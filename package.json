@@ -2,13 +2,21 @@
   "name": "shipengine-js",
   "version": "1.0.0",
   "description": "ShipEngine SDK for node/browser",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "npm run test"
   },
   "keywords": [
     "shipengine-node"
   ],
-  "author": "",
-  "license": "ISC"
+  "engineStrict": true,
+  "engines": {
+    "node": "12.x"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@tsconfig/node12": "^1.0.7",
+    "@types/node": "^12.19.3",
+    "typescript": "^4.0.5"
+  }
 }

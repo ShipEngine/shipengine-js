@@ -1,11 +1,10 @@
 {
+  "extends": "@tsconfig/node12/tsconfig.json",
   "compilerOptions": {
-    "target": "ES5",
     "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ESNext"
+      "DOM"
     ],
+    "target": "ES5",
     "outDir": "./dist",
     "rootDir": "./src",
     "skipLibCheck": true,
@@ -23,11 +22,11 @@
   },
   "include": [
     "index.d.ts",
-    "**/*.ts",
-    "*.ts"
+    "src/**/*.ts"
   ],
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "test"
   ]
 }
