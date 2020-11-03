@@ -6,10 +6,6 @@
   "scripts": {
     "test": "npm run test"
   },
-  "keywords": [
-    "shipengine-node"
-  ],
-  "engineStrict": true,
   "engines": {
     "node": "12.x"
   },
