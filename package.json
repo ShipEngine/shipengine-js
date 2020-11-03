@@ -1,0 +1,14 @@
+{
+  "name": "shipengine-js",
+  "version": "1.0.0",
+  "description": "ShipEngine SDK for node/browser",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "keywords": [
+    "shipengine-node"
+  ],
+  "author": "",
+  "license": "ISC"
+}
