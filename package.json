@@ -5,15 +5,18 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
+    "gen": "openapi-generator-cli generate -i openapi.yaml --skip-validate-spec -g typescript-fetch -o generated/openapi --additional-properties=npmName=restClient,supportsES6=true,npmVersion=6.9.0,withInterfaces=true && npm run fiix",
     "tsc:check": "tsc --noEmit",
     "test": "jest",
-    "lint": "npm run tsc:check && eslint ."
+    "lint": "npm run tsc:check && eslint .",
+    "fix": "npm run lint -- --fix"
   },
   "engines": {
     "node": "12.x"
   },
   "license": "MIT",
   "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.0.3",
     "@tsconfig/node12": "^1.0.7",
     "@types/jest": "^26.0.15",
     "@types/node": "^12.19.3",

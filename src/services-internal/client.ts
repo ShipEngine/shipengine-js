@@ -1,5 +1,4 @@
 import fetch from 'isomorphic-unfetch';
-const BASE_URL = 'http://foo.com';
 
 type ClientOptions = {
   data?: any;
@@ -37,6 +36,4 @@ const Client = <Data = any>(
   });
 };
 
-const client = Client(BASE_URL);
-
-export { client };
+export { Client };
