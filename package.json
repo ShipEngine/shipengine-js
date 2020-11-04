@@ -4,7 +4,7 @@
   "description": "ShipEngine SDK for node/browser",
   "main": "dist/index.js",
   "scripts": {
-    "test": "npm run test"
+    "test": "jest"
   },
   "engines": {
     "node": "12.x"
@@ -13,6 +13,9 @@
   "devDependencies": {
     "@tsconfig/node12": "^1.0.7",
     "@types/node": "^12.19.3",
-    "typescript": "^4.0.5"
+    "jest": "^26.6.2",
+    "ts-jest": "^26.4.3",
+    "typescript": "^4.0.5",
+    "@types/jest": "^26.0.15"
   }
 }
