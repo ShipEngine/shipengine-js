@@ -18,6 +18,8 @@ module.exports = {
     'plugin:import/typescript', // disable rules that overlap with typescript
   ],
   rules: {
-    '@typescript-eslint/ban-types': 'off',
+    'import/no-default-export': 2,
+    '@typescript-eslint/explicit-module-boundary-types': 0,
+    '@typescript-eslint/ban-types': 0,
   },
 };
