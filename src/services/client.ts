@@ -1,5 +1,5 @@
-import fetch from "isomorphic-unfetch";
-const BASE_URL = "http://foo.com";
+import fetch from 'isomorphic-unfetch';
+const BASE_URL = 'http://foo.com';
 
 type ClientOptions = {
   data?: any;
@@ -19,7 +19,7 @@ const Client = <Data = any>(
     ...baseConfig,
     ...customConfig,
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       ...baseConfig.headers,
       ...customConfig.headers,
     },
