@@ -1,8 +1,5 @@
 import { Configuration, ShipmentsApi, TagsApi } from './generated/src/index';
 
-const config = {
-  API_KEY: 'abc123',
-};
 /* import { Client } from './client';
 export const ShipEngine = (apiKey = 'foo') =>
   Client('https://api.shipengine.com', {
@@ -17,9 +14,8 @@ export class ShipEngineInternal {
   public tagsApi;
   public shipmentApi;
   constructor(apiKey: string) {
-    this.apiKey = apiKey;
     const configuration = new Configuration({
-      apiKey: config.API_KEY,
+      apiKey: apiKey,
       // basePath: 'foo',
     });
     this.tagsApi = new TagsApi(configuration);
