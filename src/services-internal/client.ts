@@ -26,7 +26,9 @@ const Client = <Data = any>(
   if (data) {
     config.body = JSON.stringify(data);
   }
-  return fetch(`${baseUrl}/${endpoint}`, config).then(async (response) => {
+  const url = `${baseUrl}${endpoint}`;
+  console.log(url);
+  return fetch(url, config).then(async (response) => {
     const data = await response.json();
     // assumes that this will always return json.
     if (response.ok) {

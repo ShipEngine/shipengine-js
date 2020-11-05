@@ -25,7 +25,7 @@
   ],
   "exclude": [
     "node_modules",
-    "src/services-internal/generated",
+    "src/**/generated/**/*.ts",
     "dist",
     "test"
   ]

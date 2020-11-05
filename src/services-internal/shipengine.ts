@@ -6,8 +6,8 @@ export interface ShipEngineApi {
 
 export class ShipEngineInternal implements ShipEngineApi {
   private client;
-  constructor(apiKey: string) {
-    const client = Client('https://api.shipengine.com/v1', {
+  constructor(apiKey: string, baseUrl?: string) {
+    const client = Client(baseUrl || 'https://api.shipengine.com/v1', {
       headers: {
         'API-Key': apiKey,
       },
@@ -18,10 +18,14 @@ export class ShipEngineInternal implements ShipEngineApi {
     const tags = await this.client('/tags');
     return tags;
   }
+  public async createTag(tagName: string): Promise<any> {
+    const tags = await this.client(`/tags/${tagName}`, { method: 'POST' });
+    return tags;
+  }
 }
 
-import { Configuration, TagsApi } from './generated/src/index';
-export class ShipEngineInternalGenerated implements ShipEngineApi {
+// import { Configuration, TagsApi } from './generated/src/index';
+/* export class ShipEngineInternalGenerated implements ShipEngineApi {
   private tagsApi;
   constructor(apiKey: string) {
     const configuration = new Configuration({
@@ -36,3 +40,4 @@ export class ShipEngineInternalGenerated implements ShipEngineApi {
     return data.tags;
   }
 }
+ */

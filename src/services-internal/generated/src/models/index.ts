@@ -249,7 +249,6 @@ export * from './ProcessBatchRequestBody1';
 export * from './PurchaseLabelWithoutShipment';
 export * from './PurchaseLabelWithoutShipment1';
 export * from './Rate';
-export * from './Rate estimate';
 export * from './Rate1';
 export * from './RateEstimateByCarrierId';
 export * from './RateEstimateByCarrierId1';
