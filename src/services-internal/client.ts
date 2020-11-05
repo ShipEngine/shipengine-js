@@ -29,12 +29,22 @@ const Client = <Data = any>(
   const url = `${baseUrl}${endpoint}`;
   console.log(url);
   return fetch(url, config).then(async (response) => {
-    const data = await response.json();
-    // assumes that this will always return json.
-    if (response.ok) {
+    try {
+      // assumes that this will always return json.
+      if (!response.ok) {
+        throw response;
+      }
+      const data = await response.json();
       return data;
+    } catch (err) {
+      try {
+        // attempt to parse error as json
+        const data = await err.json();
+        return Promise.reject(data);
+      } catch (jsonErr) {
+        return Promise.reject(err);
+      }
     }
-    return Promise.reject(data);
   });
 };
 

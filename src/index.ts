@@ -5,9 +5,9 @@ import {
 
 export class ShipEngine {
   private shipEngineInternal;
-  constructor(apiKey: string, baseUrl?: string) {
+  constructor(apiKey: string) {
     // DI would be good heres
-    this.shipEngineInternal = new ShipEngineInternal(apiKey, baseUrl);
+    this.shipEngineInternal = new ShipEngineInternal(apiKey);
   }
   public async getTagNames(): Promise<string[]> {
     const tags = await this.shipEngineInternal.getTags();
