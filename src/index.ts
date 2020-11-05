@@ -1,8 +1,12 @@
-import { ShipEngineInternal } from './services-internal/shipengine';
+import {
+  ShipEngineInternal,
+  ShipEngineInternalGenerated,
+} from './services-internal/shipengine';
 
 export class ShipEngine {
   private shipEngineInternal;
   constructor(apiKey: string) {
+    // DI would be good heres
     this.shipEngineInternal = new ShipEngineInternal(apiKey);
   }
   public async getTagNames(): Promise<string[]> {

@@ -1,5 +1,10 @@
 import { Client } from './client';
-export class ShipEngineInternal {
+
+export interface ShipEngineApi {
+  getTags: () => Promise<any[]>;
+}
+
+export class ShipEngineInternal implements ShipEngineApi {
   private client;
   constructor(apiKey: string) {
     const client = Client('https://api.shipengine.com/v1', {
@@ -10,13 +15,13 @@ export class ShipEngineInternal {
     this.client = client;
   }
   public async getTags(): Promise<any[]> {
-    const data = await this.client('/tags');
-    return data;
+    const tags = await this.client('/tags');
+    return tags;
   }
 }
 
-import { Configuration, ShipmentsApi, TagsApi } from './generated/src/index';
-export class ShipEngineInternalGenerated {
+import { Configuration, TagsApi } from './generated/src/index';
+export class ShipEngineInternalGenerated implements ShipEngineApi {
   private tagsApi;
   constructor(apiKey: string) {
     const configuration = new Configuration({
