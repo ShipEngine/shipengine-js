@@ -4,11 +4,10 @@ export interface ShipEngineApi {
   getTags: () => Promise<any[]>;
 }
 
-const baseUrl = process?.env?.BASE_URL ?? 'https://api.shipengine.com/v1';
-
 export class ShipEngineInternal implements ShipEngineApi {
   private client;
   constructor(apiKey: string) {
+    const baseUrl = process?.env?.BASE_URL ?? 'https://api.shipengine.com/v1';
     const client = Client(baseUrl, {
       headers: {
         'API-Key': apiKey,
