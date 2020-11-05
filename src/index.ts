@@ -6,13 +6,8 @@ export class ShipEngine {
     this.shipEngineInternal = new ShipEngineInternal(apiKey);
   }
   public async getTagNames(): Promise<string[]> {
-    const { tags } = await this.shipEngineInternal.tagsApi.listTags();
+    const tags = await this.shipEngineInternal.getTags();
     if (!tags) return [];
     return tags?.map((el: any) => el.tagName);
-  }
-  public async createTagAndAlsoGetTagNames(tagName: string) {
-    await this.shipEngineInternal.tagsApi.createTag({ tagName });
-    const data = await this.getTagNames();
-    return data;
   }
 }

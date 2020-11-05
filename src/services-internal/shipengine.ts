@@ -1,24 +1,33 @@
-import { Configuration, ShipmentsApi, TagsApi } from './generated/src/index';
-
-/* import { Client } from './client';
-export const ShipEngine = (apiKey = 'foo') =>
-  Client('https://api.shipengine.com', {
-    headers: {
-      Host: 'api.shipengine.com',
-      'API-Key': apiKey,
-    },
-  });
- */
-
+import { Client } from './client';
 export class ShipEngineInternal {
-  public tagsApi;
-  public shipmentApi;
+  private client;
+  constructor(apiKey: string) {
+    const client = Client('https://api.shipengine.com/v1', {
+      headers: {
+        'API-Key': apiKey,
+      },
+    });
+    this.client = client;
+  }
+  public async getTags(): Promise<any[]> {
+    const data = await this.client('/tags');
+    return data;
+  }
+}
+
+import { Configuration, ShipmentsApi, TagsApi } from './generated/src/index';
+export class ShipEngineInternalGenerated {
+  private tagsApi;
   constructor(apiKey: string) {
     const configuration = new Configuration({
       apiKey: apiKey,
       // basePath: 'foo',
     });
     this.tagsApi = new TagsApi(configuration);
-    this.shipmentApi = new ShipmentsApi(configuration);
+  }
+  public async getTags(): Promise<any[]> {
+    const data = await this.tagsApi.listTags();
+    if (!data || !data.tags) return [];
+    return data.tags;
   }
 }
