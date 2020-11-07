@@ -1,21 +1,13 @@
-import {
-  ShipEngineInternal,
-  // ShipEngineInternalGenerated,
-} from './services-internal/shipengine';
+import { ShipEngine } from './lib';
 
-export class ShipEngine {
-  private shipEngineInternal;
-  constructor(apiKey: string, overrides?: RequestInit) {
-    // DI would be good heres
-    this.shipEngineInternal = new ShipEngineInternal(apiKey, overrides);
-  }
-  public async getTagNames(): Promise<string[]> {
-    const tags = await this.shipEngineInternal.getTags();
-    if (!tags) return [];
-    return tags?.map((el: any) => el.tagName);
-  }
-  public async createTag(tagName: string): Promise<any> {
-    const response = await this.shipEngineInternal.createTag(tagName);
-    return response;
-  }
+export { ShipEngine };
+
+// Export `myLibrary` as the default export
+// eslint-disable-next-line import/no-default-export
+export default ShipEngine;
+
+// CommonJS default export hack
+/* eslint-env commonjs */
+if (typeof module === 'object' && typeof module.exports === 'object') {
+  module.exports = Object.assign(module.exports.default, module.exports);
 }
