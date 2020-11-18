@@ -17,7 +17,7 @@ export class TagsService {
   }
   public getConvenienceAPI() {
     return {
-      createTag: this.createTag,
+      createTag: this.create,
     };
   }
   public getAdvancedAPI() {
@@ -36,5 +36,4 @@ export class TagsService {
     const { data } = await this.client.post<string>(`/tags/${tagName}`, {});
     return data;
   }
-  private createTag = this.create;
 }
