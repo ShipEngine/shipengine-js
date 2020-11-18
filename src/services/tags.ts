@@ -5,8 +5,6 @@ export interface ITagsService {
   create(tagName: string): Promise<string>;
 }
 
-export type AdvancedAPI = ReturnType<TagsService['getAdvancedAPI']>;
-export type ConvenienceAPI = ReturnType<TagsService['getConvenienceAPI']>;
 /**
  * Publicly-accessible service for anything related to tags
  */
