@@ -5,6 +5,9 @@ export interface ITagsService {
   create(tagName: string): Promise<string>;
 }
 
+/**
+ * Publicly-accessible service for anything related to tags
+ */
 export class TagsService implements ITagsService {
   private client: AxiosInstance;
   constructor(client: TagsService['client']) {
