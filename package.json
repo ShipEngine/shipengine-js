@@ -2,12 +2,18 @@
   "name": "shipengine-js",
   "version": "1.0.0",
   "description": "ShipEngine SDK for node/browser",
-  "main": "dist/index.js",
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
+  "types": "esm/index.d.ts",
+  "files": [
+    "cjs",
+    "esm"
+  ],
   "scripts": {
     "build": "tsc",
     "gen": "sh generate-internal-client.sh",
     "tsc:check": "tsc --noEmit",
-    "test": "npm run test:node && npm run test:browser",
+    "test": "tsc && npm run test:node && npm run test:browser",
     "test:node": "mocha",
     "test:browser": "karma start --single-run",
     "lint": "npm run tsc:check && eslint .",
@@ -28,6 +34,7 @@
     "@types/node": "^12.19.3",
     "@typescript-eslint/eslint-plugin": "^4.6.1",
     "@typescript-eslint/parser": "^4.6.1",
+    "chai": "^4.2.0",
     "eslint": "^7.12.1",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-import": "^2.22.1",
