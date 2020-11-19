@@ -10,10 +10,12 @@
     "esm"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "npm run build:cjs && npm run build:esm",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir cjs",
     "gen": "sh generate-internal-client.sh",
     "tsc:check": "tsc --noEmit",
-    "test": "tsc && npm run test:node && npm run test:browser",
+    "test": "npm run build && npm run test:node && npm run test:browser",
     "test:node": "mocha",
     "test:browser": "karma start --single-run",
     "lint": "npm run tsc:check && eslint .",
