@@ -4,7 +4,7 @@ import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 export const defaultAxiosInstance = axios.create({});
 rax.attach(defaultAxiosInstance);
 
-const defaultConfig = {
+const defaultConfig: AxiosRequestConfig = {
   timeout: 10000,
   headers: {},
 };
@@ -28,9 +28,10 @@ const createClient = (config?: Config) => {
     };
     return instance;
   }
+  console.log('found!');
   const instance = axios.create({
-    ...defaultConfig.headers,
-    ...config.headers,
+    ...defaultConfig,
+    ...config,
   });
   rax.attach(instance);
   return instance;

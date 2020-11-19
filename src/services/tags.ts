@@ -8,30 +8,28 @@ export interface ITagsService {
 /**
  * Publicly-accessible service for anything related to tags
  */
-export class TagsService {
-  private client: AxiosInstance;
-  constructor(client: TagsService['client']) {
-    this.client = client;
-  }
-  public getConvenienceAPI() {
-    return {
-      createTag: this.create,
-    };
-  }
-  public getAdvancedAPI() {
-    return {
-      tags: {
-        get: this.get,
-        create: this.create,
-      },
-    };
-  }
-  private async get() {
-    const { data } = await this.client.get<string[]>('/tags');
-    return data;
-  }
-  private async create(tagName: string) {
-    const { data } = await this.client.post<string>(`/tags/${tagName}`, {});
-    return data;
-  }
-}
+const TagsServiceAdvanced = (client: AxiosInstance): ITagsService => {
+  return {
+    get: async () => {
+      const { data } = await client.get<string[]>('/tags');
+      return data;
+    },
+    create: async (tagName: string) => {
+      const { data } = await client.post<string>(`/tags/${tagName}`, {});
+      return data;
+    },
+  };
+};
+
+export type TagsServiceAPI = {
+  tags: ITagsService;
+  createTag: ITagsService['create'];
+};
+
+export const createTagsServiceAPI = (client: AxiosInstance): TagsServiceAPI => {
+  const tagsServices = TagsServiceAdvanced(client);
+  return {
+    tags: tagsServices,
+    createTag: tagsServices.create,
+  };
+};

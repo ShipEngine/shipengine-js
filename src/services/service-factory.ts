@@ -1,25 +1,16 @@
 import type { ShipEngineApiClient } from './shipengine-api-factory';
-import { TagsService } from './tags';
-import { AddressService } from './address';
-type GetPublicAPI<T> = T extends {
-  getAdvancedAPI: (...args: any[]) => infer AdvancedAPIFields;
-  getConvenienceAPI: (...args: any[]) => infer ConvenienceAPIAPIFields;
-}
-  ? AdvancedAPIFields & ConvenienceAPIAPIFields
-  : never;
-
-type ServiceAPI = GetPublicAPI<TagsService> & GetPublicAPI<AddressService>;
+import { TagsServiceAPI, createTagsServiceAPI } from './tags';
 
 // here is another way of doing the exact same thing without a service
+type ServiceAPI = TagsServiceAPI;
 export const ServiceFactory = (client: ShipEngineApiClient): ServiceAPI => {
-  const services = [TagsService, AddressService];
+  const services = [createTagsServiceAPI];
 
-  const publicServices = services.reduce((acc, EachService) => {
-    const service = new EachService(client);
+  const publicServices = services.reduce((acc, s) => {
+    const service = s(client);
     return {
       ...acc,
-      ...service.getAdvancedAPI(),
-      ...service.getConvenienceAPI(),
+      ...service,
     };
   }, {} as ServiceAPI);
 
