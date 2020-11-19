@@ -17,6 +17,7 @@ module.exports = {
     'plugin:import/errors', // for catching immediately-executed imports like "import ./foo"
     'plugin:import/typescript', // disable rules that overlap with typescript
   ],
+  ignorePatterns: ['esm', 'cjs', 'node_modules'],
   rules: {
     'import/no-default-export': 2,
     '@typescript-eslint/explicit-module-boundary-types': 0,

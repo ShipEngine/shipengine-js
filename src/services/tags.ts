@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 
-export interface TagsService {
+interface TagsService {
   get(): Promise<string[]>;
   create(tagName: string): Promise<string>;
 }
