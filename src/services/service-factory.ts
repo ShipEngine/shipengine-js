@@ -1,7 +1,6 @@
 import type { ShipEngineApiClient } from './shipengine-api-factory';
 import { TagsService } from './tags';
 import { AddressService } from './address';
-
 type GetPublicAPI<T> = T extends {
   getAdvancedAPI: (...args: any[]) => infer AdvancedAPIFields;
   getConvenienceAPI: (...args: any[]) => infer ConvenienceAPIAPIFields;
@@ -9,11 +8,10 @@ type GetPublicAPI<T> = T extends {
   ? AdvancedAPIFields & ConvenienceAPIAPIFields
   : never;
 
-type PublicServiceAPI = GetPublicAPI<TagsService> &
-  GetPublicAPI<AddressService>;
+type ServiceAPI = GetPublicAPI<TagsService> & GetPublicAPI<AddressService>;
 
 // here is another way of doing the exact same thing without a service
-export const ServiceFactory = (client: ShipEngineApiClient) => {
+export const ServiceFactory = (client: ShipEngineApiClient): ServiceAPI => {
   const services = [TagsService, AddressService];
 
   const publicServices = services.reduce((acc, EachService) => {
@@ -23,7 +21,7 @@ export const ServiceFactory = (client: ShipEngineApiClient) => {
       ...service.getAdvancedAPI(),
       ...service.getConvenienceAPI(),
     };
-  }, {} as PublicServiceAPI);
+  }, {} as ServiceAPI);
 
   return publicServices;
 };
