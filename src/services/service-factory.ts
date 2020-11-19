@@ -6,10 +6,9 @@ import {
 } from './address';
 
 // utility type
-type Compute<T> = { [K in keyof T]: T[K] } & {};
 
 // here is another way of doing the exact same thing without a service
-type ServiceAPI = Compute<TagsServiceAPI & AddressesServiceAPI>;
+type ServiceAPI = TagsServiceAPI & AddressesServiceAPI;
 
 export const ServiceFactory = (client: ShipEngineApiClient): ServiceAPI => {
   const services = [
