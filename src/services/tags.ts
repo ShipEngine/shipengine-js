@@ -1,14 +1,11 @@
 import { AxiosInstance } from 'axios';
 
-export interface ITagsService {
+export interface TagsService {
   get(): Promise<string[]>;
   create(tagName: string): Promise<string>;
 }
 
-/**
- * Publicly-accessible service for anything related to tags
- */
-const TagsServiceAdvanced = (client: AxiosInstance): ITagsService => {
+const createTagsService = (client: AxiosInstance): TagsService => {
   return {
     get: async () => {
       const { data } = await client.get<string[]>('/tags');
@@ -22,12 +19,14 @@ const TagsServiceAdvanced = (client: AxiosInstance): ITagsService => {
 };
 
 export type TagsServiceAPI = {
-  tags: ITagsService;
-  createTag: ITagsService['create'];
+  tags: TagsService;
+  createTag: TagsService['create'];
 };
 
-export const createTagsServiceAPI = (client: AxiosInstance): TagsServiceAPI => {
-  const tagsServices = TagsServiceAdvanced(client);
+export const createTagsConvenienceService = (
+  client: AxiosInstance
+): TagsServiceAPI => {
+  const tagsServices = createTagsService(client);
   return {
     tags: tagsServices,
     createTag: tagsServices.create,

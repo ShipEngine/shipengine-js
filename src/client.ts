@@ -28,7 +28,6 @@ const createClient = (config?: Config) => {
     };
     return instance;
   }
-  console.log('found!');
   const instance = axios.create({
     ...defaultConfig,
     ...config,
