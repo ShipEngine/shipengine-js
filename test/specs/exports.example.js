@@ -1,7 +1,7 @@
 'use strict';
 
-const commonJSExport = require('../../');
-const { default: defaultExport, myLibrary: namedExport } = require('../../');
+const commonJSExport = require('../../esm');
+const { default: defaultExport, myLibrary: namedExport } = require('../../esm');
 const { expect } = require('chai');
 const { host } = require('@jsdevtools/host-environment');
 
