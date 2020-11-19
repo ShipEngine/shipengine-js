@@ -1,8 +1,8 @@
-import { promisify } from 'util';
-import { exec } from 'child_process';
+const { promisify } = require('util');
+const { exec } = require('child_process');
 
-export const p = {
-  exec: async (cmd: string) => {
+module.exports.p = {
+  exec: async (cmd) => {
     const e = promisify(exec);
     const { stdout, stderr } = await e(cmd, { timeout: 2000 });
     if (stdout) {
