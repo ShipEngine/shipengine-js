@@ -1,10 +1,21 @@
 import type { ShipEngineApiClient } from './shipengine-api-factory';
 import { TagsServiceAPI, createTagsConvenienceService } from './tags';
+import {
+  AddressesServiceAPI,
+  createAddressesConvenienceService,
+} from './address';
+
+// utility type
+type Compute<T> = { [K in keyof T]: T[K] } & {};
 
 // here is another way of doing the exact same thing without a service
-type ServiceAPI = TagsServiceAPI;
+type ServiceAPI = Compute<TagsServiceAPI & AddressesServiceAPI>;
+
 export const ServiceFactory = (client: ShipEngineApiClient): ServiceAPI => {
-  const services = [createTagsConvenienceService];
+  const services = [
+    createTagsConvenienceService,
+    createAddressesConvenienceService,
+  ];
 
   const publicServices = services.reduce((acc, s) => {
     const service = s(client);

@@ -1,32 +1,29 @@
 import { AxiosInstance } from 'axios';
 
-export interface IAddressService {
-  get(): Promise<string[]>;
-  create(tagName: string): Promise<string>;
+interface AddressesService {
+  validate(address: any): Promise<any>;
 }
 
-/**
- * Publicly-accessible service for anything related to tags
- */
-export class AddressService {
-  private client: AxiosInstance;
-  constructor(client: AddressService['client']) {
-    this.client = client;
-  }
-  public getConvenienceAPI() {
-    return {
-      validateAddress: this.validate,
-    };
-  }
-  public getAdvancedAPI() {
-    return {
-      address: {
-        validate: this.validate,
-      },
-    };
-  }
-  private async validate(address: any) {
-    const { data } = await this.client.post<string>(`/tags/`, address);
-    return data;
-  }
-}
+const createAddressesService = (client: AxiosInstance): AddressesService => {
+  return {
+    validate: async (address: any) => {
+      const { data } = await client.post<any>('/addresses', address);
+      return data;
+    },
+  };
+};
+
+export type AddressesServiceAPI = {
+  addresses: AddressesService;
+  validateAddress: AddressesService['validate'];
+};
+
+export const createAddressesConvenienceService = (
+  client: AxiosInstance
+): AddressesServiceAPI => {
+  const addressesServices = createAddressesService(client);
+  return {
+    addresses: addressesServices,
+    validateAddress: addressesServices.validate,
+  };
+};
