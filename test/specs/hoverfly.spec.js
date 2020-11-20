@@ -17,5 +17,10 @@ describe('My API', () => {
       const res = await api.createTag('foo');
       expect(res.name).to.eq('foo');
     });
+    it('should have an api keu', async () => {
+      await Hoverfly.import('tags.json');
+      const res = await api.createTag('foo');
+      expect(res.name).to.eq('foo');
+    });
   });
 });
