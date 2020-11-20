@@ -1,9 +1,28 @@
 import type { ShipEngineApiClient } from './shipengine-api-factory';
-import { TagsService } from './tags';
+import { TagsServiceAPI, createTagsConvenienceService } from './tags';
+import {
+  AddressesServiceAPI,
+  createAddressesConvenienceService,
+} from './address';
 
-export class ServiceFactory {
-  public tags: TagsService;
-  public constructor(client: ShipEngineApiClient) {
-    this.tags = new TagsService(client);
-  }
-}
+// utility type
+
+// here is another way of doing the exact same thing without a service
+type ServiceAPI = TagsServiceAPI & AddressesServiceAPI;
+
+export const ServiceFactory = (client: ShipEngineApiClient): ServiceAPI => {
+  const services = [
+    createTagsConvenienceService,
+    createAddressesConvenienceService,
+  ];
+
+  const publicServices = services.reduce((acc, s) => {
+    const service = s(client);
+    return {
+      ...acc,
+      ...service,
+    };
+  }, {} as ServiceAPI);
+
+  return publicServices;
+};

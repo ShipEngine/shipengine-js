@@ -1,8 +1,8 @@
-import { ChildProcess, exec } from 'child_process';
-import { p } from './utils';
+const { exec } = require('child_process');
+const { p } = require('./utils');
 
-let subshell: ChildProcess | null = null;
-export class Hoverfly {
+let subshell;
+class Hoverfly {
   static async start() {
     return new Promise((resolve, reject) => {
       subshell = exec(
@@ -21,7 +21,7 @@ export class Hoverfly {
     });
   }
 
-  static async import(file: string) {
+  static async import(file) {
     return p.exec(`hoverctl import simengine/v1/${file}`);
   }
   static async flush() {
@@ -31,3 +31,7 @@ export class Hoverfly {
     return p.exec('hoverctl stop');
   }
 }
+
+module.exports = {
+  Hoverfly,
+};

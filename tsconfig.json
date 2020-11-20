@@ -5,7 +5,9 @@
       "DOM"
     ],
     "target": "ES5",
-    "outDir": "./dist",
+    "outDir": "./esm",
+    "sourceMap": true,
+    "declaration": true,
     "rootDir": "./src",
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -17,7 +19,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "removeComments": false,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "src/typings"
+    ]
   },
   "include": [
     "index.d.ts",
@@ -25,7 +31,6 @@
   ],
   "exclude": [
     "node_modules",
-    "dist",
     "test-old"
   ]
 }

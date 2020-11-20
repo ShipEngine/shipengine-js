@@ -1,21 +1,34 @@
 import { AxiosInstance } from 'axios';
 
-export interface ITagsService {
+interface TagsService {
   get(): Promise<string[]>;
   create(tagName: string): Promise<string>;
 }
 
-export class TagsService implements ITagsService {
-  private client: AxiosInstance;
-  constructor(client: TagsService['client']) {
-    this.client = client;
-  }
-  public async get() {
-    const { data } = await this.client.get<string[]>('/tags');
-    return data;
-  }
-  public async create(tagName: string) {
-    const { data } = await this.client.post<string>(`/tags/${tagName}`, {});
-    return data;
-  }
-}
+const createTagsService = (client: AxiosInstance): TagsService => {
+  return {
+    get: async () => {
+      const { data } = await client.get<string[]>('/tags');
+      return data;
+    },
+    create: async (tagName: string) => {
+      const { data } = await client.post<string>(`/tags/${tagName}`, {});
+      return data;
+    },
+  };
+};
+
+export type TagsServiceAPI = {
+  tags: TagsService;
+  createTag: TagsService['create'];
+};
+
+export const createTagsConvenienceService = (
+  client: AxiosInstance
+): TagsServiceAPI => {
+  const tagsServices = createTagsService(client);
+  return {
+    tags: tagsServices,
+    createTag: tagsServices.create,
+  };
+};
