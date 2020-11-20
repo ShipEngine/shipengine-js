@@ -2,6 +2,8 @@
 # https://mochajs.org/#configuring-mocha-nodejs
 # https://github.com/mochajs/mocha/blob/master/example/config/.mocharc.yml
 
+app: shipengine
+watch-files: ["src/**/*", "test/**/*.js"]
 spec:
   # Test fixtures
   # - test/fixtures/**/*.js
@@ -9,6 +11,5 @@ spec:
   # Test specs
   - test/specs/**/*.spec.js
 
-bail: true
 recursive: true
 require: source-map-support/register

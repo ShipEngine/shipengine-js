@@ -17,6 +17,7 @@
     "tsc:check": "tsc --noEmit",
     "test": "npm run build && npm run test:node && npm run test:browser",
     "test:node": "mocha",
+    "test:watch": "npm run test:node -- --watch",
     "test:browser": "karma start --single-run",
     "lint": "npm run tsc:check && eslint .",
     "fix": "npm run lint -- --fix"
