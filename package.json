@@ -15,10 +15,9 @@
     "build:cjs": "tsc --module commonjs --outDir cjs",
     "gen": "sh generate-internal-client.sh",
     "tsc:check": "tsc --noEmit",
-    "test": "npm run build && npm run test:node && npm run test:browser",
-    "test:node": "mocha",
-    "test:watch": "npm run test:node -- --watch",
-    "test:browser": "karma start --single-run",
+    "test": "npm run test:node && npm run test:browser",
+    "test:node": "npm run build && mocha",
+    "test:browser": "npm run build && karma start --single-run",
     "lint": "npm run tsc:check && eslint .",
     "fix": "npm run lint -- --fix"
   },
