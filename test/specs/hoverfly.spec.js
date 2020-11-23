@@ -15,12 +15,12 @@ describe('My API', () => {
       await Hoverfly.stop();
     });
     it('should create tag / return created tag', async () => {
-      await Hoverfly.import('tags.json');
+      await Hoverfly.import('v1/tags.json');
       const res = await api.createTag('foo');
       expect(res.name).to.eq('foo');
     });
     it('should have an api key', async () => {
-      await Hoverfly.import('tags.json');
+      await Hoverfly.import('v1/tags.json');
       const res = await api.createTag('foo');
       expect(res.name).to.eq('foo');
     });
