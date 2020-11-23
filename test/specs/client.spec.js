@@ -1,11 +1,6 @@
 const { expect } = require('chai');
 const { ShipEngineApi } = require('../../cjs/services/shipengine-api-factory');
 
-const ogEnv = { ...process.env };
-afterEach(() => {
-  process.env = ogEnv;
-});
-
 const defaultOpts = {
   apiKey: 'abc123',
   requestOptions: { baseURL: 'http://foo.com' },
@@ -24,13 +19,6 @@ describe('client', () => {
       requestOptions: { baseURL: undefined },
     });
     expect(r.defaults.baseURL).to.eq('https://api.shipengine.com/v1');
-  });
-  it('should be overrideable with process.env', () => {
-    process.env.BASE_URL = 'http://PROCESSENV.com';
-    const r = ShipEngineApi({
-      ...defaultOpts,
-    });
-    expect(r.defaults.baseURL).to.eq(process.env.BASE_URL);
   });
   it('should set api key as a header', async () => {
     const r = ShipEngineApi({
