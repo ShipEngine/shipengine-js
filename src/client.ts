@@ -38,7 +38,7 @@ const defaultConfig: AxiosRequestConfig = {
     onRetryAttempt: (err) => {
       const cfg = rax.getConfig(err);
       console.log(
-        `Status: ${err.code}, Retry attempt #${cfg?.currentRetryAttempt}`
+        `Status: ${err.response?.status}, Retry attempt #${cfg?.currentRetryAttempt}`
       );
     },
   },
