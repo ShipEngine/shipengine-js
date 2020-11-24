@@ -22,7 +22,7 @@ class Hoverfly {
   }
 
   static async import(file) {
-    return p.exec(`hoverctl import simengine/v1/${file}`);
+    return p.exec(`hoverctl import simengine/${file}`);
   }
   static async flush() {
     return p.exec(`hoverctl flush cache`);
