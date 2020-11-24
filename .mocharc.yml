@@ -6,10 +6,11 @@ app: shipengine
 watch-files: ["src/**/*", "test/**/*.js"]
 spec:
   # Test fixtures
-  # - test/fixtures/**/*.js
-
   # Test specs
   - test/specs/**/*.spec.js
 
 recursive: true
-require: source-map-support/register
+require:
+  - source-map-support/register
+  - test/support/mocha-hooks
+  - test/support/polyfills
