@@ -1,4 +1,8 @@
 import { AxiosInstance } from 'axios';
+import {
+  ValidateAddressRequestBody,
+  ValidateAddressResponseBody,
+} from '../models/api';
 
 interface AddressesService {
   validate(address: any): Promise<any>;
@@ -6,8 +10,11 @@ interface AddressesService {
 
 const createAddressesService = (client: AxiosInstance): AddressesService => {
   return {
-    validate: async (address: any) => {
-      const { data } = await client.post<any>('/addresses', address);
+    validate: async (address: ValidateAddressRequestBody) => {
+      const { data } = await client.post<ValidateAddressResponseBody>(
+        '/addresses/validate',
+        address
+      );
       return data;
     },
   };
@@ -15,7 +22,8 @@ const createAddressesService = (client: AxiosInstance): AddressesService => {
 
 export type AddressesServiceAPI = {
   addresses: AddressesService;
-  validateAddress: AddressesService['validate'];
+  // TODO
+  validateAddress: (address: any) => any;
 };
 
 export const createAddressesConvenienceService = (
@@ -24,6 +32,8 @@ export const createAddressesConvenienceService = (
   const addressesServices = createAddressesService(client);
   return {
     addresses: addressesServices,
-    validateAddress: addressesServices.validate,
+    validateAddress: (address: any) => {
+      return addressesServices.validate([address]);
+    },
   };
 };
