@@ -16,7 +16,7 @@
     "gen": "sh generate-internal-client.sh",
     "tsc:check": "tsc --noEmit",
     "test": "npm run test:node",
-    "test:node": "npm run build && mocha",
+    "test:node": "npm run build:cjs && mocha",
     "test:browser": "npm run build && karma start --single-run",
     "lint": "npm run tsc:check && eslint .",
     "fix": "npm run lint -- --fix"

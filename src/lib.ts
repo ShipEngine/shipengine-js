@@ -1,6 +1,6 @@
 import { ShipEngineApiServiceConfig } from './models/Config';
 import { ServiceFactory } from './services/service-factory';
-import { ShipEngineApi } from './services/shipengine-api-factory';
+import { ShipEngineApiClient } from './services/shipengine-api-factory';
 
 // should this api key be optional here in case of users who want to _only_ use api keys on a request by request basis?
 
@@ -24,5 +24,5 @@ const mapToApiServiceConfig = (
 };
 
 export const ShipEngine = (config: ShipEngineConfig) => {
-  return ServiceFactory(ShipEngineApi(mapToApiServiceConfig(config)));
+  return ServiceFactory(ShipEngineApiClient(mapToApiServiceConfig(config)));
 };

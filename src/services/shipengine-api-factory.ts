@@ -6,7 +6,7 @@ class InvalidArgumentError extends Error {}
 /*
  * create a ShipEngine API Client instance
  */
-export const ShipEngineApi = (baseConfig: ShipEngineApiServiceConfig) => {
+export const ShipEngineApiClient = (baseConfig: ShipEngineApiServiceConfig) => {
   if (!baseConfig.apiKey) {
     throw new InvalidArgumentError('Please enter API Key!');
   }
