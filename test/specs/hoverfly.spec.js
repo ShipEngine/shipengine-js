@@ -1,7 +1,8 @@
 const { ShipEngine } = require('../../cjs/index');
 const { Hoverfly } = require('../utils/Hoverfly');
 const { expect } = require('chai');
-describe('My API', () => {
+
+describe('Smoke', () => {
   let api;
   describe('hoverfly - tags', () => {
     before(async () => {

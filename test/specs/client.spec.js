@@ -1,5 +1,7 @@
 const { expect } = require('chai');
-const { ShipEngineApi } = require('../../cjs/services/shipengine-api-factory');
+const {
+  ShipEngineApiClient,
+} = require('../../cjs/services/shipengine-api-factory');
 
 const defaultOpts = {
   apiKey: 'abc123',
@@ -7,21 +9,21 @@ const defaultOpts = {
 };
 describe('client', () => {
   it('should instantiate a client with a specific baseUrl', () => {
-    const r = ShipEngineApi({
+    const r = ShipEngineApiClient({
       ...defaultOpts,
       requestOptions: { baseURL: 'http://foo.com' },
     });
     expect(r.defaults.baseURL).to.eq('http://foo.com');
   });
   it('should default to a base url if none is passed', () => {
-    const r = ShipEngineApi({
+    const r = ShipEngineApiClient({
       ...defaultOpts,
       requestOptions: { baseURL: undefined },
     });
     expect(r.defaults.baseURL).to.eq('https://api.shipengine.com/v1');
   });
   it('should set api key as a header', async () => {
-    const r = ShipEngineApi({
+    const r = ShipEngineApiClient({
       ...defaultOpts,
       apiKey: 'helloworld',
     });
@@ -29,7 +31,7 @@ describe('client', () => {
   });
   it('should throw error if no api key', async () => {
     expect(() => {
-      ShipEngineApi({
+      ShipEngineApiClient({
         ...defaultOpts,
         apiKey: undefined,
       });
