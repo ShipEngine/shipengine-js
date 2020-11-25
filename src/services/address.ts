@@ -3,7 +3,6 @@ import { ValidateAddressResponseBody, AddressToValidate } from '../models/api';
 import { AddressQuery, Address } from '../models/Address';
 import { AddressValidationResult } from '../models/api/validate-address/validate_address_response_body';
 import { assertExists, exists } from '../utils/exists';
-import { AddressResidentialIndicator } from '../models/api/validate-address/validate_address_request_body';
 
 /**
  * map from domain model to dto (to send down the wire)
