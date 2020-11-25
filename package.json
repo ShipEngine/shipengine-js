@@ -47,6 +47,7 @@
     "karma-cli": "^2.0.0",
     "mocha": "^8.2.1",
     "prettier": "^2.1.2",
+    "shipengine-json-schema": "^1.4.0",
     "shipengine-openapi": "^1.4.0",
     "sinon": "^9.2.1",
     "typescript": "^4.0.5",
