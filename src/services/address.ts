@@ -3,6 +3,7 @@ import { ValidateAddressResponseBody, AddressToValidate } from '../models/api';
 import { AddressQuery, Address } from '../models/Address';
 import { AddressValidationResult } from '../models/api/validate-address/validate_address_response_body';
 import { assertExists, exists } from '../utils/exists';
+import { AddressResidentialIndicator } from '../models/api/validate-address/validate_address_request_body';
 
 /**
  * map from domain model to dto (to send down the wire)
@@ -25,6 +26,7 @@ const mapToRequestBodyAddress = (address: AddressQuery): AddressToValidate => {
  */
 const mapToNormalizedAddress = (address: AddressValidationResult): Address => {
   const { matched_address: matched } = address;
+
   const street = [
     matched.address_line1,
     matched.address_line2,
@@ -40,12 +42,18 @@ const mapToNormalizedAddress = (address: AddressValidationResult): Address => {
   assertExists(matched.postal_code, 'postal code');
   assertExists(matched.city_locality, 'city');
   assertExists(matched.state_province, 'state');
+
+  const resId = matched.address_residential_indicator;
+  const residentialIndicator =
+    resId === undefined || resId === 'unknown' ? undefined : resId === 'yes';
+
   return new Address(
     street,
     matched.postal_code,
     matched.city_locality,
     matched.state_province,
-    matched.country_code || 'US'
+    matched.country_code || 'US',
+    residentialIndicator
   );
 };
 
