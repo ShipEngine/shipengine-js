@@ -1,13 +1,9 @@
 import { AxiosInstance } from 'axios';
 import {
-  ValidateAddressRequestBody,
   ValidateAddressResponseBody,
+  ValidateAddressRequestBody,
 } from '../models/api';
 import { AddressQuery, Address } from '../models/Address';
-import {
-  PartialAddress,
-  ValidateAddressRequestBody,
-} from '../models/api/validate-address/validate_address_request_body';
 
 interface AddressesService {
   validate(address: any): Promise<any>;
@@ -27,7 +23,7 @@ const createAddressesService = (client: AxiosInstance): AddressesService => {
 
       const body: ValidateAddressRequestBody = [
         {
-          // todo: create a class for this.
+          // TODO: create a class for this.
           address_line1: Array.isArray(street) ? street[0] : street,
           address_line2: Array.isArray(street) ? street[1] : street,
           address_line3: Array.isArray(street) ? street[2] : street,
