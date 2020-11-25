@@ -28,12 +28,7 @@ const mapToRequestBodyAddress = (addr: Address): AddressToValidate => {
     country_code: country || 'US',
     postal_code: postalCode,
     state_province: stateProvince,
-    address_residential_indicator:
-      residential === undefined || residential === null
-        ? 'unknown'
-        : residential
-        ? 'yes'
-        : 'no',
+    address_residential_indicator: residential ?? 'unknown' ? 'yes' : 'no',
   };
 };
 
