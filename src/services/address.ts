@@ -3,6 +3,11 @@ import {
   ValidateAddressRequestBody,
   ValidateAddressResponseBody,
 } from '../models/api';
+import { AddressQuery, Address } from '../models/Address';
+import {
+  PartialAddress,
+  ValidateAddressRequestBody,
+} from '../models/api/validate-address/validate_address_request_body';
 
 interface AddressesService {
   validate(address: any): Promise<any>;
@@ -10,10 +15,37 @@ interface AddressesService {
 
 const createAddressesService = (client: AxiosInstance): AddressesService => {
   return {
-    validate: async (address: ValidateAddressRequestBody) => {
+    validate: async (addr: Address) => {
+      const {
+        cityLocality,
+        street,
+        country,
+        postalCode,
+        residential,
+        stateProvince,
+      } = addr;
+
+      const body: ValidateAddressRequestBody = [
+        {
+          // todo: create a class for this.
+          address_line1: Array.isArray(street) ? street[0] : street,
+          address_line2: Array.isArray(street) ? street[1] : street,
+          address_line3: Array.isArray(street) ? street[2] : street,
+          city_locality: cityLocality,
+          country_code: country || 'US',
+          postal_code: postalCode,
+          state_province: stateProvince,
+          address_residential_indicator:
+            residential === undefined || residential === null
+              ? 'unknown'
+              : residential
+              ? 'yes'
+              : 'no',
+        },
+      ];
       const { data } = await client.post<ValidateAddressResponseBody>(
         '/addresses/validate',
-        address
+        body
       );
       return data;
     },
@@ -32,8 +64,8 @@ export const createAddressesConvenienceService = (
   const addressesServices = createAddressesService(client);
   return {
     addresses: addressesServices,
-    validateAddress: (address: any) => {
-      return addressesServices.validate([address]);
+    validateAddress: (address: AddressQuery) => {
+      return addressesServices.validate(address);
     },
   };
 };

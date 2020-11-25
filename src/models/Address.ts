@@ -1,24 +1,25 @@
 import { ShipEngineException } from './ShipEngineException';
 
+type Street = string | string[];
+
 export type Address = {
-  name?: string;
+  street: Street;
   postalCode: string;
-  companyName?: string;
-  cityLocality?: string;
+  cityLocality: string;
+  country: string;
   stateProvince?: string;
   residential?: boolean;
 };
 
 export type AddressQuery = {
-  street: string | string[];
+  street: Street;
   cityLocality: Address['cityLocality'];
   postalCode: Address['postalCode'];
-  country: string;
+  country: Address['country'];
 };
 
 export type AddressQueryResult = {
   original: AddressQuery;
   normalized?: Address;
-  // this has a specif
   exceptions: ShipEngineException[];
 };
