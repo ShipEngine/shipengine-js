@@ -8,7 +8,7 @@ export class Address {
   cityLocality: string;
   country: string;
   stateProvince: string;
-  residential?: boolean;
+  residential: boolean | undefined;
   get isResidential(): boolean {
     return this.residential || false;
   }
@@ -17,7 +17,8 @@ export class Address {
     postalCode: Address['postalCode'],
     cityLocality: Address['cityLocality'],
     stateProvince: Address['stateProvince'],
-    country: Address['country']
+    country: Address['country'],
+    residential: Address['residential']
   ) {
     // add validation here
     this.street = street;
@@ -25,6 +26,7 @@ export class Address {
     this.cityLocality = cityLocality;
     this.country = country;
     this.stateProvince = stateProvince;
+    this.residential = residential;
   }
 }
 
