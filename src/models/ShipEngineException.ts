@@ -1,23 +1,23 @@
-export enum ExceptionTypeConstants {
+export enum ExceptionType {
   WARNING = 'warning',
   ERROR = 'error',
   INFO = 'info',
 }
 
 interface BaseShipEngineException {
-  type: ExceptionTypeConstants;
+  type: ExceptionType;
 }
 
 export class ShipEngineError implements BaseShipEngineException {
-  type = ExceptionTypeConstants.ERROR;
+  type = ExceptionType.ERROR;
 }
 
 export class ShipEngineWarning implements BaseShipEngineException {
-  type = ExceptionTypeConstants.WARNING;
+  type = ExceptionType.WARNING;
 }
 
 export class ShipEngineInfo implements BaseShipEngineException {
-  type = ExceptionTypeConstants.INFO;
+  type = ExceptionType.INFO;
 }
 
 export type ShipEngineException =
