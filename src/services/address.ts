@@ -25,8 +25,8 @@ const createAddressesService = (client: AxiosInstance): AddressesService => {
         {
           // TODO: create a class for this.
           address_line1: Array.isArray(street) ? street[0] : street,
-          address_line2: Array.isArray(street) ? street[1] : street,
-          address_line3: Array.isArray(street) ? street[2] : street,
+          address_line2: Array.isArray(street) ? street[1] : undefined,
+          address_line3: Array.isArray(street) ? street[2] : undefined,
           city_locality: cityLocality,
           country_code: country || 'US',
           postal_code: postalCode,
