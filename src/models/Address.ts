@@ -7,15 +7,16 @@ export type Address = {
   postalCode: string;
   cityLocality: string;
   country: string;
-  stateProvince?: string;
+  stateProvince: string;
   residential?: boolean;
 };
 
 export type AddressQuery = {
   street: Street;
-  cityLocality: Address['cityLocality'];
-  postalCode: Address['postalCode'];
-  country: Address['country'];
+  cityLocality?: Address['cityLocality'];
+  stateProvince?: Address['stateProvince'];
+  postalCode?: Address['postalCode'];
+  country?: Address['country'];
 };
 
 export type AddressQueryResult = {

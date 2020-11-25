@@ -2,6 +2,7 @@ import { AxiosInstance } from 'axios';
 import {
   ValidateAddressResponseBody,
   ValidateAddressRequestBody,
+  AddressToValidate,
 } from '../models/api';
 import { AddressQuery, Address } from '../models/Address';
 
@@ -9,39 +10,39 @@ interface AddressesService {
   validate(address: any): Promise<any>;
 }
 
+const mapToRequestBodyAddress = (addr: Address): AddressToValidate => {
+  const {
+    cityLocality,
+    street,
+    country,
+    postalCode,
+    residential,
+    stateProvince,
+  } = addr;
+  return {
+    // TODO: create a class for this.
+    address_line1: Array.isArray(street) ? street[0] : street,
+    address_line2: Array.isArray(street) ? street[1] : undefined,
+    address_line3: Array.isArray(street) ? street[2] : undefined,
+    city_locality: cityLocality,
+    country_code: country || 'US',
+    postal_code: postalCode,
+    state_province: stateProvince,
+    address_residential_indicator:
+      residential === undefined || residential === null
+        ? 'unknown'
+        : residential
+        ? 'yes'
+        : 'no',
+  };
+};
+
 const createAddressesService = (client: AxiosInstance): AddressesService => {
   return {
     validate: async (addr: Address) => {
-      const {
-        cityLocality,
-        street,
-        country,
-        postalCode,
-        residential,
-        stateProvince,
-      } = addr;
-
-      const body: ValidateAddressRequestBody = [
-        {
-          // TODO: create a class for this.
-          address_line1: Array.isArray(street) ? street[0] : street,
-          address_line2: Array.isArray(street) ? street[1] : undefined,
-          address_line3: Array.isArray(street) ? street[2] : undefined,
-          city_locality: cityLocality,
-          country_code: country || 'US',
-          postal_code: postalCode,
-          state_province: stateProvince,
-          address_residential_indicator:
-            residential === undefined || residential === null
-              ? 'unknown'
-              : residential
-              ? 'yes'
-              : 'no',
-        },
-      ];
       const { data } = await client.post<ValidateAddressResponseBody>(
         '/addresses/validate',
-        body
+        [mapToRequestBodyAddress(addr)]
       );
       return data;
     },
