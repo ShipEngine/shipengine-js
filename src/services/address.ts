@@ -6,7 +6,7 @@ import {
   PartialAddress1,
   ResponseMessage,
 } from '../models/api/validate-address/validate_address_response_body';
-import { assertExists, exists } from '../utils/exists';
+import { exists } from '../utils/exists';
 import {
   ShipEngineError,
   ShipEngineInfo,
@@ -100,12 +100,14 @@ const createAddressesService = (client: AxiosInstance) => {
     },
 
     /**
-     * address contains no errors
+     * address contains no errors if normalized exists and there is no exceptions in any error
      */
     async validate(addresses: AddressQuery[]): Promise<Boolean[]> {
       const addressQueryResult = await this.query(addresses);
-      const result = addressQueryResult.map(({ exceptions }) =>
-        exceptions.every((el) => el.type !== ExceptionType.ERROR)
+      const result = addressQueryResult.map(
+        ({ exceptions, normalized }) =>
+          Boolean(normalized) &&
+          exceptions.every((el) => el.type !== ExceptionType.ERROR)
       );
       return result;
     },
