@@ -14,6 +14,7 @@ import {
   ShipEngineException,
   ExceptionType,
 } from '../models/ShipEngineException';
+import { PartialAddress } from '../models/api/validate-address/validate_address_request_body';
 
 /**
  * map from domain model to dto (to send down the wire)
@@ -34,22 +35,14 @@ const mapToRequestBodyAddress = (address: AddressQuery): AddressToValidate => {
 /**
  * map from dto to domain model
  */
-const mapToNormalizedAddress = (matched: PartialAddress1): Address => {
+const mapToNormalizedAddress = (
+  matched: PartialAddress1 | PartialAddress
+): Address => {
   const street = [
     matched.address_line1,
     matched.address_line2,
     matched.address_line3,
   ].filter(exists);
-
-  if (!street.length) {
-    // this should not happen under normal circumstances
-    throw Error('no street defined!');
-  }
-
-  // These elements are nullable in the open-api definition
-  assertExists(matched.postal_code, 'postal code');
-  assertExists(matched.city_locality, 'city');
-  assertExists(matched.state_province, 'state');
 
   const resId = matched.address_residential_indicator;
   const residentialIndicator =
@@ -57,9 +50,9 @@ const mapToNormalizedAddress = (matched: PartialAddress1): Address => {
 
   return new Address(
     street,
-    matched.postal_code,
-    matched.city_locality,
-    matched.state_province,
+    matched.postal_code || '',
+    matched.city_locality || '',
+    matched.state_province || '',
     matched.country_code || 'US',
     residentialIndicator
   );
@@ -129,7 +122,9 @@ interface ValidateAddress {
   (address: AddressQuery): Promise<Boolean>;
 }
 
-export const createAddressesConvenienceService = (client: AxiosInstance) => {
+export const createAddressesConvenienceService = (
+  client: AxiosInstance
+): AddressesServiceAPI => {
   const addressesServices = createAddressesService(client);
   const api: AddressesServiceAPI = {
     addresses: addressesServices,
@@ -137,6 +132,7 @@ export const createAddressesConvenienceService = (client: AxiosInstance) => {
       const [domainAddress] = await addressesServices.validate([address]);
       return domainAddress;
     },
+    // todo, accept an array of addresses as well.
     queryAddress: async (address: AddressQuery) => {
       const [domainQueryResult] = await addressesServices.query([address]);
       return domainQueryResult;
