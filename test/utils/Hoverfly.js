@@ -8,13 +8,13 @@ class Hoverfly {
       subshell = exec(
         'hoverfly -webserver -response-body-files-path simengine > /dev/null &'
       );
-      subshell.stderr?.on('data', (r) => {
+      subshell.stderr.on('data', (r) => {
         console.error(r);
         reject(r);
       });
-      subshell.stdout?.on('end', resolve);
-      subshell.stdout?.on('close', resolve);
-      subshell.stdout?.on('error', (err) => {
+      subshell.stdout.on('end', resolve);
+      subshell.stdout.on('close', resolve);
+      subshell.stdout.on('error', (err) => {
         console.error(err);
         resolve(err);
       });
