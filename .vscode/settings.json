@@ -7,5 +7,6 @@
       ],
       "url": "./simengine/hoverfly-schema.json"
     }
-  ]
+  ],
+  "nixEnvSelector.nixShellConfig": "${workspaceRoot}/shell.nix"
 }
