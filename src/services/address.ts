@@ -1,8 +1,19 @@
 import { AxiosInstance } from 'axios';
 import { ValidateAddressResponseBody, AddressToValidate } from '../models/api';
-import { AddressQuery, Address } from '../models/Address';
-import { AddressValidationResult } from '../models/api/validate-address/validate_address_response_body';
+import { AddressQuery, Address, AddressQueryResult } from '../models/Address';
+import {
+  AddressValidationResult,
+  PartialAddress1,
+  ResponseMessage,
+} from '../models/api/validate-address/validate_address_response_body';
 import { assertExists, exists } from '../utils/exists';
+import {
+  ShipEngineError,
+  ShipEngineInfo,
+  ShipEngineWarning,
+  ShipEngineException,
+  ExceptionType,
+} from '../models/ShipEngineException';
 
 /**
  * map from domain model to dto (to send down the wire)
@@ -23,9 +34,7 @@ const mapToRequestBodyAddress = (address: AddressQuery): AddressToValidate => {
 /**
  * map from dto to domain model
  */
-const mapToNormalizedAddress = (address: AddressValidationResult): Address => {
-  const { matched_address: matched } = address;
-
+const mapToNormalizedAddress = (matched: PartialAddress1): Address => {
   const street = [
     matched.address_line1,
     matched.address_line2,
@@ -56,36 +65,82 @@ const mapToNormalizedAddress = (address: AddressValidationResult): Address => {
   );
 };
 
+const mapToShipEngineExceptions = (
+  messages: ResponseMessage[]
+): ShipEngineException[] => {
+  return messages
+    .map(({ type: t, message }) => {
+      if (!t || !message) return undefined;
+      // this is verbose because may want to conditionally add additional errors based on kind
+      if (t === 'error') {
+        return new ShipEngineError(message);
+      }
+      if (t === 'warning') {
+        return new ShipEngineWarning(message);
+      }
+      if (t === 'info') {
+        return new ShipEngineInfo(message);
+      }
+    })
+    .filter(exists);
+};
+
+const mapToAddressQueryResult = (
+  v: AddressValidationResult
+): AddressQueryResult => {
+  return {
+    original: mapToNormalizedAddress(v.original_address),
+    exceptions: mapToShipEngineExceptions(v.messages),
+    normalized: mapToNormalizedAddress(v.matched_address),
+  };
+};
+
 const createAddressesService = (client: AxiosInstance) => {
   return {
-    /**
-     * validate multiple addresses
-     */
-    validate: async (addresses: AddressQuery[]) => {
+    async query(addresses: AddressQuery[]): Promise<AddressQueryResult[]> {
       const { data } = await client.post<ValidateAddressResponseBody>(
         '/addresses/validate',
         addresses.map(mapToRequestBodyAddress)
       );
-      const address = data.map(mapToNormalizedAddress);
-      return address;
+      const result = data.map(mapToAddressQueryResult);
+      return result;
+    },
+
+    /**
+     * address contains no errors
+     */
+    async validate(addresses: AddressQuery[]): Promise<Boolean[]> {
+      const addressQueryResult = await this.query(addresses);
+      const result = addressQueryResult.map(({ exceptions }) =>
+        exceptions.every((el) => el.type !== ExceptionType.ERROR)
+      );
+      return result;
     },
   };
 };
 
-export type AddressesServiceAPI = ReturnType<
-  typeof createAddressesConvenienceService
->;
+export type AddressesServiceAPI = {
+  validateAddress: ValidateAddress;
+  addresses: ReturnType<typeof createAddressesService>;
+  queryAddress: (address: AddressQuery) => Promise<AddressQueryResult>;
+};
+
+interface ValidateAddress {
+  (address: AddressQuery): Promise<Boolean>;
+}
 
 export const createAddressesConvenienceService = (client: AxiosInstance) => {
   const addressesServices = createAddressesService(client);
-  return {
+  const api: AddressesServiceAPI = {
     addresses: addressesServices,
-    /**
-     * validate single address
-     */
-    validateAddress: async (address: AddressQuery) => {
+    validateAddress: async (address) => {
       const [domainAddress] = await addressesServices.validate([address]);
       return domainAddress;
     },
+    queryAddress: async (address: AddressQuery) => {
+      const [domainQueryResult] = await addressesServices.query([address]);
+      return domainQueryResult;
+    },
   };
+  return api;
 };
