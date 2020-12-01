@@ -11,7 +11,7 @@ type SimplifiedConfig = {
   baseUrl?: string;
 };
 
-type ShipEngineConfig = ApiKey | SimplifiedConfig;
+export type ShipEngineConfig = ApiKey | SimplifiedConfig;
 
 const mapToApiServiceConfig = (
   config: ShipEngineConfig
