@@ -113,5 +113,21 @@ describe('API', () => {
         expect(queryResult).to.be.false;
       });
     });
+    describe('normalizeAddress', () => {
+      it('should normalize if possible', async () => {
+        const normalized = await api.normalizeAddress(fixtures.yankeeStadium);
+        expect(normalized).contains({
+          stateProvince: fixtures.yankeeStadium.stateProvince,
+        });
+      });
+      it('should throw an error if invalid', async () => {
+        try {
+          await api.normalizeAddress(fixtures.dodgersStadium);
+          expect.fail('should not reach here');
+        } catch (err) {
+          expect(err.message).to.contain('unable to normalize');
+        }
+      });
+    });
   });
 });
