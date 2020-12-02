@@ -1,8 +1,12 @@
 import { AxiosInstance } from 'axios';
-import { ValidateAddressResponseBody, AddressToValidate } from '../models/api';
-import { AddressQuery, Address, AddressQueryResult } from '../models/Address';
 import {
+  ValidateAddressResponseBody,
   AddressValidationResult,
+  AddressToValidate,
+} from '../models/api';
+import { AddressQuery, Address, AddressQueryResult } from '../models/Address';
+
+import {
   PartialAddress1,
   ResponseMessage,
 } from '../models/api/validate-address/validate_address_response_body';
@@ -84,7 +88,9 @@ const mapToAddressQueryResult = (
   return {
     original: mapToNormalizedAddress(v.original_address),
     exceptions: mapToShipEngineExceptions(v.messages),
-    normalized: mapToNormalizedAddress(v.matched_address),
+    normalized: v.matched_address
+      ? mapToNormalizedAddress(v.matched_address)
+      : undefined,
   };
 };
 

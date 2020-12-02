@@ -43,7 +43,7 @@ describe('API', () => {
         console.log('import success:', result);
       });
     });
-    it('should contain no addresses', async () => {
+    it('should have no exceptions', async () => {
       const yankeeStadium = {
         street: ['1 E 161 St'],
         country: 'US',
@@ -55,6 +55,19 @@ describe('API', () => {
       expect(queryResult.exceptions).to.be.empty;
       expect(queryResult.normalized.country).not.to.be.empty;
       expect(queryResult.original.country).not.to.be.empty;
+    });
+    it('should have exceptions if no matched address', async () => {
+      const dodgersStadium = {
+        street: ['1000 Elysion Ave'],
+        country: 'US',
+        cityLocality: 'Los Angeles',
+        postalCode: '90012',
+        stateProvince: 'CA',
+      };
+      const queryResult = await api.queryAddress(dodgersStadium);
+      expect(queryResult.exceptions).not.to.be.empty;
+      expect(queryResult.normalized).to.eq(undefined);
+      expect(queryResult.original.country).to.eq(dodgersStadium.country);
     });
   });
 });
