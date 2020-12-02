@@ -16,11 +16,10 @@
     "gen": "sh generate-internal-client.sh",
     "tsc:check": "tsc --noEmit",
     "test": "npm run test:node && npm run test:browser",
-    "test:node:watch": "npm run test:node -- -- --watch",
+    "test:node:watch": "chokidar **/test/** **/src/**/*.ts -c 'npm run test:node'",
     "test:browser:watch": "chokidar **/test/** karma.conf.js -c 'npm run test:browser -- --single-run'",
     "test:node": "npm run build:cjs && mocha",
     "test:browser": "npm run build && karma start --single-run",
-    "test:browser:ci": "npm run test:browser",
     "lint": "npm run tsc:check && eslint .",
     "update:sim": "git submodule update --recursive --remote",
     "fix": "npm run lint -- --fix"
