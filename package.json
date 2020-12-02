@@ -20,6 +20,7 @@
     "test:browser:watch": "chokidar **/test/** karma.conf.js -c 'npm run test:browser -- --single-run'",
     "test:node": "npm run build:cjs && mocha",
     "test:browser": "npm run build && karma start --single-run",
+    "test:browser:ci": "npm run test:browser",
     "lint": "npm run tsc:check && eslint .",
     "update:sim": "git submodule update --recursive --remote",
     "fix": "npm run lint -- --fix"
