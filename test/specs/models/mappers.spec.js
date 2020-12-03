@@ -1,20 +1,13 @@
 const { expect } = require('chai');
 const forEach = require('mocha-each');
 const {
+  mapToRequestBodyAddress,
   mapToNormalizedAddress,
 } = require('../../../cjs/models/mappers/address');
 
 /**
  * @typedef { import('../../../src/services/service-factory').ServiceAPI } ServiceAPI
  */
-const fixtures = {
-  address: {
-    address_line1: 'abc',
-    address_line2: '123',
-    address_line3: '456',
-  },
-};
-
 describe('mapToNormalizedAddress', () => {
   describe('street_line should convert to string[]', () => {
     forEach([
@@ -35,9 +28,7 @@ describe('mapToNormalizedAddress', () => {
         ['abc', '123'],
       ],
     ]).it('%j -> %j', (arg, expected) => {
-      expect(
-        mapToNormalizedAddress({ ...fixtures.address, ...arg }).street
-      ).to.eql(expected);
+      expect(mapToNormalizedAddress(arg).street).to.eql(expected);
     });
   });
 
@@ -49,7 +40,7 @@ describe('mapToNormalizedAddress', () => {
     ]).it('%s -> %s', (arg, expected) => {
       expect(
         mapToNormalizedAddress({
-          ...fixtures.address,
+          address_line1: 'abc',
           address_residential_indicator: arg,
         }).residential
       ).to.eql(expected);
@@ -57,6 +48,50 @@ describe('mapToNormalizedAddress', () => {
   });
 });
 
-describe('mapToAddressQueryResult', () => {});
-describe('mapToRequestBodyAddress', () => {});
+describe('mapToRequestBodyAddress', () => {
+  describe('street should convert to address line', () => {
+    const street1 = [
+      {
+        street: 'abc',
+      },
+      {
+        address_line1: 'abc',
+        address_line2: undefined,
+        address_line3: undefined,
+      },
+    ];
+    const street2 = [
+      {
+        street: ['abc'],
+      },
+      {
+        address_line1: 'abc',
+        address_line2: undefined,
+        address_line3: undefined,
+      },
+    ];
+    const countryCode1 = [
+      {
+        country: null,
+      },
+      {
+        country_code: 'US',
+      },
+    ];
+    const countryCode2 = [
+      {
+        country: 'CZ',
+      },
+      {
+        country_code: 'CZ',
+      },
+    ];
+    forEach([street1, street2, countryCode1, countryCode2]).it(
+      '%j -> %j',
+      (arg, expected) => {
+        expect(mapToRequestBodyAddress(arg)).to.contain(expected);
+      }
+    );
+  });
+});
 describe('mapToShipEngineExceptions', () => {});
