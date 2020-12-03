@@ -53,6 +53,7 @@
     "karma-child-process": "^1.0.4",
     "karma-cli": "^2.0.0",
     "mocha": "^8.2.1",
+    "mocha-each": "^2.0.1",
     "prettier": "^2.1.2",
     "shipengine-json-schema": "^1.4.0",
     "shipengine-openapi": "^1.4.0",

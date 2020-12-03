@@ -1,98 +1,12 @@
 import { AxiosInstance } from 'axios';
-import {
-  ValidateAddressResponseBody,
-  AddressValidationResult,
-  AddressToValidate,
-} from '../models/api';
+import { ValidateAddressResponseBody } from '../models/api';
 import { AddressQuery, Address, AddressQueryResult } from '../models/Address';
 
+import { ShipEngineError, ExceptionType } from '../models/ShipEngineException';
 import {
-  PartialAddress1,
-  ResponseMessage,
-} from '../models/api/validate-address/validate_address_response_body';
-import { exists } from '../utils/exists';
-import {
-  ShipEngineError,
-  ShipEngineInfo,
-  ShipEngineWarning,
-  ShipEngineException,
-  ExceptionType,
-} from '../models/ShipEngineException';
-import { PartialAddress } from '../models/api/validate-address/validate_address_request_body';
-
-/**
- * map from domain model to dto (to send down the wire)
- */
-const mapToRequestBodyAddress = (address: AddressQuery): AddressToValidate => {
-  const { cityLocality, street, country, postalCode, stateProvince } = address;
-  return {
-    address_line1: Array.isArray(street) ? street[0] : street,
-    address_line2: Array.isArray(street) ? street[1] : undefined,
-    address_line3: Array.isArray(street) ? street[2] : undefined,
-    city_locality: cityLocality,
-    country_code: country || 'US',
-    postal_code: postalCode,
-    state_province: stateProvince,
-  };
-};
-
-/**
- * map from dto to domain model
- */
-const mapToNormalizedAddress = (
-  matched: PartialAddress1 | PartialAddress
-): Address => {
-  const street = [
-    matched.address_line1,
-    matched.address_line2,
-    matched.address_line3,
-  ].filter(exists);
-
-  const resId = matched.address_residential_indicator;
-  const residentialIndicator =
-    resId === undefined || resId === 'unknown' ? undefined : resId === 'yes';
-
-  return new Address(
-    street,
-    matched.postal_code || '',
-    matched.city_locality || '',
-    matched.state_province || '',
-    matched.country_code || 'US',
-    residentialIndicator
-  );
-};
-
-const mapToShipEngineExceptions = (
-  messages: ResponseMessage[]
-): ShipEngineException[] => {
-  return messages
-    .map(({ type: t, message }) => {
-      if (!t || !message) return undefined;
-      // this is verbose because may want to conditionally add additional errors based on kind
-      if (t === 'error') {
-        return new ShipEngineError(message);
-      }
-      if (t === 'warning') {
-        return new ShipEngineWarning(message);
-      }
-      if (t === 'info') {
-        return new ShipEngineInfo(message);
-      }
-    })
-    .filter(exists);
-};
-
-const mapToAddressQueryResult = (
-  v: AddressValidationResult
-): AddressQueryResult => {
-  return {
-    original: mapToNormalizedAddress(v.original_address),
-    exceptions: mapToShipEngineExceptions(v.messages),
-    normalized: v.matched_address
-      ? mapToNormalizedAddress(v.matched_address)
-      : undefined,
-  };
-};
+  mapToAddressQueryResult,
+  mapToRequestBodyAddress,
+} from '../models/mappers/address';
 
 const createAddressesService = (client: AxiosInstance) => {
   const isValid = (address: AddressQueryResult) => {
