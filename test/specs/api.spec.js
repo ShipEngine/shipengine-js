@@ -81,21 +81,23 @@ describe('API', () => {
         console.log('import success:', result);
       });
     });
-    it('should have no exceptions', async () => {
-      const queryResult = await api.queryAddress(fixtures.yankeeStadium);
-      expect(queryResult.exceptions).to.be.empty;
-      expect(queryResult.normalized.country).not.to.be.empty;
-      expect(queryResult.original.country).not.to.be.empty;
+    describe('query', () => {
+      it('should have no exceptions', async () => {
+        const queryResult = await api.queryAddress(fixtures.yankeeStadium);
+        expect(queryResult.exceptions).to.be.empty;
+        expect(queryResult.normalized.country).not.to.be.empty;
+        expect(queryResult.original.country).not.to.be.empty;
+      });
+      it('should have exceptions if no matched address', async () => {
+        const queryResult = await api.queryAddress(fixtures.dodgersStadium);
+        expect(queryResult.exceptions).not.to.be.empty;
+        expect(queryResult.normalized).to.eq(undefined);
+        expect(queryResult.original.country).to.eq(
+          fixtures.dodgersStadium.country
+        );
+      });
     });
-    it('should have exceptions if no matched address', async () => {
-      const queryResult = await api.queryAddress(fixtures.dodgersStadium);
-      expect(queryResult.exceptions).not.to.be.empty;
-      expect(queryResult.normalized).to.eq(undefined);
-      expect(queryResult.original.country).to.eq(
-        fixtures.dodgersStadium.country
-      );
-    });
-    describe('validateAddress', () => {
+    describe('validate', () => {
       it('should be true if success', async () => {
         const queryResult = await api.validateAddress(fixtures.yankeeStadium);
         expect(queryResult).to.be.true;
@@ -113,7 +115,7 @@ describe('API', () => {
         expect(queryResult).to.be.false;
       });
     });
-    describe('normalizeAddress', () => {
+    describe('normalize', () => {
       it('should normalize if possible', async () => {
         const normalized = await api.normalizeAddress(fixtures.yankeeStadium);
         expect(normalized).contains({
