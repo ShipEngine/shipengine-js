@@ -8,7 +8,8 @@ import {
 // utility type
 
 // here is another way of doing the exact same thing without a service
-type ServiceAPI = TagsServiceAPI & AddressesServiceAPI;
+
+export type ServiceAPI = TagsServiceAPI & AddressesServiceAPI;
 
 export const ServiceFactory = (client: ShipEngineApiClient): ServiceAPI => {
   const services = [

@@ -56,10 +56,14 @@ const isAxiosInstance = (v: Config): v is AxiosInstance => {
 const createClient = (config: Config) => {
   if (isAxiosInstance(config)) {
     const instance = config;
+
     instance.defaults = {
-      ...instance.defaults,
-      ...config.defaults,
       ...defaultConfig,
+      ...config.defaults,
+      raxConfig: {
+        ...defaultConfig.raxConfig,
+        ...config.defaults.raxConfig,
+      },
       headers: {
         ...defaultConfig.headers,
         ...config.defaults.headers,
@@ -67,9 +71,13 @@ const createClient = (config: Config) => {
     };
     return instance;
   }
-  const finalConfig = {
+  const finalConfig: AxiosRequestConfig = {
     ...defaultConfig,
     ...config,
+    raxConfig: {
+      ...defaultConfig.raxConfig,
+      ...config.raxConfig,
+    },
     headers: {
       ...defaultConfig.headers,
       ...config.headers,

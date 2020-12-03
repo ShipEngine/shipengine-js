@@ -10,17 +10,18 @@ export const ShipEngineApiClient = (baseConfig: ShipEngineApiServiceConfig) => {
   if (!baseConfig.apiKey) {
     throw new InvalidArgumentError('Please enter API Key!');
   }
-  const finalBaseUrl =
-    baseConfig.requestOptions?.baseURL ?? 'https://api.shipengine.com/v1';
+  const { baseURL, raxConfig } = baseConfig.requestOptions || {};
+  const finalBaseUrl = baseURL ?? 'https://api.shipengine.com/v1';
   // I can override the api key when instantiating the ship engine api, but also on a request by request basis.
-  const client = createClient({
-    ...baseConfig,
+  const config = {
+    raxConfig,
     baseURL: finalBaseUrl,
     headers: {
-      ...baseConfig.requestOptions?.headers,
+      ...(baseConfig.requestOptions?.headers || {}),
       'API-Key': baseConfig.apiKey,
     },
-  });
+  };
+  const client = createClient(config);
   return client;
 };
 

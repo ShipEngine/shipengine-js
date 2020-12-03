@@ -22,8 +22,8 @@
     "downlevelIteration": true,
     "typeRoots": [
       "node_modules/@types",
-      "src/typings"
-    ]
+      "./typings"
+    ],
   },
   "include": [
     "index.d.ts",

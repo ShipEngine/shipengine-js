@@ -1,91 +1,90 @@
 import { AxiosInstance } from 'axios';
-import { ValidateAddressResponseBody, AddressToValidate } from '../models/api';
-import { AddressQuery, Address } from '../models/Address';
-import { AddressValidationResult } from '../models/api/validate-address/validate_address_response_body';
-import { assertExists, exists } from '../utils/exists';
+import { ValidateAddressResponseBody } from '../models/api';
+import { AddressQuery, Address, AddressQueryResult } from '../models/Address';
 
-/**
- * map from domain model to dto (to send down the wire)
- */
-const mapToRequestBodyAddress = (address: AddressQuery): AddressToValidate => {
-  const { cityLocality, street, country, postalCode, stateProvince } = address;
-  return {
-    address_line1: Array.isArray(street) ? street[0] : street,
-    address_line2: Array.isArray(street) ? street[1] : undefined,
-    address_line3: Array.isArray(street) ? street[2] : undefined,
-    city_locality: cityLocality,
-    country_code: country || 'US',
-    postal_code: postalCode,
-    state_province: stateProvince,
-  };
-};
-
-/**
- * map from dto to domain model
- */
-const mapToNormalizedAddress = (address: AddressValidationResult): Address => {
-  const { matched_address: matched } = address;
-
-  const street = [
-    matched.address_line1,
-    matched.address_line2,
-    matched.address_line3,
-  ].filter(exists);
-
-  if (!street.length) {
-    // this should not happen under normal circumstances
-    throw Error('no street defined!');
-  }
-
-  // These elements are nullable in the open-api definition
-  assertExists(matched.postal_code, 'postal code');
-  assertExists(matched.city_locality, 'city');
-  assertExists(matched.state_province, 'state');
-
-  const resId = matched.address_residential_indicator;
-  const residentialIndicator =
-    resId === undefined || resId === 'unknown' ? undefined : resId === 'yes';
-
-  return new Address(
-    street,
-    matched.postal_code,
-    matched.city_locality,
-    matched.state_province,
-    matched.country_code || 'US',
-    residentialIndicator
-  );
-};
+import { ShipEngineError, ExceptionType } from '../models/ShipEngineException';
+import {
+  mapToAddressQueryResult,
+  mapToRequestBodyAddress,
+} from '../models/mappers/address';
 
 const createAddressesService = (client: AxiosInstance) => {
+  const isValid = (address: AddressQueryResult) => {
+    const { normalized, exceptions } = address;
+    const result =
+      Boolean(normalized) &&
+      exceptions.every((el) => el.type !== ExceptionType.ERROR);
+    return result;
+  };
+
   return {
-    /**
-     * validate multiple addresses
-     */
-    validate: async (addresses: AddressQuery[]) => {
+    async query(addresses: AddressQuery[]): Promise<AddressQueryResult[]> {
       const { data } = await client.post<ValidateAddressResponseBody>(
         '/addresses/validate',
         addresses.map(mapToRequestBodyAddress)
       );
-      const address = data.map(mapToNormalizedAddress);
-      return address;
+      const result = data.map(mapToAddressQueryResult);
+      return result;
+    },
+
+    /**
+     * address contains no errors if normalized exists and there is no exceptions in any error
+     */
+    async validate(addresses: AddressQuery[]): Promise<Boolean[]> {
+      const addressQueryResult = await this.query(addresses);
+      const result = addressQueryResult.map(isValid);
+      return result;
+    },
+
+    /**
+     * Get array of normalized addresses.
+     * Invalid address = undefined.
+     */
+    async normalize(
+      addresses: AddressQuery[]
+    ): Promise<(Address | undefined)[]> {
+      const addressQueryResult = await this.query(addresses);
+      const normalized = addressQueryResult.map((el) =>
+        isValid(el) ? el.normalized : undefined
+      );
+      return normalized;
     },
   };
 };
 
-export type AddressesServiceAPI = ReturnType<
-  typeof createAddressesConvenienceService
->;
+export type AddressesServiceAPI = {
+  validateAddress: ValidateAddress;
+  addresses: ReturnType<typeof createAddressesService>;
+  normalizeAddress: (address: AddressQuery) => Promise<Address | undefined>;
+  queryAddress: (address: AddressQuery) => Promise<AddressQueryResult>;
+};
 
-export const createAddressesConvenienceService = (client: AxiosInstance) => {
+interface ValidateAddress {
+  (address: AddressQuery): Promise<Boolean>;
+}
+
+export const createAddressesConvenienceService = (
+  client: AxiosInstance
+): AddressesServiceAPI => {
   const addressesServices = createAddressesService(client);
-  return {
+  const api: AddressesServiceAPI = {
     addresses: addressesServices,
-    /**
-     * validate single address
-     */
-    validateAddress: async (address: AddressQuery) => {
+    async validateAddress(address) {
       const [domainAddress] = await addressesServices.validate([address]);
       return domainAddress;
     },
+    // todo, accept an array of addresses as well.
+    async queryAddress(address: AddressQuery) {
+      const [domainQueryResult] = await addressesServices.query([address]);
+      return domainQueryResult;
+    },
+    async normalizeAddress(address) {
+      const { normalized } = await this.queryAddress(address);
+      if (!normalized) {
+        throw new ShipEngineError('Address unqueryable, unable to normalize.');
+      }
+      return normalized;
+    },
   };
+  return api;
 };

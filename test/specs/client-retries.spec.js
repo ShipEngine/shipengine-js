@@ -3,13 +3,14 @@ const {
 } = require('../../cjs/services/shipengine-api-factory');
 const { Hoverfly } = require('../utils/Hoverfly');
 const { expect } = require('chai');
+const constants = require('../utils/contants');
 
 describe('retries', () => {
   const get = () =>
     ShipEngineApiClient({
       apiKey: '123',
       requestOptions: {
-        baseURL: 'http://localhost:8500',
+        baseURL: constants.hoverflyBaseUrl,
       },
     }).get('/retries');
 

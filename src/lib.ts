@@ -9,9 +9,10 @@ type ApiKey = string;
 type SimplifiedConfig = {
   apiKey: ApiKey;
   baseUrl?: string;
+  retryBackoffType?: 'linear' | 'static' | 'exponential';
 };
 
-type ShipEngineConfig = ApiKey | SimplifiedConfig;
+export type ShipEngineConfig = ApiKey | SimplifiedConfig;
 
 const mapToApiServiceConfig = (
   config: ShipEngineConfig
@@ -20,7 +21,15 @@ const mapToApiServiceConfig = (
     return { apiKey: config };
   }
 
-  return { apiKey: config.apiKey, requestOptions: { baseURL: config.baseUrl } };
+  return {
+    apiKey: config.apiKey,
+    requestOptions: {
+      baseURL: config.baseUrl,
+      raxConfig: {
+        backoffType: config.retryBackoffType,
+      },
+    },
+  };
 };
 
 export const ShipEngine = (config: ShipEngineConfig) => {
