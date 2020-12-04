@@ -1,12 +1,12 @@
 import { createClient } from '../client';
-import { ShipEngineApiServiceConfig } from '../models/Config';
+import { ShipEngineApiClientConfig } from '../models/public/Config';
 
 class InvalidArgumentError extends Error {}
 
 /*
  * create a ShipEngine API Client instance
  */
-export const ShipEngineApiClient = (baseConfig: ShipEngineApiServiceConfig) => {
+export const ShipEngineApiClient = (baseConfig: ShipEngineApiClientConfig) => {
   if (!baseConfig.apiKey) {
     throw new InvalidArgumentError('Please enter API Key!');
   }

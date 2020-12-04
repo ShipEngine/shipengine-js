@@ -1,4 +1,4 @@
-import { ShipEngineApiServiceConfig } from './models/Config';
+import { ShipEngineApiClientConfig } from './models/public/Config';
 import { ServiceFactory } from './services/service-factory';
 import { ShipEngineApiClient } from './services/shipengine-api-factory';
 
@@ -16,7 +16,7 @@ export type ShipEngineConfig = ApiKey | SimplifiedConfig;
 
 const mapToApiServiceConfig = (
   config: ShipEngineConfig
-): ShipEngineApiServiceConfig => {
+): ShipEngineApiClientConfig => {
   if (typeof config === 'string') {
     return { apiKey: config };
   }

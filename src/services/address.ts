@@ -1,8 +1,15 @@
 import { AxiosInstance } from 'axios';
 import { ValidateAddressResponseBody } from '../models/api';
-import { AddressQuery, Address, AddressQueryResult } from '../models/Address';
+import {
+  AddressQuery,
+  Address,
+  AddressQueryResult,
+} from '../models/public/Address';
 
-import { ShipEngineError, ExceptionType } from '../models/ShipEngineException';
+import {
+  ShipEngineError,
+  ExceptionType,
+} from '../models/public/ShipEngineException';
 import {
   mapToAddressQueryResult,
   mapToRequestBodyAddress,
