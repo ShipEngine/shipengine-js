@@ -1,4 +1,4 @@
-import { ShipEngineApiClientConfig } from './models/public/Config';
+import { ShipEngineApiClientConfig } from './models/public';
 import { ServiceFactory } from './services/service-factory';
 import { ShipEngineApiClient } from './services/shipengine-api-factory';
 
@@ -35,3 +35,5 @@ const mapToApiServiceConfig = (
 export const ShipEngine = (config: ShipEngineConfig) => {
   return ServiceFactory(ShipEngineApiClient(mapToApiServiceConfig(config)));
 };
+
+export * from './models/public';

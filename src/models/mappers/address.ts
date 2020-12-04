@@ -4,15 +4,16 @@ import {
   MatchedAddress,
   ResponseMessage,
 } from '../api';
-import { AddressQueryResult, Address, AddressQuery } from '../public/Address';
-import { exists } from '../../utils/exists';
-
 import {
+  AddressQueryResult,
+  Address,
+  AddressQuery,
   ShipEngineError,
   ShipEngineInfo,
   ShipEngineWarning,
   ShipEngineException,
-} from '../public/ShipEngineException';
+} from '../public';
+import { exists } from '../../utils/exists';
 
 export const mapToAddressQueryResult = (
   v: AddressValidationResult

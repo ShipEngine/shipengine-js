@@ -4,12 +4,10 @@ import {
   AddressQuery,
   Address,
   AddressQueryResult,
-} from '../models/public/Address';
-
-import {
   ShipEngineError,
   ExceptionType,
-} from '../models/public/ShipEngineException';
+} from '../models/public';
+
 import {
   mapToAddressQueryResult,
   mapToRequestBodyAddress,
