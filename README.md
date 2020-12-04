@@ -26,15 +26,14 @@ const shipengine = require('shipengine')
 
 const shipengine = ShipEngine('my_api_key')
 
-const isValid = shipengine.validateAddress({
+shipengine.validateAddress({
   street: ['1 E 161 St'],
   country: 'US',
   cityLocality: 'The Bronx',
   postalCode: '10451',
   stateProvince: 'NY',
-})
+}).then((isValid) => console.assert(isValid, 'Address should be valid!'))
 
-console.assert(isValid, 'Address should be valid!')
 
 
 ```

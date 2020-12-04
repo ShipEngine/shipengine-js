@@ -35,7 +35,7 @@ const createAddressesService = (client: AxiosInstance) => {
     /**
      * address contains no errors if normalized exists and there is no exceptions in any error
      */
-    async validate(addresses: AddressQuery[]): Promise<Boolean[]> {
+    async validate(addresses: AddressQuery[]): Promise<boolean[]> {
       const addressQueryResult = await this.query(addresses);
       const result = addressQueryResult.map(isValid);
       return result;
@@ -65,7 +65,7 @@ export type AddressesServiceAPI = {
 };
 
 interface ValidateAddress {
-  (address: AddressQuery): Promise<Boolean>;
+  (address: AddressQuery): Promise<boolean>;
 }
 
 export const createAddressesConvenienceService = (
