@@ -1,5 +1,8 @@
 #!/bin/bash
 
 hoverctl stop
-hoverfly -webserver -response-body-files-path simengine &
-hoverctl import simengine/v1/tags.json
+
+docker run -d -p 8500:8888 \
+    spectolabs/hoverfly:latest \
+    -webserver \
+    -response-body-files-path simengine
