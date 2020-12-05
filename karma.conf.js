@@ -10,7 +10,7 @@ const {
   hoverflyProxyApiPath,
   configProxyApiPath,
   configProxyPath,
-} = require('./test/utils/contants');
+} = require('./test/utils/constants');
 
 module.exports = (cfg) => {
   const getConfig = karmaConfig({

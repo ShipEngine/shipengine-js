@@ -2,7 +2,7 @@
 const { ShipEngine } = require('../../cjs/index');
 const { Hoverfly } = require('../utils/Hoverfly');
 const { expect } = require('chai');
-const constants = require('../utils/contants');
+const constants = require('../utils/constants');
 /**
  * @typedef { import('../../src/services/service-factory').ServiceAPI } ServiceAPI
  */
