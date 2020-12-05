@@ -1,8 +1,13 @@
 import { AxiosInstance } from 'axios';
 import { ValidateAddressResponseBody } from '../models/api';
-import { AddressQuery, Address, AddressQueryResult } from '../models/Address';
+import {
+  AddressQuery,
+  Address,
+  AddressQueryResult,
+  ShipEngineError,
+  ExceptionType,
+} from '../models/public';
 
-import { ShipEngineError, ExceptionType } from '../models/ShipEngineException';
 import {
   mapToAddressQueryResult,
   mapToRequestBodyAddress,
@@ -30,7 +35,7 @@ const createAddressesService = (client: AxiosInstance) => {
     /**
      * address contains no errors if normalized exists and there is no exceptions in any error
      */
-    async validate(addresses: AddressQuery[]): Promise<Boolean[]> {
+    async validate(addresses: AddressQuery[]): Promise<boolean[]> {
       const addressQueryResult = await this.query(addresses);
       const result = addressQueryResult.map(isValid);
       return result;
@@ -60,7 +65,7 @@ export type AddressesServiceAPI = {
 };
 
 interface ValidateAddress {
-  (address: AddressQuery): Promise<Boolean>;
+  (address: AddressQuery): Promise<boolean>;
 }
 
 export const createAddressesConvenienceService = (

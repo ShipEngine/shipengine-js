@@ -1,7 +1,7 @@
 {
-  "name": "shipengine-js",
-  "version": "1.0.0",
-  "description": "ShipEngine SDK for node/browser",
+  "name": "shipengine",
+  "version": "1.0.0-alpha.1",
+  "description": "ShipEngine SDK for node / browser",
   "main": "cjs/index.js",
   "module": "esm/index.js",
   "types": "esm/index.d.ts",
