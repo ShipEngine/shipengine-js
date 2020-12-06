@@ -1,4 +1,4 @@
-const { configProxyApiPath } = require('./contants');
+const { configProxyApiPath } = require('./constants');
 const axios = require('axios');
 
 const client = axios.create({ baseURL: configProxyApiPath });

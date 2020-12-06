@@ -1,0 +1,26 @@
+---
+name: Hoverfly
+on:
+  push:
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    name: Run Tests
+    timeout-minutes: 5
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Install Hoverfly
+        uses: SpectoLabs/hoverfly-github-action@main
+        with:
+          runner_github_workspace_path: ${{ github.workspace }}
+      - name: Use Node.js v12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - run: hoverfly -webserver -response-body-files-path simengine > /dev/null &
+      - run: npm ci
+      - run: npm run test:node

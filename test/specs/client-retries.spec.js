@@ -3,7 +3,7 @@ const {
 } = require('../../cjs/services/shipengine-api-factory');
 const { Hoverfly } = require('../utils/Hoverfly');
 const { expect } = require('chai');
-const constants = require('../utils/contants');
+const constants = require('../utils/constants');
 
 describe('retries', () => {
   const get = () =>

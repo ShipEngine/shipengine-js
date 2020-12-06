@@ -1,8 +1,9 @@
 const express = require('express');
+const { configProxyPort } = require('../constants');
 const bodyParser = require('body-parser');
 const { HoverflyServer: Hoverfly } = require('../hoverfly-server');
 
-const createApp = (port = 9877, app = express()) => {
+const createApp = (port = configProxyPort, app = express()) => {
   app.use(bodyParser.json());
   app.post('/import', async (req, res, next) => {
     const path = req.body.path;
