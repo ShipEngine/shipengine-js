@@ -19,6 +19,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
-      - run: hoverfly -webserver -response-body-files-path simengine
+      - run: hoverfly -webserver -response-body-files-path simengine > /dev/null &
       - run: npm ci
       - run: npm run test:node
