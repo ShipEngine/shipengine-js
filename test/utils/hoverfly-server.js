@@ -1,34 +1,23 @@
-const { exec } = require('child_process');
-const { p } = require('./utils');
+// @ts-check
 
-let subshell;
+const axios = require('axios');
+const { hoverflyActualAPIPort } = require('./constants');
+
+const client = axios.create({
+  baseURL: `http://localhost:${hoverflyActualAPIPort}`,
+});
 class HoverflyServer {
   static async start() {
-    return new Promise((resolve, reject) => {
-      subshell = exec(
-        'hoverfly -webserver -response-body-files-path simengine > /dev/null &'
-      );
-      subshell.stderr.on('data', (r) => {
-        console.error(r);
-        reject(r);
-      });
-      subshell.stdout.on('end', resolve);
-      subshell.stdout.on('close', resolve);
-      subshell.stdout.on('error', (err) => {
-        console.error(err);
-        resolve(err);
-      });
-    });
+    return client.delete('/api/v2/simulation');
   }
 
-  static async import(file) {
-    return p.exec(`hoverctl import simengine/${file}`);
+  static async import(fileName) {
+    const simulation = require(`../../simengine/${fileName}`);
+    return client.put('/api/v2/simulation', simulation);
   }
-  /*   static async flush() {
-    return p.exec(`hoverctl flush cache`);
-  } */
+
   static async stop() {
-    return p.exec('hoverctl stop');
+    // console.log('stopping...');
   }
 }
 

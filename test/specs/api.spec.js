@@ -61,9 +61,7 @@ describe('API', () => {
   });
   describe('hoverfly - tags', () => {
     before(async () => {
-      await Hoverfly.import('v1/tags.json').then((result) => {
-        console.log('import success:', result);
-      });
+      await Hoverfly.import('v1/tags.json');
     });
     it('should create tag / return created tag', async () => {
       const res = await api.createTag('foo');
@@ -77,9 +75,7 @@ describe('API', () => {
 
   describe('addresses', () => {
     before(async () => {
-      await Hoverfly.import('v1/addresses.json').then((result) => {
-        console.log('import success:', result);
-      });
+      await Hoverfly.import('v1/addresses.json');
     });
     describe('query', () => {
       it('should have no exceptions', async () => {

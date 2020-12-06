@@ -37,9 +37,12 @@ shipengine
 
 ```
 
-## Test
+# Development / Contributions
+## Running tests
+Do `docker-compose up -d`.
 
-You must have [hoverfly](https://hoverfly.io/) installed globally and accessible in your path.
+If you for any reason do not want to use docker, you can also install hoverfly locally and run `hoverfly -webserver -response-body-files-path simengine`.
+
 ```
 npm run test
 ```
