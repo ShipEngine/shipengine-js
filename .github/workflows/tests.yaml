@@ -10,7 +10,9 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Checkout code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
+        with:
+          submodules: true
       - name: Install Hoverfly
         uses: SpectoLabs/hoverfly-github-action@main
         with:
