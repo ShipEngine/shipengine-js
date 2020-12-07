@@ -19,7 +19,7 @@ An isomorphic JS library written in _typescript_ and built on the [ShipEngine AP
 
 Install ShipEngine via [npm](https://www.npmjs.com/):
 ```
-npm install shipengine@latest
+npm install shipengine@alpha
 ```
 
 The only configuration requirement is an [API key](https://www.shipengine.com/docs/auth/#api-keys).
