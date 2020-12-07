@@ -23,6 +23,7 @@ jobs:
         node:
           - 12.x
     steps:
+      - run: echo "ref -> ${{github.ref}}"
       - name: Checkout code
         uses: actions/checkout@v2
         with:
