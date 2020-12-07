@@ -42,7 +42,7 @@ jobs:
 
   deploy:
     name: Publish to NPM
-    if: github.ref == 'refs/heads/baz'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     needs:
