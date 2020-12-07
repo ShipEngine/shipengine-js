@@ -3,7 +3,7 @@
 // https://jstools.dev/karma-config/
 
 'use strict';
-const { karmaConfig, buildConfig } = require('@jsdevtools/karma-config');
+const { karmaConfig } = require('@jsdevtools/karma-config');
 const { host } = require('@jsdevtools/host-environment');
 const {
   hoverflyProxyPath,

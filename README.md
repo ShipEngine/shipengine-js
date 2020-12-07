@@ -1,11 +1,15 @@
 [![ShipEngine](https://shipengine.github.io/img/shipengine-logo-wide.png)](https://shipengine.com)
 
-# ShipEngine Isomorphic JS / Node SDK
+# ShipEngine Isomorphic JS / Node SDK (unstable)
 
-[![Test Status](https://github.com/ShipEngine/shipengine-js/workflows/tests/badge.svg)](https://github.com/ShipEngine/shipengine-js/actions)
+[![CI-CD Status](https://github.com/ShipEngine/shipengine-js/workflows/CI-CD/badge.svg)](https://github.com/ShipEngine/shipengine-js/actions)
+>
 
+> ⚠ **WARNING**: This is alpha software under active development. This repo is a successor to https://www.npmjs.com/package/shipengine. Until this has a stable release, we recommend you either stick to the current releases, or use the [shipengine API](https://shipengine.github.io/shipengine-openapi/).
 
-> ⚠ **WARNING**: This is alpha software under active development. `Caveat emptor` until a 1.0.0 release is ready.
+---
+
+## Description
 
 An isomorphic JS library written in _typescript_ and built on the [ShipEngine API](https://shipengine.com), offering low-level access as well as convenience methods.
 
@@ -15,7 +19,7 @@ An isomorphic JS library written in _typescript_ and built on the [ShipEngine AP
 
 Install ShipEngine via [npm](https://www.npmjs.com/):
 ```
-npm install shipengine --save
+npm install shipengine@latest
 ```
 
 The only configuration requirement is an [API key](https://www.shipengine.com/docs/auth/#api-keys).

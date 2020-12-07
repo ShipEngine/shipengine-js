@@ -1,0 +1,66 @@
+name: CI-CD
+
+on:
+  push:
+    branches:
+      - "*"
+    tags-ignore:
+      - "*"
+
+  schedule:
+    - cron: "0 0 1 * *"
+
+jobs:
+  tests:
+    name: Lint & Test
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    strategy:
+      fail-fast: true
+      matrix:
+        os:
+          - ubuntu-latest
+        node:
+          - 12.x
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Use Node.js v12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - run: npm ci
+      - run: npm run lint
+      - name: Install Hoverfly
+        uses: SpectoLabs/hoverfly-github-action@main
+        with:
+          runner_github_workspace_path: ${{ github.workspace }}
+      - run: hoverfly -webserver -response-body-files-path simengine > /dev/null &
+      - run: npm run test
+
+  deploy:
+    name: Publish to NPM
+    if: github.ref == 'refs/heads/baz'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs:
+      - tests
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+
+      - name: Install Node
+        uses: actions/setup-node@v1
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build the code
+        run: npm run build
+
+      - name: Publish to NPM
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
