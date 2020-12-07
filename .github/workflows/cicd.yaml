@@ -27,16 +27,17 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: true
-      - name: Install Hoverfly
-        uses: SpectoLabs/hoverfly-github-action@main
-        with:
-          runner_github_workspace_path: ${{ github.workspace }}
       - name: Use Node.js v12
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
-      - run: hoverfly -webserver -response-body-files-path simengine > /dev/null &
       - run: npm ci
+      - run: npm run lint
+      - name: Install Hoverfly
+        uses: SpectoLabs/hoverfly-github-action@main
+        with:
+          runner_github_workspace_path: ${{ github.workspace }}
+      - run: hoverfly -webserver -response-body-files-path simengine > /dev/null &
       - run: npm run test
 
   deploy:
