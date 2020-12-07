@@ -2,7 +2,7 @@
 
 # ShipEngine Isomorphic JS / Node SDK
 
-[![Test Status](https://github.com/ShipEngine/shipengine-js/workflows/tests/badge.svg)](https://github.com/ShipEngine/shipengine-js/actions)
+[![CI-CD Status](https://github.com/ShipEngine/shipengine-js/workflows/CI-CD/badge.svg)](https://github.com/ShipEngine/shipengine-js/actions)
 
 
 > ⚠ **WARNING**: This is alpha software under active development. `Caveat emptor` until a 1.0.0 release is ready.
