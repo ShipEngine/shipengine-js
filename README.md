@@ -26,7 +26,7 @@ The only configuration requirement is an [API key](https://www.shipengine.com/do
 ```ts
 import ShipEngine from "shipengine"
 // or, if you prefer commonjs
-const shipengine = require('shipengine')
+const ShipEngine = require('shipengine')
 
 
 const shipengine = ShipEngine('my_api_key')
