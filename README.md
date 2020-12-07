@@ -2,13 +2,14 @@
 
 # ShipEngine Isomorphic JS / Node SDK
 
-![Build Status](https://github.com/ShipEngine/shipengine-js/workflows/shipengine-js/badge.svg)
+[![Build Status](https://github.com/ShipEngine/shipengine-js/workflows/shipengine-js/badge.svg)](https://github.com/ShipEngine/shipengine-php/actions)
 
 
 > ⚠ **WARNING**: This is alpha software under active development. `Caveat emptor` until a 1.0.0 release is ready.
 
 An isomorphic JS library written in _typescript_ and built on the [ShipEngine API](https://shipengine.com), offering low-level access as well as convenience methods.
 
+---
 
 ## Quick Start
 
