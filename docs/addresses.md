@@ -125,6 +125,9 @@ shipengine.addresses
 ---
 
 ## Query an Address
+
+If you want a list of exceptions along with address normalization, you can use the `queryAddress`.
+
 --- query address
 ```ts
 const addressQuery = shipengine
