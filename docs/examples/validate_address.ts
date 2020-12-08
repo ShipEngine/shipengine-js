@@ -32,7 +32,6 @@ shipengine.addresses
       country: 'US',
       cityLocality: 'The Bronx',
       stateProvince: 'TX',
-      country: 'US',
     },
   ])
   .then(([isValid1, isValid2]) => {

@@ -64,8 +64,7 @@ shipengine.addresses.validate([{
     street: ['4009 Marathon Blvd', 'Suite 200'],
     country: 'US',
     cityLocality: 'The Bronx',
-    stateProvince: 'TX',
-    country: 'US'
+    stateProvince: 'TX'
   }
 ]).then(([isValid1, isValid2]) => {
   console.log(isValid1 && isValid2 ? 'all are valid' : 'some are invalid')
