@@ -1101,8 +1101,6 @@ const shipengine = ShipEngine('my_api_key');
 <p>You might want to validate that an address is correct.
 The simplest way to accomplish this is by calling <a href="">validateAddress</a> with the necessary information to build an <a href="">Address</a>.
 </p>
-<p>Street is the only required field, all others are optional.
-</p>
 
 <div class="codeblock">
 <span class="codeblock_name">{validate address args <a href="addresses.html#1:3">3</a>}</span>
@@ -1151,7 +1149,7 @@ shipengine.addresses.validate([{
 </div>
 <a name="1:4"><div class="section"><h4>4. Normalize an Address</h4></a>
 <p>When you normalize an address, you are given an altered address.
-For example, maybe you don't know the <code>postal_code</code>.
+For example, maybe you don't know the <code>postalCode</code>.
 </p>
 
 <div class="codeblock">
@@ -1175,7 +1173,7 @@ shipengine.normalizeAddress({
 </p>
 <p>In fact, all shipengine methods throw exceptions.
 This is because the underlying HTTP requests may themselves cause exceptions.
-To be safe, you should wrap them so that exceptions can be caught.
+To be safe, you should catch them.
 </p>
 
 <div class="codeblock">
@@ -1189,7 +1187,7 @@ shipengine.normalizeAddress({ street: '1234 Main St' })
 <p class="seealso">Used in section <a href="addresses.html#1:6">6</a></p>
 </div>
 <p>Finally, you can use the lower-level <a href="">Addresses</a> to normalize multiple addresses.
-This will not throw exceptions -- rather, it will return undefined anywhere there is a place where addresses will be normalized.
+This will not throw exceptions -- rather, it will return a list of Addresses with undefined in place of any addresses that cannot be normalized.
 </p>
 
 <div class="codeblock">
@@ -1217,6 +1215,8 @@ shipengine.addresses
 </div>
 </div>
 <a name="1:5"><div class="section"><h4>5. Query an Address</h4></a>
+<p>If you want a list of exceptions along with address normalization, you can use the <code>queryAddress</code> method.
+</p>
 
 <div class="codeblock">
 <span class="codeblock_name">{query address <a href="addresses.html#1:5">5</a>}</span>

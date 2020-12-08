@@ -33,9 +33,6 @@ const shipengine = ShipEngine('my_api_key');
 You might want to validate that an address is correct.
 The simplest way to accomplish this is by calling [validateAddress]() with the necessary information to build an [Address]().
 
-Street is the only required field, all others are optional.
-
-
 --- validate address args
 ```ts
 shipengine.validateAddress({
@@ -76,7 +73,7 @@ shipengine.addresses.validate([{
 ## Normalize an Address
 
 When you normalize an address, you are given an altered address.
-For example, maybe you don't know the `postal_code`.
+For example, maybe you don't know the `postalCode`.
 
 --- normalize address args
 ```ts
@@ -95,7 +92,7 @@ Normalizing an address will throw an exception if the address cannot be normaliz
 
 In fact, all shipengine methods throw exceptions.
 This is because the underlying HTTP requests may themselves cause exceptions.
-To be safe, you should wrap them so that exceptions can be caught.
+To be safe, you should catch them.
 
 --- exception handling
 ```ts
@@ -105,7 +102,7 @@ shipengine.normalizeAddress({ street: '1234 Main St' })
 ---
 
 Finally, you can use the lower-level [Addresses]() to normalize multiple addresses.
-This will not throw exceptions -- rather, it will return undefined anywhere there is a place where addresses will be normalized.
+This will not throw exceptions -- rather, it will return a list of Addresses with undefined in place of any addresses that cannot be normalized.
 
 ```ts
 --- normalize address service
@@ -128,6 +125,9 @@ shipengine.addresses
 ---
 
 ## Query an Address
+
+If you want a list of exceptions along with address normalization, you can use the `queryAddress` method.
+
 --- query address
 ```ts
 const addressQuery = shipengine

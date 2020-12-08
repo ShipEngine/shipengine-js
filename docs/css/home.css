@@ -1,0 +1,14 @@
+body {
+    width: 960px;
+    margin: auto;
+}
+* {
+    list-style-type: none;
+}
+h1 {
+    text-decoration: underline;
+}
+
+h4 {
+    display: inline-block;
+}

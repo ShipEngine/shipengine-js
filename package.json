@@ -26,7 +26,8 @@
     "compile:lit": "ts-node-script docs/md-to-lit.ts",
     "compile:tutorials": "npm run compile:lit && lit --weave docs/addresses.lit -odir docs/tutorials",
     "compile:examples": "npm run compile:lit && lit --tangle docs/addresses.lit -odir docs/examples",
-    "compile": "npm run compile:examples && npm run compile:tutorials && npm run fix"
+    "compile": "npm run compile:examples && npm run compile:tutorials && npm run fix",
+    "serve": "live-server ./docs"
   },
   "engines": {
     "node": "12.x"
@@ -56,6 +57,7 @@
     "karma": "^5.2.3",
     "karma-child-process": "^1.0.4",
     "karma-cli": "^2.0.0",
+    "live-server": "^1.2.1",
     "mocha": "^8.2.1",
     "mocha-each": "^2.0.1",
     "prettier": "^2.1.2",

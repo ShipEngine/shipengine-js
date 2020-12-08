@@ -16,7 +16,7 @@ nbproject
 # IDEs & Text Editors
 .idea
 .sublime-*
-.vscode/settings.json
+.vscode
 .netbeans
 nbproject
 
