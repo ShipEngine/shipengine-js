@@ -42,6 +42,8 @@ shipengine
   .then((isValid) => console.log(isValid ? "valid!" : "invalid!"));
 
 ```
+## Tutorials
+- https://shipengine.github.io/shipengine-js
 
 # Development / Contributions
 ## Running tests
