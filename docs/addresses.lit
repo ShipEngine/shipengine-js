@@ -18,10 +18,6 @@ npm install shipengine@alpha
 @s Initialize the ShipEngine library
 
 --- initialize
-
-
-
-
 /* import ShipEngine from 'shipengine'; */
 /* warning: below is an internal import for example purposes, use module import ^ in your code */
 import ShipEngine from '../../src';

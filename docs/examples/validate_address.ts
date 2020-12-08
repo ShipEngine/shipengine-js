@@ -1,6 +1,5 @@
 /* validate_address.ts */
 /* initialize */
-
 /* import ShipEngine from 'shipengine'; */
 /* warning: below is an internal import for example purposes, use module import ^ in your code */
 import ShipEngine from '../../src';
