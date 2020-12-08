@@ -128,10 +128,6 @@ shipengine.addresses
 ---
 
 ## Query an Address
-
-Validating and normalizing an address_query uses adddress querying under-the-hood.
-If you want full control over what you consider a valid address you can use the [AddressQueryResult]().
-
 --- query address
 ```ts
 const addressQuery = shipengine
