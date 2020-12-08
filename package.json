@@ -22,7 +22,11 @@
     "test:browser": "npm run build && karma start --single-run",
     "lint": "npm run tsc:check && eslint .",
     "update:sim": "git submodule update --recursive --remote",
-    "fix": "npm run lint -- --fix"
+    "fix": "npm run lint -- --fix",
+    "compile:lit": "ts-node-script docs/md-to-lit.ts",
+    "compile:tutorials": "npm run compile:lit && lit --weave docs/addresses.lit -odir docs/tutorials",
+    "compile:examples": "npm run compile:lit && lit --tangle docs/addresses.lit -odir docs/examples",
+    "compile": "npm run compile:examples && npm run compile:tutorials && npm run fix"
   },
   "engines": {
     "node": "12.x"
