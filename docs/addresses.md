@@ -126,7 +126,7 @@ shipengine.addresses
 
 ## Query an Address
 
-If you want a list of exceptions along with address normalization, you can use the `queryAddress`.
+If you want a list of exceptions along with address normalization, you can use the `queryAddress` method.
 
 --- query address
 ```ts
