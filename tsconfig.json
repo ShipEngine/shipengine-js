@@ -31,11 +31,9 @@
     ],
   },
   "include": [
-    "index.d.ts",
     "src/**/*.ts"
   ],
   "exclude": [
-    "node_modules",
-    "test-old"
+    "node_modules"
   ]
 }

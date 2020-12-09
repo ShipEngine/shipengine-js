@@ -20,12 +20,12 @@ npm install shipengine@alpha
 ## Initialize the ShipEngine library
 
 --- initialize
-/* import ShipEngine from 'shipengine'; */
-/* warning: below is an internal import for example purposes, use module import ^ in your code */
-import ShipEngine from '../../src';
+```ts
+import ShipEngine from 'shipengine';
 
 
 const shipengine = ShipEngine('my_api_key');
+```
 ---
 
 ## Validate an Address
@@ -35,14 +35,16 @@ The simplest way to accomplish this is by calling [validateAddress]() with the n
 
 --- validate address args
 ```ts
-shipengine.validateAddress({
+
+const isValid = await shipengine.validateAddress({
     street: ['1 E 161 St'],
     country: 'US',
     cityLocality: 'The Bronx',
     postalCode: '10451',
     stateProvince: 'NY',
   })
-  .then((isValid) => console.log(isValid ? 'valid!' : 'invalid!'));
+
+console.log(isValid ? 'valid!' : 'invalid!')
 ```
 ---
 
@@ -50,7 +52,7 @@ You can validate multiple addresses with the lower-level [Addresses]() service.
 
 --- validate address service
 ```ts
-shipengine.addresses.validate([{
+const [isValid1, isValid2] = shipengine.addresses.validate([{
     street: ['1 E 161 St'],
     country: 'US',
     cityLocality: 'The Bronx',
@@ -63,10 +65,9 @@ shipengine.addresses.validate([{
     cityLocality: 'The Bronx',
     stateProvince: 'TX'
   }
-]).then(([isValid1, isValid2]) => {
-  console.log(isValid1 && isValid2 ? 'all are valid' : 'some are invalid')
-});
+])
 
+console.log(isValid1 && isValid2 ? 'all are valid' : 'some are invalid')
 ```
 ---
 
@@ -75,29 +76,37 @@ shipengine.addresses.validate([{
 When you normalize an address, you are given an altered address.
 For example, maybe you don't know the `postalCode`.
 
+Street can be a string or an array of strings.
+
 --- normalize address args
 ```ts
-shipengine.normalizeAddress({
+const address = await shipengine.normalizeAddress({
     street: ['1 E 161 St'],
     country: 'US',
     cityLocality: 'The Bronx',
     stateProvince: 'NY'
-}).then(address => {
-  console.log(`normalized street is: ${address.street}`)
-  console.log(`is residential: ${address.isResidential}`)
 })
+
+console.log(`normalized street is: ${address.street}`)
+console.log(`is residential: ${address.isResidential}`)
 ```
 ---
 Normalizing an address will throw an exception if the address cannot be normalized.
 
 In fact, all shipengine methods throw exceptions.
+
 This is because the underlying HTTP requests may themselves cause exceptions.
+
 To be safe, you should catch them.
 
 --- exception handling
 ```ts
-shipengine.normalizeAddress({ street: '1234 Main St' })
-  .catch(err => console.error('exception!'))
+try {
+  await shipengine.normalizeAddress({ street: '1234 Main St' })
+} catch(err) {
+  // do something with error
+  console.error('caught!')
+}
 ```
 ---
 
@@ -106,21 +115,20 @@ This will not throw exceptions -- rather, it will return a list of Addresses wit
 
 ```ts
 --- normalize address service
-shipengine.addresses
-  .normalize([
-    { street: '1234 Main St' },
+const [addr1, addr2] = await shipengine.addresses.normalize([
+    {
+       street: '1234 Main St'
+    },
     {
       street: ['1 E 161 St'],
       country: 'US',
       cityLocality: 'The Bronx',
-      stateProvince: 'NY',
-    },
+      stateProvince: 'NY'
+    }
   ])
-  .then(([addr1, addr2]) => {
-    console.assert(addr1 === undefined, 'first address cannot be normalized');
-    console.assert(!!addr2, 'second address should be valid');
-  });
 
+console.assert(addr1 === undefined, 'first address cannot be normalized');
+console.assert(!!addr2, 'second address should be valid');
 ```
 ---
 
@@ -130,17 +138,16 @@ If you want a list of exceptions along with address normalization, you can use t
 
 --- query address
 ```ts
-const addressQuery = shipengine
-   .queryAddress({
+const addressQuery = await shipengine.queryAddress({
       street: ['1 E 161 St'],
       country: 'US',
       cityLocality: 'The Bronx',
       postalCode: '10451',
       stateProvince: 'NY',
-  }).then(queryResult => {
-      console.log(`the query result had ${queryResult.exceptions.length} exceptions.`)
-      console.log(`the normalized address is: ${JSON.stringify(queryResult.normalized)}.`)
   })
+
+console.log(`the query result had ${addressQuery.exceptions.length} exceptions.`)
+console.log(`the normalized address is: ${JSON.stringify(addressQuery.normalized)}.`)
 ```
 ---
 

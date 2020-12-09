@@ -1085,9 +1085,7 @@ npm install shipengine@alpha
 <div class="codeblock">
 <span class="codeblock_name">{initialize <a href="addresses.html#1:2">2</a>}</span>
 <pre class="prettyprint lang-ts">
-/* import ShipEngine from 'shipengine'; */
-/* warning: below is an internal import for example purposes, use module import ^ in your code */
-import ShipEngine from '../../src';
+import ShipEngine from 'shipengine';
 
 
 const shipengine = ShipEngine('my_api_key');
@@ -1105,14 +1103,16 @@ The simplest way to accomplish this is by calling <a href="">validateAddress</a>
 <div class="codeblock">
 <span class="codeblock_name">{validate address args <a href="addresses.html#1:3">3</a>}</span>
 <pre class="prettyprint lang-ts">
-shipengine.validateAddress({
+
+const isValid = await shipengine.validateAddress({
     street: ['1 E 161 St'],
     country: 'US',
     cityLocality: 'The Bronx',
     postalCode: '10451',
     stateProvince: 'NY',
   })
-  .then((isValid) =&gt; console.log(isValid ? 'valid!' : 'invalid!'));
+
+console.log(isValid ? 'valid!' : 'invalid!')
 </pre>
 
 
@@ -1124,7 +1124,7 @@ shipengine.validateAddress({
 <div class="codeblock">
 <span class="codeblock_name">{validate address service <a href="addresses.html#1:3">3</a>}</span>
 <pre class="prettyprint lang-ts">
-shipengine.addresses.validate([{
+const [isValid1, isValid2] = shipengine.addresses.validate([{
     street: ['1 E 161 St'],
     country: 'US',
     cityLocality: 'The Bronx',
@@ -1137,10 +1137,9 @@ shipengine.addresses.validate([{
     cityLocality: 'The Bronx',
     stateProvince: 'TX'
   }
-]).then(([isValid1, isValid2]) =&gt; {
-  console.log(isValid1 &amp;&amp; isValid2 ? 'all are valid' : 'some are invalid')
-});
+])
 
+console.log(isValid1 &amp;&amp; isValid2 ? 'all are valid' : 'some are invalid')
 </pre>
 
 
@@ -1151,19 +1150,21 @@ shipengine.addresses.validate([{
 <p>When you normalize an address, you are given an altered address.
 For example, maybe you don't know the <code>postalCode</code>.
 </p>
+<p>Street can be a string or an array of strings.
+</p>
 
 <div class="codeblock">
 <span class="codeblock_name">{normalize address args <a href="addresses.html#1:4">4</a>}</span>
 <pre class="prettyprint lang-ts">
-shipengine.normalizeAddress({
+const address = await shipengine.normalizeAddress({
     street: ['1 E 161 St'],
     country: 'US',
     cityLocality: 'The Bronx',
     stateProvince: 'NY'
-}).then(address =&gt; {
-  console.log(`normalized street is: ${address.street}`)
-  console.log(`is residential: ${address.isResidential}`)
 })
+
+console.log(`normalized street is: ${address.street}`)
+console.log(`is residential: ${address.isResidential}`)
 </pre>
 
 
@@ -1172,15 +1173,21 @@ shipengine.normalizeAddress({
 <p>Normalizing an address will throw an exception if the address cannot be normalized.
 </p>
 <p>In fact, all shipengine methods throw exceptions.
-This is because the underlying HTTP requests may themselves cause exceptions.
-To be safe, you should catch them.
+</p>
+<p>This is because the underlying HTTP requests may themselves cause exceptions.
+</p>
+<p>To be safe, you should catch them.
 </p>
 
 <div class="codeblock">
 <span class="codeblock_name">{exception handling <a href="addresses.html#1:4">4</a>}</span>
 <pre class="prettyprint lang-ts">
-shipengine.normalizeAddress({ street: '1234 Main St' })
-  .catch(err =&gt; console.error('exception!'))
+try {
+  await shipengine.normalizeAddress({ street: '1234 Main St' })
+} catch(err) {
+  // do something with error
+  console.error('caught!')
+}
 </pre>
 
 
@@ -1193,21 +1200,20 @@ This will not throw exceptions -- rather, it will return a list of Addresses wit
 <div class="codeblock">
 <span class="codeblock_name">{normalize address service <a href="addresses.html#1:4">4</a>}</span>
 <pre class="prettyprint lang-ts">
-shipengine.addresses
-  .normalize([
-    { street: '1234 Main St' },
+const [addr1, addr2] = await shipengine.addresses.normalize([
+    {
+       street: '1234 Main St'
+    },
     {
       street: ['1 E 161 St'],
       country: 'US',
       cityLocality: 'The Bronx',
-      stateProvince: 'NY',
-    },
+      stateProvince: 'NY'
+    }
   ])
-  .then(([addr1, addr2]) =&gt; {
-    console.assert(addr1 === undefined, 'first address cannot be normalized');
-    console.assert(!!addr2, 'second address should be valid');
-  });
 
+console.assert(addr1 === undefined, 'first address cannot be normalized');
+console.assert(!!addr2, 'second address should be valid');
 </pre>
 
 
@@ -1221,17 +1227,16 @@ shipengine.addresses
 <div class="codeblock">
 <span class="codeblock_name">{query address <a href="addresses.html#1:5">5</a>}</span>
 <pre class="prettyprint lang-ts">
-const addressQuery = shipengine
-   .queryAddress({
+const addressQuery = await shipengine.queryAddress({
       street: ['1 E 161 St'],
       country: 'US',
       cityLocality: 'The Bronx',
       postalCode: '10451',
       stateProvince: 'NY',
-  }).then(queryResult =&gt; {
-      console.log(`the query result had ${queryResult.exceptions.length} exceptions.`)
-      console.log(`the normalized address is: ${JSON.stringify(queryResult.normalized)}.`)
   })
+
+console.log(`the query result had ${addressQuery.exceptions.length} exceptions.`)
+console.log(`the normalized address is: ${JSON.stringify(addressQuery.normalized)}.`)
 </pre>
 
 
