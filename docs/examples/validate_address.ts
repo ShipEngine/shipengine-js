@@ -1,6 +1,6 @@
 /* validate_address.ts */
 /* initialize */
-import ShipEngine from 'shipengine';
+const ShipEngine = require('shipengine');
 
 const shipengine = ShipEngine('my_api_key');
 
@@ -28,8 +28,8 @@ const [isValid1, isValid2] = shipengine.addresses.validate([
   {
     street: ['4009 Marathon Blvd', 'Suite 200'],
     cityLocality: 'The Bronx',
-    country: 'US',
     stateProvince: 'TX',
+    country: 'US',
   },
 ]);
 

@@ -1085,8 +1085,7 @@ npm install shipengine@alpha
 <div class="codeblock">
 <span class="codeblock_name">{initialize <a href="addresses.html#1:2">2</a>}</span>
 <pre class="prettyprint lang-ts">
-import ShipEngine from 'shipengine';
-
+const ShipEngine = require('shipengine');
 
 const shipengine = ShipEngine('my_api_key');
 </pre>
@@ -1135,8 +1134,8 @@ const [isValid1, isValid2] = shipengine.addresses.validate([
   {
     street: ['4009 Marathon Blvd', 'Suite 200'],
     cityLocality: 'The Bronx',
-    country: 'US',
-    stateProvince: 'TX'
+    stateProvince: 'TX',
+    country: 'US'
   }
 ])
 

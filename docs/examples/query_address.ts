@@ -1,6 +1,6 @@
 /* query_address.ts */
 /* initialize */
-import ShipEngine from 'shipengine';
+const ShipEngine = require('shipengine');
 
 const shipengine = ShipEngine('my_api_key');
 
