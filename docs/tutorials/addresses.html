@@ -1105,11 +1105,11 @@ The simplest way to accomplish this is by calling <a href="">validateAddress</a>
 <pre class="prettyprint lang-ts">
 
 const isValid = await shipengine.validateAddress({
-    street: ['1 E 161 St'],
-    country: 'US',
+    street: '1 E 161 St',
     cityLocality: 'The Bronx',
     postalCode: '10451',
     stateProvince: 'NY',
+    country: 'US'
   })
 
 console.log(isValid ? 'valid!' : 'invalid!')
@@ -1124,17 +1124,18 @@ console.log(isValid ? 'valid!' : 'invalid!')
 <div class="codeblock">
 <span class="codeblock_name">{validate address service <a href="addresses.html#1:3">3</a>}</span>
 <pre class="prettyprint lang-ts">
-const [isValid1, isValid2] = shipengine.addresses.validate([{
-    street: ['1 E 161 St'],
-    country: 'US',
+const [isValid1, isValid2] = shipengine.addresses.validate([
+  {
+    street: '1 E 161 St',
     cityLocality: 'The Bronx',
-    postalCode: '10451',
     stateProvince: 'NY',
+    postalCode: '10451',
+    country: 'US'
   },
   {
     street: ['4009 Marathon Blvd', 'Suite 200'],
-    country: 'US',
     cityLocality: 'The Bronx',
+    country: 'US',
     stateProvince: 'TX'
   }
 ])
@@ -1150,17 +1151,15 @@ console.log(isValid1 &amp;&amp; isValid2 ? 'all are valid' : 'some are invalid')
 <p>When you normalize an address, you are given an altered address.
 For example, maybe you don't know the <code>postalCode</code>.
 </p>
-<p>Street can be a string or an array of strings.
-</p>
 
 <div class="codeblock">
 <span class="codeblock_name">{normalize address args <a href="addresses.html#1:4">4</a>}</span>
 <pre class="prettyprint lang-ts">
 const address = await shipengine.normalizeAddress({
     street: ['1 E 161 St'],
-    country: 'US',
     cityLocality: 'The Bronx',
-    stateProvince: 'NY'
+    stateProvince: 'NY',
+    country: 'US'
 })
 
 console.log(`normalized street is: ${address.street}`)
@@ -1206,9 +1205,9 @@ const [addr1, addr2] = await shipengine.addresses.normalize([
     },
     {
       street: ['1 E 161 St'],
-      country: 'US',
       cityLocality: 'The Bronx',
-      stateProvince: 'NY'
+      stateProvince: 'NY',
+      country: 'US'
     }
   ])
 
@@ -1229,10 +1228,10 @@ console.assert(!!addr2, 'second address should be valid');
 <pre class="prettyprint lang-ts">
 const addressQuery = await shipengine.queryAddress({
       street: ['1 E 161 St'],
-      country: 'US',
       cityLocality: 'The Bronx',
-      postalCode: '10451',
       stateProvince: 'NY',
+      postalCode: '10451',
+      country: 'US'
   })
 
 console.log(`the query result had ${addressQuery.exceptions.length} exceptions.`)

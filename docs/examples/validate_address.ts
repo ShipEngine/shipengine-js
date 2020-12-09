@@ -7,11 +7,11 @@ const shipengine = ShipEngine('my_api_key');
 /* validate address args */
 
 const isValid = await shipengine.validateAddress({
-  street: ['1 E 161 St'],
-  country: 'US',
+  street: '1 E 161 St',
   cityLocality: 'The Bronx',
   postalCode: '10451',
   stateProvince: 'NY',
+  country: 'US',
 });
 
 console.log(isValid ? 'valid!' : 'invalid!');
@@ -19,16 +19,16 @@ console.log(isValid ? 'valid!' : 'invalid!');
 /* validate address service */
 const [isValid1, isValid2] = shipengine.addresses.validate([
   {
-    street: ['1 E 161 St'],
-    country: 'US',
+    street: '1 E 161 St',
     cityLocality: 'The Bronx',
-    postalCode: '10451',
     stateProvince: 'NY',
+    postalCode: '10451',
+    country: 'US',
   },
   {
     street: ['4009 Marathon Blvd', 'Suite 200'],
-    country: 'US',
     cityLocality: 'The Bronx',
+    country: 'US',
     stateProvince: 'TX',
   },
 ]);

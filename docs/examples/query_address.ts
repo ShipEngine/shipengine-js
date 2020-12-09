@@ -7,10 +7,10 @@ const shipengine = ShipEngine('my_api_key');
 /* query address */
 const addressQuery = await shipengine.queryAddress({
   street: ['1 E 161 St'],
-  country: 'US',
   cityLocality: 'The Bronx',
-  postalCode: '10451',
   stateProvince: 'NY',
+  postalCode: '10451',
+  country: 'US',
 });
 
 console.log(

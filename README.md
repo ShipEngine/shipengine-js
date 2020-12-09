@@ -34,7 +34,7 @@ const shipengine = ShipEngine('my_api_key')
 
 const isValid = await shipengine
   .validateAddress({
-    street: ["1 E 161 St"],
+    street: "1 E 161 St",
     country: "US",
     cityLocality: "The Bronx",
     postalCode: "10451",
