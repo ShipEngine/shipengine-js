@@ -24,9 +24,10 @@
     "update:sim": "git submodule update --recursive --remote",
     "fix": "npm run lint -- --fix",
     "compile:lit": "ts-node-script docs/md-to-lit.ts",
+    "compile:api": "typedoc",
     "compile:tutorials": "npm run compile:lit && lit --weave docs/addresses.lit -odir docs/tutorials",
     "compile:examples": "npm run compile:lit && lit --tangle docs/addresses.lit -odir docs/examples",
-    "compile": "npm run compile:examples && npm run compile:tutorials && npm run fix",
+    "compile": "npm run compile:examples && npm run compile:tutorials && npm run compile:api && npm run fix",
     "serve": "live-server ./docs"
   },
   "engines": {
@@ -64,6 +65,7 @@
     "shipengine-json-schema": "^1.4.0",
     "shipengine-openapi": "^1.4.0",
     "sinon": "^9.2.1",
+    "typedoc": "^0.19.2",
     "typescript": "^4.0.5",
     "utility-types": "^3.10.0"
   },
