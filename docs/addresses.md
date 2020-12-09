@@ -162,26 +162,48 @@ const shipengine = ShipEngine(process.env.API_KEY);
 ```
 ---
 
+--- wrapper start  ---
+```ts
+(async () => {
+```
+---
+
+--- wrapper end ---
+})()
+---
+
 --- validate_address.ts
 @{initialize}
+
+@{wrapper start}
 
 @{validate address args}
 
 @{validate address service}
+
+@{wrapper end}
 ---
 
 --- normalize_address.ts
 @{initialize}
+
+@{wrapper start}
 
 @{normalize address args}
 
 @{exception handling}
 
 @{normalize address service}
+
+@{wrapper end}
 ---
 
 --- query_address.ts
 @{initialize}
 
+@{wrapper start}
+
 @{query address}
+
+@{wrapper end}
 ---
