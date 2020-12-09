@@ -29,7 +29,6 @@ You might want to validate that an address is correct.
 The simplest way to accomplish this is by calling [validateAddress]() with the necessary information to build an [Address]().
 
 --- validate address args
-
 const isValid = await shipengine.validateAddress({
     street: '1 E 161 St',
     cityLocality: 'The Bronx',
@@ -144,26 +143,46 @@ import { default as ShipEngine } from '../../src';
 const shipengine = ShipEngine(process.env.API_KEY);
 ---
 
+--- wrapper start  ---
+(async () => {
+---
+
+--- wrapper end ---
+})()
+---
+
 --- validate_address.ts
 @{initialize}
+
+@{wrapper start}
 
 @{validate address args}
 
 @{validate address service}
+
+@{wrapper end}
 ---
 
 --- normalize_address.ts
 @{initialize}
+
+@{wrapper start}
 
 @{normalize address args}
 
 @{exception handling}
 
 @{normalize address service}
+
+@{wrapper end}
 ---
 
 --- query_address.ts
 @{initialize}
 
+@{wrapper start}
+
 @{query address}
+
+@{wrapper end}
 ---
