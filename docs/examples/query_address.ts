@@ -1,8 +1,8 @@
 /* query_address.ts */
 /* initialize */
-const ShipEngine = require('shipengine');
+import { default as ShipEngine } from '../../src';
 
-const shipengine = ShipEngine('my_api_key');
+const shipengine = ShipEngine(process.env.API_KEY);
 
 /* query address */
 const addressQuery = await shipengine.queryAddress({
