@@ -7,7 +7,6 @@ const shipengine = ShipEngine(process.env.API_KEY);
 /* wrapper start */
 (async () => {
   /* validate address args */
-
   const isValid = await shipengine.validateAddress({
     street: '1 E 161 St',
     cityLocality: 'The Bronx',

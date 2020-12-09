@@ -29,7 +29,6 @@ You might want to validate that an address is correct.
 The simplest way to accomplish this is by calling [validateAddress]() with the necessary information to build an [Address]().
 
 --- validate address args
-
 const isValid = await shipengine.validateAddress({
     street: '1 E 161 St',
     cityLocality: 'The Bronx',

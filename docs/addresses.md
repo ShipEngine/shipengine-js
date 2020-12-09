@@ -34,7 +34,6 @@ The simplest way to accomplish this is by calling [validateAddress]() with the n
 
 --- validate address args
 ```ts
-
 const isValid = await shipengine.validateAddress({
     street: '1 E 161 St',
     cityLocality: 'The Bronx',
