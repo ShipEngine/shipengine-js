@@ -20,7 +20,7 @@ module.exports = {
     'plugin:import/warnings',
     'plugin:import/typescript', // disable rules that overlap with typescript
   ],
-  ignorePatterns: ['esm', 'cjs', 'node_modules'],
+  ignorePatterns: ['esm', 'cjs', 'node_modules', 'docs/api'],
   rules: {
     'import/no-default-export': 2,
     '@typescript-eslint/explicit-module-boundary-types': 0,

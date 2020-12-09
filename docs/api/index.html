@@ -1,0 +1,229 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>shipengine</title>
+	<meta name="description" content="Documentation for shipengine">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">shipengine</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>shipengine</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<p><a href="https://shipengine.com"><img src="https://shipengine.github.io/img/shipengine-logo-wide.png" alt="ShipEngine"></a></p>
+				<a href="#shipengine-isomorphic-js--node-sdk-unstable" id="shipengine-isomorphic-js--node-sdk-unstable" style="color: inherit; text-decoration: none;">
+					<h1>ShipEngine Isomorphic JS / Node SDK (unstable)</h1>
+				</a>
+				<p><a href="https://github.com/ShipEngine/shipengine-js/actions"><img src="https://github.com/ShipEngine/shipengine-js/workflows/CI-CD/badge.svg" alt="CI-CD Status"></a></p>
+				<blockquote>
+				</blockquote>
+				<blockquote>
+					<p>⚠ <strong>WARNING</strong>: This is alpha software under active development. This repo is a successor to <a href="https://www.npmjs.com/package/shipengine">https://www.npmjs.com/package/shipengine</a>. Until this has a stable release, we recommend you either stick to the current releases, or use the <a href="https://shipengine.github.io/shipengine-openapi/">shipengine API</a>.</p>
+				</blockquote>
+				<hr>
+				<a href="#description" id="description" style="color: inherit; text-decoration: none;">
+					<h2>Description</h2>
+				</a>
+				<p>An isomorphic JS library written in <em>typescript</em> and built on the <a href="https://shipengine.com">ShipEngine API</a>, offering low-level access as well as convenience methods.</p>
+				<hr>
+				<a href="#quick-start" id="quick-start" style="color: inherit; text-decoration: none;">
+					<h2>Quick Start</h2>
+				</a>
+				<p>Install ShipEngine via <a href="https://www.npmjs.com/">npm</a>:</p>
+				<pre><code><span class="hljs-built_in">npm</span> install shipengine@alpha</code></pre>
+				<p>The only configuration requirement is an <a href="https://www.shipengine.com/docs/auth/#api-keys">API key</a>.</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> ShipEngine <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;shipengine&quot;</span>
+<span class="hljs-comment">// or, if you prefer commonjs</span>
+<span class="hljs-keyword">const</span> ShipEngine = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;shipengine&#x27;</span>)
+
+
+<span class="hljs-keyword">const</span> shipengine = ShipEngine(<span class="hljs-string">&#x27;my_api_key&#x27;</span>)
+
+shipengine
+  .validateAddress({
+    <span class="hljs-attr">street</span>: [<span class="hljs-string">&quot;1 E 161 St&quot;</span>],
+    <span class="hljs-attr">country</span>: <span class="hljs-string">&quot;US&quot;</span>,
+    <span class="hljs-attr">cityLocality</span>: <span class="hljs-string">&quot;The Bronx&quot;</span>,
+    <span class="hljs-attr">postalCode</span>: <span class="hljs-string">&quot;10451&quot;</span>,
+    <span class="hljs-attr">stateProvince</span>: <span class="hljs-string">&quot;NY&quot;</span>,
+  })
+  .then(<span class="hljs-function">(<span class="hljs-params">isValid</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(isValid ? <span class="hljs-string">&quot;valid!&quot;</span> : <span class="hljs-string">&quot;invalid!&quot;</span>));
+</code></pre>
+				<a href="#docs-amp-tutorials" id="docs-amp-tutorials" style="color: inherit; text-decoration: none;">
+					<h2>Docs &amp; Tutorials</h2>
+				</a>
+				<ul>
+					<li><a href="https://shipengine.github.io/shipengine-js">https://shipengine.github.io/shipengine-js</a></li>
+				</ul>
+				<a href="#typescript-types" id="typescript-types" style="color: inherit; text-decoration: none;">
+					<h2>Typescript types</h2>
+				</a>
+				<p>-- <a href="https://github.com/ShipEngine/shipengine-js/tree/main/src/models/public">https://github.com/ShipEngine/shipengine-js/tree/main/src/models/public</a></p>
+				<a href="#development--contributions" id="development--contributions" style="color: inherit; text-decoration: none;">
+					<h1>Development / Contributions</h1>
+				</a>
+				<a href="#running-tests" id="running-tests" style="color: inherit; text-decoration: none;">
+					<h2>Running tests</h2>
+				</a>
+				<p>Do <code>docker-compose up -d</code>.</p>
+				<p>If you for any reason do not want to use docker, you can also install hoverfly locally and run <code>hoverfly -webserver -response-body-files-path simengine</code>.</p>
+				<pre><code>npm <span class="hljs-keyword">run</span><span class="bash"> <span class="hljs-built_in">test</span></span></code></pre>
+				<a href="#lint" id="lint" style="color: inherit; text-decoration: none;">
+					<h2>Lint</h2>
+				</a>
+				<pre><code>npm <span class="hljs-keyword">run</span><span class="bash"> lint</span></code></pre>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_client_.html">&quot;client&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_index_.html">&quot;index&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_lib_.html">&quot;lib&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_models_api_index_.html">&quot;models/api/index&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_models_api_validate_address_validate_address_request_body_.html">&quot;models/api/validate-<wbr>address/validate_<wbr>address_<wbr>request_<wbr>body&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_models_api_validate_address_validate_address_response_body_.html">&quot;models/api/validate-<wbr>address/validate_<wbr>address_<wbr>response_<wbr>body&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_models_mappers_address_.html">&quot;models/mappers/address&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_models_public_address_.html">&quot;models/public/<wbr>Address&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_models_public_config_.html">&quot;models/public/<wbr>Config&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_models_public_shipengineexception_.html">&quot;models/public/<wbr>Ship<wbr>Engine<wbr>Exception&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_models_public_index_.html">&quot;models/public/index&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_services_address_.html">&quot;services/address&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_services_service_factory_.html">&quot;services/service-<wbr>factory&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_services_shipengine_api_factory_.html">&quot;services/shipengine-<wbr>api-<wbr>factory&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_services_tags_.html">&quot;services/tags&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_utils_exists_.html">&quot;utils/exists&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_utils_index_.html">&quot;utils/index&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_utils_ts_.html">&quot;utils/ts&quot;</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
