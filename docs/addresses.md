@@ -37,11 +37,11 @@ The simplest way to accomplish this is by calling [validateAddress]() with the n
 ```ts
 
 const isValid = await shipengine.validateAddress({
-    street: ['1 E 161 St'],
-    country: 'US',
+    street: '1 E 161 St',
     cityLocality: 'The Bronx',
     postalCode: '10451',
     stateProvince: 'NY',
+    country: 'US'
   })
 
 console.log(isValid ? 'valid!' : 'invalid!')
@@ -52,17 +52,18 @@ You can validate multiple addresses with the lower-level [Addresses]() service.
 
 --- validate address service
 ```ts
-const [isValid1, isValid2] = shipengine.addresses.validate([{
-    street: ['1 E 161 St'],
-    country: 'US',
+const [isValid1, isValid2] = shipengine.addresses.validate([
+  {
+    street: '1 E 161 St',
     cityLocality: 'The Bronx',
-    postalCode: '10451',
     stateProvince: 'NY',
+    postalCode: '10451',
+    country: 'US'
   },
   {
     street: ['4009 Marathon Blvd', 'Suite 200'],
-    country: 'US',
     cityLocality: 'The Bronx',
+    country: 'US',
     stateProvince: 'TX'
   }
 ])
@@ -76,15 +77,13 @@ console.log(isValid1 && isValid2 ? 'all are valid' : 'some are invalid')
 When you normalize an address, you are given an altered address.
 For example, maybe you don't know the `postalCode`.
 
-Street can be a string or an array of strings.
-
 --- normalize address args
 ```ts
 const address = await shipengine.normalizeAddress({
     street: ['1 E 161 St'],
-    country: 'US',
     cityLocality: 'The Bronx',
-    stateProvince: 'NY'
+    stateProvince: 'NY',
+    country: 'US'
 })
 
 console.log(`normalized street is: ${address.street}`)
@@ -121,9 +120,9 @@ const [addr1, addr2] = await shipengine.addresses.normalize([
     },
     {
       street: ['1 E 161 St'],
-      country: 'US',
       cityLocality: 'The Bronx',
-      stateProvince: 'NY'
+      stateProvince: 'NY',
+      country: 'US'
     }
   ])
 
@@ -140,10 +139,10 @@ If you want a list of exceptions along with address normalization, you can use t
 ```ts
 const addressQuery = await shipengine.queryAddress({
       street: ['1 E 161 St'],
-      country: 'US',
       cityLocality: 'The Bronx',
-      postalCode: '10451',
       stateProvince: 'NY',
+      postalCode: '10451',
+      country: 'US'
   })
 
 console.log(`the query result had ${addressQuery.exceptions.length} exceptions.`)

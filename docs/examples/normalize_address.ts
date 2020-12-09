@@ -6,10 +6,10 @@ const shipengine = ShipEngine('my_api_key');
 
 /* normalize address args */
 const address = await shipengine.normalizeAddress({
-  street: ['1 E 161St'],
-  country: 'US',
+  street: ['1 E 161 St'],
   cityLocality: 'The Bronx',
   stateProvince: 'NY',
+  country: 'US',
 });
 
 console.log(`normalized street is: ${address.street}`);
@@ -30,9 +30,9 @@ const [addr1, addr2] = await shipengine.addresses.normalize([
   },
   {
     street: ['1 E 161 St'],
-    country: 'US',
     cityLocality: 'The Bronx',
     stateProvince: 'NY',
+    country: 'US',
   },
 ]);
 

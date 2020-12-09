@@ -2,9 +2,6 @@
 
 # ShipEngine Isomorphic JS / Node SDK (unstable)
 
-[![CI-CD Status](https://github.com/ShipEngine/shipengine-js/workflows/CI-CD/badge.svg)](https://github.com/ShipEngine/shipengine-js/actions)
->
-
 > ⚠ **WARNING**: This is alpha software under active development. This repo is a successor to https://www.npmjs.com/package/shipengine. Until this has a stable release, we recommend you either stick to the current releases, or use the [shipengine API](https://shipengine.github.io/shipengine-openapi/).
 
 ---
@@ -34,7 +31,7 @@ const shipengine = ShipEngine('my_api_key')
 
 const isValid = await shipengine
   .validateAddress({
-    street: ["1 E 161 St"],
+    street: "1 E 161 St",
     country: "US",
     cityLocality: "The Bronx",
     postalCode: "10451",
@@ -46,9 +43,6 @@ console.log(isValid ? "valid!" : "invalid!")
 ```
 ## Docs & Tutorials
 - https://shipengine.github.io/shipengine-js
-
-## Typescript types
--- https://github.com/ShipEngine/shipengine-js/tree/main/src/models/public
 
 # Development / Contributions
 ## Running tests
