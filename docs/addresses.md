@@ -51,7 +51,7 @@ You can validate multiple addresses with the lower-level [Addresses]() service.
 
 --- validate address service
 ```ts
-const [isValid1, isValid2] = shipengine.addresses.validate([
+const [isValid1, isValid2] = await shipengine.addresses.validate([
   {
     street: '1 E 161 St',
     cityLocality: 'The Bronx',
@@ -149,7 +149,18 @@ console.log(`the normalized address is: ${JSON.stringify(addressQuery.normalized
 ```
 ---
 
+
+
 ## Programs
+
+Swap out initialization codeblock
+--- initialize --- :=
+```ts
+import { default as ShipEngine } from '../../src';
+
+const shipengine = ShipEngine(process.env.API_KEY);
+```
+---
 
 --- validate_address.ts
 @{initialize}

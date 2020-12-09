@@ -1,8 +1,8 @@
 /* validate_address.ts */
 /* initialize */
-const ShipEngine = require('shipengine');
+import { default as ShipEngine } from '../../src';
 
-const shipengine = ShipEngine('my_api_key');
+const shipengine = ShipEngine(process.env.API_KEY);
 
 /* validate address args */
 
@@ -17,7 +17,7 @@ const isValid = await shipengine.validateAddress({
 console.log(isValid ? 'valid!' : 'invalid!');
 
 /* validate address service */
-const [isValid1, isValid2] = shipengine.addresses.validate([
+const [isValid1, isValid2] = await shipengine.addresses.validate([
   {
     street: '1 E 161 St',
     cityLocality: 'The Bronx',
