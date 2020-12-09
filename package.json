@@ -21,13 +21,15 @@
     "test:node": "npm run build:cjs && mocha",
     "test:browser": "npm run build && karma start --single-run",
     "lint": "npm run tsc:check && eslint .",
+    "lint:examples": "eslint docs/examples/**/*.ts",
     "update:sim": "git submodule update --recursive --remote",
     "fix": "npm run lint -- --fix",
+    "fix:examples": "npm run lint:examples -- --fix",
     "compile:lit": "ts-node-script docs/md-to-lit.ts",
     "compile:api": "typedoc",
     "compile:tutorials": "npm run compile:lit && lit --weave docs/addresses.lit -odir docs/tutorials",
-    "compile:examples": "npm run compile:lit && lit --tangle docs/addresses.lit -odir docs/examples",
-    "compile": "npm run compile:examples && npm run compile:tutorials && npm run compile:api && npm run fix",
+    "compile:examples": "npm run compile:lit && lit --tangle docs/addresses.lit -odir docs/examples && npm run fix:examples",
+    "compile": "npm run compile:api && npm run compile:tutorials && npm run compile:examples",
     "serve": "live-server ./docs"
   },
   "engines": {

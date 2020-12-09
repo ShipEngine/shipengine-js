@@ -21,7 +21,7 @@ npm install shipengine@alpha
 
 The only configuration requirement is an [API key](https://www.shipengine.com/docs/auth/#api-keys).
 ```ts
-import ShipEngine from "shipengine"
+import ShipEngine from 'shipengine'
 // or, if you prefer commonjs
 const ShipEngine = require('shipengine')
 
@@ -31,14 +31,14 @@ const shipengine = ShipEngine('my_api_key')
 
 const isValid = await shipengine
   .validateAddress({
-    street: "1 E 161 St",
-    country: "US",
-    cityLocality: "The Bronx",
-    postalCode: "10451",
-    stateProvince: "NY",
+    street: '1 E 161 St',
+    cityLocality: 'The Bronx',
+    stateProvince: 'NY',
+    postalCode: '10451',
+    country: 'US'
   })
 
-console.log(isValid ? "valid!" : "invalid!")
+console.log(isValid ? 'valid!' : 'invalid!')
 
 ```
 ## Docs & Tutorials

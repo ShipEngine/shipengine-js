@@ -36,6 +36,7 @@ module.exports = {
     {
       files: ['docs/examples/**/*.ts'],
       rules: {
+        '@typescript-eslint/no-var-requires': 0,
         'import/no-unresolved': 0,
       },
     },

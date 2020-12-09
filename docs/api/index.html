@@ -83,7 +83,7 @@
 				<p>Install ShipEngine via <a href="https://www.npmjs.com/">npm</a>:</p>
 				<pre><code><span class="hljs-built_in">npm</span> install shipengine@alpha</code></pre>
 				<p>The only configuration requirement is an <a href="https://www.shipengine.com/docs/auth/#api-keys">API key</a>.</p>
-				<pre><code class="language-ts"><span class="hljs-keyword">import</span> ShipEngine <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;shipengine&quot;</span>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> ShipEngine <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;shipengine&#x27;</span>
 <span class="hljs-comment">// or, if you prefer commonjs</span>
 <span class="hljs-keyword">const</span> ShipEngine = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;shipengine&#x27;</span>)
 
@@ -93,14 +93,14 @@
 
 <span class="hljs-keyword">const</span> isValid = <span class="hljs-keyword">await</span> shipengine
   .validateAddress({
-    <span class="hljs-attr">street</span>: <span class="hljs-string">&quot;1 E 161 St&quot;</span>,
-    <span class="hljs-attr">country</span>: <span class="hljs-string">&quot;US&quot;</span>,
-    <span class="hljs-attr">cityLocality</span>: <span class="hljs-string">&quot;The Bronx&quot;</span>,
-    <span class="hljs-attr">postalCode</span>: <span class="hljs-string">&quot;10451&quot;</span>,
-    <span class="hljs-attr">stateProvince</span>: <span class="hljs-string">&quot;NY&quot;</span>,
+    <span class="hljs-attr">street</span>: <span class="hljs-string">&#x27;1 E 161 St&#x27;</span>,
+    <span class="hljs-attr">country</span>: <span class="hljs-string">&#x27;US&#x27;</span>,
+    <span class="hljs-attr">cityLocality</span>: <span class="hljs-string">&#x27;The Bronx&#x27;</span>,
+    <span class="hljs-attr">postalCode</span>: <span class="hljs-string">&#x27;10451&#x27;</span>,
+    <span class="hljs-attr">stateProvince</span>: <span class="hljs-string">&#x27;NY&#x27;</span>,
   })
 
-<span class="hljs-built_in">console</span>.log(isValid ? <span class="hljs-string">&quot;valid!&quot;</span> : <span class="hljs-string">&quot;invalid!&quot;</span>)
+<span class="hljs-built_in">console</span>.log(isValid ? <span class="hljs-string">&#x27;valid!&#x27;</span> : <span class="hljs-string">&#x27;invalid!&#x27;</span>)
 </code></pre>
 				<a href="#docs-amp-tutorials" id="docs-amp-tutorials" style="color: inherit; text-decoration: none;">
 					<h2>Docs &amp; Tutorials</h2>
