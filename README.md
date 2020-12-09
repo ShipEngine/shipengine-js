@@ -31,7 +31,8 @@ const ShipEngine = require('shipengine')
 
 const shipengine = ShipEngine('my_api_key')
 
-shipengine
+
+const isValid = await shipengine
   .validateAddress({
     street: ["1 E 161 St"],
     country: "US",
@@ -39,7 +40,8 @@ shipengine
     postalCode: "10451",
     stateProvince: "NY",
   })
-  .then((isValid) => console.log(isValid ? "valid!" : "invalid!"));
+
+console.log(isValid ? "valid!" : "invalid!")
 
 ```
 ## Docs & Tutorials

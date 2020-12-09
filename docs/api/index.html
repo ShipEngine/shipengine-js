@@ -93,7 +93,8 @@
 
 <span class="hljs-keyword">const</span> shipengine = ShipEngine(<span class="hljs-string">&#x27;my_api_key&#x27;</span>)
 
-shipengine
+
+<span class="hljs-keyword">const</span> isValid = <span class="hljs-keyword">await</span> shipengine
   .validateAddress({
     <span class="hljs-attr">street</span>: [<span class="hljs-string">&quot;1 E 161 St&quot;</span>],
     <span class="hljs-attr">country</span>: <span class="hljs-string">&quot;US&quot;</span>,
@@ -101,7 +102,8 @@ shipengine
     <span class="hljs-attr">postalCode</span>: <span class="hljs-string">&quot;10451&quot;</span>,
     <span class="hljs-attr">stateProvince</span>: <span class="hljs-string">&quot;NY&quot;</span>,
   })
-  .then(<span class="hljs-function">(<span class="hljs-params">isValid</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(isValid ? <span class="hljs-string">&quot;valid!&quot;</span> : <span class="hljs-string">&quot;invalid!&quot;</span>));
+
+<span class="hljs-built_in">console</span>.log(isValid ? <span class="hljs-string">&quot;valid!&quot;</span> : <span class="hljs-string">&quot;invalid!&quot;</span>)
 </code></pre>
 				<a href="#docs-amp-tutorials" id="docs-amp-tutorials" style="color: inherit; text-decoration: none;">
 					<h2>Docs &amp; Tutorials</h2>
