@@ -62,7 +62,7 @@ class AddressesServiceLowLevel {
   };
 }
 
-export class AddressesServiceAPI {
+export class AddressesService {
   public addresses;
   constructor(client: AxiosInstance) {
     this.addresses = new AddressesServiceLowLevel(client);

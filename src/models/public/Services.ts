@@ -1,7 +1,7 @@
-import { AddressesServiceAPI } from '../../services/address';
-import { TagsServiceAPI } from '../../services/tags';
+import { AddressesService } from '../../services/address';
+import { TagsService } from '../../services/tags';
 
 /**
  * Aggregation of the entire shipengine-js API
  */
-export type ShipEngineAPI = TagsServiceAPI & AddressesServiceAPI;
+export type ShipEngineAPI = TagsService & AddressesService;
