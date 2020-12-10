@@ -15,6 +15,11 @@ import {
 } from '../public';
 import { exists } from '../../utils/exists';
 
+/**
+ * map from dto do domain model
+ * @param v - address validation result
+ * @hidden
+ */
 export const mapToAddressQueryResult = (
   v: AddressValidationResult
 ): AddressQueryResult => {
@@ -29,8 +34,8 @@ export const mapToAddressQueryResult = (
 
 /**
  * map from dto to domain model
+ * @hidden
  */
-
 export const mapToNormalizedAddress = (matched: MatchedAddress): Address => {
   const street = [
     matched.address_line1,
@@ -54,6 +59,7 @@ export const mapToNormalizedAddress = (matched: MatchedAddress): Address => {
 
 /**
  * map from domain model to dto (to send down the wire)
+ * @hidden
  */
 export const mapToRequestBodyAddress = (
   address: AddressQuery
@@ -70,6 +76,11 @@ export const mapToRequestBodyAddress = (
   };
 };
 
+/**
+ * map from dto to domain model
+ * @param messages
+ * @hidden
+ */
 export const mapToShipEngineExceptions = (
   messages: ResponseMessage[]
 ): ShipEngineException[] => {

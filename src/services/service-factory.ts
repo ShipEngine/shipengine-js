@@ -1,29 +1,12 @@
-import type { ShipEngineApiClient } from './shipengine-api-factory';
-import { TagsServiceAPI, createTagsConvenienceService } from './tags';
-import {
-  AddressesServiceAPI,
-  createAddressesConvenienceService,
-} from './address';
-
-// utility type
+import { TagsServiceAPI } from './tags';
+import { AddressesServiceAPI } from './address';
+import { AxiosInstance } from 'axios';
+import type { ShipEngine } from '../models/public';
 
 // here is another way of doing the exact same thing without a service
-
-export type ServiceAPI = TagsServiceAPI & AddressesServiceAPI;
-
-export const ServiceFactory = (client: ShipEngineApiClient): ServiceAPI => {
-  const services = [
-    createTagsConvenienceService,
-    createAddressesConvenienceService,
-  ];
-
-  const publicServices = services.reduce((acc, s) => {
-    const service = s(client);
-    return {
-      ...acc,
-      ...service,
-    };
-  }, {} as ServiceAPI);
-
-  return publicServices;
+export const ServiceFactory = (client: AxiosInstance): ShipEngine => {
+  return {
+    ...new TagsServiceAPI(client),
+    ...new AddressesServiceAPI(client),
+  };
 };
