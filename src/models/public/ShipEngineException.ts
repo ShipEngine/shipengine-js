@@ -1,17 +1,17 @@
 // this is currently the same as AddressValidationType, but this may change in the future.
-export enum ExceptionType {
+export enum ShipEngineExceptionType {
   WARNING = 'warning',
   ERROR = 'error',
   INFO = 'info',
 }
 
 interface BaseShipEngineException {
-  type: ExceptionType;
+  type: ShipEngineExceptionType;
   message: string;
 }
 
 export class ShipEngineError implements BaseShipEngineException {
-  type = ExceptionType.ERROR;
+  type = ShipEngineExceptionType.ERROR;
   message = '';
   constructor(msg: BaseShipEngineException['message']) {
     this.message = msg;
@@ -19,7 +19,7 @@ export class ShipEngineError implements BaseShipEngineException {
 }
 
 export class ShipEngineWarning implements BaseShipEngineException {
-  type = ExceptionType.WARNING;
+  type = ShipEngineExceptionType.WARNING;
   message = '';
   constructor(msg: BaseShipEngineException['message']) {
     this.message = msg;
@@ -27,7 +27,7 @@ export class ShipEngineWarning implements BaseShipEngineException {
 }
 
 export class ShipEngineInfo implements BaseShipEngineException {
-  type = ExceptionType.WARNING;
+  type = ShipEngineExceptionType.WARNING;
   message = '';
   constructor(msg: BaseShipEngineException['message']) {
     this.message = msg;

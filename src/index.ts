@@ -1,6 +1,4 @@
-import { ShipEngine } from './lib';
-
-export { ShipEngine };
+export * from './lib';
 
 // Export `myLibrary` as the default export
 // eslint-disable-next-line import/no-default-export

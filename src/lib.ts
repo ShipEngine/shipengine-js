@@ -7,14 +7,4 @@ export const ShipEngine = (config: ShipEngineConfig) => {
   return ServiceFactory(ShipEngineApiClient(mapToApiServiceConfig(config)));
 };
 
-export type {
-  Address,
-  AddressQuery,
-  AddressQueryResult,
-  ExceptionType,
-  ShipEngineApiClientConfig,
-  ShipEngineError,
-  ShipEngineException,
-  ShipEngineInfo,
-  ShipEngineWarning,
-} from './models/public';
+export * from './models/public';
