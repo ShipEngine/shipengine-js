@@ -1,5 +1,6 @@
 import * as rax from 'retry-axios';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import { Config } from './models/public/Config';
 
 const defaultConfig: AxiosRequestConfig = {
   timeout: 10000,
@@ -44,16 +45,21 @@ const defaultConfig: AxiosRequestConfig = {
   },
 };
 
-export type AxiosConfig = AxiosRequestConfig &
-  rax.RetryConfig & { apiKey?: string };
-
-type Config = AxiosConfig | AxiosInstance;
-
+/**
+ * Type guard that checks if config is AxiosInstance
+ * @param v - Config
+ * @hidden
+ */
 const isAxiosInstance = (v: Config): v is AxiosInstance => {
   return typeof v === 'function';
 };
 
-const createClient = (config: Config) => {
+/**
+ * Create API Client
+ * @param config - client configuration which can be wither axios config or instance
+ * @hidden
+ */
+export const createClient = (config: Config) => {
   if (isAxiosInstance(config)) {
     const instance = config;
 
@@ -87,5 +93,3 @@ const createClient = (config: Config) => {
   rax.attach(instance);
   return instance;
 };
-
-export { createClient };

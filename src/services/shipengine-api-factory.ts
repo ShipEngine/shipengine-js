@@ -1,3 +1,4 @@
+import { AxiosInstance } from 'axios';
 import { createClient } from '../client';
 import { ShipEngineApiClientConfig } from '../models/public/Config';
 
@@ -6,7 +7,9 @@ class InvalidArgumentError extends Error {}
 /*
  * create a ShipEngine API Client instance
  */
-export const ShipEngineApiClient = (baseConfig: ShipEngineApiClientConfig) => {
+export const ShipEngineApiClient = (
+  baseConfig: ShipEngineApiClientConfig
+): AxiosInstance => {
   if (!baseConfig.apiKey) {
     throw new InvalidArgumentError('Please enter API Key!');
   }
@@ -24,5 +27,3 @@ export const ShipEngineApiClient = (baseConfig: ShipEngineApiClientConfig) => {
   const client = createClient(config);
   return client;
 };
-
-export type ShipEngineApiClient = ReturnType<typeof createClient>;
