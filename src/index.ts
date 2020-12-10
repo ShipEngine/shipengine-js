@@ -1,4 +1,7 @@
-export * from './lib';
+export * from './models/public';
+
+import { ShipEngine } from './shipengine';
+export { ShipEngine };
 
 // Export `myLibrary` as the default export
 // eslint-disable-next-line import/no-default-export
