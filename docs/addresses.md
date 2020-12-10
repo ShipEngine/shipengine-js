@@ -30,7 +30,7 @@ const shipengine = ShipEngine('my_api_key');
 ## Validate an Address
 
 You might want to validate that an address is correct.
-The simplest way to accomplish this is by calling [validateAddress]() with the necessary information to build an [Address]().
+The simplest way to accomplish this is by calling [validateAddress](../api/classes/addressesservice.html#validateaddress) with the necessary information to build an [Address](../api/classes/address.html).
 
 --- validate address args
 ```ts
@@ -46,7 +46,7 @@ console.log(isValid ? 'valid!' : 'invalid!')
 ```
 ---
 
-You can validate multiple addresses with the lower-level [Addresses]() service.
+You can validate multiple addresses with the lower-level [Addresses](../api/classes/addressesservice.html) service.
 
 --- validate address service
 ```ts
@@ -72,8 +72,8 @@ console.log(isValid1 && isValid2 ? 'all are valid' : 'some are invalid')
 
 ## Normalize an Address
 
-When you normalize an address, you are given an altered address.
-For example, maybe you don't know the `postalCode`.
+When you [normalize an address](../api/classes/addressesservice.html#normalizeaddress), you are returned an [altered address](../api/classes/address.html).
+You can pass an incomplete address as an argument: for example, maybe you don't know the `postalCode`.
 
 --- normalize address args
 ```ts
@@ -88,7 +88,7 @@ console.log(`normalized street is: ${address.street}`)
 console.log(`is residential: ${address.isResidential}`)
 ```
 ---
- `normalizeAddress` will throw a ShipEngineError if the given address cannot be found or is missing too much information. You can  mport the `ShipEngineError` in order to check if the thrown are normalization errors, or if they are unexpected HTTP errors that indicate a request/response failure.
+ [normalizeAddress](../api/classes/addressesservice.html#normalizeaddress) will throw a [ShipEngineError](../api/classes/shipengineerror.html) if the given address cannot be found or is missing too much information. You can  mport the `ShipEngineError` in order to check if the thrown are normalization errors, or if they are unexpected HTTP errors that indicate a request/response failure.
 
 --- exception handling
 ```ts
@@ -104,7 +104,7 @@ try {
 ```
 ---
 
-Finally, you can use the lower-level [Addresses]() to normalize multiple addresses.
+Finally, you can use the [Addresses](../api/classes/addressesservice.html) to normalize multiple addresses.
 This will not throw exceptions -- rather, it will return a list of Addresses with undefined in place of any addresses that cannot be normalized.
 
 ```ts
@@ -128,7 +128,7 @@ console.assert(!!addr2, 'second address should be valid');
 
 ## Query an Address
 
-If you want a list of exceptions along with address normalization, you can use the `queryAddress` method.
+If you want a list of exceptions along with address normalization, you can use the [queryAddress](../api/classes/addressesservice.html#queryaddress) method.
 
 --- query address
 ```ts

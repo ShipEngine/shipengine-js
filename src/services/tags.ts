@@ -16,7 +16,7 @@ class TagsServiceLowLevel {
   };
 }
 
-export class TagsServiceAPI {
+export class TagsService {
   public tags;
   constructor(client: AxiosInstance) {
     this.tags = new TagsServiceLowLevel(client);
