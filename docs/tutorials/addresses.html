@@ -1167,13 +1167,7 @@ console.log(`is residential: ${address.isResidential}`)
 
 <p class="seealso">Used in section <a href="addresses.html#1:6">6</a></p>
 </div>
-<p>Normalizing an address will throw an exception if the address cannot be normalized.
-</p>
-<p>In fact, all shipengine methods throw exceptions.
-</p>
-<p>This is because the underlying HTTP requests may themselves cause exceptions.
-</p>
-<p>To be safe, you should catch them.
+<p> <code>normalizeAddress</code> will throw a ShipEngineError if the given address cannot be found or is missing too much information. You can  mport the <code>ShipEngineError</code> in order to check if the thrown are normalization errors, or if they are unexpected HTTP errors that indicate a request/response failure.
 </p>
 
 <div class="codeblock">
@@ -1182,8 +1176,11 @@ console.log(`is residential: ${address.isResidential}`)
 try {
   await shipengine.normalizeAddress({ street: '1234 Main St' })
 } catch(err) {
-  // do something with error
-  console.error('caught!')
+  if (err instanceof ShipEngineError) {
+    // do something
+  } else {
+    console.error("some http error.", err)
+  }
 }
 </pre>
 
@@ -1295,9 +1292,21 @@ const shipengine = ShipEngine(process.env.API_KEY);
 </div>
 
 <div class="codeblock">
+<span class="codeblock_name">{initialize normalize <a href="addresses.html#1:6">6</a>}</span>
+<pre class="prettyprint lang-ts">
+import { default as ShipEngine, ShipEngineError } from '../../src'
+
+const shipengine = ShipEngine(process.env.API_KEY);
+</pre>
+
+
+
+</div>
+
+<div class="codeblock">
 <span class="codeblock_name">{<strong>normalize_address.ts</strong> <a href="addresses.html#1:6">6</a>}</span>
 <pre class="prettyprint lang-ts">
-<span class="nocode pln">{initialize, <a href="addresses.html#1:2">2</a>}</span>
+<span class="nocode pln">{initialize normalize, <a href="addresses.html#1:6">6</a>}</span>
 
 <span class="nocode pln">{wrapper start, <a href="addresses.html#1:6">6</a>}</span>
 

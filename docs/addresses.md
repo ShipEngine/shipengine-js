@@ -88,21 +88,18 @@ console.log(`normalized street is: ${address.street}`)
 console.log(`is residential: ${address.isResidential}`)
 ```
 ---
-Normalizing an address will throw an exception if the address cannot be normalized.
-
-In fact, all shipengine methods throw exceptions.
-
-This is because the underlying HTTP requests may themselves cause exceptions.
-
-To be safe, you should catch them.
+ `normalizeAddress` will throw a ShipEngineError if the given address cannot be found or is missing too much information. You can  mport the `ShipEngineError` in order to check if the thrown are normalization errors, or if they are unexpected HTTP errors that indicate a request/response failure.
 
 --- exception handling
 ```ts
 try {
   await shipengine.normalizeAddress({ street: '1234 Main St' })
 } catch(err) {
-  // do something with error
-  console.error('caught!')
+  if (err instanceof ShipEngineError) {
+    // do something
+  } else {
+    console.error("some http error.", err)
+  }
 }
 ```
 ---
@@ -183,8 +180,16 @@ const shipengine = ShipEngine(process.env.API_KEY);
 @{wrapper end}
 ---
 
+--- initialize normalize
+```ts
+import { default as ShipEngine, ShipEngineError } from '../../src'
+
+const shipengine = ShipEngine(process.env.API_KEY);
+```
+---
+
 --- normalize_address.ts
-@{initialize}
+@{initialize normalize}
 
 @{wrapper start}
 

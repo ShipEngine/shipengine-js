@@ -1,6 +1,6 @@
 /* normalize_address.ts */
-/* initialize */
-import { default as ShipEngine } from '../../src';
+/* initialize normalize */
+import { default as ShipEngine, ShipEngineError } from '../../src';
 
 const shipengine = ShipEngine(process.env.API_KEY);
 
@@ -21,8 +21,11 @@ const shipengine = ShipEngine(process.env.API_KEY);
   try {
     await shipengine.normalizeAddress({ street: '1234 Main St' });
   } catch (err) {
-    // do something with error
-    console.error('caught!');
+    if (err instanceof ShipEngineError) {
+      // do something
+    } else {
+      console.error('some http error.', err);
+    }
   }
 
   /* normalize address service */

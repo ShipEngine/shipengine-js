@@ -5,7 +5,7 @@ import {
   Address,
   AddressQueryResult,
   ShipEngineError,
-  ExceptionType,
+  ShipEngineExceptionType,
 } from '../models/public';
 
 import {
@@ -23,7 +23,7 @@ class AddressesServiceLowLevel {
     const { normalized, exceptions } = address;
     const result =
       Boolean(normalized) &&
-      exceptions.every((el) => el.type !== ExceptionType.ERROR);
+      exceptions.every((el) => el.type !== ShipEngineExceptionType.ERROR);
     return result;
   };
 

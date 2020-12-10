@@ -4,4 +4,4 @@ import { TagsServiceAPI } from '../../services/tags';
 /**
  * Aggregation of the entire shipengine-js API
  */
-export type ShipEngine = TagsServiceAPI & AddressesServiceAPI;
+export type ShipEngineAPI = TagsServiceAPI & AddressesServiceAPI;
