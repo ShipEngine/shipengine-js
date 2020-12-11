@@ -1,7 +1,6 @@
 [![ShipEngine](https://shipengine.github.io/img/shipengine-logo-wide.png)](https://shipengine.com)
 
 # ShipEngine Isomorphic JS / Node SDK (unstable)
----
 ![Latest Alpha](https://img.shields.io/npm/v/shipengine/alpha)
 ![Build Status](https://img.shields.io/github/workflow/status/shipengine/shipengine-js/CI-CD/main?label=build)
 [![License](https://poser.pugx.org/shipengine/shipengine/license)](//packagist.org/packages/shipengine/shipengine)
@@ -47,14 +46,14 @@ console.log(isValid ? 'valid!' : 'invalid!')
 ## Docs & Tutorials
 - https://shipengine.github.io/shipengine-js
 
-# Development / Contributions
+## Development / Contributions
 
-## Cloning the repo
+### Cloning the repo
 - fork the repository
 - `git submodule update --init --recursive`
 - submit a PR against `main`
 
-## Running tests
+### Running tests
 Do `docker-compose up -d`.
 
 If you for any reason do not want to use docker, you can also install hoverfly locally and run `hoverfly -webserver -response-body-files-path simengine`.
