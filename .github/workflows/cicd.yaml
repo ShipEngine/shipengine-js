@@ -50,7 +50,7 @@ jobs:
         if: ${{ matrix.os == 'ubuntu-latest'}}
         run: docker-compose up -d
 
-      - name: ${{ matrix.node }}
+      - name: Use Node ${{ matrix.node }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
