@@ -38,7 +38,7 @@ jobs:
           pathInArchive: "hoverfly.exe"
       - name: run hfly
         run: |
-          Start-Job -ScriptBlock { hfly -webserver -tls-verification=false -response-body-files-path simenginee }
+         Start-Process -FilePath hfly -Args "-webserver -tls-verification=false -response-body-files-path simengine"
       - run: echo "ref -> ${{github.ref}}"
       - name: Use Node.js v12
         uses: actions/setup-node@v1
