@@ -24,7 +24,7 @@ jobs:
           - 12.x
     steps:
       - run: echo "ref -> ${{github.ref}}"
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v2
         with:
           submodules: true
@@ -34,11 +34,8 @@ jobs:
           node-version: 12.x
       - run: npm ci
       - run: npm run lint
-      - name: Install Hoverfly
-        uses: SpectoLabs/hoverfly-github-action@main
-        with:
-          runner_github_workspace_path: ${{ github.workspace }}
-      - run: hoverfly -webserver -response-body-files-path simengine > /dev/null &
+      - name: Start Hoverfly
+        run: docker-compose up -d
       - run: npm run test
 
   deploy:
@@ -67,7 +64,7 @@ jobs:
           token: ${{ secrets.NPM_TOKEN }}
           check-version: true
           tag: alpha
-      - name: Github Pages
+      - name: Publish to Github Pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
