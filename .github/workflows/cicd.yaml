@@ -20,26 +20,49 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
+          - windows-latest
         node:
           - 12.x
     steps:
-      - run: echo "ref -> ${{github.ref}}"
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           submodules: true
-      - name: Use Node.js v12
+
+      - name: Install Hoverfly for Windows
+        if: ${{ matrix.os == 'windows-latest'}}
+        uses: engineerd/configurator@v0.0.5
+        with:
+          name: hfly.exe
+          fromGitHubReleases: true
+          urlTemplate: https://github.com/SpectoLabs/hoverfly/releases/download/{{version}}/hoverfly_bundle_windows_amd64.zip
+          repo: SpectoLabs/hoverfly
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: "latest"
+          pathInArchive: "hoverfly.exe"
+
+      - name: Start Hoverfly for Windows
+        if: ${{ matrix.os == 'windows-latest'}}
+        run: |
+         Start-Process -FilePath hfly -Args "-webserver -tls-verification=false -response-body-files-path simengine"
+
+      - name: Start Hoverfly for Linux
+        if: ${{ matrix.os == 'ubuntu-latest'}}
+        run: docker-compose up -d
+
+      - name: Use Node ${{ matrix.node }}
         uses: actions/setup-node@v1
         with:
-          node-version: 12.x
+          node-version: ${{ matrix.node }}
+
       - run: npm ci
-      - run: npm run lint
-      - name: Install Hoverfly
-        uses: SpectoLabs/hoverfly-github-action@main
-        with:
-          runner_github_workspace_path: ${{ github.workspace }}
-      - run: hoverfly -webserver -response-body-files-path simengine > /dev/null &
-      - run: npm run test
+
+      - if: ${{ matrix.os == 'windows-latest'}}
+        run: npm run test:node # karma browser testing stalls out atm because it needs saucelabs
+
+      - if: ${{ matrix.os == 'ubuntu-latest'}}
+        run: npm run test
+
 
   deploy:
     name: Deploy
@@ -67,7 +90,8 @@ jobs:
           token: ${{ secrets.NPM_TOKEN }}
           check-version: true
           tag: alpha
-      - name: Github Pages
+
+      - name: Publish to Github Pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
