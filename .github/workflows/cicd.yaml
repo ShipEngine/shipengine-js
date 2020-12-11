@@ -23,22 +23,29 @@ jobs:
         node:
           - 12.x
     steps:
-      - run: echo "ref -> ${{github.ref}}"
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           submodules: true
+      - uses: engineerd/configurator@v0.0.5
+        with:
+          name: hfly.exe
+          fromGitHubReleases: true
+          urlTemplate: https://github.com/SpectoLabs/hoverfly/releases/download/{{version}}/hoverfly_bundle_windows_amd64.zip
+          repo: SpectoLabs/hoverfly
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: "latest"
+          pathInArchive: "hoverfly.exe"
+      - name: run hfly
+        run: |
+          Start-Process -NoNewWindow hfly -webserver -response-body-files-path simengine
+      - run: echo "ref -> ${{github.ref}}"
       - name: Use Node.js v12
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
       - run: npm ci
-      - run: npm run lint
-      - name: Install Hoverfly
-        uses: SpectoLabs/hoverfly-github-action@main
-        with:
-          runner_github_workspace_path: ${{ github.workspace }}
-      - run: hoverfly -webserver -response-body-files-path simengine > /dev/null &
+
       - run: npm run test
 
   deploy:
