@@ -45,6 +45,12 @@ console.log(isValid ? 'valid!' : 'invalid!')
 - https://shipengine.github.io/shipengine-js
 
 # Development / Contributions
+
+## Cloning the repo
+- fork the repository
+- `git submodule update --init --recursive`
+- submit a PR against `main`
+
 ## Running tests
 Do `docker-compose up -d`.
 
