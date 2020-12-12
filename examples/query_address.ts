@@ -2,6 +2,7 @@
 /* initialize */
 import { default as ShipEngine } from '../../src';
 
+import 'dotenv/config';
 const shipengine = ShipEngine(process.env.API_KEY);
 
 /* wrapper start */
@@ -15,9 +16,7 @@ const shipengine = ShipEngine(process.env.API_KEY);
     country: 'US',
   });
 
-  console.log(
-    `the query result had ${addressQuery.exceptions.length} exceptions.`
-  );
+  console.assert(!addressQuery.exceptions.length, 'should be no exceptions');
   console.log(
     `the normalized address is: ${JSON.stringify(addressQuery.normalized)}.`
   );

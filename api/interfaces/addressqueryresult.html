@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>BaseShipEngineException | ShipEngine JS API</title>
+	<title>AddressQueryResult | ShipEngine JS API</title>
 	<meta name="description" content="Documentation for ShipEngine JS API">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -52,10 +52,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="baseshipengineexception.html">BaseShipEngineException</a>
+					<a href="addressqueryresult.html">AddressQueryResult</a>
 				</li>
 			</ul>
-			<h1>Interface BaseShipEngineException</h1>
+			<h1>Interface AddressQueryResult</h1>
 		</div>
 	</div>
 </header>
@@ -66,16 +66,8 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">BaseShipEngineException</span>
+						<span class="target">AddressQueryResult</span>
 					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel">
-				<h3>Implemented by</h3>
-				<ul class="tsd-hierarchy">
-					<li><a href="../classes/shipengineerror.html" class="tsd-signature-type">ShipEngineError</a></li>
-					<li><a href="../classes/shipengineinfo.html" class="tsd-signature-type">ShipEngineInfo</a></li>
-					<li><a href="../classes/shipenginewarning.html" class="tsd-signature-type">ShipEngineWarning</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -85,8 +77,13 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="baseshipengineexception.html#message" class="tsd-kind-icon">message</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="baseshipengineexception.html#type" class="tsd-kind-icon">type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="addressqueryresult.html#errors" class="tsd-kind-icon">errors</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="addressqueryresult.html#exceptions" class="tsd-kind-icon">exceptions</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="addressqueryresult.html#info" class="tsd-kind-icon">info</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="addressqueryresult.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="addressqueryresult.html#normalized" class="tsd-kind-icon">normalized</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="addressqueryresult.html#original" class="tsd-kind-icon">original</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="addressqueryresult.html#warnings" class="tsd-kind-icon">warnings</a></li>
 							</ul>
 						</section>
 					</div>
@@ -95,22 +92,72 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="message" class="tsd-anchor"></a>
-					<h3>message</h3>
-					<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="errors" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> errors</h3>
+					<div class="tsd-signature tsd-kind-icon">errors<span class="tsd-signature-symbol">:</span> <a href="../classes/shipenginewarning.html" class="tsd-signature-type">ShipEngineWarning</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/8ecdc3f/src/models/public/ShipEngineException.ts#L10">src/models/public/ShipEngineException.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/8ecdc3f/src/models/public/Address.ts#L51">src/models/public/Address.ts:51</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="type" class="tsd-anchor"></a>
-					<h3>type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <a href="../enums/shipengineexceptiontype.html" class="tsd-signature-type">ShipEngineExceptionType</a></div>
+					<a name="exceptions" class="tsd-anchor"></a>
+					<h3>exceptions</h3>
+					<div class="tsd-signature tsd-kind-icon">exceptions<span class="tsd-signature-symbol">:</span> <a href="../globals.html#shipengineexception" class="tsd-signature-type">ShipEngineException</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/8ecdc3f/src/models/public/ShipEngineException.ts#L9">src/models/public/ShipEngineException.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/8ecdc3f/src/models/public/Address.ts#L48">src/models/public/Address.ts:48</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="info" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> info</h3>
+					<div class="tsd-signature tsd-kind-icon">info<span class="tsd-signature-symbol">:</span> <a href="../classes/shipengineinfo.html" class="tsd-signature-type">ShipEngineInfo</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/8ecdc3f/src/models/public/Address.ts#L49">src/models/public/Address.ts:49</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="isvalid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> is<wbr>Valid</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Valid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/8ecdc3f/src/models/public/Address.ts#L52">src/models/public/Address.ts:52</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="normalized" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> normalized</h3>
+					<div class="tsd-signature tsd-kind-icon">normalized<span class="tsd-signature-symbol">:</span> <a href="../classes/address.html" class="tsd-signature-type">Address</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/8ecdc3f/src/models/public/Address.ts#L47">src/models/public/Address.ts:47</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="original" class="tsd-anchor"></a>
+					<h3>original</h3>
+					<div class="tsd-signature tsd-kind-icon">original<span class="tsd-signature-symbol">:</span> <a href="../globals.html#addressquery" class="tsd-signature-type">AddressQuery</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/8ecdc3f/src/models/public/Address.ts#L46">src/models/public/Address.ts:46</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="warnings" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> warnings</h3>
+					<div class="tsd-signature tsd-kind-icon">warnings<span class="tsd-signature-symbol">:</span> <a href="../classes/shipenginewarning.html" class="tsd-signature-type">ShipEngineWarning</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/8ecdc3f/src/models/public/Address.ts#L50">src/models/public/Address.ts:50</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -159,24 +206,39 @@
 					<li class=" tsd-kind-class">
 						<a href="../classes/tagsservicelowlevel.html" class="tsd-kind-icon">Tags<wbr>Service<wbr>Low<wbr>Level</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="addressqueryresult.html" class="tsd-kind-icon">Address<wbr>Query<wbr>Result</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="baseshipengineexception.html" class="tsd-kind-icon">Base<wbr>Ship<wbr>Engine<wbr>Exception</a>
+						<a href="addressqueryresult.html" class="tsd-kind-icon">Address<wbr>Query<wbr>Result</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="baseshipengineexception.html#message" class="tsd-kind-icon">message</a>
+								<a href="addressqueryresult.html#errors" class="tsd-kind-icon">errors</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="baseshipengineexception.html#type" class="tsd-kind-icon">type</a>
+								<a href="addressqueryresult.html#exceptions" class="tsd-kind-icon">exceptions</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="addressqueryresult.html#info" class="tsd-kind-icon">info</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="addressqueryresult.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="addressqueryresult.html#normalized" class="tsd-kind-icon">normalized</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="addressqueryresult.html#original" class="tsd-kind-icon">original</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="addressqueryresult.html#warnings" class="tsd-kind-icon">warnings</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface">
+						<a href="baseshipengineexception.html" class="tsd-kind-icon">Base<wbr>Ship<wbr>Engine<wbr>Exception</a>
+					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#addressquery" class="tsd-kind-icon">Address<wbr>Query</a>
 					</li>

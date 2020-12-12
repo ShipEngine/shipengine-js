@@ -2,6 +2,7 @@
 /* initialize */
 import { default as ShipEngine } from '../../src';
 
+import 'dotenv/config';
 const shipengine = ShipEngine(process.env.API_KEY);
 
 /* wrapper start */
@@ -15,26 +16,8 @@ const shipengine = ShipEngine(process.env.API_KEY);
     country: 'US',
   });
 
-  console.log(isValid ? 'valid!' : 'invalid!');
-
-  /* validate address service */
-  const [isValid1, isValid2] = await shipengine.addresses.validate([
-    {
-      street: '1 E 161 St',
-      cityLocality: 'The Bronx',
-      stateProvince: 'NY',
-      postalCode: '10451',
-      country: 'US',
-    },
-    {
-      street: ['4009 Marathon Blvd', 'Suite 200'],
-      cityLocality: 'The Bronx',
-      stateProvince: 'TX',
-      country: 'US',
-    },
-  ]);
-
-  console.log(isValid1 && isValid2 ? 'all are valid' : 'some are invalid');
+  console.log(isValid);
+  console.assert(isValid, 'address should be valid');
 
   /* wrapper end */
 })();
