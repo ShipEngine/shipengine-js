@@ -2,6 +2,7 @@
 /* initialize */
 import { default as ShipEngine } from '../../src';
 
+import 'dotenv/config';
 const shipengine = ShipEngine(process.env.API_KEY);
 
 /* wrapper start */
@@ -15,7 +16,8 @@ const shipengine = ShipEngine(process.env.API_KEY);
     country: 'US',
   });
 
-  console.log(isValid ? 'valid!' : 'invalid!');
+  console.log(isValid);
+  console.assert(isValid, 'address should be valid');
 
   /* wrapper end */
 })();

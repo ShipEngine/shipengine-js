@@ -35,14 +35,15 @@ The simplest way to accomplish this is by calling [validateAddress](../api/class
 --- validate address args
 ```ts
 const isValid = await shipengine.validateAddress({
-    street: '1 E 161 St',
-    cityLocality: 'The Bronx',
-    postalCode: '10451',
-    stateProvince: 'NY',
-    country: 'US'
-  })
+  street: '1 E 161 St',
+  cityLocality: 'The Bronx',
+  postalCode: '10451',
+  stateProvince: 'NY',
+  country: 'US',
+});
 
-console.log(isValid ? 'valid!' : 'invalid!')
+console.log(isValid)
+console.assert(isValid, 'address should be valid');
 ```
 ---
 
@@ -54,15 +55,18 @@ You can pass an incomplete address as an argument: for example, maybe you don't 
 
 --- normalize address args
 ```ts
-const address = await shipengine.normalizeAddress({
-    street: ['1 E 161 St'],
-    cityLocality: 'The Bronx',
-    stateProvince: 'NY',
-    country: 'US'
-})
-
-console.log(`normalized street is: ${address.street}`)
-console.log(`is residential: ${address.isResidential}`)
+try {
+  const address = await shipengine.normalizeAddress({
+    street: ['1060 W Addison St'],
+    cityLocality: 'Chicago',
+    stateProvince: 'IL',
+    country: 'US',
+});
+  console.log(`normalized street is: ${address.street}`);
+  console.assert(!address.isResidential, 'should be commercial');
+} catch (err) {
+  console.error(err)
+}
 ```
 ---
  [normalizeAddress](../api/classes/addressesservice.html#normalizeaddress) will throw a [ShipEngineError](../api/classes/shipengineerror.html) if the given address cannot be found or is missing too much information. You can  mport the `ShipEngineError` in order to check if the thrown are normalization errors, or if they are unexpected HTTP errors that indicate a request/response failure.
@@ -72,10 +76,10 @@ console.log(`is residential: ${address.isResidential}`)
 try {
   await shipengine.normalizeAddress({ street: '1234 Main St' })
 } catch(err) {
-  if (err instanceof ShipEngineError) {
-    // do something
+    if (err instanceof ShipEngineError) {
+    console.assert(err !== undefined, 'should be a ShipEngine error');
   } else {
-    console.error("some http error.", err)
+    console.error(err)
   }
 }
 ```
@@ -88,17 +92,18 @@ If you want a list of exceptions along with address normalization, you can use t
 --- query address
 ```ts
 const addressQuery = await shipengine.queryAddress({
-      street: ['1 E 161 St'],
-      cityLocality: 'The Bronx',
-      stateProvince: 'NY',
-      postalCode: '10451',
-      country: 'US'
-  })
+  street: ['1 E 161 St'],
+  cityLocality: 'The Bronx',
+  stateProvince: 'NY',
+  postalCode: '10451',
+  country: 'US'
+})
 
-console.log(`the query result had ${addressQuery.exceptions.length} exceptions.`)
+console.assert(!addressQuery.exceptions.length, 'should be no exceptions')
 console.log(`the normalized address is: ${JSON.stringify(addressQuery.normalized)}.`)
 ```
 ---
+
 
 
 
@@ -109,6 +114,7 @@ Swap out initialization codeblock
 ```ts
 import { default as ShipEngine } from '../../src';
 
+import 'dotenv/config';
 const shipengine = ShipEngine(process.env.API_KEY);
 ```
 ---
@@ -137,6 +143,7 @@ const shipengine = ShipEngine(process.env.API_KEY);
 ```ts
 import { default as ShipEngine, ShipEngineError } from '../../src'
 
+import 'dotenv/config';
 const shipengine = ShipEngine(process.env.API_KEY);
 ```
 ---

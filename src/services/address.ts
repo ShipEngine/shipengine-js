@@ -8,7 +8,7 @@ import {
 
 import { AddressServiceRestAPI } from '../models/api/rest-api';
 
-export class AddressServiceLowLevel {
+export class AddressesServiceLowLevel {
   public addressesRestAPI;
   constructor(client: AxiosInstance) {
     this.addressesRestAPI = new AddressServiceRestAPI(client);
@@ -48,26 +48,26 @@ export class AddressServiceLowLevel {
 export class AddressesService {
   public addresses;
   constructor(client: AxiosInstance) {
-    this.addresses = new AddressServiceLowLevel(client);
+    this.addresses = new AddressesServiceLowLevel(client);
   }
   /**
    * Check if address is valid
    */
-  public validateAddress: AddressServiceLowLevel['validate'] = async (
+  public validateAddress: AddressesServiceLowLevel['validate'] = async (
     address
   ) => this.addresses.validate(address);
 
   /**
    * Try to normalize address
    */
-  public normalizeAddress: AddressServiceLowLevel['normalize'] = async (
+  public normalizeAddress: AddressesServiceLowLevel['normalize'] = async (
     address
   ) => this.addresses.normalize(address);
 
   /**
    * Get address query data
    */
-  public queryAddress: AddressServiceLowLevel['query'] = async (
+  public queryAddress: AddressesServiceLowLevel['query'] = async (
     address: AddressQuery
   ) => this.addresses.query(address);
 }
