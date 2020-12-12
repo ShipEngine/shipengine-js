@@ -7,7 +7,9 @@
 
 # Validate and Normalize Addresses
 
-In this tutorial we will learn how to validate and normalize addreses with the [ShipEngine](https://www.shipengine.com/) library.
+ShipEngine allows you to validate an address before using it to create a shipment to ensure accurate delivery of your packages.
+
+Address validation ensures accurate addresses and can lead to reduced shipping costs by preventing address correction surcharges. ShipEngine cross references multiple databases to validate addresses and identify potential deliverability issues.
 
 ## Install the ShipEngine library
 
@@ -31,6 +33,7 @@ const shipengine = ShipEngine('my_api_key');
 
 You might want to validate that an address is correct.
 The simplest way to accomplish this is by calling [validateAddress](../api/classes/addressesservice.html#validateaddress) with the necessary information to build an [Address](../api/classes/address.html).
+This accepts a single address and returns a boolean.
 
 --- validate address args
 ```ts
