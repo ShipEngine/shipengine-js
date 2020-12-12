@@ -1097,48 +1097,22 @@ const shipengine = ShipEngine('my_api_key');
 <a name="1:3"><div class="section"><h4>3. Validate an Address</h4></a>
 <p>You might want to validate that an address is correct.
 The simplest way to accomplish this is by calling <a href="../api/classes/addressesservice.html#validateaddress">validateAddress</a> with the necessary information to build an <a href="../api/classes/address.html">Address</a>.
+This accepts a single address and returns a boolean.
 </p>
 
 <div class="codeblock">
 <span class="codeblock_name">{validate address args <a href="addresses.html#1:3">3</a>}</span>
 <pre class="prettyprint lang-ts">
 const isValid = await shipengine.validateAddress({
-    street: '1 E 161 St',
-    cityLocality: 'The Bronx',
-    postalCode: '10451',
-    stateProvince: 'NY',
-    country: 'US'
-  })
+  street: '1 E 161 St',
+  cityLocality: 'The Bronx',
+  postalCode: '10451',
+  stateProvince: 'NY',
+  country: 'US',
+});
 
-console.log(isValid ? 'valid!' : 'invalid!')
-</pre>
-
-
-<p class="seealso">Used in section <a href="addresses.html#1:6">6</a></p>
-</div>
-<p>You can validate multiple addresses with the lower-level <a href="../api/classes/addressesservice.html">Addresses</a> service.
-</p>
-
-<div class="codeblock">
-<span class="codeblock_name">{validate address service <a href="addresses.html#1:3">3</a>}</span>
-<pre class="prettyprint lang-ts">
-const [isValid1, isValid2] = await shipengine.addresses.validate([
-  {
-    street: '1 E 161 St',
-    cityLocality: 'The Bronx',
-    stateProvince: 'NY',
-    postalCode: '10451',
-    country: 'US'
-  },
-  {
-    street: ['4009 Marathon Blvd', 'Suite 200'],
-    cityLocality: 'The Bronx',
-    stateProvince: 'TX',
-    country: 'US'
-  }
-])
-
-console.log(isValid1 &amp;&amp; isValid2 ? 'all are valid' : 'some are invalid')
+console.log(isValid)
+console.assert(isValid, 'address should be valid');
 </pre>
 
 
@@ -1153,15 +1127,18 @@ You can pass an incomplete address as an argument: for example, maybe you don't 
 <div class="codeblock">
 <span class="codeblock_name">{normalize address args <a href="addresses.html#1:4">4</a>}</span>
 <pre class="prettyprint lang-ts">
-const address = await shipengine.normalizeAddress({
-    street: ['1 E 161 St'],
-    cityLocality: 'The Bronx',
-    stateProvince: 'NY',
-    country: 'US'
-})
-
-console.log(`normalized street is: ${address.street}`)
-console.log(`is residential: ${address.isResidential}`)
+try {
+  const address = await shipengine.normalizeAddress({
+    street: ['1060 W Addison St'],
+    cityLocality: 'Chicago',
+    stateProvince: 'IL',
+    country: 'US',
+});
+  console.log(`normalized street is: ${address.street}`);
+  console.assert(!address.isResidential, 'should be commercial');
+} catch (err) {
+  console.error(err)
+}
 </pre>
 
 
@@ -1176,38 +1153,12 @@ console.log(`is residential: ${address.isResidential}`)
 try {
   await shipengine.normalizeAddress({ street: '1234 Main St' })
 } catch(err) {
-  if (err instanceof ShipEngineError) {
-    // do something
+    if (err instanceof ShipEngineError) {
+    console.assert(err !== undefined, 'should be a ShipEngine error');
   } else {
-    console.error("some http error.", err)
+    console.error(err)
   }
 }
-</pre>
-
-
-<p class="seealso">Used in section <a href="addresses.html#1:6">6</a></p>
-</div>
-<p>Finally, you can use the <a href="../api/classes/addressesservice.html">Addresses</a> to normalize multiple addresses.
-This will not throw exceptions -- rather, it will return a list of Addresses with undefined in place of any addresses that cannot be normalized.
-</p>
-
-<div class="codeblock">
-<span class="codeblock_name">{normalize address service <a href="addresses.html#1:4">4</a>}</span>
-<pre class="prettyprint lang-ts">
-const [addr1, addr2] = await shipengine.addresses.normalize([
-    {
-       street: '1234 Main St'
-    },
-    {
-      street: ['1 E 161 St'],
-      cityLocality: 'The Bronx',
-      stateProvince: 'NY',
-      country: 'US'
-    }
-  ])
-
-console.assert(addr1 === undefined, 'first address cannot be normalized');
-console.assert(!!addr2, 'second address should be valid');
 </pre>
 
 
@@ -1222,14 +1173,14 @@ console.assert(!!addr2, 'second address should be valid');
 <span class="codeblock_name">{query address <a href="addresses.html#1:5">5</a>}</span>
 <pre class="prettyprint lang-ts">
 const addressQuery = await shipengine.queryAddress({
-      street: ['1 E 161 St'],
-      cityLocality: 'The Bronx',
-      stateProvince: 'NY',
-      postalCode: '10451',
-      country: 'US'
-  })
+  street: ['1 E 161 St'],
+  cityLocality: 'The Bronx',
+  stateProvince: 'NY',
+  postalCode: '10451',
+  country: 'US'
+})
 
-console.log(`the query result had ${addressQuery.exceptions.length} exceptions.`)
+console.assert(!addressQuery.exceptions.length, 'should be no exceptions')
 console.log(`the normalized address is: ${JSON.stringify(addressQuery.normalized)}.`)
 </pre>
 
@@ -1246,6 +1197,7 @@ console.log(`the normalized address is: ${JSON.stringify(addressQuery.normalized
 <pre class="prettyprint lang-ts">
 import { default as ShipEngine } from '../../src';
 
+import 'dotenv/config';
 const shipengine = ShipEngine(process.env.API_KEY);
 </pre>
 
@@ -1282,8 +1234,6 @@ const shipengine = ShipEngine(process.env.API_KEY);
 
 <span class="nocode pln">{validate address args, <a href="addresses.html#1:3">3</a>}</span>
 
-<span class="nocode pln">{validate address service, <a href="addresses.html#1:3">3</a>}</span>
-
 <span class="nocode pln">{wrapper end, <a href="addresses.html#1:6">6</a>}</span>
 </pre>
 
@@ -1296,6 +1246,7 @@ const shipengine = ShipEngine(process.env.API_KEY);
 <pre class="prettyprint lang-ts">
 import { default as ShipEngine, ShipEngineError } from '../../src'
 
+import 'dotenv/config';
 const shipengine = ShipEngine(process.env.API_KEY);
 </pre>
 
@@ -1313,8 +1264,6 @@ const shipengine = ShipEngine(process.env.API_KEY);
 <span class="nocode pln">{normalize address args, <a href="addresses.html#1:4">4</a>}</span>
 
 <span class="nocode pln">{exception handling, <a href="addresses.html#1:4">4</a>}</span>
-
-<span class="nocode pln">{normalize address service, <a href="addresses.html#1:4">4</a>}</span>
 
 <span class="nocode pln">{wrapper end, <a href="addresses.html#1:6">6</a>}</span>
 </pre>

@@ -24,7 +24,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "removeComments": false,
-    "downlevelIteration": true,
     "typeRoots": [
       "node_modules/@types",
       "./typings"
@@ -34,6 +33,9 @@
     "src/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "cjs",
+    "esm",
+    "docs/api"
   ]
 }

@@ -15,7 +15,6 @@ export const ShipEngineApiClient = (
   }
   const { baseURL, raxConfig } = baseConfig.requestOptions || {};
   const finalBaseUrl = baseURL ?? 'https://api.shipengine.com/v1';
-  // I can override the api key when instantiating the ship engine api, but also on a request by request basis.
   const config = {
     raxConfig,
     baseURL: finalBaseUrl,

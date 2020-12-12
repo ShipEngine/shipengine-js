@@ -1,4 +1,8 @@
-import { ShipEngineException } from './ShipEngineException';
+import {
+  ShipEngineException,
+  ShipEngineInfo,
+  ShipEngineWarning,
+} from './ShipEngineException';
 
 type Street = string | string[];
 
@@ -38,8 +42,12 @@ export type AddressQuery = {
   country?: Address['country'];
 };
 
-export type AddressQueryResult = {
+export interface AddressQueryResult {
   original: AddressQuery;
   normalized?: Address;
   exceptions: ShipEngineException[];
-};
+  readonly info: ShipEngineInfo[];
+  readonly warnings: ShipEngineWarning[];
+  readonly errors: ShipEngineWarning[];
+  readonly isValid: boolean;
+}

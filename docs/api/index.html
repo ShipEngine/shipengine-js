@@ -64,6 +64,9 @@
 				<a href="#shipengine-isomorphic-js--node-sdk-unstable" id="shipengine-isomorphic-js--node-sdk-unstable" style="color: inherit; text-decoration: none;">
 					<h1>ShipEngine Isomorphic JS / Node SDK (unstable)</h1>
 				</a>
+				<p><img src="https://img.shields.io/npm/v/shipengine/alpha" alt="Latest Alpha">
+					<img src="https://img.shields.io/github/workflow/status/shipengine/shipengine-js/CI-CD/main?label=build" alt="Build Status">
+				<img src="https://img.shields.io/github/license/shipengine/shipengine-js" alt="License"></p>
 				<blockquote>
 					<p>⚠ <strong>WARNING</strong>: This is alpha software under active development. This repo is a successor to <a href="https://www.npmjs.com/package/shipengine">https://www.npmjs.com/package/shipengine</a>. Until this has a stable release, we recommend you either stick to the current releases, or use the <a href="https://shipengine.github.io/shipengine-openapi/">shipengine API</a>.</p>
 				</blockquote>
@@ -105,10 +108,18 @@
 					<li><a href="https://shipengine.github.io/shipengine-js">https://shipengine.github.io/shipengine-js</a></li>
 				</ul>
 				<a href="#development--contributions" id="development--contributions" style="color: inherit; text-decoration: none;">
-					<h1>Development / Contributions</h1>
+					<h2>Development / Contributions</h2>
 				</a>
+				<a href="#cloning-the-repo" id="cloning-the-repo" style="color: inherit; text-decoration: none;">
+					<h3>Cloning the repo</h3>
+				</a>
+				<ul>
+					<li>fork the repository</li>
+					<li><code>git submodule update --init --recursive</code></li>
+					<li>submit a PR against <code>main</code></li>
+				</ul>
 				<a href="#running-tests" id="running-tests" style="color: inherit; text-decoration: none;">
-					<h2>Running tests</h2>
+					<h3>Running tests</h3>
 				</a>
 				<p>Do <code>docker-compose up -d</code>.</p>
 				<p>If you for any reason do not want to use docker, you can also install hoverfly locally and run <code>hoverfly -webserver -response-body-files-path simengine</code>.</p>
@@ -163,13 +174,13 @@
 						<a href="classes/tagsservicelowlevel.html" class="tsd-kind-icon">Tags<wbr>Service<wbr>Low<wbr>Level</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/addressqueryresult.html" class="tsd-kind-icon">Address<wbr>Query<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/baseshipengineexception.html" class="tsd-kind-icon">Base<wbr>Ship<wbr>Engine<wbr>Exception</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#addressquery" class="tsd-kind-icon">Address<wbr>Query</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#addressqueryresult" class="tsd-kind-icon">Address<wbr>Query<wbr>Result</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#advancedconfig" class="tsd-kind-icon">Advanced<wbr>Config</a>

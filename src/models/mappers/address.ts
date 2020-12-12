@@ -12,6 +12,7 @@ import {
   ShipEngineInfo,
   ShipEngineWarning,
   ShipEngineException,
+  ShipEngineExceptionType,
 } from '../public';
 import { exists } from '../../utils/exists';
 
@@ -23,12 +24,35 @@ import { exists } from '../../utils/exists';
 export const mapToAddressQueryResult = (
   v: AddressValidationResult
 ): AddressQueryResult => {
+  const exceptions = mapToShipEngineExceptions(v.messages);
+  const normalized = v.matched_address
+    ? mapToNormalizedAddress(v.matched_address)
+    : undefined;
   return {
+    get info() {
+      return exceptions.filter(
+        (el) => el.type === ShipEngineExceptionType.INFO
+      );
+    },
+    get errors() {
+      return exceptions.filter(
+        (el) => el.type === ShipEngineExceptionType.ERROR
+      );
+    },
+    get warnings() {
+      return exceptions.filter(
+        (el) => el.type === ShipEngineExceptionType.WARNING
+      );
+    },
+    get isValid() {
+      const result =
+        Boolean(normalized) &&
+        exceptions.every((el) => el.type !== ShipEngineExceptionType.ERROR);
+      return result;
+    },
     original: mapToNormalizedAddress(v.original_address),
-    exceptions: mapToShipEngineExceptions(v.messages),
-    normalized: v.matched_address
-      ? mapToNormalizedAddress(v.matched_address)
-      : undefined,
+    exceptions,
+    normalized,
   };
 };
 
@@ -85,8 +109,8 @@ export const mapToShipEngineExceptions = (
   messages: ResponseMessage[]
 ): ShipEngineException[] => {
   return messages
-    .map(({ type: t, message }) => {
-      if (!t || !message) return undefined;
+    .map(({ type: t, message = '' }) => {
+      if (!t) return undefined;
       // this is verbose because may want to conditionally add additional errors based on kind
       if (t === 'error') {
         return new ShipEngineError(message);
