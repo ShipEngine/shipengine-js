@@ -1,4 +1,4 @@
-import { AddressesService } from '../../services/address';
+import { AddressesService } from '../../services/addresses';
 import { TagsService } from '../../services/tags';
 
 /**

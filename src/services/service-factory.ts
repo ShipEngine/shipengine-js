@@ -1,5 +1,5 @@
 import { TagsService } from './tags';
-import { AddressesService } from './address';
+import { AddressesService } from './addresses';
 import { AxiosInstance } from 'axios';
 import type { ShipEngineAPI } from '../models/public';
 
