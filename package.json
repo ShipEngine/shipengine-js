@@ -32,7 +32,8 @@
     "compile:tutorials": "npm run compile:lit && lit --weave docs/dist/addresses.lit -odir docs/tutorials",
     "compile:examples": "npm run compile:lit && lit --tangle docs/dist/addresses.lit -odir docs/examples && npm run fix:examples",
     "compile": "npm run compile:api && npm run compile:tutorials && npm run compile:examples",
-    "serve": "live-server ./docs"
+    "serve": "live-server ./docs",
+    "bump:alpha": "bump prerelease --preid alpha --tag"
   },
   "engines": {
     "node": "12.x"
@@ -42,6 +43,7 @@
     "@babel/polyfill": "^7.12.1",
     "@jsdevtools/host-environment": "^2.1.2",
     "@jsdevtools/karma-config": "^3.1.7",
+    "@jsdevtools/version-bump-prompt": "^6.1.0",
     "@openapitools/openapi-generator-cli": "^2.0.3",
     "@tsconfig/node12": "^1.0.7",
     "@types/karma": "^5.0.1",
