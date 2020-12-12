@@ -1,6 +1,6 @@
 {
   "name": "shipengine",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "ShipEngine SDK for node / browser",
   "main": "cjs/index.js",
   "module": "esm/index.js",
@@ -32,7 +32,8 @@
     "compile:tutorials": "npm run compile:lit && lit --weave docs/addresses.lit -odir docs/tutorials",
     "compile:examples": "npm run compile:lit && lit --tangle docs/addresses.lit -odir docs/examples && npm run fix:examples",
     "compile": "npm run compile:api && npm run compile:tutorials && npm run compile:examples",
-    "serve": "live-server ./docs"
+    "serve": "live-server ./docs",
+    "bump:alpha": "bump prerelease --preid alpha --tag --push --all"
   },
   "engines": {
     "node": "12.x"
