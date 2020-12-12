@@ -3,7 +3,12 @@ const forEach = require('mocha-each');
 const {
   mapToRequestBodyAddress,
   mapToNormalizedAddress,
+  mapToAddressQueryResult,
 } = require('../../../cjs/models/mappers/address');
+const {
+  ShipEngineError,
+  ShipEngineExceptionType,
+} = require('../../../cjs/models/public');
 
 /**
  * @typedef { import('../../../src/services/service-factory').ServiceAPI } ServiceAPI
@@ -94,4 +99,97 @@ describe('mapToRequestBodyAddress', () => {
     );
   });
 });
-// describe('mapToShipEngineExceptions', () => {});
+
+describe('mapToAddressQueryResult', () => {
+  describe('normalized', () => {
+    it('should be empty if no matched address', () => {
+      const addressQuery = mapToAddressQueryResult({
+        matched_address: null,
+        original_address: {},
+        messages: [],
+      });
+      expect(addressQuery.normalized).to.be.undefined;
+    });
+  });
+  describe('warning / error / info - exceptions', () => {
+    it('should have keys that are filtered by exceptions', () => {
+      const addressQuery = mapToAddressQueryResult({
+        matched_address: {},
+        original_address: {},
+        messages: [
+          {
+            type: 'warning',
+          },
+          {
+            type: 'error',
+          },
+          {
+            type: 'info',
+          },
+        ],
+      });
+
+      expect(addressQuery.info[0].type).to.eq(ShipEngineExceptionType.INFO);
+
+      expect(addressQuery.warnings[0].type).to.eq(
+        ShipEngineExceptionType.WARNING
+      );
+
+      expect(addressQuery.errors[0].type).to.eq(ShipEngineExceptionType.ERROR);
+
+      expect(addressQuery.warnings.length).to.eq(1);
+      expect(addressQuery.info.length).to.eq(1);
+      expect(addressQuery.errors.length).to.eq(1);
+    });
+  });
+  describe('isValid', () => {
+    it('should be true if no errors', () => {
+      const addressQuery = mapToAddressQueryResult({
+        matched_address: {},
+        original_address: {},
+        messages: [
+          {
+            type: 'warning',
+          },
+          {
+            type: 'info',
+          },
+        ],
+      });
+
+      expect(addressQuery.isValid).to.eq(true);
+    });
+    it('should be false if errors', () => {
+      const addressQuery = mapToAddressQueryResult({
+        matched_address: {},
+        original_address: {},
+        messages: [
+          {
+            type: 'error',
+          },
+          {
+            type: 'info',
+          },
+        ],
+      });
+
+      expect(addressQuery.isValid).to.eq(false);
+    });
+    it('should be false if no matched address', () => {
+      const addressQuery = mapToAddressQueryResult({
+        matched_address: undefined,
+        original_address: {},
+        messages: [
+          {
+            type: 'error',
+          },
+          {
+            type: 'info',
+          },
+        ],
+      });
+
+      expect(addressQuery.isValid).to.eq(false);
+    });
+  });
+});

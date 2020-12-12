@@ -6,7 +6,7 @@ const { expect } = require('chai');
 const constants = require('../utils/constants');
 
 describe('retries', () => {
-  const get = () =>
+  const get = async () =>
     ShipEngineApiClient({
       apiKey: '123',
       requestOptions: {

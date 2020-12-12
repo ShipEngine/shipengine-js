@@ -28,21 +28,5 @@ const shipengine = ShipEngine(process.env.API_KEY);
     }
   }
 
-  /* normalize address service */
-  const [addr1, addr2] = await shipengine.addresses.normalize([
-    {
-      street: '1234 Main St',
-    },
-    {
-      street: ['1 E 161 St'],
-      cityLocality: 'The Bronx',
-      stateProvince: 'NY',
-      country: 'US',
-    },
-  ]);
-
-  console.assert(addr1 === undefined, 'first address cannot be normalized');
-  console.assert(!!addr2, 'second address should be valid');
-
   /* wrapper end */
 })();

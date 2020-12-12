@@ -2,6 +2,8 @@ module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
   parserOptions: {
+    createDefaultProgram: true,
+    project: './tsconfig.json',
     ecmaVersion: '2018',
     sourceType: 'module',
   },
@@ -23,8 +25,10 @@ module.exports = {
   ignorePatterns: ['esm', 'cjs', 'node_modules', 'docs/api'],
   rules: {
     'import/no-default-export': 2,
-    '@typescript-eslint/explicit-module-boundary-types': 0,
     '@typescript-eslint/ban-types': 0,
+    '@typescript-eslint/explicit-module-boundary-types': 0,
+    '@typescript-eslint/promise-function-async': 2,
+    '@typescript-eslint/no-floating-promises': [2, { ignoreIIFE: true }],
   },
   overrides: [
     {

@@ -1,63 +1,46 @@
 import { AxiosInstance } from 'axios';
-import { ValidateAddressResponseBody } from '../models/api';
 import {
   AddressQuery,
   Address,
   AddressQueryResult,
   ShipEngineError,
-  ShipEngineExceptionType,
 } from '../models/public';
 
-import {
-  mapToAddressQueryResult,
-  mapToRequestBodyAddress,
-} from '../models/mappers/address';
+import { AddressServiceRestAPI } from '../models/api/rest-api';
 
-class AddressesServiceLowLevel {
-  private client;
+export class AddressServiceLowLevel {
+  public addressesRestAPI;
   constructor(client: AxiosInstance) {
-    this.client = client;
+    this.addressesRestAPI = new AddressServiceRestAPI(client);
   }
 
-  private isValid = (address: AddressQueryResult) => {
-    const { normalized, exceptions } = address;
-    const result =
-      Boolean(normalized) &&
-      exceptions.every((el) => el.type !== ShipEngineExceptionType.ERROR);
-    return result;
-  };
-
-  public query = async (
-    addresses: AddressQuery[]
-  ): Promise<AddressQueryResult[]> => {
-    const { data } = await this.client.post<ValidateAddressResponseBody>(
-      '/addresses/validate',
-      addresses.map(mapToRequestBodyAddress)
-    );
-    const result = data.map(mapToAddressQueryResult);
-    return result;
+  /**
+   * Get address query data
+   */
+  public query = async (address: AddressQuery): Promise<AddressQueryResult> => {
+    const [domainQueryResult] = await this.addressesRestAPI.query([address]);
+    return domainQueryResult;
   };
 
   /**
-   * address contains no errors if normalized exists and there is no exceptions in any error
+   * Check if address is valid
    */
-  public validate = async (addresses: AddressQuery[]): Promise<boolean[]> => {
-    const addressQueryResult = await this.query(addresses);
-    const result = addressQueryResult.map(this.isValid);
-    return result;
+  public validate = async (address: AddressQuery): Promise<boolean> => {
+    const addressQueryResult = await this.query(address);
+    return addressQueryResult.isValid;
   };
 
   /**
-   * Get array of normalized addresses.
-   * Invalid address = undefined.
+   * Try to normalize address
    */
-  public normalize = async (
-    addresses: AddressQuery[]
-  ): Promise<(Address | undefined)[]> => {
-    const addressQueryResult = await this.query(addresses);
-    const normalized = addressQueryResult.map((el) =>
-      this.isValid(el) ? el.normalized : undefined
-    );
+  public normalize = async (address: AddressQuery): Promise<Address> => {
+    const addressQueryResult = await this.query(address);
+    const normalized = addressQueryResult.isValid
+      ? addressQueryResult.normalized
+      : undefined;
+    if (!normalized) {
+      throw new ShipEngineError('Address unqueryable, unable to normalize.');
+    }
     return normalized;
   };
 }
@@ -65,28 +48,26 @@ class AddressesServiceLowLevel {
 export class AddressesService {
   public addresses;
   constructor(client: AxiosInstance) {
-    this.addresses = new AddressesServiceLowLevel(client);
+    this.addresses = new AddressServiceLowLevel(client);
   }
+  /**
+   * Check if address is valid
+   */
+  public validateAddress: AddressServiceLowLevel['validate'] = async (
+    address
+  ) => this.addresses.validate(address);
 
-  public validateAddress = async (address: AddressQuery): Promise<boolean> => {
-    const [domainAddress] = await this.addresses.validate([address]);
-    return domainAddress;
-  };
+  /**
+   * Try to normalize address
+   */
+  public normalizeAddress: AddressServiceLowLevel['normalize'] = async (
+    address
+  ) => this.addresses.normalize(address);
 
-  public normalizeAddress = async (
+  /**
+   * Get address query data
+   */
+  public queryAddress: AddressServiceLowLevel['query'] = async (
     address: AddressQuery
-  ): Promise<Address | undefined> => {
-    const { normalized } = await this.queryAddress(address);
-    if (!normalized) {
-      throw new ShipEngineError('Address unqueryable, unable to normalize.');
-    }
-    return normalized;
-  };
-
-  public queryAddress = async (
-    address: AddressQuery
-  ): Promise<AddressQueryResult> => {
-    const [domainQueryResult] = await this.addresses.query([address]);
-    return domainQueryResult;
-  };
+  ) => this.addresses.query(address);
 }

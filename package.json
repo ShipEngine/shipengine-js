@@ -29,8 +29,8 @@
     "compile:lit": "ts-node-script docs/md-to-lit.ts",
     "compile:api": "typedoc",
     "compile:api:watch": "run-p devdoc serve",
-    "compile:tutorials": "npm run compile:lit && lit --weave docs/addresses.lit -odir docs/tutorials",
-    "compile:examples": "npm run compile:lit && lit --tangle docs/addresses.lit -odir docs/examples && npm run fix:examples",
+    "compile:tutorials": "npm run compile:lit && lit --weave docs/dist/addresses.lit -odir docs/tutorials",
+    "compile:examples": "npm run compile:lit && lit --tangle docs/dist/addresses.lit -odir docs/examples && npm run fix:examples",
     "compile": "npm run compile:api && npm run compile:tutorials && npm run compile:examples",
     "serve": "live-server ./docs"
   },

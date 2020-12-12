@@ -21,7 +21,7 @@ export class TagsService {
   constructor(client: AxiosInstance) {
     this.tags = new TagsServiceLowLevel(client);
   }
-  public createTag = (tagName: string) => {
+  public createTag = async (tagName: string) => {
     return this.tags.create(tagName);
   };
 }

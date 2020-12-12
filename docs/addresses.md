@@ -46,29 +46,6 @@ console.log(isValid ? 'valid!' : 'invalid!')
 ```
 ---
 
-You can validate multiple addresses with the lower-level [Addresses](../api/classes/addressesservice.html) service.
-
---- validate address service
-```ts
-const [isValid1, isValid2] = await shipengine.addresses.validate([
-  {
-    street: '1 E 161 St',
-    cityLocality: 'The Bronx',
-    stateProvince: 'NY',
-    postalCode: '10451',
-    country: 'US'
-  },
-  {
-    street: ['4009 Marathon Blvd', 'Suite 200'],
-    cityLocality: 'The Bronx',
-    stateProvince: 'TX',
-    country: 'US'
-  }
-])
-
-console.log(isValid1 && isValid2 ? 'all are valid' : 'some are invalid')
-```
----
 
 ## Normalize an Address
 
@@ -101,28 +78,6 @@ try {
     console.error("some http error.", err)
   }
 }
-```
----
-
-Finally, you can use the [Addresses](../api/classes/addressesservice.html) to normalize multiple addresses.
-This will not throw exceptions -- rather, it will return a list of Addresses with undefined in place of any addresses that cannot be normalized.
-
-```ts
---- normalize address service
-const [addr1, addr2] = await shipengine.addresses.normalize([
-    {
-       street: '1234 Main St'
-    },
-    {
-      street: ['1 E 161 St'],
-      cityLocality: 'The Bronx',
-      stateProvince: 'NY',
-      country: 'US'
-    }
-  ])
-
-console.assert(addr1 === undefined, 'first address cannot be normalized');
-console.assert(!!addr2, 'second address should be valid');
 ```
 ---
 
@@ -175,8 +130,6 @@ const shipengine = ShipEngine(process.env.API_KEY);
 
 @{validate address args}
 
-@{validate address service}
-
 @{wrapper end}
 ---
 
@@ -196,8 +149,6 @@ const shipengine = ShipEngine(process.env.API_KEY);
 @{normalize address args}
 
 @{exception handling}
-
-@{normalize address service}
 
 @{wrapper end}
 ---
