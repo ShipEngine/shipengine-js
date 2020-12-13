@@ -9,7 +9,7 @@ import {
 import { AddressServiceRestAPI } from '../models/api/rest-api';
 
 export class AddressesServiceLowLevel {
-  public addressesRestAPI;
+  private addressesRestAPI;
   constructor(client: AxiosInstance) {
     this.addressesRestAPI = new AddressServiceRestAPI(client);
   }
