@@ -4,7 +4,7 @@
 
 'use strict';
 const { karmaConfig } = require('@jsdevtools/karma-config');
-const { host } = require('@jsdevtools/host-environment');
+// const { host } = require('@jsdevtools/host-environment');
 const {
   hoverflyProxyPath,
   hoverflyProxyApiPath,
@@ -37,12 +37,13 @@ module.exports = (cfg) => {
       },
     },
     browsers: {
-      chrome: host.ci ? host.os.linux : true,
+      chrome: true,
       firefox: false,
       safari: false,
       edge: false,
       ie: false,
     },
+    CI: true, // headless
   });
   getConfig(cfg);
 };
