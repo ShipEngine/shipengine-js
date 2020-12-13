@@ -33,7 +33,7 @@
     "compile:examples": "npm run compile:lit && lit --tangle docs/dist/addresses.lit -odir docs/examples && npm run fix:examples",
     "compile": "npm run compile:api && npm run compile:tutorials && npm run compile:examples",
     "serve": "live-server ./docs",
-    "bump": "bump prerelease --preid alpha --tag --push --all"
+    "tag-and-release": "git checkout main && bash ./scripts/release.sh"
   },
   "engines": {
     "node": "12.x"
