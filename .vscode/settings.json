@@ -4,6 +4,7 @@
     {
       "fileMatch": [
         "simengine/**/*.json",
+        "!simengine/**/responses/**/*.json"
       ],
       "url": "./simengine/hoverfly-schema.json"
     }
