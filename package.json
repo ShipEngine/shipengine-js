@@ -38,16 +38,14 @@
   "engines": {
     "node": "12.x"
   },
-  "license": "MIT",
+  "license": "Apache-2.0",
   "devDependencies": {
-    "@babel/polyfill": "^7.12.1",
     "@jsdevtools/host-environment": "^2.1.2",
     "@jsdevtools/karma-config": "^3.1.7",
     "@jsdevtools/version-bump-prompt": "^6.1.0",
     "@openapitools/openapi-generator-cli": "^2.0.3",
     "@tsconfig/node12": "^1.0.7",
     "@types/karma": "^5.0.1",
-    "@types/lodash.curry": "^4.1.6",
     "@types/mocha": "^8.0.4",
     "@types/node": "^12.19.3",
     "@types/sinon": "^9.0.8",
@@ -80,7 +78,6 @@
   },
   "dependencies": {
     "axios": "^0.21.0",
-    "lodash.curry": "^4.1.1",
     "retry-axios": "^2.3.0"
   }
 }
