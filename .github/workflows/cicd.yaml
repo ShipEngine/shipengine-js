@@ -3,13 +3,12 @@ name: CI-CD
 on:
   push:
     branches:
-      - "*"
-    tags-ignore:
-      - "*"
-
-  schedule:
-    - cron: "0 0 1 * *"
-
+      - main
+  pull_request:
+    branches:
+      # can be replaced with $default-branch macro.
+      - main
+      - develop
 jobs:
   tests:
     name: Lint & Test
@@ -60,7 +59,9 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - run: npm ci
+      - name: Install Dependencies
+        uses: bahmutov/npm-install@v1
+
       - run: npm run test
 
   deploy:
@@ -77,8 +78,8 @@ jobs:
       - name: Install Node
         uses: actions/setup-node@v1
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install Dependencies
+        uses: bahmutov/npm-install@v1
 
       - name: Build the code
         run: npm run build
