@@ -61,6 +61,8 @@ jobs:
 
       - name: Install Dependencies
         uses: bahmutov/npm-install@v1
+        with:
+          install-command: npm ci
 
       - run: npm run test
 
