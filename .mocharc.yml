@@ -13,4 +13,3 @@ recursive: true
 require:
   - source-map-support/register
   - test/support/mocha-hooks
-  - test/support/polyfills
