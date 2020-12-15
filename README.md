@@ -54,7 +54,7 @@ console.log(isValid ? 'valid!' : 'invalid!')
 - submit a PR against `main`
 
 ### Running tests
-Do `docker-compose up -d`.
+Do `npm run sim:start`
 
 If you for any reason do not want to use docker, you can also install hoverfly locally and run `hoverfly -webserver -response-body-files-path simengine`.
 
