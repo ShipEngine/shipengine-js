@@ -1,6 +1,6 @@
 // https://typedoc.org/guides/options
 module.exports = {
-  // disableSources: true, // blob changes all the time, so disable
+  gitRevision: 'main', // avoid "https://github.com/ShipEngine/shipengine-js/abc1245677 links
   exclude: [
     'src/models/api/**',
     'src/models/mappers/**',
