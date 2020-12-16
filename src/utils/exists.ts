@@ -22,3 +22,23 @@ export function assertExists<T>(
     throw Error(res);
   }
 }
+
+/**
+ *
+ * @param object
+ * example:
+ * isCompletelyNullOrEmptyObject({ foo: null }); // true
+ * isCompletelyNullOrEmptyObject(); // true
+ * isCompletelyNullOrEmptyObject([]); // true
+ * isCompletelyNullOrEmptyObject([null, null]); // true
+ * isCompletelyNullOrEmptyObject([1, 2]); // false
+ * isCompletelyNullOrEmptyObject({ foo: 123 }); // false
+ */
+export function isCompletelyNullOrEmptyObject<T>(object: T): boolean {
+  for (const property in object) {
+    if (exists(object[property])) {
+      return false;
+    }
+  }
+  return true;
+}
