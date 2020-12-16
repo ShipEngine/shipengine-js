@@ -1,8 +1,10 @@
 [![ShipEngine](https://shipengine.github.io/img/shipengine-logo-wide.png)](https://shipengine.com)
 
 # ShipEngine Isomorphic JS / Node SDK (unstable)
-![Latest Alpha](https://img.shields.io/npm/v/shipengine/alpha)
 ![Build Status](https://img.shields.io/github/workflow/status/shipengine/shipengine-js/CI-CD/main?label=build)
+[![Cross-Platform Compatibility](https://shipengine.github.io/img/badges/os-badges.svg)](https://github.com/ShipEngine/shipengine-js/actions)
+
+![Latest Alpha](https://img.shields.io/npm/v/shipengine/alpha)
 ![License](https://img.shields.io/github/license/shipengine/shipengine-js)
 
 > ⚠ **WARNING**: This is alpha software under active development. This repo is a successor to https://www.npmjs.com/package/shipengine. Until this has a stable release, we recommend you either stick to the current releases, or use the [shipengine API](https://shipengine.github.io/shipengine-openapi/).
