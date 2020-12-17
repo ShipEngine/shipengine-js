@@ -23,10 +23,15 @@ describe('retries', () => {
     const { status } = await get();
     expect(status).to.eq(200);
   });
-  it('should try again if 500 error', async () => {
+  it('should not try again if 500 error', async () => {
     await Hoverfly.import('client/retry/500.json');
-    const { status } = await get();
-    expect(status).to.eq(200);
+    try {
+      await get();
+      expect(false).to.be.true; // should throw error
+    } catch (err) {
+      expect(err.response.status).to.eq(500);
+      expect(err).to.be.ok;
+    }
   });
   it('should not try again if 404 error', async () => {
     await Hoverfly.import('client/retry/404.json');

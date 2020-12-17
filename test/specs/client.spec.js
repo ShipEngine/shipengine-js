@@ -19,9 +19,12 @@ describe('client', () => {
     expect(r.defaults.headers['API-Key']).to.eq('helloworld');
   });
   it('should throw error if no api key', () => {
-    expect(() => {
-      ShipEngineApiClient(undefined).to.Throw();
-    });
+    try {
+      ShipEngineApiClient(undefined);
+      expect.fail('should not reach here.');
+    } catch (err) {
+      expect(err.message).to.match(/key/i);
+    }
   });
   it('should default to exponential backoff', () => {
     const r = ShipEngineApiClient('abc');
