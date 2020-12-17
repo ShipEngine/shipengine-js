@@ -121,6 +121,14 @@ describe('API', () => {
           stateProvince: fixtures.yankeeStadium.stateProvince,
         });
       });
+      it('low level method should return undefined if error', async () => {
+        try {
+          const result = await api.addresses.normalize(fixtures.dodgersStadium);
+          expect(result).to.be.undefined;
+        } catch (err) {
+          expect.fail('should not reach here');
+        }
+      });
       it('should throw an error if invalid', async () => {
         try {
           await api.normalizeAddress(fixtures.dodgersStadium);

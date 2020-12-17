@@ -33,14 +33,13 @@ export class AddressesServiceLowLevel {
   /**
    * Try to normalize address
    */
-  public normalize = async (address: AddressQuery): Promise<Address> => {
+  public normalize = async (
+    address: AddressQuery
+  ): Promise<Address | undefined> => {
     const addressQueryResult = await this.query(address);
     const normalized = addressQueryResult.isValid
       ? addressQueryResult.normalized
       : undefined;
-    if (!normalized) {
-      throw new ShipEngineError('Address unqueryable, unable to normalize.');
-    }
     return normalized;
   };
 }
@@ -63,7 +62,13 @@ export class AddressesService {
    */
   public normalizeAddress: AddressesServiceLowLevel['normalize'] = async (
     address
-  ) => this.addresses.normalize(address);
+  ) => {
+    const normalized = await this.addresses.normalize(address);
+    if (!normalized) {
+      throw new ShipEngineError('Address unqueryable, unable to normalize.');
+    }
+    return normalized;
+  };
 
   /**
    * Get address query data
