@@ -14,7 +14,7 @@ export class Address {
   cityLocality: string;
   country: string;
   stateProvince: string;
-  private residentialIndicator: boolean | undefined;
+  isResidential: boolean | undefined;
 
   constructor(
     street: string[],
@@ -22,7 +22,7 @@ export class Address {
     cityLocality = '',
     stateProvince = '',
     country = 'US',
-    residentialIndicator: boolean | undefined
+    residentialIndicator = false
   ) {
     // add validation here
     this.street = street;
@@ -30,11 +30,7 @@ export class Address {
     this.cityLocality = cityLocality;
     this.country = country;
     this.stateProvince = stateProvince;
-    this.residentialIndicator = residentialIndicator;
-  }
-
-  get isResidential(): boolean {
-    return this.residentialIndicator || false;
+    this.isResidential = residentialIndicator;
   }
 }
 
