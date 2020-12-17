@@ -30,7 +30,7 @@ import ShipEngine from 'shipengine'
 const ShipEngine = require('shipengine')
 
 
-const shipengine = ShipEngine('my_api_key')
+const shipengine = new ShipEngine('my_api_key')
 
 
 const isValid = await shipengine

@@ -6,19 +6,19 @@ import {
   ShipEngineError,
 } from '../models/public';
 
-import { AddressServiceRestAPI } from '../models/api/rest-api';
+import { AddressesData } from '../models/api/rest-api';
 
 export class AddressesServiceLowLevel {
-  private addressesRestAPI;
+  #addressesData: AddressesData;
   constructor(client: AxiosInstance) {
-    this.addressesRestAPI = new AddressServiceRestAPI(client);
+    this.#addressesData = new AddressesData(client);
   }
 
   /**
    * Get address query data
    */
   public query = async (address: AddressQuery): Promise<AddressQueryResult> => {
-    const [domainQueryResult] = await this.addressesRestAPI.query([address]);
+    const [domainQueryResult] = await this.#addressesData.query([address]);
     return domainQueryResult;
   };
 
@@ -33,14 +33,13 @@ export class AddressesServiceLowLevel {
   /**
    * Try to normalize address
    */
-  public normalize = async (address: AddressQuery): Promise<Address> => {
+  public normalize = async (
+    address: AddressQuery
+  ): Promise<Address | undefined> => {
     const addressQueryResult = await this.query(address);
     const normalized = addressQueryResult.isValid
       ? addressQueryResult.normalized
       : undefined;
-    if (!normalized) {
-      throw new ShipEngineError('Address unqueryable, unable to normalize.');
-    }
     return normalized;
   };
 }
@@ -63,7 +62,13 @@ export class AddressesService {
    */
   public normalizeAddress: AddressesServiceLowLevel['normalize'] = async (
     address
-  ) => this.addresses.normalize(address);
+  ) => {
+    const normalized = await this.addresses.normalize(address);
+    if (!normalized) {
+      throw new ShipEngineError('Address unqueryable, unable to normalize.');
+    }
+    return normalized;
+  };
 
   /**
    * Get address query data

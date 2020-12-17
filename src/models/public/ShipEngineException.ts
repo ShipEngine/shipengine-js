@@ -38,3 +38,10 @@ export type ShipEngineException =
   | ShipEngineError
   | ShipEngineInfo
   | ShipEngineWarning;
+
+export const getExceptionsByType = (
+  exceptions: ShipEngineException[],
+  type: ShipEngineExceptionType
+) => {
+  return exceptions.filter((el) => el.type === type);
+};

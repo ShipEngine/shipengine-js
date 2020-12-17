@@ -1,18 +1,18 @@
 import { AxiosInstance } from 'axios';
 
 class TagsServiceLowLevel {
-  private client;
+  #client: AxiosInstance;
   constructor(client: AxiosInstance) {
-    this.client = client;
+    this.#client = client;
   }
 
   public get = async () => {
-    const { data } = await this.client.get<string[]>('/tags');
+    const { data } = await this.#client.get<string[]>('/tags');
     return data;
   };
 
   public create = async (tagName: string) => {
-    const { data } = await this.client.post<string>(`/tags/${tagName}`, {});
+    const { data } = await this.#client.post<string>(`/tags/${tagName}`, {});
     return data;
   };
 }

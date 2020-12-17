@@ -1,4 +1,5 @@
 import {
+  getExceptionsByType,
   ShipEngineError,
   ShipEngineException,
   ShipEngineExceptionType,
@@ -14,7 +15,7 @@ export class Address {
   cityLocality: string;
   country: string;
   stateProvince: string;
-  private residentialIndicator: boolean | undefined;
+  isResidential: boolean | undefined;
 
   constructor(
     street: string[],
@@ -22,7 +23,7 @@ export class Address {
     cityLocality = '',
     stateProvince = '',
     country = 'US',
-    residentialIndicator: boolean | undefined
+    residentialIndicator = false
   ) {
     // add validation here
     this.street = street;
@@ -30,11 +31,7 @@ export class Address {
     this.cityLocality = cityLocality;
     this.country = country;
     this.stateProvince = stateProvince;
-    this.residentialIndicator = residentialIndicator;
-  }
-
-  get isResidential(): boolean {
-    return this.residentialIndicator || false;
+    this.isResidential = residentialIndicator;
   }
 }
 
@@ -49,7 +46,7 @@ export interface AddressQuery {
 export class AddressQueryResult {
   original: AddressQuery;
   normalized?: Address;
-  exceptions: ShipEngineException[];
+  #exceptions: ShipEngineException[];
 
   constructor(
     original: AddressQuery,
@@ -58,31 +55,28 @@ export class AddressQueryResult {
   ) {
     this.original = original;
     this.normalized = normalized;
-    this.exceptions = exceptions;
+    this.#exceptions = exceptions;
   }
 
   get info(): ShipEngineInfo[] {
-    return this.exceptions.filter(
-      (el) => el.type === ShipEngineExceptionType.INFO
-    );
+    return getExceptionsByType(this.#exceptions, ShipEngineExceptionType.INFO);
   }
 
   get warnings(): ShipEngineWarning[] {
-    return this.exceptions.filter(
-      (el) => el.type === ShipEngineExceptionType.WARNING
+    return getExceptionsByType(
+      this.#exceptions,
+      ShipEngineExceptionType.WARNING
     );
   }
 
   get errors(): ShipEngineError[] {
-    return this.exceptions.filter(
-      (el) => el.type === ShipEngineExceptionType.ERROR
-    );
+    return getExceptionsByType(this.#exceptions, ShipEngineExceptionType.ERROR);
   }
 
   get isValid(): boolean {
     const result =
       Boolean(this.normalized) &&
-      this.exceptions.every((el) => el.type !== ShipEngineExceptionType.ERROR);
+      this.#exceptions.every((el) => el.type !== ShipEngineExceptionType.ERROR);
     return result;
   }
 }

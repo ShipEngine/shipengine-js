@@ -3,8 +3,9 @@ const { ShipEngine } = require('../../cjs/index');
 const { Hoverfly } = require('../utils/Hoverfly');
 const { expect } = require('chai');
 const constants = require('../utils/constants');
+
 /**
- * @typedef { import('../../src/services/service-factory').ServiceAPI } ServiceAPI
+ * @typedef { import('../../src/models/public').ShipEngineAPI } ShipEngineAPI
  */
 
 const fixtures = {
@@ -46,13 +47,12 @@ const fixtures = {
 };
 
 describe('API', () => {
-  /** @type { ServiceAPI } **/
+  /** @type { ShipEngineAPI } **/
   let api;
 
   before(async () => {
     await Hoverfly.start();
-    api = ShipEngine({
-      apiKey: 'myApiKey',
+    api = new ShipEngine('myApiKey', {
       baseUrl: `${constants.hoverflyBaseUrl}/v1`,
     });
   });
@@ -80,13 +80,15 @@ describe('API', () => {
     describe('query', () => {
       it('should have no exceptions', async () => {
         const queryResult = await api.queryAddress(fixtures.yankeeStadium);
-        expect(queryResult.exceptions).to.be.empty;
+        expect(queryResult.warnings).to.be.empty;
+        expect(queryResult.errors).to.be.empty;
+        expect(queryResult.info).to.be.empty;
         expect(queryResult.normalized.country).not.to.be.empty;
         expect(queryResult.original.country).not.to.be.empty;
       });
-      it('should have exceptions if no matched address', async () => {
+      it('should have error if no matched address', async () => {
         const queryResult = await api.queryAddress(fixtures.dodgersStadium);
-        expect(queryResult.exceptions).not.to.be.empty;
+        expect(queryResult.errors).not.to.be.empty;
         expect(queryResult.normalized).to.eq(undefined);
         expect(queryResult.original.country).to.eq(
           fixtures.dodgersStadium.country
@@ -117,6 +119,14 @@ describe('API', () => {
         expect(normalized).contains({
           stateProvince: fixtures.yankeeStadium.stateProvince,
         });
+      });
+      it('low level method should return undefined if error', async () => {
+        try {
+          const result = await api.addresses.normalize(fixtures.dodgersStadium);
+          expect(result).to.be.undefined;
+        } catch (err) {
+          expect.fail('should not reach here');
+        }
       });
       it('should throw an error if invalid', async () => {
         try {

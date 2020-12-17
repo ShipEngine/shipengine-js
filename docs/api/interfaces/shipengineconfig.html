@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>BaseShipEngineException | ShipEngine JS API</title>
+	<title>ShipEngineConfig | ShipEngine JS API</title>
 	<meta name="description" content="Documentation for ShipEngine JS API">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -52,10 +52,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="baseshipengineexception.html">BaseShipEngineException</a>
+					<a href="shipengineconfig.html">ShipEngineConfig</a>
 				</li>
 			</ul>
-			<h1>Interface BaseShipEngineException</h1>
+			<h1>Interface ShipEngineConfig</h1>
 		</div>
 	</div>
 </header>
@@ -66,16 +66,8 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">BaseShipEngineException</span>
+						<span class="target">ShipEngineConfig</span>
 					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel">
-				<h3>Implemented by</h3>
-				<ul class="tsd-hierarchy">
-					<li><a href="../classes/shipengineerror.html" class="tsd-signature-type">ShipEngineError</a></li>
-					<li><a href="../classes/shipengineinfo.html" class="tsd-signature-type">ShipEngineInfo</a></li>
-					<li><a href="../classes/shipenginewarning.html" class="tsd-signature-type">ShipEngineWarning</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -85,8 +77,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="baseshipengineexception.html#message" class="tsd-kind-icon">message</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="baseshipengineexception.html#type" class="tsd-kind-icon">type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="shipengineconfig.html#baseurl" class="tsd-kind-icon">base<wbr>Url</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="shipengineconfig.html#retrybackofftype" class="tsd-kind-icon">retry<wbr>Backoff<wbr>Type</a></li>
 							</ul>
 						</section>
 					</div>
@@ -95,22 +87,22 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="message" class="tsd-anchor"></a>
-					<h3>message</h3>
-					<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="baseurl" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> base<wbr>Url</h3>
+					<div class="tsd-signature tsd-kind-icon">base<wbr>Url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/ShipEngineException.ts#L10">src/models/public/ShipEngineException.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/shipengine.ts#L10">src/shipengine.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="type" class="tsd-anchor"></a>
-					<h3>type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <a href="../enums/shipengineexceptiontype.html" class="tsd-signature-type">ShipEngineExceptionType</a></div>
+					<a name="retrybackofftype" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> retry<wbr>Backoff<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">retry<wbr>Backoff<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../globals.html#retrybackofftype" class="tsd-signature-type">RetryBackOffType</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/ShipEngineException.ts#L9">src/models/public/ShipEngineException.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/shipengine.ts#L11">src/shipengine.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -171,24 +163,24 @@
 					<li class=" tsd-kind-interface">
 						<a href="addressquery.html" class="tsd-kind-icon">Address<wbr>Query</a>
 					</li>
+					<li class=" tsd-kind-interface">
+						<a href="baseshipengineexception.html" class="tsd-kind-icon">Base<wbr>Ship<wbr>Engine<wbr>Exception</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="baseshipengineexception.html" class="tsd-kind-icon">Base<wbr>Ship<wbr>Engine<wbr>Exception</a>
+						<a href="shipengineconfig.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Config</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="baseshipengineexception.html#message" class="tsd-kind-icon">message</a>
+								<a href="shipengineconfig.html#baseurl" class="tsd-kind-icon">base<wbr>Url</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="baseshipengineexception.html#type" class="tsd-kind-icon">type</a>
+								<a href="shipengineconfig.html#retrybackofftype" class="tsd-kind-icon">retry<wbr>Backoff<wbr>Type</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface">
-						<a href="shipengineconfig.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Config</a>
-					</li>
 					<li class=" tsd-kind-interface">
 						<a href="trackingevent.html" class="tsd-kind-icon">Tracking<wbr>Event</a>
 					</li>
