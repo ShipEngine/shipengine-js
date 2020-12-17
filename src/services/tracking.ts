@@ -9,9 +9,9 @@ import {
 import { AddressesData } from '../models/api/rest-api';
 
 export class AddressesServiceLowLevel {
-  private addressesData;
+  #addressesData: AddressesData;
   constructor(client: AxiosInstance) {
-    this.addressesData = new AddressesData(client);
+    this.#addressesData = new AddressesData(client);
   }
 
   /**

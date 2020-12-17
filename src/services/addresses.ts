@@ -9,16 +9,16 @@ import {
 import { AddressesData } from '../models/api/rest-api';
 
 export class AddressesServiceLowLevel {
-  private addressesData;
+  #addressesData: AddressesData;
   constructor(client: AxiosInstance) {
-    this.addressesData = new AddressesData(client);
+    this.#addressesData = new AddressesData(client);
   }
 
   /**
    * Get address query data
    */
   public query = async (address: AddressQuery): Promise<AddressQueryResult> => {
-    const [domainQueryResult] = await this.addressesData.query([address]);
+    const [domainQueryResult] = await this.#addressesData.query([address]);
     return domainQueryResult;
   };
 

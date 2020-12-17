@@ -1,4 +1,5 @@
 import {
+  getExceptionsByType,
   ShipEngineError,
   ShipEngineException,
   ShipEngineExceptionType,
@@ -45,7 +46,7 @@ export interface AddressQuery {
 export class AddressQueryResult {
   original: AddressQuery;
   normalized?: Address;
-  exceptions: ShipEngineException[];
+  #exceptions: ShipEngineException[];
 
   constructor(
     original: AddressQuery,
@@ -54,31 +55,28 @@ export class AddressQueryResult {
   ) {
     this.original = original;
     this.normalized = normalized;
-    this.exceptions = exceptions;
+    this.#exceptions = exceptions;
   }
 
   get info(): ShipEngineInfo[] {
-    return this.exceptions.filter(
-      (el) => el.type === ShipEngineExceptionType.INFO
-    );
+    return getExceptionsByType(this.#exceptions, ShipEngineExceptionType.INFO);
   }
 
   get warnings(): ShipEngineWarning[] {
-    return this.exceptions.filter(
-      (el) => el.type === ShipEngineExceptionType.WARNING
+    return getExceptionsByType(
+      this.#exceptions,
+      ShipEngineExceptionType.WARNING
     );
   }
 
   get errors(): ShipEngineError[] {
-    return this.exceptions.filter(
-      (el) => el.type === ShipEngineExceptionType.ERROR
-    );
+    return getExceptionsByType(this.#exceptions, ShipEngineExceptionType.ERROR);
   }
 
   get isValid(): boolean {
     const result =
       Boolean(this.normalized) &&
-      this.exceptions.every((el) => el.type !== ShipEngineExceptionType.ERROR);
+      this.#exceptions.every((el) => el.type !== ShipEngineExceptionType.ERROR);
     return result;
   }
 }

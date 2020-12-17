@@ -1,5 +1,4 @@
 import { ISOString } from './DateTime';
-import { ShipEngineException } from './ShipEngineException';
 
 /**
  * Shipment Statuses
@@ -106,7 +105,4 @@ export interface TrackingQueryResult {
 
   /* Information. */
   information: TrackingInformation;
-
-  /* Exceptions */
-  exceptions: ShipEngineException[];
 }

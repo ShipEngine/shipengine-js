@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 import { AddressToValidate, ValidateAddressResponseBody } from '.';
-import { AddressQuery, AddressQueryResult } from '../public';
+import { AddressQuery, AddressQueryResult, ShipEngineAPI } from '../public';
 import {
   mapToAddressQueryResult,
   mapToRequestBodyAddress,
@@ -11,14 +11,14 @@ import {
  * This should be able to swapped out cleanly with another generated model if we so desire.
  */
 class ShipEngineRestAPI {
-  private client;
+  #client: AxiosInstance;
   constructor(client: AxiosInstance) {
-    this.client = client;
+    this.#client = client;
   }
 
   validateAddresses = async (v: AddressToValidate[]) => {
     return (
-      await this.client.post<ValidateAddressResponseBody>(
+      await this.#client.post<ValidateAddressResponseBody>(
         '/addresses/validate',
         v
       )
@@ -31,24 +31,24 @@ class ShipEngineRestAPI {
  * This is a data repository, and should just be a simple abstraction
  */
 export class AddressesData {
-  private shipEngineRestAPI;
+  #shipEngineRestAPI: ShipEngineRestAPI;
   constructor(client: AxiosInstance) {
-    this.shipEngineRestAPI = new ShipEngineRestAPI(client);
+    this.#shipEngineRestAPI = new ShipEngineRestAPI(client);
   }
 
   public query = async (
     addresses: AddressQuery[]
   ): Promise<AddressQueryResult[]> => {
     const request = addresses.map(mapToRequestBodyAddress);
-    const data = await this.shipEngineRestAPI.validateAddresses(request);
+    const data = await this.#shipEngineRestAPI.validateAddresses(request);
     const result = data.map(mapToAddressQueryResult);
     return result;
   };
 }
 
 export class TrackingData {
-  private shipEngineRestAPI;
+  #shipEngineRestAPI: ShipEngineRestAPI;
   constructor(client: AxiosInstance) {
-    this.shipEngineRestAPI = new ShipEngineRestAPI(client);
+    this.#shipEngineRestAPI = new ShipEngineRestAPI(client);
   }
 }
