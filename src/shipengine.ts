@@ -7,6 +7,10 @@ import { ShipEngineApiClient } from './services/shipengine-api-factory';
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ShipEngine extends ShipEngineAPI {}
 
+/**
+ * This class encapsulates the entire public API of the ShipEngine SDK
+ *
+ */
 export class ShipEngine implements ShipEngineAPI {
   constructor(config: ShipEngineConfig) {
     // assign all properties to this class.
