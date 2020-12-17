@@ -50,6 +50,7 @@ export class AddressesService {
   constructor(client: AxiosInstance) {
     this.addresses = new AddressesServiceLowLevel(client);
   }
+
   /**
    * Check if address is valid
    */

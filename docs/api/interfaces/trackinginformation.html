@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>AddressQueryResult | ShipEngine JS API</title>
+	<title>TrackingInformation | ShipEngine JS API</title>
 	<meta name="description" content="Documentation for ShipEngine JS API">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -52,10 +52,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="addressqueryresult.html">AddressQueryResult</a>
+					<a href="trackinginformation.html">TrackingInformation</a>
 				</li>
 			</ul>
-			<h1>Interface AddressQueryResult</h1>
+			<h1>Interface TrackingInformation</h1>
 		</div>
 	</div>
 </header>
@@ -66,7 +66,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">AddressQueryResult</span>
+						<span class="target">TrackingInformation</span>
 					</li>
 				</ul>
 			</section>
@@ -77,13 +77,13 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="addressqueryresult.html#errors" class="tsd-kind-icon">errors</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="addressqueryresult.html#exceptions" class="tsd-kind-icon">exceptions</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="addressqueryresult.html#info" class="tsd-kind-icon">info</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="addressqueryresult.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="addressqueryresult.html#normalized" class="tsd-kind-icon">normalized</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="addressqueryresult.html#original" class="tsd-kind-icon">original</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="addressqueryresult.html#warnings" class="tsd-kind-icon">warnings</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="trackinginformation.html#carriercode" class="tsd-kind-icon">carrier<wbr>Code</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="trackinginformation.html#deliveredat" class="tsd-kind-icon">delivered<wbr>At</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="trackinginformation.html#estimateddelivery" class="tsd-kind-icon">estimated<wbr>Delivery</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="trackinginformation.html#events" class="tsd-kind-icon">events</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="trackinginformation.html#latestevent" class="tsd-kind-icon">latest<wbr>Event</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="trackinginformation.html#shippedat" class="tsd-kind-icon">shipped<wbr>At</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="trackinginformation.html#trackingnumber" class="tsd-kind-icon">tracking<wbr>Number</a></li>
 							</ul>
 						</section>
 					</div>
@@ -92,72 +92,72 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="errors" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> errors</h3>
-					<div class="tsd-signature tsd-kind-icon">errors<span class="tsd-signature-symbol">:</span> <a href="../classes/shipenginewarning.html" class="tsd-signature-type">ShipEngineWarning</a><span class="tsd-signature-symbol">[]</span></div>
+					<a name="carriercode" class="tsd-anchor"></a>
+					<h3>carrier<wbr>Code</h3>
+					<div class="tsd-signature tsd-kind-icon">carrier<wbr>Code<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L51">src/models/public/Address.ts:51</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Tracking.ts#L73">src/models/public/Tracking.ts:73</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="exceptions" class="tsd-anchor"></a>
-					<h3>exceptions</h3>
-					<div class="tsd-signature tsd-kind-icon">exceptions<span class="tsd-signature-symbol">:</span> <a href="../globals.html#shipengineexception" class="tsd-signature-type">ShipEngineException</a><span class="tsd-signature-symbol">[]</span></div>
+					<a name="deliveredat" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> delivered<wbr>At</h3>
+					<div class="tsd-signature tsd-kind-icon">delivered<wbr>At<span class="tsd-signature-symbol">:</span> <a href="../classes/isostring.html" class="tsd-signature-type">ISOString</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L48">src/models/public/Address.ts:48</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Tracking.ts#L91">src/models/public/Tracking.ts:91</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="info" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> info</h3>
-					<div class="tsd-signature tsd-kind-icon">info<span class="tsd-signature-symbol">:</span> <a href="../classes/shipengineinfo.html" class="tsd-signature-type">ShipEngineInfo</a><span class="tsd-signature-symbol">[]</span></div>
+					<a name="estimateddelivery" class="tsd-anchor"></a>
+					<h3>estimated<wbr>Delivery</h3>
+					<div class="tsd-signature tsd-kind-icon">estimated<wbr>Delivery<span class="tsd-signature-symbol">:</span> <a href="../classes/isostring.html" class="tsd-signature-type">ISOString</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L49">src/models/public/Address.ts:49</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Tracking.ts#L79">src/models/public/Tracking.ts:79</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="isvalid" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> is<wbr>Valid</h3>
-					<div class="tsd-signature tsd-kind-icon">is<wbr>Valid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="events" class="tsd-anchor"></a>
+					<h3>events</h3>
+					<div class="tsd-signature tsd-kind-icon">events<span class="tsd-signature-symbol">:</span> <a href="trackingevent.html" class="tsd-signature-type">TrackingEvent</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L52">src/models/public/Address.ts:52</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Tracking.ts#L82">src/models/public/Tracking.ts:82</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="normalized" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> normalized</h3>
-					<div class="tsd-signature tsd-kind-icon">normalized<span class="tsd-signature-symbol">:</span> <a href="../classes/address.html" class="tsd-signature-type">Address</a></div>
+					<a name="latestevent" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> latest<wbr>Event</h3>
+					<div class="tsd-signature tsd-kind-icon">latest<wbr>Event<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TrackEvent</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L47">src/models/public/Address.ts:47</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Tracking.ts#L85">src/models/public/Tracking.ts:85</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="original" class="tsd-anchor"></a>
-					<h3>original</h3>
-					<div class="tsd-signature tsd-kind-icon">original<span class="tsd-signature-symbol">:</span> <a href="../globals.html#addressquery" class="tsd-signature-type">AddressQuery</a></div>
+					<a name="shippedat" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> shipped<wbr>At</h3>
+					<div class="tsd-signature tsd-kind-icon">shipped<wbr>At<span class="tsd-signature-symbol">:</span> <a href="../classes/isostring.html" class="tsd-signature-type">ISOString</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L46">src/models/public/Address.ts:46</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Tracking.ts#L88">src/models/public/Tracking.ts:88</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="warnings" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> warnings</h3>
-					<div class="tsd-signature tsd-kind-icon">warnings<span class="tsd-signature-symbol">:</span> <a href="../classes/shipenginewarning.html" class="tsd-signature-type">ShipEngineWarning</a><span class="tsd-signature-symbol">[]</span></div>
+					<a name="trackingnumber" class="tsd-anchor"></a>
+					<h3>tracking<wbr>Number</h3>
+					<div class="tsd-signature tsd-kind-icon">tracking<wbr>Number<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L50">src/models/public/Address.ts:50</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Tracking.ts#L76">src/models/public/Tracking.ts:76</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -176,14 +176,23 @@
 					<li class=" tsd-kind-enum">
 						<a href="../enums/shipengineexceptiontype.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Exception<wbr>Type</a>
 					</li>
+					<li class=" tsd-kind-enum">
+						<a href="../enums/trackingstatus.html" class="tsd-kind-icon">Tracking<wbr>Status</a>
+					</li>
 					<li class=" tsd-kind-class">
 						<a href="../classes/address.html" class="tsd-kind-icon">Address</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/addressqueryresult.html" class="tsd-kind-icon">Address<wbr>Query<wbr>Result</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="../classes/addressesservice.html" class="tsd-kind-icon">Addresses<wbr>Service</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="../classes/addressesservicelowlevel.html" class="tsd-kind-icon">Addresses<wbr>Service<wbr>Low<wbr>Level</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/isostring.html" class="tsd-kind-icon">ISOString</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="../classes/invalidargumenterror.html" class="tsd-kind-icon">Invalid<wbr>Argument<wbr>Error</a>
@@ -206,41 +215,53 @@
 					<li class=" tsd-kind-class">
 						<a href="../classes/tagsservicelowlevel.html" class="tsd-kind-icon">Tags<wbr>Service<wbr>Low<wbr>Level</a>
 					</li>
+					<li class=" tsd-kind-interface">
+						<a href="addressquery.html" class="tsd-kind-icon">Address<wbr>Query</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="baseshipengineexception.html" class="tsd-kind-icon">Base<wbr>Ship<wbr>Engine<wbr>Exception</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="trackingevent.html" class="tsd-kind-icon">Tracking<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="trackingeventlocation.html" class="tsd-kind-icon">Tracking<wbr>Event<wbr>Location</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="addressqueryresult.html" class="tsd-kind-icon">Address<wbr>Query<wbr>Result</a>
+						<a href="trackinginformation.html" class="tsd-kind-icon">Tracking<wbr>Information</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="addressqueryresult.html#errors" class="tsd-kind-icon">errors</a>
+								<a href="trackinginformation.html#carriercode" class="tsd-kind-icon">carrier<wbr>Code</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="addressqueryresult.html#exceptions" class="tsd-kind-icon">exceptions</a>
+								<a href="trackinginformation.html#deliveredat" class="tsd-kind-icon">delivered<wbr>At</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="addressqueryresult.html#info" class="tsd-kind-icon">info</a>
+								<a href="trackinginformation.html#estimateddelivery" class="tsd-kind-icon">estimated<wbr>Delivery</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="addressqueryresult.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a>
+								<a href="trackinginformation.html#events" class="tsd-kind-icon">events</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="addressqueryresult.html#normalized" class="tsd-kind-icon">normalized</a>
+								<a href="trackinginformation.html#latestevent" class="tsd-kind-icon">latest<wbr>Event</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="addressqueryresult.html#original" class="tsd-kind-icon">original</a>
+								<a href="trackinginformation.html#shippedat" class="tsd-kind-icon">shipped<wbr>At</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="addressqueryresult.html#warnings" class="tsd-kind-icon">warnings</a>
+								<a href="trackinginformation.html#trackingnumber" class="tsd-kind-icon">tracking<wbr>Number</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-interface">
-						<a href="baseshipengineexception.html" class="tsd-kind-icon">Base<wbr>Ship<wbr>Engine<wbr>Exception</a>
+						<a href="trackingquery.html" class="tsd-kind-icon">Tracking<wbr>Query</a>
 					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#addressquery" class="tsd-kind-icon">Address<wbr>Query</a>
+					<li class=" tsd-kind-interface">
+						<a href="trackingqueryresult.html" class="tsd-kind-icon">Tracking<wbr>Query<wbr>Result</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#advancedconfig" class="tsd-kind-icon">Advanced<wbr>Config</a>

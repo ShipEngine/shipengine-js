@@ -12,7 +12,6 @@ import {
   ShipEngineInfo,
   ShipEngineWarning,
   ShipEngineException,
-  ShipEngineExceptionType,
 } from '../public';
 import { exists } from '../../utils/exists';
 
@@ -28,32 +27,11 @@ export const mapToAddressQueryResult = (
   const normalized = v.matched_address
     ? mapToNormalizedAddress(v.matched_address)
     : undefined;
-  return {
-    get info() {
-      return exceptions.filter(
-        (el) => el.type === ShipEngineExceptionType.INFO
-      );
-    },
-    get errors() {
-      return exceptions.filter(
-        (el) => el.type === ShipEngineExceptionType.ERROR
-      );
-    },
-    get warnings() {
-      return exceptions.filter(
-        (el) => el.type === ShipEngineExceptionType.WARNING
-      );
-    },
-    get isValid() {
-      const result =
-        Boolean(normalized) &&
-        exceptions.every((el) => el.type !== ShipEngineExceptionType.ERROR);
-      return result;
-    },
-    original: mapToNormalizedAddress(v.original_address),
+  return new AddressQueryResult(
+    mapToNormalizedAddress(v.original_address),
     exceptions,
-    normalized,
-  };
+    normalized
+  );
 };
 
 /**
@@ -73,10 +51,10 @@ export const mapToNormalizedAddress = (matched: MatchedAddress): Address => {
 
   return new Address(
     street,
-    matched.postal_code || '',
-    matched.city_locality || '',
-    matched.state_province || '',
-    matched.country_code || 'US',
+    matched.postal_code || undefined,
+    matched.city_locality || undefined,
+    matched.state_province || undefined,
+    matched.country_code || undefined,
     residentialIndicator
   );
 };

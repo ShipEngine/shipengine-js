@@ -24,6 +24,11 @@ module.exports = {
   ],
   ignorePatterns: ['esm', 'cjs', 'node_modules', 'docs/api'],
   rules: {
+    'lines-between-class-members': [
+      'error',
+      'always',
+      { exceptAfterSingleLine: true },
+    ],
     'import/no-default-export': 2,
     '@typescript-eslint/ban-types': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,

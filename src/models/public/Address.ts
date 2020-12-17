@@ -1,5 +1,7 @@
 import {
+  ShipEngineError,
   ShipEngineException,
+  ShipEngineExceptionType,
   ShipEngineInfo,
   ShipEngineWarning,
 } from './ShipEngineException';
@@ -12,17 +14,15 @@ export class Address {
   cityLocality: string;
   country: string;
   stateProvince: string;
-  residential: boolean | undefined;
-  get isResidential(): boolean {
-    return this.residential || false;
-  }
+  private residentialIndicator: boolean | undefined;
+
   constructor(
-    street: Address['street'],
-    postalCode: Address['postalCode'],
-    cityLocality: Address['cityLocality'],
-    stateProvince: Address['stateProvince'],
-    country: Address['country'],
-    residential: Address['residential']
+    street: string[],
+    postalCode = '',
+    cityLocality = '',
+    stateProvince = '',
+    country = 'US',
+    residentialIndicator: boolean | undefined
   ) {
     // add validation here
     this.street = street;
@@ -30,24 +30,59 @@ export class Address {
     this.cityLocality = cityLocality;
     this.country = country;
     this.stateProvince = stateProvince;
-    this.residential = residential;
+    this.residentialIndicator = residentialIndicator;
+  }
+
+  get isResidential(): boolean {
+    return this.residentialIndicator || false;
   }
 }
 
-export type AddressQuery = {
+export interface AddressQuery {
   street: Street;
-  cityLocality?: Address['cityLocality'];
-  stateProvince?: Address['stateProvince'];
-  postalCode?: Address['postalCode'];
-  country?: Address['country'];
-};
+  cityLocality?: string;
+  stateProvince?: string;
+  postalCode?: string;
+  country?: string;
+}
 
-export interface AddressQueryResult {
+export class AddressQueryResult {
   original: AddressQuery;
   normalized?: Address;
   exceptions: ShipEngineException[];
-  readonly info: ShipEngineInfo[];
-  readonly warnings: ShipEngineWarning[];
-  readonly errors: ShipEngineWarning[];
-  readonly isValid: boolean;
+
+  constructor(
+    original: AddressQuery,
+    exceptions: ShipEngineException[],
+    normalized?: Address
+  ) {
+    this.original = original;
+    this.normalized = normalized;
+    this.exceptions = exceptions;
+  }
+
+  get info(): ShipEngineInfo[] {
+    return this.exceptions.filter(
+      (el) => el.type === ShipEngineExceptionType.INFO
+    );
+  }
+
+  get warnings(): ShipEngineWarning[] {
+    return this.exceptions.filter(
+      (el) => el.type === ShipEngineExceptionType.WARNING
+    );
+  }
+
+  get errors(): ShipEngineError[] {
+    return this.exceptions.filter(
+      (el) => el.type === ShipEngineExceptionType.ERROR
+    );
+  }
+
+  get isValid(): boolean {
+    const result =
+      Boolean(this.normalized) &&
+      this.exceptions.every((el) => el.type !== ShipEngineExceptionType.ERROR);
+    return result;
+  }
 }

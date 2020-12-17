@@ -5,10 +5,7 @@ const {
   mapToNormalizedAddress,
   mapToAddressQueryResult,
 } = require('../../../cjs/models/mappers/address');
-const {
-  ShipEngineError,
-  ShipEngineExceptionType,
-} = require('../../../cjs/models/public');
+const { ShipEngineExceptionType } = require('../../../cjs/models/public');
 
 /**
  * @typedef { import('../../../src/services/service-factory').ServiceAPI } ServiceAPI
@@ -41,13 +38,13 @@ describe('mapToNormalizedAddress', () => {
     forEach([
       ['yes', true],
       ['no', false],
-      ['unknown', undefined],
+      ['unknown', false],
     ]).it('%s -> %s', (arg, expected) => {
       expect(
         mapToNormalizedAddress({
           address_line1: 'abc',
           address_residential_indicator: arg,
-        }).residential
+        }).isResidential
       ).to.eql(expected);
     });
   });
