@@ -20,10 +20,7 @@ export const ShipEngineApiClient = (
 
   const cfg: CustomAxiosClientConfig = {
     raxConfig: {
-      statusCodesToRetry: [
-        [429, 429],
-        [500, 500],
-      ],
+      statusCodesToRetry: [[429, 429]],
       // defaults to 'exponential backoff'
       ...(retryBackoffType ? { backoffType: retryBackoffType } : {}),
     },
