@@ -77,7 +77,6 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="trackingqueryresult.html#exceptions" class="tsd-kind-icon">exceptions</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="trackingqueryresult.html#information" class="tsd-kind-icon">information</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="trackingqueryresult.html#query" class="tsd-kind-icon">query</a></li>
 							</ul>
@@ -87,16 +86,6 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="exceptions" class="tsd-anchor"></a>
-					<h3>exceptions</h3>
-					<div class="tsd-signature tsd-kind-icon">exceptions<span class="tsd-signature-symbol">:</span> <a href="../globals.html#shipengineexception" class="tsd-signature-type">ShipEngineException</a><span class="tsd-signature-symbol">[]</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Tracking.ts#L110">src/models/public/Tracking.ts:110</a></li>
-						</ul>
-					</aside>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="information" class="tsd-anchor"></a>
 					<h3>information</h3>
@@ -154,7 +143,7 @@
 						<a href="../classes/invalidargumenterror.html" class="tsd-kind-icon">Invalid<wbr>Argument<wbr>Error</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="../classes/shipengineapiclientconfig.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Api<wbr>Client<wbr>Config</a>
+						<a href="../classes/shipengine.html" class="tsd-kind-icon">Ship<wbr>Engine</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="../classes/shipengineerror.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Error</a>
@@ -178,6 +167,9 @@
 						<a href="baseshipengineexception.html" class="tsd-kind-icon">Base<wbr>Ship<wbr>Engine<wbr>Exception</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="shipengineconfig.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="trackingevent.html" class="tsd-kind-icon">Tracking<wbr>Event</a>
 					</li>
 					<li class=" tsd-kind-interface">
@@ -195,9 +187,6 @@
 						<a href="trackingqueryresult.html" class="tsd-kind-icon">Tracking<wbr>Query<wbr>Result</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="trackingqueryresult.html#exceptions" class="tsd-kind-icon">exceptions</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="trackingqueryresult.html#information" class="tsd-kind-icon">information</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
@@ -208,25 +197,16 @@
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#advancedconfig" class="tsd-kind-icon">Advanced<wbr>Config</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#apikey" class="tsd-kind-icon">Api<wbr>Key</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#axiosconfig" class="tsd-kind-icon">Axios<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#config" class="tsd-kind-icon">Config</a>
+						<a href="../globals.html#customaxiosclientconfig" class="tsd-kind-icon">Custom<wbr>Axios<wbr>Client<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#requestoptions" class="tsd-kind-icon">Request<wbr>Options</a>
+						<a href="../globals.html#retrybackofftype" class="tsd-kind-icon">Retry<wbr>Back<wbr>Off<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#shipengineapi" class="tsd-kind-icon">Ship<wbr>EngineAPI</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#shipengineconfig" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#shipengineexception" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Exception</a>
@@ -238,10 +218,10 @@
 						<a href="../globals.html#servicefactory" class="tsd-kind-icon">Service<wbr>Factory</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="../globals.html#shipengine" class="tsd-kind-icon">Ship<wbr>Engine</a>
+						<a href="../globals.html#shipengineapiclient" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Api<wbr>Client</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="../globals.html#shipengineapiclient" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Api<wbr>Client</a>
+						<a href="../globals.html#getexceptionsbytype" class="tsd-kind-icon">get<wbr>Exceptions<wbr>ByType</a>
 					</li>
 				</ul>
 			</nav>
@@ -258,10 +238,12 @@
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
