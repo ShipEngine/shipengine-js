@@ -75,6 +75,7 @@
     "shipengine-json-schema": "^1.4.0",
     "shipengine-openapi": "^1.4.0",
     "sinon": "^9.2.1",
+    "ts-node": "^9.1.1",
     "typedoc": "^0.19.2",
     "typedoc-plugin-internal-external": "^2.2.0",
     "typescript": "^4.0.5",
