@@ -1,6 +1,6 @@
 import * as rax from 'retry-axios';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Config } from './models/public/Config';
+import { CustomAxiosClientConfig } from './models/public/Config';
 
 const defaultConfig: AxiosRequestConfig = {
   timeout: 10000,
@@ -50,7 +50,7 @@ const defaultConfig: AxiosRequestConfig = {
  * @param v - Config
  * @hidden
  */
-const isAxiosInstance = (v: Config): v is AxiosInstance => {
+const isAxiosInstance = (v: CustomAxiosClientConfig): v is AxiosInstance => {
   return typeof v === 'function';
 };
 
@@ -59,7 +59,7 @@ const isAxiosInstance = (v: Config): v is AxiosInstance => {
  * @param config - client configuration which can be wither axios config or instance
  * @hidden
  */
-export const createClient = (config: Config) => {
+export const createClient = (config: CustomAxiosClientConfig) => {
   if (isAxiosInstance(config)) {
     const instance = config;
 

@@ -1,8 +1,4 @@
-import {
-  RetryBackOffType,
-  ShipEngineAPI,
-  ShipEngineAxiosClientConfig,
-} from './models/public';
+import { RetryBackOffType, ShipEngineAPI } from './models/public';
 import { ServiceFactory } from './services/service-factory';
 import { ShipEngineApiClient } from './services/shipengine-api-factory';
 
@@ -24,11 +20,7 @@ export class ShipEngine implements ShipEngineAPI {
     // assign all properties to this class.
     return Object.assign(
       this,
-      ServiceFactory(
-        ShipEngineApiClient(
-          new ShipEngineAxiosClientConfig(apiKey, config?.baseUrl)
-        )
-      )
+      ServiceFactory(ShipEngineApiClient(apiKey, config))
     );
   }
 }

@@ -7,11 +7,8 @@ const constants = require('../utils/constants');
 
 describe('retries', () => {
   const get = async () =>
-    ShipEngineApiClient({
-      apiKey: '123',
-      requestOptions: {
-        baseURL: constants.hoverflyBaseUrl,
-      },
+    ShipEngineApiClient('123', {
+      baseUrl: constants.hoverflyBaseUrl,
     }).get('/retries');
 
   before(async () => {
