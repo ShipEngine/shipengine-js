@@ -46,4 +46,4 @@ export type AddressValidationResult = Overwrite<
   { matched_address: MatchedAddress | null }
 >;
 
-export { AddressServiceRestAPI } from './rest-api';
+export * from './rest-api';
