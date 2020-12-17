@@ -15,9 +15,7 @@ export class Address {
   country: string;
   stateProvince: string;
   private residentialIndicator: boolean | undefined;
-  get isResidential(): boolean {
-    return this.residentialIndicator || false;
-  }
+
   constructor(
     street: string[],
     postalCode = '',
@@ -34,6 +32,10 @@ export class Address {
     this.stateProvince = stateProvince;
     this.residentialIndicator = residentialIndicator;
   }
+
+  get isResidential(): boolean {
+    return this.residentialIndicator || false;
+  }
 }
 
 export interface AddressQuery {
@@ -49,6 +51,16 @@ export class AddressQueryResult {
   normalized?: Address;
   exceptions: ShipEngineException[];
 
+  constructor(
+    original: AddressQuery,
+    exceptions: ShipEngineException[],
+    normalized?: Address
+  ) {
+    this.original = original;
+    this.normalized = normalized;
+    this.exceptions = exceptions;
+  }
+
   get info(): ShipEngineInfo[] {
     return this.exceptions.filter(
       (el) => el.type === ShipEngineExceptionType.INFO
@@ -60,6 +72,7 @@ export class AddressQueryResult {
       (el) => el.type === ShipEngineExceptionType.WARNING
     );
   }
+
   get errors(): ShipEngineError[] {
     return this.exceptions.filter(
       (el) => el.type === ShipEngineExceptionType.ERROR
@@ -71,15 +84,5 @@ export class AddressQueryResult {
       Boolean(this.normalized) &&
       this.exceptions.every((el) => el.type !== ShipEngineExceptionType.ERROR);
     return result;
-  }
-
-  constructor(
-    original: AddressQuery,
-    exceptions: ShipEngineException[],
-    normalized?: Address
-  ) {
-    this.original = original;
-    this.normalized = normalized;
-    this.exceptions = exceptions;
   }
 }

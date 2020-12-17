@@ -5,10 +5,7 @@ const {
   mapToNormalizedAddress,
   mapToAddressQueryResult,
 } = require('../../../cjs/models/mappers/address');
-const {
-  ShipEngineError,
-  ShipEngineExceptionType,
-} = require('../../../cjs/models/public');
+const { ShipEngineExceptionType } = require('../../../cjs/models/public');
 
 /**
  * @typedef { import('../../../src/services/service-factory').ServiceAPI } ServiceAPI

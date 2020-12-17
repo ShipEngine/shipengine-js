@@ -5,6 +5,7 @@ class TagsServiceLowLevel {
   constructor(client: AxiosInstance) {
     this.client = client;
   }
+
   public get = async () => {
     const { data } = await this.client.get<string[]>('/tags');
     return data;
@@ -21,6 +22,7 @@ export class TagsService {
   constructor(client: AxiosInstance) {
     this.tags = new TagsServiceLowLevel(client);
   }
+
   public createTag = async (tagName: string) => {
     return this.tags.create(tagName);
   };
