@@ -73,10 +73,10 @@ export const mapToNormalizedAddress = (matched: MatchedAddress): Address => {
 
   return new Address(
     street,
-    matched.postal_code || '',
-    matched.city_locality || '',
-    matched.state_province || '',
-    matched.country_code || 'US',
+    matched.postal_code || undefined,
+    matched.city_locality || undefined,
+    matched.state_province || undefined,
+    matched.country_code || undefined,
     residentialIndicator
   );
 };
