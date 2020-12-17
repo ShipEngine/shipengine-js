@@ -25,7 +25,7 @@ npm install shipengine@alpha
 ```ts
 const ShipEngine = require('shipengine');
 
-const shipengine = ShipEngine('my_api_key');
+const shipengine = new ShipEngine('my_api_key');
 ```
 ---
 
@@ -118,7 +118,7 @@ Swap out initialization codeblock
 import { default as ShipEngine } from '../../src';
 
 import 'dotenv/config';
-const shipengine = ShipEngine(process.env.API_KEY);
+const shipengine = new ShipEngine(process.env.API_KEY);
 ```
 ---
 
@@ -147,7 +147,7 @@ const shipengine = ShipEngine(process.env.API_KEY);
 import { default as ShipEngine, ShipEngineError } from '../../src'
 
 import 'dotenv/config';
-const shipengine = ShipEngine(process.env.API_KEY);
+const shipengine = new ShipEngine(process.env.API_KEY);
 ```
 ---
 

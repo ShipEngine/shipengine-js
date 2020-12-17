@@ -22,7 +22,7 @@ npm install shipengine@alpha
 --- initialize
 const ShipEngine = require('shipengine');
 
-const shipengine = ShipEngine('my_api_key');
+const shipengine = new ShipEngine('my_api_key');
 ---
 
 @s Validate an Address
@@ -105,7 +105,7 @@ Swap out initialization codeblock
 import { default as ShipEngine } from '../../src';
 
 import 'dotenv/config';
-const shipengine = ShipEngine(process.env.API_KEY);
+const shipengine = new ShipEngine(process.env.API_KEY);
 ---
 
 --- wrapper start  ---
@@ -130,7 +130,7 @@ const shipengine = ShipEngine(process.env.API_KEY);
 import { default as ShipEngine, ShipEngineError } from '../../src'
 
 import 'dotenv/config';
-const shipengine = ShipEngine(process.env.API_KEY);
+const shipengine = new ShipEngine(process.env.API_KEY);
 ---
 
 --- normalize_address.ts

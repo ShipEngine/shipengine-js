@@ -3,7 +3,7 @@
 import { default as ShipEngine } from '../../src';
 
 import 'dotenv/config';
-const shipengine = ShipEngine(process.env.API_KEY);
+const shipengine = new ShipEngine(process.env.API_KEY);
 
 /* wrapper start */
 (async () => {

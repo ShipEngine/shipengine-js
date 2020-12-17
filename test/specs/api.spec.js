@@ -51,7 +51,7 @@ describe('API', () => {
 
   before(async () => {
     await Hoverfly.start();
-    api = ShipEngine({
+    api = new ShipEngine({
       apiKey: 'myApiKey',
       baseUrl: `${constants.hoverflyBaseUrl}/v1`,
     });

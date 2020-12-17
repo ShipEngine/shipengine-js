@@ -1087,7 +1087,7 @@ npm install shipengine@alpha
 <pre class="prettyprint lang-ts">
 const ShipEngine = require('shipengine');
 
-const shipengine = ShipEngine('my_api_key');
+const shipengine = new ShipEngine('my_api_key');
 </pre>
 
 <p class="seealso">Redefined in section <a href="addresses.html#1:6">6</a></p>
@@ -1198,7 +1198,7 @@ console.log(`the normalized address is: ${JSON.stringify(addressQuery.normalized
 import { default as ShipEngine } from '../../src';
 
 import 'dotenv/config';
-const shipengine = ShipEngine(process.env.API_KEY);
+const shipengine = new ShipEngine(process.env.API_KEY);
 </pre>
 
 
@@ -1247,7 +1247,7 @@ const shipengine = ShipEngine(process.env.API_KEY);
 import { default as ShipEngine, ShipEngineError } from '../../src'
 
 import 'dotenv/config';
-const shipengine = ShipEngine(process.env.API_KEY);
+const shipengine = new ShipEngine(process.env.API_KEY);
 </pre>
 
 
