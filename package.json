@@ -48,6 +48,7 @@
     "@jsdevtools/version-bump-prompt": "^6.1.0",
     "@openapitools/openapi-generator-cli": "^2.0.3",
     "@tsconfig/node12": "^1.0.7",
+    "@types/chai": "^4.2.14",
     "@types/karma": "^5.0.1",
     "@types/mocha": "^8.0.4",
     "@types/node": "^12.19.3",
