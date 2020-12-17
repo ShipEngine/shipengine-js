@@ -11,29 +11,22 @@ type RequestOptions = Compute<
   Pick<AxiosConfig, 'baseURL' | 'headers' | 'raxConfig'>
 >;
 
-export class ShipEngineApiClientConfig {
+export type RetryBackOffType = 'linear' | 'static' | 'exponential';
+
+export class ShipEngineAxiosClientConfig {
   public apiKey: string;
-  public requestOptions?: RequestOptions;
+  public requestOptions: RequestOptions;
   public constructor(
-    apiKey: ShipEngineApiClientConfig['apiKey'],
-    requestOptions?: RequestOptions
+    apiKey: string,
+    baseUrl?: string,
+    retryBackOffType?: RetryBackOffType
   ) {
     this.apiKey = apiKey;
-    this.requestOptions = requestOptions;
+    this.requestOptions = {
+      baseURL: baseUrl,
+      raxConfig: {
+        backoffType: retryBackOffType,
+      },
+    };
   }
 }
-
-// should this api key be optional here in case of users who want to _only_ use api keys on a request by request basis?
-
-/**
- * api key
- */
-
-type ApiKey = string;
-type AdvancedConfig = {
-  apiKey: ApiKey;
-  baseUrl?: string;
-  retryBackoffType?: 'linear' | 'static' | 'exponential';
-};
-
-export type ShipEngineConfig = ApiKey | AdvancedConfig;

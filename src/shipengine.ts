@@ -1,5 +1,8 @@
-import { mapToApiServiceConfig } from './models/mappers/shipengine-api-client';
-import type { ShipEngineAPI, ShipEngineConfig } from './models/public';
+import {
+  RetryBackOffType,
+  ShipEngineAPI,
+  ShipEngineAxiosClientConfig,
+} from './models/public';
 import { ServiceFactory } from './services/service-factory';
 import { ShipEngineApiClient } from './services/shipengine-api-factory';
 
@@ -7,16 +10,25 @@ import { ShipEngineApiClient } from './services/shipengine-api-factory';
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ShipEngine extends ShipEngineAPI {}
 
+export interface ShipEngineConfig {
+  baseUrl?: string;
+  retryBackoffType?: RetryBackOffType;
+}
+
 /**
  * This class encapsulates the entire public API of the ShipEngine SDK
  *
  */
 export class ShipEngine implements ShipEngineAPI {
-  constructor(config: ShipEngineConfig) {
+  constructor(apiKey: string, config?: ShipEngineConfig) {
     // assign all properties to this class.
     return Object.assign(
       this,
-      ServiceFactory(ShipEngineApiClient(mapToApiServiceConfig(config)))
+      ServiceFactory(
+        ShipEngineApiClient(
+          new ShipEngineAxiosClientConfig(apiKey, config?.baseUrl)
+        )
+      )
     );
   }
 }
