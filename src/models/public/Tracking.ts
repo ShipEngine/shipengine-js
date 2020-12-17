@@ -37,6 +37,7 @@ interface TrackingEventLocation {
   /* Longitude. */
   longitude?: number;
 }
+
 /* An event or status change that occurred while processing a `Shipment`. */
 export interface TrackingEvent {
   /* Date, datetime, or datetime w/timezone at which the event occurred. */

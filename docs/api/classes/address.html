@@ -86,7 +86,6 @@
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="address.html#citylocality" class="tsd-kind-icon">city<wbr>Locality</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="address.html#country" class="tsd-kind-icon">country</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="address.html#postalcode" class="tsd-kind-icon">postal<wbr>Code</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="address.html#residential" class="tsd-kind-icon">residential</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="address.html#stateprovince" class="tsd-kind-icon">state<wbr>Province</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="address.html#street" class="tsd-kind-icon">street</a></li>
 							</ul>
@@ -106,34 +105,34 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Address<span class="tsd-signature-symbol">(</span>street<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Address</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"street"</span><span class="tsd-signature-symbol">]</span>, postalCode<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Address</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"postalCode"</span><span class="tsd-signature-symbol">]</span>, cityLocality<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Address</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"cityLocality"</span><span class="tsd-signature-symbol">]</span>, stateProvince<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Address</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"stateProvince"</span><span class="tsd-signature-symbol">]</span>, country<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Address</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"country"</span><span class="tsd-signature-symbol">]</span>, residential<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Address</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"residential"</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="address.html" class="tsd-signature-type">Address</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Address<span class="tsd-signature-symbol">(</span>street<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, postalCode<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, cityLocality<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, stateProvince<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, country<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, residentialIndicator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="address.html" class="tsd-signature-type">Address</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L18">src/models/public/Address.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L20">src/models/public/Address.ts:20</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>street: <span class="tsd-signature-type">Address</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"street"</span><span class="tsd-signature-symbol">]</span></h5>
+									<h5>street: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
 								</li>
 								<li>
-									<h5>postalCode: <span class="tsd-signature-type">Address</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"postalCode"</span><span class="tsd-signature-symbol">]</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> postalCode: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></h5>
 								</li>
 								<li>
-									<h5>cityLocality: <span class="tsd-signature-type">Address</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"cityLocality"</span><span class="tsd-signature-symbol">]</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> cityLocality: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></h5>
 								</li>
 								<li>
-									<h5>stateProvince: <span class="tsd-signature-type">Address</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"stateProvince"</span><span class="tsd-signature-symbol">]</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> stateProvince: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></h5>
 								</li>
 								<li>
-									<h5>country: <span class="tsd-signature-type">Address</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"country"</span><span class="tsd-signature-symbol">]</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> country: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;US&quot;</span></h5>
 								</li>
 								<li>
-									<h5>residential: <span class="tsd-signature-type">Address</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"residential"</span><span class="tsd-signature-symbol">]</span></h5>
+									<h5>residentialIndicator: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="address.html" class="tsd-signature-type">Address</a></h4>
@@ -149,7 +148,7 @@
 					<div class="tsd-signature tsd-kind-icon">city<wbr>Locality<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L12">src/models/public/Address.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L14">src/models/public/Address.ts:14</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -159,7 +158,7 @@
 					<div class="tsd-signature tsd-kind-icon">country<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L13">src/models/public/Address.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L15">src/models/public/Address.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -169,17 +168,7 @@
 					<div class="tsd-signature tsd-kind-icon">postal<wbr>Code<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L11">src/models/public/Address.ts:11</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="residential" class="tsd-anchor"></a>
-					<h3>residential</h3>
-					<div class="tsd-signature tsd-kind-icon">residential<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L15">src/models/public/Address.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L13">src/models/public/Address.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -189,7 +178,7 @@
 					<div class="tsd-signature tsd-kind-icon">state<wbr>Province<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L14">src/models/public/Address.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L16">src/models/public/Address.ts:16</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -199,7 +188,7 @@
 					<div class="tsd-signature tsd-kind-icon">street<span class="tsd-signature-symbol">:</span> <a href="../globals.html#street" class="tsd-signature-type">Street</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L10">src/models/public/Address.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L12">src/models/public/Address.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -216,7 +205,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L16">src/models/public/Address.ts:16</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L18">src/models/public/Address.ts:18</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -238,6 +227,9 @@
 					<li class=" tsd-kind-enum">
 						<a href="../enums/shipengineexceptiontype.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Exception<wbr>Type</a>
 					</li>
+					<li class=" tsd-kind-enum">
+						<a href="../enums/trackingstatus.html" class="tsd-kind-icon">Tracking<wbr>Status</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
@@ -256,9 +248,6 @@
 								<a href="address.html#postalcode" class="tsd-kind-icon">postal<wbr>Code</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="address.html#residential" class="tsd-kind-icon">residential</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="address.html#stateprovince" class="tsd-kind-icon">state<wbr>Province</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
@@ -272,10 +261,16 @@
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-class">
+						<a href="addressqueryresult.html" class="tsd-kind-icon">Address<wbr>Query<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="addressesservice.html" class="tsd-kind-icon">Addresses<wbr>Service</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="addressesservicelowlevel.html" class="tsd-kind-icon">Addresses<wbr>Service<wbr>Low<wbr>Level</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="isostring.html" class="tsd-kind-icon">ISOString</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="invalidargumenterror.html" class="tsd-kind-icon">Invalid<wbr>Argument<wbr>Error</a>
@@ -299,13 +294,25 @@
 						<a href="tagsservicelowlevel.html" class="tsd-kind-icon">Tags<wbr>Service<wbr>Low<wbr>Level</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="../interfaces/addressqueryresult.html" class="tsd-kind-icon">Address<wbr>Query<wbr>Result</a>
+						<a href="../interfaces/addressquery.html" class="tsd-kind-icon">Address<wbr>Query</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/baseshipengineexception.html" class="tsd-kind-icon">Base<wbr>Ship<wbr>Engine<wbr>Exception</a>
 					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#addressquery" class="tsd-kind-icon">Address<wbr>Query</a>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/trackingevent.html" class="tsd-kind-icon">Tracking<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/trackingeventlocation.html" class="tsd-kind-icon">Tracking<wbr>Event<wbr>Location</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/trackinginformation.html" class="tsd-kind-icon">Tracking<wbr>Information</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/trackingquery.html" class="tsd-kind-icon">Tracking<wbr>Query</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/trackingqueryresult.html" class="tsd-kind-icon">Tracking<wbr>Query<wbr>Result</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#advancedconfig" class="tsd-kind-icon">Advanced<wbr>Config</a>

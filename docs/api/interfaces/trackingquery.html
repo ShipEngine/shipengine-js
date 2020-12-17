@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>InvalidArgumentError | ShipEngine JS API</title>
+	<title>TrackingQuery | ShipEngine JS API</title>
 	<meta name="description" content="Documentation for ShipEngine JS API">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -52,10 +52,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="invalidargumenterror.html">InvalidArgumentError</a>
+					<a href="trackingquery.html">TrackingQuery</a>
 				</li>
 			</ul>
-			<h1>Class InvalidArgumentError</h1>
+			<h1>Interface TrackingQuery</h1>
 		</div>
 	</div>
 </header>
@@ -66,12 +66,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="invalidargumenterror.html#error" class="tsd-signature-type">Error</a>
-						<ul class="tsd-hierarchy">
-							<li>
-								<span class="target">InvalidArgumentError</span>
-							</li>
-						</ul>
+						<span class="target">TrackingQuery</span>
 					</li>
 				</ul>
 			</section>
@@ -82,10 +77,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="invalidargumenterror.html#message" class="tsd-kind-icon">message</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="invalidargumenterror.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="invalidargumenterror.html#stack" class="tsd-kind-icon">stack</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="invalidargumenterror.html#error" class="tsd-kind-icon">Error</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="trackingquery.html#carriercode" class="tsd-kind-icon">carrier<wbr>Code</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="trackingquery.html#trackingnumber" class="tsd-kind-icon">tracking<wbr>Number</a></li>
 							</ul>
 						</section>
 					</div>
@@ -93,47 +86,23 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-					<a name="message" class="tsd-anchor"></a>
-					<h3>message</h3>
-					<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="carriercode" class="tsd-anchor"></a>
+					<h3>carrier<wbr>Code</h3>
+					<div class="tsd-signature tsd-kind-icon">carrier<wbr>Code<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="invalidargumenterror.html">InvalidArgumentError</a>.<a href="invalidargumenterror.html#message">message</a></p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:974</li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Tracking.ts#L98">src/models/public/Tracking.ts:98</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-					<a name="name" class="tsd-anchor"></a>
-					<h3>name</h3>
-					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="invalidargumenterror.html">InvalidArgumentError</a>.<a href="invalidargumenterror.html#name">name</a></p>
-						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:973</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
-					<a name="stack" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> stack</h3>
-					<div class="tsd-signature tsd-kind-icon">stack<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="invalidargumenterror.html">InvalidArgumentError</a>.<a href="invalidargumenterror.html#stack">stack</a></p>
-						<p>Overrides <a href="invalidargumenterror.html">InvalidArgumentError</a>.<a href="invalidargumenterror.html#stack">stack</a></p>
-						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:975</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
-					<a name="error" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> Error</h3>
-					<div class="tsd-signature tsd-kind-icon">Error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ErrorConstructor</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="trackingnumber" class="tsd-anchor"></a>
+					<h3>tracking<wbr>Number</h3>
+					<div class="tsd-signature tsd-kind-icon">tracking<wbr>Number<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:984</li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Tracking.ts#L96">src/models/public/Tracking.ts:96</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -156,79 +125,73 @@
 						<a href="../enums/trackingstatus.html" class="tsd-kind-icon">Tracking<wbr>Status</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="address.html" class="tsd-kind-icon">Address</a>
+						<a href="../classes/address.html" class="tsd-kind-icon">Address</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="addressqueryresult.html" class="tsd-kind-icon">Address<wbr>Query<wbr>Result</a>
+						<a href="../classes/addressqueryresult.html" class="tsd-kind-icon">Address<wbr>Query<wbr>Result</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="addressesservice.html" class="tsd-kind-icon">Addresses<wbr>Service</a>
+						<a href="../classes/addressesservice.html" class="tsd-kind-icon">Addresses<wbr>Service</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="addressesservicelowlevel.html" class="tsd-kind-icon">Addresses<wbr>Service<wbr>Low<wbr>Level</a>
+						<a href="../classes/addressesservicelowlevel.html" class="tsd-kind-icon">Addresses<wbr>Service<wbr>Low<wbr>Level</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="isostring.html" class="tsd-kind-icon">ISOString</a>
+						<a href="../classes/isostring.html" class="tsd-kind-icon">ISOString</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/invalidargumenterror.html" class="tsd-kind-icon">Invalid<wbr>Argument<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/shipengineapiclientconfig.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Api<wbr>Client<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/shipengineerror.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/shipengineinfo.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/shipenginewarning.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Warning</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/tagsservice.html" class="tsd-kind-icon">Tags<wbr>Service</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/tagsservicelowlevel.html" class="tsd-kind-icon">Tags<wbr>Service<wbr>Low<wbr>Level</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="addressquery.html" class="tsd-kind-icon">Address<wbr>Query</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="baseshipengineexception.html" class="tsd-kind-icon">Base<wbr>Ship<wbr>Engine<wbr>Exception</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="trackingevent.html" class="tsd-kind-icon">Tracking<wbr>Event</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="trackingeventlocation.html" class="tsd-kind-icon">Tracking<wbr>Event<wbr>Location</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="trackinginformation.html" class="tsd-kind-icon">Tracking<wbr>Information</a>
 					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class">
-						<a href="invalidargumenterror.html" class="tsd-kind-icon">Invalid<wbr>Argument<wbr>Error</a>
+					<li class="current tsd-kind-interface">
+						<a href="trackingquery.html" class="tsd-kind-icon">Tracking<wbr>Query</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="invalidargumenterror.html#message" class="tsd-kind-icon">message</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="trackingquery.html#carriercode" class="tsd-kind-icon">carrier<wbr>Code</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="invalidargumenterror.html#name" class="tsd-kind-icon">name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
-								<a href="invalidargumenterror.html#stack" class="tsd-kind-icon">stack</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
-								<a href="invalidargumenterror.html#error" class="tsd-kind-icon">Error</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="trackingquery.html#trackingnumber" class="tsd-kind-icon">tracking<wbr>Number</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-class">
-						<a href="shipengineapiclientconfig.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Api<wbr>Client<wbr>Config</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="shipengineerror.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="shipengineinfo.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Info</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="shipenginewarning.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Warning</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="tagsservice.html" class="tsd-kind-icon">Tags<wbr>Service</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="tagsservicelowlevel.html" class="tsd-kind-icon">Tags<wbr>Service<wbr>Low<wbr>Level</a>
-					</li>
 					<li class=" tsd-kind-interface">
-						<a href="../interfaces/addressquery.html" class="tsd-kind-icon">Address<wbr>Query</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/baseshipengineexception.html" class="tsd-kind-icon">Base<wbr>Ship<wbr>Engine<wbr>Exception</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/trackingevent.html" class="tsd-kind-icon">Tracking<wbr>Event</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/trackingeventlocation.html" class="tsd-kind-icon">Tracking<wbr>Event<wbr>Location</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/trackinginformation.html" class="tsd-kind-icon">Tracking<wbr>Information</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/trackingquery.html" class="tsd-kind-icon">Tracking<wbr>Query</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/trackingqueryresult.html" class="tsd-kind-icon">Tracking<wbr>Query<wbr>Result</a>
+						<a href="trackingqueryresult.html" class="tsd-kind-icon">Tracking<wbr>Query<wbr>Result</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#advancedconfig" class="tsd-kind-icon">Advanced<wbr>Config</a>

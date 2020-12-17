@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>AddressesService | ShipEngine JS API</title>
+	<title>AddressQueryResult | ShipEngine JS API</title>
 	<meta name="description" content="Documentation for ShipEngine JS API">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -52,10 +52,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="addressesservice.html">AddressesService</a>
+					<a href="addressqueryresult.html">AddressQueryResult</a>
 				</li>
 			</ul>
-			<h1>Class AddressesService</h1>
+			<h1>Class AddressQueryResult</h1>
 		</div>
 	</div>
 </header>
@@ -66,7 +66,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">AddressesService</span>
+						<span class="target">AddressQueryResult</span>
 					</li>
 				</ul>
 			</section>
@@ -77,21 +77,24 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="addressesservice.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="addressqueryresult.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="addressesservice.html#addresses" class="tsd-kind-icon">addresses</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="addressqueryresult.html#exceptions" class="tsd-kind-icon">exceptions</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="addressqueryresult.html#normalized" class="tsd-kind-icon">normalized</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="addressqueryresult.html#original" class="tsd-kind-icon">original</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
-							<h3>Methods</h3>
+							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="addressesservice.html#normalizeaddress" class="tsd-kind-icon">normalize<wbr>Address</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="addressesservice.html#queryaddress" class="tsd-kind-icon">query<wbr>Address</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="addressesservice.html#validateaddress" class="tsd-kind-icon">validate<wbr>Address</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="addressqueryresult.html#errors" class="tsd-kind-icon">errors</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="addressqueryresult.html#info" class="tsd-kind-icon">info</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="addressqueryresult.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="addressqueryresult.html#warnings" class="tsd-kind-icon">warnings</a></li>
 							</ul>
 						</section>
 					</div>
@@ -103,22 +106,28 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Addresses<wbr>Service<span class="tsd-signature-symbol">(</span>client<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AxiosInstance</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="addressesservice.html" class="tsd-signature-type">AddressesService</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Address<wbr>Query<wbr>Result<span class="tsd-signature-symbol">(</span>original<span class="tsd-signature-symbol">: </span><a href="../interfaces/addressquery.html" class="tsd-signature-type">AddressQuery</a>, exceptions<span class="tsd-signature-symbol">: </span><a href="../globals.html#shipengineexception" class="tsd-signature-type">ShipEngineException</a><span class="tsd-signature-symbol">[]</span>, normalized<span class="tsd-signature-symbol">?: </span><a href="address.html" class="tsd-signature-type">Address</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="addressqueryresult.html" class="tsd-signature-type">AddressQueryResult</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/services/addresses.ts#L49">src/services/addresses.ts:49</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L73">src/models/public/Address.ts:73</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>client: <span class="tsd-signature-type">AxiosInstance</span></h5>
+									<h5>original: <a href="../interfaces/addressquery.html" class="tsd-signature-type">AddressQuery</a></h5>
+								</li>
+								<li>
+									<h5>exceptions: <a href="../globals.html#shipengineexception" class="tsd-signature-type">ShipEngineException</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> normalized: <a href="address.html" class="tsd-signature-type">Address</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="addressesservice.html" class="tsd-signature-type">AddressesService</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="addressqueryresult.html" class="tsd-signature-type">AddressQueryResult</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -126,99 +135,103 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="addresses" class="tsd-anchor"></a>
-					<h3>addresses</h3>
-					<div class="tsd-signature tsd-kind-icon">addresses<span class="tsd-signature-symbol">:</span> <a href="addressesservicelowlevel.html" class="tsd-signature-type">AddressesServiceLowLevel</a></div>
+					<a name="exceptions" class="tsd-anchor"></a>
+					<h3>exceptions</h3>
+					<div class="tsd-signature tsd-kind-icon">exceptions<span class="tsd-signature-symbol">:</span> <a href="../globals.html#shipengineexception" class="tsd-signature-type">ShipEngineException</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/services/addresses.ts#L49">src/services/addresses.ts:49</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L50">src/models/public/Address.ts:50</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="normalized" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> normalized</h3>
+					<div class="tsd-signature tsd-kind-icon">normalized<span class="tsd-signature-symbol">:</span> <a href="address.html" class="tsd-signature-type">Address</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L49">src/models/public/Address.ts:49</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="original" class="tsd-anchor"></a>
+					<h3>original</h3>
+					<div class="tsd-signature tsd-kind-icon">original<span class="tsd-signature-symbol">:</span> <a href="../interfaces/addressquery.html" class="tsd-signature-type">AddressQuery</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L48">src/models/public/Address.ts:48</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="normalizeaddress" class="tsd-anchor"></a>
-					<h3>normalize<wbr>Address</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">normalize<wbr>Address<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><a href="../interfaces/addressquery.html" class="tsd-signature-type">AddressQuery</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="address.html" class="tsd-signature-type">Address</a><span class="tsd-signature-symbol">&gt;</span></li>
+				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="errors" class="tsd-anchor"></a>
+					<h3>errors</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> errors<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="shipengineerror.html" class="tsd-signature-type">ShipEngineError</a><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/services/addresses.ts#L63">src/services/addresses.ts:63</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L62">src/models/public/Address.ts:62</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Try to normalize address</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>address: <a href="../interfaces/addressquery.html" class="tsd-signature-type">AddressQuery</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="address.html" class="tsd-signature-type">Address</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="shipengineerror.html" class="tsd-signature-type">ShipEngineError</a><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="queryaddress" class="tsd-anchor"></a>
-					<h3>query<wbr>Address</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">query<wbr>Address<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><a href="../interfaces/addressquery.html" class="tsd-signature-type">AddressQuery</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="addressqueryresult.html" class="tsd-signature-type">AddressQueryResult</a><span class="tsd-signature-symbol">&gt;</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="info" class="tsd-anchor"></a>
+					<h3>info</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> info<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="shipengineinfo.html" class="tsd-signature-type">ShipEngineInfo</a><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/services/addresses.ts#L70">src/services/addresses.ts:70</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L52">src/models/public/Address.ts:52</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Get address query data</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>address: <a href="../interfaces/addressquery.html" class="tsd-signature-type">AddressQuery</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="addressqueryresult.html" class="tsd-signature-type">AddressQueryResult</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="shipengineinfo.html" class="tsd-signature-type">ShipEngineInfo</a><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="validateaddress" class="tsd-anchor"></a>
-					<h3>validate<wbr>Address</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">validate<wbr>Address<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><a href="../interfaces/addressquery.html" class="tsd-signature-type">AddressQuery</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="isvalid" class="tsd-anchor"></a>
+					<h3>is<wbr>Valid</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> isValid<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/services/addresses.ts#L56">src/services/addresses.ts:56</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L68">src/models/public/Address.ts:68</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Check if address is valid</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>address: <a href="../interfaces/addressquery.html" class="tsd-signature-type">AddressQuery</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="warnings" class="tsd-anchor"></a>
+					<h3>warnings</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> warnings<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="shipenginewarning.html" class="tsd-signature-type">ShipEngineWarning</a><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L57">src/models/public/Address.ts:57</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="shipenginewarning.html" class="tsd-signature-type">ShipEngineWarning</a><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -243,33 +256,42 @@
 					<li class=" tsd-kind-class">
 						<a href="address.html" class="tsd-kind-icon">Address</a>
 					</li>
-					<li class=" tsd-kind-class">
-						<a href="addressqueryresult.html" class="tsd-kind-icon">Address<wbr>Query<wbr>Result</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
-						<a href="addressesservice.html" class="tsd-kind-icon">Addresses<wbr>Service</a>
+						<a href="addressqueryresult.html" class="tsd-kind-icon">Address<wbr>Query<wbr>Result</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="addressesservice.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="addressqueryresult.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="addressesservice.html#addresses" class="tsd-kind-icon">addresses</a>
+								<a href="addressqueryresult.html#exceptions" class="tsd-kind-icon">exceptions</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="addressesservice.html#normalizeaddress" class="tsd-kind-icon">normalize<wbr>Address</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="addressqueryresult.html#normalized" class="tsd-kind-icon">normalized</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="addressesservice.html#queryaddress" class="tsd-kind-icon">query<wbr>Address</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="addressqueryresult.html#original" class="tsd-kind-icon">original</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="addressesservice.html#validateaddress" class="tsd-kind-icon">validate<wbr>Address</a>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="addressqueryresult.html#errors" class="tsd-kind-icon">errors</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="addressqueryresult.html#info" class="tsd-kind-icon">info</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="addressqueryresult.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="addressqueryresult.html#warnings" class="tsd-kind-icon">warnings</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-class">
+						<a href="addressesservice.html" class="tsd-kind-icon">Addresses<wbr>Service</a>
+					</li>
 					<li class=" tsd-kind-class">
 						<a href="addressesservicelowlevel.html" class="tsd-kind-icon">Addresses<wbr>Service<wbr>Low<wbr>Level</a>
 					</li>

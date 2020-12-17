@@ -1,5 +1,7 @@
 import {
+  ShipEngineError,
   ShipEngineException,
+  ShipEngineExceptionType,
   ShipEngineInfo,
   ShipEngineWarning,
 } from './ShipEngineException';
@@ -34,20 +36,50 @@ export class Address {
   }
 }
 
-export type AddressQuery = {
+export interface AddressQuery {
   street: Street;
-  cityLocality?: Address['cityLocality'];
-  stateProvince?: Address['stateProvince'];
-  postalCode?: Address['postalCode'];
-  country?: Address['country'];
-};
+  cityLocality?: string;
+  stateProvince?: string;
+  postalCode?: string;
+  country?: string;
+}
 
-export interface AddressQueryResult {
+export class AddressQueryResult {
   original: AddressQuery;
   normalized?: Address;
   exceptions: ShipEngineException[];
-  readonly info: ShipEngineInfo[];
-  readonly warnings: ShipEngineWarning[];
-  readonly errors: ShipEngineWarning[];
-  readonly isValid: boolean;
+
+  get info(): ShipEngineInfo[] {
+    return this.exceptions.filter(
+      (el) => el.type === ShipEngineExceptionType.INFO
+    );
+  }
+
+  get warnings(): ShipEngineWarning[] {
+    return this.exceptions.filter(
+      (el) => el.type === ShipEngineExceptionType.WARNING
+    );
+  }
+  get errors(): ShipEngineError[] {
+    return this.exceptions.filter(
+      (el) => el.type === ShipEngineExceptionType.ERROR
+    );
+  }
+
+  get isValid(): boolean {
+    const result =
+      Boolean(this.normalized) &&
+      this.exceptions.every((el) => el.type !== ShipEngineExceptionType.ERROR);
+    return result;
+  }
+
+  constructor(
+    original: AddressQuery,
+    exceptions: ShipEngineException[],
+    normalized?: Address
+  ) {
+    this.original = original;
+    this.normalized = normalized;
+    this.exceptions = exceptions;
+  }
 }

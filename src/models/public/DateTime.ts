@@ -18,15 +18,15 @@ export class ISOString {
   }
 
   /**
-   * does the value include the time (e.g.T23:00)?
+   * Check if value includes time (e.g.T23:00)?
    */
   get hasTime(): boolean {
     return true;
   }
 
   /**
-   * does the value include a time zone designator (e.g.+05:00)?
-   * The time zone designator will is represented as UTC offset.
+   * Check if the value include a time zone designator (e.g.+05:00).
+   * The TZD is represented as UTC offset.
    */
   get hasTimeZone(): boolean {
     return true;
