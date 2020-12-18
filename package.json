@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "build": "npm run build:cjs && npm run build:esm",
-    "build:esm": "tsc",
+    "build:esm": "tsc --module esnext --outDir esm",
     "build:cjs": "tsc --module commonjs --outDir cjs",
     "gen": "sh generate-internal-client.sh",
     "tsc:check": "tsc --noEmit",
