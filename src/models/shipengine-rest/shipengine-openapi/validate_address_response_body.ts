@@ -111,7 +111,7 @@ export interface PartialAddress {
   state_province?: string;
   postal_code?: PostalCode;
   country_code?: CountryCode;
-  address_residential_indicator?: AddressResidentialIndicator;
+  address_residential_indicator?: AddressResidentialIndicator & string;
 }
 export interface PartialAddress1 {
   name?: string;
@@ -124,7 +124,7 @@ export interface PartialAddress1 {
   state_province?: string;
   postal_code?: PostalCode1;
   country_code?: CountryCode1;
-  address_residential_indicator?: AddressResidentialIndicator1;
+  address_residential_indicator?: AddressResidentialIndicator1 & string;
 }
 export interface ResponseMessage {
   code?: AddressValidationCode;

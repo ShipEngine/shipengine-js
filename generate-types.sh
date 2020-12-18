@@ -1,6 +1,6 @@
 #!/bin/bash
 src="node_modules/shipengine-json-schema"
-dir="src/models/api/validate-address"
+dir="src/models/shipengine-rest/shipengine-openapi"
 
 # generate requests
 declare -a requests=(
@@ -31,12 +31,13 @@ declare -a requests=(
   # update_shipment_request_body
   # update_warehouse_request_body
   # update_webhook_request_body
-  # validate_address_request_body
+  validate_address_request_body
 )
 for i in "${requests[@]}"; do
   npx json2ts \
     "$src/requests/$i.json" \
     "$dir/$i.ts"
+  echo "generated $i"
 done
 
 declare -a responses=(
@@ -118,7 +119,7 @@ declare -a responses=(
   # update_shipment_response_body
   # update_warehouse_response_body
   # update_webhook_response_body
-  # validate_address_response_body
+  validate_address_response_body
   # void_label_response_body
 )
 
@@ -127,4 +128,5 @@ for i in "${responses[@]}"; do
   npx json2ts \
     "$src/responses/$i.json" \
     "$dir/$i.ts"
+  echo "generated $i"
 done
