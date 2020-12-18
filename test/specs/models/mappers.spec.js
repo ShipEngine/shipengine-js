@@ -1,3 +1,4 @@
+// @ts-check
 const { expect } = require('chai');
 const forEach = require('mocha-each');
 const {
@@ -126,67 +127,15 @@ describe('mapToAddressQueryResult', () => {
         ],
       });
 
-      expect(addressQuery.info[0].type).to.eq(ShipEngineExceptionType.INFO);
+      expect(addressQuery.info[0].type).to.eq('info');
 
-      expect(addressQuery.warnings[0].type).to.eq(
-        ShipEngineExceptionType.WARNING
-      );
+      expect(addressQuery.warnings[0].type).to.eq('warning');
 
-      expect(addressQuery.errors[0].type).to.eq(ShipEngineExceptionType.ERROR);
+      expect(addressQuery.errors[0].type).to.eq('error');
 
       expect(addressQuery.warnings.length).to.eq(1);
       expect(addressQuery.info.length).to.eq(1);
       expect(addressQuery.errors.length).to.eq(1);
-    });
-  });
-  describe('isValid', () => {
-    it('should be true if no errors', () => {
-      const addressQuery = mapToAddressQueryResult({
-        matched_address: {},
-        original_address: {},
-        messages: [
-          {
-            type: 'warning',
-          },
-          {
-            type: 'info',
-          },
-        ],
-      });
-
-      expect(addressQuery.isValid).to.eq(true);
-    });
-    it('should be false if errors', () => {
-      const addressQuery = mapToAddressQueryResult({
-        matched_address: {},
-        original_address: {},
-        messages: [
-          {
-            type: 'error',
-          },
-          {
-            type: 'info',
-          },
-        ],
-      });
-
-      expect(addressQuery.isValid).to.eq(false);
-    });
-    it('should be false if no matched address', () => {
-      const addressQuery = mapToAddressQueryResult({
-        matched_address: undefined,
-        original_address: {},
-        messages: [
-          {
-            type: 'error',
-          },
-          {
-            type: 'info',
-          },
-        ],
-      });
-
-      expect(addressQuery.isValid).to.eq(false);
     });
   });
 });

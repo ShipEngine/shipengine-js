@@ -27,7 +27,7 @@ export class AddressesServiceLowLevel {
    */
   public validate = async (address: AddressQuery): Promise<boolean> => {
     const addressQueryResult = await this.query(address);
-    return addressQueryResult.isValid;
+    return !addressQueryResult.errors.length;
   };
 
   /**
@@ -37,7 +37,7 @@ export class AddressesServiceLowLevel {
     address: AddressQuery
   ): Promise<Address | undefined> => {
     const addressQueryResult = await this.query(address);
-    const normalized = addressQueryResult.isValid
+    const normalized = !addressQueryResult.errors.length
       ? addressQueryResult.normalized
       : undefined;
     return normalized;

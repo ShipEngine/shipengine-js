@@ -11,7 +11,7 @@ import {
   ShipEngineError,
   ShipEngineInfo,
   ShipEngineWarning,
-  ShipEngineException,
+  ShipEngineMessage,
 } from '../public';
 import { exists } from '../../utils/exists';
 
@@ -85,7 +85,7 @@ export const mapToRequestBodyAddress = (
  */
 export const mapToShipEngineExceptions = (
   messages: ResponseMessage[]
-): ShipEngineException[] => {
+): ShipEngineMessage[] => {
   return messages
     .map(({ type: t, message = '' }) => {
       if (!t) return undefined;

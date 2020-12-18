@@ -1,11 +1,4 @@
-import {
-  getExceptionsByType,
-  ShipEngineError,
-  ShipEngineException,
-  ShipEngineExceptionType,
-  ShipEngineInfo,
-  ShipEngineWarning,
-} from './ShipEngineException';
+import { ShipEngineMessage, getMessages, MessageFields } from './Messages';
 
 type Street = string | string[];
 
@@ -43,40 +36,19 @@ export interface AddressQuery {
   country?: string;
 }
 
+// mix-in MessageFields
+export interface AddressQueryResult extends MessageFields {}
+
 export class AddressQueryResult {
   original: AddressQuery;
   normalized?: Address;
-  #exceptions: ShipEngineException[];
-
   constructor(
     original: AddressQuery,
-    exceptions: ShipEngineException[],
+    messages: ShipEngineMessage[],
     normalized?: Address
   ) {
+    Object.assign(this, getMessages(messages));
     this.original = original;
     this.normalized = normalized;
-    this.#exceptions = exceptions;
-  }
-
-  get info(): ShipEngineInfo[] {
-    return getExceptionsByType(this.#exceptions, ShipEngineExceptionType.INFO);
-  }
-
-  get warnings(): ShipEngineWarning[] {
-    return getExceptionsByType(
-      this.#exceptions,
-      ShipEngineExceptionType.WARNING
-    );
-  }
-
-  get errors(): ShipEngineError[] {
-    return getExceptionsByType(this.#exceptions, ShipEngineExceptionType.ERROR);
-  }
-
-  get isValid(): boolean {
-    const result =
-      Boolean(this.normalized) &&
-      this.#exceptions.every((el) => el.type !== ShipEngineExceptionType.ERROR);
-    return result;
   }
 }
