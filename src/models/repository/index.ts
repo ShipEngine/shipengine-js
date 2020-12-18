@@ -1,30 +1,11 @@
 import { AxiosInstance } from 'axios';
-import { AddressToValidate, ValidateAddressResponseBody } from '.';
-import { AddressQuery, AddressQueryResult, ShipEngineAPI } from '../public';
+
+import { AddressQuery, AddressQueryResult } from '../public';
 import {
   mapToAddressQueryResult,
   mapToRequestBodyAddress,
 } from '../mappers/address';
-
-/**
- * Model that represents the actual ShipEngine Rest API.
- * This should be able to swapped out cleanly with another generated model if we so desire.
- */
-class ShipEngineRestAPI {
-  #client: AxiosInstance;
-  constructor(client: AxiosInstance) {
-    this.#client = client;
-  }
-
-  validateAddresses = async (v: AddressToValidate[]) => {
-    return (
-      await this.#client.post<ValidateAddressResponseBody>(
-        '/addresses/validate',
-        v
-      )
-    ).data;
-  };
-}
+import { ShipEngineRestAPI } from '../shipengine-rest';
 
 /**
  * Model that represents the Address Data model

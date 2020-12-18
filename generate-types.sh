@@ -4,7 +4,6 @@ dir="src/models/api/validate-address"
 
 # generate requests
 declare -a requests=(
-  "get_tracking_log_from_label_response_body"
   # add_funds_to_carrier_request_body
   # "add_funds_to_insurance_request_body"
   # add_to_batch_request_body
@@ -41,10 +40,9 @@ for i in "${requests[@]}"; do
 done
 
 declare -a responses=(
-  "get_tracking_log_from_label_response_body"
-  # 400_error_response_body
-  # 404_error_response_body
-  # 409_error_response_body
+  # "400_error_response_body"
+  # "404_error_response_body"
+  # "409_error_response_body"
   # 500_error_response_body
   # add_funds_to_carrier_response_body
   # add_funds_to_insurance_response_body
@@ -87,8 +85,8 @@ declare -a responses=(
   # get_rate_by_id_response_body
   # get_shipment_by_external_id_response_body
   # get_shipment_by_id_response_body
-  # get_tracking_log_from_label_response_body
-  # get_tracking_log_response_body
+  get_tracking_log_from_label_response_body
+  get_tracking_log_response_body
   # get_warehouse_by_id_response_body
   # get_webhook_by_id_response_body
   # list_batch_errors_response_body

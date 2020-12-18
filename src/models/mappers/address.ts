@@ -3,7 +3,7 @@ import {
   AddressToValidate,
   MatchedAddress,
   ResponseMessage,
-} from '../api';
+} from '../shipengine-rest/shipengine-openapi';
 import {
   AddressQueryResult,
   Address,
