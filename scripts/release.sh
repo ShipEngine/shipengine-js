@@ -5,6 +5,9 @@ if [[ "$BRANCH" != "main" ]]; then
   exit 0
 fi
 
+# make sure you don't tag an old commit
+git pull --ff-only
+
 # don't create git tag here, it will automatically be created in the next step
 npx bump prerelease --preid alpha --push
 
