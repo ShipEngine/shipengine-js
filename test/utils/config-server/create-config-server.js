@@ -35,7 +35,9 @@ const createApp = (port = configProxyPort, app = express()) => {
       return next(err);
     }
   });
-  return app.listen(port);
+  return app.listen(port, () => {
+    console.log(`Server listening on http://localhost:${port}`);
+  });
 };
 
 module.exports = {
