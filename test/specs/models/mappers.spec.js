@@ -73,7 +73,7 @@ describe('mapToRequestBodyAddress', () => {
         address_line3: undefined,
       },
     ];
-    const countryCode1 = [
+    const country1 = [
       {
         country: null,
       },
@@ -81,7 +81,7 @@ describe('mapToRequestBodyAddress', () => {
         country_code: 'US',
       },
     ];
-    const countryCode2 = [
+    const country2 = [
       {
         country: 'CZ',
       },
@@ -89,7 +89,7 @@ describe('mapToRequestBodyAddress', () => {
         country_code: 'CZ',
       },
     ];
-    forEach([street1, street2, countryCode1, countryCode2]).it(
+    forEach([street1, street2, country1, country2]).it(
       '%j -> %j',
       (arg, expected) => {
         expect(mapToRequestBodyAddress(arg)).to.contain(expected);
