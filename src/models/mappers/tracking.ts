@@ -53,9 +53,10 @@ export const mapToTrackingInformation = (
     estimated_delivery_date,
   } = trackingInformationResponse;
 
-  if (!tracking_number || !events || !estimated_delivery_date) {
+  /*   if (!tracking_number || !events || !estimated_delivery_date) {
     console.error('missing some critical information.');
-  }
+  } */
+
   return new TrackingInformation(
     tracking_number || '',
     new ISOString(estimated_delivery_date || ''),
