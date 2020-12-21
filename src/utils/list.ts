@@ -5,7 +5,8 @@ type Maybe<T> = T | undefined;
  *
  * @param list - list
  */
-const last = <T>(list: T[]): Maybe<T> => list.slice(list.length - 1)[0];
+
+export const last = <T>(list: T[]): Maybe<T> => list.slice(list.length - 1)[0];
 
 /**
  * Returns the first element of a list.

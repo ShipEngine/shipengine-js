@@ -1,5 +1,5 @@
 import { ISOString } from './DateTime';
-import { head, findLast } from '../../utils';
+import { findLast, last } from '../../utils';
 
 /**
  * Shipment Statuses
@@ -67,6 +67,37 @@ export interface TrackingEvent {
   readonly hasError: boolean;
 }
 
+interface TrackingEventsInfo {
+  latestEvent?: TrackingEvent;
+  shippedAt?: ISOString;
+  deliveredAt?: ISOString;
+}
+
+export const getEventsInfo = (events: TrackingEvent[]): TrackingEventsInfo => {
+  // tracking event should be _sorted_ with earliest event first (date ascending)
+  const sortedDateAsc = events.sort((a, b) =>
+    a.dateTime.value < b.dateTime.value ? -1 : 1
+  );
+
+  const latestEvent = last(sortedDateAsc);
+
+  const shippedAt = sortedDateAsc.find(
+    (el) => el.status === TrackingStatus.Accepted
+  )?.dateTime;
+
+  const deliveredAt = findLast(
+    (el) => el.status === TrackingStatus.Delivered,
+    sortedDateAsc
+  )?.dateTime;
+
+  return {
+    latestEvent,
+    shippedAt,
+    deliveredAt,
+  };
+};
+
+export interface TrackingInformation extends TrackingEventsInfo {}
 export class TrackingInformation {
   /* Tracking number for the shipment. */
   trackingNumber: string;
@@ -74,38 +105,14 @@ export class TrackingInformation {
   /* Date, datetime, datetime w/timestamp estimated delivery. */
   estimatedDelivery: ISOString;
 
-  /*  Returns the latest `Event`. */
-  readonly latestEvent?: TrackingEvent;
-
-  /*  The datetime of the first "accepted" event in the `events` array, if any. */
-  readonly shippedAt?: ISOString;
-
-  /* The datetime of the last "delivered" event in the `events` array, if any. */
-  readonly deliveredAt?: ISOString;
-
   constructor(
     trackingNumber: string,
     estimatedDelivery: ISOString,
-    events: TrackingEvent[]
+    trackingEvents: TrackingEvent[]
   ) {
+    Object.assign(this, getEventsInfo(trackingEvents));
     this.estimatedDelivery = estimatedDelivery;
     this.trackingNumber = trackingNumber;
-
-    // tracking event should be _sorted_ with earliest event first (date ascending)
-    const sortedDateAsc = events.sort((a, b) =>
-      a.dateTime.value < b.dateTime.value ? -1 : 1
-    );
-
-    this.latestEvent = head(sortedDateAsc);
-
-    this.shippedAt = sortedDateAsc.find(
-      (el) => el.status === TrackingStatus.Accepted
-    )?.dateTime;
-
-    this.deliveredAt = findLast(
-      (el) => el.status === TrackingStatus.Delivered,
-      sortedDateAsc
-    )?.dateTime;
   }
 }
 

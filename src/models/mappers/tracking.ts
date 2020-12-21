@@ -31,24 +31,34 @@ export const mapToTrackEvents = (e: TrackEventInternal): TrackingEvent => {
     description: e.status_description || '', // why would status description be empty, if status isn't?,
     carrierStatusCode: e.carrier_status_code || '',
     dateTime: new ISOString(e.occurred_at),
-    hasError: status === 'error', // TODO
+    get hasError() {
+      return this.status === TrackingStatus.Exception;
+    },
   };
 };
 
 /**
  * Returns domain model from DTO.
  *
- * @param v - Address validation result from ShipEngine REST API.
+ * @param trackingInformationResponse - Address validation result from ShipEngine REST API.
  */
 export const mapToTrackingInformation = (
-  v: GetTrackingLogResponseBody | GetTrackingLogFromLabelResponseBody
+  trackingInformationResponse:
+    | GetTrackingLogResponseBody
+    | GetTrackingLogFromLabelResponseBody
 ): TrackingInformation => {
-  if (!v.tracking_number || !v.events || !v.estimated_delivery_date) {
+  const {
+    tracking_number,
+    events,
+    estimated_delivery_date,
+  } = trackingInformationResponse;
+
+  if (!tracking_number || !events || !estimated_delivery_date) {
     console.error('missing some critical information.');
   }
   return new TrackingInformation(
-    v.tracking_number || '',
-    new ISOString(v.estimated_delivery_date || ''),
-    (v.events || []).map(mapToTrackEvents)
+    tracking_number || '',
+    new ISOString(estimated_delivery_date || ''),
+    (events || []).map(mapToTrackEvents)
   );
 };
