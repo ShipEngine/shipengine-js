@@ -1,5 +1,6 @@
 import { ISOString } from './DateTime';
 import { findLast, last } from '../../utils';
+import { MessageFields, ShipEngineMessage } from './Messages';
 
 /**
  * Shipment Statuses
@@ -39,7 +40,7 @@ interface TrackingEventLocation {
 }
 
 /* An event or status change that occurred while processing a `Shipment`. */
-export interface TrackingEvent {
+export interface TrackingEvent extends MessageFields {
   /* Date, datetime, or datetime w/timezone at which the event occurred. */
   dateTime: ISOString;
 
@@ -53,7 +54,7 @@ export interface TrackingEvent {
   carrierStatusCode: string;
 
   /* Carrier-specific description */
-  carrierDetailCode?: string;
+  carrierDetailCode: string;
 
   /* Location where the event occurred. */
   location?: TrackingEventLocation;
@@ -81,8 +82,9 @@ export const getEventsInfo = (events: TrackingEvent[]): TrackingEventsInfo => {
 
   const latestEvent = last(sortedDateAsc);
 
-  const shippedAt = sortedDateAsc.find(
-    (el) => el.status === TrackingStatus.Accepted
+  const shippedAt = findLast(
+    (el) => el.status === TrackingStatus.Accepted,
+    sortedDateAsc
   )?.dateTime;
 
   const deliveredAt = findLast(
@@ -125,13 +127,9 @@ export interface TrackingQuery {
 
 /* Result of a tracking query. */
 export class TrackingQueryResult {
-  /* Either a `Query` or `String` representing a label_id. */
-  query: TrackingQuery | string;
-
-  /* Information. */
-  information: TrackingInformation;
-  constructor(query: TrackingQuery | string, information: TrackingInformation) {
-    this.query = query;
-    this.information = information;
-  }
+  constructor(
+    readonly query: TrackingQuery | string,
+    readonly information: TrackingInformation,
+    readonly messages: ShipEngineMessage[]
+  ) {}
 }

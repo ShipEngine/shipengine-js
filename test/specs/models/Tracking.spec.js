@@ -44,6 +44,24 @@ describe('getEventInfo mixin', () => {
     ]);
     expect(deliveredAt.value).to.eq(lastDelivered.value);
   });
+  it('should get shippedAt item', () => {
+    const _shippedAt = new ISOString('2020-01-01');
+    const { shippedAt } = getEventsInfo([
+      {
+        dateTime: _shippedAt,
+        status: TrackingStatus.Accepted,
+      },
+      {
+        dateTime: new ISOString('2020-01-01'),
+        status: TrackingStatus.InTransit,
+      },
+      {
+        dateTime: new ISOString('2020-01-01'),
+        status: TrackingStatus.Delivered,
+      },
+    ]);
+    expect(_shippedAt.value).to.eq(shippedAt.value);
+  });
 });
 
 describe('TrackingInformation', () => {

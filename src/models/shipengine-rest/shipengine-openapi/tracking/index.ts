@@ -1,15 +1,16 @@
 import type { GetArrayElement, Overwrite } from '../../../../utils/ts';
-
 import type { GetTrackingLogResponseBody as _GetTrackingLogResponseBody } from './get_tracking_log_response_body';
 
 export type TrackEventInternal = GetArrayElement<
   _GetTrackingLogResponseBody['events']
 > & {
   // hacky overwrite of tracking stuff
-  carrier_detail_code: string; // TODO: This shows up null in the hoverfly response, and is nowherre
-  carrier_status_code: GetTrackingLogResponseBody['carrier_status_code']; // e.g. AR or OD or DP
-  status_code?: GetTrackingLogResponseBody['status_code']; // e.g. IT
-  status_description: GetTrackingLogResponseBody['status_description']; // e.g. In Transit
+  carrier_detail_code: string;
+  carrier_status_code: string;
+  carrier_status_description: string;
+  exception_description?: string;
+  status_code: 'AC' | 'AT' | 'DE' | 'EX' | 'IT' | 'NY' | 'UN';
+  status_description: string;
 };
 
 export type GetTrackingLogResponseBody = Overwrite<
