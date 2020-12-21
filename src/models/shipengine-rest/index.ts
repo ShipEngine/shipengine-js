@@ -2,9 +2,12 @@ import { AxiosInstance } from 'axios';
 import {
   AddressToValidate,
   ValidateAddressResponseBody,
+} from './shipengine-openapi/address';
+
+import {
   GetTrackingLogResponseBody,
   GetTrackingLogFromLabelResponseBody,
-} from './shipengine-openapi';
+} from './shipengine-openapi/tracking';
 
 /**
  * Model that represents the actual ShipEngine Rest API.

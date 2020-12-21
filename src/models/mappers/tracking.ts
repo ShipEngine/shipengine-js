@@ -2,7 +2,7 @@ import {
   GetTrackingLogFromLabelResponseBody,
   GetTrackingLogResponseBody,
   TrackEventInternal,
-} from '../shipengine-rest/shipengine-openapi';
+} from '../shipengine-rest/shipengine-openapi/tracking';
 
 import {
   TrackingEvent,
