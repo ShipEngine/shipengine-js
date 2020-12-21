@@ -1,5 +1,5 @@
-import { Overwrite } from 'utility-types';
-import { Compute, GetArrayElement } from '../../../../utils/ts';
+import type { GetArrayElement, Overwrite } from '../../../../utils/ts';
+
 import type { GetTrackingLogResponseBody as _GetTrackingLogResponseBody } from './get_tracking_log_response_body';
 
 export type TrackEventInternal = GetArrayElement<
@@ -12,22 +12,18 @@ export type TrackEventInternal = GetArrayElement<
   status_description: GetTrackingLogResponseBody['status_description']; // e.g. In Transit
 };
 
-export type GetTrackingLogResponseBody = Compute<
-  Overwrite<
-    _GetTrackingLogResponseBody,
-    {
-      events: TrackEventInternal[];
-    }
-  >
+export type GetTrackingLogResponseBody = Overwrite<
+  _GetTrackingLogResponseBody,
+  {
+    events: TrackEventInternal[];
+  }
 >;
 
 import type { GetTrackingLogFromLabelResponseBody as _GetTrackingLogFromLabelResponseBody } from './get_tracking_log_from_label_response_body';
 
-export type GetTrackingLogFromLabelResponseBody = Compute<
-  Overwrite<
-    _GetTrackingLogFromLabelResponseBody,
-    {
-      events: TrackEventInternal[];
-    }
-  >
+export type GetTrackingLogFromLabelResponseBody = Overwrite<
+  _GetTrackingLogFromLabelResponseBody,
+  {
+    events: TrackEventInternal[];
+  }
 >;

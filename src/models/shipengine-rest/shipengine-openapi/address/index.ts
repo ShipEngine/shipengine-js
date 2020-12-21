@@ -1,4 +1,5 @@
-import { Overwrite } from 'utility-types';
+import type { Overwrite } from '../../../../utils/ts';
+
 import type {
   AddressValidationResult as _AddressValidationResult,
   PartialAddress as _PartialAddress,

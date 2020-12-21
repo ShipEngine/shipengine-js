@@ -11,6 +11,11 @@ import {
   TrackingStatus,
 } from '../public';
 
+/**
+ * Returns domain model from DTO
+ *
+ * @param e - Tracking event from ShipEngine REST API.
+ */
 export const mapToTrackEvents = (e: TrackEventInternal): TrackingEvent => {
   return {
     location: {
@@ -31,9 +36,9 @@ export const mapToTrackEvents = (e: TrackEventInternal): TrackingEvent => {
 };
 
 /**
- * map from dto do domain model
- * @param v - address validation result
- * @hidden
+ * Returns domain model from DTO.
+ *
+ * @param v - Address validation result from ShipEngine REST API.
  */
 export const mapToTrackingInformation = (
   v: GetTrackingLogResponseBody | GetTrackingLogFromLabelResponseBody
