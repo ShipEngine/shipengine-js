@@ -8,7 +8,7 @@
 export type AddressToValidate = PartialAddress;
 export type PostalCode = string;
 export type CountryCode = string;
-export type AddressResidentialIndicator = 'unknown' | 'yes' | 'no';
+export type AddressResidentialIndicator = "unknown" | "yes" | "no";
 export type ValidateAddressRequestBody = AddressToValidate[];
 
 export interface PartialAddress {

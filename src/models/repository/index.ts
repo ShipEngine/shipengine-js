@@ -1,11 +1,17 @@
 import { AxiosInstance } from 'axios';
+import {
+  AddressQuery,
+  AddressQueryResult,
+  TrackingInformation,
+} from '../public';
 
-import { AddressQuery, AddressQueryResult } from '../public';
 import {
   mapToAddressQueryResult,
   mapToRequestBodyAddress,
 } from '../mappers/address';
+
 import { ShipEngineRestAPI } from '../shipengine-rest';
+import { mapToTrackingInformation } from '../mappers/tracking';
 
 /**
  * Model that represents the Address Data model
@@ -32,4 +38,38 @@ export class TrackingData {
   constructor(client: AxiosInstance) {
     this.#shipEngineRestAPI = new ShipEngineRestAPI(client);
   }
+
+  /**
+   * Get Tracking Information
+   *
+   * @param carrierCode - e.g ups
+   * @param trackingNumber - e.g. 1Z6Y21Y60300230257
+   */
+  query = async (
+    carrierCode: string,
+    trackingNumber: string
+  ): Promise<TrackingInformation> => {
+    const data = await this.#shipEngineRestAPI.getTrackingLog(
+      carrierCode,
+      trackingNumber
+    );
+    const result = mapToTrackingInformation(data);
+    return result;
+  };
+
+  /**
+   * Get Label Information
+   *
+   * @param labelId - e.g string
+   */
+  queryLabel = async (
+    labelId: string
+  ): Promise<TrackingInformation> => {
+    const data = await this.#shipEngineRestAPI.getTrackingLogFromLabel(
+      labelId,
+    );
+    const result = mapToTrackingInformation(data);
+    return result;
+  };
+}
 }

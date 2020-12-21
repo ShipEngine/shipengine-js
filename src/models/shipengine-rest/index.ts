@@ -17,9 +17,15 @@ export class ShipEngineRestAPI {
   }
 
   /* node_modules/shipengine-json-schema/index.json */
-  getTrackingLog = async () => {
-    return (await this.#client.get<GetTrackingLogResponseBody>('/tracking'))
-      .data;
+  getTrackingLog = async (carrierCode: string, trackingNumber: string) => {
+    return (
+      await this.#client.get<GetTrackingLogResponseBody>('/tracking', {
+        params: {
+          carrier_code: carrierCode,
+          tracking_number: trackingNumber,
+        },
+      })
+    ).data;
   };
 
   getTrackingLogFromLabel = async (labelId: string) => {
