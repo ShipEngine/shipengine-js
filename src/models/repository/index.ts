@@ -62,14 +62,9 @@ export class TrackingData {
    *
    * @param labelId - e.g string
    */
-  queryLabel = async (
-    labelId: string
-  ): Promise<TrackingInformation> => {
-    const data = await this.#shipEngineRestAPI.getTrackingLogFromLabel(
-      labelId,
-    );
+  queryLabel = async (labelId: string): Promise<TrackingInformation> => {
+    const data = await this.#shipEngineRestAPI.getTrackingLogFromLabel(labelId);
     const result = mapToTrackingInformation(data);
     return result;
   };
-}
 }
