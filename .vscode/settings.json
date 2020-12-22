@@ -1,6 +1,4 @@
 {
-  "git.ignoreSubmodules": true,
-  "git.detectSubmodules": true, // ignore submodules when doing "git add"
   "typescript.tsdk": "node_modules/typescript/lib",
   "json.schemas": [
     {
