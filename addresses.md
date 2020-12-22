@@ -7,7 +7,8 @@
 
 # Validate and Normalize Addresses
 
-ShipEngine allows you to validate an address before using it to create a shipment to ensure accurate delivery of your packages.
+## Introduction
+[ShipEngine](https://www.shipengine.com) allows you to validate an address before using it to create a shipment to ensure accurate delivery of your packages.
 
 Address validation ensures accurate addresses and can lead to reduced shipping costs by preventing address correction surcharges. ShipEngine cross references multiple databases to validate addresses and identify potential deliverability issues.
 
