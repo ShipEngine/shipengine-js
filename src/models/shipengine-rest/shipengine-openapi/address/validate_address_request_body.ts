@@ -22,5 +22,5 @@ export interface PartialAddress {
   state_province?: string;
   postal_code?: PostalCode;
   country_code?: CountryCode;
-  address_residential_indicator?: AddressResidentialIndicator;
+  address_residential_indicator?: AddressResidentialIndicator & string;
 }

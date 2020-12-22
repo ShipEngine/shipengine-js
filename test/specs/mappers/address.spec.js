@@ -1,3 +1,4 @@
+// @ts-check
 const { expect } = require('chai');
 const forEach = require('mocha-each');
 const {
@@ -72,7 +73,7 @@ describe('mapToRequestBodyAddress', () => {
         address_line3: undefined,
       },
     ];
-    const countryCode1 = [
+    const country1 = [
       {
         country: null,
       },
@@ -80,7 +81,7 @@ describe('mapToRequestBodyAddress', () => {
         country_code: 'US',
       },
     ];
-    const countryCode2 = [
+    const country2 = [
       {
         country: 'CZ',
       },
@@ -88,7 +89,7 @@ describe('mapToRequestBodyAddress', () => {
         country_code: 'CZ',
       },
     ];
-    forEach([street1, street2, countryCode1, countryCode2]).it(
+    forEach([street1, street2, country1, country2]).it(
       '%j -> %j',
       (arg, expected) => {
         expect(mapToRequestBodyAddress(arg)).to.contain(expected);
@@ -126,67 +127,15 @@ describe('mapToAddressQueryResult', () => {
         ],
       });
 
-      expect(addressQuery.info[0].type).to.eq(ShipEngineExceptionType.INFO);
+      expect(addressQuery.info[0].type).to.eq('info');
 
-      expect(addressQuery.warnings[0].type).to.eq(
-        ShipEngineExceptionType.WARNING
-      );
+      expect(addressQuery.warnings[0].type).to.eq('warning');
 
-      expect(addressQuery.errors[0].type).to.eq(ShipEngineExceptionType.ERROR);
+      expect(addressQuery.errors[0].type).to.eq('error');
 
       expect(addressQuery.warnings.length).to.eq(1);
       expect(addressQuery.info.length).to.eq(1);
       expect(addressQuery.errors.length).to.eq(1);
-    });
-  });
-  describe('isValid', () => {
-    it('should be true if no errors', () => {
-      const addressQuery = mapToAddressQueryResult({
-        matched_address: {},
-        original_address: {},
-        messages: [
-          {
-            type: 'warning',
-          },
-          {
-            type: 'info',
-          },
-        ],
-      });
-
-      expect(addressQuery.isValid).to.eq(true);
-    });
-    it('should be false if errors', () => {
-      const addressQuery = mapToAddressQueryResult({
-        matched_address: {},
-        original_address: {},
-        messages: [
-          {
-            type: 'error',
-          },
-          {
-            type: 'info',
-          },
-        ],
-      });
-
-      expect(addressQuery.isValid).to.eq(false);
-    });
-    it('should be false if no matched address', () => {
-      const addressQuery = mapToAddressQueryResult({
-        matched_address: undefined,
-        original_address: {},
-        messages: [
-          {
-            type: 'error',
-          },
-          {
-            type: 'info',
-          },
-        ],
-      });
-
-      expect(addressQuery.isValid).to.eq(false);
     });
   });
 });

@@ -13,7 +13,7 @@
     "build": "npm run build:cjs && npm run build:esm",
     "build:esm": "tsc --module esnext --outDir esm",
     "build:cjs": "tsc --module commonjs --outDir cjs",
-    "gen": "sh generate-internal-client.sh",
+    "gen:types": "bash ./generate-types.sh && npm run fix",
     "tsc:check": "tsc --noEmit",
     "test": "npm run test:node && npm run test:browser",
     "test:node:watch": "chokidar **/test/** **/src/**/*.ts -c 'npm run test:node'",

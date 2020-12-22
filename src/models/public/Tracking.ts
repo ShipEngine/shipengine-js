@@ -1,4 +1,6 @@
 import { ISOString } from './DateTime';
+import { findLast, last } from '../../utils';
+import { MessageFields, ShipEngineMessage } from './Messages';
 
 /**
  * Shipment Statuses
@@ -28,7 +30,7 @@ interface TrackingEventLocation {
   postalCode?: string;
 
   /* [ISO 3166](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) country code. */
-  countryCode?: string;
+  country?: string;
 
   /* Latitude. */
   latitude?: number;
@@ -38,7 +40,7 @@ interface TrackingEventLocation {
 }
 
 /* An event or status change that occurred while processing a `Shipment`. */
-export interface TrackingEvent {
+export interface TrackingEvent extends MessageFields {
   /* Date, datetime, or datetime w/timezone at which the event occurred. */
   dateTime: ISOString;
 
@@ -57,38 +59,63 @@ export interface TrackingEvent {
   /* Location where the event occurred. */
   location?: TrackingEventLocation;
 
-  /* Human-readable information regarding this event, such as details about the error state
-   * or a description of where the package was placed upon delivery.
-   */
-  notes: string[];
-
   /*  Name of the person who signed or approved this event.
    * This is usually only relevant for the TrackingStatus.Delivered event.
    */
   signer?: string;
+
+  /* True if the `#status` is an exception. */
+  readonly hasError: boolean;
 }
 
-export interface TrackingInformation {
-  /* Carrier code for the shipment. */
-  carrierCode: string;
+interface TrackingEventsInfo {
+  latestEvent?: TrackingEvent;
+  shippedAt?: ISOString;
+  deliveredAt?: ISOString;
+}
 
+export const getEventsInfo = (events: TrackingEvent[]): TrackingEventsInfo => {
+  // tracking event should be _sorted_ with earliest event first (date ascending)
+  const sortedDateAsc = events.sort((a, b) =>
+    a.dateTime.value < b.dateTime.value ? -1 : 1
+  );
+
+  const latestEvent = last(sortedDateAsc);
+
+  const shippedAt = findLast(
+    (el) => el.status === TrackingStatus.Accepted,
+    sortedDateAsc
+  )?.dateTime;
+
+  const deliveredAt = findLast(
+    (el) => el.status === TrackingStatus.Delivered,
+    sortedDateAsc
+  )?.dateTime;
+
+  return {
+    latestEvent,
+    shippedAt,
+    deliveredAt,
+  };
+};
+
+export interface TrackingInformation extends TrackingEventsInfo {}
+export class TrackingInformation {
   /* Tracking number for the shipment. */
   trackingNumber: string;
 
   /* Date, datetime, datetime w/timestamp estimated delivery. */
   estimatedDelivery: ISOString;
 
-  /* `Event`s that have occurred for this shipment. */
-  events: TrackingEvent[];
-
-  /*  Returns the latest `Event`. */
-  readonly latestEvent?: TrackEvent;
-
-  /*  The datetime of the first "accepted" event in the `events` array, if any. */
-  readonly shippedAt?: ISOString;
-
-  /* The datetime of the last "delivered" event in the `events` array, if any. */
-  readonly deliveredAt?: ISOString;
+  constructor(
+    trackingNumber: string,
+    estimatedDelivery: ISOString,
+    trackingEvents: TrackingEvent[]
+  ) {
+    Object.assign(this, getEventsInfo(trackingEvents));
+    this.estimatedDelivery = estimatedDelivery;
+    this.trackingNumber = trackingNumber;
+  }
 }
 
 export interface TrackingQuery {
@@ -99,10 +126,10 @@ export interface TrackingQuery {
 }
 
 /* Result of a tracking query. */
-export interface TrackingQueryResult {
-  /* Either a `Query` or `String` representing a label_id. */
-  query: TrackingQuery | string;
-
-  /* Information. */
-  information: TrackingInformation;
+export class TrackingQueryResult {
+  constructor(
+    readonly query: TrackingQuery | string,
+    readonly information: TrackingInformation,
+    readonly messages: ShipEngineMessage[]
+  ) {}
 }

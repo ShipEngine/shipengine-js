@@ -27,7 +27,7 @@ export class AddressesServiceLowLevel {
    */
   public validate = async (address: AddressQuery): Promise<boolean> => {
     const addressQueryResult = await this.query(address);
-    return addressQueryResult.isValid;
+    return !addressQueryResult.errors.length;
   };
 
   /**
@@ -37,7 +37,7 @@ export class AddressesServiceLowLevel {
     address: AddressQuery
   ): Promise<Address | undefined> => {
     const addressQueryResult = await this.query(address);
-    const normalized = addressQueryResult.isValid
+    const normalized = !addressQueryResult.errors.length
       ? addressQueryResult.normalized
       : undefined;
     return normalized;
@@ -51,18 +51,15 @@ export class AddressesService {
   }
 
   /**
-   * Check if address is valid
+   * Check if address is valid.
    */
-  public validateAddress: AddressesServiceLowLevel['validate'] = async (
-    address
-  ) => this.addresses.validate(address);
+  public validateAddress = async (address: AddressQuery): Promise<boolean> =>
+    this.addresses.validate(address);
 
   /**
-   * Try to normalize address
+   *  Normalize address.
    */
-  public normalizeAddress: AddressesServiceLowLevel['normalize'] = async (
-    address
-  ) => {
+  public normalizeAddress = async (address: AddressQuery): Promise<Address> => {
     const normalized = await this.addresses.normalize(address);
     if (!normalized) {
       throw new ShipEngineError('Address unqueryable, unable to normalize.');
@@ -71,9 +68,9 @@ export class AddressesService {
   };
 
   /**
-   * Get address query data
+   * Get address query data.
    */
-  public queryAddress: AddressesServiceLowLevel['query'] = async (
+  public queryAddress = async (
     address: AddressQuery
-  ) => this.addresses.query(address);
+  ): Promise<AddressQueryResult> => this.addresses.query(address);
 }

@@ -78,7 +78,7 @@ describe('API', () => {
       await Hoverfly.import('v1/addresses.json');
     });
     describe('query', () => {
-      it('should have no exceptions', async () => {
+      it('should have no errors', async () => {
         const queryResult = await api.queryAddress(fixtures.yankeeStadium);
         expect(queryResult.warnings).to.be.empty;
         expect(queryResult.errors).to.be.empty;

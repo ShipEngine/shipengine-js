@@ -3,7 +3,7 @@ import {
   AddressToValidate,
   MatchedAddress,
   ResponseMessage,
-} from '../shipengine-rest/shipengine-openapi';
+} from '../shipengine-rest/shipengine-openapi/address';
 import {
   AddressQueryResult,
   Address,
@@ -11,7 +11,7 @@ import {
   ShipEngineError,
   ShipEngineInfo,
   ShipEngineWarning,
-  ShipEngineException,
+  ShipEngineMessage,
 } from '../public';
 import { exists } from '../../utils/exists';
 
@@ -85,7 +85,7 @@ export const mapToRequestBodyAddress = (
  */
 export const mapToShipEngineExceptions = (
   messages: ResponseMessage[]
-): ShipEngineException[] => {
+): ShipEngineMessage[] => {
   return messages
     .map(({ type: t, message = '' }) => {
       if (!t) return undefined;

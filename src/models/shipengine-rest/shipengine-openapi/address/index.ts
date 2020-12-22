@@ -1,4 +1,4 @@
-import { Overwrite } from 'utility-types';
+import type { Overwrite } from '../../../../utils/ts';
 
 import type {
   AddressValidationResult as _AddressValidationResult,
@@ -26,6 +26,3 @@ export type AddressValidationResult = Overwrite<
   _AddressValidationResult,
   { matched_address: MatchedAddress | null }
 >;
-
-export type { GetTrackingLogResponseBody } from './get_tracking_log_response_body';
-export type { GetTrackingLogFromLabelResponseBody } from './get_tracking_log_from_label_response_body';

@@ -32,6 +32,7 @@ module.exports = {
     'import/no-default-export': 2,
     '@typescript-eslint/ban-types': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
+    '@typescript-eslint/no-empty-interface': 0,
     '@typescript-eslint/promise-function-async': 2,
     '@typescript-eslint/no-floating-promises': [2, { ignoreIIFE: true }],
   },

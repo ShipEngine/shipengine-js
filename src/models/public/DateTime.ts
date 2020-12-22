@@ -3,8 +3,8 @@
  *  Class representing an ISOString.
  */
 export class ISOString {
-  value: string;
-
+  readonly hasTime: boolean;
+  readonly hasTimeZone: boolean;
   /**
    * Create an ISOString
    * @param value - date
@@ -13,22 +13,12 @@ export class ISOString {
    *  - 2020-01-01T23:00
    *  - 2020-01-01T20:00:05+05:00
    */
-  constructor(value: string) {
-    this.value = value;
+  constructor(readonly value: string) {
+    this.hasTime = /[0-9]*T[0-9]*/.test(value);
+    this.hasTimeZone = /(?<=T).*[+-][0-9]|Z/.test(value);
   }
 
-  /**
-   * Check if value includes time (e.g.T23:00)?
-   */
-  get hasTime(): boolean {
-    return true;
-  }
-
-  /**
-   * Check if the value include a time zone designator (e.g.+05:00).
-   * The TZD is represented as UTC offset.
-   */
-  get hasTimeZone(): boolean {
-    return true;
+  toString() {
+    return this.value;
   }
 }
