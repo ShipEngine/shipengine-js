@@ -1,4 +1,5 @@
 {
+  "git.ignoreSubmodules": true,
   "typescript.tsdk": "node_modules/typescript/lib",
   "json.schemas": [
     {
