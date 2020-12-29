@@ -8,20 +8,28 @@ const shipengine = new ShipEngine(process.env.API_KEY);
 /* wrapper start */
 (async () => {
   /* one */
-  const { estimatedDelivery, events } = await shipengine.trackShipment({
-    trackingNumber: '1Z97643X0347662293',
-    carrierCode: 'ups',
-  });
+  try {
+    const { estimatedDelivery, events } = await shipengine.trackShipment({
+      trackingNumber: '1Z97643X0347662293',
+      carrierCode: 'ups',
+    });
 
-  console.assert(
-    estimatedDelivery !== undefined,
-    'should have an estimated delivery'
-  );
-  console.assert(events.length, 'should have tracking events');
+    console.assert(
+      estimatedDelivery !== undefined,
+      'should have an estimated delivery'
+    );
+    console.assert(events.length, 'should have tracking events');
+  } catch (err) {
+    console.error(err);
+  }
 
   /* two */
-  const result = await shipengine.trackShipment('se-ABC123');
-  console.assert(result !== undefined);
+  try {
+    const result = await shipengine.trackShipment('se-ABC123');
+    console.assert(result !== undefined);
+  } catch (err) {
+    console.error(err);
+  }
 
   /* three */
   try {

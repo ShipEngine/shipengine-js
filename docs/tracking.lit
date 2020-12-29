@@ -32,19 +32,27 @@ There are two ways to track a shipment.
 The simplest method is to provide a [carrier code and tracking number](../api/globals.html#trackingquerybytrackingnumber)
 
 --- one
-const { estimatedDelivery, events } = await shipengine.trackShipment({
-  trackingNumber: '1Z97643X0347662293',
-  carrierCode: 'ups',
-});
+try {
+  const { estimatedDelivery, events } = await shipengine.trackShipment({
+    trackingNumber: '1Z97643X0347662293',
+    carrierCode: 'ups',
+  });
 
-console.assert(estimatedDelivery !== undefined, 'should have an estimated delivery');
-console.assert(events.length, 'should have tracking events');
+  console.assert(estimatedDelivery !== undefined, 'should have an estimated delivery');
+  console.assert(events.length, 'should have tracking events');
+} catch(err) {
+  console.error(err)
+}
 ---
 
 If you have a label, you can also track a shipment by package ID.
 --- two
-const result = await shipengine.trackShipment('se-ABC123');
-console.assert(result !== undefined)
+try {
+  const result = await shipengine.trackShipment('se-ABC123');
+  console.assert(result !== undefined)
+} catch(err) {
+  console.error(err)
+}
 ---
 
 NOTE: All ShipEngine convenience methods throw exceptions; wrap them in a try/catch.

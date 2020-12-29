@@ -1113,13 +1113,17 @@ The simplest method is to provide a <a href="../api/globals.html#trackingqueryby
 <div class="codeblock">
 <span class="codeblock_name">{one <a href="tracking.html#1:4">4</a>}</span>
 <pre class="prettyprint lang-ts">
-const { estimatedDelivery, events } = await shipengine.trackShipment({
-  trackingNumber: '1Z97643X0347662293',
-  carrierCode: 'ups',
-});
+try {
+  const { estimatedDelivery, events } = await shipengine.trackShipment({
+    trackingNumber: '1Z97643X0347662293',
+    carrierCode: 'ups',
+  });
 
-console.assert(estimatedDelivery !== undefined, 'should have an estimated delivery');
-console.assert(events.length, 'should have tracking events');
+  console.assert(estimatedDelivery !== undefined, 'should have an estimated delivery');
+  console.assert(events.length, 'should have tracking events');
+} catch(err) {
+  console.error(err)
+}
 </pre>
 
 
@@ -1131,8 +1135,12 @@ console.assert(events.length, 'should have tracking events');
 <div class="codeblock">
 <span class="codeblock_name">{two <a href="tracking.html#1:4">4</a>}</span>
 <pre class="prettyprint lang-ts">
-const result = await shipengine.trackShipment('se-ABC123');
-console.assert(result !== undefined)
+try {
+  const result = await shipengine.trackShipment('se-ABC123');
+  console.assert(result !== undefined)
+} catch(err) {
+  console.error(err)
+}
 </pre>
 
 
