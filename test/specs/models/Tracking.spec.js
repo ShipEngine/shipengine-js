@@ -1,17 +1,16 @@
-// @ts-check
 const { expect } = require('chai');
 const { ISOString } = require('../../../cjs/models/public');
 const {
   TrackingInformation,
   TrackingStatus,
-  getEventsInfo,
+  getEventsMixin,
 } = require('../../../cjs/models/public/Tracking');
 
 describe('getEventInfo mixin', () => {
   it('should sort by latest event first', () => {
     const shouldBeLatest = new ISOString('2020-01-01');
 
-    const { latestEvent } = getEventsInfo([
+    const { latestEvent } = getEventsMixin([
       {
         dateTime: new ISOString('2019-12-31'),
       },
@@ -23,9 +22,18 @@ describe('getEventInfo mixin', () => {
     ]);
     expect(latestEvent.dateTime.value).to.eq(shouldBeLatest.value);
   });
+  it('should return the og events', () => {
+    const a = [
+      {
+        dateTime: new ISOString('2019-12-31'),
+      },
+    ];
+    const { events } = getEventsMixin(a);
+    expect(events).to.deep.eq(a);
+  });
   it('should get latest deliveredAt item', () => {
     const lastDelivered = new ISOString('2020-01-01');
-    const { deliveredAt } = getEventsInfo([
+    const { deliveredAt } = getEventsMixin([
       {
         dateTime: new ISOString('2019-12-31'),
       },
@@ -46,7 +54,7 @@ describe('getEventInfo mixin', () => {
   });
   it('should get shippedAt item', () => {
     const _shippedAt = new ISOString('2020-01-01');
-    const { shippedAt } = getEventsInfo([
+    const { shippedAt } = getEventsMixin([
       {
         dateTime: _shippedAt,
         status: TrackingStatus.Accepted,
@@ -73,10 +81,12 @@ describe('TrackingInformation', () => {
       ...new TrackingInformation(trackingInfo, new ISOString(estDeliv), events),
     };
     expect(result.trackingNumber).to.eq(trackingInfo);
-    expect(Object.keys(result)).to.include.members([
-      'shippedAt',
-      'estimatedDelivery',
-      'deliveredAt',
-    ]);
+    const keys = Object.keys(result).sort();
+    expect(keys).to.include.members(
+      ['trackingNumber', 'estimatedDelivery'].sort()
+    );
+
+    // events mixin
+    expect(keys).to.include.members(['latestEvent', 'deliveredAt'].sort());
   });
 });

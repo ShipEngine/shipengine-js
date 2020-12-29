@@ -2,7 +2,10 @@ import { AxiosInstance } from 'axios';
 import {
   AddressQuery,
   AddressQueryResult,
+  ShipEngineError,
   TrackingInformation,
+  TrackingQueryByPackageId,
+  TrackingQueryByTrackingNumber,
 } from '../public';
 
 import {
@@ -27,7 +30,7 @@ export class AddressesData {
     addresses: AddressQuery[]
   ): Promise<AddressQueryResult[]> => {
     const request = addresses.map(mapToRequestBodyAddress);
-    const data = await this.#shipEngineRestAPI.validateAddresses(request);
+    const { data } = await this.#shipEngineRestAPI.validateAddresses(request);
     const result = data.map(mapToAddressQueryResult);
     return result;
   };
@@ -40,30 +43,32 @@ export class TrackingData {
   }
 
   /**
-   * Get Tracking Information
+   * Get Tracking Information via tracking / carrier.
    *
    * @param carrierCode - e.g ups
    * @param trackingNumber - e.g. 1Z6Y21Y60300230257
    */
-  query = async (
-    carrierCode: string,
-    trackingNumber: string
+  queryByTrackingNumber = async (
+    q: TrackingQueryByTrackingNumber
   ): Promise<TrackingInformation> => {
-    const data = await this.#shipEngineRestAPI.getTrackingLog(
-      carrierCode,
-      trackingNumber
+    const { data } = await this.#shipEngineRestAPI.getTrackingLog(
+      q.carrierCode,
+      q.trackingNumber
     );
     const result = mapToTrackingInformation(data);
     return result;
   };
 
   /**
-   * Get Label Information
+   * Get Tracking Information from package ID.
    *
-   * @param labelId - e.g string
    */
-  queryLabel = async (labelId: string): Promise<TrackingInformation> => {
-    const data = await this.#shipEngineRestAPI.getTrackingLogFromLabel(labelId);
+  queryByPackage = async (
+    packageId: TrackingQueryByPackageId
+  ): Promise<TrackingInformation | undefined> => {
+    const { data } = await this.#shipEngineRestAPI.getTrackingLogFromLabel(
+      packageId
+    );
     const result = mapToTrackingInformation(data);
     return result;
   };

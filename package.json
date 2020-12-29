@@ -16,7 +16,7 @@
     "gen:types": "bash ./generate-types.sh && npm run fix",
     "tsc:check": "tsc --noEmit",
     "test": "npm run test:node && npm run test:browser",
-    "test:node:watch": "chokidar **/test/** **/src/**/*.ts -c 'npm run test:node'",
+    "test:node:watch": "chokidar test/** src/**/** -c 'npm run test:node'",
     "test:browser:watch": "chokidar **/test/** karma.conf.js -c 'npm run test:browser -- --single-run'",
     "test:node": "npm run build:cjs && mocha",
     "test:browser": "npm run build && karma start --single-run",
@@ -28,15 +28,22 @@
     "sim:stop": "npm run sim -- down",
     "fix": "npm run lint -- --fix",
     "devdoc": "chokidar typedoc.js src/** -c 'npm run compile:api'",
+    "devlit": "chokidar docs/* --ignore '/docs/(api|tutorials|examples).*/' -c 'npm run compile:lit'",
     "fix:examples": "npm run lint:examples -- --fix",
     "compile:md-to-lit": "ts-node-script docs/md-to-lit.ts",
     "compile:api": "typedoc",
     "compile:api:watch": "run-p devdoc serve",
-    "compile:lit": "npm run compile:md-to-lit && bash docs/compile-lit.sh",
-    "compile": "npm run compile:api && npm run compile:lit && npm run fix:examples",
+    "compile:lit": "bash scripts/compile-lit.sh && npm run fix:examples",
+    "compile:lit:watch": "run-p devlit serve",
+    "compile": "npm run compile:api && npm run compile:lit",
     "serve": "live-server ./docs",
     "tag-and-release": "git checkout main && bash ./scripts/release.sh",
     "json2ts": "json2ts"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint && npm run test:node"
+    }
   },
   "engines": {
     "node": "12.x"
@@ -64,6 +71,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "express": "^4.17.1",
     "fkill": "^7.0.1",
+    "husky": "^4.3.6",
     "json-schema-to-typescript": "^10.0.0",
     "karma": "^5.2.3",
     "karma-child-process": "^1.0.4",
@@ -71,6 +79,7 @@
     "live-server": "^1.2.1",
     "mocha": "^8.2.1",
     "mocha-each": "^2.0.1",
+    "mocha-suppress-logs": "^0.2.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.1.2",
     "shipengine-json-schema": "^1.4.0",

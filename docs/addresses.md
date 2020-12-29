@@ -1,9 +1,9 @@
 @code_type typescript .ts
 @comment_type /* %s */
-@add_css docs/css/normalize.css
-@add_css docs/css/fonts.css
-@add_css docs/css/milligram.css
-@add_css docs/css/main.css
+@add_css css/normalize.css
+@add_css css/fonts.css
+@add_css css/milligram.css
+@add_css css/main.css
 
 # Validate and Normalize Addresses
 
@@ -80,7 +80,7 @@ try {
 try {
   await shipengine.normalizeAddress({ street: '1234 Main St' })
 } catch(err) {
-    if (err instanceof ShipEngineError) {
+  if (err instanceof ShipEngineError) {
     console.assert(err !== undefined, 'should be a ShipEngine error');
   } else {
     console.error(err)
@@ -133,7 +133,7 @@ const shipengine = new ShipEngine(process.env.API_KEY);
 })()
 ---
 
---- validate_address.ts
+--- validate-address.ts
 @{initialize}
 
 @{wrapper start}
@@ -152,7 +152,7 @@ const shipengine = new ShipEngine(process.env.API_KEY);
 ```
 ---
 
---- normalize_address.ts
+--- normalize-address.ts
 @{initialize normalize}
 
 @{wrapper start}
@@ -164,7 +164,7 @@ const shipengine = new ShipEngine(process.env.API_KEY);
 @{wrapper end}
 ---
 
---- query_address.ts
+--- query-address.ts
 @{initialize}
 
 @{wrapper start}

@@ -85,7 +85,7 @@
 			<section class="tsd-panel">
 				<h3>Implements</h3>
 				<ul class="tsd-hierarchy">
-					<li><a href="tagsservice.html" class="tsd-signature-type">TagsService</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="addressesservice.html" class="tsd-signature-type">AddressesService</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li><a href="trackingservice.html" class="tsd-signature-type">TrackingService</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="addressesservice.html" class="tsd-signature-type">AddressesService</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -102,15 +102,15 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="shipengine.html#addresses" class="tsd-kind-icon">addresses</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="shipengine.html#tags" class="tsd-kind-icon">tags</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="shipengine.html#tracking" class="tsd-kind-icon">tracking</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="shipengine.html#createtag" class="tsd-kind-icon">create<wbr>Tag</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="shipengine.html#normalizeaddress" class="tsd-kind-icon">normalize<wbr>Address</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="shipengine.html#queryaddress" class="tsd-kind-icon">query<wbr>Address</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="shipengine.html#trackshipment" class="tsd-kind-icon">track<wbr>Shipment</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="shipengine.html#validateaddress" class="tsd-kind-icon">validate<wbr>Address</a></li>
 							</ul>
 						</section>
@@ -128,10 +128,10 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="tagsservice.html">TagsService</a>.<a href="tagsservice.html#constructor">constructor</a></p>
+								<p>Inherited from <a href="trackingservice.html">TrackingService</a>.<a href="trackingservice.html#constructor">constructor</a></p>
 								<p>Overrides <a href="addressesservice.html">AddressesService</a>.<a href="addressesservice.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/services/tags.ts#L21">src/services/tags.ts:21</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/services/tracking.ts#L34">src/services/tracking.ts:34</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -159,43 +159,19 @@
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-					<a name="tags" class="tsd-anchor"></a>
-					<h3>tags</h3>
-					<div class="tsd-signature tsd-kind-icon">tags<span class="tsd-signature-symbol">:</span> <a href="tagsservicelowlevel.html" class="tsd-signature-type">TagsServiceLowLevel</a></div>
+					<a name="tracking" class="tsd-anchor"></a>
+					<h3>tracking</h3>
+					<div class="tsd-signature tsd-kind-icon">tracking<span class="tsd-signature-symbol">:</span> <a href="trackingservicelowlevel.html" class="tsd-signature-type">TrackingServiceLowLevel</a></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="tagsservice.html">TagsService</a>.<a href="tagsservice.html#tags">tags</a></p>
+						<p>Inherited from <a href="trackingservice.html">TrackingService</a>.<a href="trackingservice.html#tracking">tracking</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/services/tags.ts#L21">src/services/tags.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/services/tracking.ts#L34">src/services/tracking.ts:34</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-					<a name="createtag" class="tsd-anchor"></a>
-					<h3>create<wbr>Tag</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Tag<span class="tsd-signature-symbol">(</span>tagName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Inherited from <a href="tagsservice.html">TagsService</a>.<a href="tagsservice.html#createtag">createTag</a></p>
-								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/services/tags.ts#L26">src/services/tags.ts:26</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>tagName: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 					<a name="normalizeaddress" class="tsd-anchor"></a>
 					<h3>normalize<wbr>Address</h3>
@@ -207,12 +183,12 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="addressesservice.html">AddressesService</a>.<a href="addressesservice.html#normalizeaddress">normalizeAddress</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/services/addresses.ts#L63">src/services/addresses.ts:63</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/services/addresses.ts#L62">src/services/addresses.ts:62</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Try to normalize address</p>
+									<p> Normalize address.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -236,12 +212,12 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="addressesservice.html">AddressesService</a>.<a href="addressesservice.html#queryaddress">queryAddress</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/services/addresses.ts#L76">src/services/addresses.ts:76</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/services/addresses.ts#L73">src/services/addresses.ts:73</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get address query data</p>
+									<p>Get address query data.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -251,6 +227,30 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="addressqueryresult.html" class="tsd-signature-type">AddressQueryResult</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="trackshipment" class="tsd-anchor"></a>
+					<h3>track<wbr>Shipment</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">track<wbr>Shipment<span class="tsd-signature-symbol">(</span>q<span class="tsd-signature-symbol">: </span><a href="../globals.html#trackingquery" class="tsd-signature-type">TrackingQuery</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TrackingInformation</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="trackingservice.html">TrackingService</a>.<a href="trackingservice.html#trackshipment">trackShipment</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/services/tracking.ts#L39">src/services/tracking.ts:39</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>q: <a href="../globals.html#trackingquery" class="tsd-signature-type">TrackingQuery</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TrackingInformation</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -270,7 +270,7 @@
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Check if address is valid</p>
+									<p>Check if address is valid.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -295,30 +295,6 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-enum">
-						<a href="../enums/shipengineexceptiontype.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Exception<wbr>Type</a>
-					</li>
-					<li class=" tsd-kind-enum">
-						<a href="../enums/trackingstatus.html" class="tsd-kind-icon">Tracking<wbr>Status</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="address.html" class="tsd-kind-icon">Address</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="addressqueryresult.html" class="tsd-kind-icon">Address<wbr>Query<wbr>Result</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="addressesservice.html" class="tsd-kind-icon">Addresses<wbr>Service</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="addressesservicelowlevel.html" class="tsd-kind-icon">Addresses<wbr>Service<wbr>Low<wbr>Level</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="isostring.html" class="tsd-kind-icon">ISOString</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="invalidargumenterror.html" class="tsd-kind-icon">Invalid<wbr>Argument<wbr>Error</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
@@ -331,10 +307,7 @@
 								<a href="shipengine.html#addresses" class="tsd-kind-icon">addresses</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="shipengine.html#tags" class="tsd-kind-icon">tags</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="shipengine.html#createtag" class="tsd-kind-icon">create<wbr>Tag</a>
+								<a href="shipengine.html#tracking" class="tsd-kind-icon">tracking</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="shipengine.html#normalizeaddress" class="tsd-kind-icon">normalize<wbr>Address</a>
@@ -343,78 +316,15 @@
 								<a href="shipengine.html#queryaddress" class="tsd-kind-icon">query<wbr>Address</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="shipengine.html#trackshipment" class="tsd-kind-icon">track<wbr>Shipment</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="shipengine.html#validateaddress" class="tsd-kind-icon">validate<wbr>Address</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-class">
-						<a href="shipengineerror.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="shipengineinfo.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Info</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="shipenginewarning.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Warning</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="tagsservice.html" class="tsd-kind-icon">Tags<wbr>Service</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="tagsservicelowlevel.html" class="tsd-kind-icon">Tags<wbr>Service<wbr>Low<wbr>Level</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/addressquery.html" class="tsd-kind-icon">Address<wbr>Query</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/baseshipengineexception.html" class="tsd-kind-icon">Base<wbr>Ship<wbr>Engine<wbr>Exception</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/shipengineconfig.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Config</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/trackingevent.html" class="tsd-kind-icon">Tracking<wbr>Event</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/trackingeventlocation.html" class="tsd-kind-icon">Tracking<wbr>Event<wbr>Location</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/trackinginformation.html" class="tsd-kind-icon">Tracking<wbr>Information</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/trackingquery.html" class="tsd-kind-icon">Tracking<wbr>Query</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/trackingqueryresult.html" class="tsd-kind-icon">Tracking<wbr>Query<wbr>Result</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#axiosconfig" class="tsd-kind-icon">Axios<wbr>Config</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#customaxiosclientconfig" class="tsd-kind-icon">Custom<wbr>Axios<wbr>Client<wbr>Config</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#retrybackofftype" class="tsd-kind-icon">Retry<wbr>Back<wbr>Off<wbr>Type</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#shipengineapi" class="tsd-kind-icon">Ship<wbr>EngineAPI</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#shipengineexception" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Exception</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#street" class="tsd-kind-icon">Street</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="../globals.html#servicefactory" class="tsd-kind-icon">Service<wbr>Factory</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="../globals.html#shipengineapiclient" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Api<wbr>Client</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="../globals.html#getexceptionsbytype" class="tsd-kind-icon">get<wbr>Exceptions<wbr>ByType</a>
-					</li>
 				</ul>
 			</nav>
 		</div>

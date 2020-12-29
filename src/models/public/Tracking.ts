@@ -1,6 +1,12 @@
 import { ISOString } from './DateTime';
-import { findLast, last } from '../../utils';
-import { MessageFields, ShipEngineMessage } from './Messages';
+import { findLast, flatten, last } from '../../utils';
+import {
+  getMessageMixin,
+  MessageFields,
+  ShipEngineError,
+  ShipEngineInfo,
+  ShipEngineMessage,
+} from './Messages';
 
 /**
  * Shipment Statuses
@@ -40,41 +46,83 @@ interface TrackingEventLocation {
 }
 
 /* An event or status change that occurred while processing a `Shipment`. */
-export interface TrackingEvent extends MessageFields {
-  /* Date, datetime, or datetime w/timezone at which the event occurred. */
-  dateTime: ISOString;
+export interface TrackingEvent extends ReturnType<typeof getMessageMixin> {}
+export class TrackingEvent {
+  readonly #messages: ShipEngineMessage[];
 
-  /* Status of the shipment. */
-  status: TrackingStatus;
+  /** Expose message as proto method since prototype methods do _not_ show up in the public API (since they are not spreadable) ). */
+  get messages() {
+    return this.#messages;
+  }
 
-  /* Long-form description of the status */
-  description: string;
-
-  /*  Carrier-specific event or status code. */
-  carrierStatusCode: string;
-
-  /* Carrier-specific description */
-  carrierDetailCode: string;
+  /* Date, datetime, or date:time w/timezone at which the event occurred. */
+  readonly dateTime: ISOString;
 
   /* Location where the event occurred. */
-  location?: TrackingEventLocation;
+  readonly location?: TrackingEventLocation;
+
+  /* Status of the shipment. */
+  readonly status: TrackingStatus;
+
+  /* Long-form description of the status */
+  readonly description: string;
+
+  /*  Carrier-specific event or status code. */
+  readonly carrierStatusCode: string;
+
+  /* Carrier-specific description */
+  readonly carrierDetailCode: string;
 
   /*  Name of the person who signed or approved this event.
    * This is usually only relevant for the TrackingStatus.Delivered event.
    */
-  signer?: string;
+  readonly signer?: string;
 
-  /* True if the `#status` is an exception. */
-  readonly hasError: boolean;
+  constructor(
+    dateTime: string,
+    status: TrackingStatus,
+    description: string,
+    carrierStatusCode: string,
+    carrierDetailCode: string,
+    location: TrackingEventLocation,
+    signer?: string,
+    exceptionDescription?: string,
+    carrierStatusDescription?: string
+  ) {
+    this.#messages = [];
+    exceptionDescription &&
+      this.messages.push(new ShipEngineError(exceptionDescription));
+
+    carrierStatusDescription &&
+      this.messages.push(new ShipEngineInfo(carrierStatusDescription));
+
+    Object.assign(this, getMessageMixin(this.#messages));
+    // if all values are undefined, object is undefined.
+    const maybeLocation = Object.values(location).some(Boolean)
+      ? location
+      : undefined;
+    if (maybeLocation) {
+      this.location = maybeLocation;
+    }
+    this.dateTime = new ISOString(dateTime);
+    this.status = status;
+    this.description = description;
+    this.carrierStatusCode = carrierStatusCode;
+    this.carrierDetailCode = carrierDetailCode;
+    if (signer) {
+      this.signer = signer;
+    }
+  }
 }
 
 interface TrackingEventsInfo {
   latestEvent?: TrackingEvent;
   shippedAt?: ISOString;
   deliveredAt?: ISOString;
+  events: TrackingEvent[];
 }
 
-export const getEventsInfo = (events: TrackingEvent[]): TrackingEventsInfo => {
+export const getEventsMixin = (events: TrackingEvent[]): TrackingEventsInfo => {
   // tracking event should be _sorted_ with earliest event first (date ascending)
   const sortedDateAsc = events.sort((a, b) =>
     a.dateTime.value < b.dateTime.value ? -1 : 1
@@ -93,6 +141,7 @@ export const getEventsInfo = (events: TrackingEvent[]): TrackingEventsInfo => {
   )?.dateTime;
 
   return {
+    events: sortedDateAsc,
     latestEvent,
     shippedAt,
     deliveredAt,
@@ -112,24 +161,50 @@ export class TrackingInformation {
     estimatedDelivery: ISOString,
     trackingEvents: TrackingEvent[]
   ) {
-    Object.assign(this, getEventsInfo(trackingEvents));
+    Object.assign(this, getEventsMixin(trackingEvents));
     this.estimatedDelivery = estimatedDelivery;
     this.trackingNumber = trackingNumber;
   }
 }
 
-export interface TrackingQuery {
+export type TrackingQueryByPackageId = string;
+
+export type TrackingQuery =
+  | TrackingQueryByPackageId
+  | TrackingQueryByTrackingNumber;
+
+export type TrackingQueryByTrackingNumber = {
   /* Tracking number of the shipment being queried. */
   trackingNumber: string;
   /* Carrier code of the shipment being queried. */
   carrierCode: string;
-}
+};
+
+export const isTrackingQueryByPackageId = (
+  t: TrackingQuery
+): t is TrackingQueryByPackageId => {
+  return typeof t === 'string';
+};
 
 /* Result of a tracking query. */
+export interface TrackingQueryResult extends MessageFields {}
 export class TrackingQueryResult {
+  readonly query: TrackingQuery;
+  readonly information: TrackingInformation | undefined;
   constructor(
-    readonly query: TrackingQuery | string,
-    readonly information: TrackingInformation,
-    readonly messages: ShipEngineMessage[]
-  ) {}
+    query: TrackingQuery,
+    information: TrackingInformation | undefined,
+    extraMessages?: ShipEngineMessage[]
+  ) {
+    this.information = information;
+    this.query = query;
+    const messages = [
+      ...(information
+        ? flatten(information.events.map((el) => el.messages))
+        : [new ShipEngineError('Unable to get tracking information')]),
+      ...(extraMessages || []),
+    ];
+
+    Object.assign(this, getMessageMixin(messages));
+  }
 }

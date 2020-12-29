@@ -1,4 +1,3 @@
-// @ts-check
 const { expect } = require('chai');
 const forEach = require('mocha-each');
 const {

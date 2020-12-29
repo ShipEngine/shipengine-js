@@ -1,4 +1,3 @@
-// @ts-check
 const { expect } = require('chai');
 const { ISOString } = require('../../../cjs/models/public');
 

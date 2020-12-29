@@ -90,14 +90,15 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="isostring.html#hastime" class="tsd-kind-icon">has<wbr>Time</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="isostring.html#hastimezone" class="tsd-kind-icon">has<wbr>Time<wbr>Zone</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="isostring.html#value" class="tsd-kind-icon">value</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
-							<h3>Accessors</h3>
+							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="isostring.html#hastime" class="tsd-kind-icon">has<wbr>Time</a></li>
-								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="isostring.html#hastimezone" class="tsd-kind-icon">has<wbr>Time<wbr>Zone</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="isostring.html#tostring" class="tsd-kind-icon">to<wbr>String</a></li>
 							</ul>
 						</section>
 					</div>
@@ -115,7 +116,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/DateTime.ts#L6">src/models/public/DateTime.ts:6</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/DateTime.ts#L7">src/models/public/DateTime.ts:7</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -148,60 +149,63 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="value" class="tsd-anchor"></a>
-					<h3>value</h3>
-					<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="hastime" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> has<wbr>Time</h3>
+					<div class="tsd-signature tsd-kind-icon">has<wbr>Time<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/DateTime.ts#L6">src/models/public/DateTime.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="hastimezone" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> has<wbr>Time<wbr>Zone</h3>
+					<div class="tsd-signature tsd-kind-icon">has<wbr>Time<wbr>Zone<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/DateTime.ts#L7">src/models/public/DateTime.ts:7</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="value" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> value</h3>
+					<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/DateTime.ts#L16">src/models/public/DateTime.ts:16</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>date
+							example:</p>
+							<ul>
+								<li>2020-01-01</li>
+								<li>2020-01-01T23:00</li>
+								<li>2020-01-01T20:00:05+05:00</li>
+							</ul>
+						</div>
+					</div>
+				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Accessors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-					<a name="hastime" class="tsd-anchor"></a>
-					<h3>has<wbr>Time</h3>
-					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> hasTime<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="tostring" class="tsd-anchor"></a>
+					<h3>to<wbr>String</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">to<wbr>String<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/DateTime.ts#L23">src/models/public/DateTime.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/DateTime.ts#L21">src/models/public/DateTime.ts:21</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Check if value includes time (e.g.T23:00)?</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-					<a name="hastimezone" class="tsd-anchor"></a>
-					<h3>has<wbr>Time<wbr>Zone</h3>
-					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> hasTimeZone<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/DateTime.ts#L31">src/models/public/DateTime.ts:31</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Check if the value include a time zone designator (e.g.+05:00).
-									The TZD is represented as UTC offset.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -217,24 +221,6 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-enum">
-						<a href="../enums/shipengineexceptiontype.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Exception<wbr>Type</a>
-					</li>
-					<li class=" tsd-kind-enum">
-						<a href="../enums/trackingstatus.html" class="tsd-kind-icon">Tracking<wbr>Status</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="address.html" class="tsd-kind-icon">Address</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="addressqueryresult.html" class="tsd-kind-icon">Address<wbr>Query<wbr>Result</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="addressesservice.html" class="tsd-kind-icon">Addresses<wbr>Service</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="addressesservicelowlevel.html" class="tsd-kind-icon">Addresses<wbr>Service<wbr>Low<wbr>Level</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
@@ -244,90 +230,21 @@
 								<a href="isostring.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="isostring.html#value" class="tsd-kind-icon">value</a>
-							</li>
-							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="isostring.html#hastime" class="tsd-kind-icon">has<wbr>Time</a>
 							</li>
-							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="isostring.html#hastimezone" class="tsd-kind-icon">has<wbr>Time<wbr>Zone</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="isostring.html#value" class="tsd-kind-icon">value</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="isostring.html#tostring" class="tsd-kind-icon">to<wbr>String</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-class">
-						<a href="invalidargumenterror.html" class="tsd-kind-icon">Invalid<wbr>Argument<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="shipengine.html" class="tsd-kind-icon">Ship<wbr>Engine</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="shipengineerror.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="shipengineinfo.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Info</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="shipenginewarning.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Warning</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="tagsservice.html" class="tsd-kind-icon">Tags<wbr>Service</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="tagsservicelowlevel.html" class="tsd-kind-icon">Tags<wbr>Service<wbr>Low<wbr>Level</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/addressquery.html" class="tsd-kind-icon">Address<wbr>Query</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/baseshipengineexception.html" class="tsd-kind-icon">Base<wbr>Ship<wbr>Engine<wbr>Exception</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/shipengineconfig.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Config</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/trackingevent.html" class="tsd-kind-icon">Tracking<wbr>Event</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/trackingeventlocation.html" class="tsd-kind-icon">Tracking<wbr>Event<wbr>Location</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/trackinginformation.html" class="tsd-kind-icon">Tracking<wbr>Information</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/trackingquery.html" class="tsd-kind-icon">Tracking<wbr>Query</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/trackingqueryresult.html" class="tsd-kind-icon">Tracking<wbr>Query<wbr>Result</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#axiosconfig" class="tsd-kind-icon">Axios<wbr>Config</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#customaxiosclientconfig" class="tsd-kind-icon">Custom<wbr>Axios<wbr>Client<wbr>Config</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#retrybackofftype" class="tsd-kind-icon">Retry<wbr>Back<wbr>Off<wbr>Type</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#shipengineapi" class="tsd-kind-icon">Ship<wbr>EngineAPI</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#shipengineexception" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Exception</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#street" class="tsd-kind-icon">Street</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="../globals.html#servicefactory" class="tsd-kind-icon">Service<wbr>Factory</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="../globals.html#shipengineapiclient" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Api<wbr>Client</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="../globals.html#getexceptionsbytype" class="tsd-kind-icon">get<wbr>Exceptions<wbr>ByType</a>
-					</li>
 				</ul>
 			</nav>
 		</div>
