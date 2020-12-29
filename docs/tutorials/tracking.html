@@ -1107,20 +1107,19 @@ const shipengine = new ShipEngine('my_api_key');
 </div>
 <a name="1:4"><div class="section"><h4>4. Track a shipment</h4></a>
 <p>There are two ways to track a shipment.
-The simplest method is to provide a <a href="../api/globals.html#trackingquerybytrackingnumber">carrier code and tracking number</a>
+The simplest method is to provide a <a href="../api/globals.html#trackingquerybytrackingnumber">carrier code and tracking number</a>.
 </p>
 
 <div class="codeblock">
 <span class="codeblock_name">{one <a href="tracking.html#1:4">4</a>}</span>
 <pre class="prettyprint lang-ts">
 try {
-  const { estimatedDelivery, events } = await shipengine.trackShipment({
-    trackingNumber: '1Z97643X0347662293',
+  const result = await shipengine.trackShipment({
+    trackingNumber: '1Z12345E0205271688',
     carrierCode: 'ups',
   });
-
-  console.assert(estimatedDelivery !== undefined, 'should have an estimated delivery');
-  console.assert(events.length, 'should have tracking events');
+  console.assert(result.estimatedDelivery, 'should have an estimated delivery');
+  console.assert(result.events.length, 'should have tracking events');;
 } catch(err) {
   console.error(err)
 }
@@ -1137,7 +1136,8 @@ try {
 <pre class="prettyprint lang-ts">
 try {
   const result = await shipengine.trackShipment('se-ABC123');
-  console.assert(result !== undefined)
+  console.assert(result.estimatedDelivery, 'should have an estimated delivery');
+  console.assert(result.events.length, 'should have tracking events');;
 } catch(err) {
   console.error(err)
 }
@@ -1146,7 +1146,8 @@ try {
 
 <p class="seealso">Used in section <a href="tracking.html#1:5">5</a></p>
 </div>
-<p>NOTE: All ShipEngine convenience methods throw exceptions; wrap them in a try/catch.
+<p>Track shipment will throw an <a href="../api/classes/shipengineerror.html">Error</a> if the tracking number is invalid, or if the request was otherwise unsuccessful.
+All ShipEngine convenience methods throw errors.
 </p>
 
 <div class="codeblock">
@@ -1154,10 +1155,9 @@ try {
 <pre class="prettyprint lang-ts">
 try {
   await shipengine.trackShipment('se-IDONTEXIST');
-  console.error('should throw an error; execution should not reach here');
 } catch (err) {
-  console.assert(err.type === 'error');
-  console.assert(err.message !== undefined, 'error should have message field')
+  console.error(err)
+  console.assert(err.message, 'should have message field')
 }
 </pre>
 

@@ -29,17 +29,16 @@ const shipengine = new ShipEngine('my_api_key');
 @s Track a shipment
 
 There are two ways to track a shipment.
-The simplest method is to provide a [carrier code and tracking number](../api/globals.html#trackingquerybytrackingnumber)
+The simplest method is to provide a [carrier code and tracking number](../api/globals.html#trackingquerybytrackingnumber).
 
 --- one
 try {
-  const { estimatedDelivery, events } = await shipengine.trackShipment({
-    trackingNumber: '1Z97643X0347662293',
+  const result = await shipengine.trackShipment({
+    trackingNumber: '1Z12345E0205271688',
     carrierCode: 'ups',
   });
-
-  console.assert(estimatedDelivery !== undefined, 'should have an estimated delivery');
-  console.assert(events.length, 'should have tracking events');
+  console.assert(result.estimatedDelivery, 'should have an estimated delivery');
+  console.assert(result.events.length, 'should have tracking events');;
 } catch(err) {
   console.error(err)
 }
@@ -49,21 +48,20 @@ If you have a label, you can also track a shipment by package ID.
 --- two
 try {
   const result = await shipengine.trackShipment('se-ABC123');
-  console.assert(result !== undefined)
+  console.assert(result.estimatedDelivery, 'should have an estimated delivery');
+  console.assert(result.events.length, 'should have tracking events');;
 } catch(err) {
   console.error(err)
 }
 ---
-
-NOTE: All ShipEngine convenience methods throw exceptions; wrap them in a try/catch.
-
+Track shipment will throw an [Error](../api/classes/shipengineerror.html) if the tracking number is invalid, or if the request was otherwise unsuccessful.
+All ShipEngine convenience methods throw errors.
 --- three
 try {
   await shipengine.trackShipment('se-IDONTEXIST');
-  console.error('should throw an error; execution should not reach here');
 } catch (err) {
-  console.assert(err.type === 'error');
-  console.assert(err.message !== undefined, 'error should have message field')
+  console.error(err)
+  console.assert(err.message, 'should have message field')
 }
 ---
 
