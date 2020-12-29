@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>AddressQueryResult | ShipEngine JS API</title>
+	<title>TrackingQueryResult | ShipEngine JS API</title>
 	<meta name="description" content="Documentation for ShipEngine JS API">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -52,10 +52,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="addressqueryresult.html">AddressQueryResult</a>
+					<a href="trackingqueryresult.html">TrackingQueryResult</a>
 				</li>
 			</ul>
-			<h1>Class AddressQueryResult</h1>
+			<h1>Class TrackingQueryResult</h1>
 		</div>
 	</div>
 </header>
@@ -69,7 +69,7 @@
 						<a href="../interfaces/messagefields.html" class="tsd-signature-type">MessageFields</a>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">AddressQueryResult</span>
+								<span class="target">TrackingQueryResult</span>
 							</li>
 						</ul>
 					</li>
@@ -82,17 +82,17 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="addressqueryresult.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="trackingqueryresult.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="addressqueryresult.html#errors" class="tsd-kind-icon">errors</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="addressqueryresult.html#info" class="tsd-kind-icon">info</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="addressqueryresult.html#normalized" class="tsd-kind-icon">normalized</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="addressqueryresult.html#original" class="tsd-kind-icon">original</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="addressqueryresult.html#warnings" class="tsd-kind-icon">warnings</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="trackingqueryresult.html#errors" class="tsd-kind-icon">errors</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="trackingqueryresult.html#info" class="tsd-kind-icon">info</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="trackingqueryresult.html#information" class="tsd-kind-icon">information</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="trackingqueryresult.html#query" class="tsd-kind-icon">query</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="trackingqueryresult.html#warnings" class="tsd-kind-icon">warnings</a></li>
 							</ul>
 						</section>
 					</div>
@@ -104,28 +104,25 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Address<wbr>Query<wbr>Result<span class="tsd-signature-symbol">(</span>original<span class="tsd-signature-symbol">: </span><a href="../interfaces/addressquery.html" class="tsd-signature-type">AddressQuery</a>, messages<span class="tsd-signature-symbol">: </span><a href="../globals.html#shipenginemessage" class="tsd-signature-type">ShipEngineMessage</a><span class="tsd-signature-symbol">[]</span>, normalized<span class="tsd-signature-symbol">?: </span><a href="address.html" class="tsd-signature-type">Address</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="addressqueryresult.html" class="tsd-signature-type">AddressQueryResult</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Tracking<wbr>Query<wbr>Result<span class="tsd-signature-symbol">(</span>query<span class="tsd-signature-symbol">: </span><a href="../globals.html#trackingquery" class="tsd-signature-type">TrackingQuery</a>, information<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TrackingInformation</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="trackingqueryresult.html" class="tsd-signature-type">TrackingQueryResult</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L44">src/models/public/Address.ts:44</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Tracking.ts#L193">src/models/public/Tracking.ts:193</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>original: <a href="../interfaces/addressquery.html" class="tsd-signature-type">AddressQuery</a></h5>
+									<h5>query: <a href="../globals.html#trackingquery" class="tsd-signature-type">TrackingQuery</a></h5>
 								</li>
 								<li>
-									<h5>messages: <a href="../globals.html#shipenginemessage" class="tsd-signature-type">ShipEngineMessage</a><span class="tsd-signature-symbol">[]</span></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> normalized: <a href="address.html" class="tsd-signature-type">Address</a></h5>
+									<h5>information: <span class="tsd-signature-type">TrackingInformation</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="addressqueryresult.html" class="tsd-signature-type">AddressQueryResult</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="trackingqueryresult.html" class="tsd-signature-type">TrackingQueryResult</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -155,22 +152,22 @@
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="normalized" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> normalized</h3>
-					<div class="tsd-signature tsd-kind-icon">normalized<span class="tsd-signature-symbol">:</span> <a href="address.html" class="tsd-signature-type">Address</a></div>
+					<a name="information" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> information</h3>
+					<div class="tsd-signature tsd-kind-icon">information<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TrackingInformation</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L44">src/models/public/Address.ts:44</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Tracking.ts#L193">src/models/public/Tracking.ts:193</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="original" class="tsd-anchor"></a>
-					<h3>original</h3>
-					<div class="tsd-signature tsd-kind-icon">original<span class="tsd-signature-symbol">:</span> <a href="../interfaces/addressquery.html" class="tsd-signature-type">AddressQuery</a></div>
+					<a name="query" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> query</h3>
+					<div class="tsd-signature tsd-kind-icon">query<span class="tsd-signature-symbol">:</span> <a href="../globals.html#trackingquery" class="tsd-signature-type">TrackingQuery</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Address.ts#L43">src/models/public/Address.ts:43</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/Tracking.ts#L192">src/models/public/Tracking.ts:192</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -200,25 +197,25 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
-						<a href="addressqueryresult.html" class="tsd-kind-icon">Address<wbr>Query<wbr>Result</a>
+						<a href="trackingqueryresult.html" class="tsd-kind-icon">Tracking<wbr>Query<wbr>Result</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="addressqueryresult.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="trackingqueryresult.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="addressqueryresult.html#errors" class="tsd-kind-icon">errors</a>
+								<a href="trackingqueryresult.html#errors" class="tsd-kind-icon">errors</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="addressqueryresult.html#info" class="tsd-kind-icon">info</a>
+								<a href="trackingqueryresult.html#info" class="tsd-kind-icon">info</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="addressqueryresult.html#normalized" class="tsd-kind-icon">normalized</a>
+								<a href="trackingqueryresult.html#information" class="tsd-kind-icon">information</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="addressqueryresult.html#original" class="tsd-kind-icon">original</a>
+								<a href="trackingqueryresult.html#query" class="tsd-kind-icon">query</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="addressqueryresult.html#warnings" class="tsd-kind-icon">warnings</a>
+								<a href="trackingqueryresult.html#warnings" class="tsd-kind-icon">warnings</a>
 							</li>
 						</ul>
 					</li>

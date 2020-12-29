@@ -3,7 +3,7 @@ import path from 'path';
 
 const generateLit = async (fileName = '') => {
   const mdPath = path.join(__dirname, `${fileName}.md`);
-  const litPath = path.join(__dirname, 'dist', `${fileName}.lit`);
+  const litPath = path.join(__dirname, `${fileName}.lit`);
   const r = await fs.promises.readFile(mdPath, {
     encoding: 'utf8',
   });

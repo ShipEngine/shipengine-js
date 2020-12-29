@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ISOString | ShipEngine JS API</title>
+	<title>TrackingData | ShipEngine JS API</title>
 	<meta name="description" content="Documentation for ShipEngine JS API">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -52,28 +52,21 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="isostring.html">ISOString</a>
+					<a href="trackingdata.html">TrackingData</a>
 				</li>
 			</ul>
-			<h1>Class ISOString</h1>
+			<h1>Class TrackingData</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p> Class representing an ISOString.</p>
-					</div>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ISOString</span>
+						<span class="target">TrackingData</span>
 					</li>
 				</ul>
 			</section>
@@ -84,21 +77,14 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="isostring.html#constructor" class="tsd-kind-icon">constructor</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="isostring.html#hastime" class="tsd-kind-icon">has<wbr>Time</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="isostring.html#hastimezone" class="tsd-kind-icon">has<wbr>Time<wbr>Zone</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="isostring.html#value" class="tsd-kind-icon">value</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="trackingdata.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="isostring.html#tostring" class="tsd-kind-icon">to<wbr>String</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="trackingdata.html#querybypackage" class="tsd-kind-icon">query<wbr>ByPackage</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="trackingdata.html#querybytrackingnumber" class="tsd-kind-icon">query<wbr>ByTracking<wbr>Number</a></li>
 							</ul>
 						</section>
 					</div>
@@ -110,102 +96,81 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new ISOString<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="isostring.html" class="tsd-signature-type">ISOString</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Tracking<wbr>Data<span class="tsd-signature-symbol">(</span>client<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AxiosInstance</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="trackingdata.html" class="tsd-signature-type">TrackingData</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/DateTime.ts#L7">src/models/public/DateTime.ts:7</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/repository/index.ts#L39">src/models/repository/index.ts:39</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Create an ISOString</p>
-								</div>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>value: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>date
-											example:</p>
-											<ul>
-												<li>2020-01-01</li>
-												<li>2020-01-01T23:00</li>
-												<li>2020-01-01T20:00:05+05:00</li>
-											</ul>
-										</div>
-									</div>
+									<h5>client: <span class="tsd-signature-type">AxiosInstance</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="isostring.html" class="tsd-signature-type">ISOString</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="trackingdata.html" class="tsd-signature-type">TrackingData</a></h4>
 						</li>
 					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="hastime" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> has<wbr>Time</h3>
-					<div class="tsd-signature tsd-kind-icon">has<wbr>Time<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/DateTime.ts#L6">src/models/public/DateTime.ts:6</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="hastimezone" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> has<wbr>Time<wbr>Zone</h3>
-					<div class="tsd-signature tsd-kind-icon">has<wbr>Time<wbr>Zone<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/DateTime.ts#L7">src/models/public/DateTime.ts:7</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="value" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> value</h3>
-					<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/DateTime.ts#L16">src/models/public/DateTime.ts:16</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>date
-							example:</p>
-							<ul>
-								<li>2020-01-01</li>
-								<li>2020-01-01T23:00</li>
-								<li>2020-01-01T20:00:05+05:00</li>
-							</ul>
-						</div>
-					</div>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="tostring" class="tsd-anchor"></a>
-					<h3>to<wbr>String</h3>
+					<a name="querybypackage" class="tsd-anchor"></a>
+					<h3>query<wbr>ByPackage</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">to<wbr>String<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">query<wbr>ByPackage<span class="tsd-signature-symbol">(</span>packageId<span class="tsd-signature-symbol">: </span><a href="../globals.html#trackingquerybypackageid" class="tsd-signature-type">TrackingQueryByPackageId</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TrackingInformation</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/public/DateTime.ts#L21">src/models/public/DateTime.ts:21</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/repository/index.ts#L65">src/models/repository/index.ts:65</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get Tracking Information from package ID.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>packageId: <a href="../globals.html#trackingquerybypackageid" class="tsd-signature-type">TrackingQueryByPackageId</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TrackingInformation</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="querybytrackingnumber" class="tsd-anchor"></a>
+					<h3>query<wbr>ByTracking<wbr>Number</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">query<wbr>ByTracking<wbr>Number<span class="tsd-signature-symbol">(</span>q<span class="tsd-signature-symbol">: </span><a href="../globals.html#trackingquerybytrackingnumber" class="tsd-signature-type">TrackingQueryByTrackingNumber</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TrackingInformation</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/repository/index.ts#L50">src/models/repository/index.ts:50</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get Tracking Information via tracking / carrier.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>q: <a href="../globals.html#trackingquerybytrackingnumber" class="tsd-signature-type">TrackingQueryByTrackingNumber</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TrackingInformation</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -224,22 +189,16 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
-						<a href="isostring.html" class="tsd-kind-icon">ISOString</a>
+						<a href="trackingdata.html" class="tsd-kind-icon">Tracking<wbr>Data</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="isostring.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="isostring.html#hastime" class="tsd-kind-icon">has<wbr>Time</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="isostring.html#hastimezone" class="tsd-kind-icon">has<wbr>Time<wbr>Zone</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="isostring.html#value" class="tsd-kind-icon">value</a>
+								<a href="trackingdata.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="isostring.html#tostring" class="tsd-kind-icon">to<wbr>String</a>
+								<a href="trackingdata.html#querybypackage" class="tsd-kind-icon">query<wbr>ByPackage</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="trackingdata.html#querybytrackingnumber" class="tsd-kind-icon">query<wbr>ByTracking<wbr>Number</a>
 							</li>
 						</ul>
 					</li>

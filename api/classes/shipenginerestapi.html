@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>AddressesService | ShipEngine JS API</title>
+	<title>ShipEngineRestAPI | ShipEngine JS API</title>
 	<meta name="description" content="Documentation for ShipEngine JS API">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -52,21 +52,29 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="addressesservice.html">AddressesService</a>
+					<a href="shipenginerestapi.html">ShipEngineRestAPI</a>
 				</li>
 			</ul>
-			<h1>Class AddressesService</h1>
+			<h1>Class ShipEngineRestAPI</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Model that represents the actual ShipEngine Rest API.
+						This should be able to swapped out cleanly with another generated model if we so desire.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">AddressesService</span>
+						<span class="target">ShipEngineRestAPI</span>
 					</li>
 				</ul>
 			</section>
@@ -77,21 +85,15 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="addressesservice.html#constructor" class="tsd-kind-icon">constructor</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="addressesservice.html#addresses" class="tsd-kind-icon">addresses</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="shipenginerestapi.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="addressesservice.html#normalizeaddress" class="tsd-kind-icon">normalize<wbr>Address</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="addressesservice.html#queryaddress" class="tsd-kind-icon">query<wbr>Address</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="addressesservice.html#validateaddress" class="tsd-kind-icon">validate<wbr>Address</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="shipenginerestapi.html#gettrackinglog" class="tsd-kind-icon">get<wbr>Tracking<wbr>Log</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="shipenginerestapi.html#gettrackinglogfromlabel" class="tsd-kind-icon">get<wbr>Tracking<wbr>Log<wbr>From<wbr>Label</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="shipenginerestapi.html#validateaddresses" class="tsd-kind-icon">validate<wbr>Addresses</a></li>
 							</ul>
 						</section>
 					</div>
@@ -103,13 +105,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Addresses<wbr>Service<span class="tsd-signature-symbol">(</span>client<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AxiosInstance</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="addressesservice.html" class="tsd-signature-type">AddressesService</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Ship<wbr>Engine<wbr>RestAPI<span class="tsd-signature-symbol">(</span>client<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AxiosInstance</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="shipenginerestapi.html" class="tsd-signature-type">ShipEngineRestAPI</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/services/addresses.ts#L48">src/services/addresses.ts:48</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/shipengine-rest/index.ts#L17">src/models/shipengine-rest/index.ts:17</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -118,107 +120,82 @@
 									<h5>client: <span class="tsd-signature-type">AxiosInstance</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="addressesservice.html" class="tsd-signature-type">AddressesService</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="shipenginerestapi.html" class="tsd-signature-type">ShipEngineRestAPI</a></h4>
 						</li>
 					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="addresses" class="tsd-anchor"></a>
-					<h3>addresses</h3>
-					<div class="tsd-signature tsd-kind-icon">addresses<span class="tsd-signature-symbol">:</span> <a href="addressesservicelowlevel.html" class="tsd-signature-type">AddressesServiceLowLevel</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/services/addresses.ts#L48">src/services/addresses.ts:48</a></li>
-						</ul>
-					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="normalizeaddress" class="tsd-anchor"></a>
-					<h3>normalize<wbr>Address</h3>
+					<a name="gettrackinglog" class="tsd-anchor"></a>
+					<h3>get<wbr>Tracking<wbr>Log</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">normalize<wbr>Address<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><a href="../interfaces/addressquery.html" class="tsd-signature-type">AddressQuery</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="address.html" class="tsd-signature-type">Address</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Tracking<wbr>Log<span class="tsd-signature-symbol">(</span>carrierCode<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, trackingNumber<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AxiosResponse</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/services/addresses.ts#L62">src/services/addresses.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/shipengine-rest/index.ts#L23">src/models/shipengine-rest/index.ts:23</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p> Normalize address.</p>
-								</div>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>address: <a href="../interfaces/addressquery.html" class="tsd-signature-type">AddressQuery</a></h5>
+									<h5>carrierCode: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>trackingNumber: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="address.html" class="tsd-signature-type">Address</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AxiosResponse</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="queryaddress" class="tsd-anchor"></a>
-					<h3>query<wbr>Address</h3>
+					<a name="gettrackinglogfromlabel" class="tsd-anchor"></a>
+					<h3>get<wbr>Tracking<wbr>Log<wbr>From<wbr>Label</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">query<wbr>Address<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><a href="../interfaces/addressquery.html" class="tsd-signature-type">AddressQuery</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="addressqueryresult.html" class="tsd-signature-type">AddressQueryResult</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Tracking<wbr>Log<wbr>From<wbr>Label<span class="tsd-signature-symbol">(</span>packageId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AxiosResponse</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/services/addresses.ts#L73">src/services/addresses.ts:73</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/shipengine-rest/index.ts#L32">src/models/shipengine-rest/index.ts:32</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Get address query data.</p>
-								</div>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>address: <a href="../interfaces/addressquery.html" class="tsd-signature-type">AddressQuery</a></h5>
+									<h5>packageId: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="addressqueryresult.html" class="tsd-signature-type">AddressQueryResult</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AxiosResponse</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="validateaddress" class="tsd-anchor"></a>
-					<h3>validate<wbr>Address</h3>
+					<a name="validateaddresses" class="tsd-anchor"></a>
+					<h3>validate<wbr>Addresses</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">validate<wbr>Address<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><a href="../interfaces/addressquery.html" class="tsd-signature-type">AddressQuery</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">validate<wbr>Addresses<span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><a href="../globals.html#addresstovalidate" class="tsd-signature-type">AddressToValidate</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AxiosResponse</span><span class="tsd-signature-symbol">&lt;</span><a href="../globals.html#validateaddressresponsebody" class="tsd-signature-type">ValidateAddressResponseBody</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/services/addresses.ts#L56">src/services/addresses.ts:56</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/shipengine-rest/index.ts#L38">src/models/shipengine-rest/index.ts:38</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Check if address is valid.</p>
-								</div>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>address: <a href="../interfaces/addressquery.html" class="tsd-signature-type">AddressQuery</a></h5>
+									<h5>v: <a href="../globals.html#addresstovalidate" class="tsd-signature-type">AddressToValidate</a><span class="tsd-signature-symbol">[]</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AxiosResponse</span><span class="tsd-signature-symbol">&lt;</span><a href="../globals.html#validateaddressresponsebody" class="tsd-signature-type">ValidateAddressResponseBody</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -237,22 +214,19 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
-						<a href="addressesservice.html" class="tsd-kind-icon">Addresses<wbr>Service</a>
+						<a href="shipenginerestapi.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>RestAPI</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="addressesservice.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="addressesservice.html#addresses" class="tsd-kind-icon">addresses</a>
+								<a href="shipenginerestapi.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="addressesservice.html#normalizeaddress" class="tsd-kind-icon">normalize<wbr>Address</a>
+								<a href="shipenginerestapi.html#gettrackinglog" class="tsd-kind-icon">get<wbr>Tracking<wbr>Log</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="addressesservice.html#queryaddress" class="tsd-kind-icon">query<wbr>Address</a>
+								<a href="shipenginerestapi.html#gettrackinglogfromlabel" class="tsd-kind-icon">get<wbr>Tracking<wbr>Log<wbr>From<wbr>Label</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="addressesservice.html#validateaddress" class="tsd-kind-icon">validate<wbr>Address</a>
+								<a href="shipenginerestapi.html#validateaddresses" class="tsd-kind-icon">validate<wbr>Addresses</a>
 							</li>
 						</ul>
 					</li>
