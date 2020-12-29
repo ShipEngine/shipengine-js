@@ -21,30 +21,24 @@ export class ShipEngineRestAPI {
 
   /* node_modules/shipengine-json-schema/index.json */
   getTrackingLog = async (carrierCode: string, trackingNumber: string) => {
-    return (
-      await this.#client.get<GetTrackingLogResponseBody>('/tracking', {
-        params: {
-          carrier_code: carrierCode,
-          tracking_number: trackingNumber,
-        },
-      })
-    ).data;
+    return await this.#client.get<GetTrackingLogResponseBody>('/tracking', {
+      params: {
+        carrier_code: carrierCode,
+        tracking_number: trackingNumber,
+      },
+    });
   };
 
-  getTrackingLogFromLabel = async (labelId: string) => {
-    return (
-      await this.#client.get<GetTrackingLogFromLabelResponseBody>(
-        `/labels/${labelId}/track`
-      )
-    ).data;
+  getTrackingLogFromLabel = async (packageId: string) => {
+    return await this.#client.get<GetTrackingLogFromLabelResponseBody>(
+      `/labels/${packageId}/track`
+    );
   };
 
   validateAddresses = async (v: AddressToValidate[]) => {
-    return (
-      await this.#client.post<ValidateAddressResponseBody>(
-        '/addresses/validate',
-        v
-      )
-    ).data;
+    return await this.#client.post<ValidateAddressResponseBody>(
+      '/addresses/validate',
+      v
+    );
   };
 }

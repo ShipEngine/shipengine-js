@@ -1,3 +1,3 @@
-import './examples/normalize_address';
-import './examples/query_address';
-import './examples/validate_address';
+import './examples/normalize-address';
+import './examples/query-address';
+import './examples/validate-address';

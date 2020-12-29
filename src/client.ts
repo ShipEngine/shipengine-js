@@ -54,6 +54,19 @@ const isAxiosInstance = (v: CustomAxiosClientConfig): v is AxiosInstance => {
   return typeof v === 'function';
 };
 
+/* /**
+ * parse error response
+ * @function
+ * @param {Error} error - Error to parse
+ * @returns {Promise} - Contains the error object
+ */
+/* const parseError async (error: AxiosError) {
+  if (error.response) {
+    return Promise.reject(error.response.data);
+  }
+
+  return Promise.reject(error);
+} */
 /**
  * Create API Client
  * @param config - client configuration which can be wither axios config or instance

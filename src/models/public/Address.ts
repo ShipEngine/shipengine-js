@@ -1,4 +1,4 @@
-import { ShipEngineMessage, getMessages, MessageFields } from './Messages';
+import { ShipEngineMessage, getMessageMixin, MessageFields } from './Messages';
 
 type Street = string | string[];
 
@@ -47,7 +47,7 @@ export class AddressQueryResult {
     messages: ShipEngineMessage[],
     normalized?: Address
   ) {
-    Object.assign(this, getMessages(messages));
+    Object.assign(this, getMessageMixin(messages));
     this.original = original;
     this.normalized = normalized;
   }

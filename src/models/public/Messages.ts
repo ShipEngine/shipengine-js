@@ -5,32 +5,25 @@ export enum MessageType {
   WARNING = 'warning',
 }
 
-interface Message {
-  type: MessageType;
-  message: string;
+abstract class Message {
+  constructor(readonly message: string, readonly type: MessageType) {}
 }
 
-export class ShipEngineError implements Message {
-  type = MessageType.ERROR;
-  message = '';
-  constructor(msg: Message['message']) {
-    this.message = msg;
+export class ShipEngineError extends Message {
+  constructor(message: string) {
+    super(message, MessageType.ERROR);
   }
 }
 
-export class ShipEngineWarning implements Message {
-  type = MessageType.WARNING;
-  message = '';
-  constructor(msg: Message['message']) {
-    this.message = msg;
+export class ShipEngineWarning extends Message {
+  constructor(message: string) {
+    super(message, MessageType.WARNING);
   }
 }
 
-export class ShipEngineInfo implements Message {
-  type = MessageType.INFO;
-  message = '';
-  constructor(msg: Message['message']) {
-    this.message = msg;
+export class ShipEngineInfo extends Message {
+  constructor(message: string) {
+    super(message, MessageType.INFO);
   }
 }
 
@@ -39,11 +32,11 @@ export type ShipEngineMessage =
   | ShipEngineInfo
   | ShipEngineWarning;
 
-export const getExceptionsByType = (
-  exceptions: ShipEngineMessage[],
+export const getMessagesByType = (
+  messages: ShipEngineMessage[],
   type: MessageType
 ) => {
-  return exceptions.filter((el) => el.type === type);
+  return messages.filter((el) => el.type === type);
 };
 
 export interface MessageFields {
@@ -52,8 +45,10 @@ export interface MessageFields {
   errors: ShipEngineError[];
 }
 
-export const getMessages = (messages: ShipEngineMessage[]): MessageFields => ({
-  info: getExceptionsByType(messages, MessageType.INFO),
-  warnings: getExceptionsByType(messages, MessageType.WARNING),
-  errors: getExceptionsByType(messages, MessageType.ERROR),
+export const getMessageMixin = (
+  messages: ShipEngineMessage[]
+): MessageFields => ({
+  info: getMessagesByType(messages, MessageType.INFO),
+  warnings: getMessagesByType(messages, MessageType.WARNING),
+  errors: getMessagesByType(messages, MessageType.ERROR),
 });

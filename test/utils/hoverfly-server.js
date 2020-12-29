@@ -1,5 +1,3 @@
-// @ts-check
-
 const axios = require('axios');
 const { hoverflyActualAPIPort } = require('./constants');
 

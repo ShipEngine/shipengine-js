@@ -1,0 +1,93 @@
+@code_type typescript .ts
+@comment_type /* %s */
+@add_css css/normalize.css
+@add_css css/fonts.css
+@add_css css/milligram.css
+@add_css css/main.css
+
+@title Track a Shipment
+
+@s Introduction
+In this tutorial we will learn multiple ways to track a shipment using the [ShipEngine](https://www.shipengine.com/) library.
+
+NOTE: You will need shipment information to track.
+
+@s Install the ShipEngine library
+
+--- install
+npm install shipengine@alpha
+---
+
+@s Initialize the ShipEngine library
+
+--- initialize
+const ShipEngine = require('shipengine');
+
+const shipengine = new ShipEngine('my_api_key');
+---
+
+@s Track a shipment
+
+There are two ways to track a shipment.
+The simplest method is to provide a [carrier code and tracking number](../api/globals.html#trackingquerybytrackingnumber)
+
+--- one
+const { estimatedDelivery, events } = await shipengine.trackShipment({
+  trackingNumber: '1Z97643X0347662293',
+  carrierCode: 'ups',
+});
+
+console.assert(estimatedDelivery !== undefined, 'should have an estimated delivery');
+console.assert(events.length, 'should have tracking events');
+---
+
+If you have a label, you can also track a shipment by package ID.
+--- two
+const result = await shipengine.trackShipment('se-ABC123');
+console.assert(result !== undefined)
+---
+
+NOTE: All ShipEngine convenience methods throw exceptions; wrap them in a try/catch.
+
+--- three
+try {
+  await shipengine.trackShipment('se-IDONTEXIST');
+  console.error('should throw an error; execution should not reach here');
+} catch (err) {
+  console.assert(err.type === 'error');
+  console.assert(err.message !== undefined, 'error should have message field')
+}
+---
+
+@s Programs
+
+Swap out initialization codeblock
+--- initialize --- :=
+import { default as ShipEngine } from '../../src';
+
+import 'dotenv/config';
+const shipengine = new ShipEngine(process.env.API_KEY);
+---
+
+--- wrapper start  ---
+(async () => {
+---
+
+--- wrapper end ---
+})()
+---
+
+--- track-shipment.ts
+@{initialize}
+
+@{wrapper start}
+
+@{one}
+
+@{two}
+
+@{three}
+
+@{wrapper end}
+---
+
