@@ -1,9 +1,5 @@
 const { expect } = require('chai');
 const {
-  TrackingInformation,
-  TrackingEvent,
-} = require('../../../cjs/models/public/Tracking');
-const {
   mapToTrackingInformation,
   mapToTrackEvents,
 } = require('../../../cjs/models/mappers/tracking');
@@ -16,33 +12,23 @@ describe('mapToTrackingInformation', () => {
       tracking_number: 'abc',
     };
     const result = mapToTrackingInformation(trackingInfo);
-    expect(result instanceof TrackingInformation).to.be.true;
+    expect(result.trackingNumber).to.eq('abc');
+    expect(result.events).to.have.length;
   });
   describe('impossible states: api boundary validation', () => {
-    it('should return undefined if events does not exist', () => {
+    it('should throw error', () => {
       const trackingInfo = {
         ...query,
-        tracking_number: 'abc',
-        events: null,
-      };
-      const result = mapToTrackingInformation(trackingInfo);
-      expect(result).to.be.undefined;
-    });
-    it('should return undefined if tracking_number does not exist', () => {
-      const trackingInfo = {
-        ...query,
-        tracking_number: undefined,
-      };
-      const result = mapToTrackingInformation(trackingInfo);
-      expect(result).to.be.undefined;
-    });
-    it('should return undefined if estimated_delivery_data does not exist', () => {
-      const trackingInfo = {
-        ...query,
+        events: [],
+        carrier_status_description: 'Invalid Tracking Information',
         estimated_delivery_date: undefined,
       };
-      const result = mapToTrackingInformation(trackingInfo);
-      expect(result).to.be.undefined;
+      try {
+        mapToTrackingInformation(trackingInfo);
+        expect.fail('should not reach here');
+      } catch (err) {
+        expect(typeof err.message).to.eq('string');
+      }
     });
   });
 });
@@ -71,7 +57,6 @@ describe('mapToTrackEvents', () => {
   });
   it('should return a track events instance', () => {
     const result = mapToTrackEvents(ev1);
-    expect(result).to.be.instanceOf(TrackingEvent);
     const parsed = {
       info: [{ type: 'info', message: 'On FedEx vehicle for delivery' }],
       warnings: [],

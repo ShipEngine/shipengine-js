@@ -8,6 +8,7 @@ import {
   TrackingInformation,
   ISOString,
   TrackingStatus,
+  ShipEngineError,
 } from '../public';
 
 export const mapToTrackEvents = (e: TrackEventInternal): TrackingEvent => {
@@ -30,25 +31,33 @@ export const mapToTrackEvents = (e: TrackEventInternal): TrackingEvent => {
   );
 };
 
+type TrackingInformationLogResponse =
+  | GetTrackingLogResponseBody
+  | GetTrackingLogFromLabelResponseBody;
+
 export const mapToTrackingInformation = (
-  trackingInformationResponse:
-    | GetTrackingLogResponseBody
-    | GetTrackingLogFromLabelResponseBody
-): TrackingInformation | undefined => {
+  response: TrackingInformationLogResponse
+): TrackingInformation => {
   const {
     tracking_number,
     events,
     estimated_delivery_date,
-  } = trackingInformationResponse;
+    carrier_status_description,
+  } = response;
 
-  // validate response
-  if (!tracking_number || !events || !estimated_delivery_date) {
-    return undefined;
+  if (
+    // carrier_status_description does not always refer to events in the events array
+    // it can also indicate a requestion failure, e.g. somethibg like "Invalid Tracking Number"
+    carrier_status_description &&
+    !events?.length &&
+    !estimated_delivery_date
+  ) {
+    throw new ShipEngineError(carrier_status_description);
   }
 
   return new TrackingInformation(
-    tracking_number,
-    new ISOString(estimated_delivery_date),
+    tracking_number || '',
+    new ISOString(estimated_delivery_date || ''),
     (events || []).map(mapToTrackEvents)
   );
 };

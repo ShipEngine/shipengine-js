@@ -67,13 +67,25 @@ describe('tracking service', () => {
         expect.fail();
       }
     });
-    it('should throw errors', async () => {
-      try {
-        const queryResult = await api.trackShipment('errors');
-        expect.fail(queryResult);
-      } catch (err) {
-        expect(err).to.be.instanceOf(ShipEngineError);
-      }
+    describe('errors', () => {
+      const errStr = 'Unable to get tracking information';
+      it('should throw errors if 404', async () => {
+        try {
+          const queryResult = await api.trackShipment('error');
+          expect.fail(queryResult);
+        } catch (err) {
+          expect(err.message).includes(errStr);
+        }
+      });
+      it('should throw errors', async () => {
+        try {
+          const queryResult = await api.trackShipment('error-no-tracking-info');
+          expect.fail(queryResult);
+        } catch (err) {
+          expect(err.message).includes(errStr);
+          expect(err.message).includes('No tracking information');
+        }
+      });
     });
   });
 });

@@ -193,13 +193,17 @@ export class TrackingQueryResult {
   readonly information: TrackingInformation | undefined;
   constructor(
     query: TrackingQuery,
-    information: TrackingInformation | undefined
+    information: TrackingInformation | undefined,
+    extraMessages?: ShipEngineMessage[]
   ) {
     this.information = information;
     this.query = query;
-    const messages = information
-      ? flatten(information.events.map((el) => el.messages))
-      : [new ShipEngineError('Could not get information.')];
+    const messages = [
+      ...(information
+        ? flatten(information.events.map((el) => el.messages))
+        : [new ShipEngineError('Unable to get tracking information')]),
+      ...(extraMessages || []),
+    ];
 
     Object.assign(this, getMessageMixin(messages));
   }

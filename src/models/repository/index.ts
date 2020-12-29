@@ -2,6 +2,7 @@ import { AxiosInstance } from 'axios';
 import {
   AddressQuery,
   AddressQueryResult,
+  ShipEngineError,
   TrackingInformation,
   TrackingQueryByPackageId,
   TrackingQueryByTrackingNumber,
@@ -49,7 +50,7 @@ export class TrackingData {
    */
   queryByTrackingNumber = async (
     q: TrackingQueryByTrackingNumber
-  ): Promise<TrackingInformation | undefined> => {
+  ): Promise<TrackingInformation> => {
     const { data } = await this.#shipEngineRestAPI.getTrackingLog(
       q.carrierCode,
       q.trackingNumber
