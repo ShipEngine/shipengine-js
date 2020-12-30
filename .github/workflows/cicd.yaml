@@ -84,6 +84,14 @@ jobs:
       - name: Install Dependencies
         uses: bahmutov/npm-install@v1
 
+      - name: Install Literate
+        uses: engineerd/configurator@v0.0.5
+        continue-on-error: true
+        with:
+          name: lit
+          url: https://zyedidia.github.io/literate/binaries/literate-linux64.tar.gz
+          pathInArchive: lit
+
       - name: Build the code
         run: npm run build
 
