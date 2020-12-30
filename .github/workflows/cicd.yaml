@@ -87,7 +87,12 @@ jobs:
         run: npm run build
 
       - name: Generate docs
-        run: npm run compile
+        run: |
+          npm run compile
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add docs
+          git commit -m "add docs"
 
       - name: Publish to NPM
         uses: JS-DevTools/npm-publish@v1
