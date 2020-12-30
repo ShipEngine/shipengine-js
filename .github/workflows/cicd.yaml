@@ -11,6 +11,7 @@ on:
       - develop
 jobs:
   tests:
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
     name: Lint & Test
     runs-on: ${{ matrix.os }}
     timeout-minutes: 5
@@ -87,12 +88,20 @@ jobs:
         run: npm run build
 
       - name: Generate docs
+        run: npm run compile
+
+      - name: Commit files
         run: |
-          npm run compile
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add docs
-          git commit -m "add docs"
+          git commit -m "add docs [skip ci]"
+
+      - name: Push the docs
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
 
       - name: Publish to NPM
         uses: JS-DevTools/npm-publish@v1
