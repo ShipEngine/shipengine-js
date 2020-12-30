@@ -23,7 +23,6 @@ const shipengine = new ShipEngine(process.env.API_KEY);
   }
 
   /* two */
-  /*
   try {
     const result = await shipengine.trackShipment('se-ABC123');
     console.assert(
@@ -34,14 +33,14 @@ const shipengine = new ShipEngine(process.env.API_KEY);
   } catch (err) {
     console.error(err);
   }
-*/
+
   /* three */
-  /*   try {
+  try {
     await shipengine.trackShipment('se-IDONTEXIST');
   } catch (err) {
     console.error(err);
     console.assert(err.message, 'should have message field');
-  } */
+  }
 
   /* wrapper end */
 })();
