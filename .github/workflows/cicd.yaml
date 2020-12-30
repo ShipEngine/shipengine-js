@@ -93,6 +93,9 @@ jobs:
           check-version: true
           tag: alpha
 
+      - name: Generate docs
+        run: npm run compile
+
       - name: Publish to Github Pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
