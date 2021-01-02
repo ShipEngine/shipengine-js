@@ -1,0 +1,2 @@
+# rename this to .envrc and add directives
+use nix
