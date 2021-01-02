@@ -55,6 +55,13 @@ console.log(isValid ? 'valid!' : 'invalid!')
 - `git submodule update --init --recursive`
 - submit a PR against `main`
 
+### Optional
+- if you use direnv, edit and rename .envrc.example.
+
+### Upgrading node version
+#### edit the following files:
+- `package.json/engines, .nvmrc, shell.nix, README.md`
+
 ### Running tests
 Do `npm run sim:start`
 

@@ -1,2 +1,9 @@
-# rename this to .envrc and add directives
-use nix
+# If you use direnv and a version manager, you may wish to rename this to .envrc and uncomment one of the following.
+
+# notes:
+## asdf requires legacy_version_file = yes in an .asdfrc.
+## If you use the asdf plugin for oh-my-zsh, no need to add a .envrc after updating your .asdfrc.
+
+# use nix
+# nvm use
+# use asdf
