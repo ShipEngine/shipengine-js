@@ -3,6 +3,7 @@
 
 # Private files
 .env
+.envrc
 
 # Miscellaneous
 *~
