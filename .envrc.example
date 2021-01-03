@@ -2,8 +2,7 @@
 
 # notes:
 ## asdf requires legacy_version_file = yes in an .asdfrc.
-## If you use the asdf plugin for oh-my-zsh, no need to add a .envrc after updating your .asdfrc.
+## If you use the asdf direnv plugin, there is no need to for this file.
 
 # use nix
 # nvm use
-# use asdf
