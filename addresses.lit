@@ -53,27 +53,28 @@ You can pass an incomplete address as an argument: for example, maybe you don't 
 
 --- normalize address args
 try {
-  const address = await shipengine.normalizeAddress({
+  const result = await shipengine.normalizeAddress({
     street: ['1060 W Addison St'],
     cityLocality: 'Chicago',
     stateProvince: 'IL',
     country: 'US',
 });
-  console.log(`normalized street is: ${address.street}`);
-  console.assert(!address.isResidential, 'should be commercial');
+  console.log(`normalized street is: ${result.street}`);
+  console.assert(!result.isResidential, 'should be commercial');
 } catch (err) {
   console.error(err)
 }
 ---
- [normalizeAddress](../api/classes/addressesservice.html#normalizeaddress) will throw a [ShipEngineError](../api/classes/shipengineerror.html) if the given address cannot be found or is missing too much information. You can  mport the `ShipEngineError` in order to check if the thrown are normalization errors, or if they are unexpected HTTP errors that indicate a request/response failure.
+ [normalizeAddress](../api/classes/addressesservice.html#normalizeaddress) will throw a [ShipEngineError](../api/classes/shipengineerror.html) if the request was recieved but normalization was otherwise unsuccessful. Normalization may fail if the provided address query cannot be found or is missing required fields.
 
 --- exception handling
 try {
   await shipengine.normalizeAddress({ street: '1234 Main St' })
 } catch(err) {
   if (err instanceof ShipEngineError) {
-    console.assert(err !== undefined, 'should be a ShipEngine error');
+    console.assert(err !== undefined, 'address query missing too much information');
   } else {
+    // unable to complete request at all (e.g. network connection)
     console.error(err)
   }
 }
@@ -84,7 +85,7 @@ try {
 If you want a list of exceptions along with address normalization, you can use the [queryAddress](../api/classes/addressesservice.html#queryaddress) method.
 
 --- query address
-const addressQuery = await shipengine.queryAddress({
+const result = await shipengine.queryAddress({
   street: ['1 E 161 St'],
   cityLocality: 'The Bronx',
   stateProvince: 'NY',
@@ -92,8 +93,8 @@ const addressQuery = await shipengine.queryAddress({
   country: 'US'
 })
 
-console.assert(!addressQuery.exceptions.length, 'should be no exceptions')
-console.log(`the normalized address is: ${JSON.stringify(addressQuery.normalized)}.`)
+console.assert(!result.exceptions.length, 'should be no exceptions')
+console.log(`the normalized address is: ${JSON.stringify(result.normalized)}.`)
 ---
 
 
