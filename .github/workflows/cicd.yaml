@@ -20,7 +20,7 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-          - macos-latest
+          # - macos-latest # buggy
           - windows-latest
         node:
           - 12.x
