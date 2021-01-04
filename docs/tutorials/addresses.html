@@ -1139,14 +1139,14 @@ You can pass an incomplete address as an argument: for example, maybe you don't 
 <span class="codeblock_name">{normalize address args <a href="addresses.html#1:5">5</a>}</span>
 <pre class="prettyprint lang-ts">
 try {
-  const address = await shipengine.normalizeAddress({
+  const result = await shipengine.normalizeAddress({
     street: ['1060 W Addison St'],
     cityLocality: 'Chicago',
     stateProvince: 'IL',
     country: 'US',
 });
-  console.log(`normalized street is: ${address.street}`);
-  console.assert(!address.isResidential, 'should be commercial');
+  console.log(`normalized street is: ${result.street}`);
+  console.assert(!result.isResidential, 'should be commercial');
 } catch (err) {
   console.error(err)
 }
@@ -1155,7 +1155,7 @@ try {
 
 <p class="seealso">Used in section <a href="addresses.html#1:7">7</a></p>
 </div>
-<p> <a href="../api/classes/addressesservice.html#normalizeaddress">normalizeAddress</a> will throw a <a href="../api/classes/shipengineerror.html">ShipEngineError</a> if the given address cannot be found or is missing too much information. You can  mport the <code>ShipEngineError</code> in order to check if the thrown are normalization errors, or if they are unexpected HTTP errors that indicate a request/response failure.
+<p> <a href="../api/classes/addressesservice.html#normalizeaddress">normalizeAddress</a> will throw a <a href="../api/classes/shipengineerror.html">ShipEngineError</a> if the request was recieved but normalization was otherwise unsuccessful. Normalization may fail if the provided address query cannot be found or is missing required fields.
 </p>
 
 <div class="codeblock">
@@ -1165,8 +1165,9 @@ try {
   await shipengine.normalizeAddress({ street: '1234 Main St' })
 } catch(err) {
   if (err instanceof ShipEngineError) {
-    console.assert(err !== undefined, 'should be a ShipEngine error');
+    console.assert(err !== undefined, 'address query missing too much information');
   } else {
+    // unable to complete request at all (e.g. network connection)
     console.error(err)
   }
 }
@@ -1183,7 +1184,7 @@ try {
 <div class="codeblock">
 <span class="codeblock_name">{query address <a href="addresses.html#1:6">6</a>}</span>
 <pre class="prettyprint lang-ts">
-const addressQuery = await shipengine.queryAddress({
+const result = await shipengine.queryAddress({
   street: ['1 E 161 St'],
   cityLocality: 'The Bronx',
   stateProvince: 'NY',
@@ -1191,8 +1192,8 @@ const addressQuery = await shipengine.queryAddress({
   country: 'US'
 })
 
-console.assert(!addressQuery.exceptions.length, 'should be no exceptions')
-console.log(`the normalized address is: ${JSON.stringify(addressQuery.normalized)}.`)
+console.assert(!result.exceptions.length, 'should be no exceptions')
+console.log(`the normalized address is: ${JSON.stringify(result.normalized)}.`)
 </pre>
 
 
