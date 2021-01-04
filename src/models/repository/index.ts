@@ -2,7 +2,6 @@ import { AxiosInstance } from 'axios';
 import {
   AddressQuery,
   AddressQueryResult,
-  ShipEngineError,
   TrackingInformation,
   TrackingQueryByPackageId,
   TrackingQueryByTrackingNumber,
@@ -44,9 +43,6 @@ export class TrackingData {
 
   /**
    * Get Tracking Information via tracking / carrier.
-   *
-   * @param carrierCode - e.g ups
-   * @param trackingNumber - e.g. 1Z6Y21Y60300230257
    */
   queryByTrackingNumber = async (
     q: TrackingQueryByTrackingNumber
@@ -61,7 +57,6 @@ export class TrackingData {
 
   /**
    * Get Tracking Information from package ID.
-   *
    */
   queryByPackage = async (
     packageId: TrackingQueryByPackageId

@@ -48,7 +48,6 @@ export class TrackingService {
   trackShipment = async (q: TrackingQuery): Promise<TrackingInformation> => {
     const data = await this.tracking.query(q);
     if (!data.information) {
-      // this needs hoverfly testing
       throw new ShipEngineError(
         data.errors.map((el) => el.message).join(' | ')
       );
