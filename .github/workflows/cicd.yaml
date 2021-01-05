@@ -68,7 +68,7 @@ jobs:
       - run: npm run test
 
   deploy:
-    name: Deploy
+    name: Deploy to NPM
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -84,32 +84,8 @@ jobs:
       - name: Install Dependencies
         uses: bahmutov/npm-install@v1
 
-      - name: Install Literate
-        uses: engineerd/configurator@v0.0.5
-        continue-on-error: true
-        with:
-          name: lit
-          url: https://zyedidia.github.io/literate/binaries/literate-linux64.tar.gz
-          pathInArchive: lit
-
-      - name: Build the code
+      - name: Build
         run: npm run build
-
-      - name: Generate docs
-        run: npm run compile
-
-      - name: Commit files
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add docs
-          git commit -m "generate docs [skip ci]" || echo "nothing to commit."
-
-      - name: Push the docs
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
 
       - name: Publish to NPM
         uses: JS-DevTools/npm-publish@v1
@@ -118,10 +94,52 @@ jobs:
           check-version: true
           tag: alpha
 
+  publish-docs:
+    name: Publish Documentation
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - name: Install Node
+        uses: actions/setup-node@v1
+
+      - name: Install Dependencies
+        uses: bahmutov/npm-install@v1
+
+      - name: Build
+        run: npm run build
+
+      - name: Install Literate
+        uses: engineerd/configurator@v0.0.5
+        with:
+          name: lit
+          url: https://zyedidia.github.io/literate/binaries/literate-linux64.tar.gz
+          pathInArchive: lit
+
+      - name: Generate Docs
+        run: npm run compile
+
+      - name: Commit Generated Docs
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add docs
+          git commit -m "generate docs [skip ci]" || echo "nothing to commit."
+
+      - name: Push Docs to Branch
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+
       - name: Publish to Github Pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.
           FOLDER: docs # The folder the action should deploy.
-          CLEAN: true # Automatically remove deleted files from the deploy branch
