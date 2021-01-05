@@ -21,7 +21,7 @@ const shipengine = new ShipEngine(process.env.API_KEY);
     console.error(err);
   }
 
-  /* exception handling */
+  /* error handling */
   try {
     await shipengine.normalizeAddress({ street: '1234 Main St' });
   } catch (err) {

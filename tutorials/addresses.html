@@ -1159,7 +1159,7 @@ try {
 </p>
 
 <div class="codeblock">
-<span class="codeblock_name">{exception handling <a href="addresses.html#1:5">5</a>}</span>
+<span class="codeblock_name">{error handling <a href="addresses.html#1:5">5</a>}</span>
 <pre class="prettyprint lang-ts">
 try {
   await shipengine.normalizeAddress({ street: '1234 Main St' })
@@ -1178,7 +1178,7 @@ try {
 </div>
 </div>
 <a name="1:6"><div class="section"><h4>6. Query an Address</h4></a>
-<p>If you want a list of exceptions along with address normalization, you can use the <a href="../api/classes/addressesservice.html#queryaddress">queryAddress</a> method.
+<p>If you want a list errors along with address normalization, you can use the <a href="../api/classes/addressesservice.html#queryaddress">queryAddress</a> method.
 </p>
 
 <div class="codeblock">
@@ -1192,7 +1192,7 @@ const result = await shipengine.queryAddress({
   country: 'US'
 })
 
-console.assert(!result.exceptions.length, 'should be no exceptions')
+console.assert(!result.errors.length, 'should be no errors')
 console.log(`the normalized address is: ${JSON.stringify(result.normalized)}.`)
 </pre>
 
@@ -1275,7 +1275,7 @@ const shipengine = new ShipEngine(process.env.API_KEY);
 
 <span class="nocode pln">{normalize address args, <a href="addresses.html#1:5">5</a>}</span>
 
-<span class="nocode pln">{exception handling, <a href="addresses.html#1:5">5</a>}</span>
+<span class="nocode pln">{error handling, <a href="addresses.html#1:5">5</a>}</span>
 
 <span class="nocode pln">{wrapper end, <a href="addresses.html#1:7">7</a>}</span>
 </pre>

@@ -16,7 +16,7 @@ const shipengine = new ShipEngine(process.env.API_KEY);
     country: 'US',
   });
 
-  console.assert(!result.exceptions.length, 'should be no exceptions');
+  console.assert(!result.errors.length, 'should be no errors');
   console.log(
     `the normalized address is: ${JSON.stringify(result.normalized)}.`
   );
