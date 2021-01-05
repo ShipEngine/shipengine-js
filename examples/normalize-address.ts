@@ -9,14 +9,14 @@ const shipengine = new ShipEngine(process.env.API_KEY);
 (async () => {
   /* normalize address args */
   try {
-    const address = await shipengine.normalizeAddress({
+    const result = await shipengine.normalizeAddress({
       street: ['1060 W Addison St'],
       cityLocality: 'Chicago',
       stateProvince: 'IL',
       country: 'US',
     });
-    console.log(`normalized street is: ${address.street}`);
-    console.assert(!address.isResidential, 'should be commercial');
+    console.log(`normalized street is: ${result.street}`);
+    console.assert(!result.isResidential, 'should be commercial');
   } catch (err) {
     console.error(err);
   }
@@ -26,8 +26,12 @@ const shipengine = new ShipEngine(process.env.API_KEY);
     await shipengine.normalizeAddress({ street: '1234 Main St' });
   } catch (err) {
     if (err instanceof ShipEngineError) {
-      console.assert(err !== undefined, 'should be a ShipEngine error');
+      console.assert(
+        err !== undefined,
+        'address query missing too much information'
+      );
     } else {
+      // unable to complete request at all (e.g. network connection)
       console.error(err);
     }
   }
