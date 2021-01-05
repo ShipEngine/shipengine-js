@@ -67,7 +67,7 @@ try {
 ---
  [normalizeAddress](../api/classes/addressesservice.html#normalizeaddress) will throw a [ShipEngineError](../api/classes/shipengineerror.html) if the request was recieved but normalization was otherwise unsuccessful. Normalization may fail if the provided address query cannot be found or is missing required fields.
 
---- exception handling
+--- error handling
 try {
   await shipengine.normalizeAddress({ street: '1234 Main St' })
 } catch(err) {
@@ -82,7 +82,7 @@ try {
 
 @s Query an Address
 
-If you want a list of exceptions along with address normalization, you can use the [queryAddress](../api/classes/addressesservice.html#queryaddress) method.
+If you want a list errors along with address normalization, you can use the [queryAddress](../api/classes/addressesservice.html#queryaddress) method.
 
 --- query address
 const result = await shipengine.queryAddress({
@@ -93,7 +93,7 @@ const result = await shipengine.queryAddress({
   country: 'US'
 })
 
-console.assert(!result.exceptions.length, 'should be no exceptions')
+console.assert(!result.errors.length, 'should be no errors')
 console.log(`the normalized address is: ${JSON.stringify(result.normalized)}.`)
 ---
 
@@ -142,7 +142,7 @@ const shipengine = new ShipEngine(process.env.API_KEY);
 
 @{normalize address args}
 
-@{exception handling}
+@{error handling}
 
 @{wrapper end}
 ---
