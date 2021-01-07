@@ -4,4 +4,4 @@ import type { TrackingService } from '../../services/tracking';
 /**
  * Aggregation of the entire shipengine-js API
  */
-export type ShipEngineAPI = TrackingService & AddressesService;
+export interface ShipEngineAPI extends TrackingService, AddressesService {}
