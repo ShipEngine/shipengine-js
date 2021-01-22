@@ -1,7 +1,8 @@
 {
   "ts-node": {
     "compilerOptions": {
-      "module": "commonjs"
+      "module": "commonjs",
+      "strict": false
     }
   },
   "extends": "@tsconfig/node12/tsconfig.json",
