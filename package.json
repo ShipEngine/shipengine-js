@@ -25,7 +25,8 @@
     "lint:examples": "eslint docs/examples/**/*.ts",
     "sim:update": "git submodule update --recursive --remote",
     "sim": "docker-compose -f simengine/docker-compose.yaml ",
-    "sim:start": "npm run sim -- up -d",
+    "sim:start": "npm run sim -- up -d && npm run sim:import",
+    "sim:import": "ts-node-script import-rpc.ts",
     "sim:stop": "npm run sim -- down",
     "fix": "npm run lint -- --fix",
     "devdoc": "chokidar typedoc.js src/** -c 'npm run compile:api'",
@@ -94,6 +95,7 @@
   },
   "dependencies": {
     "axios": "^0.21.0",
+    "jsonrpc-ts": "^0.2.1",
     "retry-axios": "^2.3.0"
   }
 }

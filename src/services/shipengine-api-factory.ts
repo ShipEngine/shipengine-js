@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios';
-import { createClient } from '../client';
+import { createClient } from '../models/shipengine-rest/client';
 import { CustomAxiosClientConfig } from '../models/public/Config';
 import { ShipEngineConfig } from '../shipengine';
 

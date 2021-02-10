@@ -1,6 +1,6 @@
 import * as rax from 'retry-axios';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { CustomAxiosClientConfig } from './models/public/Config';
+import { CustomAxiosClientConfig } from '../public/Config';
 
 const defaultConfig: AxiosRequestConfig = {
   timeout: 10000,
