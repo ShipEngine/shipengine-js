@@ -8,7 +8,7 @@ import {
   ShipEngineError,
   ShipEngineMessage,
 } from '../models/public';
-import { TrackingData } from '../models/repository';
+import { TrackingData } from '../models/TrackingData';
 
 export class TrackingServiceLowLevel {
   #trackingData: TrackingData;

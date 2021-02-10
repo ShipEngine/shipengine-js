@@ -1,5 +1,4 @@
 import {
-  AddressValidationResult,
   AddressToValidate,
   MatchedAddress,
   ResponseMessage,
@@ -14,6 +13,7 @@ import {
   ShipEngineMessage,
 } from '../public';
 import { exists } from '../../utils/exists';
+import { AddressReply } from '../shipengine-rpc/types';
 
 /**
  * map from dto do domain model
@@ -21,11 +21,11 @@ import { exists } from '../../utils/exists';
  * @hidden
  */
 export const mapToAddressQueryResult = (
-  v: AddressValidationResult
+  v: AddressReply
 ): AddressQueryResult => {
   const exceptions = mapToShipEngineExceptions(v.messages);
-  const normalized = v.matched_address
-    ? mapToNormalizedAddress(v.matched_address)
+  const normalized = v.validated_address
+    ? mapToNormalizedAddress(v.validated_address)
     : undefined;
   return new AddressQueryResult(
     mapToNormalizedAddress(v.original_address),

@@ -1,24 +1,16 @@
 import { InternalRpcClient } from './client';
-interface CreateTagsRequest {
-  name: string;
-}
-
-interface CreateTagsResponse {
-  name: string;
-}
-
+import { AddressCall, AddressReply, TagCall, TagReply } from './types';
 export class ShipEngineRpcApi {
   constructor(private client: InternalRpcClient) {}
 
   /* node_modules/shipengine-json-schema/index.json */
-  createTag = async (tag: string) => {
-    return this.client.exec<CreateTagsRequest, CreateTagsResponse>(
-      'create_tag',
-      {
-        name: tag,
-      }
-    );
-  };
+  createTag = async (tag: string) =>
+    this.client.exec<TagCall, TagReply>('create_tag', {
+      name: tag,
+    });
+
+  validateAddress = async (address: AddressCall) =>
+    this.client.exec<AddressCall, AddressReply>('validate_address', address);
 }
 
 const test = async () => {

@@ -6,7 +6,7 @@ import {
   ShipEngineError,
 } from '../models/public';
 
-import { AddressesData } from '../models/repository';
+import { AddressesData } from '../models/AddressesData';
 
 export class AddressesServiceLowLevel {
   #addressesData: AddressesData;
