@@ -1,10 +1,5 @@
-import { AxiosInstance } from 'axios';
+import { ShipEngineRpcApi } from '../shipengine-rpc/shipengine-rpc-api';
 import { AddressQuery, AddressQueryResult } from '../public';
-import {
-  mapToAddressQueryResult,
-  mapToRequestBodyAddress,
-} from '../mappers/address';
-import { ShipEngineRestAPI } from '../shipengine-rest';
 
 /**
  * Model that represents the Address Data model
@@ -12,17 +7,19 @@ import { ShipEngineRestAPI } from '../shipengine-rest';
  */
 
 export class AddressesData {
-  #shipEngineRestAPI: ShipEngineRestAPI;
-  constructor(client: AxiosInstance) {
-    this.#shipEngineRestAPI = new ShipEngineRestAPI(client);
+  #api: ShipEngineRpcApi;
+  constructor(api: ShipEngineRpcApi) {
+    this.#api = api;
   }
 
-  public query = async (
-    addresses: AddressQuery[]
-  ): Promise<AddressQueryResult[]> => {
-    const request = addresses.map(mapToRequestBodyAddress);
-    const { data } = await this.#shipEngineRestAPI.validateAddresses(request);
-    const result = data.map(mapToAddressQueryResult);
-    return result;
+  public query = async (v: AddressQuery): Promise<AddressQueryResult> => {
+    const call = {
+      address_lines: v.street as string[],
+      city_locality: v.cityLocality,
+      country_code: v.country,
+      state_province: v.stateProvince,
+    };
+    const { result } = await this.#api.validateAddress(call);
+    return new AddressQueryResult(v, [], result?.validated_address);
   };
 }
