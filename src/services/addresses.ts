@@ -1,69 +1,31 @@
-import { AxiosInstance } from 'axios';
 import {
   AddressQuery,
-  Address,
   AddressQueryResult,
-  ShipEngineError,
+  AddressesData,
 } from '../models/public';
-
-import { AddressesData } from '../models/AddressesData';
-
-export class AddressesServiceLowLevel {
-  #addressesData: AddressesData;
-  constructor(client: AxiosInstance) {
-    this.#addressesData = new AddressesData(client);
-  }
-
-  /**
-   * Get address query data
-   */
-  public query = async (address: AddressQuery): Promise<AddressQueryResult> => {
-    const [domainQueryResult] = await this.#addressesData.query([address]);
-    return domainQueryResult;
-  };
-
-  /**
-   * Check if address is valid
-   */
-  public validate = async (address: AddressQuery): Promise<boolean> => {
-    const addressQueryResult = await this.query(address);
-    return !addressQueryResult.errors.length;
-  };
-
-  /**
-   * Try to normalize address
-   */
-  public normalize = async (
-    address: AddressQuery
-  ): Promise<Address | undefined> => {
-    const addressQueryResult = await this.query(address);
-    const normalized = !addressQueryResult.errors.length
-      ? addressQueryResult.normalized
-      : undefined;
-    return normalized;
-  };
-}
 
 export class AddressesService {
   public addresses;
-  constructor(client: AxiosInstance) {
-    this.addresses = new AddressesServiceLowLevel(client);
+  constructor(addresses: AddressesData) {
+    this.addresses = addresses;
   }
 
   /**
    * Check if address is valid.
    */
-  public validateAddress = async (address: AddressQuery): Promise<boolean> =>
-    this.addresses.validate(address);
+  public validateAddress = async (address: AddressQuery): Promise<boolean> => {
+    const addressQueryResult = await this.addresses.validate(address);
+    return !addressQueryResult.errors.length;
+  };
 
   /**
    *  Normalize address.
    */
-  public normalizeAddress = async (address: AddressQuery): Promise<Address> => {
-    const normalized = await this.addresses.normalize(address);
-    if (!normalized) {
-      throw new ShipEngineError('Address unqueryable, unable to normalize.');
-    }
+  public normalizeAddress = async (address: AddressQuery) => {
+    const addressQueryResult = await this.addresses.validate(address);
+    const normalized = !addressQueryResult.errors.length
+      ? addressQueryResult.normalized
+      : undefined;
     return normalized;
   };
 
@@ -72,5 +34,5 @@ export class AddressesService {
    */
   public queryAddress = async (
     address: AddressQuery
-  ): Promise<AddressQueryResult> => this.addresses.query(address);
+  ): Promise<AddressQueryResult> => this.addresses.validate(address);
 }

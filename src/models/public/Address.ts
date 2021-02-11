@@ -1,4 +1,5 @@
-import { ShipEngineMessage, getMessageMixin, MessageFields } from './Messages';
+import { getMessageMixin, MessageFields, ShipEngineMessage } from './Messages';
+export * from '../repository/AddressesData';
 
 type Street = string | string[];
 

@@ -5,32 +5,27 @@ export enum MessageType {
   WARNING = 'warning',
 }
 
-abstract class Message {
+export class ShipEngineMessage {
   constructor(readonly message: string, readonly type: MessageType) {}
 }
 
-export class ShipEngineError extends Message {
+export class ShipEngineError extends ShipEngineMessage {
   constructor(message: string) {
     super(message, MessageType.ERROR);
   }
 }
 
-export class ShipEngineWarning extends Message {
+export class ShipEngineWarning extends ShipEngineMessage {
   constructor(message: string) {
     super(message, MessageType.WARNING);
   }
 }
 
-export class ShipEngineInfo extends Message {
+export class ShipEngineInfo extends ShipEngineMessage {
   constructor(message: string) {
     super(message, MessageType.INFO);
   }
 }
-
-export type ShipEngineMessage =
-  | ShipEngineError
-  | ShipEngineInfo
-  | ShipEngineWarning;
 
 export const getMessagesByType = (
   messages: ShipEngineMessage[],

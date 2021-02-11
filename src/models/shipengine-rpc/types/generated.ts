@@ -271,7 +271,7 @@ export interface components {
       company_name?: components['schemas']['CompanyName'];
       is_residential?: components['schemas']['IsResidential'];
     };
-    Message: {
+    ShipEngineMessage: {
       /** The message */
       message: string;
       /** The type of message */
@@ -345,7 +345,7 @@ export interface components {
       | 'partially_verified'
       | 'verified'
       | 'geocoded';
-    AddressValidationMessage: components['schemas']['Message'] & {
+    AddressValidationMessage: components['schemas']['ShipEngineMessage'] & {
       detail_code: components['schemas']['AddressValidationDetailCode'];
       category_code: components['schemas']['AddressValidationCategoryCode'];
     };
@@ -458,7 +458,7 @@ export interface components {
       carrier_status_code: string;
       /** Whatever the carrier detail code is */
       carrier_detail_code?: string;
-      messages?: components['schemas']['Message'][];
+      messages?: components['schemas']['ShipEngineMessage'][];
     };
     TrackingInformation: {
       events?: components['schemas']['TrackingEvent'][];

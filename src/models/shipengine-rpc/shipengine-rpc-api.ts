@@ -1,5 +1,5 @@
 import { InternalRpcClient } from './client';
-import { AddressCall, AddressReply, TagCall, TagReply } from './types';
+import { AddressParams, AddressResponse, TagCall, TagReply } from './types';
 export class ShipEngineRpcApi {
   constructor(private client: InternalRpcClient) {}
 
@@ -7,8 +7,11 @@ export class ShipEngineRpcApi {
   createTag = async (tag: TagCall) =>
     this.client.exec<TagCall, TagReply>('create_tag', tag);
 
-  validateAddress = async (address: AddressCall) =>
-    this.client.exec<AddressCall, AddressReply>('validate_address', address);
+  validateAddress = async (address: AddressParams) =>
+    this.client.exec<AddressParams, AddressResponse>(
+      'validate_address',
+      address
+    );
 }
 
 const test = async () => {

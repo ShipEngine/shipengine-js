@@ -17,7 +17,7 @@ import type { components } from '../generated';
     }[];
 }
  */
-export type AddressReply = Compute<
+export type AddressResponse = Compute<
   components['schemas']['AddressValidationInfo']
 >;
 
@@ -29,4 +29,8 @@ export type AddressReply = Compute<
     state_province?: string | undefined;
 }
  */
-export type AddressCall = Compute<components['schemas']['BaseLocationAddress']>;
+export type AddressParams = Compute<
+  components['schemas']['BaseLocationAddress']
+>;
+
+export type AddressResponseMessage = AddressResponse['messages'];

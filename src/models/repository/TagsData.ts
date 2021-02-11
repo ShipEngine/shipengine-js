@@ -14,7 +14,7 @@ export class TagsData {
    * this sort of decouples the data model from the implementation (e.g. RPC, HTTP, etc)
    * create could be "swapped out" for another data model
    */
-  public create = async (name: string): Promise<CreateTagResult> => {
+  public createTag = async (name: string): Promise<CreateTagResult> => {
     const { result } = await this.#api.createTag({ name });
     if (!result?.name) throw Error('TODO'); // could be either?
     return {
