@@ -43,11 +43,19 @@ export function isCompletelyNullOrEmptyObject<T>(object: T): boolean {
   return true;
 }
 
+export const isObject = (v: unknown): v is object => {
+  return v !== null && typeof v === 'object';
+};
+
 export const hasProperties = <T extends object, K extends string>(
   obj: T,
   ...keys: K[]
 ): obj is T & { [J in K]: unknown } => {
   return (
-    !!obj && keys.every((key) => Object.prototype.hasOwnProperty.call(obj, key))
+    !!obj &&
+    keys.every((key) => {
+      const hasKey = Object.prototype.hasOwnProperty.call(obj, key);
+      return hasKey;
+    })
   );
 };
