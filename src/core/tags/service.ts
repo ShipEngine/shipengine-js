@@ -1,4 +1,4 @@
-import { TagsRepository } from './tag-repository';
+import { TagsRepository } from './repository';
 
 export class TagsService {
   tags: TagsRepository;
