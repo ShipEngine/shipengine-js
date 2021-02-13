@@ -1,4 +1,4 @@
-export * from './models/public';
+export * from './shared/models/public/ShipEngineAPI';
 
 import { ShipEngine } from './shipengine';
 export { ShipEngine };
