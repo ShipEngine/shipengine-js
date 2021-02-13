@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 export interface ErrorDataResult {
   required?: string[]; // e.g. ["jsonrpc"] -- missing fields
@@ -21,9 +22,9 @@ export interface Result<ResponseData = any> {
   };
 }
 
-type Parameters = Record<string, any>;
+type Params = Record<string, any>;
 
-export class Request<P extends Parameters> {
+export class Request<P extends Params> {
   public jsonrpc = '2.0';
   constructor(public method: string, public params: P, public id: string) {}
 }
@@ -39,11 +40,8 @@ export class InternalRpcClient {
     });
   }
 
-  exec = async <P extends Parameters, ResponseData>(
-    method: string,
-    params: P
-  ) => {
-    const request = new Request(method, params, Math.random().toString());
+  exec = async <P extends Params, ResponseData>(method: string, params: P) => {
+    const request = new Request(method, params, uuidv4());
     try {
       const axiosResponse: AxiosResponse<Result<
         ResponseData
