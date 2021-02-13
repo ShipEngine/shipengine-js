@@ -1,11 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
-export interface ErrorDataResult {
-  required?: string[]; // e.g. ["jsonrpc"] -- missing fields
-  message: string;
-}
-
 type ErrorData =
   | {
       required: string[];
