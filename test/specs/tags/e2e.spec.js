@@ -4,7 +4,7 @@ const { expect } = require('chai');
 const constants = require('../../utils/constants');
 
 let shipengine;
-describe('retries', () => {
+describe('Create tag', () => {
   before(async () => {
     await Hoverfly.start();
     await Hoverfly.import('rpc/rpc.json');
