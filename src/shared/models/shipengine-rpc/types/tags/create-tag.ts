@@ -1,8 +1,8 @@
 import type {
   CreateTagParamsGenerated,
-  CreateTagResponseGenerated,
+  CreateTagResultGenerated,
 } from '../generated';
 
 export type CreateTagParams = CreateTagParamsGenerated;
 
-export type CreateTagResponse = CreateTagResponseGenerated;
+export type CreateTagResult = CreateTagResultGenerated;

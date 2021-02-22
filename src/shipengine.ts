@@ -1,5 +1,5 @@
-import { ShipEngineAPI } from './shared/models/public/ShipEngineAPI';
-import { ShipEngineRpcApi } from './shared/models/shipengine-rpc/shipengine-rpc-api';
+import { ShipEngineAPI } from './shared/models/public/shipengine-api';
+import { ShipEngineRpcApiClient } from './shared/models/shipengine-rpc/shipengine-rpc-api';
 import { ServiceFactory } from './shared/services/service-factory';
 
 // https://github.com/microsoft/TypeScript/issues/26792#issuecomment-617541464
@@ -15,7 +15,7 @@ export class ShipEngine implements ShipEngineAPI {
     // assign all properties to this class.
     return Object.assign(
       this,
-      ServiceFactory(new ShipEngineRpcApi(apiKey, baseUrl))
+      ServiceFactory(new ShipEngineRpcApiClient(apiKey, baseUrl))
     );
   }
 }

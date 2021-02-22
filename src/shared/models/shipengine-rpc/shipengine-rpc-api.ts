@@ -1,7 +1,8 @@
 import { InternalRpcClient } from './client';
-import { CreateTagParams, CreateTagResponse } from './types';
+import { CreateTagParams, CreateTagResult } from './types';
 
-export class ShipEngineRpcApi extends InternalRpcClient {
-  createTag = async (tag: CreateTagParams) =>
-    this.exec<CreateTagParams, CreateTagResponse>('tag.create', tag);
+export class ShipEngineRpcApiClient extends InternalRpcClient {
+  createTag = async (tag: CreateTagParams) => {
+    return this.exec<CreateTagParams, CreateTagResult>('tag.create', tag);
+  };
 }

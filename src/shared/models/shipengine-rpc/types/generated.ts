@@ -2,6 +2,6 @@ export interface CreateTagParamsGenerated {
   name: string;
 }
 
-export interface CreateTagResponseGenerated {
+export interface CreateTagResultGenerated {
   name: string;
 }
