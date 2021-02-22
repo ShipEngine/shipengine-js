@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>AddressesData | ShipEngine JS API</title>
+	<title>CreateTagQuery | ShipEngine JS API</title>
 	<meta name="description" content="Documentation for ShipEngine JS API">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -52,29 +52,21 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="addressesdata.html">AddressesData</a>
+					<a href="createtagquery.html">CreateTagQuery</a>
 				</li>
 			</ul>
-			<h1>Class AddressesData</h1>
+			<h1>Class CreateTagQuery</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Model that represents the Address Data model
-						This is a data repository, and should just be a simple abstraction</p>
-					</div>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">AddressesData</span>
+						<span class="target">CreateTagQuery</span>
 					</li>
 				</ul>
 			</section>
@@ -85,13 +77,13 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="addressesdata.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="createtagquery.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
-							<h3>Methods</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="addressesdata.html#query" class="tsd-kind-icon">query</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="createtagquery.html#name" class="tsd-kind-icon">name</a></li>
 							</ul>
 						</section>
 					</div>
@@ -103,50 +95,37 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Addresses<wbr>Data<span class="tsd-signature-symbol">(</span>client<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AxiosInstance</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="addressesdata.html" class="tsd-signature-type">AddressesData</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Create<wbr>Tag<wbr>Query<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="createtagquery.html" class="tsd-signature-type">CreateTagQuery</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/repository/index.ts#L23">src/models/repository/index.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/tags/repository.ts#L3">core/tags/repository.ts:3</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>client: <span class="tsd-signature-type">AxiosInstance</span></h5>
+									<h5>name: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="addressesdata.html" class="tsd-signature-type">AddressesData</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="createtagquery.html" class="tsd-signature-type">CreateTagQuery</a></h4>
 						</li>
 					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="query" class="tsd-anchor"></a>
-					<h3>query</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">query<span class="tsd-signature-symbol">(</span>addresses<span class="tsd-signature-symbol">: </span><a href="../interfaces/addressquery.html" class="tsd-signature-type">AddressQuery</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="addressqueryresult.html" class="tsd-signature-type">AddressQueryResult</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/models/repository/index.ts#L28">src/models/repository/index.ts:28</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>addresses: <a href="../interfaces/addressquery.html" class="tsd-signature-type">AddressQuery</a><span class="tsd-signature-symbol">[]</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="addressqueryresult.html" class="tsd-signature-type">AddressQueryResult</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="name" class="tsd-anchor"></a>
+					<h3>name</h3>
+					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/tags/repository.ts#L4">core/tags/repository.ts:4</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 		</div>
@@ -160,21 +139,81 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="baseshipenginedata.html" class="tsd-kind-icon">Base<wbr>Ship<wbr>Engine<wbr>Data</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
-						<a href="addressesdata.html" class="tsd-kind-icon">Addresses<wbr>Data</a>
+						<a href="createtagquery.html" class="tsd-kind-icon">Create<wbr>Tag<wbr>Query</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="addressesdata.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="createtagquery.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="addressesdata.html#query" class="tsd-kind-icon">query</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="createtagquery.html#name" class="tsd-kind-icon">name</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-class">
+						<a href="createtagqueryresult.html" class="tsd-kind-icon">Create<wbr>Tag<wbr>Query<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="internalrpcclient.html" class="tsd-kind-icon">Internal<wbr>Rpc<wbr>Client</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="jsonrpccall.html" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Call</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="shipengine.html" class="tsd-kind-icon">Ship<wbr>Engine</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="shipenginerpcapi.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Rpc<wbr>Api</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="tagquery.html" class="tsd-kind-icon">Tag<wbr>Query</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="tagqueryresult.html" class="tsd-kind-icon">Tag<wbr>Query<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="tagsrepository.html" class="tsd-kind-icon">Tags<wbr>Repository</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="tagsservice.html" class="tsd-kind-icon">Tags<wbr>Service</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/createtagparamsgenerated.html" class="tsd-kind-icon">Create<wbr>Tag<wbr>Params<wbr>Generated</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/createtagresponsegenerated.html" class="tsd-kind-icon">Create<wbr>Tag<wbr>Response<wbr>Generated</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="../interfaces/jsonrpcreply.html" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Reply</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#createtagparams" class="tsd-kind-icon">Create<wbr>Tag<wbr>Params</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#createtagresponse" class="tsd-kind-icon">Create<wbr>Tag<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#errordata" class="tsd-kind-icon">Error<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#params" class="tsd-kind-icon">Params</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#shipengineapi" class="tsd-kind-icon">Ship<wbr>EngineAPI</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../globals.html#servicefactory" class="tsd-kind-icon">Service<wbr>Factory</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="../globals.html#assertjsonrpcreply" class="tsd-kind-icon">assert<wbr>Json<wbr>Rpc<wbr>Reply</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -198,7 +237,7 @@
 				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
 			</ul>
 		</div>
 	</div>
