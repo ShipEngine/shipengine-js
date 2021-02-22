@@ -4,6 +4,7 @@
 
 app: shipengine
 watch-files: ["src/**/*", "test/**/*.js"]
+timeout: 10000
 spec:
   # Test fixtures
   # Test specs
