@@ -15,6 +15,7 @@
     "build:cjs": "tsc --module commonjs --outDir cjs",
     "gen:types": "bash ./generate-types.sh && npm run fix",
     "tsc:check": "tsc --noEmit",
+    "tsc:watch": "tsc --noEmit --watch --incremental",
     "test": "npm run test:node && npm run test:browser",
     "test:node:watch": "chokidar test/** src/**/** -c 'npm run test:node'",
     "test:browser:watch": "chokidar **/test/** karma.conf.js -c 'npm run test:browser -- --single-run'",
