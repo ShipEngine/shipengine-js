@@ -39,6 +39,9 @@ export const isRpcResponseError = <T>(
 
 type JsonRpcResponse<T> = JsonRpcResponseSuccess<T> | JsonRpcResponseError;
 
+/**
+ * Validate the basic structure of the JSON:RPC reply
+ */
 function assertJsonRpcReply<T>(v: unknown): asserts v is JsonRpcResponse<T> {
   if (!isObject(v)) {
     throw new Error('Response is not object');
@@ -63,13 +66,18 @@ function assertJsonRpcReply<T>(v: unknown): asserts v is JsonRpcResponse<T> {
   }
 }
 
-type Params = Record<string, any>;
+type Parameters = Record<string, any>;
 
-export class JsonRpcCall<P extends Params> {
+export class JsonRpcCall<Params extends Parameters> {
   public jsonrpc = '2.0';
-  constructor(public method: string, public params: P, public id = uuidv4()) {}
+  constructor(
+    public method: string,
+    public params: Params,
+    public id = uuidv4()
+  ) {}
 }
 
+type RpcClientResponse<T> = T | JsonRpcError;
 export class InternalRpcClient {
   #client: AxiosInstance;
   constructor(apiKey: string, baseUrl = 'http://localhost:8500') {
@@ -82,10 +90,10 @@ export class InternalRpcClient {
     });
   }
 
-  exec = async <P extends Params, Data>(
+  exec = async <Params extends Parameters, Data>(
     method: string,
-    params: P
-  ): Promise<Data | JsonRpcError> => {
+    params: Params
+  ): Promise<RpcClientResponse<Data>> => {
     try {
       const data = new JsonRpcCall(method, params);
       const axiosResponse: AxiosResponse<unknown> = await this.#client({
