@@ -8,6 +8,7 @@ export type Compute<T> = { [P in keyof T]: Compute<T[P]> } & {};
 /**
  * Return unwrapped type T when given T[].
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export type GetArrayElement<T> = T extends (infer T)[] ? T : never;
 
 /**
