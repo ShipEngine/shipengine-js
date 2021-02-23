@@ -1,3 +1,4 @@
+import { mapEither } from '../../shared/models/shipengine-rpc/either';
 import { ShipEngineRpcApiClient } from '../../shared/models/shipengine-rpc/shipengine-rpc-api';
 import { CreateTagParams } from '../../shared/models/shipengine-rpc/types';
 
@@ -20,9 +21,6 @@ export class TagsService {
 
   public createTag = async (q: string) => {
     const data = await this.tags.create({ name: q });
-    if (data.type === 'error') {
-      return data.error;
-    }
-    return data.result;
+    return mapEither(data, (result) => result.name);
   };
 }

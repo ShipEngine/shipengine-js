@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import { hasProperties, isObject } from '../../../utils';
+import { Either, SuccessResponse, ErrorResponse } from './either';
 
 type ErrorData =
   | {
@@ -77,16 +78,6 @@ export class JsonRpcCall<Params extends Parameters> {
   ) {}
 }
 
-type RpcClientResponse<Result> =
-  | {
-      type: 'error';
-      error: JsonRpcError;
-    }
-  | {
-      type: 'success';
-      result: Result;
-    };
-
 export class InternalRpcClient {
   #client: AxiosInstance;
   constructor(apiKey: string, baseUrl = 'http://localhost:8500') {
@@ -102,7 +93,7 @@ export class InternalRpcClient {
   exec = async <Params extends Parameters, Data>(
     method: string,
     params: Params
-  ): Promise<RpcClientResponse<Data>> => {
+  ): Promise<Either<Data, JsonRpcError>> => {
     try {
       const data = new JsonRpcCall(method, params);
       const axiosResponse: AxiosResponse<unknown> = await this.#client({
@@ -113,26 +104,17 @@ export class InternalRpcClient {
       assertJsonRpcReply<Data>(axiosData);
 
       if (isJsonRpcResponseError(axiosData)) {
-        return {
-          type: 'error',
-          error: axiosData.error,
-        };
+        return new ErrorResponse(axiosData.error);
       } else {
-        return {
-          type: 'success',
-          result: axiosData.result,
-        };
+        return new SuccessResponse(axiosData.result);
       }
     } catch (err) {
       // this should never happen
-      return {
-        type: 'error',
-        error: {
-          code: 666,
-          message: err.message || 'some unhandled axios error happened.',
-          data: '',
-        },
-      };
+      return new ErrorResponse({
+        code: 666,
+        message: err.message || 'some unhandled axios error happened.',
+        data: '',
+      });
     }
   };
 }
