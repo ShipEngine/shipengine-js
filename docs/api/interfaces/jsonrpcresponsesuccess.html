@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>JsonRpcCall | ShipEngine JS API</title>
+	<title>JsonRpcResponseSuccess | ShipEngine JS API</title>
 	<meta name="description" content="Documentation for ShipEngine JS API">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -52,10 +52,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="jsonrpccall.html">JsonRpcCall</a>
+					<a href="jsonrpcresponsesuccess.html">JsonRpcResponseSuccess</a>
 				</li>
 			</ul>
-			<h1>Class JsonRpcCall&lt;Params&gt;</h1>
+			<h1>Interface JsonRpcResponseSuccess&lt;Data&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -66,7 +66,7 @@
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>Params<span class="tsd-signature-symbol">: </span><a href="../globals.html#parameters" class="tsd-signature-type">Parameters</a></h4>
+						<h4>Data</h4>
 					</li>
 				</ul>
 			</section>
@@ -74,7 +74,12 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">JsonRpcCall</span>
+						<a href="basejsonrpcresponse.html" class="tsd-signature-type">BaseJsonRpcResponse</a>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">JsonRpcResponseSuccess</span>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -83,94 +88,47 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Constructors</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="jsonrpccall.html#constructor" class="tsd-kind-icon">constructor</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="jsonrpccall.html#id" class="tsd-kind-icon">id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="jsonrpccall.html#jsonrpc" class="tsd-kind-icon">jsonrpc</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="jsonrpccall.html#method" class="tsd-kind-icon">method</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="jsonrpccall.html#params" class="tsd-kind-icon">params</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="jsonrpcresponsesuccess.html#id" class="tsd-kind-icon">id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="jsonrpcresponsesuccess.html#jsonrpc" class="tsd-kind-icon">jsonrpc</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="jsonrpcresponsesuccess.html#result" class="tsd-kind-icon">result</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
-					<a name="constructor" class="tsd-anchor"></a>
-					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Json<wbr>Rpc<wbr>Call<span class="tsd-signature-symbol">(</span>method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, params<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Params</span>, id<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="jsonrpccall.html" class="tsd-signature-type">JsonRpcCall</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/shared/models/shipengine-rpc/client.ts#L72">shared/models/shipengine-rpc/client.ts:72</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>method: <span class="tsd-signature-type">string</span></h5>
-								</li>
-								<li>
-									<h5>params: <span class="tsd-signature-type">Params</span></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> id: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = uuidv4()</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="jsonrpccall.html" class="tsd-signature-type">JsonRpcCall</a></h4>
-						</li>
-					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="id" class="tsd-anchor"></a>
 					<h3>id</h3>
 					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="basejsonrpcresponse.html">BaseJsonRpcResponse</a>.<a href="basejsonrpcresponse.html#id">id</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/shared/models/shipengine-rpc/client.ts#L76">shared/models/shipengine-rpc/client.ts:76</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/shared/models/shipengine-rpc/client.ts#L23">shared/models/shipengine-rpc/client.ts:23</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="jsonrpc" class="tsd-anchor"></a>
 					<h3>jsonrpc</h3>
-					<div class="tsd-signature tsd-kind-icon">jsonrpc<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;2.0&quot;</span></div>
+					<div class="tsd-signature tsd-kind-icon">jsonrpc<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"2.0"</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="basejsonrpcresponse.html">BaseJsonRpcResponse</a>.<a href="basejsonrpcresponse.html#jsonrpc">jsonrpc</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/shared/models/shipengine-rpc/client.ts#L72">shared/models/shipengine-rpc/client.ts:72</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/shared/models/shipengine-rpc/client.ts#L22">shared/models/shipengine-rpc/client.ts:22</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="method" class="tsd-anchor"></a>
-					<h3>method</h3>
-					<div class="tsd-signature tsd-kind-icon">method<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="result" class="tsd-anchor"></a>
+					<h3>result</h3>
+					<div class="tsd-signature tsd-kind-icon">result<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Data</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/shared/models/shipengine-rpc/client.ts#L74">shared/models/shipengine-rpc/client.ts:74</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="params" class="tsd-anchor"></a>
-					<h3>params</h3>
-					<div class="tsd-signature tsd-kind-icon">params<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Params</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/shared/models/shipengine-rpc/client.ts#L75">shared/models/shipengine-rpc/client.ts:75</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/shared/models/shipengine-rpc/client.ts#L27">shared/models/shipengine-rpc/client.ts:27</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -187,62 +145,56 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-class">
-						<a href="internalrpcclient.html" class="tsd-kind-icon">Internal<wbr>Rpc<wbr>Client</a>
+						<a href="../classes/internalrpcclient.html" class="tsd-kind-icon">Internal<wbr>Rpc<wbr>Client</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="../classes/jsonrpccall.html" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Call</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/shipengine.html" class="tsd-kind-icon">Ship<wbr>Engine</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/shipenginerpcapiclient.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Rpc<wbr>Api<wbr>Client</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/tagsadvanced.html" class="tsd-kind-icon">Tags<wbr>Advanced</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/tagsservice.html" class="tsd-kind-icon">Tags<wbr>Service</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="basejsonrpcresponse.html" class="tsd-kind-icon">Base<wbr>Json<wbr>Rpc<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="createtagparamsgenerated.html" class="tsd-kind-icon">Create<wbr>Tag<wbr>Params<wbr>Generated</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="createtagresultgenerated.html" class="tsd-kind-icon">Create<wbr>Tag<wbr>Result<wbr>Generated</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="jsonrpcerror.html" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="jsonrpcresponseerror.html" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Response<wbr>Error</a>
 					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class tsd-has-type-parameter">
-						<a href="jsonrpccall.html" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Call</a>
+					<li class="current tsd-kind-interface tsd-has-type-parameter">
+						<a href="jsonrpcresponsesuccess.html" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Response<wbr>Success</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="jsonrpccall.html#constructor" class="tsd-kind-icon">constructor</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="jsonrpcresponsesuccess.html#id" class="tsd-kind-icon">id</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="jsonrpccall.html#id" class="tsd-kind-icon">id</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="jsonrpcresponsesuccess.html#jsonrpc" class="tsd-kind-icon">jsonrpc</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="jsonrpccall.html#jsonrpc" class="tsd-kind-icon">jsonrpc</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="jsonrpccall.html#method" class="tsd-kind-icon">method</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="jsonrpccall.html#params" class="tsd-kind-icon">params</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="jsonrpcresponsesuccess.html#result" class="tsd-kind-icon">result</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-class">
-						<a href="shipengine.html" class="tsd-kind-icon">Ship<wbr>Engine</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="shipenginerpcapiclient.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Rpc<wbr>Api<wbr>Client</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="tagsadvanced.html" class="tsd-kind-icon">Tags<wbr>Advanced</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="tagsservice.html" class="tsd-kind-icon">Tags<wbr>Service</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/basejsonrpcresponse.html" class="tsd-kind-icon">Base<wbr>Json<wbr>Rpc<wbr>Response</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/createtagparamsgenerated.html" class="tsd-kind-icon">Create<wbr>Tag<wbr>Params<wbr>Generated</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/createtagresultgenerated.html" class="tsd-kind-icon">Create<wbr>Tag<wbr>Result<wbr>Generated</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/jsonrpcerror.html" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/jsonrpcresponseerror.html" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Response<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-has-type-parameter">
-						<a href="../interfaces/jsonrpcresponsesuccess.html" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Response<wbr>Success</a>
-					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#createtagparams" class="tsd-kind-icon">Create<wbr>Tag<wbr>Params</a>
 					</li>
