@@ -31,7 +31,7 @@ export interface JsonRpcResponseError extends BaseJsonRpcResponse {
   error: JsonRpcError;
 }
 
-export const isRpcResponseError = <T>(
+export const isJsonRpcResponseError = <T>(
   value: JsonRpcResponse<T>
 ): value is JsonRpcResponseError => {
   return 'error' in value && value.error !== null;
@@ -77,7 +77,16 @@ export class JsonRpcCall<Params extends Parameters> {
   ) {}
 }
 
-type RpcClientResponse<T> = T | JsonRpcError;
+type RpcClientResponse<Result> =
+  | {
+      type: 'error';
+      error: JsonRpcError;
+    }
+  | {
+      type: 'success';
+      result: Result;
+    };
+
 export class InternalRpcClient {
   #client: AxiosInstance;
   constructor(apiKey: string, baseUrl = 'http://localhost:8500') {
@@ -103,17 +112,26 @@ export class InternalRpcClient {
       const axiosData = axiosResponse.data;
       assertJsonRpcReply<Data>(axiosData);
 
-      if (isRpcResponseError(axiosData)) {
-        return axiosData.error;
+      if (isJsonRpcResponseError(axiosData)) {
+        return {
+          type: 'error',
+          error: axiosData.error,
+        };
       } else {
-        return axiosData.result;
+        return {
+          type: 'success',
+          result: axiosData.result,
+        };
       }
     } catch (err) {
       // this should never happen
       return {
-        code: 666,
-        message: err.message || 'some unhandled axios error happened.',
-        data: '',
+        type: 'error',
+        error: {
+          code: 666,
+          message: err.message || 'some unhandled axios error happened.',
+          data: '',
+        },
       };
     }
   };
