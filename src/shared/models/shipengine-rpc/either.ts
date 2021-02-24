@@ -1,5 +1,5 @@
 interface Functor<A> {
-  map<B>(f: (v: A) => B): unknown; // typing this is hard.
+  map<B>(f: (v: A) => B): Functor<B>;
 }
 
 /**
