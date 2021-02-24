@@ -31,11 +31,11 @@ export type Either<Result, Error> =
 
 export const identity = <T>(v: T): T => v;
 
-export const match = <Success, Error, T>(
+export const match = <Success, Error, T, U>(
   either: Either<Success, Error>,
   mapSuccess: (result: Success) => T,
-  mapError: (error: Error) => Error = identity
-) => {
+  mapError: (error: Error) => U
+): T | U => {
   switch (either.type) {
     case 'success':
       return mapSuccess(either.result);
@@ -44,11 +44,11 @@ export const match = <Success, Error, T>(
   }
 };
 
-export const bimap = <Success, Error, T>(
+export const bimap = <Success, Error, T, U>(
   either: Either<Success, Error>,
   mapSuccess: (v: Success) => T,
-  mapError: (v: Error) => Error = identity
-): Either<T, Error> => {
+  mapError: (v: Error) => U
+): Either<T, U> => {
   switch (either.type) {
     case 'success':
       return either.map(mapSuccess);
