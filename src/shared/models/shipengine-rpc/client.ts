@@ -12,11 +12,11 @@ type ErrorData =
 export interface JsonRpcError {
   code: number;
   message: string;
-  data: ErrorData;
+  data?: ErrorData;
 }
 
 export const isJsonRpcError = (v: object): v is JsonRpcError => {
-  return hasProperties(v, 'code', 'message', 'data');
+  return hasProperties(v, 'code', 'message');
 };
 
 interface BaseJsonRpcResponse {
@@ -47,19 +47,21 @@ function assertJsonRpcReply<T>(v: unknown): asserts v is JsonRpcResponse<T> {
   if (!isObject(v)) {
     throw new Error('Response is not object');
   }
-  if (!hasProperties(v, 'jsonrpc', 'id')) {
+  if (!hasProperties(v, 'jsonrpc')) {
     throw new Error(`Invalid response ${JSON.stringify(v, undefined, 2)}`);
   }
   if (hasProperties(v, 'result', 'error')) {
-    throw new Error(
-      'Result and error member should not exist together (https://www.jsonrpc.org/specification#5)'
-    );
+    if (v.result && v.error) {
+      throw new Error(
+        'Result and error member should not exist together (https://www.jsonrpc.org/specification#5)'
+      );
+    }
   }
   if (hasProperties(v, 'error')) {
     if (!isObject(v.error)) {
       throw new Error('Error not object');
     }
-    if (!hasProperties(v.error, 'code', 'message', 'data')) {
+    if (!hasProperties(v.error, 'code', 'message')) {
       throw new Error(
         `Invalid error shape: ${JSON.stringify(v.error, undefined, 2)}`
       );
@@ -111,9 +113,9 @@ export class InternalRpcClient {
     } catch (err) {
       // this should never happen
       return new ErrorResponse({
-        code: 666,
+        code: err.code || 666,
         message: err.message || 'some unhandled axios error happened.',
-        data: '',
+        ...(err.data ? { data: err.data } : {}),
       });
     }
   };

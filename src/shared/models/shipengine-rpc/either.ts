@@ -1,29 +1,40 @@
+interface Functor<A> {
+  map<B>(f: (v: A) => B): unknown; // typing this is hard.
+}
+
 /**
  * Class representing "right" (success case)
  */
-export class SuccessResponse<T> {
+export class SuccessResponse<T> implements Functor<T> {
   public readonly type = 'success';
+
   constructor(public result: T) {}
+
+  public map = <B>(fn: (result: T) => B) =>
+    new SuccessResponse(fn(this.result));
 }
 
 /**
  * Class representing "left" (failure case)
  */
-export class ErrorResponse<T> {
+export class ErrorResponse<T> implements Functor<T> {
   public readonly type = 'error';
+
   constructor(public error: T) {}
+
+  public map = <B>(fn: (result: T) => B) => new ErrorResponse(fn(this.error));
 }
 
 export type Either<Result, Error> =
   | SuccessResponse<Result>
   | ErrorResponse<Error>;
 
-const identity = <T>(v: T): T => v;
+export const identity = <T>(v: T): T => v;
 
-export const match = <T, Success, Error>(
+export const match = <Success, Error, T>(
   either: Either<Success, Error>,
   mapSuccess: (result: Success) => T,
-  mapError: (error: Error) => T
+  mapError: (error: Error) => Error = identity
 ) => {
   switch (either.type) {
     case 'success':
@@ -33,15 +44,15 @@ export const match = <T, Success, Error>(
   }
 };
 
-export const mapEither = <Success, Error, T>(
+export const bimap = <Success, Error, T>(
   either: Either<Success, Error>,
   mapSuccess: (v: Success) => T,
   mapError: (v: Error) => Error = identity
 ): Either<T, Error> => {
   switch (either.type) {
     case 'success':
-      return new SuccessResponse(mapSuccess(either.result));
+      return either.map(mapSuccess);
     case 'error':
-      return new ErrorResponse(mapError(either.error));
+      return either.map(mapError);
   }
 };
