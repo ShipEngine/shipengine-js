@@ -20,6 +20,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "removeComments": false,
+    "noFallthroughCasesInSwitch": true,
     "typeRoots": [
       "node_modules/@types",
       "./typings"
