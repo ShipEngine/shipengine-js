@@ -17,6 +17,7 @@ const generateLit = async (fileName = '') => {
 
 const main = async () => {
   await generateLit('addresses');
+  await generateLit('errors');
 };
 
 main().catch(console.error);
