@@ -19,7 +19,7 @@ This response structure is inspired by the FP concept of an [Either](https://gig
 // success response
 {
   type: 'success',
-  results: {
+  result: {
     name: 'SOME_TAG',
   },
   id: 'abc123',
@@ -43,7 +43,7 @@ This response structure is inspired by the FP concept of an [Either](https://gig
 ```ts
 const response = await shipengine.createTag("MY_TAG")
 if (response.type === 'success') {
-  console.log('Tag created!', response.name)
+  console.log('Tag created!', response.result)
 } else {
   console.error('error', response.error)
 }

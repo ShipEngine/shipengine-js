@@ -1081,7 +1081,7 @@ div.section:last-of-type {
 </p>
 
 <div class="codeblock">
-<span class="codeblock_name">{either example <a href="errors.html#1:1">1</a>}</span>
+<span class="codeblock_name">{example <a href="errors.html#1:1">1</a>}</span>
 <pre class="prettyprint lang-ts">
 // success response
 {
@@ -1103,7 +1103,15 @@ div.section:last-of-type {
   },
   id: null,
 }
+</pre>
 
+
+
+</div>
+
+<div class="codeblock">
+<span class="codeblock_name">{either <a href="errors.html#1:1">1</a>}</span>
+<pre class="prettyprint lang-ts">
 const response = await shipengine.createTag("MY_TAG")
 if (response.type === 'success') {
   console.log('Tag created!', response.name)
@@ -1112,12 +1120,10 @@ if (response.type === 'success') {
 }
 
 console.assert(response.type !== 'error', 'Tag should be successful');
-
-
 </pre>
 
 
-
+<p class="seealso">Used in section <a href="errors.html#1:2">2</a></p>
 </div>
 </div>
 <a name="1:2"><div class="section"><h4>2. Programs</h4></a>
@@ -1164,7 +1170,7 @@ const shipengine = new ShipEngine(process.env.API_KEY);
 
 <span class="nocode pln">{wrapper start, <a href="errors.html#1:2">2</a>}</span>
 
-<span class="nocode pln">{create tag}</span>
+<span class="nocode pln">{either, <a href="errors.html#1:1">1</a>}</span>
 
 <span class="nocode pln">{wrapper end, <a href="errors.html#1:2">2</a>}</span>
 </pre>
