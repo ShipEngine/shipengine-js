@@ -36,7 +36,7 @@
     "compile:md-to-lit": "ts-node-script docs/md-to-lit.ts",
     "compile:api": "typedoc",
     "compile:api:watch": "run-p devdoc serve",
-    "compile:lit": "bash scripts/compile-lit.sh && npm run fix:examples",
+    "compile:lit": "npm run compile:md-to-lit && bash scripts/compile-lit.sh && npm run fix:examples",
     "compile:lit:watch": "run-p devlit serve",
     "compile": "npm run compile:api && npm run compile:lit",
     "serve": "live-server ./docs",
