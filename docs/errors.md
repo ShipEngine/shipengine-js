@@ -41,11 +41,11 @@ This response structure is inspired by the FP concept of an [Either](https://gig
 
 --- either
 ```ts
-const response = await shipengine.createTag("MY_TAG")
+const response = await shipengine.tags.create("MY_TAG")
 if (response.type === 'success') {
-  console.log('Tag created!', response.result)
+  console.log('Tag created!', response.result.name)
 } else {
-  console.error('error', response.error)
+  console.error('error', response.error.message)
 }
 
 console.assert(response.type !== 'error', 'Tag should be successful');
