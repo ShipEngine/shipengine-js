@@ -50,3 +50,4 @@ node_modules
 /dist.examples
 
 docs/api
+docs/tutorials/*.html
