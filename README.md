@@ -65,7 +65,7 @@ console.log(isValid ? 'valid!' : 'invalid!')
 ### Running tests
 Do `npm run sim:start`
 
-If you for any reason do not want to use docker, you can also install hoverfly locally and run `hoverfly -webserver -response-body-files-path simengine`.
+If you for any reason do not want to use docker, you can also install hV
 
 ```
 npm run test
