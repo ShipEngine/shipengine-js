@@ -1086,7 +1086,7 @@ div.section:last-of-type {
 // success response
 {
   type: 'success',
-  results: {
+  result: {
     name: 'SOME_TAG',
   },
   id: 'abc123',
@@ -1114,7 +1114,7 @@ div.section:last-of-type {
 <pre class="prettyprint lang-ts">
 const response = await shipengine.createTag("MY_TAG")
 if (response.type === 'success') {
-  console.log('Tag created!', response.name)
+  console.log('Tag created!', response.result)
 } else {
   console.error('error', response.error)
 }

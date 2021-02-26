@@ -10,7 +10,7 @@ const shipengine = new ShipEngine(process.env.API_KEY);
   /* either */
   const response = await shipengine.createTag('MY_TAG');
   if (response.type === 'success') {
-    console.log('Tag created!', response.name);
+    console.log('Tag created!', response.result);
   } else {
     console.error('error', response.error);
   }
