@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import { hasProperties, isObject } from '../../../utils';
-import { Either, SuccessResponse, ErrorResponse } from './either';
+import { Either, SuccessResponse, ErrorResponse } from '../../../utils/either';
 
 type ErrorData =
   | {

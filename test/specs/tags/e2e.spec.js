@@ -16,10 +16,10 @@ describe('Create tag', () => {
 
   it('should work with createTag', async () => {
     const response = await shipengine.createTag('foo');
-    expect(response.result).to.eq('foo');
+    expect(response).to.eq('foo');
   });
   it('should work with tags.create', async () => {
     const response = await shipengine.tags.create({ name: 'foo' });
-    expect(response.result.name).to.eq('foo');
+    expect(response.name).to.eq('foo');
   });
 });
