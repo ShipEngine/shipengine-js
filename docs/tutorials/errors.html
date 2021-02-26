@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Validate and Normalize Addresses</title>
+<title>Errors</title>
 <script>
 !function(){var q=null;window.PR_SHOULD_USE_CONTINUATION=!0;
 (function(){function R(a){function d(e){var b=e.charCodeAt(0);if(b!==92)return b;var a=e.charAt(1);return(b=r[a])?b:"0"<=a&&a<="7"?parseInt(e.substring(1),8):a==="u"||a==="x"?parseInt(e.substring(2),16):e.charCodeAt(1)}function g(e){if(e<32)return(e<16?"\\x0":"\\x")+e.toString(16);e=String.fromCharCode(e);return e==="\\"||e==="-"||e==="]"||e==="^"?"\\"+e:e}function b(e){var b=e.substring(1,e.length-1).match(/\\u[\dA-Fa-f]{4}|\\x[\dA-Fa-f]{2}|\\[0-3][0-7]{0,2}|\\[0-7]{1,2}|\\[\S\s]|[^\\]/g),e=[],a=
@@ -1071,140 +1071,61 @@ div.section:last-of-type {
 </head>
 <body onload="prettyPrint()">
 <section>
-<h1>Validate and Normalize Addresses</h1>
+<h1>Errors</h1>
 <a name="1:1"><div class="section"><h4>1. Introduction</h4></a>
-<p><a href="https://www.shipengine.com">ShipEngine</a> allows you to validate an address before using it to create a shipment to ensure accurate delivery of your packages.
+<p>When you make a request with a method such as <code>createTag</code>, this library doesn't throw errors. Instead, it returns a response with either <code>type: success</code> or <code>type: error</code>.
 </p>
-<p>Address validation ensures accurate addresses and can lead to reduced shipping costs by preventing address correction surcharges. ShipEngine cross references multiple databases to validate addresses and identify potential deliverability issues.
+<p>Data types like this, which can be represented by multiple shapes (e.g. <code>Foo | Bar</code>) but are discriminated by a single key such as <code>type</code>, are known as <a href="https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#discriminating-unions">discriminating unions</a>. Discriminating unions also commonly known as <a href="https://en.wikipedia.org/wiki/Tagged_union">tagged unions</a>, and therefore you will sometimes see the discriminant key called <code>tag</code> instead of <code>type</code>.
 </p>
-
-</div>
-<a name="1:2"><div class="section"><h4>2. Install the ShipEngine library</h4></a>
-
-<div class="codeblock">
-<span class="codeblock_name">{install <a href="addresses.html#1:2">2</a>}</span>
-<pre class="prettyprint lang-ts">
-npm install shipengine@alpha
-</pre>
-
-
-
-</div>
-</div>
-<a name="1:3"><div class="section"><h4>3. Initialize the ShipEngine library</h4></a>
-
-<div class="codeblock">
-<span class="codeblock_name">{initialize <a href="addresses.html#1:3">3</a>}</span>
-<pre class="prettyprint lang-ts">
-const ShipEngine = require('shipengine');
-
-const shipengine = new ShipEngine('my_api_key');
-</pre>
-
-<p class="seealso">Redefined in section <a href="addresses.html#1:7">7</a></p>
-<p class="seealso">Used in sections <a href="addresses.html#1:7">7</a> and <a href="addresses.html#1:7">7</a></p>
-</div>
-</div>
-<a name="1:4"><div class="section"><h4>4. Validate an Address</h4></a>
-<p>You might want to validate that an address is correct.
-The simplest way to accomplish this is by calling <a href="../api/classes/addressesservice.html#validateaddress">validateAddress</a> with the necessary information to build an <a href="../api/classes/address.html">Address</a>.
-This accepts a single address and returns a boolean.
+<p>This response structure is inspired by the FP concept of an <a href="https://gigobyte.github.io/purify/adts/Either">Either</a>.
 </p>
 
 <div class="codeblock">
-<span class="codeblock_name">{validate address args <a href="addresses.html#1:4">4</a>}</span>
+<span class="codeblock_name">{either example <a href="errors.html#1:1">1</a>}</span>
 <pre class="prettyprint lang-ts">
-const isValid = await shipengine.validateAddress({
-  street: '1 E 161 St',
-  cityLocality: 'The Bronx',
-  postalCode: '10451',
-  stateProvince: 'NY',
-  country: 'US',
-});
-
-console.log(isValid)
-console.assert(isValid, 'address should be valid');
-</pre>
-
-
-<p class="seealso">Used in section <a href="addresses.html#1:7">7</a></p>
-</div>
-</div>
-<a name="1:5"><div class="section"><h4>5. Normalize an Address</h4></a>
-<p>When you <a href="../api/classes/addressesservice.html#normalizeaddress">normalize an address</a>, you are returned an <a href="../api/classes/address.html">altered address</a>.
-You can pass an incomplete address as an argument: for example, maybe you don't know the <code>postalCode</code>.
-</p>
-
-<div class="codeblock">
-<span class="codeblock_name">{normalize address args <a href="addresses.html#1:5">5</a>}</span>
-<pre class="prettyprint lang-ts">
-try {
-  const address = await shipengine.normalizeAddress({
-    street: ['1060 W Addison St'],
-    cityLocality: 'Chicago',
-    stateProvince: 'IL',
-    country: 'US',
-});
-  console.log(`normalized street is: ${address.street}`);
-  console.assert(!address.isResidential, 'should be commercial');
-} catch (err) {
-  console.error(err)
+// success response
+{
+  type: 'success',
+  results: {
+    name: 'SOME_TAG',
+  },
+  id: 'abc123',
 }
-</pre>
 
-
-<p class="seealso">Used in section <a href="addresses.html#1:7">7</a></p>
-</div>
-<p> <a href="../api/classes/addressesservice.html#normalizeaddress">normalizeAddress</a> will throw a <a href="../api/classes/shipengineerror.html">ShipEngineError</a> if the given address cannot be found or is missing too much information. You can  mport the <code>ShipEngineError</code> in order to check if the thrown are normalization errors, or if they are unexpected HTTP errors that indicate a request/response failure.
-</p>
-
-<div class="codeblock">
-<span class="codeblock_name">{exception handling <a href="addresses.html#1:5">5</a>}</span>
-<pre class="prettyprint lang-ts">
-try {
-  await shipengine.normalizeAddress({ street: '1234 Main St' })
-} catch(err) {
-  if (err instanceof ShipEngineError) {
-    console.assert(err !== undefined, 'should be a ShipEngine error');
-  } else {
-    console.error(err)
-  }
+// error response
+{
+  type: 'error',
+  error: {
+     message: 'Invalid Request',
+     data: {
+       required: ['name'],
+     },
+  },
+  id: null,
 }
+
+const response = await shipengine.createTag("MY_TAG")
+if (response.type === 'success') {
+  console.log('Tag created!', response.name)
+} else {
+  console.error('error', response.error)
+}
+
+console.assert(response.type !== 'error', 'Tag should be successful');
+
+
 </pre>
 
 
-<p class="seealso">Used in section <a href="addresses.html#1:7">7</a></p>
+
 </div>
 </div>
-<a name="1:6"><div class="section"><h4>6. Query an Address</h4></a>
-<p>If you want a list of exceptions along with address normalization, you can use the <a href="../api/classes/addressesservice.html#queryaddress">queryAddress</a> method.
-</p>
-
-<div class="codeblock">
-<span class="codeblock_name">{query address <a href="addresses.html#1:6">6</a>}</span>
-<pre class="prettyprint lang-ts">
-const addressQuery = await shipengine.queryAddress({
-  street: ['1 E 161 St'],
-  cityLocality: 'The Bronx',
-  stateProvince: 'NY',
-  postalCode: '10451',
-  country: 'US'
-})
-
-console.assert(!addressQuery.exceptions.length, 'should be no exceptions')
-console.log(`the normalized address is: ${JSON.stringify(addressQuery.normalized)}.`)
-</pre>
-
-
-<p class="seealso">Used in section <a href="addresses.html#1:7">7</a></p>
-</div>
-</div>
-<a name="1:7"><div class="section"><h4>7. Programs</h4></a>
+<a name="1:2"><div class="section"><h4>2. Programs</h4></a>
 <p>Swap out initialization codeblock
 </p>
 
 <div class="codeblock">
-<span class="codeblock_name">{initialize <a href="addresses.html#1:3">3</a>} :=</span>
+<span class="codeblock_name">{initialize <a href="errors.html#1:2">2</a>}</span>
 <pre class="prettyprint lang-ts">
 import { default as ShipEngine } from '../../src';
 
@@ -1213,86 +1134,39 @@ const shipengine = new ShipEngine(process.env.API_KEY);
 </pre>
 
 
-<p class="seealso">Used in section <a href="addresses.html#1:7">7</a></p>
+
 </div>
 
 <div class="codeblock">
-<span class="codeblock_name">{wrapper start <a href="addresses.html#1:7">7</a>}</span>
+<span class="codeblock_name">{wrapper start <a href="errors.html#1:2">2</a>}</span>
 <pre class="prettyprint lang-ts">
 (async () =&gt; {
 </pre>
 
 
-<p class="seealso">Used in sections <a href="addresses.html#1:7">7</a> and <a href="addresses.html#1:7">7</a></p>
+
 </div>
 
 <div class="codeblock">
-<span class="codeblock_name">{wrapper end <a href="addresses.html#1:7">7</a>}</span>
+<span class="codeblock_name">{wrapper end <a href="errors.html#1:2">2</a>}</span>
 <pre class="prettyprint lang-ts">
 })()
 </pre>
 
 
-<p class="seealso">Used in sections <a href="addresses.html#1:7">7</a> and <a href="addresses.html#1:7">7</a></p>
-</div>
-
-<div class="codeblock">
-<span class="codeblock_name">{<strong>validate-address.ts</strong> <a href="addresses.html#1:7">7</a>}</span>
-<pre class="prettyprint lang-ts">
-<span class="nocode pln">{initialize, <a href="addresses.html#1:3">3</a>}</span>
-
-<span class="nocode pln">{wrapper start, <a href="addresses.html#1:7">7</a>}</span>
-
-<span class="nocode pln">{validate address args, <a href="addresses.html#1:4">4</a>}</span>
-
-<span class="nocode pln">{wrapper end, <a href="addresses.html#1:7">7</a>}</span>
-</pre>
-
-
 
 </div>
 
 <div class="codeblock">
-<span class="codeblock_name">{initialize normalize <a href="addresses.html#1:7">7</a>}</span>
+<span class="codeblock_name">{<strong>create-tags.ts</strong> <a href="errors.html#1:2">2</a>}</span>
 <pre class="prettyprint lang-ts">
-import { default as ShipEngine, ShipEngineError } from '../../src'
+<span class="nocode pln">{initialize, <a href="errors.html#1:2">2</a>}</span>
 
-import 'dotenv/config';
-const shipengine = new ShipEngine(process.env.API_KEY);
-</pre>
+<span class="nocode pln">{wrapper start, <a href="errors.html#1:2">2</a>}</span>
 
+<span class="nocode pln">{create tag}</span>
 
-
-</div>
-
-<div class="codeblock">
-<span class="codeblock_name">{<strong>normalize-address.ts</strong> <a href="addresses.html#1:7">7</a>}</span>
-<pre class="prettyprint lang-ts">
-<span class="nocode pln">{initialize normalize, <a href="addresses.html#1:7">7</a>}</span>
-
-<span class="nocode pln">{wrapper start, <a href="addresses.html#1:7">7</a>}</span>
-
-<span class="nocode pln">{normalize address args, <a href="addresses.html#1:5">5</a>}</span>
-
-<span class="nocode pln">{exception handling, <a href="addresses.html#1:5">5</a>}</span>
-
-<span class="nocode pln">{wrapper end, <a href="addresses.html#1:7">7</a>}</span>
-</pre>
-
-
-
-</div>
-
-<div class="codeblock">
-<span class="codeblock_name">{<strong>query-address.ts</strong> <a href="addresses.html#1:7">7</a>}</span>
-<pre class="prettyprint lang-ts">
-<span class="nocode pln">{initialize, <a href="addresses.html#1:3">3</a>}</span>
-
-<span class="nocode pln">{wrapper start, <a href="addresses.html#1:7">7</a>}</span>
-
-<span class="nocode pln">{query address, <a href="addresses.html#1:6">6</a>}</span>
-
-<span class="nocode pln">{wrapper end, <a href="addresses.html#1:7">7</a>}</span>
+<span class="nocode pln">{wrapper end, <a href="errors.html#1:2">2</a>}</span>
 </pre>
 
 

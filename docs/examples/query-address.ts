@@ -8,7 +8,7 @@ const shipengine = new ShipEngine(process.env.API_KEY);
 /* wrapper start */
 (async () => {
   /* query address */
-  const result = await shipengine.queryAddress({
+  const addressQuery = await shipengine.queryAddress({
     street: ['1 E 161 St'],
     cityLocality: 'The Bronx',
     stateProvince: 'NY',
@@ -16,9 +16,9 @@ const shipengine = new ShipEngine(process.env.API_KEY);
     country: 'US',
   });
 
-  console.assert(!result.errors.length, 'should be no errors');
+  console.assert(!addressQuery.exceptions.length, 'should be no exceptions');
   console.log(
-    `the normalized address is: ${JSON.stringify(result.normalized)}.`
+    `the normalized address is: ${JSON.stringify(addressQuery.normalized)}.`
   );
 
   /* wrapper end */
