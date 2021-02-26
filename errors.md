@@ -14,7 +14,7 @@ Data types like this, which can be represented by multiple shapes (e.g. `Foo | B
 
 This response structure is inspired by the FP concept of an [Either](https://gigobyte.github.io/purify/adts/Either).
 
---- either example
+--- example
 ```ts
 // success response
 {
@@ -36,7 +36,11 @@ This response structure is inspired by the FP concept of an [Either](https://gig
   },
   id: null,
 }
+```
+---
 
+--- either
+```ts
 const response = await shipengine.createTag("MY_TAG")
 if (response.type === 'success') {
   console.log('Tag created!', response.name)
@@ -46,8 +50,6 @@ if (response.type === 'success') {
 
 console.assert(response.type !== 'error', 'Tag should be successful');
 ```
-
-
 ---
 
 ## Programs
@@ -77,7 +79,7 @@ const shipengine = new ShipEngine(process.env.API_KEY);
 
 @{wrapper start}
 
-@{create tag}
+@{either}
 
 @{wrapper end}
 ---
