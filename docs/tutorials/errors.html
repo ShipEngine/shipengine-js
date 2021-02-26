@@ -1112,11 +1112,11 @@ div.section:last-of-type {
 <div class="codeblock">
 <span class="codeblock_name">{either <a href="errors.html#1:1">1</a>}</span>
 <pre class="prettyprint lang-ts">
-const response = await shipengine.createTag("MY_TAG")
+const response = await shipengine.tags.create("MY_TAG")
 if (response.type === 'success') {
-  console.log('Tag created!', response.result)
+  console.log('Tag created!', response.result.name)
 } else {
-  console.error('error', response.error)
+  console.error('error', response.error.message)
 }
 
 console.assert(response.type !== 'error', 'Tag should be successful');
