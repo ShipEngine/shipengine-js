@@ -1,7 +1,6 @@
-import { bimap, identity } from '../../shared/models/shipengine-rpc/either';
 import { ShipEngineRpcApiClient } from '../../shared/models/shipengine-rpc/shipengine-rpc-api';
 import { CreateTagParams } from '../../shared/models/shipengine-rpc/types';
-
+import { toThrowable } from '../../utils';
 export class TagsAdvanced {
   #api: ShipEngineRpcApiClient;
   public constructor(api: ShipEngineRpcApiClient) {
@@ -9,18 +8,19 @@ export class TagsAdvanced {
   }
 
   public create = async (params: CreateTagParams) => {
-    return this.#api.createTag(params);
+    const result = await this.#api.createTag(params);
+    return toThrowable(result);
   };
 }
 
 export class TagsService {
   tags: TagsAdvanced;
-  constructor(api: ShipEngineRpcApiClient) {
+  public constructor(api: ShipEngineRpcApiClient) {
     this.tags = new TagsAdvanced(api);
   }
 
   public createTag = async (q: string) => {
     const data = await this.tags.create({ name: q });
-    return bimap(data, (result) => result.name, identity);
+    return data.name;
   };
 }
