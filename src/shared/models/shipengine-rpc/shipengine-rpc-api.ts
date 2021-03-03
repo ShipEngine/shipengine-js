@@ -1,25 +1,17 @@
 import { InternalRpcClient } from './client';
 import { bimap, id } from '../../../utils';
-import {
-  CreateTagParams,
-  CreateTagResult,
-  toValidateAddressResult,
-  ValidateAddressResultJSON,
-  ValidateAddressParams,
-  ValidateAddressParamsJSON,
-  toValidateAddressParamsJSON,
-} from './types';
-
+import type * as T from './types';
+import { toValidateAddressResult, toValidateAddressParamsDto } from './types';
 export class ShipEngineRpcApiClient extends InternalRpcClient {
-  createTag = async (tag: CreateTagParams) => {
-    return this.exec<CreateTagParams, CreateTagResult>('tag/create', tag);
+  createTag = async (tag: T.CreateTagParams) => {
+    return this.exec<T.CreateTagParams, T.CreateTagResult>('tag/create', tag);
   };
 
-  validateAddress = async (validateAddressParams: ValidateAddressParams) => {
+  validateAddress = async (validateAddressParams: T.ValidateAddressParams) => {
     return bimap(
-      await this.exec<ValidateAddressParamsJSON, ValidateAddressResultJSON>(
+      await this.exec<T.ValidateAddressParamsDto, T.ValidateAddressResultDto>(
         'address/validate',
-        toValidateAddressParamsJSON(validateAddressParams)
+        toValidateAddressParamsDto(validateAddressParams)
       ),
       toValidateAddressResult,
       id

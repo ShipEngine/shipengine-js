@@ -98,8 +98,7 @@
   "dependencies": {
     "axios": "^0.21.0",
     "camelcase-keys": "^6.2.2",
-    "camelcase-keys-deep": "^0.1.0",
-    "retry-axios": "^2.3.0",
+    "snakecase-keys": "^3.2.1",
     "uuid": "^8.3.2"
   }
 }
