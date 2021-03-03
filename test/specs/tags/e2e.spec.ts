@@ -1,9 +1,9 @@
-const ShipEngine = require('../../../cjs/shipengine').ShipEngine;
-const { Hoverfly } = require('../../utils/Hoverfly');
-const { expect } = require('chai');
-const constants = require('../../utils/constants');
+import { ShipEngine } from '../../../cjs/shipengine';
+import { Hoverfly } from '../../utils/Hoverfly';
+import { expect } from 'chai';
+import constants from '../../utils/constants';
 
-let shipengine;
+let shipengine: ShipEngine;
 describe('Create tag', () => {
   before(async () => {
     await Hoverfly.start();

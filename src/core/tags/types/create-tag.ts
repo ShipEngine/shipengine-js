@@ -1,7 +1,10 @@
-import type {
-  CreateTagParamsGenerated,
-  CreateTagResultGenerated,
-} from '../generated';
+interface CreateTagParamsGenerated {
+  name: string;
+}
+
+interface CreateTagResultGenerated {
+  name: string;
+}
 
 export type CreateTagParams = CreateTagParamsGenerated;
 

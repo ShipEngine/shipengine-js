@@ -1,9 +1,9 @@
-import { ShipEngineRpcApiClient } from '../../shared/models/shipengine-rpc/shipengine-rpc-api';
-import { CreateTagParams } from '../../shared/models/shipengine-rpc/types';
+import { TagsApi } from './api';
+import { CreateTagParams } from '../../shared/models/client/types';
 import { toThrowable } from '../../utils';
 export class TagsAdvanced {
-  #api: ShipEngineRpcApiClient;
-  public constructor(api: ShipEngineRpcApiClient) {
+  #api: TagsApi;
+  public constructor(api: TagsApi) {
     this.#api = api;
   }
 
@@ -15,7 +15,7 @@ export class TagsAdvanced {
 
 export class TagsService {
   tags: TagsAdvanced;
-  public constructor(api: ShipEngineRpcApiClient) {
+  public constructor(api: TagsApi) {
     this.tags = new TagsAdvanced(api);
   }
 

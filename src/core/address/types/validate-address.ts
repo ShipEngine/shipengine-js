@@ -1,8 +1,4 @@
-import {
-  camelize,
-  snakeize,
-  SnakeToCamelCaseObject,
-} from '../../../../../utils';
+import { camelize, snakeize, SnakeToCamelCaseObject } from '../../../utils';
 export interface ValidateAddressParamsDto {
   street: string[];
   country_code: null | string;
@@ -47,7 +43,9 @@ export interface MessagesDto {
   warnings: string[];
 }
 
-type ValidateAddressResult = SnakeToCamelCaseObject<ValidateAddressResultDto>;
+export type ValidateAddressResult = SnakeToCamelCaseObject<
+  ValidateAddressResultDto
+>;
 
 export type ValidateAddressParams = SnakeToCamelCaseObject<
   ValidateAddressParamsDto

@@ -1,14 +1,16 @@
-import { ShipEngineRpcApiClient } from '../../shared/models/shipengine-rpc/shipengine-rpc-api';
-import { ValidateAddressParams } from '../../shared/models/shipengine-rpc/types';
+import { AddressApi } from './api';
+import { ValidateAddressParams, ValidateAddressResult } from './types';
 import { toThrowable } from '../../utils/either';
 
 export class AddressAdvanced {
-  #api: ShipEngineRpcApiClient;
-  public constructor(api: ShipEngineRpcApiClient) {
+  #api: AddressApi;
+  public constructor(api: AddressApi) {
     this.#api = api;
   }
 
-  public validate = async (params: ValidateAddressParams) => {
+  public validate = async (
+    params: ValidateAddressParams
+  ): Promise<ValidateAddressResult> => {
     return toThrowable(await this.#api.validateAddress(params));
   };
 }
@@ -17,11 +19,13 @@ export class AddressAdvanced {
 type Address = ValidateAddressParams;
 export class AddressService {
   address: AddressAdvanced;
-  constructor(api: ShipEngineRpcApiClient) {
+  constructor(api: AddressApi) {
     this.address = new AddressAdvanced(api);
   }
 
-  public validateAddress = async (address: Address) => {
+  public validateAddress = async (
+    address: Address
+  ): Promise<ValidateAddressResult> => {
     const data = await this.address.validate(address);
     return data;
   };
