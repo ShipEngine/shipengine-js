@@ -1,9 +1,13 @@
 import { InternalRpcClient } from './client';
+import { bimap, id } from '../../../utils';
 import {
   CreateTagParams,
   CreateTagResult,
+  toValidateAddressResult,
+  ValidateAddressResultJSON,
   ValidateAddressParams,
-  ValidateAddressResult,
+  ValidateAddressParamsJSON,
+  toValidateAddressParamsJSON,
 } from './types';
 
 export class ShipEngineRpcApiClient extends InternalRpcClient {
@@ -12,9 +16,13 @@ export class ShipEngineRpcApiClient extends InternalRpcClient {
   };
 
   validateAddress = async (validateAddressParams: ValidateAddressParams) => {
-    return this.exec<ValidateAddressParams, ValidateAddressResult>(
-      'address/validate',
-      validateAddressParams
+    return bimap(
+      await this.exec<ValidateAddressParamsJSON, ValidateAddressResultJSON>(
+        'address/validate',
+        toValidateAddressParamsJSON(validateAddressParams)
+      ),
+      toValidateAddressResult,
+      id
     );
   };
 }

@@ -20,7 +20,7 @@ export type Either<Result, Error> =
   | SuccessResponse<Result>
   | ErrorResponse<Error>;
 
-export const identity = <T>(v: T): T => v;
+export const id = <T>(v: T): T => v;
 
 export const match = <Success, Error, T, U>(
   either: Either<Success, Error>,

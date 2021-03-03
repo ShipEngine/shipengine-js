@@ -50,6 +50,20 @@ type ValidateAddressResult =
   SnakeToCamelCaseObject<ValidateAddressResultJSON>
 
 
-const toAddress = (v: ValidateAddressResultJSON): ValidateAddressResult => {
+export type ValidateAddressParams = SnakeToCamelCaseObject<ValidateAddressParamsJSON>
+
+export const toValidateAddressParamsJSON = (v: ValidateAddressParams): ValidateAddressParamsJSON => {
+  return {
+    country_code: v.countryCode,
+    street: v.street,
+    city_locality: v.cityLocality,
+    latitude: v.latitude,
+    longitude: v.longitude,
+    state_province: v.stateProvince,
+    postal_code: v.postalCode,
+  }
+}
+
+export const toValidateAddressResult = (v: ValidateAddressResultJSON): ValidateAddressResult => {
   return camelize(v);
 }
