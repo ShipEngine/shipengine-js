@@ -19,14 +19,15 @@ export class PackagesAdvanced {
 }
 
 /* in this case, tracking is the same as the params */
-type Tracking = TrackPackageParams;
-export class TrackingService {
+export class PackageService {
   package: PackagesAdvanced;
   constructor(api: PackageApi) {
     this.package = new PackagesAdvanced(api);
   }
 
-  public track = async (tracking: Tracking): Promise<TrackPackageResult> => {
+  public trackPackage = async (
+    tracking: TrackPackageParams
+  ): Promise<TrackPackageResult> => {
     const data = await this.package.track(tracking);
     return data;
   };

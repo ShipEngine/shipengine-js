@@ -1,6 +1,6 @@
 import { InternalRpcClient } from '../../shared/models/client/client';
-import { TrackPackageParams } from './types/track-package.dto';
 import {
+  TrackPackageParams,
   dtoToTrackPackageResultsEntity,
   entityToTrackPackageParamsDto,
 } from './types/track-package.entities';
