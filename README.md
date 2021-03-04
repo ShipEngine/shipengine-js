@@ -50,6 +50,11 @@ console.log(isValid ? 'valid!' : 'invalid!')
 
 ## Development / Contributions
 
+### Releasing new Alpha versions
+- Install the [github client](https://github.com/cli/cli).
+- Once `main` is in a state where we want to release.
+  - `npm run tag-and-release` (justs run `scripts/release.sh`)
+
 ### Cloning the repo
 - fork the repository
 - `git submodule update --init --recursive`
