@@ -1,7 +1,7 @@
-import { ShipEngine } from '../../../cjs/shipengine';
 import { Hoverfly } from '../../utils/Hoverfly';
 import { expect } from 'chai';
 import constants from '../../utils/constants';
+import { ShipEngine } from '../../../src/shipengine';
 
 let shipengine: ShipEngine;
 describe('Create tag', () => {
