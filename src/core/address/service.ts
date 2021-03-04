@@ -2,6 +2,9 @@ import { AddressApi } from './api';
 import { ValidateAddressParams, ValidateAddressResult } from './types';
 import { toThrowable } from '../../utils/either';
 
+type ValidateAddressIndividualParams = ValidateAddressParams[0];
+type ValidateAddressIndividualResult = ValidateAddressResult[0];
+type Address = ValidateAddressIndividualParams;
 export class AddressAdvanced {
   #api: AddressApi;
   public constructor(api: AddressApi) {
@@ -9,14 +12,16 @@ export class AddressAdvanced {
   }
 
   public validate = async (
-    params: ValidateAddressParams
-  ): Promise<ValidateAddressResult> => {
-    return toThrowable(await this.#api.validateAddress(params));
+    params: ValidateAddressIndividualParams
+  ): Promise<ValidateAddressIndividualResult> => {
+    const result = toThrowable(
+      await this.#api.validateAddressIndividual(params)
+    );
+    return result;
   };
 }
 
 /* in this case, address is the same as the params */
-type Address = ValidateAddressParams;
 export class AddressService {
   address: AddressAdvanced;
   constructor(api: AddressApi) {
@@ -25,7 +30,7 @@ export class AddressService {
 
   public validateAddress = async (
     address: Address
-  ): Promise<ValidateAddressResult> => {
+  ): Promise<ValidateAddressIndividualResult> => {
     const data = await this.address.validate(address);
     return data;
   };

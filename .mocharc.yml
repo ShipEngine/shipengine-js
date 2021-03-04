@@ -3,12 +3,12 @@
 # https://github.com/mochajs/mocha/blob/master/example/config/.mocharc.yml
 
 app: shipengine
-watch-files: ["src/**/*", "test/**/*.js"]
+watch-files: ["src/**/*", "test/**/*"]
 timeout: 10000
 spec:
   # Test fixtures
   # Test specs
-  - test/specs/**/*.spec.js
+  - test/specs/**/*.spec.ts
 
 recursive: true
 require:

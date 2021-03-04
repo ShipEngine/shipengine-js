@@ -21,9 +21,9 @@ export interface ValidateAddressResultDto {
 }
 
 export const toValidateAddressResult = (
-  v: ValidateAddressResultDto
+  v: ValidateAddressResultDto[]
 ): ValidateAddressResult => {
-  return camelize(v);
+  return v.map(camelize);
 };
 
 export interface AddressDto {
@@ -45,8 +45,8 @@ export interface MessagesDto {
 
 export type ValidateAddressResult = SnakeToCamelCaseObject<
   ValidateAddressResultDto
->;
+>[];
 
 export type ValidateAddressParams = SnakeToCamelCaseObject<
   ValidateAddressParamsDto
->;
+>[];
