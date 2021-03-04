@@ -7,18 +7,15 @@ const shipengine = new ShipEngine(process.env.API_KEY);
 
 /* wrapper start */
 (async () => {
-  try {
-    const response = await shipengine.tags.create({ name: 'MY_TAG' });
-    console.log(response);
-  } catch (err) {
-    console.error(err);
+  /* either */
+  const response = await shipengine.tags.create('MY_TAG');
+  if (response.type === 'success') {
+    console.log('Tag created!', response.result.name);
+  } else {
+    console.error('error', response.error.message);
   }
 
-  try {
-    const response = await shipengine.createTag('MY_TAG');
-    console.log(response);
-  } catch (err) {
-    console.error(err);
-  }
+  console.assert(response.type !== 'error', 'Tag should be successful');
+
   /* wrapper end */
 })();
