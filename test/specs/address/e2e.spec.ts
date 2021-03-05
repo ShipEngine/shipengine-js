@@ -2,7 +2,7 @@ import { ShipEngine } from '../../../src/shipengine';
 import { Hoverfly } from '../../utils/Hoverfly';
 import { expect } from 'chai';
 import constants from '../../utils/constants';
-import { ValidateAddressResult } from '../../../src/core/address/types/validate-address';
+import { ValidateAddressResult } from '../../../src/core/address/entities';
 
 let shipengine: ShipEngine;
 describe('address', () => {
@@ -37,7 +37,8 @@ describe('address', () => {
     assertAddress(response);
   });
   it('should work with address.validate', async () => {
-    const response = await shipengine.address.validate(address);
-    assertAddress(response);
+    const response = await shipengine.address.validate([address]);
+
+    assertAddress(response[0]);
   });
 });

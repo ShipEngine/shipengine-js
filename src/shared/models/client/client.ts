@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import { hasProperties, isObject } from '../../../utils';
+import { camelize, hasProperties, isObject, snakeize } from '../../../utils';
 import { Either, SuccessResponse, ErrorResponse } from '../../../utils/either';
 
 type ErrorData =
@@ -92,13 +92,17 @@ export class InternalRpcClient {
     });
   }
 
+  /**
+   * auto snake cases params
+   * auto camel cases result
+   */
   exec = async <Params extends Parameters, Result>(
     method: string,
     params: Params,
     resultMapper: (jsonData: any) => Result
   ): Promise<Either<Result, JsonRpcError>> => {
     try {
-      const data = new JsonRpcCall(method, params);
+      const data = new JsonRpcCall(method, snakeize(params));
       const axiosResponse: AxiosResponse<unknown> = await this.#client({
         method: 'post',
         data,
@@ -107,9 +111,9 @@ export class InternalRpcClient {
       assertJsonRpcReply<any>(axiosData);
 
       if (isJsonRpcResponseError(axiosData)) {
-        return new ErrorResponse(axiosData.error);
+        return new ErrorResponse(camelize(axiosData.error));
       } else {
-        return new SuccessResponse(resultMapper(axiosData.result));
+        return new SuccessResponse(resultMapper(camelize(axiosData.result)));
       }
     } catch (err) {
       // this should never happen

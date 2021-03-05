@@ -2,6 +2,7 @@ import camelcaseKeys from 'camelcase-keys';
 import snakecaseKeys from 'snakecase-keys'
 
  type SnakeToCamelCase<S extends string> =
+  // eslint-disable-next-line prettier/prettier
   S extends `${infer T}_${infer U}` ?
   `${Lowercase<T>}${Capitalize<SnakeToCamelCase<U>>}` :
   S
