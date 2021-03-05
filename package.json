@@ -24,7 +24,7 @@
     "test:browser": "npm run build && karma start --single-run",
     "lint": "npm run tsc:check && eslint .",
     "lint:examples": "eslint docs/examples/**/*.ts",
-    "sim:update": "git submodule update --recursive --remote",
+    "sim:update": "git submodule update --recursive --remote --merge",
     "sim": "docker-compose -f simengine/docker-compose.yaml ",
     "sim:start": "npm run sim -- up -d && npm run sim:import",
     "sim:import": "ts-node-script import-rpc.ts",
