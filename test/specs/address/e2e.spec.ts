@@ -1,8 +1,8 @@
-import { ShipEngine } from '../../../cjs/shipengine';
+import { ShipEngine } from '../../../src/shipengine';
 import { Hoverfly } from '../../utils/Hoverfly';
 import { expect } from 'chai';
 import constants from '../../utils/constants';
-import { ValidateAddressResult } from '../../../cjs/core/address/types';
+import { ValidateAddressResult } from '../../../src/core/address/types/validate-address';
 
 let shipengine: ShipEngine;
 describe('address', () => {

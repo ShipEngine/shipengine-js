@@ -1,7 +1,7 @@
 import { Hoverfly } from '../../utils/Hoverfly';
 import { expect } from 'chai';
 import constants from '../../utils/constants';
-import { InternalRpcClient } from '../../../cjs/shared/models/client/client';
+import { InternalRpcClient } from '../../../src/shared/models/client/client';
 
 describe('RPC Client test', () => {
   before(async () => {

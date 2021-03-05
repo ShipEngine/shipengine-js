@@ -14,7 +14,8 @@ const {
 
 module.exports = (cfg) => {
   const getConfig = karmaConfig({
-    sourceDir: 'esm',
+    sourceDir: './esm.test',
+    tests: ['./esm.test/**/*.spec.js'],
     config: {
       frameworks: ['mocha', 'host-environment', 'child-process'],
       plugins: ['karma-child-process'],
