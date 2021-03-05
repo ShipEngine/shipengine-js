@@ -62,30 +62,20 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>This class encapsulates the entire public API of the ShipEngine SDK</p>
-					</div>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
 						<a href="tagsservice.html" class="tsd-signature-type">TagsService</a>
+					</li>
+					<li>
+						<a href="addressservice.html" class="tsd-signature-type">AddressService</a>
 						<ul class="tsd-hierarchy">
 							<li>
 								<span class="target">ShipEngine</span>
 							</li>
 						</ul>
 					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel">
-				<h3>Implements</h3>
-				<ul class="tsd-hierarchy">
-					<li><a href="tagsservice.html" class="tsd-signature-type">TagsService</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -95,12 +85,13 @@
 						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><a href="shipengine.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="shipengine.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="shipengine.html#address" class="tsd-kind-icon">address</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="shipengine.html#tags" class="tsd-kind-icon">tags</a></li>
 							</ul>
 						</section>
@@ -108,6 +99,7 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="shipengine.html#createtag" class="tsd-kind-icon">create<wbr>Tag</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="shipengine.html#validateaddress" class="tsd-kind-icon">validate<wbr>Address</a></li>
 							</ul>
 						</section>
 					</div>
@@ -115,16 +107,17 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Ship<wbr>Engine<span class="tsd-signature-symbol">(</span>api<span class="tsd-signature-symbol">: </span><a href="shipenginerpcapiclient.html" class="tsd-signature-type">ShipEngineRpcApiClient</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="shipengine.html" class="tsd-signature-type">ShipEngine</a></li>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Ship<wbr>Engine<span class="tsd-signature-symbol">(</span>api<span class="tsd-signature-symbol">: </span><a href="tagsapi.html" class="tsd-signature-type">TagsApi</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="shipengine.html" class="tsd-signature-type">ShipEngine</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="tagsservice.html">TagsService</a>.<a href="tagsservice.html#constructor">constructor</a></p>
+								<p>Overrides <a href="addressservice.html">AddressService</a>.<a href="addressservice.html#constructor">constructor</a></p>
 								<ul>
 									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/tags/service.ts#L17">core/tags/service.ts:17</a></li>
 								</ul>
@@ -132,7 +125,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>api: <a href="shipenginerpcapiclient.html" class="tsd-signature-type">ShipEngineRpcApiClient</a></h5>
+									<h5>api: <a href="tagsapi.html" class="tsd-signature-type">TagsApi</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="shipengine.html" class="tsd-signature-type">ShipEngine</a></h4>
@@ -142,6 +135,17 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="address" class="tsd-anchor"></a>
+					<h3>address</h3>
+					<div class="tsd-signature tsd-kind-icon">address<span class="tsd-signature-symbol">:</span> <a href="addressadvanced.html" class="tsd-signature-type">AddressAdvanced</a></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="addressservice.html">AddressService</a>.<a href="addressservice.html#address">address</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/service.ts#L26">core/address/service.ts:26</a></li>
+						</ul>
+					</aside>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="tags" class="tsd-anchor"></a>
 					<h3>tags</h3>
@@ -160,7 +164,7 @@
 					<a name="createtag" class="tsd-anchor"></a>
 					<h3>create<wbr>Tag</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Tag<span class="tsd-signature-symbol">(</span>q<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Tag<span class="tsd-signature-symbol">(</span>q<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -176,7 +180,31 @@
 									<h5>q: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="validateaddress" class="tsd-anchor"></a>
+					<h3>validate<wbr>Address</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">validate<wbr>Address<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><a href="../globals.html#address" class="tsd-signature-type">Address</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../globals.html#validateaddressindividualresult" class="tsd-signature-type">ValidateAddressIndividualResult</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="addressservice.html">AddressService</a>.<a href="addressservice.html#validateaddress">validateAddress</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/service.ts#L31">core/address/service.ts:31</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>address: <a href="../globals.html#address" class="tsd-signature-type">Address</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../globals.html#validateaddressindividualresult" class="tsd-signature-type">ValidateAddressIndividualResult</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -193,6 +221,15 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-class">
+						<a href="addressadvanced.html" class="tsd-kind-icon">Address<wbr>Advanced</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="addressapi.html" class="tsd-kind-icon">Address<wbr>Api</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="addressservice.html" class="tsd-kind-icon">Address<wbr>Service</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="internalrpcclient.html" class="tsd-kind-icon">Internal<wbr>Rpc<wbr>Client</a>
 					</li>
 					<li class=" tsd-kind-class tsd-has-type-parameter">
@@ -203,8 +240,11 @@
 					<li class="current tsd-kind-class">
 						<a href="shipengine.html" class="tsd-kind-icon">Ship<wbr>Engine</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
 								<a href="shipengine.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="shipengine.html#address" class="tsd-kind-icon">address</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="shipengine.html#tags" class="tsd-kind-icon">tags</a>
@@ -212,18 +252,24 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="shipengine.html#createtag" class="tsd-kind-icon">create<wbr>Tag</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="shipengine.html#validateaddress" class="tsd-kind-icon">validate<wbr>Address</a>
+							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-class">
-						<a href="shipenginerpcapiclient.html" class="tsd-kind-icon">Ship<wbr>Engine<wbr>Rpc<wbr>Api<wbr>Client</a>
-					</li>
-					<li class=" tsd-kind-class">
 						<a href="tagsadvanced.html" class="tsd-kind-icon">Tags<wbr>Advanced</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="tagsapi.html" class="tsd-kind-icon">Tags<wbr>Api</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="tagsservice.html" class="tsd-kind-icon">Tags<wbr>Service</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/addressdto.html" class="tsd-kind-icon">Address<wbr>Dto</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/basejsonrpcresponse.html" class="tsd-kind-icon">Base<wbr>Json<wbr>Rpc<wbr>Response</a>
@@ -243,6 +289,18 @@
 					<li class=" tsd-kind-interface tsd-has-type-parameter">
 						<a href="../interfaces/jsonrpcresponsesuccess.html" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Response<wbr>Success</a>
 					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/messagesdto.html" class="tsd-kind-icon">Messages<wbr>Dto</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/validateaddressparamsdto.html" class="tsd-kind-icon">Validate<wbr>Address<wbr>Params<wbr>Dto</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/validateaddressresultdto.html" class="tsd-kind-icon">Validate<wbr>Address<wbr>Result<wbr>Dto</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#address" class="tsd-kind-icon">Address</a>
+					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#createtagparams" class="tsd-kind-icon">Create<wbr>Tag<wbr>Params</a>
 					</li>
@@ -259,10 +317,16 @@
 						<a href="../globals.html#parameters" class="tsd-kind-icon">Parameters</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="../globals.html#shipengineapi" class="tsd-kind-icon">Ship<wbr>EngineAPI</a>
+						<a href="../globals.html#validateaddressindividualparams" class="tsd-kind-icon">Validate<wbr>Address<wbr>Individual<wbr>Params</a>
 					</li>
-					<li class=" tsd-kind-function">
-						<a href="../globals.html#servicefactory" class="tsd-kind-icon">Service<wbr>Factory</a>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#validateaddressindividualresult" class="tsd-kind-icon">Validate<wbr>Address<wbr>Individual<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#validateaddressparams" class="tsd-kind-icon">Validate<wbr>Address<wbr>Params</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#validateaddressresult" class="tsd-kind-icon">Validate<wbr>Address<wbr>Result</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="../globals.html#assertjsonrpcreply" class="tsd-kind-icon">assert<wbr>Json<wbr>Rpc<wbr>Reply</a>
@@ -272,6 +336,12 @@
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="../globals.html#isjsonrpcresponseerror" class="tsd-kind-icon">is<wbr>Json<wbr>Rpc<wbr>Response<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../globals.html#tovalidateaddressparamsdto" class="tsd-kind-icon">to<wbr>Validate<wbr>Address<wbr>Params<wbr>Dto</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../globals.html#tovalidateaddressresult" class="tsd-kind-icon">to<wbr>Validate<wbr>Address<wbr>Result</a>
 					</li>
 				</ul>
 			</nav>
