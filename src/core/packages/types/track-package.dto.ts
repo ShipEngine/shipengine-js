@@ -49,13 +49,6 @@ export interface MessagesObject {
   warnings?: string[];
 }
 
-/***************/
-// To parse this data:
-//
-//   import { Convert, TrackPackageParams } from "./file";
-//
-//   const trackPackageParams = Convert.toTrackPackageParams(json);
-
 export interface TrackPackageParams {
   carrier_code?: string;
   tracking_number?: string;

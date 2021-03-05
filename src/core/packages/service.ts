@@ -18,7 +18,6 @@ export class PackagesAdvanced {
   };
 }
 
-/* in this case, tracking is the same as the params */
 export class PackageService {
   package: PackagesAdvanced;
   constructor(api: PackageApi) {

@@ -50,6 +50,21 @@ console.log(isValid ? 'valid!' : 'invalid!')
 
 ## Development / Contributions
 
+### Publishing workflow
+Note: These things more or less happen automatically with `npm run tag-and-release`.
+1. Bump `version` in package.json to v1.0.0
+2. If no longer publishing an alpha or beta, make sure to change the `tag: alpha` to `tag: latest` line in the [cicd.yaml](.github/workflows/cicd.yaml). This refers the npm `dist-tag`; for example, if the release getting published on npm as `v1.0.0@latest`, the dist-tag would be the word `latest`. This allows a consumer to do `npm install shipengine-js@latest --save`, and npm will serve up the latest version. See  [JS-DevTools/npm-publish](https://github.com/JS-DevTools/npm-publish#input-parameters) for more information.
+
+3. Do the following
+```sh
+git checkout -b main
+git commit -m release v1.0.0
+git tag -l v1.0.0
+git push --tags origin HEAD
+```
+4. Now, the github action publish job should start automatically. This happens whenever it detects a new package.json version on a push to `main`.
+5. After the npm publish job completes, create a github release and write release notes. Assign the release to the appropriate git tag.
+
 ### Releasing new Alpha versions
 - Install the [github client](https://github.com/cli/cli).
 - Once `main` is in a state where we want to release.
