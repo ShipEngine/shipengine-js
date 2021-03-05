@@ -111,6 +111,36 @@
 				<a href="#development--contributions" id="development--contributions" style="color: inherit; text-decoration: none;">
 					<h2>Development / Contributions</h2>
 				</a>
+				<a href="#publishing-workflow" id="publishing-workflow" style="color: inherit; text-decoration: none;">
+					<h3>Publishing workflow</h3>
+				</a>
+				<p>Note: These things more or less happen automatically with <code>npm run tag-and-release</code>.</p>
+				<ol>
+					<li><p>Bump <code>version</code> in package.json to v1.0.0</p>
+					</li>
+					<li><p>If no longer publishing an alpha or beta, make sure to change the <code>tag: alpha</code> to <code>tag: latest</code> line in the <a href=".github/workflows/cicd.yaml">cicd.yaml</a>. This refers the npm <code>dist-tag</code>; for example, if the release getting published on npm as <code>v1.0.0@latest</code>, the dist-tag would be the word <code>latest</code>. This allows a consumer to do <code>npm install shipengine-js@latest --save</code>, and npm will serve up the latest version. See  <a href="https://github.com/JS-DevTools/npm-publish#input-parameters">JS-DevTools/npm-publish</a> for more information.</p>
+					</li>
+					<li><p>Do the following</p>
+						<pre><code class="language-sh">git checkout -b main
+git commit -m release v1.0.0
+git tag -l v1.0.0
+git push --tags origin HEAD</code></pre>
+					</li>
+					<li><p>Now, the github action publish job should start automatically. This happens whenever it detects a new package.json version on a push to <code>main</code>.</p>
+					</li>
+					<li><p>After the npm publish job completes, create a github release and write release notes. Assign the release to the appropriate git tag.</p>
+					</li>
+				</ol>
+				<a href="#releasing-new-alpha-versions" id="releasing-new-alpha-versions" style="color: inherit; text-decoration: none;">
+					<h3>Releasing new Alpha versions</h3>
+				</a>
+				<ul>
+					<li>Install the <a href="https://github.com/cli/cli">github client</a>.</li>
+					<li>Once <code>main</code> is in a state where we want to release.<ul>
+							<li><code>npm run tag-and-release</code> (justs run <code>scripts/release.sh</code>)</li>
+						</ul>
+					</li>
+				</ul>
 				<a href="#cloning-the-repo" id="cloning-the-repo" style="color: inherit; text-decoration: none;">
 					<h3>Cloning the repo</h3>
 				</a>
@@ -156,6 +186,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="enums/status.html" class="tsd-kind-icon">Status</a>
+					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/addressadvanced.html" class="tsd-kind-icon">Address<wbr>Advanced</a>
 					</li>
@@ -170,6 +203,15 @@
 					</li>
 					<li class=" tsd-kind-class tsd-has-type-parameter">
 						<a href="classes/jsonrpccall.html" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Call</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/packageapi.html" class="tsd-kind-icon">Package<wbr>Api</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/packageservice.html" class="tsd-kind-icon">Package<wbr>Service</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/packagesadvanced.html" class="tsd-kind-icon">Packages<wbr>Advanced</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/shipengine.html" class="tsd-kind-icon">Ship<wbr>Engine</a>
@@ -196,6 +238,12 @@
 						<a href="interfaces/createtagresultgenerated.html" class="tsd-kind-icon">Create<wbr>Tag<wbr>Result<wbr>Generated</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/eventelement.html" class="tsd-kind-icon">Event<wbr>Element</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/information.html" class="tsd-kind-icon">Information</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/jsonrpcerror.html" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Error</a>
 					</li>
 					<li class=" tsd-kind-interface">
@@ -205,7 +253,19 @@
 						<a href="interfaces/jsonrpcresponsesuccess.html" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Response<wbr>Success</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/locationobject.html" class="tsd-kind-icon">Location<wbr>Object</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/messagesdto.html" class="tsd-kind-icon">Messages<wbr>Dto</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/messagesobject.html" class="tsd-kind-icon">Messages<wbr>Object</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/trackpackageparams.html" class="tsd-kind-icon">Track<wbr>Package<wbr>Params</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/trackpackageresult.html" class="tsd-kind-icon">Track<wbr>Package<wbr>Result</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/validateaddressparamsdto.html" class="tsd-kind-icon">Validate<wbr>Address<wbr>Params<wbr>Dto</a>
@@ -229,6 +289,9 @@
 						<a href="globals.html#jsonrpcresponse" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Response</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#packageid" class="tsd-kind-icon">Package<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#parameters" class="tsd-kind-icon">Parameters</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
@@ -245,6 +308,12 @@
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="globals.html#assertjsonrpcreply" class="tsd-kind-icon">assert<wbr>Json<wbr>Rpc<wbr>Reply</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#dtototrackpackageresultsentity" class="tsd-kind-icon">dto<wbr>ToTrack<wbr>Package<wbr>Results<wbr>Entity</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#entitytotrackpackageparamsdto" class="tsd-kind-icon">entity<wbr>ToTrack<wbr>Package<wbr>Params<wbr>Dto</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#isjsonrpcerror" class="tsd-kind-icon">is<wbr>Json<wbr>Rpc<wbr>Error</a>

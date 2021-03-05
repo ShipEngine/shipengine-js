@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ValidateAddressResultDto | ShipEngine JS API</title>
+	<title>Information | ShipEngine JS API</title>
 	<meta name="description" content="Documentation for ShipEngine JS API">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -52,10 +52,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="validateaddressresultdto.html">ValidateAddressResultDto</a>
+					<a href="information.html">Information</a>
 				</li>
 			</ul>
-			<h1>Interface ValidateAddressResultDto</h1>
+			<h1>Interface Information</h1>
 		</div>
 	</div>
 </header>
@@ -66,7 +66,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ValidateAddressResultDto</span>
+						<span class="target">Information</span>
 					</li>
 				</ul>
 			</section>
@@ -77,8 +77,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="validateaddressresultdto.html#address" class="tsd-kind-icon">address</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="validateaddressresultdto.html#messages" class="tsd-kind-icon">messages</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="information.html#estimated_delivery" class="tsd-kind-icon">estimated_<wbr>delivery</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="information.html#events" class="tsd-kind-icon">events</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="information.html#tracking_number" class="tsd-kind-icon">tracking_<wbr>number</a></li>
 							</ul>
 						</section>
 					</div>
@@ -87,22 +88,32 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="address" class="tsd-anchor"></a>
-					<h3>address</h3>
-					<div class="tsd-signature tsd-kind-icon">address<span class="tsd-signature-symbol">:</span> <a href="addressdto.html" class="tsd-signature-type">AddressDto</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+					<a name="estimated_delivery" class="tsd-anchor"></a>
+					<h3>estimated_<wbr>delivery</h3>
+					<div class="tsd-signature tsd-kind-icon">estimated_<wbr>delivery<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/types/validate-address.ts#L19">core/address/types/validate-address.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/types/track-package.dto.ts#L13">core/packages/types/track-package.dto.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="messages" class="tsd-anchor"></a>
-					<h3>messages</h3>
-					<div class="tsd-signature tsd-kind-icon">messages<span class="tsd-signature-symbol">:</span> <a href="messagesdto.html" class="tsd-signature-type">MessagesDto</a></div>
+					<a name="events" class="tsd-anchor"></a>
+					<h3>events</h3>
+					<div class="tsd-signature tsd-kind-icon">events<span class="tsd-signature-symbol">:</span> <a href="eventelement.html" class="tsd-signature-type">EventElement</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/types/validate-address.ts#L20">core/address/types/validate-address.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/types/track-package.dto.ts#L14">core/packages/types/track-package.dto.ts:14</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="tracking_number" class="tsd-anchor"></a>
+					<h3>tracking_<wbr>number</h3>
+					<div class="tsd-signature tsd-kind-icon">tracking_<wbr>number<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/types/track-package.dto.ts#L15">core/packages/types/track-package.dto.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -121,13 +132,16 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="validateaddressresultdto.html" class="tsd-kind-icon">Validate<wbr>Address<wbr>Result<wbr>Dto</a>
+						<a href="information.html" class="tsd-kind-icon">Information</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="validateaddressresultdto.html#address" class="tsd-kind-icon">address</a>
+								<a href="information.html#estimated_delivery" class="tsd-kind-icon">estimated_<wbr>delivery</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="validateaddressresultdto.html#messages" class="tsd-kind-icon">messages</a>
+								<a href="information.html#events" class="tsd-kind-icon">events</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="information.html#tracking_number" class="tsd-kind-icon">tracking_<wbr>number</a>
 							</li>
 						</ul>
 					</li>

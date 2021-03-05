@@ -9,33 +9,27 @@ const shipengine = new ShipEngine(process.env.API_KEY);
 (async () => {
   /* one */
   try {
-    const result = await shipengine.trackPackage({
+    const result = await shipengine.trackShipment({
       trackingNumber: '1Z12345E0205271688',
       carrierCode: 'ups',
     });
     console.assert(
-      result.information.estimatedDelivery,
+      result.estimatedDelivery,
       'should have an estimated delivery'
     );
-    console.assert(
-      result.information.events.length,
-      'should have tracking events'
-    );
+    console.assert(result.events.length, 'should have tracking events');
   } catch (err) {
     console.error(err);
   }
 
   /* two */
   try {
-    const result = await shipengine.trackPackage('se-ABC123');
+    const result = await shipengine.trackShipment('se-ABC123');
     console.assert(
-      result.information.estimatedDelivery,
+      result.estimatedDelivery,
       'should have an estimated delivery'
     );
-    console.assert(
-      result.information.events.length,
-      'should have tracking events'
-    );
+    console.assert(result.events.length, 'should have tracking events');
   } catch (err) {
     console.error(err);
   }
