@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./esm.test",
+    "declaration": false,
+    "sourceMap": false,
+    "rootDir": "",
+    "strict": false,
+    "rootDirs": [
+      "test/**",
+      "src/**"
+    ],
+    "allowJs": true,
+  },
+  "include": [
+    "test/**/*"
+  ]
+}

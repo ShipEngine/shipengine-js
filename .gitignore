@@ -42,7 +42,7 @@ node_modules
 # Build output
 /cjs
 /esm
-
+/esm.test
 # Test output
 /.nyc_output
 /coverage

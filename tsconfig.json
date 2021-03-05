@@ -21,6 +21,7 @@
     "isolatedModules": true,
     "removeComments": false,
     "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
     "typeRoots": [
       "node_modules/@types",
       "./typings"
@@ -31,8 +32,9 @@
   ],
   "exclude": [
     "node_modules",
-    "cjs",
-    "esm",
-    "docs/api"
+    "cjs/**",
+    "esm/**",
+    "esm.test/**",
+    "docs/api/**"
   ]
 }

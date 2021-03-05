@@ -15,14 +15,12 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   extends: [
     'eslint:recommended', // for js files
-    'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
-    'prettier/@typescript-eslint',
     'plugin:import/errors', // for catching immediately-executed imports like "import ./foo"
     'plugin:import/warnings',
     'plugin:import/typescript', // disable rules that overlap with typescript
   ],
-  ignorePatterns: ['esm', 'cjs', 'node_modules', 'docs/api'],
+  ignorePatterns: ['esm', 'esm.test', 'cjs', 'node_modules', 'docs/api'],
   rules: {
     'lines-between-class-members': [
       'error',
