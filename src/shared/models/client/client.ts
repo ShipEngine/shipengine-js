@@ -92,10 +92,11 @@ export class InternalRpcClient {
     });
   }
 
-  exec = async <Params extends Parameters, Data>(
+  exec = async <Params extends Parameters, Result>(
     method: string,
-    params: Params
-  ): Promise<Either<Data, JsonRpcError>> => {
+    params: Params,
+    resultMapper: (jsonData: any) => Result
+  ): Promise<Either<Result, JsonRpcError>> => {
     try {
       const data = new JsonRpcCall(method, params);
       const axiosResponse: AxiosResponse<unknown> = await this.#client({
@@ -103,12 +104,12 @@ export class InternalRpcClient {
         data,
       });
       const axiosData = axiosResponse.data;
-      assertJsonRpcReply<Data>(axiosData);
+      assertJsonRpcReply<any>(axiosData);
 
       if (isJsonRpcResponseError(axiosData)) {
         return new ErrorResponse(axiosData.error);
       } else {
-        return new SuccessResponse(axiosData.result);
+        return new SuccessResponse(resultMapper(axiosData.result));
       }
     } catch (err) {
       // this should never happen

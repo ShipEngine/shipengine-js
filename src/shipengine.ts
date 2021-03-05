@@ -1,21 +1,18 @@
-import { ShipEngineAPI } from './shared/models/public/shipengine-api';
-import { ShipEngineRpcApiClient } from './shared/models/shipengine-rpc/shipengine-rpc-api';
-import { ServiceFactory } from './shared/services/service-factory';
+import { AddressApi } from './core/address/api';
+import { AddressService } from './core/address/service';
+import { TagsApi } from './core/tags/api';
+import { TagsService } from './core/tags/service';
 
 // https://github.com/microsoft/TypeScript/issues/26792#issuecomment-617541464
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface ShipEngine extends ShipEngineAPI {}
 
-/**
- * This class encapsulates the entire public API of the ShipEngine SDK
- *
- */
-export class ShipEngine implements ShipEngineAPI {
+export interface ShipEngine extends TagsService, AddressService {}
+export class ShipEngine {
   constructor(apiKey: string, baseUrl?: string) {
-    // assign all properties to this class.
-    return Object.assign(
-      this,
-      ServiceFactory(new ShipEngineRpcApiClient(apiKey, baseUrl))
-    );
+    const config = [apiKey, baseUrl] as const;
+    Object.assign(this, {
+      ...new TagsService(new TagsApi(...config)),
+      ...new AddressService(new AddressApi(...config)),
+    });
   }
 }

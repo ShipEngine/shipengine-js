@@ -1,5 +1,3 @@
-import { ENGINE_METHOD_STORE } from 'constants';
-
 /**
  * Class representing "right" (success case)
  */
@@ -22,7 +20,7 @@ export type Either<Result, Error> =
   | SuccessResponse<Result>
   | ErrorResponse<Error>;
 
-export const identity = <T>(v: T): T => v;
+export const id = <T>(v: T): T => v;
 
 export const match = <Success, Error, T, U>(
   either: Either<Success, Error>,
@@ -50,9 +48,7 @@ export const bimap = <Success, Error, T, U>(
   }
 };
 
-export const toThrowable = <Result, Error, T extends any>(
-  v: Either<Result, Error>
-) => {
+export const toThrowable = <Result, Error>(v: Either<Result, Error>) => {
   switch (v.type) {
     case 'success':
       return v.result;
@@ -60,5 +56,3 @@ export const toThrowable = <Result, Error, T extends any>(
       throw v.error;
   }
 };
-
-export type GetError<T> = T extends Either<any, infer Error> ? Error : never;
