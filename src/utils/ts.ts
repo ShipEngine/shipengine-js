@@ -3,7 +3,7 @@ import { Overwrite as _Overwrite } from 'utility-types';
 /**
  * Return type T that's friendly to intellisense.
  */
-export type Compute<T> = { [P in keyof T]: Compute<T[P]> } & {};
+export type Compute<T> = { [P in keyof T]: T[P] } & {};
 
 /**
  * Return unwrapped type T when given T[].

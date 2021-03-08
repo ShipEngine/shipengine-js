@@ -4,7 +4,7 @@ module.exports = {
   parserOptions: {
     createDefaultProgram: true,
     project: './tsconfig.json',
-    ecmaVersion: '2018',
+    ecmaVersion: '2020',
     sourceType: 'module',
   },
   env: {
@@ -12,9 +12,10 @@ module.exports = {
     mocha: true,
     browser: true,
   },
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'prettier'],
   extends: [
     'eslint:recommended', // for js files
+    'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
     'plugin:import/errors', // for catching immediately-executed imports like "import ./foo"
     'plugin:import/warnings',

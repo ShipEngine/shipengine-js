@@ -1,10 +1,7 @@
 import { AddressApi } from './api';
-import { ValidateAddressParams, ValidateAddressResult } from './types';
+import * as Entities from './entities';
 import { toThrowable } from '../../utils/either';
 
-type ValidateAddressIndividualParams = ValidateAddressParams[0];
-type ValidateAddressIndividualResult = ValidateAddressResult[0];
-type Address = ValidateAddressIndividualParams;
 export class AddressAdvanced {
   #api: AddressApi;
   public constructor(api: AddressApi) {
@@ -12,11 +9,9 @@ export class AddressAdvanced {
   }
 
   public validate = async (
-    params: ValidateAddressIndividualParams
-  ): Promise<ValidateAddressIndividualResult> => {
-    const result = toThrowable(
-      await this.#api.validateAddressIndividual(params)
-    );
+    params: Entities.ValidateAddressParams
+  ): Promise<Entities.ValidateAddressResult> => {
+    const result = toThrowable(await this.#api.validateAddress(params));
     return result;
   };
 }
@@ -29,9 +24,9 @@ export class AddressService {
   }
 
   public validateAddress = async (
-    address: Address
-  ): Promise<ValidateAddressIndividualResult> => {
-    const data = await this.address.validate(address);
+    address: Entities.Address
+  ): Promise<Entities.ValidateAddressResultItem> => {
+    const [data] = await this.address.validate([address]);
     return data;
   };
 }
