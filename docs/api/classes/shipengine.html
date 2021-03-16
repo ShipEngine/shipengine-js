@@ -66,9 +66,6 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="tagsservice.html" class="tsd-signature-type">TagsService</a>
-					</li>
-					<li>
 						<a href="addressservice.html" class="tsd-signature-type">AddressService</a>
 					</li>
 					<li>
@@ -96,13 +93,11 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="shipengine.html#address" class="tsd-kind-icon">address</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="shipengine.html#package" class="tsd-kind-icon">package</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="shipengine.html#tags" class="tsd-kind-icon">tags</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="shipengine.html#createtag" class="tsd-kind-icon">create<wbr>Tag</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="shipengine.html#trackpackage" class="tsd-kind-icon">track<wbr>Package</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="shipengine.html#validateaddress" class="tsd-kind-icon">validate<wbr>Address</a></li>
 							</ul>
@@ -116,21 +111,21 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Ship<wbr>Engine<span class="tsd-signature-symbol">(</span>api<span class="tsd-signature-symbol">: </span><a href="tagsapi.html" class="tsd-signature-type">TagsApi</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="shipengine.html" class="tsd-signature-type">ShipEngine</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Ship<wbr>Engine<span class="tsd-signature-symbol">(</span>api<span class="tsd-signature-symbol">: </span><a href="addressapi.html" class="tsd-signature-type">AddressApi</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="shipengine.html" class="tsd-signature-type">ShipEngine</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="tagsservice.html">TagsService</a>.<a href="tagsservice.html#constructor">constructor</a></p>
-								<p>Overrides <a href="addressservice.html">AddressService</a>.<a href="addressservice.html#constructor">constructor</a></p>
+								<p>Inherited from <a href="addressservice.html">AddressService</a>.<a href="addressservice.html#constructor">constructor</a></p>
+								<p>Overrides <a href="packageservice.html">PackageService</a>.<a href="packageservice.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/tags/service.ts#L17">core/tags/service.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/service.ts#L18">core/address/service.ts:18</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>api: <a href="tagsapi.html" class="tsd-signature-type">TagsApi</a></h5>
+									<h5>api: <a href="addressapi.html" class="tsd-signature-type">AddressApi</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="shipengine.html" class="tsd-signature-type">ShipEngine</a></h4>
@@ -147,7 +142,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="addressservice.html">AddressService</a>.<a href="addressservice.html#address">address</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/service.ts#L21">core/address/service.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/service.ts#L18">core/address/service.ts:18</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -158,48 +153,13 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="packageservice.html">PackageService</a>.<a href="packageservice.html#package">package</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/service.ts#L19">core/packages/service.ts:19</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-					<a name="tags" class="tsd-anchor"></a>
-					<h3>tags</h3>
-					<div class="tsd-signature tsd-kind-icon">tags<span class="tsd-signature-symbol">:</span> <a href="tagsadvanced.html" class="tsd-signature-type">TagsAdvanced</a></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="tagsservice.html">TagsService</a>.<a href="tagsservice.html#tags">tags</a></p>
-						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/tags/service.ts#L17">core/tags/service.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/service.ts#L17">core/packages/service.ts:17</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-					<a name="createtag" class="tsd-anchor"></a>
-					<h3>create<wbr>Tag</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Tag<span class="tsd-signature-symbol">(</span>q<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Inherited from <a href="tagsservice.html">TagsService</a>.<a href="tagsservice.html#createtag">createTag</a></p>
-								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/tags/service.ts#L22">core/tags/service.ts:22</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>q: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 					<a name="trackpackage" class="tsd-anchor"></a>
 					<h3>track<wbr>Package</h3>
@@ -211,7 +171,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="packageservice.html">PackageService</a>.<a href="packageservice.html#trackpackage">trackPackage</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/service.ts#L24">core/packages/service.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/service.ts#L22">core/packages/service.ts:22</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -228,23 +188,23 @@
 					<a name="validateaddress" class="tsd-anchor"></a>
 					<h3>validate<wbr>Address</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">validate<wbr>Address<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Entities.Address</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Entities.ValidateAddressResultItem</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">validate<wbr>Address<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Entities.ValidateAddressParams</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Entities.ValidateAddressResult</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="addressservice.html">AddressService</a>.<a href="addressservice.html#validateaddress">validateAddress</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/service.ts#L26">core/address/service.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/service.ts#L23">core/address/service.ts:23</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>address: <span class="tsd-signature-type">Entities.Address</span></h5>
+									<h5>address: <span class="tsd-signature-type">Entities.ValidateAddressParams</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Entities.ValidateAddressResultItem</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Entities.ValidateAddressResult</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -273,12 +233,6 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="shipengine.html#package" class="tsd-kind-icon">package</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="shipengine.html#tags" class="tsd-kind-icon">tags</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="shipengine.html#createtag" class="tsd-kind-icon">create<wbr>Tag</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="shipengine.html#trackpackage" class="tsd-kind-icon">track<wbr>Package</a>
