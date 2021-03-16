@@ -1,6 +1,6 @@
 import * as Entities from './types/track-package.entities';
 import { PackageApi } from './api';
-import { toThrowable } from '../../utils';
+import { getShipEngineResultOrThrow } from '../../utils';
 
 export class PackagesAdvanced {
   #api: PackageApi;
@@ -8,10 +8,8 @@ export class PackagesAdvanced {
     this.#api = api;
   }
 
-  public track = async (
-    params: Entities.TrackPackageParams
-  ): Promise<Entities.TrackPackageResult> => {
-    return toThrowable(await this.#api.trackPackage(params));
+  public track = async (params: Entities.TrackPackageParams) => {
+    return this.#api.trackPackage(params);
   };
 }
 
@@ -25,6 +23,6 @@ export class PackageService {
     tracking: Entities.TrackPackageParams
   ): Promise<Entities.TrackPackageResult> => {
     const data = await this.package.track(tracking);
-    return data;
+    return getShipEngineResultOrThrow(data);
   };
 }

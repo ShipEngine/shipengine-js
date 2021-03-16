@@ -1,3 +1,6 @@
+import ShipEngine from '..';
+import { IResult } from '../shared/models/result';
+
 /**
  * Class representing "right" (success case)
  */
@@ -48,9 +51,14 @@ export const bimap = <Success, Error, T, U>(
   }
 };
 
-export const toThrowable = <Result, Error>(v: Either<Result, Error>) => {
+export const getShipEngineResultOrThrow = <Result extends IResult, Error>(
+  v: Either<Result, Error>
+) => {
   switch (v.type) {
     case 'success':
+      if (v.result.messages.errors?.length) {
+        throw new Error(v.result.messages.errors.join(','));
+      }
       return v.result;
     case 'error':
       throw v.error;

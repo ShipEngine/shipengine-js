@@ -1,7 +1,13 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import { camelize, hasProperties, isObject, snakeize } from '../../../utils';
-import { Either, SuccessResponse, ErrorResponse } from '../../../utils/either';
+import {
+  Either,
+  SuccessResponse,
+  ErrorResponse,
+  bimap,
+  id,
+} from '../../../utils/either';
 
 type ErrorData =
   | {
@@ -92,7 +98,17 @@ export class InternalRpcClient {
     });
   }
 
-  /**
+  private jsonRpcResponseToEither<T extends object>(
+    axiosData: JsonRpcResponse<T>
+  ): Either<T, JsonRpcError> {
+    if (isJsonRpcResponseError(axiosData)) {
+      return new ErrorResponse(camelize(axiosData.error));
+    } else {
+      return new SuccessResponse(camelize(axiosData.result) as T);
+    }
+  }
+
+  /**s
    * auto snake cases params
    * auto camel cases result
    */
@@ -110,11 +126,8 @@ export class InternalRpcClient {
       const axiosData = axiosResponse.data;
       assertJsonRpcReply<any>(axiosData);
 
-      if (isJsonRpcResponseError(axiosData)) {
-        return new ErrorResponse(camelize(axiosData.error));
-      } else {
-        return new SuccessResponse(resultMapper(camelize(axiosData.result)));
-      }
+      const response = this.jsonRpcResponseToEither(axiosData);
+      return bimap(response, resultMapper, id);
     } catch (err) {
       // this should never happen
       return new ErrorResponse({

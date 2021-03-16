@@ -1,6 +1,6 @@
+import { getShipEngineResultOrThrow } from '../../utils';
 import { AddressApi } from './api';
 import * as Entities from './entities';
-import { toThrowable } from '../../utils/either';
 
 export class AddressAdvanced {
   #api: AddressApi;
@@ -8,11 +8,8 @@ export class AddressAdvanced {
     this.#api = api;
   }
 
-  public validate = async (
-    params: Entities.ValidateAddressParams
-  ): Promise<Entities.ValidateAddressResult> => {
-    const result = toThrowable(await this.#api.validateAddress(params));
-    return result;
+  public validate = async (params: Entities.ValidateAddressParams) => {
+    return this.#api.validateAddress(params);
   };
 }
 
@@ -24,9 +21,10 @@ export class AddressService {
   }
 
   public validateAddress = async (
-    address: Entities.Address
-  ): Promise<Entities.ValidateAddressResultItem> => {
-    const [data] = await this.address.validate([address]);
+    address: Entities.ValidateAddressParams
+  ): Promise<Entities.ValidateAddressResult> => {
+    const response = await this.address.validate(address);
+    const data = await getShipEngineResultOrThrow(response);
     return data;
   };
 }
