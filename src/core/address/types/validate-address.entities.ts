@@ -1,3 +1,4 @@
+import { Compute } from '../../../utils/ts';
 import {
   ValidateAddressParamsDto,
   ValidateAddressResultDto,
@@ -9,4 +10,4 @@ export type ValidateAddressParams = ValidateAddressParamsDto;
 export type ValidateAddressResultBulk = ValidateAddressResultDto[];
 export type ValidateAddressParamsBulk = ValidateAddressParamsDto[];
 
-/* entity parameters for the convenience method */
+export type Address = NonNullable<Compute<ValidateAddressResult['address']>>;

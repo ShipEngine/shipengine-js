@@ -1,4 +1,4 @@
-import { getShipEngineResultOrThrow } from '../../utils';
+import { assertNoErrors } from '../../shared/models/result';
 import { AddressApi } from './api';
 import * as Entities from './entities';
 
@@ -22,9 +22,12 @@ export class AddressService {
 
   public validateAddress = async (
     address: Entities.ValidateAddressParams
-  ): Promise<Entities.ValidateAddressResult> => {
+  ): Promise<Entities.Address> => {
     const response = await this.address.validate(address);
-    const data = await getShipEngineResultOrThrow(response);
-    return data;
+    const data = assertNoErrors(response);
+    if (data.address === null) {
+      throw new Error('No address data');
+    }
+    return data.address;
   };
 }

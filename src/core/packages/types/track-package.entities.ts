@@ -23,12 +23,14 @@ type TrackingEvent = Overwrite<
 
 // replace all date strings in generated result -> DateTime
 export type TrackPackageResult = {
-  information: Overwrite<
-    Information,
-    {
-      events: TrackingEvent[];
-      estimatedDelivery: ISOString;
-    }
-  >;
+  information: TrackPackageInfo;
   messages: MessagesObject;
 };
+
+export type TrackPackageInfo = Overwrite<
+  Information,
+  {
+    events: TrackingEvent[];
+    estimatedDelivery: ISOString;
+  }
+>;

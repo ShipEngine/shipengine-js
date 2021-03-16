@@ -100,6 +100,7 @@
   "dependencies": {
     "axios": "^0.21.0",
     "camelcase-keys": "^6.2.2",
+    "purify-ts": "^0.16.1",
     "snakecase-keys": "^3.2.1",
     "uuid": "^8.3.2"
   }
