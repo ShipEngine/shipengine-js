@@ -1,4 +1,4 @@
-import { assertNoErrors } from '../../shared/models/result';
+import { getResultOrThrow } from '../../shared/models/result';
 import { AddressApi } from './api';
 import * as Entities from './entities';
 
@@ -24,10 +24,7 @@ export class AddressService {
     address: Entities.ValidateAddressParams
   ): Promise<Entities.Address> => {
     const response = await this.address.validate(address);
-    const data = assertNoErrors(response);
-    if (data.address === null) {
-      throw new Error('No address data');
-    }
-    return data.address;
+    const data = getResultOrThrow(response);
+    return data.address!;
   };
 }

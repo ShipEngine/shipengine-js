@@ -1,6 +1,6 @@
 import * as Entities from './types/track-package.entities';
 import { PackageApi } from './api';
-import { assertNoErrors } from '../../shared/models/result';
+import { getResultOrThrow } from '../../shared/models/result';
 
 export class PackagesAdvanced {
   #api: PackageApi;
@@ -23,7 +23,7 @@ export class PackageService {
     tracking: Entities.TrackPackageParams
   ): Promise<Entities.TrackPackageInfo> => {
     const data = await this.package.track(tracking);
-    const result = assertNoErrors(data);
+    const result = getResultOrThrow(data);
     return result.information;
   };
 }

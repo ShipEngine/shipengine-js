@@ -1,4 +1,4 @@
-import { Either, Right } from 'purify-ts';
+import { Either } from 'purify-ts';
 export interface IResult {
   messages: {
     errors?: string[];
@@ -7,9 +7,7 @@ export interface IResult {
   };
 }
 
-export const assertNoErrors = <L, R extends IResult>(
-  v: Either<L, R>
-): NonNullable<R> => {
+export const getResultOrThrow = <L, R extends IResult>(v: Either<L, R>): R => {
   const result = v
     .ifRight((el) => {
       if (el.messages.errors?.length) {
@@ -17,8 +15,5 @@ export const assertNoErrors = <L, R extends IResult>(
       }
     })
     .unsafeCoerce();
-  if (result === null) {
-    throw new Error('no result!');
-  }
-  return result as NonNullable<R>;
+  return result;
 };
