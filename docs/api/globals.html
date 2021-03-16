@@ -107,11 +107,13 @@
 						<section class="tsd-index-section ">
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias"><a href="globals.html#address" class="tsd-kind-icon">Address</a></li>
 								<li class="tsd-kind-type-alias"><a href="globals.html#errordata" class="tsd-kind-icon">Error<wbr>Data</a></li>
 								<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="globals.html#jsonrpcresponse" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Response</a></li>
 								<li class="tsd-kind-type-alias"><a href="globals.html#messages" class="tsd-kind-icon">Messages</a></li>
 								<li class="tsd-kind-type-alias"><a href="globals.html#packageid" class="tsd-kind-icon">Package<wbr>Id</a></li>
 								<li class="tsd-kind-type-alias"><a href="globals.html#parameters" class="tsd-kind-icon">Parameters</a></li>
+								<li class="tsd-kind-type-alias"><a href="globals.html#trackpackageinfo" class="tsd-kind-icon">Track<wbr>Package<wbr>Info</a></li>
 								<li class="tsd-kind-type-alias"><a href="globals.html#trackingevent" class="tsd-kind-icon">Tracking<wbr>Event</a></li>
 								<li class="tsd-kind-type-alias"><a href="globals.html#validateaddressparams" class="tsd-kind-icon">Validate<wbr>Address<wbr>Params</a></li>
 								<li class="tsd-kind-type-alias"><a href="globals.html#validateaddressparamsbulk" class="tsd-kind-icon">Validate<wbr>Address<wbr>Params<wbr>Bulk</a></li>
@@ -125,6 +127,7 @@
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#assertjsonrpcreply" class="tsd-kind-icon">assert<wbr>Json<wbr>Rpc<wbr>Reply</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#dtototrackpackageresultsentity" class="tsd-kind-icon">dto<wbr>ToTrack<wbr>Package<wbr>Results<wbr>Entity</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#entitytotrackpackageparamsdto" class="tsd-kind-icon">entity<wbr>ToTrack<wbr>Package<wbr>Params<wbr>Dto</a></li>
+								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#getresultorthrow" class="tsd-kind-icon">get<wbr>Result<wbr>OrThrow</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#isjsonrpcerror" class="tsd-kind-icon">is<wbr>Json<wbr>Rpc<wbr>Error</a></li>
 								<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#isjsonrpcresponseerror" class="tsd-kind-icon">is<wbr>Json<wbr>Rpc<wbr>Response<wbr>Error</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#tovalidateaddressparamsdto" class="tsd-kind-icon">to<wbr>Validate<wbr>Address<wbr>Params<wbr>Dto</a></li>
@@ -137,12 +140,22 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Type aliases</h2>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias">
+					<a name="address" class="tsd-anchor"></a>
+					<h3>Address</h3>
+					<div class="tsd-signature tsd-kind-icon">Address<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">NonNullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Compute</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ValidateAddressResult</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"address"</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/types/validate-address.entities.ts#L13">core/address/types/validate-address.entities.ts:13</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias">
 					<a name="errordata" class="tsd-anchor"></a>
 					<h3>Error<wbr>Data</h3>
 					<div class="tsd-signature tsd-kind-icon">Error<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>required<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/shared/models/client/client.ts#L12">shared/models/client/client.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/shared/models/client/client.ts#L6">shared/models/client/client.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -152,7 +165,7 @@
 					<div class="tsd-signature tsd-kind-icon">Json<wbr>Rpc<wbr>Response&lt;T&gt;<span class="tsd-signature-symbol">:</span> <a href="interfaces/jsonrpcresponsesuccess.html" class="tsd-signature-type">JsonRpcResponseSuccess</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><a href="interfaces/jsonrpcresponseerror.html" class="tsd-signature-type">JsonRpcResponseError</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/shared/models/client/client.ts#L47">shared/models/client/client.ts:47</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/shared/models/client/client.ts#L41">shared/models/client/client.ts:41</a></li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -202,7 +215,17 @@
 					<div class="tsd-signature tsd-kind-icon">Parameters<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/shared/models/client/client.ts#L78">shared/models/client/client.ts:78</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/shared/models/client/client.ts#L72">shared/models/client/client.ts:72</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias">
+					<a name="trackpackageinfo" class="tsd-anchor"></a>
+					<h3>Track<wbr>Package<wbr>Info</h3>
+					<div class="tsd-signature tsd-kind-icon">Track<wbr>Package<wbr>Info<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Overwrite</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/information.html" class="tsd-signature-type">Information</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">{ </span>estimatedDelivery<span class="tsd-signature-symbol">: </span><a href="classes/isostring.html" class="tsd-signature-type">ISOString</a><span class="tsd-signature-symbol">; </span>events<span class="tsd-signature-symbol">: </span><a href="globals.html#trackingevent" class="tsd-signature-type">TrackingEvent</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/types/track-package.entities.ts#L30">core/packages/types/track-package.entities.ts:30</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -222,7 +245,7 @@
 					<div class="tsd-signature tsd-kind-icon">Validate<wbr>Address<wbr>Params<span class="tsd-signature-symbol">:</span> <a href="interfaces/validateaddressparamsdto.html" class="tsd-signature-type">ValidateAddressParamsDto</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/types/validate-address.entities.ts#L7">core/address/types/validate-address.entities.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/types/validate-address.entities.ts#L8">core/address/types/validate-address.entities.ts:8</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -232,7 +255,7 @@
 					<div class="tsd-signature tsd-kind-icon">Validate<wbr>Address<wbr>Params<wbr>Bulk<span class="tsd-signature-symbol">:</span> <a href="interfaces/validateaddressparamsdto.html" class="tsd-signature-type">ValidateAddressParamsDto</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/types/validate-address.entities.ts#L10">core/address/types/validate-address.entities.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/types/validate-address.entities.ts#L11">core/address/types/validate-address.entities.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -242,7 +265,7 @@
 					<div class="tsd-signature tsd-kind-icon">Validate<wbr>Address<wbr>Result<span class="tsd-signature-symbol">:</span> <a href="interfaces/validateaddressresultdto.html" class="tsd-signature-type">ValidateAddressResultDto</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/types/validate-address.entities.ts#L6">core/address/types/validate-address.entities.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/types/validate-address.entities.ts#L7">core/address/types/validate-address.entities.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -252,7 +275,7 @@
 					<div class="tsd-signature tsd-kind-icon">Validate<wbr>Address<wbr>Result<wbr>Bulk<span class="tsd-signature-symbol">:</span> <a href="interfaces/validateaddressresultdto.html" class="tsd-signature-type">ValidateAddressResultDto</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/types/validate-address.entities.ts#L9">core/address/types/validate-address.entities.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/types/validate-address.entities.ts#L10">core/address/types/validate-address.entities.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -269,7 +292,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/shared/models/client/client.ts#L52">shared/models/client/client.ts:52</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/shared/models/client/client.ts#L46">shared/models/client/client.ts:46</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -339,6 +362,38 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter">
+					<a name="getresultorthrow" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> get<wbr>Result<wbr>OrThrow</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Result<wbr>OrThrow&lt;L, R&gt;<span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Either</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">L</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">R</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/shared/models/result.ts#L10">shared/models/result.ts:10</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>L</h4>
+								</li>
+								<li>
+									<h4>R<span class="tsd-signature-symbol">: </span><a href="interfaces/iresult.html" class="tsd-signature-type">IResult</a></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>v: <span class="tsd-signature-type">Either</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">L</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">R</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function">
 					<a name="isjsonrpcerror" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> is<wbr>Json<wbr>Rpc<wbr>Error</h3>
@@ -349,7 +404,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/shared/models/client/client.ts#L24">shared/models/client/client.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/shared/models/client/client.ts#L18">shared/models/client/client.ts:18</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -372,7 +427,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/shared/models/client/client.ts#L41">shared/models/client/client.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/shared/models/client/client.ts#L35">shared/models/client/client.ts:35</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -528,6 +583,9 @@
 						<a href="interfaces/validateaddressresultdto.html" class="tsd-kind-icon">Validate<wbr>Address<wbr>Result<wbr>Dto</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#address" class="tsd-kind-icon">Address</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#errordata" class="tsd-kind-icon">Error<wbr>Data</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
@@ -541,6 +599,9 @@
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#parameters" class="tsd-kind-icon">Parameters</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#trackpackageinfo" class="tsd-kind-icon">Track<wbr>Package<wbr>Info</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#trackingevent" class="tsd-kind-icon">Tracking<wbr>Event</a>
@@ -565,6 +626,9 @@
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#entitytotrackpackageparamsdto" class="tsd-kind-icon">entity<wbr>ToTrack<wbr>Package<wbr>Params<wbr>Dto</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#getresultorthrow" class="tsd-kind-icon">get<wbr>Result<wbr>OrThrow</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#isjsonrpcerror" class="tsd-kind-icon">is<wbr>Json<wbr>Rpc<wbr>Error</a>
