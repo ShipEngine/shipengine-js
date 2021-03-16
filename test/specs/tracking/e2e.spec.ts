@@ -40,7 +40,7 @@ describe('tracking', () => {
         packageId: 'abc',
         carrierCode: '123',
       });
-      assertTracking(response);
+      assertTracking(response.type === 'success' && response.result);
     }
   });
 
@@ -57,7 +57,7 @@ describe('tracking', () => {
         packageId: 'abc',
         carrierCode: '123',
       });
-      assertTracking(response);
+      assertTracking(response.type === 'success' && response.result);
     }
   });
 });

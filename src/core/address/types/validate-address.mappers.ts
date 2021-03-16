@@ -14,7 +14,7 @@ export const toValidateAddressParamsDto = (
   return v;
 };
 export const toValidateAddressResult = (
-  v: ValidateAddressResultDto[]
+  v: ValidateAddressResultDto
 ): ValidateAddressResult => {
   return v;
 };

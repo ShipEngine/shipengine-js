@@ -22,9 +22,7 @@ describe('address', () => {
     postalCode: '78751',
   };
 
-  const assertAddress = (response: ValidateAddressResult[0]) => {
-    expect(typeof response.address.latitude).to.eq('number');
-    expect(typeof response.address.latitude).to.eq('number');
+  const assertAddress = (response: ValidateAddressResult) => {
     expect(typeof response.address.cityLocality).to.eq('string');
     expect(typeof response.address.postalCode).to.eq('string');
     expect(['null', 'boolean'].includes(typeof response.address.residential)).to
@@ -37,8 +35,8 @@ describe('address', () => {
     assertAddress(response);
   });
   it('should work with address.validate', async () => {
-    const response = await shipengine.address.validate([address]);
+    const response = await shipengine.address.validate(address);
 
-    assertAddress(response[0]);
+    assertAddress(response.type === 'success' && response.result);
   });
 });
