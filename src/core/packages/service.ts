@@ -1,6 +1,6 @@
 import * as Entities from './types/track-package.entities';
 import { PackageApi } from './api';
-import { getShipEngineResultOrThrow } from '../../utils';
+import { getResultOrThrow } from '../../shared/models/result';
 
 export class PackagesAdvanced {
   #api: PackageApi;
@@ -21,8 +21,9 @@ export class PackageService {
 
   public trackPackage = async (
     tracking: Entities.TrackPackageParams
-  ): Promise<Entities.TrackPackageResult> => {
+  ): Promise<Entities.TrackPackageInfo> => {
     const data = await this.package.track(tracking);
-    return getShipEngineResultOrThrow(data);
+    const result = getResultOrThrow(data);
+    return result.information;
   };
 }

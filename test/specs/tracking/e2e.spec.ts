@@ -2,7 +2,7 @@ import { ShipEngine } from '../../../src/shipengine';
 import { Hoverfly } from '../../utils/Hoverfly';
 import { expect } from 'chai';
 import constants from '../../utils/constants';
-import { TrackPackageResult } from '../../../src/core/packages/types/track-package.entities';
+import { TrackPackageInfo } from '../../../src/core/packages/types/track-package.entities';
 
 let shipengine: ShipEngine;
 describe('tracking', () => {
@@ -15,16 +15,12 @@ describe('tracking', () => {
     await Hoverfly.stop();
   });
 
-  const assertTracking = (response: TrackPackageResult) => {
-    expect(response.information.events).to.be.an('array').that.is.not.empty;
-    expect(response.information.events.length).to.be.greaterThan(0);
-    expect(response.information.events[0].dateTime.toString()).to.be.a(
-      'string'
-    );
-    expect(response.information.estimatedDelivery.toString()).to.be.a('string');
-    expect(response.information.estimatedDelivery.hasTimeZone).to.be.a(
-      'boolean'
-    );
+  const assertTracking = (information: TrackPackageInfo) => {
+    expect(information.events).to.be.an('array').that.is.not.empty;
+    expect(information.events.length).to.be.greaterThan(0);
+    expect(information.events[0].dateTime.toString()).to.be.a('string');
+    expect(information.estimatedDelivery.toString()).to.be.a('string');
+    expect(information.estimatedDelivery.hasTimeZone).to.be.a('boolean');
   };
 
   it('should have a date', async () => {
@@ -40,7 +36,7 @@ describe('tracking', () => {
         packageId: 'abc',
         carrierCode: '123',
       });
-      assertTracking(response.type === 'success' && response.result);
+      assertTracking(response.unsafeCoerce().information);
     }
   });
 
@@ -57,7 +53,7 @@ describe('tracking', () => {
         packageId: 'abc',
         carrierCode: '123',
       });
-      assertTracking(response.type === 'success' && response.result);
+      assertTracking(response.unsafeCoerce().information);
     }
   });
 });

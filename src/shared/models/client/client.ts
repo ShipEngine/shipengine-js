@@ -1,14 +1,8 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import { camelize, hasProperties, isObject, snakeize } from '../../../utils';
-import {
-  Either,
-  SuccessResponse,
-  ErrorResponse,
-  bimap,
-  id,
-} from '../../../utils/either';
 
+import * as E from 'purify-ts/Either';
 type ErrorData =
   | {
       required: string[];
@@ -100,11 +94,11 @@ export class InternalRpcClient {
 
   private jsonRpcResponseToEither<T extends object>(
     axiosData: JsonRpcResponse<T>
-  ): Either<T, JsonRpcError> {
+  ): E.Either<JsonRpcError, T> {
     if (isJsonRpcResponseError(axiosData)) {
-      return new ErrorResponse(camelize(axiosData.error));
+      return E.Left(camelize(axiosData.error));
     } else {
-      return new SuccessResponse(camelize(axiosData.result) as T);
+      return E.Right(camelize(axiosData.result) as T);
     }
   }
 
@@ -112,11 +106,11 @@ export class InternalRpcClient {
    * auto snake cases params
    * auto camel cases result
    */
-  exec = async <Params extends Parameters, Result>(
+  exec = async <Params extends Parameters, Result extends object>(
     method: string,
     params: Params,
     resultMapper: (jsonData: any) => Result
-  ): Promise<Either<Result, JsonRpcError>> => {
+  ): Promise<E.Either<JsonRpcError, Result>> => {
     try {
       const data = new JsonRpcCall(method, snakeize(params));
       const axiosResponse: AxiosResponse<unknown> = await this.#client({
@@ -126,11 +120,11 @@ export class InternalRpcClient {
       const axiosData = axiosResponse.data;
       assertJsonRpcReply<any>(axiosData);
 
-      const response = this.jsonRpcResponseToEither(axiosData);
-      return bimap(response, resultMapper, id);
+      const response = this.jsonRpcResponseToEither<Result>(axiosData);
+      return response.map(resultMapper);
     } catch (err) {
       // this should never happen
-      return new ErrorResponse({
+      return E.Left({
         code: err.code || 666,
         message: err.message || 'some unhandled axios error happened.',
         ...(err.data ? { data: err.data } : {}),
