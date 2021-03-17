@@ -1,13 +1,29 @@
 abstract class EitherApi {
-  map<Error, Success, NewSuccessResponse>(
+  map<Error, Success, Success2>(
     this: Either<Error, Success>,
-    onSuccess: (v: Success) => NewSuccessResponse
-  ): Either<Error, NewSuccessResponse> {
+    onSuccess: (v: Success) => Success2
+  ): Either<Error, Success2> {
     switch (this.type) {
       case 'error':
         return new ErrorResponse(this.error);
       case 'success':
         return new SuccessResponse(onSuccess(this.result));
+    }
+  }
+
+  ap<Error, Success, Success2>(
+    this: Either<Error, Success>,
+    eitherFn: Either<Error, (value: Success) => Either<Error, Success2>>
+  ): Either<Error, Success2> {
+    switch (this.type) {
+      case 'error':
+        return new ErrorResponse(this.error);
+      case 'success':
+        if (eitherFn.isSuccess()) {
+          return eitherFn.result(this.result);
+        } else {
+          return this.ap(eitherFn);
+        }
     }
   }
 
