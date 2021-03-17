@@ -23,11 +23,11 @@ describe('RPC Client test', () => {
       (v) => v
     );
 
-    response.ifLeft((r) => {
+    response.onError((r) => {
       expect(r.message).to.eq('Invalid Request');
       expect(r.code).to.eq(-32600);
     });
-    response.ifRight(() => {
+    response.onSuccess(() => {
       expect.fail('should fail.');
     });
   });

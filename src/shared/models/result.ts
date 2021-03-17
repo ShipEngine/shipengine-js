@@ -1,4 +1,5 @@
-import { Either } from 'purify-ts';
+import { Either } from '../../utils/either';
+
 export interface IResult {
   messages: {
     errors?: string[];
@@ -9,7 +10,7 @@ export interface IResult {
 
 export const getResultOrThrow = <L, R extends IResult>(v: Either<L, R>): R => {
   const result = v
-    .ifRight((el) => {
+    .onSuccess((el) => {
       if (el.messages.errors?.length) {
         throw new Error(el.messages.errors.join(', '));
       }
