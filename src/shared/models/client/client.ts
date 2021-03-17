@@ -1,8 +1,8 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import { camelize, hasProperties, isObject, snakeize } from '../../../utils';
+import { Either, ErrorResponse, SuccessResponse } from '../../../utils/either';
 
-import * as E from 'purify-ts/Either';
 type ErrorData =
   | {
       required: string[];
@@ -94,11 +94,11 @@ export class InternalRpcClient {
 
   private jsonRpcResponseToEither<T extends object>(
     axiosData: JsonRpcResponse<T>
-  ): E.Either<JsonRpcError, T> {
+  ): Either<JsonRpcError, T> {
     if (isJsonRpcResponseError(axiosData)) {
-      return E.Left(camelize(axiosData.error));
+      return new ErrorResponse(camelize(axiosData.error));
     } else {
-      return E.Right(camelize(axiosData.result) as T);
+      return new SuccessResponse(camelize(axiosData.result) as T);
     }
   }
 
@@ -110,7 +110,7 @@ export class InternalRpcClient {
     method: string,
     params: Params,
     resultMapper: (jsonData: any) => Result
-  ): Promise<E.Either<JsonRpcError, Result>> => {
+  ): Promise<Either<JsonRpcError, Result>> => {
     try {
       const data = new JsonRpcCall(method, snakeize(params));
       const axiosResponse: AxiosResponse<unknown> = await this.#client({
@@ -124,7 +124,7 @@ export class InternalRpcClient {
       return response.map(resultMapper);
     } catch (err) {
       // this should never happen
-      return E.Left({
+      return new ErrorResponse({
         code: err.code || 666,
         message: err.message || 'some unhandled axios error happened.',
         ...(err.data ? { data: err.data } : {}),
