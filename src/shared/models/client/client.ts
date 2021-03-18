@@ -82,7 +82,7 @@ export class JsonRpcCall<Params extends Parameters> {
 
 export class InternalRpcClient {
   #client: AxiosInstance;
-  constructor(apiKey: string, baseUrl = 'http://localhost:8500') {
+  constructor(apiKey: string, baseUrl = `https://simengine.herokuapp.com`) {
     this.#client = axios.create({
       baseURL: baseUrl,
       url: '/',
