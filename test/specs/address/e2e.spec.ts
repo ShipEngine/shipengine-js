@@ -36,7 +36,7 @@ describe('address', () => {
     expect(m.warnings).to.be.an('array');
   };
 
-  describe('validateAddress', async () => {
+  describe('validateAddress', () => {
     let response: ValidateAddressConvenienceResult;
     before(async () => {
       response = await shipengine.validateAddress(address);
