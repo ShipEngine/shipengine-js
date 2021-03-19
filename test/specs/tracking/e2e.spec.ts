@@ -8,7 +8,6 @@ describe('tracking', () => {
   before(async () => {
     shipengine = new ShipEngine('MY_API_KEY', `${constants.isomorphicBaseUri}`);
   });
-  after(async () => {});
 
   const assertTracking = (information: TrackPackageInfo) => {
     expect(information.events).to.be.an('array').that.is.not.empty;
@@ -24,6 +23,7 @@ describe('tracking', () => {
         packageId: 'abc',
         carrierCode: '123',
       });
+      response.events.map((v) => v.carrierDetailCode);
       assertTracking(response);
     }
     {

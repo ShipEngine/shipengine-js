@@ -2,6 +2,12 @@ import { getResultOrThrow } from '../../shared/models/result';
 import { AddressApi } from './api';
 import * as Entities from './entities';
 
+import {
+  toValidateAddressConvenience,
+  toValidateAddressParamsDto,
+  toValidateAddressResult,
+} from './types/validate-address.mappers';
+
 export class AddressAdvanced {
   #api: AddressApi;
   public constructor(api: AddressApi) {
@@ -9,7 +15,11 @@ export class AddressAdvanced {
   }
 
   public validate = async (params: Entities.ValidateAddressParams) => {
-    return this.#api.validateAddress(params);
+    const response = await this.#api.validateAddress(
+      toValidateAddressParamsDto(params)
+    );
+    const result = response.map(toValidateAddressResult);
+    return result;
   };
 }
 
@@ -22,9 +32,9 @@ export class AddressService {
 
   public validateAddress = async (
     address: Entities.ValidateAddressParams
-  ): Promise<Entities.Address> => {
+  ): Promise<Entities.ValidateAddressConvenienceResult> => {
     const response = await this.address.validate(address);
-    const data = getResultOrThrow(response);
-    return data.address!;
+    const result = getResultOrThrow(response.map(toValidateAddressConvenience));
+    return result;
   };
 }
