@@ -34,7 +34,6 @@ export class AddressService {
     address: Entities.ValidateAddressParams
   ): Promise<Entities.ValidateAddressConvenienceResult> => {
     const response = await this.address.validate(address);
-    const result = getResultOrThrow(response.map(toValidateAddressConvenience));
-    return result;
+    return response.unsafeCoerce();
   };
 }
