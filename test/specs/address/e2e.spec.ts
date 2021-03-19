@@ -60,12 +60,7 @@ describe('address', () => {
     });
 
     it('should return the original with the correct shape', () => {
-       assertOriginalAddress(response.original);
+      assertOriginalAddress(response.original);
     });
-  });
-
-  it.skip('address.validate', async () => {
-    const response = await shipengine.address.validate(address);
-    response.map((el) => assertResponseAddress(el.normalized));
   });
 });
