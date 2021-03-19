@@ -8,8 +8,7 @@ export interface ValidateAddressParamsDto {
 
 export interface ValidateAddressResultDto {
   valid: true;
-  original: AddressAddressResultDto | null;
-  normalized: AddressAddressResultDto | null;
+  address: AddressAddressResultDto | null;
   messages: MessagesDto;
 }
 

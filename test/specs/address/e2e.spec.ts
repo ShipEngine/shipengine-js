@@ -20,13 +20,19 @@ describe('address', () => {
     postalCode: '78751',
   };
 
-  const assertAddress = (address: Address) => {
+  const assertResponseAddress = (address: Address) => {
     expect(address).to.be.an('object');
-    expect(typeof address.cityLocality).to.eq('string');
-    expect(typeof address.postalCode).to.eq('string');
-    expect(['null', 'boolean'].includes(typeof address.isResidential)).to.be
-      .true;
-    expect(Array.isArray(address.street)).to.eq(true);
+    expect(address.cityLocality).to.be.a('string');
+    expect(address.postalCode).to.be.a('string');
+    expect(address.street).to.be.an('array');
+    expect(address.isResidential).to.be.a('boolean');
+  };
+
+  const assertOriginalAddress = (address: Address) => {
+    expect(address).to.be.an('object');
+    expect(address.cityLocality).to.be.a('string');
+    expect(address.postalCode).to.be.a('string');
+    expect(address.street).to.be.an('array');
   };
 
   const assertMessages = (m: Messages) => {
@@ -44,21 +50,22 @@ describe('address', () => {
     it('isValid should be the right type', () => {
       expect(response.isValid).to.be.a('boolean');
     });
+
     it('should have an normalized address with the correct shape', () => {
-      assertAddress(response.normalized);
+      assertResponseAddress(response.normalized);
     });
 
     it('should have messages with the correct shape', () => {
       assertMessages(response.messages);
     });
 
-    it('should have a response with the correct shape', () => {
-      assertAddress(response.original);
+    it('should return the original with the correct shape', () => {
+       assertOriginalAddress(response.original);
     });
   });
 
   it.skip('address.validate', async () => {
     const response = await shipengine.address.validate(address);
-    response.map((el) => assertAddress(el.normalized));
+    response.map((el) => assertResponseAddress(el.normalized));
   });
 });

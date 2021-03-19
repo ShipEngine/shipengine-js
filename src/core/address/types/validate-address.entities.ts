@@ -20,11 +20,6 @@ export interface Address {
   stateProvince?: string;
   isResidential?: boolean;
 }
-export class Address {
-  constructor(address: Address) {
-    Object.assign(this, address);
-  }
-}
 
 export interface ValidateAddressResult extends IResult {
   isValid: boolean;
@@ -32,10 +27,6 @@ export interface ValidateAddressResult extends IResult {
   normalized?: Address;
   original?: Address;
 }
-export class ValidateAddressResult {
-  constructor(result: ValidateAddressResult) {
-    Object.assign(this, result);
-  }
-}
 
-export class ValidateAddressConvenienceResult extends ValidateAddressResult {}
+export interface ValidateAddressConvenienceResult
+  extends ValidateAddressResult {}

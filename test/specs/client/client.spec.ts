@@ -8,11 +8,14 @@ describe('RPC Client test', () => {
       'MY_API_KEY',
       constants.isomorphicBaseUri
     );
-    const response = await client.exec('test/error/invalid-request', {} as any);
+    const response = await client.exec('client', {
+      foo: 'invalid-request',
+    });
 
     response.onError((r) => {
       expect(r.message).to.eq('Invalid Request');
       expect(r.code).to.eq(-32600);
+      expect(r).not.to.have.property('id');
     });
     response.onSuccess(() => {
       expect.fail('should fail.');
