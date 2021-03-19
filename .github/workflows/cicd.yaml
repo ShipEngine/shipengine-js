@@ -6,7 +6,6 @@ on:
       - main
   pull_request:
     branches:
-      # can be replaced with $default-branch macro.
       - main
       - develop
 jobs:
@@ -20,7 +19,6 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-          # - macos-latest # buggy
           - windows-latest
         node:
           - 12.x
@@ -29,31 +27,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: true
-
-      - name: Install Hoverfly for Windows
-        if: ${{ matrix.os == 'windows-latest'}}
-        uses: engineerd/configurator@v0.0.5
-        with:
-          name: hfly.exe
-          fromGitHubReleases: true
-          urlTemplate: https://github.com/SpectoLabs/hoverfly/releases/download/{{version}}/hoverfly_bundle_windows_amd64.zip
-          repo: SpectoLabs/hoverfly
-          token: ${{ secrets.GITHUB_TOKEN }}
-          version: "latest"
-          pathInArchive: "hoverfly.exe"
-
-      - name: Start Hoverfly for Windows
-        if: ${{ matrix.os == 'windows-latest'}}
-        run: |
-          Start-Process -FilePath hfly -Args "-webserver -tls-verification=false -response-body-files-path simengine"
-
-      - name: Start Hoverfly for Linux
-        if: ${{ matrix.os == 'ubuntu-latest'}}
-        run: docker-compose -f simengine/docker-compose.yaml up -d
-
-      - name: Start Hoverfly for MacOS
-        if: ${{ matrix.os == 'macos-latest' }}
-        run: brew install SpectoLabs/tap/hoverfly && hoverfly -webserver -response-body-files-path simengine > /dev/null &
 
       - name: Use Node ${{ matrix.node }}
         uses: actions/setup-node@v1
