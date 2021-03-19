@@ -117,7 +117,7 @@
 									<h5>apiKey: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> baseUrl: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;http://localhost:8500&quot;</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> baseUrl: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x60;https://simengine.herokuapp.com&#x60;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="packageapi.html" class="tsd-signature-type">PackageApi</a></h4>
@@ -131,7 +131,7 @@
 					<a name="exec" class="tsd-anchor"></a>
 					<h3>exec</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">exec&lt;Params, Result&gt;<span class="tsd-signature-symbol">(</span>method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, params<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Params</span>, resultMapper<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>jsonData<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Result</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Either</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/jsonrpcerror.html" class="tsd-signature-type">JsonRpcError</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Result</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">exec&lt;Result&gt;<span class="tsd-signature-symbol">(</span>method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, params<span class="tsd-signature-symbol">: </span><a href="../globals.html#parameters" class="tsd-signature-type">Parameters</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Either</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/jsonrpcerror.html" class="tsd-signature-type">JsonRpcError</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Result</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -151,9 +151,6 @@
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
-									<h4>Params<span class="tsd-signature-symbol">: </span><a href="../globals.html#parameters" class="tsd-signature-type">Parameters</a></h4>
-								</li>
-								<li>
 									<h4>Result<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></h4>
 								</li>
 							</ul>
@@ -163,28 +160,7 @@
 									<h5>method: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
-									<h5>params: <span class="tsd-signature-type">Params</span></h5>
-								</li>
-								<li>
-									<h5>resultMapper: <span class="tsd-signature-symbol">(</span>jsonData<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Result</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-signature">
-											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>jsonData<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Result</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-parameters-title">Parameters</h4>
-													<ul class="tsd-parameters">
-														<li>
-															<h5>jsonData: <span class="tsd-signature-type">any</span></h5>
-														</li>
-													</ul>
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Result</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
+									<h5>params: <a href="../globals.html#parameters" class="tsd-signature-type">Parameters</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Either</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/jsonrpcerror.html" class="tsd-signature-type">JsonRpcError</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Result</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -195,22 +171,22 @@
 					<a name="trackpackage" class="tsd-anchor"></a>
 					<h3>track<wbr>Package</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">track<wbr>Package<span class="tsd-signature-symbol">(</span>params<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Entities.TrackPackageParams</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Either</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/jsonrpcerror.html" class="tsd-signature-type">JsonRpcError</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/trackpackageresult.html" class="tsd-signature-type">TrackPackageResult</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">track<wbr>Package<span class="tsd-signature-symbol">(</span>params<span class="tsd-signature-symbol">: </span><a href="../interfaces/trackpackageparams.html" class="tsd-signature-type">TrackPackageParams</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Either</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/jsonrpcerror.html" class="tsd-signature-type">JsonRpcError</a><span class="tsd-signature-symbol">, </span><a href="trackpackageresult.html" class="tsd-signature-type">TrackPackageResult</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/api.ts#L5">core/packages/api.ts:5</a></li>
+									<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/api.ts#L4">core/packages/api.ts:4</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>params: <span class="tsd-signature-type">Entities.TrackPackageParams</span></h5>
+									<h5>params: <a href="../interfaces/trackpackageparams.html" class="tsd-signature-type">TrackPackageParams</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Either</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/jsonrpcerror.html" class="tsd-signature-type">JsonRpcError</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/trackpackageresult.html" class="tsd-signature-type">TrackPackageResult</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Either</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/jsonrpcerror.html" class="tsd-signature-type">JsonRpcError</a><span class="tsd-signature-symbol">, </span><a href="trackpackageresult.html" class="tsd-signature-type">TrackPackageResult</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>

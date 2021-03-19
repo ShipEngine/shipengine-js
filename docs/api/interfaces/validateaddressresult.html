@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IResult | ShipEngine JS API</title>
+	<title>ValidateAddressResult | ShipEngine JS API</title>
 	<meta name="description" content="Documentation for ShipEngine JS API">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -52,10 +52,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="iresult.html">IResult</a>
+					<a href="validateaddressresult.html">ValidateAddressResult</a>
 				</li>
 			</ul>
-			<h1>Interface IResult</h1>
+			<h1>Interface ValidateAddressResult</h1>
 		</div>
 	</div>
 </header>
@@ -66,10 +66,15 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">IResult</span>
+						<a href="iresult.html" class="tsd-signature-type">IResult</a>
 						<ul class="tsd-hierarchy">
 							<li>
-								<a href="validateaddressresult.html" class="tsd-signature-type">ValidateAddressResult</a>
+								<span class="target">ValidateAddressResult</span>
+								<ul class="tsd-hierarchy">
+									<li>
+										<a href="validateaddressconvenienceresult.html" class="tsd-signature-type">ValidateAddressConvenienceResult</a>
+									</li>
+								</ul>
 							</li>
 						</ul>
 					</li>
@@ -82,7 +87,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iresult.html#messages" class="tsd-kind-icon">messages</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="validateaddressresult.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite"><a href="validateaddressresult.html#messages" class="tsd-kind-icon">messages</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="validateaddressresult.html#normalized" class="tsd-kind-icon">normalized</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="validateaddressresult.html#original" class="tsd-kind-icon">original</a></li>
 							</ul>
 						</section>
 					</div>
@@ -91,12 +99,43 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="messages" class="tsd-anchor"></a>
-					<h3>messages</h3>
-					<div class="tsd-signature tsd-kind-icon">messages<span class="tsd-signature-symbol">:</span> <a href="../globals.html#messagesobj" class="tsd-signature-type">MessagesObj</a></div>
+					<a name="isvalid" class="tsd-anchor"></a>
+					<h3>is<wbr>Valid</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Valid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/shared/models/result.ts#L10">shared/models/result.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/types/validate-address.entities.ts#L25">core/address/types/validate-address.entities.ts:25</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite">
+					<a name="messages" class="tsd-anchor"></a>
+					<h3>messages</h3>
+					<div class="tsd-signature tsd-kind-icon">messages<span class="tsd-signature-symbol">:</span> <a href="../globals.html#messages" class="tsd-signature-type">Messages</a></div>
+					<aside class="tsd-sources">
+						<p>Overrides <a href="iresult.html">IResult</a>.<a href="iresult.html#messages">messages</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/types/validate-address.entities.ts#L26">core/address/types/validate-address.entities.ts:26</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="normalized" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> normalized</h3>
+					<div class="tsd-signature tsd-kind-icon">normalized<span class="tsd-signature-symbol">:</span> <a href="address.html" class="tsd-signature-type">Address</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/types/validate-address.entities.ts#L27">core/address/types/validate-address.entities.ts:27</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="original" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> original</h3>
+					<div class="tsd-signature tsd-kind-icon">original<span class="tsd-signature-symbol">:</span> <a href="address.html" class="tsd-signature-type">Address</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/types/validate-address.entities.ts#L28">core/address/types/validate-address.entities.ts:28</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -115,10 +154,19 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="iresult.html" class="tsd-kind-icon">IResult</a>
+						<a href="validateaddressresult.html" class="tsd-kind-icon">Validate<wbr>Address<wbr>Result</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="iresult.html#messages" class="tsd-kind-icon">messages</a>
+								<a href="validateaddressresult.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite">
+								<a href="validateaddressresult.html#messages" class="tsd-kind-icon">messages</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="validateaddressresult.html#normalized" class="tsd-kind-icon">normalized</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="validateaddressresult.html#original" class="tsd-kind-icon">original</a>
 							</li>
 						</ul>
 					</li>
