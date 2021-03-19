@@ -82,7 +82,7 @@ export class JsonRpcCall<Params extends Parameters> {
 
 export class InternalRpcClient {
   #client: AxiosInstance;
-  constructor(apiKey: string, baseUrl = 'http://localhost:8500') {
+  constructor(apiKey: string, baseUrl = `https://simengine.herokuapp.com`) {
     this.#client = axios.create({
       baseURL: baseUrl,
       url: '/',
@@ -106,10 +106,9 @@ export class InternalRpcClient {
    * auto snake cases params
    * auto camel cases result
    */
-  exec = async <Params extends Parameters, Result extends object>(
+  exec = async <Result extends object>(
     method: string,
-    params: Params,
-    resultMapper: (jsonData: any) => Result
+    params: Parameters
   ): Promise<Either<JsonRpcError, Result>> => {
     try {
       const data = new JsonRpcCall(method, snakeize(params));
@@ -121,7 +120,7 @@ export class InternalRpcClient {
       assertJsonRpcReply<any>(axiosData);
 
       const response = this.jsonRpcResponseToEither<Result>(axiosData);
-      return response.map(resultMapper);
+      return response;
     } catch (err) {
       // this should never happen
       return new ErrorResponse({

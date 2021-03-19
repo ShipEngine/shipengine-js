@@ -1,5 +1,4 @@
 import { ShipEngine } from '../../../src/shipengine';
-import { Hoverfly } from '../../utils/Hoverfly';
 import { expect } from 'chai';
 import constants from '../../utils/constants';
 import { TrackPackageInfo } from '../../../src/core/packages/types/track-package.entities';
@@ -7,12 +6,7 @@ import { TrackPackageInfo } from '../../../src/core/packages/types/track-package
 let shipengine: ShipEngine;
 describe('tracking', () => {
   before(async () => {
-    await Hoverfly.start();
-    await Hoverfly.import('rpc/rpc.json');
-    shipengine = new ShipEngine('MY_API_KEY', `${constants.hoverflyBaseUrl}`);
-  });
-  after(async () => {
-    await Hoverfly.stop();
+    shipengine = new ShipEngine('MY_API_KEY', `${constants.isomorphicBaseUri}`);
   });
 
   const assertTracking = (information: TrackPackageInfo) => {
@@ -29,6 +23,7 @@ describe('tracking', () => {
         packageId: 'abc',
         carrierCode: '123',
       });
+      response.events.map((v) => v.carrierDetailCode);
       assertTracking(response);
     }
     {

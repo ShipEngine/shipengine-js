@@ -1,6 +1,15 @@
-import { getResultOrThrow } from '../../shared/models/result';
+import { JsonRpcError } from '../../shared/models/client/client';
+import { Either } from '../../utils/either';
 import { AddressApi } from './api';
-import * as Entities from './entities';
+import {
+  ValidateAddressConvenienceResult,
+  ValidateAddressParams,
+  ValidateAddressResult,
+} from './types/validate-address.entities';
+import {
+  toAddress,
+  toValidateAddressParamsDto,
+} from './types/validate-address.mappers';
 
 export class AddressAdvanced {
   #api: AddressApi;
@@ -8,8 +17,19 @@ export class AddressAdvanced {
     this.#api = api;
   }
 
-  public validate = async (params: Entities.ValidateAddressParams) => {
-    return this.#api.validateAddress(params);
+  public validate = async (
+    params: ValidateAddressParams
+  ): Promise<Either<JsonRpcError, ValidateAddressResult>> => {
+    const response = await this.#api.validateAddress(
+      toValidateAddressParamsDto(params)
+    );
+    const result = response.map((v) => ({
+      isValid: v.valid,
+      messages: v.messages,
+      normalized: v.address ? toAddress(v.address) : undefined,
+      original: params,
+    }));
+    return result;
   };
 }
 
@@ -21,10 +41,9 @@ export class AddressService {
   }
 
   public validateAddress = async (
-    address: Entities.ValidateAddressParams
-  ): Promise<Entities.Address> => {
+    address: ValidateAddressParams
+  ): Promise<ValidateAddressConvenienceResult> => {
     const response = await this.address.validate(address);
-    const data = getResultOrThrow(response);
-    return data.address!;
+    return response.unsafeCoerce();
   };
 }

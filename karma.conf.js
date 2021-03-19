@@ -5,35 +5,19 @@
 'use strict';
 const { karmaConfig } = require('@jsdevtools/karma-config');
 // const { host } = require('@jsdevtools/host-environment');
-const {
-  hoverflyProxyPath,
-  hoverflyProxyApiPath,
-  configProxyApiPath,
-  configProxyPath,
-} = require('./test/utils/constants');
+const { karmaProxyBaseUri, apiBaseUri } = require('./test/utils/constants');
 
 module.exports = (cfg) => {
   const getConfig = karmaConfig({
     sourceDir: './esm.test',
     tests: ['./esm.test/**/*.spec.js'],
+
     config: {
-      frameworks: ['mocha', 'host-environment', 'child-process'],
-      plugins: ['karma-child-process'],
+      frameworks: ['mocha', 'host-environment'],
       proxies: {
-        [configProxyApiPath]: {
-          target: configProxyPath,
+        [karmaProxyBaseUri]: {
+          target: apiBaseUri,
           changeOrigin: true,
-        },
-        [hoverflyProxyApiPath]: {
-          target: hoverflyProxyPath,
-          changeOrigin: true,
-        },
-      },
-      client: {
-        childProcess: {
-          path: './test/utils/config-server/start-config-server.js',
-          args: [],
-          options: {},
         },
       },
     },

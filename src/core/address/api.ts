@@ -1,16 +1,13 @@
 import { InternalRpcClient } from '../../shared/models/client/client';
-import { ValidateAddressParams } from './types/validate-address.entities';
 import {
-  toValidateAddressParamsDto,
-  toValidateAddressResult,
-} from './types/validate-address.mappers';
+  ValidateAddressParamsDto,
+  ValidateAddressResultDto,
+} from './types/validate-address.dto';
 
 export class AddressApi extends InternalRpcClient {
-  validateAddress = async (validateAddressParams: ValidateAddressParams) => {
-    return this.exec(
+  validateAddress = async (validateAddressParams: ValidateAddressParamsDto) =>
+    this.exec<ValidateAddressResultDto>(
       'address/validate',
-      toValidateAddressParamsDto(validateAddressParams),
-      toValidateAddressResult
+      validateAddressParams
     );
-  };
 }

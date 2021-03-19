@@ -1,31 +1,21 @@
-import { Hoverfly } from '../../utils/Hoverfly';
 import { expect } from 'chai';
 import constants from '../../utils/constants';
 import { InternalRpcClient } from '../../../src/shared/models/client/client';
 
 describe('RPC Client test', () => {
-  before(async () => {
-    await Hoverfly.start();
-    await Hoverfly.import('rpc/rpc.json');
-  });
-  after(async () => {
-    await Hoverfly.stop();
-  });
-
-  it('should return correct response if validation error', async () => {
+  it('should return correct response if validation error!', async () => {
     const client = new InternalRpcClient(
       'MY_API_KEY',
-      constants.hoverflyBaseUrl
+      constants.isomorphicBaseUri
     );
-    const response = await client.exec(
-      'test/error/invalid-request',
-      {},
-      (v) => v
-    );
+    const response = await client.exec('client', {
+      foo: 'invalid-request',
+    });
 
     response.onError((r) => {
       expect(r.message).to.eq('Invalid Request');
       expect(r.code).to.eq(-32600);
+      expect(r).not.to.have.property('id');
     });
     response.onSuccess(() => {
       expect.fail('should fail.');

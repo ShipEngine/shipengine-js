@@ -5,7 +5,7 @@ import { ISOString } from '../../../shared/models/date-time';
 export const dtoToTrackPackageResultsEntity = (
   trackPackageResult: Dto.TrackPackageResult
 ): Entities.TrackPackageResult => {
-  return {
+  return new Entities.TrackPackageResult({
     information: {
       ...trackPackageResult.information,
       events: trackPackageResult.information.events.map((event) => ({
@@ -17,7 +17,7 @@ export const dtoToTrackPackageResultsEntity = (
       ),
     },
     messages: trackPackageResult.messages,
-  };
+  });
 };
 
 export const entityToTrackPackageParamsDto = (

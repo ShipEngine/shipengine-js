@@ -7,6 +7,7 @@ export interface ValidateAddressParamsDto {
 }
 
 export interface ValidateAddressResultDto {
+  valid: true;
   address: AddressAddressResultDto | null;
   messages: MessagesDto;
 }

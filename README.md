@@ -33,7 +33,7 @@ const ShipEngine = require('shipengine')
 const shipengine = new ShipEngine('my_api_key')
 
 
-const isValid = await shipengine
+ await shipengine
   .validateAddress({
     street: '1 E 161 St',
     cityLocality: 'The Bronx',
@@ -42,14 +42,22 @@ const isValid = await shipengine
     country: 'US'
   })
 
-console.log(isValid ? 'valid!' : 'invalid!')
-
 ```
 ## Docs & Tutorials
 - https://shipengine.github.io/shipengine-js
 
-## Development / Contributions
+## Development
 
+```
+npm install
+npm run test
+npm run lint
+```
+
+## Contribute
+### Cloning the repo
+- fork the repository
+- submit a PR against `main
 ### Publishing workflow
 Note: These things more or less happen automatically with `npm run tag-and-release`.
 1. Bump `version` in package.json to v1.0.0
@@ -70,27 +78,9 @@ git push --tags origin HEAD
 - Once `main` is in a state where we want to release.
   - `npm run tag-and-release` (justs run `scripts/release.sh`)
 
-### Cloning the repo
-- fork the repository
-- `git submodule update --init --recursive`
-- submit a PR against `main`
-
-### Optional
-- if you use direnv, edit and rename .envrc.example.
+`
 
 ### Upgrading node version
 #### edit the following files:
-- `package.json/engines, .nvmrc, shell.nix, README.md`
+- `package.json/engines, .nvmrc, README.md`
 
-### Running tests
-Do `npm run sim:start`
-
-If you for any reason do not want to use docker, you can also install hV
-
-```
-npm run test
-```
-## Lint
-```
-npm run lint
-```

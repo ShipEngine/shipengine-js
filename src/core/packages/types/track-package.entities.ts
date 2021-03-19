@@ -21,11 +21,15 @@ type TrackingEvent = Overwrite<
   }
 >;
 
-// replace all date strings in generated result -> DateTime
-export type TrackPackageResult = {
+export interface TrackPackageResult {
   information: TrackPackageInfo;
   messages: MessagesObject;
-};
+}
+export class TrackPackageResult {
+  constructor(result: TrackPackageResult) {
+    Object.assign(this, result);
+  }
+}
 
 export type TrackPackageInfo = Overwrite<
   Information,
