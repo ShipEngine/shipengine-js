@@ -1,5 +1,3 @@
-// generated from https://app.quicktype.io/ -- do not edit by hand
-
 export interface TrackPackageResultDto {
   events: Event[];
   package: Package;
@@ -7,10 +5,10 @@ export interface TrackPackageResultDto {
 }
 
 export interface Event {
-  carrier_date_time: string;
-  carrier_detail_code?: string;
-  carrier_status_code: string;
-  date_time: string;
+  carrierDateTime: string;
+  carrierDetailCode?: string;
+  carrierStatusCode: string;
+  dateTime: string;
   description: string;
   location?: Location;
   signer?: string;
@@ -18,11 +16,11 @@ export interface Event {
 }
 
 export interface Location {
-  city_locality?: string;
+  cityLocality?: string;
   coordinates?: GeoCoordinates;
-  country_code?: CountryCode;
-  postal_code?: string;
-  state_province?: string;
+  countryCode?: CountryCode;
+  postalCode?: string;
+  stateProvince?: string;
 }
 
 export interface GeoCoordinates {
@@ -288,9 +286,9 @@ export enum Status {
 
 export interface Package {
   dimensions?: Dimensions;
-  package_id?: string;
-  tracking_number: string;
-  tracking_url?: string;
+  packageid?: string;
+  trackingNumber: string;
+  trackingurl?: string;
   weight?: Weight;
 }
 
@@ -319,10 +317,10 @@ export enum WeightUnit {
 }
 
 export interface Shipment {
-  carrier_code: CarrierCode;
-  carrier_id?: string;
-  estimated_delivery: string;
-  shipment_id?: string;
+  carrierCode: CarrierCode;
+  carrierid?: string;
+  estimatedDelivery: string;
+  shipmentid?: string;
 }
 
 export enum CarrierCode {
@@ -352,7 +350,7 @@ export enum CarrierCode {
   RrDonnelley = 'RR DONNELLEY',
   Seko = 'SEKO',
   Sendle = 'SENDLE',
-  StampsCOM = 'STAMPS.COM',
+  Stamps = 'STAMPS.COM',
   UPS = 'UPS',
   Usps = 'USPS',
 }

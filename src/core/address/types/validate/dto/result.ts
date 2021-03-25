@@ -1,7 +1,3 @@
-// generated from https://app.quicktype.io/ -- do not edit by hand
-
-import { Messages } from '../../../../../shared/models/messsages';
-
 export interface AddressValidationResultDto {
   address?: Address;
   messages: Messages;
@@ -9,14 +5,14 @@ export interface AddressValidationResultDto {
 }
 
 export interface Address {
-  city_locality: string;
-  company_name?: string;
-  country_code: CountryCode;
+  cityLocality: string;
+  companyName?: string;
+  countryCode: CountryCode;
   name?: string;
   phone?: string;
-  postal_code: string;
+  postalCode: string;
   residential: boolean | null;
-  state_province: string;
+  stateProvince: string;
   street: string[];
 }
 
@@ -265,4 +261,10 @@ export enum CountryCode {
   Za = 'ZA',
   Zm = 'ZM',
   Zw = 'ZW',
+}
+
+export interface Messages {
+  errors: string[];
+  info: string[];
+  warnings: string[];
 }

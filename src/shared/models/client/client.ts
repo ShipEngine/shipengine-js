@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import { hasProperties, isObject } from '../../../utils';
+import { camelize, hasProperties, isObject, snakeize } from '../../../utils';
 import { Either, ErrorResponse, SuccessResponse } from '../../../utils/either';
 
 type ErrorData =
@@ -103,7 +103,7 @@ export class InternalRpcClient {
     params: Parameters
   ): Promise<Either<JsonRpcError, Result>> => {
     try {
-      const data = new JsonRpcCall(method, params);
+      const data = new JsonRpcCall(method, snakeize(params));
       const axiosResponse: AxiosResponse<unknown> = await this.#client({
         method: 'post',
         data,
@@ -112,8 +112,8 @@ export class InternalRpcClient {
 
       assertCorrectJsonRpcStructure<Result>(axiosData);
       const response = isJsonRpcResponseError(axiosData)
-        ? new ErrorResponse(axiosData.error)
-        : new SuccessResponse(axiosData.result);
+        ? new ErrorResponse(camelize(axiosData.error))
+        : new SuccessResponse(camelize(axiosData.result) as Result);
 
       return response;
     } catch (err) {

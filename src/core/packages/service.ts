@@ -1,8 +1,9 @@
-import * as Entities from './types/entities';
 import { PackageApi } from './api';
 import { JsonRpcError } from '../../shared/models/client/client';
 import { Either } from '../../utils/either';
+import { ISOString } from '../../shared/models/date-time';
 import { CarrierCode } from './types/track/dto/params';
+import * as Entities from './types/track/entities';
 
 export class PackageService {
   package: PackagesAdvanced;
@@ -28,16 +29,28 @@ export class PackagesAdvanced {
     params: Entities.TrackPackageParams
   ): Promise<Either<JsonRpcError, Entities.TrackPackageResult>> => {
     const data = await this.#api.trackPackage({
-      carrier_code:
+      carrierCode:
         'packageId' in params ? undefined : (params.carrierCode as CarrierCode),
-      tracking_number:
-        'packageId' in params ? undefined : params.trackingNumber,
-      package_id: 'packageId' in params ? params.packageId : undefined,
+      trackingNumber: 'packageId' in params ? undefined : params.trackingNumber,
+      packageid: 'packageId' in params ? params.packageId : undefined,
     });
     // map is only ran if response is successful
-    return data.map((trackPackageResult) => {
+    return data.map((r) => {
       return {
-        // write huge amounts of mapping code that only snake cases stuff.
+        ...r,
+        package: {
+          ...r.package,
+        },
+        shipment: {
+          ...r.shipment,
+          estimatedDelivery: new ISOString(r.shipment.estimatedDelivery),
+        },
+
+        events: r.events.map((e) => ({
+          ...e,
+          dateTime: new ISOString(e.dateTime),
+          carrierDateTime: new ISOString(e.carrierDateTime),
+        })),
       };
     });
   };

@@ -1,14 +1,7 @@
-// generated from https://app.quicktype.io/ -- do not edit by hand
-// To parse this data:
-//
-//   import { Convert, TrackPackageParamsDto } from "./file";
-//
-//   const trackPackageParamsDto = Convert.toTrackPackageParamsDto(json);
-
 export interface TrackPackageParamsDto {
-  carrier_code?: CarrierCode;
-  tracking_number?: string;
-  package_id?: string;
+  carrierCode?: CarrierCode;
+  trackingNumber?: string;
+  packageid?: string;
 }
 
 export enum CarrierCode {
@@ -38,7 +31,7 @@ export enum CarrierCode {
   RrDonnelley = 'RR DONNELLEY',
   Seko = 'SEKO',
   Sendle = 'SENDLE',
-  StampsCOM = 'STAMPS.COM',
+  Stamps = 'STAMPS.COM',
   UPS = 'UPS',
   Usps = 'USPS',
 }

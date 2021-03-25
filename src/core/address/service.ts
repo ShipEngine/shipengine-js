@@ -34,10 +34,10 @@ export class AddressAdvanced {
         address !== undefined
           ? {
               street: address?.street ?? [],
-              postalCode: address?.postal_code ?? undefined,
-              cityLocality: address?.city_locality ?? undefined,
-              countryCode: address?.country_code ?? undefined,
-              stateProvince: address?.state_province ?? undefined,
+              postalCode: address?.postalCode ?? undefined,
+              cityLocality: address?.cityLocality ?? undefined,
+              countryCode: address?.countryCode ?? undefined,
+              stateProvince: address?.stateProvince ?? undefined,
               isResidential: address?.residential ?? undefined,
             }
           : undefined,
