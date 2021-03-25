@@ -23,8 +23,8 @@ describe('tracking', () => {
         packageId: 'abc',
         carrierCode: '123',
       });
-      response.events.map((v) => v.carrierDetailCode);
-      assertTracking(response);
+      response.information.events.map((v) => v.carrierDetailCode);
+      assertTracking(response.information);
     }
     {
       const response = await shipengine.package.track({
@@ -41,7 +41,7 @@ describe('tracking', () => {
         packageId: 'abc',
         carrierCode: '123',
       });
-      assertTracking(response);
+      assertTracking(response.information);
     }
     {
       const response = await shipengine.package.track({

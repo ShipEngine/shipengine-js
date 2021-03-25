@@ -31,9 +31,8 @@ export class PackageService {
 
   public trackPackage = async (
     tracking: Entities.TrackPackageParams
-  ): Promise<Entities.TrackPackageInfo> => {
+  ): Promise<Entities.TrackPackageResult> => {
     const data = await this.package.track(tracking);
-    const result = getResultOrThrow(data);
-    return result.information;
+    return data.unsafeCoerce();
   };
 }
