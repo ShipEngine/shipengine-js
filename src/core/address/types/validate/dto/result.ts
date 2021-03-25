@@ -1,8 +1,4 @@
-// To parse this data:
-//
-//   import { Convert, AddressValidationResultDto } from "./file";
-//
-//   const addressValidationResultDto = Convert.toAddressValidationResultDto(json);
+// generated from https://app.quicktype.io/ -- do not edit by hand
 
 import { Messages } from '../../../../../shared/models/messsages';
 

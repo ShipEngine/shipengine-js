@@ -1,18 +1,33 @@
 // generated from https://app.quicktype.io/ -- do not edit by hand
-export interface AddressValidationParamsDto {
-  address: Address;
+
+export interface TrackPackageResultDto {
+  events: Event[];
+  package: Package;
+  shipment: Shipment;
 }
 
-export interface Address {
+export interface Event {
+  carrier_date_time: string;
+  carrier_detail_code?: string;
+  carrier_status_code: string;
+  date_time: string;
+  description: string;
+  location?: Location;
+  signer?: string;
+  status: Status;
+}
+
+export interface Location {
   city_locality?: string;
-  company_name?: string;
-  country_code: CountryCode;
-  name?: string;
-  phone?: string;
+  coordinates?: GeoCoordinates;
+  country_code?: CountryCode;
   postal_code?: string;
-  residential?: boolean | null;
   state_province?: string;
-  street: string[];
+}
+
+export interface GeoCoordinates {
+  latitude: number;
+  longitude: number;
 }
 
 export enum CountryCode {
@@ -260,4 +275,84 @@ export enum CountryCode {
   Za = 'ZA',
   Zm = 'ZM',
   Zw = 'ZW',
+}
+
+export enum Status {
+  Accepted = 'ACCEPTED',
+  AttemptedDelivery = 'ATTEMPTED DELIVERY',
+  Delivered = 'DELIVERED',
+  Exception = 'EXCEPTION',
+  InTransit = 'IN TRANSIT',
+  Unknown = 'UNKNOWN',
+}
+
+export interface Package {
+  dimensions?: Dimensions;
+  package_id?: string;
+  tracking_number: string;
+  tracking_url?: string;
+  weight?: Weight;
+}
+
+export interface Dimensions {
+  height: number;
+  length: number;
+  unit: DimensionsUnit;
+  width: number;
+}
+
+export enum DimensionsUnit {
+  Centimeter = 'CENTIMETER',
+  Inch = 'INCH',
+}
+
+export interface Weight {
+  unit: WeightUnit;
+  value: number;
+}
+
+export enum WeightUnit {
+  Gram = 'GRAM',
+  Kilogram = 'KILOGRAM',
+  Ounce = 'OUNCE',
+  Pound = 'POUND',
+}
+
+export interface Shipment {
+  carrier_code: CarrierCode;
+  carrier_id?: string;
+  estimated_delivery: string;
+  shipment_id?: string;
+}
+
+export enum CarrierCode {
+  AccessWorldwide = 'ACCESS WORLDWIDE',
+  AmazonBuyShipping = 'AMAZON BUY SHIPPING',
+  AmazonShippingUk = 'AMAZON SHIPPING UK',
+  Apc = 'APC',
+  Asendia = 'ASENDIA',
+  AustraliaPost = 'AUSTRALIA POST',
+  CanadaPost = 'CANADA POST',
+  DhlEcommerce = 'DHL ECOMMERCE',
+  DhlExpress = 'DHL EXPRESS',
+  DhlExpressAustralia = 'DHL EXPRESS AUSTRALIA',
+  DhlExpressCanada = 'DHL EXPRESS CANADA',
+  DhlExpressUk = 'DHL EXPRESS UK',
+  Dpd = 'DPD',
+  Endicia = 'ENDICIA',
+  Fedex = 'FEDEX',
+  FedexUk = 'FEDEX UK',
+  Firstmile = 'FIRSTMILE',
+  Globegistics = 'GLOBEGISTICS',
+  Imex = 'IMEX',
+  Newgistics = 'NEWGISTICS',
+  OnTrac = 'ON TRAC',
+  PurolatorCanada = 'PUROLATOR CANADA',
+  RoyalMail = 'ROYAL MAIL',
+  RrDonnelley = 'RR DONNELLEY',
+  Seko = 'SEKO',
+  Sendle = 'SENDLE',
+  StampsCOM = 'STAMPS.COM',
+  UPS = 'UPS',
+  Usps = 'USPS',
 }
