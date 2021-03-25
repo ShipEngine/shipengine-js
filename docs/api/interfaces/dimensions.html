@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ValidateAddressParamsDto | ShipEngine JS API</title>
+	<title>Dimensions | ShipEngine JS API</title>
 	<meta name="description" content="Documentation for ShipEngine JS API">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -52,10 +52,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="validateaddressparamsdto.html">ValidateAddressParamsDto</a>
+					<a href="dimensions.html">Dimensions</a>
 				</li>
 			</ul>
-			<h1>Interface ValidateAddressParamsDto</h1>
+			<h1>Interface Dimensions</h1>
 		</div>
 	</div>
 </header>
@@ -66,7 +66,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ValidateAddressParamsDto</span>
+						<span class="target">Dimensions</span>
 					</li>
 				</ul>
 			</section>
@@ -77,11 +77,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="validateaddressparamsdto.html#citylocality" class="tsd-kind-icon">city<wbr>Locality</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="validateaddressparamsdto.html#countrycode" class="tsd-kind-icon">country<wbr>Code</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="validateaddressparamsdto.html#postalcode" class="tsd-kind-icon">postal<wbr>Code</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="validateaddressparamsdto.html#stateprovince" class="tsd-kind-icon">state<wbr>Province</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="validateaddressparamsdto.html#street" class="tsd-kind-icon">street</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dimensions.html#height" class="tsd-kind-icon">height</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dimensions.html#length" class="tsd-kind-icon">length</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dimensions.html#unit" class="tsd-kind-icon">unit</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dimensions.html#width" class="tsd-kind-icon">width</a></li>
 							</ul>
 						</section>
 					</div>
@@ -90,52 +89,42 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="citylocality" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> city<wbr>Locality</h3>
-					<div class="tsd-signature tsd-kind-icon">city<wbr>Locality<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<a name="height" class="tsd-anchor"></a>
+					<h3>height</h3>
+					<div class="tsd-signature tsd-kind-icon">height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/types/validate-address.dto.ts#L4">core/address/types/validate-address.dto.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/types/track/dto/result.ts#L296">core/packages/types/track/dto/result.ts:296</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="countrycode" class="tsd-anchor"></a>
-					<h3>country<wbr>Code</h3>
-					<div class="tsd-signature tsd-kind-icon">country<wbr>Code<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<a name="length" class="tsd-anchor"></a>
+					<h3>length</h3>
+					<div class="tsd-signature tsd-kind-icon">length<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/types/validate-address.dto.ts#L3">core/address/types/validate-address.dto.ts:3</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/types/track/dto/result.ts#L297">core/packages/types/track/dto/result.ts:297</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="postalcode" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> postal<wbr>Code</h3>
-					<div class="tsd-signature tsd-kind-icon">postal<wbr>Code<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<a name="unit" class="tsd-anchor"></a>
+					<h3>unit</h3>
+					<div class="tsd-signature tsd-kind-icon">unit<span class="tsd-signature-symbol">:</span> <a href="../enums/dimensionsunit.html" class="tsd-signature-type">DimensionsUnit</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/types/validate-address.dto.ts#L5">core/address/types/validate-address.dto.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/types/track/dto/result.ts#L298">core/packages/types/track/dto/result.ts:298</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="stateprovince" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> state<wbr>Province</h3>
-					<div class="tsd-signature tsd-kind-icon">state<wbr>Province<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<a name="width" class="tsd-anchor"></a>
+					<h3>width</h3>
+					<div class="tsd-signature tsd-kind-icon">width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/types/validate-address.dto.ts#L6">core/address/types/validate-address.dto.ts:6</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="street" class="tsd-anchor"></a>
-					<h3>street</h3>
-					<div class="tsd-signature tsd-kind-icon">street<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/address/types/validate-address.dto.ts#L2">core/address/types/validate-address.dto.ts:2</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/types/track/dto/result.ts#L299">core/packages/types/track/dto/result.ts:299</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -154,22 +143,19 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="validateaddressparamsdto.html" class="tsd-kind-icon">Validate<wbr>Address<wbr>Params<wbr>Dto</a>
+						<a href="dimensions.html" class="tsd-kind-icon">Dimensions</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="validateaddressparamsdto.html#citylocality" class="tsd-kind-icon">city<wbr>Locality</a>
+								<a href="dimensions.html#height" class="tsd-kind-icon">height</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="validateaddressparamsdto.html#countrycode" class="tsd-kind-icon">country<wbr>Code</a>
+								<a href="dimensions.html#length" class="tsd-kind-icon">length</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="validateaddressparamsdto.html#postalcode" class="tsd-kind-icon">postal<wbr>Code</a>
+								<a href="dimensions.html#unit" class="tsd-kind-icon">unit</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="validateaddressparamsdto.html#stateprovince" class="tsd-kind-icon">state<wbr>Province</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="validateaddressparamsdto.html#street" class="tsd-kind-icon">street</a>
+								<a href="dimensions.html#width" class="tsd-kind-icon">width</a>
 							</li>
 						</ul>
 					</li>

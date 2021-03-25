@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>EventElement | ShipEngine JS API</title>
+	<title>Event | ShipEngine JS API</title>
 	<meta name="description" content="Documentation for ShipEngine JS API">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -52,10 +52,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="eventelement.html">EventElement</a>
+					<a href="event.html">Event</a>
 				</li>
 			</ul>
-			<h1>Interface EventElement</h1>
+			<h1>Interface Event</h1>
 		</div>
 	</div>
 </header>
@@ -66,7 +66,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">EventElement</span>
+						<span class="target">Event</span>
 					</li>
 				</ul>
 			</section>
@@ -77,13 +77,14 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="eventelement.html#carrierdetailcode" class="tsd-kind-icon">carrier<wbr>Detail<wbr>Code</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="eventelement.html#carrierstatuscode" class="tsd-kind-icon">carrier<wbr>Status<wbr>Code</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="eventelement.html#datetime" class="tsd-kind-icon">date<wbr>Time</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="eventelement.html#description" class="tsd-kind-icon">description</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="eventelement.html#location" class="tsd-kind-icon">location</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="eventelement.html#signer" class="tsd-kind-icon">signer</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="eventelement.html#status" class="tsd-kind-icon">status</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="event.html#carrierdatetime" class="tsd-kind-icon">carrier<wbr>Date<wbr>Time</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="event.html#carrierdetailcode" class="tsd-kind-icon">carrier<wbr>Detail<wbr>Code</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="event.html#carrierstatuscode" class="tsd-kind-icon">carrier<wbr>Status<wbr>Code</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="event.html#datetime" class="tsd-kind-icon">date<wbr>Time</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="event.html#description" class="tsd-kind-icon">description</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="event.html#location" class="tsd-kind-icon">location</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="event.html#signer" class="tsd-kind-icon">signer</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="event.html#status" class="tsd-kind-icon">status</a></li>
 							</ul>
 						</section>
 					</div>
@@ -92,22 +93,32 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="carrierdetailcode" class="tsd-anchor"></a>
-					<h3>carrier<wbr>Detail<wbr>Code</h3>
-					<div class="tsd-signature tsd-kind-icon">carrier<wbr>Detail<wbr>Code<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<a name="carrierdatetime" class="tsd-anchor"></a>
+					<h3>carrier<wbr>Date<wbr>Time</h3>
+					<div class="tsd-signature tsd-kind-icon">carrier<wbr>Date<wbr>Time<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/types/track-package.dto.ts#L19">core/packages/types/track-package.dto.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/types/track/dto/result.ts#L8">core/packages/types/track/dto/result.ts:8</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="carrierdetailcode" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> carrier<wbr>Detail<wbr>Code</h3>
+					<div class="tsd-signature tsd-kind-icon">carrier<wbr>Detail<wbr>Code<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/types/track/dto/result.ts#L9">core/packages/types/track/dto/result.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="carrierstatuscode" class="tsd-anchor"></a>
 					<h3>carrier<wbr>Status<wbr>Code</h3>
-					<div class="tsd-signature tsd-kind-icon">carrier<wbr>Status<wbr>Code<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<div class="tsd-signature tsd-kind-icon">carrier<wbr>Status<wbr>Code<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/types/track-package.dto.ts#L20">core/packages/types/track-package.dto.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/types/track/dto/result.ts#L10">core/packages/types/track/dto/result.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -117,7 +128,7 @@
 					<div class="tsd-signature tsd-kind-icon">date<wbr>Time<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/types/track-package.dto.ts#L21">core/packages/types/track-package.dto.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/types/track/dto/result.ts#L11">core/packages/types/track/dto/result.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -127,27 +138,27 @@
 					<div class="tsd-signature tsd-kind-icon">description<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/types/track-package.dto.ts#L22">core/packages/types/track-package.dto.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/types/track/dto/result.ts#L12">core/packages/types/track/dto/result.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="location" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> location</h3>
-					<div class="tsd-signature tsd-kind-icon">location<span class="tsd-signature-symbol">:</span> <a href="locationobject.html" class="tsd-signature-type">LocationObject</a></div>
+					<div class="tsd-signature tsd-kind-icon">location<span class="tsd-signature-symbol">:</span> <a href="location.html" class="tsd-signature-type">Location</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/types/track-package.dto.ts#L23">core/packages/types/track-package.dto.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/types/track/dto/result.ts#L13">core/packages/types/track/dto/result.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="signer" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> signer</h3>
-					<div class="tsd-signature tsd-kind-icon">signer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<div class="tsd-signature tsd-kind-icon">signer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/types/track-package.dto.ts#L24">core/packages/types/track-package.dto.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/types/track/dto/result.ts#L14">core/packages/types/track/dto/result.ts:14</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -157,7 +168,7 @@
 					<div class="tsd-signature tsd-kind-icon">status<span class="tsd-signature-symbol">:</span> <a href="../enums/status.html" class="tsd-signature-type">Status</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/types/track-package.dto.ts#L25">core/packages/types/track-package.dto.ts:25</a></li>
+							<li>Defined in <a href="https://github.com/ShipEngine/shipengine-js/blob/main/src/core/packages/types/track/dto/result.ts#L15">core/packages/types/track/dto/result.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -176,28 +187,31 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="eventelement.html" class="tsd-kind-icon">Event<wbr>Element</a>
+						<a href="event.html" class="tsd-kind-icon">Event</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="eventelement.html#carrierdetailcode" class="tsd-kind-icon">carrier<wbr>Detail<wbr>Code</a>
+								<a href="event.html#carrierdatetime" class="tsd-kind-icon">carrier<wbr>Date<wbr>Time</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="eventelement.html#carrierstatuscode" class="tsd-kind-icon">carrier<wbr>Status<wbr>Code</a>
+								<a href="event.html#carrierdetailcode" class="tsd-kind-icon">carrier<wbr>Detail<wbr>Code</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="eventelement.html#datetime" class="tsd-kind-icon">date<wbr>Time</a>
+								<a href="event.html#carrierstatuscode" class="tsd-kind-icon">carrier<wbr>Status<wbr>Code</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="eventelement.html#description" class="tsd-kind-icon">description</a>
+								<a href="event.html#datetime" class="tsd-kind-icon">date<wbr>Time</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="eventelement.html#location" class="tsd-kind-icon">location</a>
+								<a href="event.html#description" class="tsd-kind-icon">description</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="eventelement.html#signer" class="tsd-kind-icon">signer</a>
+								<a href="event.html#location" class="tsd-kind-icon">location</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="eventelement.html#status" class="tsd-kind-icon">status</a>
+								<a href="event.html#signer" class="tsd-kind-icon">signer</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="event.html#status" class="tsd-kind-icon">status</a>
 							</li>
 						</ul>
 					</li>
