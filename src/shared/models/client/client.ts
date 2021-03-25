@@ -43,7 +43,9 @@ type JsonRpcResponse<T> = JsonRpcResponseSuccess<T> | JsonRpcResponseError;
 /**
  * Validate the basic structure of the JSON:RPC reply
  */
-function assertJsonRpcReply<T>(v: unknown): asserts v is JsonRpcResponse<T> {
+function assertCorrectJsonRpcStructure<T>(
+  v: unknown
+): asserts v is JsonRpcResponse<T> {
   if (!isObject(v)) {
     throw new Error('Response is not object');
   }
@@ -92,16 +94,6 @@ export class InternalRpcClient {
     });
   }
 
-  private jsonRpcResponseToEither<T extends object>(
-    axiosData: JsonRpcResponse<T>
-  ): Either<JsonRpcError, T> {
-    if (isJsonRpcResponseError(axiosData)) {
-      return new ErrorResponse(camelize(axiosData.error));
-    } else {
-      return new SuccessResponse(camelize(axiosData.result) as T);
-    }
-  }
-
   /**s
    * auto snake cases params
    * auto camel cases result
@@ -117,9 +109,12 @@ export class InternalRpcClient {
         data,
       });
       const axiosData = axiosResponse.data;
-      assertJsonRpcReply<any>(axiosData);
 
-      const response = this.jsonRpcResponseToEither<Result>(axiosData);
+      assertCorrectJsonRpcStructure<Result>(axiosData);
+      const response = isJsonRpcResponseError(axiosData)
+        ? new ErrorResponse(camelize(axiosData.error))
+        : new SuccessResponse(camelize(axiosData.result) as Result);
+
       return response;
     } catch (err) {
       // this should never happen

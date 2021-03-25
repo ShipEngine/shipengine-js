@@ -1,6 +1,7 @@
 import { InternalRpcClient } from '../../shared/models/client/client';
-import type * as Dto from './types/track-package.dto';
+import type * as DtoResult from './types/track/dto/result';
+import type * as DtoParams from './types/track/dto/params';
 export class PackageApi extends InternalRpcClient {
-  trackPackage = async (params: Dto.TrackPackageParams) =>
-    this.exec<Dto.TrackPackageResult>('package/track', params);
+  trackPackage = async (params: DtoParams.TrackPackageParamsDto) =>
+    this.exec<DtoResult.TrackPackageResultDto>('package/track', params);
 }
