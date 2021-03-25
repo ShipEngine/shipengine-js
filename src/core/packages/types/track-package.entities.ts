@@ -25,11 +25,6 @@ export interface TrackPackageResult {
   information: TrackPackageInfo;
   messages: MessagesObject;
 }
-export class TrackPackageResult {
-  constructor(result: TrackPackageResult) {
-    Object.assign(this, result);
-  }
-}
 
 export type TrackPackageInfo = Overwrite<
   Information,

@@ -6,7 +6,7 @@ import { TrackPackageInfo } from '../../../src/core/packages/types/track-package
 let shipengine: ShipEngine;
 describe('tracking', () => {
   before(async () => {
-    shipengine = new ShipEngine('MY_API_KEY', `${constants.isomorphicBaseUri}`);
+    shipengine = new ShipEngine('MY_API_KEY', constants.isomorphicBaseUri);
   });
 
   const assertTracking = (information: TrackPackageInfo) => {

@@ -1,6 +1,5 @@
 import * as Entities from './types/track-package.entities';
 import { PackageApi } from './api';
-import { getResultOrThrow } from '../../shared/models/result';
 import {
   entityToTrackPackageParamsDto,
   dtoToTrackPackageResultsEntity,

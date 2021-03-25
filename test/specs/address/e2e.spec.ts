@@ -1,15 +1,15 @@
 import { ShipEngine } from '../../../src/shipengine';
 import { expect } from 'chai';
 import constants from '../../utils/constants';
+import { Messages } from '../../../src/shared/models/messsages';
 import {
   Address,
   ValidateAddressConvenienceResult,
-} from '../../../src/core/address/entities';
-import { Messages } from '../../../src/shared/models/messsages';
+} from '../../../src/core/address/types/validate-address.entities';
 
 let shipengine: ShipEngine;
 describe('address', () => {
-  before(async () => {
+  before(() => {
     shipengine = new ShipEngine('MY_API_KEY', `${constants.isomorphicBaseUri}`);
   });
 
