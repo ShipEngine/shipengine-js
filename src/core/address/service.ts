@@ -1,7 +1,6 @@
 import { JsonRpcError } from '../../shared/models/client/client';
 import { Either } from '../../utils/either';
 import { AddressApi } from './api';
-import { CountryCode } from './types/validate/dto/params';
 import {
   Address,
   ValidateAddressConvenienceResult,
@@ -58,7 +57,7 @@ export class AddressService {
     address: Address
   ): Promise<ValidateAddressConvenienceResult> => {
     const response = await this.address.validate({
-      countryCode: address.countryCode as CountryCode,
+      countryCode: address.countryCode,
       street: address.street,
       cityLocality: address.cityLocality,
       postalCode: address.postalCode,
