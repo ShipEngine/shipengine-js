@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import { camelize, hasProperties, isObject, snakeize } from '../../../utils';
+import { hasProperties, isObject } from '../../../utils';
 import { Either, ErrorResponse, SuccessResponse } from '../../../utils/either';
 
 type ErrorData =
@@ -43,7 +43,9 @@ type JsonRpcResponse<T> = JsonRpcResponseSuccess<T> | JsonRpcResponseError;
 /**
  * Validate the basic structure of the JSON:RPC reply
  */
-function assertJsonRpcReply<T>(v: unknown): asserts v is JsonRpcResponse<T> {
+function assertCorrectJsonRpcStructure<T>(
+  v: unknown
+): asserts v is JsonRpcResponse<T> {
   if (!isObject(v)) {
     throw new Error('Response is not object');
   }
@@ -92,16 +94,6 @@ export class InternalRpcClient {
     });
   }
 
-  private jsonRpcResponseToEither<T extends object>(
-    axiosData: JsonRpcResponse<T>
-  ): Either<JsonRpcError, T> {
-    if (isJsonRpcResponseError(axiosData)) {
-      return new ErrorResponse(camelize(axiosData.error));
-    } else {
-      return new SuccessResponse(camelize(axiosData.result) as T);
-    }
-  }
-
   /**s
    * auto snake cases params
    * auto camel cases result
@@ -111,15 +103,18 @@ export class InternalRpcClient {
     params: Parameters
   ): Promise<Either<JsonRpcError, Result>> => {
     try {
-      const data = new JsonRpcCall(method, snakeize(params));
+      const data = new JsonRpcCall(method, params);
       const axiosResponse: AxiosResponse<unknown> = await this.#client({
         method: 'post',
         data,
       });
       const axiosData = axiosResponse.data;
-      assertJsonRpcReply<any>(axiosData);
 
-      const response = this.jsonRpcResponseToEither<Result>(axiosData);
+      assertCorrectJsonRpcStructure<Result>(axiosData);
+      const response = isJsonRpcResponseError(axiosData)
+        ? new ErrorResponse(axiosData.error)
+        : new SuccessResponse(axiosData.result);
+
       return response;
     } catch (err) {
       // this should never happen

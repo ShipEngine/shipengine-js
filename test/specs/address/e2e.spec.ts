@@ -5,7 +5,7 @@ import { Messages } from '../../../src/shared/models/messsages';
 import {
   Address,
   ValidateAddressConvenienceResult,
-} from '../../../src/core/address/types/validate-address.entities';
+} from '../../../src/core/address/types/validate-address/entities';
 
 let shipengine: ShipEngine;
 describe('address', () => {
