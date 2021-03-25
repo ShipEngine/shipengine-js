@@ -1,6 +1,6 @@
+import { CountryCode } from '../../../../shared/models/country-code';
 import { Messages } from '../../../../shared/models/messsages';
 import { IResult } from '../../../../shared/models/result';
-import { CountryCode } from './dto/result';
 
 /**
  * this will never be constructed
@@ -15,7 +15,7 @@ export interface ValidateAddressParams {
 
 export interface Address {
   street: string[];
-  countryCode: string;
+  countryCode: CountryCode;
   cityLocality?: string;
   postalCode?: string;
   stateProvince?: string;
