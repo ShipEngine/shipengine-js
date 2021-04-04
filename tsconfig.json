@@ -1,40 +1,35 @@
 {
-  "ts-node": {
-    "compilerOptions": {
-      "module": "commonjs",
-      "strict": false
-    }
-  },
-  "extends": "@tsconfig/node12/tsconfig.json",
   "compilerOptions": {
-    "lib": [
-      "DOM"
-    ],
-    "outDir": "./cjs",
-    "sourceMap": true,
-    "declaration": true,
-    "rootDir": "./src",
-    "allowSyntheticDefaultImports": true,
+    "target": "esnext",
     "module": "commonjs",
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "removeComments": false,
-    "noFallthroughCasesInSwitch": true,
-    "skipLibCheck": true,
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+
+    "outDir": "cjs",
+    "sourceMap": true,
+    "declaration": true,
+
+    "newLine": "LF",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictBindCallApply": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "stripInternal": true,
+
     "typeRoots": [
       "node_modules/@types",
-      "./typings"
-    ],
+      "src/typings"
+    ]
   },
   "include": [
     "src/**/*.ts"
   ],
   "exclude": [
-    "node_modules",
-    "cjs/**",
-    "esm/**",
-    "esm.test/**",
-    "docs/api/**"
+    "node_modules"
   ]
 }
