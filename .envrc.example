@@ -1,8 +1,0 @@
-# If you use direnv and a version manager, you may wish to rename this to .envrc and uncomment one of the following.
-
-# notes:
-## asdf requires legacy_version_file = yes in an .asdfrc.
-## If you use the asdf direnv plugin, there is no need to for this file.
-
-# use nix
-# nvm use
