@@ -1,4 +1,4 @@
-import { CountryCode } from '../../../../../shared/models/country-code';
+import { CountryCode } from "../../../../../shared/models/country-code";
 
 // generated from https://app.quicktype.io/ -- do not edit by hand
 export interface AddressValidationParamsDto {

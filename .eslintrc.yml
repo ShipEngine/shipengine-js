@@ -9,11 +9,6 @@ parserOptions:
   ecmaVersion: 2020
   sourceType: module
 
-env:
-  node: true
-  mocha: true
-  browser: true
-
 plugins:
   - "@typescript-eslint"
   - prettier

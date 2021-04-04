@@ -1,4 +1,4 @@
-import { CountryCode } from '../../../../../shared/models/country-code';
+import { CountryCode } from "../../../../../shared/models/country-code";
 
 export interface AddressValidationResultDto {
   address?: Address;

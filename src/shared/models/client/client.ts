@@ -1,7 +1,7 @@
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { v4 as uuidv4 } from 'uuid';
-import { camelize, hasProperties, isObject, snakeize } from '../../../utils';
-import { Either, ErrorResponse, SuccessResponse } from '../../../utils/either';
+import axios, { AxiosInstance, AxiosResponse } from "axios";
+import { v4 as uuidv4 } from "uuid";
+import { camelize, hasProperties, isObject, snakeize } from "../../../utils";
+import { Either, ErrorResponse, SuccessResponse } from "../../../utils/either";
 
 type ErrorData =
   | {
@@ -16,11 +16,11 @@ export interface JsonRpcError {
 }
 
 export const isJsonRpcError = (v: object): v is JsonRpcError => {
-  return hasProperties(v, 'code', 'message');
+  return hasProperties(v, "code", "message");
 };
 
 interface BaseJsonRpcResponse {
-  jsonrpc: '2.0';
+  jsonrpc: "2.0";
   id: string;
 }
 
@@ -35,7 +35,7 @@ export interface JsonRpcResponseError extends BaseJsonRpcResponse {
 export const isJsonRpcResponseError = <T>(
   value: JsonRpcResponse<T>
 ): value is JsonRpcResponseError => {
-  return 'error' in value && value.error !== null;
+  return "error" in value && value.error !== null;
 };
 
 type JsonRpcResponse<T> = JsonRpcResponseSuccess<T> | JsonRpcResponseError;
@@ -47,23 +47,23 @@ function assertCorrectJsonRpcStructure<T>(
   v: unknown
 ): asserts v is JsonRpcResponse<T> {
   if (!isObject(v)) {
-    throw new Error('Response is not object');
+    throw new Error("Response is not object");
   }
-  if (!hasProperties(v, 'jsonrpc')) {
+  if (!hasProperties(v, "jsonrpc")) {
     throw new Error(`Invalid response ${JSON.stringify(v, undefined, 2)}`);
   }
-  if (hasProperties(v, 'result', 'error')) {
+  if (hasProperties(v, "result", "error")) {
     if (v.result && v.error) {
       throw new Error(
-        'Result and error member should not exist together (https://www.jsonrpc.org/specification#5)'
+        "Result and error member should not exist together (https://www.jsonrpc.org/specification#5)"
       );
     }
   }
-  if (hasProperties(v, 'error')) {
+  if (hasProperties(v, "error")) {
     if (!isObject(v.error)) {
-      throw new Error('Error not object');
+      throw new Error("Error not object");
     }
-    if (!hasProperties(v.error, 'code', 'message')) {
+    if (!hasProperties(v.error, "code", "message")) {
       throw new Error(
         `Invalid error shape: ${JSON.stringify(v.error, undefined, 2)}`
       );
@@ -74,7 +74,7 @@ function assertCorrectJsonRpcStructure<T>(
 type Parameters = Record<string, any>;
 
 export class JsonRpcCall<Params extends Parameters> {
-  public jsonrpc = '2.0';
+  public jsonrpc = "2.0";
   constructor(
     public method: string,
     public params: Params,
@@ -87,9 +87,9 @@ export class InternalRpcClient {
   constructor(apiKey: string, baseUrl = `https://simengine.herokuapp.com`) {
     this.#client = axios.create({
       baseURL: baseUrl,
-      url: '/',
+      url: "/",
       headers: {
-        'API-Key': apiKey,
+        "API-Key": apiKey,
       },
     });
   }
@@ -105,7 +105,7 @@ export class InternalRpcClient {
     try {
       const data = new JsonRpcCall(method, snakeize(params));
       const axiosResponse: AxiosResponse<unknown> = await this.#client({
-        method: 'post',
+        method: "post",
         data,
       });
       const axiosData = axiosResponse.data;
@@ -120,7 +120,7 @@ export class InternalRpcClient {
       // this should never happen
       return new ErrorResponse({
         code: err.code || 666,
-        message: err.message || 'some unhandled axios error happened.',
+        message: err.message || "some unhandled axios error happened.",
         ...(err.data ? { data: err.data } : {}),
       });
     }

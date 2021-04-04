@@ -1,9 +1,9 @@
-import { PackageApi } from './api';
-import { JsonRpcError } from '../../shared/models/client/client';
-import { Either } from '../../utils/either';
-import { ISOString } from '../../shared/models/date-time';
-import { CarrierCode } from './types/track/dto/params';
-import * as Entities from './types/track/entities';
+import { PackageApi } from "./api";
+import { JsonRpcError } from "../../shared/models/client/client";
+import { Either } from "../../utils/either";
+import { ISOString } from "../../shared/models/date-time";
+import { CarrierCode } from "./types/track/dto/params";
+import * as Entities from "./types/track/entities";
 
 export class PackageService {
   package: PackagesAdvanced;
@@ -30,9 +30,9 @@ export class PackagesAdvanced {
   ): Promise<Either<JsonRpcError, Entities.TrackPackageResult>> => {
     const data = await this.#api.trackPackage({
       carrierCode:
-        'packageId' in params ? undefined : (params.carrierCode as CarrierCode),
-      trackingNumber: 'packageId' in params ? undefined : params.trackingNumber,
-      packageid: 'packageId' in params ? params.packageId : undefined,
+        "packageId" in params ? undefined : (params.carrierCode as CarrierCode),
+      trackingNumber: "packageId" in params ? undefined : params.trackingNumber,
+      packageid: "packageId" in params ? params.packageId : undefined,
     });
     // map is only ran if response is successful
     return data.map((r) => {

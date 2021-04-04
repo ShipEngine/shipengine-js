@@ -1,4 +1,4 @@
-import { CountryCode } from '../../../../../shared/models/country-code';
+import { CountryCode } from "../../../../../shared/models/country-code";
 
 export interface TrackPackageResultDto {
   events: Event[];
@@ -31,12 +31,12 @@ export interface GeoCoordinates {
 }
 
 export enum Status {
-  Accepted = 'ACCEPTED',
-  AttemptedDelivery = 'ATTEMPTED DELIVERY',
-  Delivered = 'DELIVERED',
-  Exception = 'EXCEPTION',
-  InTransit = 'IN TRANSIT',
-  Unknown = 'UNKNOWN',
+  Accepted = "ACCEPTED",
+  AttemptedDelivery = "ATTEMPTED DELIVERY",
+  Delivered = "DELIVERED",
+  Exception = "EXCEPTION",
+  InTransit = "IN TRANSIT",
+  Unknown = "UNKNOWN",
 }
 
 export interface Package {
@@ -55,8 +55,8 @@ export interface Dimensions {
 }
 
 export enum DimensionsUnit {
-  Centimeter = 'CENTIMETER',
-  Inch = 'INCH',
+  Centimeter = "CENTIMETER",
+  Inch = "INCH",
 }
 
 export interface Weight {
@@ -65,10 +65,10 @@ export interface Weight {
 }
 
 export enum WeightUnit {
-  Gram = 'GRAM',
-  Kilogram = 'KILOGRAM',
-  Ounce = 'OUNCE',
-  Pound = 'POUND',
+  Gram = "GRAM",
+  Kilogram = "KILOGRAM",
+  Ounce = "OUNCE",
+  Pound = "POUND",
 }
 
 export interface Shipment {
@@ -79,33 +79,33 @@ export interface Shipment {
 }
 
 export enum CarrierCode {
-  AccessWorldwide = 'ACCESS WORLDWIDE',
-  AmazonBuyShipping = 'AMAZON BUY SHIPPING',
-  AmazonShippingUk = 'AMAZON SHIPPING UK',
-  Apc = 'APC',
-  Asendia = 'ASENDIA',
-  AustraliaPost = 'AUSTRALIA POST',
-  CanadaPost = 'CANADA POST',
-  DhlEcommerce = 'DHL ECOMMERCE',
-  DhlExpress = 'DHL EXPRESS',
-  DhlExpressAustralia = 'DHL EXPRESS AUSTRALIA',
-  DhlExpressCanada = 'DHL EXPRESS CANADA',
-  DhlExpressUk = 'DHL EXPRESS UK',
-  Dpd = 'DPD',
-  Endicia = 'ENDICIA',
-  Fedex = 'FEDEX',
-  FedexUk = 'FEDEX UK',
-  Firstmile = 'FIRSTMILE',
-  Globegistics = 'GLOBEGISTICS',
-  Imex = 'IMEX',
-  Newgistics = 'NEWGISTICS',
-  OnTrac = 'ON TRAC',
-  PurolatorCanada = 'PUROLATOR CANADA',
-  RoyalMail = 'ROYAL MAIL',
-  RrDonnelley = 'RR DONNELLEY',
-  Seko = 'SEKO',
-  Sendle = 'SENDLE',
-  Stamps = 'STAMPS.COM',
-  UPS = 'UPS',
-  Usps = 'USPS',
+  AccessWorldwide = "ACCESS WORLDWIDE",
+  AmazonBuyShipping = "AMAZON BUY SHIPPING",
+  AmazonShippingUk = "AMAZON SHIPPING UK",
+  Apc = "APC",
+  Asendia = "ASENDIA",
+  AustraliaPost = "AUSTRALIA POST",
+  CanadaPost = "CANADA POST",
+  DhlEcommerce = "DHL ECOMMERCE",
+  DhlExpress = "DHL EXPRESS",
+  DhlExpressAustralia = "DHL EXPRESS AUSTRALIA",
+  DhlExpressCanada = "DHL EXPRESS CANADA",
+  DhlExpressUk = "DHL EXPRESS UK",
+  Dpd = "DPD",
+  Endicia = "ENDICIA",
+  Fedex = "FEDEX",
+  FedexUk = "FEDEX UK",
+  Firstmile = "FIRSTMILE",
+  Globegistics = "GLOBEGISTICS",
+  Imex = "IMEX",
+  Newgistics = "NEWGISTICS",
+  OnTrac = "ON TRAC",
+  PurolatorCanada = "PUROLATOR CANADA",
+  RoyalMail = "ROYAL MAIL",
+  RrDonnelley = "RR DONNELLEY",
+  Seko = "SEKO",
+  Sendle = "SENDLE",
+  Stamps = "STAMPS.COM",
+  UPS = "UPS",
+  Usps = "USPS",
 }

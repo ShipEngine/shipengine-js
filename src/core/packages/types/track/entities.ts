@@ -1,6 +1,6 @@
-import { ISOString } from '../../../../shared/models/date-time';
-import { Overwrite } from '../../../../utils/ts';
-import type * as DtoResult from './dto/result';
+import { ISOString } from "../../../../shared/models/date-time";
+import { Overwrite } from "../../../../utils/ts";
+import type * as DtoResult from "./dto/result";
 
 type PackageId = string;
 

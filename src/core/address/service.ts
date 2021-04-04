@@ -1,12 +1,12 @@
-import { JsonRpcError } from '../../shared/models/client/client';
-import { Either } from '../../utils/either';
-import { AddressApi } from './api';
+import { JsonRpcError } from "../../shared/models/client/client";
+import { Either } from "../../utils/either";
+import { AddressApi } from "./api";
 import {
   Address,
   ValidateAddressConvenienceResult,
   ValidateAddressParams,
   ValidateAddressResult,
-} from './types/validate/entities';
+} from "./types/validate/entities";
 
 export class AddressAdvanced {
   #api: AddressApi;
