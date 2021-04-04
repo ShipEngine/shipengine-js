@@ -1,0 +1,29 @@
+# ESLint config
+# http://eslint.org/docs/user-guide/configuring
+
+root: true
+
+parser: "@typescript-eslint/parser"
+parserOptions:
+  project: ./tsconfig.json
+  ecmaVersion: 2020
+  sourceType: module
+
+env:
+  node: true
+  mocha: true
+  browser: true
+
+plugins:
+  - "@typescript-eslint"
+  - prettier
+
+extends:
+  - eslint:recommended
+  - plugin:@typescript-eslint/recommended
+  - plugin:prettier/recommended
+
+ignorePatterns:
+  - esm
+  - cjs
+  - node_modules

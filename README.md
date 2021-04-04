@@ -65,6 +65,10 @@ To build the project locally on your computer:
 `npm run build`<br><br>
 Or you can use `npm run watch` to automatically re-build whenever source files change.
 
-4. __Run the tests__<br>
+4. __Lint the code__<br>
+`npm run lint`<br><br>
+Or you can use `npm run lint:fix` to automatically fix most linting errors.
+
+5. __Run the tests__<br>
 `npm test`<br><br>
 This runs tests in both Node.js and web browsers. Use `npm run test:node` to only run Node.js tests, or `npm run test:browser` to only run browser tests.
