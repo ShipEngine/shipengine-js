@@ -1,8 +1,7 @@
 /* eslint-env browser */
 
-/**
- * Returns the URL of the current web page
- */
-export function getLocation(): string {
-  return window.location.href;
-}
+// In web browsers we use the native Fetch API
+export const fetch = window.fetch;
+
+// In web browsers we use the native AbortController API
+export const AbortController = window.AbortController;
