@@ -1,4 +1,4 @@
-import { Country } from "../types/country";
+import { Country } from "../enums";
 import { NormalizedAddress } from "./normalized-address";
 
 /**

@@ -1,14 +1,13 @@
 import { NormalizedConfig } from "../config";
+import { Country, ErrorCode, ErrorType } from "../enums";
+import { InvalidFieldValueError, ShipEngineError } from "../errors";
 import {
-  ErrorCode,
-  ErrorType,
-  InvalidFieldValueError,
-  ShipEngineError,
-} from "../errors";
-import { Country, isCountry } from "../types/country";
+  AddressValidateParams,
+  AddressValidateResult,
+  callJsonRpcMethod,
+} from "../json-rpc";
 import * as assert from "../utils/assert";
-import { sendRequest } from "../utils/json-rpc";
-import { JsonRpcParams, JsonRpcResult } from "./dto";
+import { isCountry } from "../utils/type-guards";
 import { NormalizedAddress } from "./normalized-address";
 import { Address, AddressValidationResult } from "./public-types";
 
@@ -26,7 +25,7 @@ export async function validateAddress(
     ? address.street
     : [address.street];
 
-  const params: JsonRpcParams = {
+  const params: AddressValidateParams = {
     address: {
       name: address.name,
       company_name: address.company,
@@ -40,7 +39,7 @@ export async function validateAddress(
     },
   };
 
-  const result: JsonRpcResult = await sendRequest(
+  const result: AddressValidateResult = await callJsonRpcMethod(
     "address/validate",
     params,
     config

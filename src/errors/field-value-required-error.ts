@@ -1,4 +1,4 @@
-import { ErrorCode, ErrorSource, ErrorType } from "./enums";
+import { ErrorCode, ErrorSource, ErrorType } from "../enums";
 import { ShipEngineError } from "./shipengine-error";
 
 /**

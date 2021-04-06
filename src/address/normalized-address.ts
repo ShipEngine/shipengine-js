@@ -1,5 +1,5 @@
-import { Country } from "../types/country";
-import { JsonRpcResultAddress } from "./dto";
+import { Country } from "../enums";
+import { NormalizedAddressDTO } from "../json-rpc";
 
 /**
  * A normalized address that is returned by ShipEngine API.
@@ -59,7 +59,7 @@ export class NormalizedAddress {
    */
   public isResidential?: boolean;
 
-  public constructor(address: JsonRpcResultAddress) {
+  public constructor(address: NormalizedAddressDTO) {
     this.street = address.street;
     this.name = address.name || "";
     this.company = address.company_name || "";

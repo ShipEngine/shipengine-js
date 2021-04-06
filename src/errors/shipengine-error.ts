@@ -1,4 +1,4 @@
-import { ErrorCode, ErrorSource, ErrorType } from "./enums";
+import { ErrorCode, ErrorSource, ErrorType } from "../enums";
 
 /**
  * An error thrown by the ShipEngine SDK.
@@ -38,9 +38,25 @@ export class ShipEngineError extends Error {
   public readonly code: ErrorCode;
 
   /**
+   * Some errors include a URL that you can visit to learn more about the error,
+   * find out how to resolve it, or get support.
+   */
+  public readonly url?: URL;
+
+  /**
    * Instantiates a client-side error.
    */
   public constructor(type: ErrorType, code: ErrorCode, message: string);
+
+  /**
+   * Instantiates a client-side error with a URL.
+   */
+  public constructor(
+    type: ErrorType,
+    code: ErrorCode,
+    message: string,
+    url: string
+  );
 
   /**
    * Instantiates a server-side error.
@@ -50,15 +66,18 @@ export class ShipEngineError extends Error {
     source: ErrorSource,
     type: ErrorType,
     code: ErrorCode,
-    message: string
+    message: string,
+    url?: string
   );
 
   public constructor(
     ...args:
       | [ErrorType, ErrorCode, string]
+      | [ErrorType, ErrorCode, string, string]
       | [string | undefined, ErrorSource, ErrorType, ErrorCode, string]
+      | [string | undefined, ErrorSource, ErrorType, ErrorCode, string, string]
   ) {
-    let requestID, source, type, code, message;
+    let requestID, source, type, code, message, url;
 
     // Determine which overload was called
     if (args.length >= 5) {
@@ -67,11 +86,13 @@ export class ShipEngineError extends Error {
       type = args[2] as ErrorType;
       code = args[3] as ErrorCode;
       message = args[4] as string;
+      url = args[5] as string;
     } else {
       source = ErrorSource.ShipEngine;
       type = args[0] as ErrorType;
       code = args[1] as ErrorCode;
       message = args[2] as string;
+      url = args[3] as string;
     }
 
     super(message);
@@ -80,6 +101,7 @@ export class ShipEngineError extends Error {
     this.type = type;
     this.code = code;
     this.requestID = requestID;
+    this.url = url ? new URL(url) : undefined;
   }
 
   /**

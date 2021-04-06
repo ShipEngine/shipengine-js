@@ -1,9 +1,9 @@
-import { Country } from "../types/country";
+import { Country } from "../enums";
 
 /**
  * The params that are passed to the ShipEngine address validation API.
  */
-export interface JsonRpcParams {
+export interface AddressValidateParams {
   address: {
     name?: string;
     company_name?: string;
@@ -20,9 +20,9 @@ export interface JsonRpcParams {
 /**
  * The result that comes back from the ShipEngine address validation API.
  */
-export interface JsonRpcResult {
+export interface AddressValidateResult {
   valid: boolean;
-  address?: JsonRpcResultAddress;
+  address?: NormalizedAddressDTO;
   messages: {
     info: string[];
     warnings: string[];
@@ -33,7 +33,7 @@ export interface JsonRpcResult {
 /**
  * The normalized address that is returned from the ShipEngine address validation API.
  */
-export interface JsonRpcResultAddress {
+export interface NormalizedAddressDTO {
   name?: string;
   company_name?: string;
   phone?: string;

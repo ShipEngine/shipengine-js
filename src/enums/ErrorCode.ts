@@ -1,82 +1,4 @@
 /**
- * Indicates where an error originated from. This lets you know whether you should
- * contact ShipEngine for support or if you should contact the carrier or
- * marketplace instead.
- *
- * @see https://www.shipengine.com/docs/errors/codes/#error-source
- */
-export enum ErrorSource {
-  /**
-   * The error is from ShipEngine. If you have any questions or require support,
-   * please contact us
-   */
-  ShipEngine = "shipengine",
-
-  /**
-   * The error came from a shipping carrier (such as UPS, FedEx, DHL, etc).
-   * ShipEngine support may be able to help clarify the error for you, but if
-   * the problem is with your carrier account, then you will need to contact
-   * them directly.
-   */
-  Carrier = "carrier",
-
-  /**
-   * The error came from an order source (such as Shopify, Ebay, WalMart, etc).
-   * ShipEngine support may be able to help clarify the error for you, but if
-   * the problem is with your seller account, then you will need to contact
-   * them directly.
-   */
-  OrderSource = "order_source",
-}
-
-/**
- * Indicates the type of an error. Think of this as a broad category rather
- * than a specific error.
- *
- * @see https://www.shipengine.com/docs/errors/codes/#error-type
- */
-export enum ErrorType {
-  /**
-   * There is a problem with your account. This may be your ShipEngine account
-   * or a third-party account. See the the error source to determine which
-   * account needs your attention.
-   */
-  AccountStatus = "account_status",
-
-  /**
-   * A security error will occur if your API key is invalid or expired, or if
-   * you attempt to perform an operation that is not permitted for your account.
-   */
-  Security = "security",
-
-  /**
-   * Something is wrong with the input provided, such as missing a required field,
-   * or an illegal value or combinatio of values. This error type always means
-   * that some change needs to be made to the input before retrying.
-   */
-  Validation = "validation",
-
-  /**
-   * There was a business rule violation. Business rules are requirements or
-   * limitations of a system. If the error source is ShipEngine, then please
-   * read the relevant documentation to find out what limitations or requirements
-   * apply. Or contact our support for help. If the error source is the carrier
-   * or order source, then ShipEngine support may still be able to help clarify
-   * the problem or propose a solution, or you may need to contact the third-party
-   * for assistance.
-   */
-  BusinessRules = "business_rules",
-
-  /**
-   * An unknown or unexpected error occurred in our system. Or an error occurred
-   * that has not yet been assigned a specific error_type. If you receive
-   * persistent system errors, then please contact our support or check our API
-   * status page to see if there's a known issue.
-   */
-  System = "system",
-}
-
-/**
  * A code that indicates a specific error.
  *
  * @see https://www.shipengine.com/docs/errors/codes/#error-code
@@ -218,6 +140,11 @@ export enum ErrorCode {
   MeterFailure = "meter_failure",
 
   /**
+   * The ShipEngine API endpoint that was requested does not exist.
+   */
+  NotFound = "not_found",
+
+  /**
    * You have exceeded a rate limit. Check the the error_source field to determine
    * whether the rate limit was imposed by ShipEngine or by a third-party, such
    * as a carrier. If the rate limit is from ShipEngine, then consider using bulk
@@ -251,6 +178,12 @@ export enum ErrorCode {
    * the ShipEngine dashboard to read and accept the carrier's terms.
    */
   TermsNotAccepted = "terms_not_accepted",
+
+  /**
+   * An API call timed out because ShipEngine did not respond within the allowed
+   * timeframe.
+   */
+  Timeout = "timeout",
 
   /**
    * This error will occur if you attempt to track a package for a carrier that

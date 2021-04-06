@@ -1,25 +1,13 @@
 import { NormalizedConfig } from "../config";
-import { ErrorCode, ErrorSource, ErrorType, ShipEngineError } from "../errors";
+import { ErrorCode, ErrorSource, ErrorType } from "../enums";
+import { ShipEngineError } from "../errors";
 import { AbortController, fetch } from "../isomorphic.node";
-
-/**
- * Sends a JSON RPC 2.0 request to ShipEngine API. If the response is successful,
- * the result is returned. Otherwise, an error is thrown.
- */
-export async function callJsonRpcMethod<TParams, TResult>(
-  method: string,
-  params: TParams,
-  config: NormalizedConfig
-): Promise<TResult> {
-  let response = await sendRequest(method, params, config);
-  return processResponse(response, method, params, config);
-}
 
 /**
  * Sends a JSON RPC 2.0 request to ShipEngine API. The request is automatically
  * canceled if it exceeds the configured timeout.
  */
-async function sendRequest<TParams, TResult>(
+export async function sendRequest<TParams>(
   method: string,
   params: TParams,
   config: NormalizedConfig
@@ -62,20 +50,4 @@ async function sendRequest<TParams, TResult>(
         (error as Error).message
     );
   }
-}
-
-/**
- * Sends a JSON RPC 2.0 request to ShipEngine API. The request is automatically
- * canceled if it exceeds the configured timeout.
- */
-async function process<TParams, TResult>(
-  method: string,
-  params: TParams,
-  config: NormalizedConfig
-): Promise<TResult> {
-  // Parse the response body
-  const responseBody = await response.json();
-
-  // TODO: Inspect the response for success/error
-  return responseBody as TResult;
 }

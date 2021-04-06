@@ -1,10 +1,10 @@
 import { ShipEngine } from "./shipengine";
 
+export { NormalizedAddress } from "./address/normalized-address";
 export * from "./address/public-types";
 export { ShipEngineConfig } from "./config";
+export * from "./enums";
 export { ShipEngineError } from "./errors";
-export * from "./errors/enums";
-export { Country } from "./types/country";
 export { ShipEngine };
 
 // Export `myLibrary` as the default export

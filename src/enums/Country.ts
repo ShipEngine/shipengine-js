@@ -1,11 +1,4 @@
 /**
- * Determines whether the given value is a valid ShipEngine country code.
- */
-export function isCountry(country: unknown): country is Country {
-  return Object.values(Country).includes(country as Country);
-}
-
-/**
  * The countries that ShipEngine supports shipping to.
  * These are ISO 3166 country codes.
  *
