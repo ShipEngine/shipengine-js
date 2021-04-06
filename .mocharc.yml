@@ -8,7 +8,7 @@ timeout: 10000
 spec:
   # Test fixtures
   # Test specs
-  - test/specs/**/*.spec.ts
+  - test/specs/**/*.spec.js
 
 recursive: true
 require:
