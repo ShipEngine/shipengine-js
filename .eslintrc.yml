@@ -33,6 +33,8 @@ overrides:
     env:
       mocha: true
       commonjs: true
+      browser: true
+      node: true
 
     parserOptions:
       ecmaVersion: 2020
