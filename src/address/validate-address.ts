@@ -8,7 +8,7 @@ import {
 } from "../json-rpc";
 import * as assert from "../utils/assert";
 import { isCountry } from "../utils/type-guards";
-import { NormalizedAddress } from "./normalized-address";
+import { normalizeAddress } from "./normalized-address";
 import { Address, AddressValidationResult } from "./public-types";
 
 /**
@@ -47,7 +47,7 @@ export async function validateAddress(
 
   return {
     isValid: result.valid,
-    normalizedAddress: result.address && new NormalizedAddress(result.address),
+    normalizedAddress: result.address && normalizeAddress(result.address),
     info: result.messages.info,
     warnings: result.messages.warnings,
     errors: result.messages.errors,
