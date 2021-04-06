@@ -9,5 +9,5 @@ import nodeFetch from "node-fetch";
 export const fetch = (nodeFetch as unknown) as typeof window["fetch"];
 
 // Node.js does not natively support the AbortController API yet,
-// so use the abort-coontroller library instead.
+// so use the abort-controller library instead.
 export { AbortController };

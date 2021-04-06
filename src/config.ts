@@ -70,22 +70,36 @@ export class NormalizedConfig {
     // Base URL
     if (config.baseURL instanceof URL) {
       this.baseURL = config.baseURL;
-    } else {
+    } else if (config.baseURL) {
       assert.isNonWhitespaceString("Base URL", config.baseURL);
       this.baseURL = new URL(config.baseURL);
+    } else {
+      this.baseURL = new URL("https://api.shipengine.com");
     }
 
     // Page Size
-    assert.isPositiveInteger("Page Size", config.pageSize);
-    this.pageSize = config.pageSize;
+    if (config.pageSize === undefined) {
+      this.pageSize = 50;
+    } else {
+      assert.isPositiveInteger("Page Size", config.pageSize);
+      this.pageSize = config.pageSize;
+    }
 
     // Retries
-    assert.isPositiveInteger("Retries", config.retries);
-    this.retries = config.retries;
+    if (config.retries === undefined) {
+      this.retries = 1;
+    } else {
+      assert.isNonNegativeInteger("Retries", config.retries);
+      this.retries = config.retries;
+    }
 
     // Timeout
-    assert.isPositiveInteger("Timeout", config.timeout);
-    this.timeout = config.timeout;
+    if (config.timeout === undefined) {
+      this.timeout = 5000;
+    } else {
+      assert.isPositiveInteger("Timeout", config.timeout);
+      this.timeout = config.timeout;
+    }
   }
 
   /**

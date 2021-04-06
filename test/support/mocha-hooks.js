@@ -4,7 +4,7 @@ exports.mochaHooks = {
    * Perform one-time setup before any tests are run.
    */
   beforeAll() {
-    console.log('Running mocha hooks...');
+    console.log("Running mocha hooks...");
     // TODO: Add any logic needed to initialize the test environment
   },
 

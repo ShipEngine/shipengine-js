@@ -20,7 +20,7 @@ export class ShipEngine {
    * Your ShipEngine API key. This can be a production or sandbox key
    * (sandbox keys start with "TEST_")
    */
-  public constructor(config: string);
+  public constructor(apiKey: string);
 
   /**
    * Instantiates the ShipEngine API client.
