@@ -2,7 +2,7 @@ import { NormalizedConfig } from "../config";
 import {
   AddressValidateParams,
   AddressValidateResult,
-  callJsonRpcMethod
+  callJsonRpcMethod,
 } from "../json-rpc";
 import { formatAddress } from "./format-address";
 import { Address, AddressValidationResult } from "./public-types";
@@ -62,7 +62,7 @@ function createAddressValidationResult(
       stateProvince: result.address.state_province,
       postalCode: result.address.postal_code,
       country: result.address.country_code,
-      isResidential: result.address.residential || undefined,
+      isResidential: result.address.residential ?? undefined,
       toString: formatAddress,
     },
     info: result.messages.info,

@@ -3,7 +3,7 @@ import { RateLimitExceededError, ShipEngineError } from "../errors";
 import {
   JsonRpcErrorResponse,
   JsonRpcResponse,
-  RateLimitExceededErrorData
+  RateLimitExceededErrorData,
 } from "./types";
 
 /**
