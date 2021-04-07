@@ -3,7 +3,7 @@ import { ShipEngine } from "./shipengine";
 export * from "./address/public-types";
 export { ShipEngineConfig } from "./config";
 export * from "./enums";
-export { ShipEngineError } from "./errors";
+export * from "./errors";
 export { ShipEngine };
 
 // Export `myLibrary` as the default export
