@@ -3,7 +3,7 @@ import { RateLimitExceededError, ShipEngineError } from "../errors";
 import {
   JsonRpcErrorResponse,
   JsonRpcResponse,
-  RateLimitExceededErrorData,
+  RateLimitExceededErrorData
 } from "./types";
 
 /**
@@ -22,7 +22,7 @@ export async function processResponse<TResult>(
     throw error;
   }
 
-  // I
+  // A successful response was returned
   return responseBody.result;
 }
 

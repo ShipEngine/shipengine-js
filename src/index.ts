@@ -1,6 +1,5 @@
 import { ShipEngine } from "./shipengine";
 
-export { NormalizedAddress } from "./address/normalized-address";
 export * from "./address/public-types";
 export { ShipEngineConfig } from "./config";
 export * from "./enums";
