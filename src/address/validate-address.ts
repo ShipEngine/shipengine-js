@@ -2,7 +2,7 @@ import { NormalizedConfig } from "../config";
 import {
   AddressValidateParams,
   AddressValidateResult,
-  callJsonRpcMethod
+  callJsonRpcMethod,
 } from "../json-rpc";
 import { formatAddress } from "./format-address";
 import { Address, AddressValidationResult } from "./public-types";
