@@ -2,16 +2,13 @@
 # https://mochajs.org/#configuring-mocha-nodejs
 # https://github.com/mochajs/mocha/blob/master/example/config/.mocharc.yml
 
-app: shipengine
-watch-files: ["src/**/*", "test/**/*"]
-timeout: 10000
+watch-files:
+  - "src/**/*"
+  - "test/**/*"
+
 spec:
-  # Test fixtures
-  # Test specs
   - test/specs/**/*.spec.js
 
+bail: true
 recursive: true
-require:
-  - ts-node/register
-  - source-map-support/register
-  - test/support/mocha-hooks
+require: source-map-support/register
