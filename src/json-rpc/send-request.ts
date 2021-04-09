@@ -22,25 +22,30 @@ export async function sendRequest<TParams>(
 
   try {
     // Send the JSON RPC 2.0 request
-    const response = await fetch(config.baseURL.href, {
+    const options = {
       method: "POST",
-      mode: "cors",
+      // mode: "cors",
       signal: controller.signal,
       headers: {
         "Content-Type": "application/json",
         "API-Key": config.apiKey,
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36",
       },
       body: JSON.stringify({
         jsonrpc: "2.0",
+        method: "address/validate",
         id: requestID,
         params,
       }),
-    });
+    };
+    const response = await fetch(config.baseURL.href, options);
 
     return response;
   } catch (error: unknown) {
     // Something unexpected happened, like a network error.
     // No response was received from the server
+    console.log("STOP");
     throw new ShipEngineError(
       requestID,
       ErrorSource.ShipEngine,
