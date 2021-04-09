@@ -22,6 +22,7 @@ export async function callJsonRpcMethod<TParams, TResult>(
     try {
       const response = await sendRequest(method, params, config);
       result = await processResponse(response);
+      break;
     } catch (error: unknown) {
       if (
         attemptNumber < maxAttempts &&
