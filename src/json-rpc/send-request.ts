@@ -3,6 +3,8 @@ import { ErrorCode, ErrorSource, ErrorType } from "../enums";
 import { ShipEngineError } from "../errors";
 import { AbortController, fetch } from "../isomorphic.node";
 
+const userAgent = getUserAgentString();
+
 /**
  * Sends a JSON RPC 2.0 request to ShipEngine API. The request is automatically
  * canceled if it exceeds the configured timeout.
@@ -29,8 +31,7 @@ export async function sendRequest<TParams>(
       headers: {
         "Content-Type": "application/json",
         "API-Key": config.apiKey,
-        "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36",
+        "User-Agent": userAgent,
       },
       body: JSON.stringify({
         jsonrpc: "2.0",
