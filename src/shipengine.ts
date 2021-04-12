@@ -1,3 +1,4 @@
+import { EventEmitter } from "./isomorphic.node";
 import { Address, AddressValidationResult } from "./address/public-types";
 import { validateAddress } from "./address/validate-address";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
@@ -5,7 +6,7 @@ import { NormalizedConfig, ShipEngineConfig } from "./config";
 /**
  * Exposes the functionality of the ShipEngine API.
  */
-export class ShipEngine {
+export class ShipEngine extends EventEmitter {
   /**
    * Global configuration for the ShipEngine API client, such as timeouts,
    * retries, page size, etc. This configuration applies to all method calls,
@@ -30,6 +31,7 @@ export class ShipEngine {
   public constructor(config: ShipEngineConfig);
 
   public constructor(config: string | ShipEngineConfig) {
+    super();
     this.config = new NormalizedConfig(config);
   }
 
@@ -47,6 +49,6 @@ export class ShipEngine {
     config?: ShipEngineConfig
   ): Promise<AddressValidationResult> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
-    return validateAddress(address, mergedConfig);
+    return validateAddress(address, mergedConfig, this);
   }
 }

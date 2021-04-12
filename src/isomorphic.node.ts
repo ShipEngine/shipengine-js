@@ -1,6 +1,7 @@
 /* eslint-env node */
 
 import AbortController from "abort-controller";
+import { EventEmitter } from "events";
 import nodeFetch from "node-fetch";
 import * as os from "os";
 
@@ -17,6 +18,9 @@ export const fetch = (nodeFetch as unknown) as typeof window["fetch"];
 // Node.js does not natively support the AbortController API yet,
 // so use the abort-controller library instead.
 export { AbortController };
+
+// In Node.js we use the native EventEmitter class
+export { EventEmitter };
 
 /**
  * Returns the User-Agent string for the Node.js SDK

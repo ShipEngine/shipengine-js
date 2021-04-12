@@ -1,3 +1,4 @@
+import { EventEmitter } from "../isomorphic.node";
 import { NormalizedConfig } from "../config";
 import {
   AddressValidateParams,
@@ -13,7 +14,8 @@ import { validateInputAddress } from "./validate-input-address";
  */
 export async function validateAddress(
   address: Address,
-  config: NormalizedConfig
+  config: NormalizedConfig,
+  events: EventEmitter
 ): Promise<AddressValidationResult> {
   validateInputAddress(address);
 
@@ -39,7 +41,8 @@ export async function validateAddress(
   const result: AddressValidateResult = await callJsonRpcMethod(
     "address/validate",
     params,
-    config
+    config,
+    events
   );
 
   return createAddressValidationResult(result);

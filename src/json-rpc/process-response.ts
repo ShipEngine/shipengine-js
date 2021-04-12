@@ -1,5 +1,8 @@
+import { NormalizedConfig } from "../config";
 import { ErrorCode, ErrorSource } from "../enums";
 import { RateLimitExceededError, ShipEngineError } from "../errors";
+import { Event, RequestSentEvent, ResponseReceivedEvent } from "../events";
+import { EventEmitter } from "../isomorphic.node";
 import {
   JsonRpcErrorResponse,
   JsonRpcResponse,
@@ -11,19 +14,44 @@ import {
  * the result is returned. Otherwise, an error is thrown.
  */
 export async function processResponse<TResult>(
-  response: Response
+  method: string,
+  request: RequestSentEvent,
+  response: Response,
+  config: NormalizedConfig,
+  events: EventEmitter
 ): Promise<TResult> {
-  // Parse the response body
-  const responseBody: JsonRpcResponse<TResult> = await response.json();
+  // Read the response headers
+  const headers: Record<string, string> = {};
+  response.headers.forEach((value, name) => {
+    headers[name] = value;
+  });
+
+  // Read the response body
+  const body: JsonRpcResponse<TResult> = await response.json();
+
+  // Emit the ResponseReceived event
+  const event: ResponseReceivedEvent = {
+    timestamp: new Date(),
+    type: Event.ResponseReceived,
+    message: `Received an HTTP ${response.status} response from the ShipEngine ${method} API`,
+    requestID: request.requestID,
+    url: config.baseURL,
+    statusCode: response.status,
+    headers,
+    body,
+    retry: request.retry,
+    elapsed: Date.now() - request.timestamp.getTime(),
+  };
+  events.emit(Event.ResponseReceived, event);
 
   // If it's an error response, then throw a ShipEngineError
-  if ("error" in responseBody) {
-    const error = createError(responseBody);
+  if ("error" in body) {
+    const error = createError(body);
     throw error;
   }
 
   // A successful response was returned
-  return responseBody.result;
+  return body.result;
 }
 
 /**

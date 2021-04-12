@@ -1,6 +1,6 @@
+import { EventEmitter } from "../isomorphic.node";
 import { NormalizedConfig } from "../config";
 import { RateLimitExceededError } from "../errors";
-import { processResponse } from "./process-response";
 import { sendRequest } from "./send-request";
 
 /**
@@ -10,39 +10,28 @@ import { sendRequest } from "./send-request";
 export async function callJsonRpcMethod<TParams, TResult>(
   method: string,
   params: TParams,
-  config: NormalizedConfig
+  config: NormalizedConfig,
+  events: EventEmitter
+  // @ts-expect-error TypeScript is confused by the return in the for loop
 ): Promise<TResult> {
-  let result: TResult;
-
-  // Determine how many attempts to make
-  let attemptNumber = 1;
-  const maxAttempts = 1 + config.retries;
-
-  while (attemptNumber <= maxAttempts) {
+  // Retry up to N times
+  for (let retry = 0; retry <= config.retries; retry++) {
     try {
-      const response = await sendRequest(method, params, config);
-      result = await processResponse(response);
-      break;
+      return await sendRequest(method, params, retry, config, events);
     } catch (error: unknown) {
       if (
-        attemptNumber < maxAttempts &&
+        retry < config.retries &&
         error instanceof RateLimitExceededError &&
         error.retryAfter < config.timeout
       ) {
         // The request was blocked due to exceeding the rate limit.
         // So wait the specified amount of time and then retry.
         await wait(error.retryAfter);
-        attemptNumber++;
       } else {
         throw error;
       }
     }
   }
-
-  // NOTE: The non-null assertion is required because TypeScript can't tell
-  // that result will always have a value at this point
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  return result!;
 }
 
 /**
