@@ -5,7 +5,7 @@ import { Country } from "../enums";
  */
 export interface Address {
   /**
-   * The street address. If the street addresss is multiple lines, then pass an
+   * The street address. If the street address is multiple lines, then pass an
    * array of lines (up to 3).
    */
   street: string | string[];

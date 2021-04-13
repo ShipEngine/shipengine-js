@@ -1,5 +1,6 @@
 const { ShipEngine } = require("../../");
 const { expect } = require("chai");
+const { assertString, assertNoErrors } = require("../utils/assertions");
 // const constants = require("../../utils/constants");
 // const { Messages } = require("../../../src/shared/models/messsages");
 
@@ -9,38 +10,35 @@ let response;
 describe("validateAddress()", () => {
   const address = {
     country: "US",
-    street: "10702 Seven Oaks Cove",
-    cityLocality: "Austin",
-    postalCode: "TX",
+    street: ["4 Jersey St", "Suite 200", "validate-residential-address"],
+    cityLocality: "Boston",
+    stateProvince: "MA",
+    postalCode: "02215",
   };
 
-  const assertResponseAddress = (normalizedAddress) => {
+  const assertNormalizedAddressFormat = (normalizedAddress) => {
     expect(normalizedAddress).to.be.an("object");
-    expect(normalizedAddress.cityLocality).to.be.a("string");
-    expect(normalizedAddress.postalCode).to.be.a("string");
-    expect(normalizedAddress.street).to.be.an("array");
-    expect(normalizedAddress.isResidential).to.be.a("boolean");
-    // expect(normalizedAddress.isResidential).to.be.true;
+    assertString(normalizedAddress.country);
+    assertString(normalizedAddress.cityLocality);
+    assertString(normalizedAddress.stateProvince);
+    assertString(normalizedAddress.postalCode);
   };
 
-  // TODO: Implement. Need to change my address to use the one in the mock
-  // server to get this pass and flesh out the other assertions.
   const assertNormalizedAddressMatchesOriginal = (normalizedAddress) => {
-    expect(normalizedAddress.country).to.be(address.country);
-    expect(normalizedAddress.cityLocality).to.be(address.cityLocality);
-    expect(normalizedAddress.postalCode).to.be.a("string");
-    expect(normalizedAddress.street).to.be.an("array");
-  };
-
-  const assertNoErrors = (response) => {
-    assertEmptyArray(response.info);
-    assertEmptyArray(response.warnings);
-    assertEmptyArray(response.errors);
-  };
-
-  const assertEmptyArray = (value) => {
-    expect(value).to.be.an("array");
-    expect(value.length).to.equal(0);
+    expect(normalizedAddress.country).to.equal(
+      normalizedAddress.country.toUpperCase()
+    );
+    expect(normalizedAddress.street[0]).to.equal(
+      normalizedAddress.street[0].toUpperCase()
+    );
+    expect(normalizedAddress.cityLocality).to.equal(
+      normalizedAddress.cityLocality.toUpperCase()
+    );
+    expect(normalizedAddress.postalCode).to.equal(normalizedAddress.postalCode);
+    expect(normalizedAddress.stateProvince).to.equal(
+      normalizedAddress.stateProvince.toUpperCase()
+    );
+    expect(normalizedAddress.isResidential).to.be.true;
   };
 
   it("Valid should be the right type", async function () {
@@ -56,9 +54,11 @@ describe("validateAddress()", () => {
       console.log(`Error from test: ${e.message}`);
     }
 
+    const { normalizedAddress } = response;
+
     // It should have an normalized address with the correct shape
-    assertResponseAddress(response.normalizedAddress);
+    assertNormalizedAddressFormat(normalizedAddress);
+    assertNormalizedAddressMatchesOriginal(normalizedAddress);
     assertNoErrors(response);
-    // assertNormalizedAddressMatchesOriginal(response.normalizedAddress);
   });
 });
