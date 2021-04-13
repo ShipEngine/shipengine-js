@@ -97,6 +97,7 @@ export class ShipEngineError extends Error {
 
     super(message);
 
+    this.name = new.target.name;
     this.source = source;
     this.type = type;
     this.code = code;

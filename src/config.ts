@@ -1,3 +1,5 @@
+import { ErrorCode, ErrorType } from "./enums";
+import { ShipEngineError } from "./errors";
 import * as assert from "./utils/assert";
 
 /**
@@ -59,6 +61,17 @@ export class NormalizedConfig {
     if (typeof config === "string") {
       // Only an API key was specified
       config = { apiKey: config };
+    }
+
+    if (
+      !config ||
+      (typeof config.apiKey === "string" && config.apiKey.trim().length === 0)
+    ) {
+      throw new ShipEngineError(
+        ErrorType.Validation,
+        ErrorCode.FieldValueRequired,
+        "A ShipEngine API key must be specified."
+      );
     }
 
     assert.isPOJO("Config", config);
