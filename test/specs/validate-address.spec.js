@@ -1,64 +1,69 @@
-const { ShipEngine } = require("../../");
+const { sendValidateAddressRequest } = require("../utils/helpers");
 const { expect } = require("chai");
-const { assertString, assertNoErrors } = require("../utils/assertions");
-// const constants = require("../../utils/constants");
-// const { Messages } = require("../../../src/shared/models/messsages");
 
-let shipengine;
-let response;
+const {
+  assertNoErrors,
+  assertNormalizedAddressFormat,
+  assertNormalizedAddressMatchesOriginal,
+  assertIsValid,
+} = require("../utils/assertions");
 
 describe("validateAddress()", () => {
   const address = {
     country: "US",
-    street: ["4 Jersey St", "Suite 200", "validate-residential-address"],
+    street: ["4 Jersey St", "Suite 200"],
     cityLocality: "Boston",
     stateProvince: "MA",
     postalCode: "02215",
   };
 
-  const assertNormalizedAddressFormat = (normalizedAddress) => {
-    expect(normalizedAddress).to.be.an("object");
-    assertString(normalizedAddress.country);
-    assertString(normalizedAddress.cityLocality);
-    assertString(normalizedAddress.stateProvince);
-    assertString(normalizedAddress.postalCode);
-  };
+  it("Validate a residential address", async function () {
+    let residentialAddress = {
+      ...address,
+    };
 
-  const assertNormalizedAddressMatchesOriginal = (normalizedAddress) => {
-    expect(normalizedAddress.country).to.equal(
-      normalizedAddress.country.toUpperCase()
-    );
-    expect(normalizedAddress.street[0]).to.equal(
-      normalizedAddress.street[0].toUpperCase()
-    );
-    expect(normalizedAddress.cityLocality).to.equal(
-      normalizedAddress.cityLocality.toUpperCase()
-    );
-    expect(normalizedAddress.postalCode).to.equal(normalizedAddress.postalCode);
-    expect(normalizedAddress.stateProvince).to.equal(
-      normalizedAddress.stateProvince.toUpperCase()
-    );
-    expect(normalizedAddress.isResidential).to.be.true;
-  };
+    // Add the string used by the mock RPC server
+    residentialAddress.street[1] = "validate-residential-address";
 
-  it("Valid should be the right type", async function () {
-    try {
-      shipengine = new ShipEngine({
-        apiKey: "MY_API_KEY",
-        baseUrl: "https://simengine.herokuapp.com",
-        timeout: 20000,
-      });
-      response = await shipengine.validateAddress(address);
-      console.log(JSON.stringify(response));
-    } catch (e) {
-      console.log(`Error from test: ${e.message}`);
-    }
+    const response = await sendValidateAddressRequest(residentialAddress);
 
     const { normalizedAddress } = response;
 
+    assertIsValid(response);
+    expect(normalizedAddress.isResidential).to.be.true;
+
     // It should have an normalized address with the correct shape
     assertNormalizedAddressFormat(normalizedAddress);
+
+    // The normalized address should match the original address
     assertNormalizedAddressMatchesOriginal(normalizedAddress);
+
+    // It should not throw errors
+    assertNoErrors(response);
+  });
+
+  it("Validate a commercial address", async function () {
+    let residentialAddress = {
+      ...address,
+    };
+
+    // Add the string used by the mock RPC server
+    residentialAddress.street[1] = "validate-commercial-address";
+
+    const response = await sendValidateAddressRequest(residentialAddress);
+
+    const { normalizedAddress } = response;
+
+    assertIsValid(response);
+    expect(normalizedAddress.isResidential).to.be.false;
+
+    // It should have an normalized address with the correct shape
+    assertNormalizedAddressFormat(normalizedAddress);
+
+    // The normalized address should match the original address
+    assertNormalizedAddressMatchesOriginal(normalizedAddress);
+
+    // It should not throw errors
     assertNoErrors(response);
   });
 });
