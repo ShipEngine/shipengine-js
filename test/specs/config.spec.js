@@ -2,7 +2,7 @@
 
 const { ShipEngine } = require("../../");
 const { expect } = require("chai");
-const { apiKey, baseURL } = require("../utils/constants");
+const { apiKey } = require("../utils/constants");
 const errors = require("../utils/errors");
 
 describe("Configuration", () => {
@@ -18,14 +18,16 @@ describe("Configuration", () => {
 
   it("should allow the config to be an object with multiple config settings", () => {
     const shipengine = new ShipEngine({
-      apiKey,
-      baseURL,
+      apiKey: "my api key",
+      baseURL: "http://example.com/foo?bar",
       pageSize: 100,
       retries: 5,
       timeout: 30000,
     });
-    expect(shipengine.config.apiKey).to.equal(apiKey);
-    expect(shipengine.config.baseURL).to.deep.equal(new URL(baseURL));
+    expect(shipengine.config.apiKey).to.equal("my api key");
+    expect(shipengine.config.baseURL).to.deep.equal(
+      new URL("http://example.com/foo?bar")
+    );
     expect(shipengine.config.pageSize).to.equal(100);
     expect(shipengine.config.retries).to.equal(5);
     expect(shipengine.config.timeout).to.equal(30000);

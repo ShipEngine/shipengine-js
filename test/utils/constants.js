@@ -4,7 +4,8 @@
  * The URL of the ShipEngine API to use for testing.
  * If not set, it will default to the public ShipEngine API.
  */
-exports.baseURL = process.env["BASE_URL"];
+exports.baseURL =
+  process.env["BASE_URL"] || "https://api.shipengine.com/jsonrpc/";
 
 /**
  * The API key to use for testing. If not set, it defaults to a dummy key.

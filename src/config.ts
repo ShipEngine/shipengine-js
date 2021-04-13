@@ -87,7 +87,7 @@ export class NormalizedConfig {
       assert.isNonWhitespaceString("Base URL", config.baseURL);
       this.baseURL = new URL(config.baseURL);
     } else {
-      this.baseURL = new URL("https://simengine.herokuapp.com/jsonrpc");
+      this.baseURL = new URL("https://api.shipengine.com/jsonrpc/");
     }
 
     // Page Size
