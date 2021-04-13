@@ -39,10 +39,15 @@ const assertNormalizedAddressMatchesOriginal = (normalizedAddress) => {
   );
 };
 
+const assertIsValid = (response) => {
+  expect(response.isValid).to.be.true;
+};
+
 module.exports = {
   assertNoErrors,
   assertString,
   assertEmptyArray,
+  assertIsValid,
   assertNormalizedAddressFormat,
   assertNormalizedAddressMatchesOriginal,
 };
