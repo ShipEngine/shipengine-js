@@ -39,7 +39,7 @@ export async function sendRequest<TParams, TResult>(
 
   const body = {
     jsonrpc: "2.0",
-    method: "address/validate",
+    method,
     id: requestID,
     params,
   };
