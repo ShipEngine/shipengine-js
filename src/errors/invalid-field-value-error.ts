@@ -65,7 +65,7 @@ export class InvalidFieldValueError extends ShipEngineError {
       requestID,
       source,
       ErrorType.Validation,
-      ErrorCode.FieldValueRequired,
+      ErrorCode.InvalidFieldValue,
       `${fieldName || "Field"} ${reason}`
     );
 

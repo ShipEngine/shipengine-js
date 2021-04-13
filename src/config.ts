@@ -1,3 +1,5 @@
+import { ErrorCode, ErrorType } from "./enums";
+import { ShipEngineError } from "./errors";
 import * as assert from "./utils/assert";
 
 /**
@@ -61,6 +63,17 @@ export class NormalizedConfig {
       config = { apiKey: config };
     }
 
+    if (
+      !config ||
+      (typeof config.apiKey === "string" && config.apiKey.trim().length === 0)
+    ) {
+      throw new ShipEngineError(
+        ErrorType.Validation,
+        ErrorCode.FieldValueRequired,
+        "A ShipEngine API key must be specified."
+      );
+    }
+
     assert.isPOJO("Config", config);
 
     // API Key
@@ -74,7 +87,7 @@ export class NormalizedConfig {
       assert.isNonWhitespaceString("Base URL", config.baseURL);
       this.baseURL = new URL(config.baseURL);
     } else {
-      this.baseURL = new URL("https://simengine.herokuapp.com/jsonrpc");
+      this.baseURL = new URL("https://api.shipengine.com/jsonrpc/");
     }
 
     // Page Size

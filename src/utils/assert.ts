@@ -132,7 +132,7 @@ export function isPositiveInteger(
   if (value < 1) {
     throw new InvalidFieldValueError(
       field,
-      "must be a positive integer.",
+      "must be greater than zero.",
       value
     );
   }
