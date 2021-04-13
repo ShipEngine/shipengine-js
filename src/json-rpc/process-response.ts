@@ -33,7 +33,7 @@ export async function processResponse<TResult>(
   const event: ResponseReceivedEvent = {
     timestamp: new Date(),
     type: Event.ResponseReceived,
-    message: `Received an HTTP ${response.status} response from the ShipEngine ${method} API`,
+    message: `Received an HTTP ${response.status} response from the ShipEngine ${method} API.`,
     requestID: request.requestID,
     url: config.baseURL,
     statusCode: response.status,

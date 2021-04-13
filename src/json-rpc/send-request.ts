@@ -27,10 +27,6 @@ export async function sendRequest<TParams, TResult>(
   const randomNumber = Math.floor(Math.random() * 1000);
   const requestID = `req_${Date.now()}${randomNumber}`;
 
-  // Create an AbortController so we can cancel the request if it times out
-  const controller = new AbortController();
-  setTimeout(() => controller.abort(), config.timeout);
-
   const headers = {
     "Content-Type": "application/json",
     "API-Key": config.apiKey,
@@ -58,6 +54,10 @@ export async function sendRequest<TParams, TResult>(
   };
   events.emit(Event.RequestSent, request);
 
+  // Create an AbortController so we can cancel the request if it times out
+  const controller = new AbortController();
+  setTimeout(() => controller.abort(), config.timeout);
+
   try {
     // Send the JSON RPC 2.0 request
     const response = await fetch(config.baseURL.href, {
@@ -72,7 +72,6 @@ export async function sendRequest<TParams, TResult>(
   } catch (error: unknown) {
     // Something unexpected happened, like a network error.
     // No response was received from the server
-    console.log("STOP");
     throw new ShipEngineError(
       requestID,
       ErrorSource.ShipEngine,
