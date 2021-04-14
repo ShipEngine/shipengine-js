@@ -1,15 +1,13 @@
+"use strict";
+
 /**
- * proxy from karma browser to the karma hoverfly server
+ * The URL of the ShipEngine API to use for testing.
+ * If not set, it will default to the public ShipEngine API.
  */
-const karmaProxyBaseUri = '/hoverfly-proxy';
-const apiBaseUri = `https://simengine.herokuapp.com`;
+exports.baseURL =
+  process.env["BASE_URL"] || "https://api.shipengine.com/jsonrpc/";
 
-const onServer = typeof window === 'undefined';
-
-const isomorphicBaseUri = onServer ? apiBaseUri : karmaProxyBaseUri;
-
-module.exports = {
-  karmaProxyBaseUri,
-  apiBaseUri,
-  isomorphicBaseUri,
-};
+/**
+ * The API key to use for testing. If not set, it defaults to a dummy key.
+ */
+exports.apiKey = process.env["API_KEY"] || "TEST_API_KEY";

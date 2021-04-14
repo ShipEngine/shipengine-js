@@ -1,86 +1,74 @@
-[![ShipEngine](https://shipengine.github.io/img/shipengine-logo-wide.png)](https://shipengine.com)
+[![ShipEngine](https://shipengine.github.io/img/shipengine-logo-wide.png)](https://www.shipengine.com/)
 
-# ShipEngine Isomorphic JS / Node SDK (unstable)
-![Build Status](https://img.shields.io/github/workflow/status/shipengine/shipengine-js/CI-CD/main?label=build)
-[![Cross-Platform Compatibility](https://shipengine.github.io/img/badges/os-badges.svg)](https://github.com/ShipEngine/shipengine-js/actions)
+ShipEngine JavaScript SDK
+=====================================================
+### The official ShipEngine JavaScript SDK for Node.js
 
-![Latest Alpha](https://img.shields.io/npm/v/shipengine/alpha)
-![License](https://img.shields.io/github/license/shipengine/shipengine-js)
+[![npm](https://img.shields.io/npm/v/shipengine.svg)](https://www.npmjs.com/package/shipengine)
+[![License](https://img.shields.io/npm/l/shipengine.svg)](LICENSE)
 
-> ⚠ **WARNING**: This is alpha software under active development. This repo is a successor to https://www.npmjs.com/package/shipengine. Until this has a stable release, we recommend you either stick to the current releases, or use the [shipengine API](https://shipengine.github.io/shipengine-openapi/).
+[![Build Status](https://github.com/ShipEngine/shipengine-js/workflows/CI-CD/badge.svg)](https://github.com/ShipEngine/shipengine-js/actions)
+[![Coverage Status](https://coveralls.io/repos/github/ShipEngine/shipengine-js/badge.svg?branch=master)](https://coveralls.io/github/ShipEngine/shipengine-js)
+[![Dependencies](https://david-dm.org/ShipEngine/shipengine-js.svg)](https://david-dm.org/ShipEngine/shipengine-js)
 
----
+[![OS and Browser Compatibility](https://shipengine.github.io/img/badges/ci-badges.svg)](https://github.com/ShipEngine/shipengine-js/actions)
 
-## Description
-An isomorphic JS library written in _typescript_ and built on the [ShipEngine API](https://shipengine.com), offering low-level access as well as convenience methods.
 
----
+> ⚠ **WARNING**: This is alpha software under active development. This repo is a successor to https://www.npmjs.com/package/shipengine. Until this has a stable release, we recommend you either stick to the current releases, or use the [ShipEngine API](https://www.shipengine.com/docs/) directly.
 
-## Quick Start
 
-Install ShipEngine via [npm](https://www.npmjs.com/):
-```
-npm install shipengine@alpha
+
+Quick Start
+--------------------------
+Install ShipEngine JavaScript SDK via [npm](https://docs.npmjs.com/about-npm/).
+
+```bash
+npm install shipengine
 ```
 
 The only configuration requirement is an [API key](https://www.shipengine.com/docs/auth/#api-keys).
-```ts
-import ShipEngine from 'shipengine'
-// or, if you prefer commonjs
-const ShipEngine = require('shipengine')
 
+```javascript
+const ShipEngine = require("shipengine");
 
-const shipengine = new ShipEngine('my_api_key')
+let shipengine = new ShipEngine("___YOUR_API_KEY_HERE__");
 
+// Validate an address
+let result = await shipengine.validateAddress({
+  street: "1 E 161 St",
+  cityLocality: "The Bronx",
+  stateProvince: "NY",
+  postalCode: "10451",
+  country: "US",
+});
 
- await shipengine
-  .validateAddress({
-    street: '1 E 161 St',
-    cityLocality: 'The Bronx',
-    stateProvince: 'NY',
-    postalCode: '10451',
-    country: 'US'
-  })
-
-```
-## Docs & Tutorials
-- https://shipengine.github.io/shipengine-js
-
-## Development
-
-```
-npm install
-npm run test
-npm run lint
+// Print the validation results
+console.log(result.isValid);
+console.log(result.normalizedAddress);
 ```
 
-## Contribute
-### Cloning the repo
-- fork the repository
-- submit a PR against `main
-### Publishing workflow
-Note: These things more or less happen automatically with `npm run tag-and-release`.
-1. Bump `version` in package.json to v1.0.0
-2. If no longer publishing an alpha or beta, make sure to change the `tag: alpha` to `tag: latest` line in the [cicd.yaml](.github/workflows/cicd.yaml). This refers the npm `dist-tag`; for example, if the release getting published on npm as `v1.0.0@latest`, the dist-tag would be the word `latest`. This allows a consumer to do `npm install shipengine-js@latest --save`, and npm will serve up the latest version. See  [JS-DevTools/npm-publish](https://github.com/JS-DevTools/npm-publish#input-parameters) for more information.
 
-3. Do the following
-```sh
-git checkout -b main
-git commit -m release v1.0.0
-git tag -l v1.0.0
-git push --tags origin HEAD
-```
-4. Now, the github action publish job should start automatically. This happens whenever it detects a new package.json version on a push to `main`.
-5. After the npm publish job completes, create a github release and write release notes. Assign the release to the appropriate git tag.
+Contributing
+--------------------------
+Contributions, enhancements, and bug-fixes are welcome!  [Open an issue](https://github.com/ShipEngine/shipengine-js/issues) on GitHub and [submit a pull request](https://github.com/ShipEngine/shipengine-js/pulls).
 
-### Releasing new Alpha versions
-- Install the [github client](https://github.com/cli/cli).
-- Once `main` is in a state where we want to release.
-  - `npm run tag-and-release` (justs run `scripts/release.sh`)
+#### Building
+To build the project locally on your computer:
 
-`
+1. __Clone this repo__<br>
+`git clone https://github.com/ShipEngine/shipengine-js.git`
 
-### Upgrading node version
-#### edit the following files:
-- `package.json/engines, .nvmrc, README.md`
+2. __Install dependencies__<br>
+`npm install`
 
+3. __Build the code__<br>
+`npm run build`<br><br>
+Or you can use `npm run watch` to automatically re-build whenever source files change.
+
+4. __Lint the code__<br>
+`npm run lint`<br><br>
+Or you can use `npm run lint:fix` to automatically fix most linting errors.
+
+5. __Run the tests__<br>
+`npm test`<br><br>
+This runs tests in both Node.js and web browsers. Use `npm run test:node` to only run Node.js tests, or `npm run test:browser` to only run browser tests.

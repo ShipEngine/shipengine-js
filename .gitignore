@@ -1,4 +1,4 @@
-## Git ignore
+# Git ignore
 # https://git-scm.com/docs/gitignore
 
 # Private files
@@ -13,6 +13,7 @@ Thumbs.db
 .netbeans
 nbproject
 .node_history
+.husky
 
 # IDEs & Text Editors
 .idea
@@ -42,12 +43,7 @@ node_modules
 # Build output
 /cjs
 /esm
-/esm.test
+
 # Test output
 /.nyc_output
 /coverage
-*.tsbuildinfo
-/dist.examples
-
-docs/api
-docs/tutorials/*.html
