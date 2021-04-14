@@ -81,6 +81,32 @@ describe("validateAddress()", () => {
     assertNoErrors(response);
   });
 
+  it("Validates an address of with a numeric zip code", async function () {
+    const shipengine = new ShipEngine({ apiKey, baseURL });
+
+    const response = await shipengine.validateAddress({
+      country: "US",
+      street: ["4 Jersey St", "Suite 200", "validate-unknown-address"],
+      cityLocality: "Boston",
+      stateProvince: "MA",
+      postalCode: "02215",
+    });
+
+    const { normalizedAddress } = response;
+
+    expect(response.isValid).to.be.true;
+    expect(normalizedAddress.isResidential).to.be.undefined;
+
+    // It should have an normalized address with the correct shape
+    assertNormalizedAddressFormat(normalizedAddress);
+
+    // The normalized address should match the original address
+    assertNormalizedAddressMatchesOriginal(normalizedAddress);
+
+    // It should not throw errors
+    assertNoErrors(response);
+  });
+
   const assertNormalizedAddressMatchesOriginal = (normalizedAddress) => {
     expect(normalizedAddress.cityLocality).to.equal(
       normalizedAddress.cityLocality.toUpperCase()
