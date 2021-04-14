@@ -72,7 +72,6 @@ export async function sendRequest<TParams, TResult>(
   } catch (error: unknown) {
     // Something unexpected happened, like a network error.
     // No response was received from the server
-
     throw new ShipEngineError(
       requestID,
       ErrorSource.ShipEngine,

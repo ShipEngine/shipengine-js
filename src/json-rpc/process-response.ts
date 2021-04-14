@@ -1,11 +1,12 @@
 import { NormalizedConfig } from "../config";
-import { ErrorCode, ErrorSource } from "../enums";
+import { ErrorCode, ErrorSource, ErrorType } from "../enums";
 import { RateLimitExceededError, ShipEngineError } from "../errors";
 import { Event, RequestSentEvent, ResponseReceivedEvent } from "../events";
 import { EventEmitter } from "../isomorphic.node";
 import {
   JsonRpcErrorResponse,
   JsonRpcResponse,
+  JsonRpcSuccessResponse,
   RateLimitExceededErrorData,
 } from "./types";
 
@@ -44,6 +45,19 @@ export async function processResponse<TResult>(
   };
   events.emit(Event.ResponseReceived, event);
 
+  if (!isJsonRpcResponse(body)) {
+    // The response is not valid JSON RPC 2.0
+    throw new ShipEngineError(
+      request.requestID,
+      ErrorSource.ShipEngine,
+      ErrorType.System,
+      ErrorCode.Unspecified,
+      `The ShipEngine ${method} API returned an invalid response. ` +
+        `Please contact ShipEngine support and reference this ID: ${request.requestID}.`,
+      "mailto:support@shipengine.com"
+    );
+  }
+
   // If it's an error response, then throw a ShipEngineError
   if ("error" in body) {
     const error = createError(body);
@@ -52,6 +66,52 @@ export async function processResponse<TResult>(
 
   // A successful response was returned
   return body.result;
+}
+
+/**
+ * Determines whether the response is valid JSON RPC 2.0.
+ */
+function isJsonRpcResponse<T>(
+  response: unknown
+): response is JsonRpcResponse<T> {
+  const rpcResponse = response as JsonRpcSuccessResponse<T>;
+
+  return Boolean(
+    rpcResponse &&
+      typeof rpcResponse === "object" &&
+      rpcResponse.jsonrpc === "2.0" &&
+      rpcResponse.id &&
+      typeof rpcResponse.id === "string" &&
+      (typeof rpcResponse.result === "object" ||
+        isJsonRpcErrorResponse(response))
+  );
+}
+
+/**
+ * Determines whether the response is valid JSON RPC 2.0 error.
+ */
+function isJsonRpcErrorResponse(
+  response: unknown
+): response is JsonRpcErrorResponse {
+  const rpcResponse = response as JsonRpcErrorResponse;
+  const error = rpcResponse.error;
+
+  return Boolean(
+    error &&
+      typeof error === "object" &&
+      typeof error.code === "number" &&
+      error.message &&
+      typeof error.message === "string" &&
+      typeof error.data === "object" &&
+      error.data.source &&
+      typeof error.data.source === "string" &&
+      error.data.type &&
+      typeof error.data.type === "string" &&
+      error.data.code &&
+      typeof error.data.code === "string" &&
+      (error.data.url === undefined ||
+        (error.data.url && typeof error.data.url === "string"))
+  );
 }
 
 /**
