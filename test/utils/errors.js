@@ -8,6 +8,15 @@ const { ShipEngineError } = require("../../");
  */
 const errors = (module.exports = {
   /**
+   * A helper function that you can put in your test at a point that should not
+   * actually be reached because an error should have been thrown.  This prevents
+   * tests from "passing" because they didn't throw an error like you expected.
+   */
+  shouldHaveThrown() {
+    throw new Error("Expected an error to be thrown, but no error was thrown.");
+  },
+
+  /**
    * Asserts that an error is a valid FieldValueRequiredError with the expected values
    */
   assertFieldValueRequiredError(error, props) {

@@ -35,8 +35,8 @@ describe("Configuration", () => {
 
   it("should throw an error if no config is specified", () => {
     try {
-      const shipengine = new ShipEngine();
-      expect(shipengine).to.equal(undefined);
+      new ShipEngine();
+      errors.shouldHaveThrown();
     } catch (error) {
       errors.assertShipEngineError(error, {
         name: "ShipEngineError",
@@ -50,8 +50,8 @@ describe("Configuration", () => {
 
   it("should throw an error if an empty API key is specified", () => {
     try {
-      const shipengine = new ShipEngine("");
-      expect(shipengine).to.equal(undefined);
+      new ShipEngine("");
+      errors.shouldHaveThrown();
     } catch (error) {
       errors.assertShipEngineError(error, {
         name: "ShipEngineError",
@@ -65,8 +65,8 @@ describe("Configuration", () => {
 
   it("should throw an error if a whitespace API key is specified", () => {
     try {
-      const shipengine = new ShipEngine("  \n\t  ");
-      expect(shipengine).to.equal(undefined);
+      new ShipEngine("  \n\t  ");
+      errors.shouldHaveThrown();
     } catch (error) {
       errors.assertShipEngineError(error, {
         name: "ShipEngineError",
@@ -80,8 +80,8 @@ describe("Configuration", () => {
 
   it("should throw an error if a non-string API key is specified", () => {
     try {
-      const shipengine = new ShipEngine({ apiKey: 42 });
-      expect(shipengine).to.equal(undefined);
+      new ShipEngine({ apiKey: 42 });
+      errors.shouldHaveThrown();
     } catch (error) {
       errors.assertInvalidFieldValueError(error, {
         source: "shipengine",
@@ -96,14 +96,13 @@ describe("Configuration", () => {
 
   it("should allow retries to be zero", () => {
     const shipengine = new ShipEngine({ apiKey, retries: 0 });
-    expect(shipengine.config.apiKey).to.equal(apiKey);
     expect(shipengine.config.retries).to.equal(0);
   });
 
   it("should throw an error if retries is a negative number", () => {
     try {
-      const shipengine = new ShipEngine({ apiKey, retries: -42 });
-      expect(shipengine).to.equal(undefined);
+      new ShipEngine({ apiKey, retries: -42 });
+      errors.shouldHaveThrown();
     } catch (error) {
       errors.assertInvalidFieldValueError(error, {
         source: "shipengine",
@@ -118,8 +117,8 @@ describe("Configuration", () => {
 
   it("should throw an error if timeout is zero", () => {
     try {
-      const shipengine = new ShipEngine({ apiKey, timeout: 0 });
-      expect(shipengine).to.equal(undefined);
+      new ShipEngine({ apiKey, timeout: 0 });
+      errors.shouldHaveThrown();
     } catch (error) {
       errors.assertInvalidFieldValueError(error, {
         source: "shipengine",
@@ -134,8 +133,8 @@ describe("Configuration", () => {
 
   it("should throw an error if timeout is a negative number", () => {
     try {
-      const shipengine = new ShipEngine({ apiKey, timeout: -42 });
-      expect(shipengine).to.equal(undefined);
+      new ShipEngine({ apiKey, timeout: -42 });
+      errors.shouldHaveThrown();
     } catch (error) {
       errors.assertInvalidFieldValueError(error, {
         source: "shipengine",
