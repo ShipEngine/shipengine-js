@@ -122,6 +122,10 @@ export class NormalizedConfig {
     baseConfig: ShipEngineConfig,
     overrides?: ShipEngineConfig
   ): NormalizedConfig {
+    if (overrides) {
+      assert.isPOJO("Config", overrides);
+    }
+
     return new NormalizedConfig({ ...baseConfig, ...overrides });
   }
 }

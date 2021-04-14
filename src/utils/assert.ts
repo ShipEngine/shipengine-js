@@ -55,7 +55,10 @@ export function isNonWhitespaceString(
 /**
  * Asserts that the given value is a POJO (plain old javascript object).
  */
-export function isPOJO(field: string, value: unknown): asserts value is string {
+export function isPOJO(
+  field: string,
+  value: unknown
+): asserts value is Record<string, unknown> {
   isSet(field, value);
 
   if (typeof value !== "object" || Array.isArray(value)) {
