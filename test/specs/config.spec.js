@@ -2,18 +2,18 @@
 
 const { ShipEngine } = require("../../");
 const { expect } = require("chai");
-const { apiKey } = require("../utils/constants");
 const errors = require("../utils/errors");
+const { apiKey } = require("../utils/constants");
 
 describe("Configuration", () => {
   it("should allow the config to just be the API key", () => {
-    const shipengine = new ShipEngine(apiKey);
-    expect(shipengine.config.apiKey).to.equal(apiKey);
+    const shipengine = new ShipEngine("my api key");
+    expect(shipengine.config.apiKey).to.equal("my api key");
   });
 
   it("should allow the config to be an object with an API key", () => {
-    const shipengine = new ShipEngine({ apiKey });
-    expect(shipengine.config.apiKey).to.equal(apiKey);
+    const shipengine = new ShipEngine({ apiKey: "my api key" });
+    expect(shipengine.config.apiKey).to.equal("my api key");
   });
 
   it("should allow the config to be an object with multiple config settings", () => {
