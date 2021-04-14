@@ -231,6 +231,42 @@ describe("validateAddress()", () => {
     assertNoErrors(response);
   });
 
+  it("Validates an address with warnings", async function () {
+    const shipengine = new ShipEngine({ apiKey, baseURL });
+
+    const addressToValidate = {
+      country: "CA",
+      street: ["170 Princes' Blvd", "validate-with-warning"],
+      cityLocality: "Toronto",
+      stateProvince: "On",
+      postalCode: "M6K 3C3",
+    };
+
+    const response = await shipengine.validateAddress(addressToValidate);
+
+    const { normalizedAddress, isValid } = response;
+
+    expect(isValid).to.be.a("boolean").and.to.be.true;
+    expect(normalizedAddress.isResidential).to.be.a("boolean").and.to.be.false;
+
+    // It should have an normalized address with the correct shape
+    assertNormalizedAddressFormat(normalizedAddress);
+
+    // The normalized address should match the original address
+    assertNormalizedAddressMatchesOriginal(
+      addressToValidate,
+      normalizedAddress
+    );
+
+    // It should not throw errors
+    expect(response.info).to.be.an("array").and.be.empty;
+    expect(response.warnings).to.be.an("array").and.not.be.empty;
+    expect(response.errors).to.be.an("array").and.be.empty;
+    expect(response.warnings[0]).to.equal(
+      "This address has been verified down to the house/building level (highest possible accuracy with the provided data)"
+    );
+  });
+
   const assertNormalizedAddressMatchesOriginal = (
     originalAddress,
     normalizedAddress
