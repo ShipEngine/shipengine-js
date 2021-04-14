@@ -41,7 +41,7 @@ export class ShipEngineError extends Error {
    * Some errors include a URL that you can visit to learn more about the error,
    * find out how to resolve it, or get support.
    */
-  public readonly url?: URL;
+  public readonly url: URL;
 
   /**
    * Instantiates a client-side error.
@@ -102,7 +102,7 @@ export class ShipEngineError extends Error {
     this.type = type;
     this.code = code;
     this.requestID = requestID;
-    this.url = url ? new URL(url) : undefined;
+    this.url = new URL(url || "https://www.shipengine.com/docs/errors/codes/");
   }
 
   /**

@@ -74,12 +74,9 @@ const errors = (module.exports = {
     expect(error.type).to.be.a("string").equal(props.type).with.length.above(0);
     expect(error.code).to.be.a("string").equal(props.code).with.length.above(0);
 
+    expect(error.url).to.be.an.instanceOf(URL);
     if (props.url) {
-      expect(error.url)
-        .to.be.an.instanceOf(URL)
-        .with.property("href", props.url);
-    } else {
-      expect(error.url).to.equal(undefined);
+      expect(error.url).to.have.property("href", props.url);
     }
 
     if (props.requestID) {
