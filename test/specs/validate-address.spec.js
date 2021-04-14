@@ -267,6 +267,31 @@ describe("validateAddress()", () => {
     );
   });
 
+  it("Validates an address with errors", async function () {
+    const shipengine = new ShipEngine({ apiKey, baseURL });
+
+    const addressToValidate = {
+      country: "CA",
+      street: ["170 Princes' Blvd", "validate-with-error"],
+      postalCode: "M6K 3C3",
+    };
+
+    const response = await shipengine.validateAddress(addressToValidate);
+
+    const { normalizedAddress, isValid } = response;
+
+    expect(isValid).to.be.a("boolean").and.to.be.false;
+    expect(normalizedAddress).to.be.equal(undefined);
+
+    // It should not throw errors
+    expect(response.info).to.be.an("array").and.be.empty;
+    expect(response.warnings).to.be.an("array").and.be.empty;
+    expect(response.errors).to.be.an("array").and.not.be.empty;
+    expect(response.errors[0]).to.equal(
+        "Invalid City, State, or Zip"
+    );
+  });
+
   const assertNormalizedAddressMatchesOriginal = (
     originalAddress,
     normalizedAddress
