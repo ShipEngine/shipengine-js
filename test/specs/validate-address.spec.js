@@ -269,25 +269,24 @@ describe("validateAddress()", () => {
 
   it("Validates an address with errors", async function () {
     const shipengine = new ShipEngine({ apiKey, baseURL });
-
+    let error;
     const addressToValidate = {
       country: "CA",
       street: ["170 Princes' Blvd", "validate-with-error"],
       postalCode: "M6K 3C3",
     };
 
-    const response = await shipengine.validateAddress(addressToValidate);
+    try {
+      await shipengine.validateAddress(addressToValidate);
+    } catch (e) {
+      error = e;
+    }
 
-    const { normalizedAddress, isValid } = response;
-
-    expect(isValid).to.be.a("boolean").and.to.be.false;
-    expect(normalizedAddress).to.be.equal(undefined);
-
-    // It should not throw errors
-    expect(response.info).to.be.an("array").and.be.empty;
-    expect(response.warnings).to.be.an("array").and.be.empty;
-    expect(response.errors).to.be.an("array").and.not.be.empty;
-    expect(response.errors[0]).to.equal("Invalid City, State, or Zip");
+    expect(error).to.be.not.undefined;
+    expect(error.source).to.equal("ShipEngine");
+    expect(error.type).to.equal("validation");
+    expect(error.code).to.equal("field_value_required");
+    expect(error.requestId).to.be.undefined;
   });
 
   it("Throws an error if no address lines are provided", async function () {
@@ -308,10 +307,188 @@ describe("validateAddress()", () => {
     }
 
     expect(error).to.be.not.undefined;
-    expect(error.source).to.equal("ShipEngine");
+    expect(error.source).to.equal("shipengine");
     expect(error.type).to.equal("validation");
     expect(error.code).to.equal("field_value_required");
+    expect(error.message).to.equal(
+      "Invalid address. At least one address line is required."
+    );
     expect(error.requestId).to.be.undefined;
+  });
+
+  it("Throws an error if too many address lines are provided", async function () {
+    const shipengine = new ShipEngine({ apiKey, baseURL });
+    let error;
+    const addressToValidate = {
+      country: "US",
+      street: ["4 Jersey St", "Ste 200", "Building 2", "Platform 9 3/4"],
+      cityLocality: "Boston",
+      stateProvince: "MA",
+      postalCode: "02215",
+    };
+
+    try {
+      await shipengine.validateAddress(addressToValidate);
+    } catch (e) {
+      error = e;
+    }
+
+    expect(error).to.be.not.undefined;
+    expect(error.source).to.equal("shipengine");
+    expect(error.type).to.equal("validation");
+    expect(error.code).to.equal("invalid_field_value");
+    expect(error.message).to.equal(
+      "Invalid address. No more than 3 street lines are allowed."
+    );
+    expect(error.requestId).to.be.undefined;
+  });
+
+  it("Throws an error if the postalCode, cityLocality, and stateProvince properties are not *provided*", async function () {
+    const shipengine = new ShipEngine({ apiKey, baseURL });
+    let error;
+    const addressToValidate = {
+      country: "US",
+      street: ["4 Jersey St"],
+    };
+
+    try {
+      await shipengine.validateAddress(addressToValidate);
+    } catch (e) {
+      error = e;
+    }
+
+    expect(error).to.be.not.undefined;
+    expect(error.source).to.equal("shipengine");
+    expect(error.type).to.equal("validation");
+    expect(error.code).to.equal("field_value_required");
+    expect(error.message).to.equal(
+      "Invalid address. Either the postal code or the city/locality and state/province must be specified."
+    );
+    expect(error.requestId).to.be.undefined;
+  });
+
+  it("Throws an error if th postalCode, cityLocality, and stateProvince properties are not *populated*", async function () {
+    const shipengine = new ShipEngine({ apiKey, baseURL });
+    let error;
+    const addressToValidate = {
+      country: "US",
+      street: ["4 Jersey St"],
+      cityLocality: "",
+      stateProvince: "",
+      postalCode: "",
+    };
+
+    try {
+      await shipengine.validateAddress(addressToValidate);
+    } catch (e) {
+      error = e;
+    }
+
+    expect(error).to.be.not.undefined;
+    expect(error.source).to.equal("shipengine");
+    expect(error.type).to.equal("validation");
+    expect(error.code).to.equal("field_value_required");
+    expect(error.message).to.equal(
+      "Invalid address. Either the postal code or the city/locality and state/province must be specified."
+    );
+    expect(error.requestId).to.be.undefined;
+  });
+
+  it("Throws an error if neither the postalCode nor the cityLocality is provided", async function () {
+    const shipengine = new ShipEngine({ apiKey, baseURL });
+    let error;
+    const addressToValidate = {
+      country: "US",
+      street: ["4 Jersey St"],
+      stateProvince: "MA",
+    };
+
+    try {
+      await shipengine.validateAddress(addressToValidate);
+    } catch (e) {
+      error = e;
+    }
+
+    expect(error).to.be.not.undefined;
+    expect(error.source).to.equal("shipengine");
+    expect(error.type).to.equal("validation");
+    expect(error.code).to.equal("field_value_required");
+    expect(error.message).to.equal(
+      "Invalid address. Either the postal code or the city/locality and state/province must be specified."
+    );
+    expect(error.requestId).to.be.undefined;
+  });
+
+  it("Throws an error if neither the postalCode nor the stateProvince is provided", async function () {
+    const shipengine = new ShipEngine({ apiKey, baseURL });
+    let error;
+    const addressToValidate = {
+      country: "US",
+      street: ["4 Jersey St"],
+      cityLocality: "Boston",
+    };
+
+    try {
+      await shipengine.validateAddress(addressToValidate);
+    } catch (e) {
+      error = e;
+    }
+
+    expect(error).to.be.not.undefined;
+    expect(error.source).to.equal("shipengine");
+    expect(error.type).to.equal("validation");
+    expect(error.code).to.equal("field_value_required");
+    expect(error.message).to.equal(
+      "Invalid address. Either the postal code or the city/locality and state/province must be specified."
+    );
+    expect(error.requestId).to.be.undefined;
+  });
+
+  it("Validates an address when a postalCode is provided but neither cityLocality nor stateProvince is provided", async function () {
+    const shipengine = new ShipEngine({ apiKey, baseURL });
+
+    const addressToValidate = {
+      country: "US",
+      street: ["4 Jersey St", "validate-residential-address"],
+      postalCode: "02215",
+    };
+
+    const response = await shipengine.validateAddress(addressToValidate);
+
+    const { normalizedAddress, isValid } = response;
+
+    expect(isValid).to.be.a("boolean").and.to.be.true;
+    expect(normalizedAddress.isResidential).to.be.a("boolean").and.to.be.true;
+
+    // It should have an normalized address with the correct shape
+    assertNormalizedAddressFormat(normalizedAddress);
+
+    // It should not throw errors
+    assertNoErrors(response);
+  });
+
+  it("Validates an address when cityLocality and stateProvince are provided but no postalCode is provided", async function () {
+    const shipengine = new ShipEngine({ apiKey, baseURL });
+
+    const addressToValidate = {
+      country: "US",
+      street: ["4 Jersey St", "validate-residential-address"],
+      cityLocality: "Boston",
+      stateProvince: "MA",
+    };
+
+    const response = await shipengine.validateAddress(addressToValidate);
+
+    const { normalizedAddress, isValid } = response;
+
+    expect(isValid).to.be.a("boolean").and.to.be.true;
+    expect(normalizedAddress.isResidential).to.be.a("boolean").and.to.be.true;
+
+    // It should have an normalized address with the correct shape
+    assertNormalizedAddressFormat(normalizedAddress);
+
+    // It should not throw errors
+    assertNoErrors(response);
   });
 
   const assertNormalizedAddressMatchesOriginal = (
