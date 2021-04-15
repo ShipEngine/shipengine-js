@@ -287,9 +287,31 @@ describe("validateAddress()", () => {
     expect(response.info).to.be.an("array").and.be.empty;
     expect(response.warnings).to.be.an("array").and.be.empty;
     expect(response.errors).to.be.an("array").and.not.be.empty;
-    expect(response.errors[0]).to.equal(
-        "Invalid City, State, or Zip"
-    );
+    expect(response.errors[0]).to.equal("Invalid City, State, or Zip");
+  });
+
+  it("Throws an error if no address lines are provided", async function () {
+    const shipengine = new ShipEngine({ apiKey, baseURL });
+    let error;
+    const addressToValidate = {
+      country: "US",
+      street: [],
+      cityLocality: "Boston",
+      stateProvince: "MA",
+      postalCode: "02215",
+    };
+
+    try {
+      await shipengine.validateAddress(addressToValidate);
+    } catch (e) {
+      error = e;
+    }
+
+    expect(error).to.be.not.undefined;
+    expect(error.source).to.equal("ShipEngine");
+    expect(error.type).to.equal("validation");
+    expect(error.code).to.equal("field_value_required");
+    expect(error.requestId).to.be.undefined;
   });
 
   const assertNormalizedAddressMatchesOriginal = (
