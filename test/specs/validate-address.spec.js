@@ -269,24 +269,27 @@ describe("validateAddress()", () => {
 
   it("Validates an address with errors", async function () {
     const shipengine = new ShipEngine({ apiKey, baseURL });
-    let error;
+
     const addressToValidate = {
       country: "CA",
       street: ["170 Princes' Blvd", "validate-with-error"],
+      cityLocality: "Toronto",
+      stateProvince: "On",
       postalCode: "M6K 3C3",
     };
 
-    try {
-      await shipengine.validateAddress(addressToValidate);
-    } catch (e) {
-      error = e;
-    }
+    const response = await shipengine.validateAddress(addressToValidate);
 
-    expect(error).to.be.not.undefined;
-    expect(error.source).to.equal("ShipEngine");
-    expect(error.type).to.equal("validation");
-    expect(error.code).to.equal("field_value_required");
-    expect(error.requestId).to.be.undefined;
+    const { normalizedAddress, isValid } = response;
+
+    expect(isValid).to.be.a("boolean").and.to.be.false;
+    expect(normalizedAddress).to.be.undefined;
+
+    // It should not throw errors
+    expect(response.info).to.be.an("array").and.be.empty;
+    expect(response.warnings).to.be.an("array").and.be.empty;
+    expect(response.errors).to.be.an("array").and.not.be.empty;
+    expect(response.errors[0]).to.equal("Invalid City, State, or Zip");
   });
 
   it("Throws an error if no address lines are provided", async function () {
