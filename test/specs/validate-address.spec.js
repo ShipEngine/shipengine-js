@@ -134,10 +134,10 @@ describe("validateAddress()", () => {
     // The isValid flag is true
     expect(isValid).to.be.a("boolean").and.to.equal(true);
 
-    expect(normalizedAddress.street).to.be.a("array").and.have.length(2);
-
     // The normalized address is populated and matches the original with adjustments
     expect(normalizedAddress.country).to.equal("US");
+
+    // All lines of the address are returned in the correct order
     expect(normalizedAddress.street).to.deep.equal([
       "4 JERSEY ST STE 200",
       "2ND FLOOR",
