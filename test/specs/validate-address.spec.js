@@ -275,25 +275,29 @@ describe("validateAddress()", () => {
 
     const { normalizedAddress, isValid } = response;
 
-    expect(isValid).to.be.a("boolean").and.to.be.true;
-    expect(normalizedAddress.isResidential).to.be.a("boolean").and.to.be.false;
+    // The isValid flag is false
+    // TODO: This fails. It is written to the Jira ticket spec but this is not how the mock RPC server responds
+    expect(isValid).to.be.a("boolean").and.to.equal(false);
 
-    // It should have an normalized address with the correct shape
-    assertNormalizedAddressFormat(normalizedAddress);
+    // The normalized address is populated with the correct values
+    expect(normalizedAddress.country).to.equal("CA");
+    expect(normalizedAddress.street).to.deep.equal(["170 Princes' Blvd"]);
+    expect(normalizedAddress.cityLocality).to.equal("Toronto");
+    expect(normalizedAddress.stateProvince).to.equal("On");
+    expect(normalizedAddress.postalCode).to.equal("M6K 3C3");
 
-    // The normalized address should match the original address
-    assertNormalizedAddressMatchesOriginal(
-      addressToValidate,
-      normalizedAddress
-    );
-
-    // It should not throw errors
-    expect(response.info).to.be.an("array").and.be.empty;
-    expect(response.warnings).to.be.an("array").and.not.be.empty;
-    expect(response.errors).to.be.an("array").and.be.empty;
+    // Warning messages are returned correctly
+    expect(response.warnings).to.be.an("array").and.to.have.length(1);
     expect(response.warnings[0]).to.equal(
       "This address has been verified down to the house/building level (highest possible accuracy with the provided data)"
     );
+
+    // There are no error messages
+    expect(response.info).to.be.an("array").and.to.have.length(0);
+    expect(response.errors).to.be.an("array").and.to.have.length(0);
+
+    // It should have an normalized address with the correct shape
+    assertNormalizedAddressFormat(normalizedAddress);
   });
 
   it("Validates an address with error messages", async function () {
