@@ -18,20 +18,24 @@ describe("validateAddress()", () => {
 
     const { normalizedAddress, isValid } = response;
 
-    expect(isValid).to.be.a("boolean").and.to.be.true;
+    // The isValid flag is true
+    expect(isValid).to.be.a("boolean").and.to.equal(true);
+
+    // The normalized address is populated and matches the original with adjustments
+    expect(normalizedAddress.country).to.equal("US");
+    expect(normalizedAddress.street).to.deep.equal(["4 JERSEY ST"]);
+    expect(normalizedAddress.cityLocality).to.equal("BOSTON");
+    expect(normalizedAddress.stateProvince).to.equal("MA");
+    expect(normalizedAddress.postalCode).to.equal("02215");
+
+    // The isResidential flag on the normalized address is true
     expect(normalizedAddress.isResidential).to.be.a("boolean").and.to.be.true;
+
+    // There are no warning or error messages
+    assertNoWarningsOrErrorMessages(response);
 
     // It should have an normalized address with the correct shape
     assertNormalizedAddressFormat(normalizedAddress);
-
-    // The normalized address should match the original address
-    assertNormalizedAddressMatchesOriginal(
-      addressToValidate,
-      normalizedAddress
-    );
-
-    // It should not throw errors
-    assertNoWarningsOrErrorMessages(response);
   });
 
   it("Validates a commercial address", async function () {
@@ -604,6 +608,7 @@ describe("validateAddress()", () => {
         "street",
         "toString"
       );
+    expect(normalizedAddress.isResidential).to.be.a("boolean");
     expect(normalizedAddress.cityLocality).to.be.a("string");
     expect(normalizedAddress.company).to.be.a("string");
     expect(normalizedAddress.country).to.be.a("string");
