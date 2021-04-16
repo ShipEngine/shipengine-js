@@ -207,21 +207,24 @@ describe("validateAddress()", () => {
 
     const { normalizedAddress, isValid } = response;
 
-    expect(isValid).to.be.a("boolean").and.to.be.true;
-    expect(normalizedAddress.isResidential).to.be.a("boolean").and.to.be.false;
+    // The isValid flag is true
+    expect(isValid).to.be.a("boolean").and.to.equal(true);
+
+    // The normalized address is populated and matches the original with adjustments
+    // Verified that SE API does not capitalize Canadian normalized addresses
+    expect(normalizedAddress.country).to.equal("CA");
+    expect(normalizedAddress.street).to.deep.equal(["170 Princes' Blvd"]);
+    expect(normalizedAddress.cityLocality).to.equal("Toronto");
+    expect(normalizedAddress.stateProvince).to.equal("On");
+
+    // The correct postalCode is returned
     expect(normalizedAddress.postalCode).to.equal("M6K 3C3");
+
+    // There are no warning or error messages
+    assertNoWarningsOrErrorMessages(response);
 
     // It should have an normalized address with the correct shape
     assertNormalizedAddressFormat(normalizedAddress);
-
-    // The normalized address should match the original address
-    assertNormalizedAddressMatchesOriginal(
-      addressToValidate,
-      normalizedAddress
-    );
-
-    // It should not throw errors
-    assertNoWarningsOrErrorMessages(response);
   });
 
   it("Validates an address with non-Latin characters", async function () {
