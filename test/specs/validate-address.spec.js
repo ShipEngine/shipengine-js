@@ -278,7 +278,6 @@ describe("validateAddress()", () => {
     // The isValid flag is false
     // TODO: This fails. It is written to the Jira ticket spec but this is not how the mock RPC server responds
     expect(isValid).to.be.a("boolean").and.to.equal(false);
-
     // The normalized address is populated with the correct values
     expect(normalizedAddress.country).to.equal("CA");
     expect(normalizedAddress.street).to.deep.equal(["170 Princes' Blvd"]);
@@ -288,8 +287,8 @@ describe("validateAddress()", () => {
 
     // Warning messages are returned correctly
     expect(response.warnings).to.be.an("array").and.to.have.length(1);
-    expect(response.warnings[0]).to.equal(
-      "This address has been verified down to the house/building level (highest possible accuracy with the provided data)"
+    expect(response.warnings).to.deep.equals(
+      ["This address has been verified down to the house/building level (highest possible accuracy with the provided data)"]
     );
 
     // There are no error messages
@@ -325,7 +324,7 @@ describe("validateAddress()", () => {
     expect(response.info).to.be.an("array").and.to.have.length(0);
     expect(response.warnings).to.be.an("array").and.to.have.length(0);
     expect(response.errors).to.be.an("array").and.to.have.length(1);
-    expect(response.errors[0]).to.equal("Invalid City, State, or Zip");
+    expect(response.errors).to.deep.equal(["Invalid City, State, or Zip"]);
   });
 
   it("Throws an error if no address lines are provided", async function () {
