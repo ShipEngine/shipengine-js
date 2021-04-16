@@ -96,7 +96,7 @@ describe("validateAddress()", () => {
     assertNoWarningsOrErrorMessages(response);
   });
 
-  it("Validates a multi-line address", async function () {
+  it("Validates a multiline address", async function () {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
@@ -117,6 +117,11 @@ describe("validateAddress()", () => {
 
     expect(isValid).to.be.a("boolean").and.to.be.true;
     expect(normalizedAddress.isResidential).to.be.a("boolean").and.to.be.false;
+
+    expect(normalizedAddress.street).to.deep.equal([
+      "4 JERSEY ST STE 200",
+      "2ND FLOOR",
+    ]);
 
     // It should have an normalized address with the correct shape
     assertNormalizedAddressFormat(normalizedAddress);
@@ -542,7 +547,7 @@ describe("validateAddress()", () => {
     expect(error.type).to.equal("validation");
     expect(error.code).to.equal("field_value_required");
     expect(error.message).to.equal(
-        "Invalid address. The country must be specified."
+      "Invalid address. The country must be specified."
     );
     expect(error.requestId).to.be.undefined;
   });
