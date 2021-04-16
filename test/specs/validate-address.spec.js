@@ -238,7 +238,7 @@ describe("validateAddress()", () => {
     assertNoWarningsOrErrorMessages(response);
   });
 
-  it("Validates an address with warnings", async function () {
+  it("Validates an address with warning messages", async function () {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
@@ -274,7 +274,7 @@ describe("validateAddress()", () => {
     );
   });
 
-  it("Validates an address with errors", async function () {
+  it("Validates an address with error messages", async function () {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
