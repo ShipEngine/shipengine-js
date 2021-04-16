@@ -152,6 +152,7 @@ describe("validateAddress()", () => {
 
     expect(isValid).to.be.a("boolean").and.to.be.true;
     expect(normalizedAddress.isResidential).to.be.a("boolean").and.to.be.true;
+    expect(normalizedAddress.postalCode).to.equal("02215");
 
     // It should have an normalized address with the correct shape
     assertNormalizedAddressFormat(normalizedAddress);
@@ -183,6 +184,7 @@ describe("validateAddress()", () => {
 
     expect(isValid).to.be.a("boolean").and.to.be.true;
     expect(normalizedAddress.isResidential).to.be.a("boolean").and.to.be.false;
+    expect(normalizedAddress.postalCode).to.equal("M6K 3C3");
 
     // It should have an normalized address with the correct shape
     assertNormalizedAddressFormat(normalizedAddress);
@@ -574,15 +576,15 @@ describe("validateAddress()", () => {
       originalAddress.street[0].toUpperCase()
     );
 
-    if (normalizedAddress.street[2] !== undefined) {
-      expect(normalizedAddress.street[2]).to.equal(
-        originalAddress.street[2].toUpperCase()
+    if (normalizedAddress.street[1] !== undefined) {
+      expect(normalizedAddress.street[1]).to.equal(
+        originalAddress.street[1].toUpperCase()
       );
     }
 
-    if (normalizedAddress.street[3] !== undefined) {
-      expect(normalizedAddress.street[3]).to.equal(
-        originalAddress.street[3].toUpperCase()
+    if (normalizedAddress.street[2] !== undefined) {
+      expect(normalizedAddress.street[2]).to.equal(
+        originalAddress.street[2].toUpperCase()
       );
     }
   };
