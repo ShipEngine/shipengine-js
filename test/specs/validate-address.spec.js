@@ -315,13 +315,16 @@ describe("validateAddress()", () => {
 
     const { normalizedAddress, isValid } = response;
 
-    expect(isValid).to.be.a("boolean").and.to.be.false;
-    expect(normalizedAddress).to.be.undefined;
+    // The isValid flag is false
+    expect(isValid).to.be.a("boolean").and.to.equal(false);
 
-    // It should not throw errors
-    expect(response.info).to.be.an("array").and.be.empty;
-    expect(response.warnings).to.be.an("array").and.be.empty;
-    expect(response.errors).to.be.an("array").and.not.be.empty;
+    // The normalized address is null
+    expect(normalizedAddress).to.equal(undefined);
+
+    // Warning and error messages are returned correctly
+    expect(response.info).to.be.an("array").and.to.have.length(0);
+    expect(response.warnings).to.be.an("array").and.to.have.length(0);
+    expect(response.errors).to.be.an("array").and.to.have.length(1);
     expect(response.errors[0]).to.equal("Invalid City, State, or Zip");
   });
 
