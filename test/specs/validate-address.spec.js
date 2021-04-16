@@ -31,7 +31,7 @@ describe("validateAddress()", () => {
     );
 
     // It should not throw errors
-    assertNoErrors(response);
+    assertNoWarningsOrErrorMessages(response);
   });
 
   it("Validates a commercial address", async function () {
@@ -62,7 +62,7 @@ describe("validateAddress()", () => {
     );
 
     // It should not throw errors
-    assertNoErrors(response);
+    assertNoWarningsOrErrorMessages(response);
   });
 
   it("Validates an address of unknown type", async function () {
@@ -93,7 +93,7 @@ describe("validateAddress()", () => {
     );
 
     // It should not throw errors
-    assertNoErrors(response);
+    assertNoWarningsOrErrorMessages(response);
   });
 
   it("Validates a multi-line address", async function () {
@@ -127,7 +127,7 @@ describe("validateAddress()", () => {
     );
 
     // It should not throw errors
-    assertNoErrors(response);
+    assertNoWarningsOrErrorMessages(response);
   });
 
   it("Validates an address with a numeric zip code", async function () {
@@ -158,7 +158,7 @@ describe("validateAddress()", () => {
     );
 
     // It should not throw errors
-    assertNoErrors(response);
+    assertNoWarningsOrErrorMessages(response);
   });
 
   it("Validates an address with an alpha zip code", async function () {
@@ -189,7 +189,7 @@ describe("validateAddress()", () => {
     );
 
     // It should not throw errors
-    assertNoErrors(response);
+    assertNoWarningsOrErrorMessages(response);
   });
 
   it("Validates an address with non-Latin characters", async function () {
@@ -228,7 +228,7 @@ describe("validateAddress()", () => {
     );
 
     // It should not throw errors
-    assertNoErrors(response);
+    assertNoWarningsOrErrorMessages(response);
   });
 
   it("Validates an address with warnings", async function () {
@@ -467,7 +467,7 @@ describe("validateAddress()", () => {
     assertNormalizedAddressFormat(normalizedAddress);
 
     // It should not throw errors
-    assertNoErrors(response);
+    assertNoWarningsOrErrorMessages(response);
   });
 
   it("Validates an address when cityLocality and stateProvince are provided but no postalCode is provided", async function () {
@@ -491,7 +491,60 @@ describe("validateAddress()", () => {
     assertNormalizedAddressFormat(normalizedAddress);
 
     // It should not throw errors
-    assertNoErrors(response);
+    assertNoWarningsOrErrorMessages(response);
+  });
+
+  it("Throws an error if the countryCode is not provided", async function () {
+    const shipengine = new ShipEngine({ apiKey, baseURL });
+    let error;
+    const addressToValidate = {
+      street: ["4 Jersey St"],
+      cityLocality: "Boston",
+      stateProvince: "MA",
+      postalCode: "01152",
+    };
+
+    try {
+      await shipengine.validateAddress(addressToValidate);
+    } catch (e) {
+      error = e;
+    }
+
+    expect(error).to.be.not.undefined;
+    expect(error.source).to.equal("shipengine");
+    expect(error.type).to.equal("validation");
+    expect(error.code).to.equal("field_value_required");
+    expect(error.message).to.equal(
+      "Invalid address. The country must be specified."
+    );
+    expect(error.requestId).to.be.undefined;
+  });
+
+  it("Throws an error if the countryCode is invalid", async function () {
+    const shipengine = new ShipEngine({ apiKey, baseURL });
+    let error;
+    const addressToValidate = {
+      countryCode: "USA",
+      street: ["4 Jersey St"],
+      cityLocality: "Boston",
+      stateProvince: "MA",
+      postalCode: "01152",
+    };
+
+    try {
+      await shipengine.validateAddress(addressToValidate);
+    } catch (e) {
+      error = e;
+    }
+
+    expect(error).to.be.not.undefined;
+    expect(error.source).to.equal("shipengine");
+    expect(error.type).to.equal("validation");
+    expect(error.code).to.equal("field_value_required");
+    expect(error.message).to.equal(
+        "Invalid address. The country must be specified."
+    );
+    expect(error.requestId).to.be.undefined;
   });
 
   const assertNormalizedAddressMatchesOriginal = (
@@ -555,7 +608,7 @@ describe("validateAddress()", () => {
     expect(normalizedAddress.toString).to.be.a("function");
   };
 
-  const assertNoErrors = (response) => {
+  const assertNoWarningsOrErrorMessages = (response) => {
     expect(response.info).to.be.an("array").and.be.empty;
     expect(response.warnings).to.be.an("array").and.be.empty;
     expect(response.errors).to.be.an("array").and.be.empty;
