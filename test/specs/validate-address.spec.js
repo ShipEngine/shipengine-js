@@ -65,7 +65,7 @@ describe("validateAddress()", () => {
     expect(normalizedAddress.stateProvince).to.equal("MA");
     expect(normalizedAddress.postalCode).to.equal("02215");
 
-    // The isResidential flag on the normalized address is true
+    // The isResidential flag on the normalized address is false
     expect(normalizedAddress.isResidential)
       .to.be.a("boolean")
       .and.to.equal(false);
@@ -90,22 +90,26 @@ describe("validateAddress()", () => {
 
     const response = await shipengine.validateAddress(addressToValidate);
 
-    const { normalizedAddress } = response;
+    const { normalizedAddress, isValid } = response;
 
-    expect(response.isValid).to.be.true;
-    expect(normalizedAddress.isResidential).to.be.undefined;
+    // The isValid flag is true
+    expect(isValid).to.be.a("boolean").and.to.equal(true);
+
+    // The normalized address is populated and matches the original with adjustments
+    expect(normalizedAddress.country).to.equal("US");
+    expect(normalizedAddress.street).to.deep.equal(["4 JERSEY ST"]);
+    expect(normalizedAddress.cityLocality).to.equal("BOSTON");
+    expect(normalizedAddress.stateProvince).to.equal("MA");
+    expect(normalizedAddress.postalCode).to.equal("02215");
+
+    // The isResidential flag on the normalized address is true
+    expect(normalizedAddress.isResidential).to.equal(undefined);
+
+    // There are no warning or error messages
+    assertNoWarningsOrErrorMessages(response);
 
     // It should have an normalized address with the correct shape
     assertNormalizedAddressFormat(normalizedAddress);
-
-    // The normalized address should match the original address
-    assertNormalizedAddressMatchesOriginal(
-      addressToValidate,
-      normalizedAddress
-    );
-
-    // It should not throw errors
-    assertNoWarningsOrErrorMessages(response);
   });
 
   it("Validates a multiline address", async function () {
@@ -127,24 +131,31 @@ describe("validateAddress()", () => {
 
     const { normalizedAddress, isValid } = response;
 
-    expect(isValid).to.be.a("boolean").and.to.be.true;
-    expect(normalizedAddress.isResidential).to.be.a("boolean").and.to.be.false;
+    // The isValid flag is true
+    expect(isValid).to.be.a("boolean").and.to.equal(true);
 
+    expect(normalizedAddress.street).to.be.a("array").and.have.length(2);
+
+    // The normalized address is populated and matches the original with adjustments
+    expect(normalizedAddress.country).to.equal("US");
     expect(normalizedAddress.street).to.deep.equal([
       "4 JERSEY ST STE 200",
       "2ND FLOOR",
     ]);
+    expect(normalizedAddress.cityLocality).to.equal("BOSTON");
+    expect(normalizedAddress.stateProvince).to.equal("MA");
+    expect(normalizedAddress.postalCode).to.equal("02215");
+
+    // The isResidential flag on the normalized address is false
+    expect(normalizedAddress.isResidential)
+      .to.be.a("boolean")
+      .and.to.equal(false);
+
+    // There are no warning or error messages
+    assertNoWarningsOrErrorMessages(response);
 
     // It should have an normalized address with the correct shape
     assertNormalizedAddressFormat(normalizedAddress);
-
-    assertNormalizedAddressMatchesOriginal(
-      addressToValidate,
-      normalizedAddress
-    );
-
-    // It should not throw errors
-    assertNoWarningsOrErrorMessages(response);
   });
 
   it("Validates an address with a numeric zip code", async function () {
@@ -616,7 +627,9 @@ describe("validateAddress()", () => {
         "street",
         "toString"
       );
-    expect(normalizedAddress.isResidential).to.be.a("boolean");
+    if (normalizedAddress.isResidential !== undefined) {
+      expect(normalizedAddress.isResidential).to.be.a("boolean");
+    }
     expect(normalizedAddress.cityLocality).to.be.a("string");
     expect(normalizedAddress.company).to.be.a("string");
     expect(normalizedAddress.country).to.be.a("string");
