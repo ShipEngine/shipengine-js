@@ -230,14 +230,6 @@ describe("validateAddress()", () => {
   it("Validates an address with non-Latin characters", async function () {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
-    const expectedNormalizedAddress = {
-      street: ["68 Kamitobatsunodacho"],
-      cityLocality: "Kyoto-Shi Minami-Ku",
-      stateProvince: "Kyoto",
-      postalCode: "601-8104",
-      country: "JP",
-    };
-
     const addressToValidate = {
       street: ["上鳥羽角田町６８", "validate-with-non-latin-chars"],
       cityLocality: "南区",
@@ -250,20 +242,22 @@ describe("validateAddress()", () => {
 
     const { normalizedAddress, isValid } = response;
 
-    expect(isValid).to.be.a("boolean").and.to.be.true;
-    expect(normalizedAddress.isResidential).to.be.a("boolean").and.to.be.false;
+    // The isValid flag is true
+    expect(isValid).to.be.a("boolean").and.to.equal(true);
+
+    // The normalized address is populated and matches the original with adjustments
+    // This is actually what SE API returns
+    expect(normalizedAddress.country).to.equal("JP");
+    expect(normalizedAddress.street).to.deep.equal(["68 Kamitobatsunodacho"]);
+    expect(normalizedAddress.cityLocality).to.equal("Kyoto-Shi Minami-Ku");
+    expect(normalizedAddress.stateProvince).to.equal("Kyoto");
+    expect(normalizedAddress.postalCode).to.equal("601-8104");
+
+    // There are no warning or error messages
+    assertNoWarningsOrErrorMessages(response);
 
     // It should have an normalized address with the correct shape
     assertNormalizedAddressFormat(normalizedAddress);
-
-    // The normalized address should match the original address
-    assertNormalizedAddressMatchesOriginal(
-      expectedNormalizedAddress,
-      normalizedAddress
-    );
-
-    // It should not throw errors
-    assertNoWarningsOrErrorMessages(response);
   });
 
   it("Validates an address with warning messages", async function () {
