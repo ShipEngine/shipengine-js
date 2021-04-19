@@ -1,6 +1,7 @@
 const { expect } = require("chai");
 const { ShipEngine } = require("../../");
 const { apiKey, baseURL } = require("../utils/constants");
+const errors = require("../utils/errors");
 
 describe("validateAddress()", () => {
   it("Validates a residential address", async function () {
@@ -14,6 +15,16 @@ describe("validateAddress()", () => {
       postalCode: "02215",
     };
 
+    const expectedNormalizedAddress = {
+      country: "US",
+      street: ["4 JERSEY ST"],
+      cityLocality: "BOSTON",
+      stateProvince: "MA",
+      postalCode: "02215",
+      name: "",
+      company: "",
+    };
+
     const response = await shipengine.validateAddress(addressToValidate);
 
     const { normalizedAddress, isValid } = response;
@@ -21,12 +32,8 @@ describe("validateAddress()", () => {
     // The isValid flag is true
     expect(isValid).to.be.a("boolean").and.to.equal(true);
 
-    // The normalized address is populated and matches the original with adjustments
-    expect(normalizedAddress.country).to.equal("US");
-    expect(normalizedAddress.street).to.deep.equal(["4 JERSEY ST"]);
-    expect(normalizedAddress.cityLocality).to.equal("BOSTON");
-    expect(normalizedAddress.stateProvince).to.equal("MA");
-    expect(normalizedAddress.postalCode).to.equal("02215");
+    // The normalized address is populated and matches the expected normalized address
+    assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
 
     // The isResidential flag on the normalized address is true
     expect(normalizedAddress.isResidential)
@@ -36,7 +43,7 @@ describe("validateAddress()", () => {
     // There are no warning or error messages
     assertNoWarningsOrErrorMessages(response);
 
-    // It should have an normalized address with the correct shape
+    // It should have a normalized address with the correct shape
     assertNormalizedAddressFormat(normalizedAddress);
   });
 
@@ -51,6 +58,16 @@ describe("validateAddress()", () => {
       postalCode: "02215",
     };
 
+    const expectedNormalizedAddress = {
+      country: "US",
+      street: ["4 JERSEY ST"],
+      cityLocality: "BOSTON",
+      stateProvince: "MA",
+      postalCode: "02215",
+      name: "",
+      company: "",
+    };
+
     const response = await shipengine.validateAddress(addressToValidate);
 
     const { normalizedAddress, isValid } = response;
@@ -58,12 +75,8 @@ describe("validateAddress()", () => {
     // The isValid flag is true
     expect(isValid).to.be.a("boolean").and.to.equal(true);
 
-    // The normalized address is populated and matches the original with adjustments
-    expect(normalizedAddress.country).to.equal("US");
-    expect(normalizedAddress.street).to.deep.equal(["4 JERSEY ST"]);
-    expect(normalizedAddress.cityLocality).to.equal("BOSTON");
-    expect(normalizedAddress.stateProvince).to.equal("MA");
-    expect(normalizedAddress.postalCode).to.equal("02215");
+    // The normalized address is populated and matches the expected normalized address
+    assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
 
     // The isResidential flag on the normalized address is false
     expect(normalizedAddress.isResidential)
@@ -73,7 +86,7 @@ describe("validateAddress()", () => {
     // There are no warning or error messages
     assertNoWarningsOrErrorMessages(response);
 
-    // It should have an normalized address with the correct shape
+    // It should have a normalized address with the correct shape
     assertNormalizedAddressFormat(normalizedAddress);
   });
 
@@ -88,6 +101,16 @@ describe("validateAddress()", () => {
       postalCode: "02215",
     };
 
+    const expectedNormalizedAddress = {
+      country: "US",
+      street: ["4 JERSEY ST"],
+      cityLocality: "BOSTON",
+      stateProvince: "MA",
+      postalCode: "02215",
+      name: "",
+      company: "",
+    };
+
     const response = await shipengine.validateAddress(addressToValidate);
 
     const { normalizedAddress, isValid } = response;
@@ -95,12 +118,8 @@ describe("validateAddress()", () => {
     // The isValid flag is true
     expect(isValid).to.be.a("boolean").and.to.equal(true);
 
-    // The normalized address is populated and matches the original with adjustments
-    expect(normalizedAddress.country).to.equal("US");
-    expect(normalizedAddress.street).to.deep.equal(["4 JERSEY ST"]);
-    expect(normalizedAddress.cityLocality).to.equal("BOSTON");
-    expect(normalizedAddress.stateProvince).to.equal("MA");
-    expect(normalizedAddress.postalCode).to.equal("02215");
+    // The normalized address is populated and matches the expected normalized address
+    assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
 
     // The isResidential flag on the normalized address is true
     expect(normalizedAddress.isResidential).to.equal(undefined);
@@ -108,7 +127,7 @@ describe("validateAddress()", () => {
     // There are no warning or error messages
     assertNoWarningsOrErrorMessages(response);
 
-    // It should have an normalized address with the correct shape
+    // It should have a normalized address with the correct shape
     assertNormalizedAddressFormat(normalizedAddress);
   });
 
@@ -127,6 +146,16 @@ describe("validateAddress()", () => {
       postalCode: "02215",
     };
 
+    const expectedNormalizedAddress = {
+      country: "US",
+      street: ["4 JERSEY ST STE 200", "2ND FLOOR"],
+      cityLocality: "BOSTON",
+      stateProvince: "MA",
+      postalCode: "02215",
+      name: "",
+      company: "",
+    };
+
     const response = await shipengine.validateAddress(addressToValidate);
 
     const { normalizedAddress, isValid } = response;
@@ -134,17 +163,14 @@ describe("validateAddress()", () => {
     // The isValid flag is true
     expect(isValid).to.be.a("boolean").and.to.equal(true);
 
-    // The normalized address is populated and matches the original with adjustments
-    expect(normalizedAddress.country).to.equal("US");
+    // The normalized address is populated and matches the expected normalized address
+    assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
 
     // All lines of the address are returned in the correct order
     expect(normalizedAddress.street).to.deep.equal([
       "4 JERSEY ST STE 200",
       "2ND FLOOR",
     ]);
-    expect(normalizedAddress.cityLocality).to.equal("BOSTON");
-    expect(normalizedAddress.stateProvince).to.equal("MA");
-    expect(normalizedAddress.postalCode).to.equal("02215");
 
     // The isResidential flag on the normalized address is false
     expect(normalizedAddress.isResidential)
@@ -154,7 +180,7 @@ describe("validateAddress()", () => {
     // There are no warning or error messages
     assertNoWarningsOrErrorMessages(response);
 
-    // It should have an normalized address with the correct shape
+    // It should have a normalized address with the correct shape
     assertNormalizedAddressFormat(normalizedAddress);
   });
 
@@ -169,6 +195,16 @@ describe("validateAddress()", () => {
       postalCode: "02215",
     };
 
+    const expectedNormalizedAddress = {
+      country: "US",
+      street: ["4 JERSEY ST"],
+      cityLocality: "BOSTON",
+      stateProvince: "MA",
+      postalCode: "02215",
+      name: "",
+      company: "",
+    };
+
     const response = await shipengine.validateAddress(addressToValidate);
 
     const { normalizedAddress, isValid } = response;
@@ -176,11 +212,8 @@ describe("validateAddress()", () => {
     // The isValid flag is true
     expect(isValid).to.be.a("boolean").and.to.equal(true);
 
-    // The normalized address is populated and matches the original with adjustments
-    expect(normalizedAddress.country).to.equal("US");
-    expect(normalizedAddress.street).to.deep.equal(["4 JERSEY ST"]);
-    expect(normalizedAddress.cityLocality).to.equal("BOSTON");
-    expect(normalizedAddress.stateProvince).to.equal("MA");
+    // The normalized address is populated and matches the expected normalized address
+    assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
 
     // The correct postalCode is returned
     expect(normalizedAddress.postalCode).to.equal("02215");
@@ -188,7 +221,7 @@ describe("validateAddress()", () => {
     // There are no warning or error messages
     assertNoWarningsOrErrorMessages(response);
 
-    // It should have an normalized address with the correct shape
+    // It should have a normalized address with the correct shape
     assertNormalizedAddressFormat(normalizedAddress);
   });
 
@@ -197,10 +230,20 @@ describe("validateAddress()", () => {
 
     const addressToValidate = {
       country: "CA",
-      street: ["170 PRINCES' BLVD", "validate-canadian-address"],
+      street: ["170 Princes' Blvd", "validate-canadian-address"],
       cityLocality: "Toronto",
       stateProvince: "On",
       postalCode: "M6K 3C3",
+    };
+
+    const expectedNormalizedAddress = {
+      country: "CA",
+      street: ["170 Princes' Blvd"],
+      cityLocality: "Toronto",
+      stateProvince: "On",
+      postalCode: "M6K 3C3",
+      name: "",
+      company: "",
     };
 
     const response = await shipengine.validateAddress(addressToValidate);
@@ -212,10 +255,7 @@ describe("validateAddress()", () => {
 
     // The normalized address is populated and matches the original with adjustments
     // Verified that SE API does not capitalize Canadian normalized addresses
-    expect(normalizedAddress.country).to.equal("CA");
-    expect(normalizedAddress.street).to.deep.equal(["170 Princes' Blvd"]);
-    expect(normalizedAddress.cityLocality).to.equal("Toronto");
-    expect(normalizedAddress.stateProvince).to.equal("On");
+    assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
 
     // The correct postalCode is returned
     expect(normalizedAddress.postalCode).to.equal("M6K 3C3");
@@ -223,7 +263,7 @@ describe("validateAddress()", () => {
     // There are no warning or error messages
     assertNoWarningsOrErrorMessages(response);
 
-    // It should have an normalized address with the correct shape
+    // It should have a normalized address with the correct shape
     assertNormalizedAddressFormat(normalizedAddress);
   });
 
@@ -238,6 +278,16 @@ describe("validateAddress()", () => {
       country: "JP",
     };
 
+    const expectedNormalizedAddress = {
+      street: ["68 Kamitobatsunodacho"],
+      cityLocality: "Kyoto-Shi Minami-Ku",
+      stateProvince: "Kyoto",
+      postalCode: "601-8104",
+      country: "JP",
+      name: "",
+      company: "",
+    };
+
     const response = await shipengine.validateAddress(addressToValidate);
 
     const { normalizedAddress, isValid } = response;
@@ -245,18 +295,14 @@ describe("validateAddress()", () => {
     // The isValid flag is true
     expect(isValid).to.be.a("boolean").and.to.equal(true);
 
-    // The normalized address is populated and matches the original with adjustments
+    // The normalized address is populated and matches the expected normalized address
     // This is actually what SE API returns
-    expect(normalizedAddress.country).to.equal("JP");
-    expect(normalizedAddress.street).to.deep.equal(["68 Kamitobatsunodacho"]);
-    expect(normalizedAddress.cityLocality).to.equal("Kyoto-Shi Minami-Ku");
-    expect(normalizedAddress.stateProvince).to.equal("Kyoto");
-    expect(normalizedAddress.postalCode).to.equal("601-8104");
+    assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
 
     // There are no warning or error messages
     assertNoWarningsOrErrorMessages(response);
 
-    // It should have an normalized address with the correct shape
+    // It should have a normalized address with the correct shape
     assertNormalizedAddressFormat(normalizedAddress);
   });
 
@@ -271,31 +317,37 @@ describe("validateAddress()", () => {
       postalCode: "M6K 3C3",
     };
 
+    const expectedNormalizedAddress = {
+      country: "CA",
+      street: ["170 Princes' Blvd"],
+      cityLocality: "Toronto",
+      stateProvince: "On",
+      postalCode: "M6K 3C3",
+      name: "",
+      company: "",
+    };
+
     const response = await shipengine.validateAddress(addressToValidate);
 
     const { normalizedAddress, isValid } = response;
 
-    // The isValid flag is false
-    // TODO: This fails. It is written to the Jira ticket spec but this is not how the mock RPC server responds
-    expect(isValid).to.be.a("boolean").and.to.equal(false);
+    // The isValid flag is true
+    expect(isValid).to.be.a("boolean").and.to.equal(true);
+
     // The normalized address is populated with the correct values
-    expect(normalizedAddress.country).to.equal("CA");
-    expect(normalizedAddress.street).to.deep.equal(["170 Princes' Blvd"]);
-    expect(normalizedAddress.cityLocality).to.equal("Toronto");
-    expect(normalizedAddress.stateProvince).to.equal("On");
-    expect(normalizedAddress.postalCode).to.equal("M6K 3C3");
+    assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
 
     // Warning messages are returned correctly
     expect(response.warnings).to.be.an("array").and.to.have.length(1);
-    expect(response.warnings).to.deep.equals(
-      ["This address has been verified down to the house/building level (highest possible accuracy with the provided data)"]
-    );
+    expect(response.warnings).to.deep.equals([
+      "This address has been verified down to the house/building level (highest possible accuracy with the provided data)",
+    ]);
 
     // There are no error messages
     expect(response.info).to.be.an("array").and.to.have.length(0);
     expect(response.errors).to.be.an("array").and.to.have.length(0);
 
-    // It should have an normalized address with the correct shape
+    // It should have a normalized address with the correct shape
     assertNormalizedAddressFormat(normalizedAddress);
   });
 
@@ -329,7 +381,7 @@ describe("validateAddress()", () => {
 
   it("Throws an error if no address lines are provided", async function () {
     const shipengine = new ShipEngine({ apiKey, baseURL });
-    let error;
+
     const addressToValidate = {
       country: "US",
       street: [],
@@ -340,23 +392,22 @@ describe("validateAddress()", () => {
 
     try {
       await shipengine.validateAddress(addressToValidate);
-    } catch (e) {
-      error = e;
+      errors.shouldHaveThrown();
+    } catch (error) {
+      errors.assertShipEngineError(error, {
+        name: "ShipEngineError",
+        source: "shipengine",
+        type: "validation",
+        code: "field_value_required",
+        message: "Invalid address. At least one address line is required.",
+      });
+      expect(error.requestId).to.be.undefined;
     }
-
-    expect(error).to.be.not.undefined;
-    expect(error.source).to.equal("shipengine");
-    expect(error.type).to.equal("validation");
-    expect(error.code).to.equal("field_value_required");
-    expect(error.message).to.equal(
-      "Invalid address. At least one address line is required."
-    );
-    expect(error.requestId).to.be.undefined;
   });
 
   it("Throws an error if too many address lines are provided", async function () {
     const shipengine = new ShipEngine({ apiKey, baseURL });
-    let error;
+
     const addressToValidate = {
       country: "US",
       street: ["4 Jersey St", "Ste 200", "Building 2", "Platform 9 3/4"],
@@ -367,23 +418,22 @@ describe("validateAddress()", () => {
 
     try {
       await shipengine.validateAddress(addressToValidate);
-    } catch (e) {
-      error = e;
+      errors.shouldHaveThrown();
+    } catch (error) {
+      errors.assertShipEngineError(error, {
+        name: "ShipEngineError",
+        source: "shipengine",
+        type: "validation",
+        code: "field_value_required",
+        message: "Invalid address. No more than 3 street lines are allowed.",
+      });
+      expect(error.requestId).to.be.undefined;
     }
-
-    expect(error).to.be.not.undefined;
-    expect(error.source).to.equal("shipengine");
-    expect(error.type).to.equal("validation");
-    expect(error.code).to.equal("invalid_field_value");
-    expect(error.message).to.equal(
-      "Invalid address. No more than 3 street lines are allowed."
-    );
-    expect(error.requestId).to.be.undefined;
   });
 
   it("Throws an error if the postalCode, cityLocality, and stateProvince properties are not *provided*", async function () {
     const shipengine = new ShipEngine({ apiKey, baseURL });
-    let error;
+
     const addressToValidate = {
       country: "US",
       street: ["4 Jersey St"],
@@ -391,23 +441,23 @@ describe("validateAddress()", () => {
 
     try {
       await shipengine.validateAddress(addressToValidate);
-    } catch (e) {
-      error = e;
+      errors.shouldHaveThrown();
+    } catch (error) {
+      errors.assertShipEngineError(error, {
+        name: "ShipEngineError",
+        source: "shipengine",
+        type: "validation",
+        code: "field_value_required",
+        message:
+          "Invalid address. Either the postal code or the city/locality and state/province must be specified.",
+      });
+      expect(error.requestId).to.be.undefined;
     }
-
-    expect(error).to.be.not.undefined;
-    expect(error.source).to.equal("shipengine");
-    expect(error.type).to.equal("validation");
-    expect(error.code).to.equal("field_value_required");
-    expect(error.message).to.equal(
-      "Invalid address. Either the postal code or the city/locality and state/province must be specified."
-    );
-    expect(error.requestId).to.be.undefined;
   });
 
-  it("Throws an error if th postalCode, cityLocality, and stateProvince properties are not *populated*", async function () {
+  it("Throws an error if the postalCode, cityLocality, and stateProvince properties are not *populated*", async function () {
     const shipengine = new ShipEngine({ apiKey, baseURL });
-    let error;
+
     const addressToValidate = {
       country: "US",
       street: ["4 Jersey St"],
@@ -418,23 +468,23 @@ describe("validateAddress()", () => {
 
     try {
       await shipengine.validateAddress(addressToValidate);
-    } catch (e) {
-      error = e;
+      errors.shouldHaveThrown();
+    } catch (error) {
+      errors.assertShipEngineError(error, {
+        name: "ShipEngineError",
+        source: "shipengine",
+        type: "validation",
+        code: "field_value_required",
+        message:
+          "Invalid address. Either the postal code or the city/locality and state/province must be specified.",
+      });
+      expect(error.requestId).to.be.undefined;
     }
-
-    expect(error).to.be.not.undefined;
-    expect(error.source).to.equal("shipengine");
-    expect(error.type).to.equal("validation");
-    expect(error.code).to.equal("field_value_required");
-    expect(error.message).to.equal(
-      "Invalid address. Either the postal code or the city/locality and state/province must be specified."
-    );
-    expect(error.requestId).to.be.undefined;
   });
 
-  it("Throws an error if neither the postalCode nor the cityLocality is provided", async function () {
+  it("Throws an error if neither the postalCode nor the cityLocality is provided, (state only provided)", async function () {
     const shipengine = new ShipEngine({ apiKey, baseURL });
-    let error;
+
     const addressToValidate = {
       country: "US",
       street: ["4 Jersey St"],
@@ -443,23 +493,23 @@ describe("validateAddress()", () => {
 
     try {
       await shipengine.validateAddress(addressToValidate);
-    } catch (e) {
-      error = e;
+      errors.shouldHaveThrown();
+    } catch (error) {
+      errors.assertShipEngineError(error, {
+        name: "ShipEngineError",
+        source: "shipengine",
+        type: "validation",
+        code: "field_value_required",
+        message:
+          "Invalid address. Either the postal code or the city/locality and state/province must be specified.",
+      });
+      expect(error.requestId).to.be.undefined;
     }
-
-    expect(error).to.be.not.undefined;
-    expect(error.source).to.equal("shipengine");
-    expect(error.type).to.equal("validation");
-    expect(error.code).to.equal("field_value_required");
-    expect(error.message).to.equal(
-      "Invalid address. Either the postal code or the city/locality and state/province must be specified."
-    );
-    expect(error.requestId).to.be.undefined;
   });
 
-  it("Throws an error if neither the postalCode nor the stateProvince is provided", async function () {
+  it("Throws an error if neither the postalCode nor the stateProvince is provided (citLocality only provided)", async function () {
     const shipengine = new ShipEngine({ apiKey, baseURL });
-    let error;
+
     const addressToValidate = {
       country: "US",
       street: ["4 Jersey St"],
@@ -468,18 +518,18 @@ describe("validateAddress()", () => {
 
     try {
       await shipengine.validateAddress(addressToValidate);
-    } catch (e) {
-      error = e;
+      errors.shouldHaveThrown();
+    } catch (error) {
+      errors.assertShipEngineError(error, {
+        name: "ShipEngineError",
+        source: "shipengine",
+        type: "validation",
+        code: "field_value_required",
+        message:
+          "Invalid address. Either the postal code or the city/locality and state/province must be specified.",
+      });
+      expect(error.requestId).to.be.undefined;
     }
-
-    expect(error).to.be.not.undefined;
-    expect(error.source).to.equal("shipengine");
-    expect(error.type).to.equal("validation");
-    expect(error.code).to.equal("field_value_required");
-    expect(error.message).to.equal(
-      "Invalid address. Either the postal code or the city/locality and state/province must be specified."
-    );
-    expect(error.requestId).to.be.undefined;
   });
 
   it("Validates an address when a postalCode is provided but neither cityLocality nor stateProvince is provided", async function () {
@@ -491,6 +541,16 @@ describe("validateAddress()", () => {
       postalCode: "02215",
     };
 
+    const expectedNormalizedAddress = {
+      country: "US",
+      street: ["4 JERSEY ST"],
+      cityLocality: "BOSTON",
+      stateProvince: "MA",
+      postalCode: "02215",
+      name: "",
+      company: "",
+    };
+
     const response = await shipengine.validateAddress(addressToValidate);
 
     const { normalizedAddress, isValid } = response;
@@ -498,7 +558,18 @@ describe("validateAddress()", () => {
     expect(isValid).to.be.a("boolean").and.to.be.true;
     expect(normalizedAddress.isResidential).to.be.a("boolean").and.to.be.true;
 
-    // It should have an normalized address with the correct shape
+    // The city and state should be populated even though it was not provided
+    expect(normalizedAddress.cityLocality).to.equal(
+      expectedNormalizedAddress.cityLocality
+    );
+    expect(normalizedAddress.stateProvince).to.equal(
+      expectedNormalizedAddress.stateProvince
+    );
+
+    // The normalized address is populated and matches the expected normalized address
+    assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
+
+    // It should have a normalized address with the correct shape
     assertNormalizedAddressFormat(normalizedAddress);
 
     // It should not throw errors
@@ -515,6 +586,16 @@ describe("validateAddress()", () => {
       stateProvince: "MA",
     };
 
+    const expectedNormalizedAddress = {
+      country: "US",
+      street: ["4 JERSEY ST"],
+      cityLocality: "BOSTON",
+      stateProvince: "MA",
+      postalCode: "02215",
+      name: "",
+      company: "",
+    };
+
     const response = await shipengine.validateAddress(addressToValidate);
 
     const { normalizedAddress, isValid } = response;
@@ -522,7 +603,15 @@ describe("validateAddress()", () => {
     expect(isValid).to.be.a("boolean").and.to.be.true;
     expect(normalizedAddress.isResidential).to.be.a("boolean").and.to.be.true;
 
-    // It should have an normalized address with the correct shape
+    // The postalCode should to popoulated even though it was not provided
+    expect(normalizedAddress.postalCode).to.equal(
+      expectedNormalizedAddress.postalCode
+    );
+
+    // The normalized address is populated and matches the expected normalized address
+    assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
+
+    // It should have a normalized address with the correct shape
     assertNormalizedAddressFormat(normalizedAddress);
 
     // It should not throw errors
@@ -531,7 +620,6 @@ describe("validateAddress()", () => {
 
   it("Throws an error if the countryCode is not provided", async function () {
     const shipengine = new ShipEngine({ apiKey, baseURL });
-    let error;
     const addressToValidate = {
       street: ["4 Jersey St"],
       cityLocality: "Boston",
@@ -541,23 +629,22 @@ describe("validateAddress()", () => {
 
     try {
       await shipengine.validateAddress(addressToValidate);
-    } catch (e) {
-      error = e;
+      errors.shouldHaveThrown();
+    } catch (error) {
+      errors.assertShipEngineError(error, {
+        name: "ShipEngineError",
+        source: "shipengine",
+        type: "validation",
+        code: "field_value_required",
+        message: "Invalid address. The country must be specified.",
+      });
+      expect(error.requestId).to.be.undefined;
     }
-
-    expect(error).to.be.not.undefined;
-    expect(error.source).to.equal("shipengine");
-    expect(error.type).to.equal("validation");
-    expect(error.code).to.equal("field_value_required");
-    expect(error.message).to.equal(
-      "Invalid address. The country must be specified."
-    );
-    expect(error.requestId).to.be.undefined;
   });
 
   it("Throws an error if the countryCode is invalid", async function () {
     const shipengine = new ShipEngine({ apiKey, baseURL });
-    let error;
+
     const addressToValidate = {
       countryCode: "USA",
       street: ["4 Jersey St"],
@@ -568,53 +655,27 @@ describe("validateAddress()", () => {
 
     try {
       await shipengine.validateAddress(addressToValidate);
-    } catch (e) {
-      error = e;
+      errors.shouldHaveThrown();
+    } catch (error) {
+      errors.assertShipEngineError(error, {
+        name: "ShipEngineError",
+        source: "shipengine",
+        type: "validation",
+        code: "field_value_required",
+        message: "Invalid address. The country must be specified.",
+      });
+      expect(error.requestId).to.be.undefined;
     }
-
-    expect(error).to.be.not.undefined;
-    expect(error.source).to.equal("shipengine");
-    expect(error.type).to.equal("validation");
-    expect(error.code).to.equal("field_value_required");
-    expect(error.message).to.equal(
-      "Invalid address. The country must be specified."
-    );
-    expect(error.requestId).to.be.undefined;
   });
 
-  const assertNormalizedAddressMatchesOriginal = (
-    originalAddress,
-    normalizedAddress
-  ) => {
-    expect(normalizedAddress.cityLocality.toUpperCase()).to.equal(
-      originalAddress.cityLocality.toUpperCase()
-    );
-    expect(normalizedAddress.country.toUpperCase()).to.equal(
-      originalAddress.country.toUpperCase()
-    );
-
-    expect(normalizedAddress.postalCode.toUpperCase()).to.equal(
-      originalAddress.postalCode
-    );
-
-    expect(normalizedAddress.stateProvince.toUpperCase()).to.equal(
-      originalAddress.stateProvince.toUpperCase()
-    );
-    expect(normalizedAddress.street[0].toUpperCase()).to.equal(
-      originalAddress.street[0].toUpperCase()
-    );
-
-    if (normalizedAddress.street[1] !== undefined) {
-      expect(normalizedAddress.street[1]).to.equal(
-        originalAddress.street[1].toUpperCase()
-      );
-    }
-
-    if (normalizedAddress.street[2] !== undefined) {
-      expect(normalizedAddress.street[2]).to.equal(
-        originalAddress.street[2].toUpperCase()
-      );
-    }
+  const assertAddressEquals = (actual, expected) => {
+    expect(actual.name).to.equal(expected.name);
+    expect(actual.company).to.equal(expected.company);
+    expect(actual.street).to.deep.equal(expected.street);
+    expect(actual.cityLocality).to.equal(expected.cityLocality);
+    expect(actual.stateProvince).to.equal(expected.stateProvince);
+    expect(actual.postalCode).to.equal(expected.postalCode);
+    expect(actual.country).to.equal(expected.country);
   };
 
   const assertNormalizedAddressFormat = (normalizedAddress) => {
