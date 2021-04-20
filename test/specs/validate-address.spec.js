@@ -424,7 +424,7 @@ describe("validateAddress()", () => {
         name: "ShipEngineError",
         source: "shipengine",
         type: "validation",
-        code: "field_value_required",
+        code: "invalid_field_value",
         message: "Invalid address. No more than 3 street lines are allowed.",
       });
       expect(error.requestId).to.be.undefined;
