@@ -618,7 +618,7 @@ describe("validateAddress()", () => {
     assertNoWarningsOrErrorMessages(response);
   });
 
-  it("Throws an error if the countryCode is not provided", async function () {
+  it("Throws an error if the country is not provided", async function () {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const addressToValidate = {
       street: ["4 Jersey St"],
@@ -642,11 +642,11 @@ describe("validateAddress()", () => {
     }
   });
 
-  it("Throws an error if the countryCode is invalid", async function () {
+  it("Throws an error if the country is invalid", async function () {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
-      countryCode: "USA",
+      country: "USA",
       street: ["4 Jersey St"],
       cityLocality: "Boston",
       stateProvince: "MA",
@@ -665,6 +665,32 @@ describe("validateAddress()", () => {
         message: "Invalid address. The country must be specified.",
       });
       expect(error.requestId).to.be.undefined;
+    }
+  });
+
+  it("Throws an error if there is a server-side error", async function () {
+    const shipengine = new ShipEngine({ apiKey, baseURL });
+
+    const addressToValidate = {
+      country: "US",
+      street: ["4 Jersey St", "rpc-server-error"],
+      cityLocality: "Boston",
+      stateProvince: "MA",
+      postalCode: "01152",
+    };
+
+    try {
+      await shipengine.validateAddress(addressToValidate);
+      errors.shouldHaveThrown();
+    } catch (error) {
+      errors.assertShipEngineError(error, {
+        name: "ShipEngineError",
+        source: "shipengine",
+        type: "system",
+        code: "unspecified",
+        message: "Unable to connect to the database",
+      });
+      expect(error.requestID).to.match(/^req_\w+$/);
     }
   });
 
