@@ -661,8 +661,8 @@ describe("validateAddress()", () => {
         name: "ShipEngineError",
         source: "shipengine",
         type: "validation",
-        code: "field_value_required",
-        message: "Invalid address. The country must be specified.",
+        code: "invalid_field_value",
+        message: "Invalid address. USA is not a valid country code.",
       });
       expect(error.requestId).to.be.undefined;
     }
