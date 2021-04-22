@@ -88,10 +88,8 @@ const errors = (module.exports = {
       expect(error.url).to.have.property("href", props.url);
     }
 
-    if (props.requestID) {
-      expect(error.requestID).to.match(/^req_\w+$/);
-    } else {
-      expect(error.requestID).to.equal(undefined);
+    if ("requestID" in props) {
+      expect(error.requestID).to.equal(props.requestID);
     }
 
     expect(error.message).to.be.a("string").with.length.above(0);
