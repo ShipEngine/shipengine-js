@@ -23,30 +23,22 @@ Quick Start
 Install ShipEngine JavaScript SDK via [npm](https://docs.npmjs.com/about-npm/).
 
 ```bash
-npm install shipengine
+npm install shipengine-js
 ```
 
 The only configuration requirement is an [API key](https://www.shipengine.com/docs/auth/#api-keys).
 
 ```javascript
-const ShipEngine = require("shipengine");
+const ShipEngine = require("shipengine-js");
 
-let shipengine = new ShipEngine("___YOUR_API_KEY_HERE__");
+const shipengine = new ShipEngine("___YOUR_API_KEY_HERE__");
 
-// Validate an address
-let result = await shipengine.validateAddress({
-  street: "1 E 161 St",
-  cityLocality: "The Bronx",
-  stateProvince: "NY",
-  postalCode: "10451",
-  country: "US",
-});
-
-// Print the validation results
-console.log(result.isValid);
-console.log(result.normalizedAddress);
 ```
-
+Methods
+-------------------------------
+* [`validateAddress`](./docs/validate-address.md) - Indicates whether the provided address is valid. If the address is valid, 
+  the method returns a normalized version of the address
+based on the standards of the country in which the address resides. 
 
 Contributing
 --------------------------
