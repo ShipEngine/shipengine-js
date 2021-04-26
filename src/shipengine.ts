@@ -1,7 +1,13 @@
 import { EventEmitter } from "./isomorphic.node";
-import { Address, AddressValidationResult } from "./address/public-types";
+import {
+  Address,
+  AddressValidationResult,
+  NormalizedAddress,
+} from "./address/public-types";
 import { validateAddress } from "./address/validate-address";
+import { normalizeAddress } from "./address/normalize-address";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
+import { ShipEngineError } from "./errors";
 
 /**
  * Exposes the functionality of the ShipEngine API.
@@ -50,5 +56,13 @@ export class ShipEngine extends EventEmitter {
   ): Promise<AddressValidationResult> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return validateAddress(address, mergedConfig, this);
+  }
+
+  public async normalizeAddress(
+    address: Address,
+    config?: ShipEngineConfig
+  ): Promise<NormalizedAddress | ShipEngineError> {
+    const mergedConfig = NormalizedConfig.merge(this.config, config);
+    return normalizeAddress(address, mergedConfig, this);
   }
 }
