@@ -3,7 +3,7 @@
 const { expect } = require("chai");
 const { Address } = require("../../");
 
-const addresses = (module.exports = {
+module.exports = {
   assertAddress(value) {
     expect(value).to.be.an.instanceOf(Address);
   },
@@ -53,4 +53,4 @@ const addresses = (module.exports = {
     expect(response.warnings).to.be.an("array").and.be.empty;
     expect(response.errors).to.be.an("array").and.be.empty;
   },
-});
+};
