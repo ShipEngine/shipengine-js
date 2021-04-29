@@ -2,7 +2,11 @@ const { expect } = require("chai");
 const { ShipEngine } = require("../../");
 const { apiKey, baseURL } = require("../utils/constants");
 const errors = require("../utils/errors");
-const addresses = require("../utils/addresses");
+const {
+  assertAddressEquals,
+  assertNormalizedAddressFormat,
+  assertNoWarningsOrErrorMessages,
+} = require("../utils/addresses");
 
 describe("validateAddress()", () => {
   it("Validates a residential address", async function () {
@@ -35,7 +39,7 @@ describe("validateAddress()", () => {
     expect(isValid).to.be.a("boolean").and.to.equal(true);
 
     // The normalized address is populated and matches the expected normalized address
-    addresses.assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
+    assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
 
     // The isResidential flag on the normalized address is true
     expect(normalizedAddress.isResidential)
@@ -43,10 +47,10 @@ describe("validateAddress()", () => {
       .and.to.equal(true);
 
     // There are no warning or error messages
-    addresses.assertNoWarningsOrErrorMessages(response);
+    assertNoWarningsOrErrorMessages(response);
 
     // It should have a normalized address with the correct shape
-    addresses.assertNormalizedAddressFormat(normalizedAddress);
+    assertNormalizedAddressFormat(normalizedAddress);
   });
 
   it("Validates a commercial address", async function () {
@@ -79,7 +83,7 @@ describe("validateAddress()", () => {
     expect(isValid).to.be.a("boolean").and.to.equal(true);
 
     // The normalized address is populated and matches the expected normalized address
-    addresses.assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
+    assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
 
     // The isResidential flag on the normalized address is false
     expect(normalizedAddress.isResidential)
@@ -87,10 +91,10 @@ describe("validateAddress()", () => {
       .and.to.equal(false);
 
     // There are no warning or error messages
-    addresses.assertNoWarningsOrErrorMessages(response);
+    assertNoWarningsOrErrorMessages(response);
 
     // It should have a normalized address with the correct shape
-    addresses.assertNormalizedAddressFormat(normalizedAddress);
+    assertNormalizedAddressFormat(normalizedAddress);
   });
 
   it("Validates an address of unknown type", async function () {
@@ -123,16 +127,16 @@ describe("validateAddress()", () => {
     expect(isValid).to.be.a("boolean").and.to.equal(true);
 
     // The normalized address is populated and matches the expected normalized address
-    addresses.assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
+    assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
 
     // The isResidential flag on the normalized address is true
     expect(normalizedAddress.isResidential).to.equal(undefined);
 
     // There are no warning or error messages
-    addresses.assertNoWarningsOrErrorMessages(response);
+    assertNoWarningsOrErrorMessages(response);
 
     // It should have a normalized address with the correct shape
-    addresses.assertNormalizedAddressFormat(normalizedAddress);
+    assertNormalizedAddressFormat(normalizedAddress);
   });
 
   it("Validates a multiline address", async function () {
@@ -169,7 +173,7 @@ describe("validateAddress()", () => {
     expect(isValid).to.be.a("boolean").and.to.equal(true);
 
     // The normalized address is populated and matches the expected normalized address
-    addresses.assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
+    assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
 
     // All lines of the address are returned in the correct order
     expect(normalizedAddress.street).to.deep.equal([
@@ -183,10 +187,10 @@ describe("validateAddress()", () => {
       .and.to.equal(false);
 
     // There are no warning or error messages
-    addresses.assertNoWarningsOrErrorMessages(response);
+    assertNoWarningsOrErrorMessages(response);
 
     // It should have a normalized address with the correct shape
-    addresses.assertNormalizedAddressFormat(normalizedAddress);
+    assertNormalizedAddressFormat(normalizedAddress);
   });
 
   it("Validates an address with a numeric zip code", async function () {
@@ -219,16 +223,16 @@ describe("validateAddress()", () => {
     expect(isValid).to.be.a("boolean").and.to.equal(true);
 
     // The normalized address is populated and matches the expected normalized address
-    addresses.assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
+    assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
 
     // The correct postalCode is returned
     expect(normalizedAddress.postalCode).to.equal("02215");
 
     // There are no warning or error messages
-    addresses.assertNoWarningsOrErrorMessages(response);
+    assertNoWarningsOrErrorMessages(response);
 
     // It should have a normalized address with the correct shape
-    addresses.assertNormalizedAddressFormat(normalizedAddress);
+    assertNormalizedAddressFormat(normalizedAddress);
   });
 
   it("Validates an address with an alpha zip code", async function () {
@@ -262,16 +266,16 @@ describe("validateAddress()", () => {
 
     // The normalized address is populated and matches the original with adjustments
     // Verified that SE API does not capitalize Canadian normalized addresses
-    addresses.assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
+    assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
 
     // The correct postalCode is returned
     expect(normalizedAddress.postalCode).to.equal("M6K 3C3");
 
     // There are no warning or error messages
-    addresses.assertNoWarningsOrErrorMessages(response);
+    assertNoWarningsOrErrorMessages(response);
 
     // It should have a normalized address with the correct shape
-    addresses.assertNormalizedAddressFormat(normalizedAddress);
+    assertNormalizedAddressFormat(normalizedAddress);
   });
 
   it("Validates an address with non-Latin characters", async function () {
@@ -305,13 +309,13 @@ describe("validateAddress()", () => {
 
     // The normalized address is populated and matches the expected normalized address
     // This is actually what SE API returns
-    addresses.assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
+    assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
 
     // There are no warning or error messages
-    addresses.assertNoWarningsOrErrorMessages(response);
+    assertNoWarningsOrErrorMessages(response);
 
     // It should have a normalized address with the correct shape
-    addresses.assertNormalizedAddressFormat(normalizedAddress);
+    assertNormalizedAddressFormat(normalizedAddress);
   });
 
   it("Validates an address with warning messages", async function () {
@@ -344,7 +348,7 @@ describe("validateAddress()", () => {
     expect(isValid).to.be.a("boolean").and.to.equal(true);
 
     // The normalized address is populated with the correct values
-    addresses.assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
+    assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
 
     // Warning messages are returned correctly
     expect(response.warnings).to.be.an("array").and.to.have.length(1);
@@ -357,7 +361,7 @@ describe("validateAddress()", () => {
     expect(response.errors).to.be.an("array").and.to.have.length(0);
 
     // It should have a normalized address with the correct shape
-    addresses.assertNormalizedAddressFormat(normalizedAddress);
+    assertNormalizedAddressFormat(normalizedAddress);
   });
 
   it("Validates an address with error messages", async function () {
@@ -577,13 +581,13 @@ describe("validateAddress()", () => {
     );
 
     // The normalized address is populated and matches the expected normalized address
-    addresses.assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
+    assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
 
     // It should have a normalized address with the correct shape
-    addresses.assertNormalizedAddressFormat(normalizedAddress);
+    assertNormalizedAddressFormat(normalizedAddress);
 
     // It should not throw errors
-    addresses.assertNoWarningsOrErrorMessages(response);
+    assertNoWarningsOrErrorMessages(response);
   });
 
   it("Validates an address when cityLocality and stateProvince are provided but no postalCode is provided", async function () {
@@ -620,13 +624,13 @@ describe("validateAddress()", () => {
     );
 
     // The normalized address is populated and matches the expected normalized address
-    addresses.assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
+    assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
 
     // It should have a normalized address with the correct shape
-    addresses.assertNormalizedAddressFormat(normalizedAddress);
+    assertNormalizedAddressFormat(normalizedAddress);
 
     // It should not throw errors
-    addresses.assertNoWarningsOrErrorMessages(response);
+    assertNoWarningsOrErrorMessages(response);
   });
 
   it("Throws an error if the country is not provided", async function () {
@@ -738,7 +742,7 @@ describe("validateAddress()", () => {
     expect(isValid).to.be.a("boolean").and.to.equal(true);
 
     // The normalized address is populated and matches the expected normalized address
-    addresses.assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
+    assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
 
     // The isResidential flag on the normalized address is true
     expect(normalizedAddress.isResidential)
@@ -746,10 +750,10 @@ describe("validateAddress()", () => {
       .and.to.equal(false);
 
     // There are no warning or error messages
-    addresses.assertNoWarningsOrErrorMessages(response);
+    assertNoWarningsOrErrorMessages(response);
 
     // It should have a normalized address with the correct shape
-    addresses.assertNormalizedAddressFormat(normalizedAddress);
+    assertNormalizedAddressFormat(normalizedAddress);
   });
 
   it("Validates an address with NO name,company,and phone", async function () {
@@ -782,7 +786,7 @@ describe("validateAddress()", () => {
     expect(isValid).to.be.a("boolean").and.to.equal(true);
 
     // The normalized address is populated and matches the expected normalized address
-    addresses.assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
+    assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
 
     // The isResidential flag on the normalized address is true
     expect(normalizedAddress.isResidential)
@@ -790,9 +794,9 @@ describe("validateAddress()", () => {
       .and.to.equal(true);
 
     // There are no warning or error messages
-    addresses.assertNoWarningsOrErrorMessages(response);
+    assertNoWarningsOrErrorMessages(response);
 
     // It should have a normalized address with the correct shape
-    addresses.assertNormalizedAddressFormat(normalizedAddress);
+    assertNormalizedAddressFormat(normalizedAddress);
   });
 });
