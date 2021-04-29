@@ -17,7 +17,6 @@ export async function normalizeAddress(
   address: Address,
   config: NormalizedConfig,
   events: EventEmitter
-  // @ts-expect-error TypeScript is confused by the return in the for loop
 ): Promise<NormalizedAddress> {
   const result: AddressValidationResult = await validateAddress(
     address,
@@ -25,28 +24,28 @@ export async function normalizeAddress(
     events
   );
 
-  if (result.normalizedAddress) {
-    if (!doesNormalizedAddressHaveErrors(result)) {
-      return result.normalizedAddress;
-    } else {
-      throw new ShipEngineError(
-        ErrorType.BusinessRules,
-        ErrorCode.InvalidAddress,
-        `Invalid address. ${result.errors}`
-      );
-    }
+  if (!resultIsSuccessful(result)) {
+    throw new ShipEngineError(
+      ErrorType.BusinessRules,
+      ErrorCode.InvalidAddress,
+      `Invalid address. ${result.errors}`
+    );
   }
+
+  return result.normalizedAddress;
 }
 
-function doesNormalizedAddressHaveErrors(
+function resultIsSuccessful(
   result: AddressValidationResult
-  // @ts-expect-error TypeScript is confused by the return in the for loop
-): boolean {
-  Boolean(
-    !(
-      result.isValid &&
-      result.normalizedAddress !== undefined &&
-      result.errors.length === 0
-    )
+): result is AddressValidationResultSuccess {
+  return (
+    result.isValid &&
+    result.normalizedAddress !== undefined &&
+    result.errors.length === 0
   );
+}
+
+interface AddressValidationResultSuccess extends AddressValidationResult {
+  isValid: true;
+  normalizedAddress: NormalizedAddress;
 }
