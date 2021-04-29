@@ -139,7 +139,7 @@ describe("validateAddress()", () => {
     assertNormalizedAddressFormat(normalizedAddress);
   });
 
-  it("Validates a multiline address", async function () {
+  it("Validates a multi-line address", async function () {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
@@ -282,7 +282,7 @@ describe("validateAddress()", () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
-      street: ["上鳥羽角田町６８", "validate-with-non-latin-chars"],
+      street: ["上鳥羽角田町６８", "address-with-non-latin-chars"],
       cityLocality: "南区",
       stateProvince: "京都",
       postalCode: "601-8104",
