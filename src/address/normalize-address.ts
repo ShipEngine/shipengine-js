@@ -18,6 +18,7 @@ export async function normalizeAddress(
   config: NormalizedConfig,
   events: EventEmitter
 ): Promise<NormalizedAddress> {
+  // Calls the validateAddress method and uses its output
   const result: AddressValidationResult = await validateAddress(
     address,
     config,
@@ -28,13 +29,14 @@ export async function normalizeAddress(
     throw new ShipEngineError(
       ErrorType.BusinessRules,
       ErrorCode.InvalidAddress,
-      `Invalid address. ${result.errors}`
+      "Invalid address." + "\n" + result.errors.join(`\n`)
     );
   }
 
   return result.normalizedAddress;
 }
 
+// Type Guard. If this function returns true, we can know that the value passed in is of type AddressValidationSuccess
 function resultIsSuccessful(
   result: AddressValidationResult
 ): result is AddressValidationResultSuccess {
@@ -45,6 +47,7 @@ function resultIsSuccessful(
   );
 }
 
+// Type created for Type Guard above
 interface AddressValidationResultSuccess extends AddressValidationResult {
   isValid: true;
   normalizedAddress: NormalizedAddress;
