@@ -1,13 +1,8 @@
 "use strict";
 
 const { expect } = require("chai");
-const { Address } = require("../../");
 
 module.exports = {
-  assertAddress(value) {
-    expect(value).to.be.an.instanceOf(Address);
-  },
-
   assertAddressEquals(actual, expected) {
     expect(actual.name).to.equal(expected.name);
     expect(actual.company).to.equal(expected.company);
