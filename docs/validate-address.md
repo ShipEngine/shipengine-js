@@ -142,6 +142,16 @@ const ShipEngine = require("shipengine");
 const shipengine = new ShipEngine("api_key");
 
 async function validateAddress() {
+
+  const originalAdddress = {
+    name: "John Doe",
+    company: "Example Corp.",
+    street: "525 S Winchester Blvd",
+    cityLocality: "San Jose",
+    stateProvince: "CA",
+    country: "US",
+  };
+  
   try {
     const result = await shipengine.validateAddress(address);
     
@@ -172,14 +182,14 @@ Example Output
   "isValid": true,
   "normalizedAddress": {
     "street": [
-      "4009 MARATHON BLVD"
+      "525 SOUTH WINCHESTER BLVD"
     ],
-    "name": "",
-    "company": "",
+    "name": "JOHN DOE",
+    "company": "EXAMPLE CORP.",
     "phone": "",
-    "cityLocality": "AUSTIN",
-    "stateProvince": "TX",
-    "postalCode": "78756",
+    "cityLocality": "SAN JOSE",
+    "stateProvince": "CA",
+    "postalCode": "95128",
     "country": "US",
     "isResidential": true
   },
@@ -195,14 +205,14 @@ Example Output
   "isValid": true,
   "normalizedAddress": {
     "street": [
-      "4009 MARATHON BLVD"
+      "525 SOUTH WINCHESTER BLVD"
     ],
-    "name": "",
-    "company": "",
+    "name": "JOHN DOE",
+    "company": "EXAMPLE CORP.",
     "phone": "",
-    "cityLocality": "AUSTIN",
-    "stateProvince": "TX",
-    "postalCode": "78756",
+    "cityLocality": "SAN JOSE",
+    "stateProvince": "CA",
+    "postalCode": "95128",
     "country": "US",
     "isResidential": false
   },

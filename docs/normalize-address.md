@@ -116,33 +116,35 @@ If the address is not valid or cannot be normalized properly, or if a network or
 Example
 -----------------------
 ```
-import ShipEngine from shipengine
-const shipengine = new ShipEngine("api_key")
+const ShipEngine = require("shipengine");
+const shipengine = new ShipEngine("api_key");
 
-const originalAdddress = {
-  name: "John Doe",
-  company: "Acme Corp.",
-  street: "123 Main St.",
-  cityLocality: "Austin",
-  stateProvince: "Texas",
-  country: "US",
-}
-try {
-  // Convert the address to its normalized format
-  let normalizedAddress = await shipengine.normalizedAddress(originalAddress);
+async function normalizeAddress() {
+
+  const originalAdddress = {
+    name: "John Doe",
+    company: "Example Corp.",
+    street: "525 S Winchester Blvd",
+    cityLocality: "San Jose",
+    stateProvince: "CA",
+    country: "US",
+  };
+  
+  try {
+    // Convert the address to its normalized format
+    const normalizedAddress = await shipengine.normalizedAddress(originalAddress);
     
-  console.log("Successfully normalized the address!")
-  console.log(result.normalizedAddress.toString());;
-   }
-   else {
-     // Bad address. Print the warning & error messages
-     console.log("The address is not valid");
-     console.log(result.warnings[0]);
-     console.log(result.errors[0]);
-     
+    console.log("Successfully normalized the address!")
+    console.log(result.normalizedAddress.toString());;
+    }
+    else {
+      // Bad address. Print the warning & error messages
+      console.log("The address is not valid");
+      console.log(result.warnings[0]);
+      console.log(result.errors[0]);
    } 
   } catch (e) {
-      console.log("Error validating address: ", e.message);
+    console.log("Error validating address: ", e.message);
   }
 }
 
@@ -155,14 +157,14 @@ Example Output
 ```
 {
   "street": [
-    "4 JERSEY ST"
+    "525 SOUTH WINCHESTER BLVD"
   ],
-  "name": "",
-  "company": "",
+  "name": "JOHN DOE",
+  "company": "EXAMPLE CORP.",
   "phone": "",
-  "cityLocality": "BOSTON",
-  "stateProvince": "MA",
-  "postalCode": "02215",
+  "cityLocality": "SAN JOSE",
+  "stateProvince": "CA",
+  "postalCode": "95128",
   "country": "US",
   "isResidential": true
 }
