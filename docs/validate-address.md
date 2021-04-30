@@ -9,7 +9,7 @@ and supports address validation for virtually every country on Earth, including 
 Great Britain, Australia, Germany, France, Norway, Spain, Sweden, Israel, Italy, and over 160 others.
 
 The `validateAddress` Method
-============================================
+--------------------------------------
 The `validateAddress` method allows you to determine whether an address is valid before using it for your shipments. 
 It accepts an address object containing typical address properties, described below, and will return a normalized address object
 if the address is valid. 
@@ -20,10 +20,12 @@ These changes are suggested
 to ensure your address is best understood by the carrier systems that will read it. 
 
 Input Parameters
-=================================================
+-------------------------------------
 
 The `validateAddress` method accepts an address object containing the properties listed below.
-You can import the `Address` type into your project to take advantage of your IDE's code completion functionality.
+If you are using TypeScript, you can import the [`Address`](https://github.com/ShipEngine/shipengine-js/blob/dc2a6cd5dba7f3e62f35b9d2224270bb94700897/src/address/public-types.ts#L6-L54)
+type into your project to take advantage of your 
+IDE's code completion functionality.
 
 * `country` *required* <br>
 A *string* containing a valid [two digit country code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes).
@@ -67,9 +69,10 @@ A *string* between `0` and `1000` characters indicating the company name, if thi
   
 
 Output
-=============================================
+--------------------------------
 The `validateAddress` method returns an address validation result object containing the properties listed below.
-You can import the `AddressValidationResult` type into your project to take advantage of your IDE's code completion functionality.
+If you are using TypeScript, you can import the [`AddressValidationResult`](https://github.com/ShipEngine/shipengine-js/blob/dc2a6cd5dba7f3e62f35b9d2224270bb94700897/src/address/public-types.ts#L123-L154) 
+type into your project to take advantage of your IDE's code completion functionality.
 
 * `isValid` <br>
   A *boolean* indicating whether the address provided is valid.
@@ -82,10 +85,10 @@ This property will only be provided if the address is valid.
    <br>
   
   * `street` <br>
-     An *array* containing the street address. Each string in the array is a separate line, up to 3.
-  <br>  
+     An *array* containing the street address. Each string in the array is a separate line, up to 3. <br>
+
   * `country` <br>
-  A *string* containing the ISO 3166 country code.
+  A *string* containing the [ISO 3166 country code]((https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)).
   
   * `postalCode`  <br>
   A *string* containing the postal code.
@@ -128,36 +131,46 @@ prevent the address from being fully validated.
 
 Errors
 ======
-The `validateAddress` method may throw a `ShipEngineError` if there are issues with the input data, a
-network error, or a server error from the backend API.
+The `validateAddress` method may throw a [`ShipEngineError`](https://github.com/ShipEngine/shipengine-js/blob/dc2a6cd5dba7f3e62f35b9d2224270bb94700897/src/errors/shipengine-error.ts#L7-L44) 
+if there are issues with the input data, a network error, or a server error from the backend API.
 
 
 Example
 ==============================
 ```
+import ShipEngine from shipengine
+const shipengine = new ShipEngine("api_key")
+
 try {
-  response = await shipengine.validateAddress({
+  const result = await shipengine.validateAddress({
       country: "US",
       street: ["4009 Marathon Blvd"],
       cityLocality: "Austin",
       stateProvince: "TX",
-    }
+    });
     
-    const { isValid, normalizedAddress } = response;
+    const { isValid, normalizedAddress } = result;
     
-    console.assert(isValid, "Expected address to be valid.");
-    console.assert(normalizedAddress.isResidential, "Expected address to be a residential address");
-    console.log("The normalizedAddress is ", normalizedAddress');
-  
+    if (result.isValid) {
+      // Success! Print the formatted address
+      console.log("Successfully normalized the address!")
+      console.log(result.normalizedAddress.toString());;
+   }
+   else {
+     // Bad address. Print the warning & error messages
+     console.log("The address is not valid");
+     console.log(result.warnings[0]);
+     console.log(result.errors[0]);
+     
+   } 
   } catch (e) {
       console.log("Error validating address: ", e.message);
   }
 }
-
 ```
 
 Example Output
-===========================
+-----------------------------------------------------
 
 ### Successful Address Validation
 ```{
@@ -181,7 +194,7 @@ Example Output
 }
 ```
 
-### Success Address Validation with Warnings
+### Successful Address Validation with Warnings
 ```
 {
   "isValid": true,
