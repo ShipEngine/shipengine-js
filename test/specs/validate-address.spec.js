@@ -414,7 +414,7 @@ describe("validateAddress()", () => {
         code: "field_value_required",
         message: "Invalid address. At least one address line is required.",
       });
-      expect(error.requestId).to.be.undefined;
+      expect(error.requestId).to.equal(undefined);
     }
   });
 
@@ -440,7 +440,7 @@ describe("validateAddress()", () => {
         code: "invalid_field_value",
         message: "Invalid address. No more than 3 street lines are allowed.",
       });
-      expect(error.requestId).to.be.undefined;
+      expect(error.requestId).to.equal(undefined);
     }
   });
 
@@ -464,7 +464,7 @@ describe("validateAddress()", () => {
         message:
           "Invalid address. Either the postal code or the city/locality and state/province must be specified.",
       });
-      expect(error.requestId).to.be.undefined;
+      expect(error.requestId).to.equal(undefined);
     }
   });
 
@@ -491,7 +491,7 @@ describe("validateAddress()", () => {
         message:
           "Invalid address. Either the postal code or the city/locality and state/province must be specified.",
       });
-      expect(error.requestId).to.be.undefined;
+      expect(error.requestId).to.equal(undefined);
     }
   });
 
@@ -516,7 +516,7 @@ describe("validateAddress()", () => {
         message:
           "Invalid address. Either the postal code or the city/locality and state/province must be specified.",
       });
-      expect(error.requestId).to.be.undefined;
+      expect(error.requestId).to.equal(undefined);
     }
   });
 
@@ -541,7 +541,7 @@ describe("validateAddress()", () => {
         message:
           "Invalid address. Either the postal code or the city/locality and state/province must be specified.",
       });
-      expect(error.requestId).to.be.undefined;
+      expect(error.requestId).to.equal(undefined);
     }
   });
 
@@ -653,7 +653,7 @@ describe("validateAddress()", () => {
         code: "field_value_required",
         message: "Invalid address. The country must be specified.",
       });
-      expect(error.requestId).to.be.undefined;
+      expect(error.requestId).to.equal(undefined);
     }
   });
 
@@ -679,7 +679,7 @@ describe("validateAddress()", () => {
         code: "invalid_field_value",
         message: "Invalid address. USA is not a valid country code.",
       });
-      expect(error.requestId).to.be.undefined;
+      expect(error.requestId).to.equal(undefined);
     }
   });
 
@@ -742,12 +742,9 @@ describe("validateAddress()", () => {
     expect(isValid).to.be.a("boolean").and.to.equal(true);
 
     // The normalized address is populated and matches the expected normalized address
+    // This function validates the name, company, and phone properties, including
+    // the expected capitalization changes
     assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
-
-    // The isResidential flag on the normalized address is true
-    expect(normalizedAddress.isResidential)
-      .to.be.a("boolean")
-      .and.to.equal(false);
 
     // There are no warning or error messages
     assertNoWarningsOrErrorMessages(response);
@@ -786,12 +783,8 @@ describe("validateAddress()", () => {
     expect(isValid).to.be.a("boolean").and.to.equal(true);
 
     // The normalized address is populated and matches the expected normalized address
+    // This function validates the name, company, and phone properties
     assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
-
-    // The isResidential flag on the normalized address is true
-    expect(normalizedAddress.isResidential)
-      .to.be.a("boolean")
-      .and.to.equal(true);
 
     // There are no warning or error messages
     assertNoWarningsOrErrorMessages(response);
