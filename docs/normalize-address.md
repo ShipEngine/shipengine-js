@@ -127,10 +127,10 @@ async function normalizeAddress() {
   
   try {
     // Convert the address to its normalized format
-    const normalizedAddress = await shipengine.normalizedAddress(originalAddress);
+    const normalizedAddress = await shipengine.normalizeAddress(originalAddress);
     
     console.log("Successfully normalized the address!")
-    console.log(result.normalizedAddress.toString());;
+    console.log(result.normalizedAddress.toString());
     }
     else {
       // Bad address. Print the warning & error messages
