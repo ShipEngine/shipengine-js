@@ -32,7 +32,7 @@ IDE's code completion functionality.
 * `street` *required* <br>
   The street address provided as a single string or as multiple strings in an array. It should be one of the following:<br>
 
-    *  A *string* containing `0` to `1000` characters (i.e. `"4009 Marathon Blvd, Ste 200"`). <br>
+    * A *string* containing `0` to `1000` characters (i.e. `"4009 Marathon Blvd, Ste 200"`). <br>
     * An *array* containing `1` to `3` elements. Each element
       should contain a *string* value containing `0` to `1000` characters. <br>
       (i.e. `["4009 Marathon Blvd", "Ste 200"]`).
@@ -121,7 +121,7 @@ const shipengine = new ShipEngine("api_key")
 
 const originalAdddress = {
   name: "John Doe",
-  companyName: "Acme Corp.",
+  company: "Acme Corp.",
   street: "123 Main St.",
   cityLocality: "Austin",
   stateProvince: "Texas",

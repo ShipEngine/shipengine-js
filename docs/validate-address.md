@@ -138,35 +138,30 @@ if there are issues with the input data, a network error, or a server error from
 Example
 ==============================
 ```
-import ShipEngine from shipengine
-const shipengine = new ShipEngine("api_key")
+const ShipEngine = require("shipengine");
+const shipengine = new ShipEngine("api_key");
 
-try {
-  const result = await shipengine.validateAddress({
-      country: "US",
-      street: ["4009 Marathon Blvd"],
-      cityLocality: "Austin",
-      stateProvince: "TX",
-    });
-    
-    const { isValid, normalizedAddress } = result;
+async function validateAddress() {
+  try {
+    const result = await shipengine.validateAddress(address);
     
     if (result.isValid) {
       // Success! Print the formatted address
-      console.log("Successfully normalized the address!")
-      console.log(result.normalizedAddress.toString());;
+      console.log("Successfully normalized the address!");
+      console.log(result.normalizedAddress.toString());
    }
    else {
      // Bad address. Print the warning & error messages
      console.log("The address is not valid");
      console.log(result.warnings[0]);
      console.log(result.errors[0]);
-     
    } 
   } catch (e) {
-      console.log("Error validating address: ", e.message);
+    console.log("Error validating address: ", e.message);
   }
 }
+
+validateAddress();
 ```
 
 Example Output
