@@ -318,7 +318,7 @@ describe("normalizeAddress()", () => {
         code: "invalid_address",
         message: "Could not validate the address provided.",
       });
-      expect(error.requestId).to.be.undefined;
+      expect(error.requestId).to.equal(undefined);
     }
   });
 
@@ -349,7 +349,7 @@ describe("normalizeAddress()", () => {
           "\n" +
           "Invalid postal code",
       });
-      expect(error.requestId).to.be.undefined;
+      expect(error.requestId).to.equal(undefined);
     }
   });
 
@@ -375,7 +375,7 @@ describe("normalizeAddress()", () => {
         code: "field_value_required",
         message: "Invalid address. At least one address line is required.",
       });
-      expect(error.requestId).to.be.undefined;
+      expect(error.requestId).to.equal(undefined);
     }
   });
 
@@ -401,7 +401,7 @@ describe("normalizeAddress()", () => {
         code: "field_value_required",
         message: "Invalid address. At least one address line is required.",
       });
-      expect(error.requestId).to.be.undefined;
+      expect(error.requestId).to.equal(undefined);
     }
   });
 
@@ -425,11 +425,11 @@ describe("normalizeAddress()", () => {
         message:
           "Invalid address. Either the postal code or the city/locality and state/province must be specified.",
       });
-      expect(error.requestId).to.be.undefined;
+      expect(error.requestId).to.equal(undefined);
     }
   });
 
-  it("Throws an error if the postalCode, cityLocality, and stateProvince properties are not *populate", async function () {
+  it("Throws an error if the postalCode, cityLocality, and stateProvince properties are not *populated*", async function () {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
@@ -452,7 +452,7 @@ describe("normalizeAddress()", () => {
         message:
           "Invalid address. Either the postal code or the city/locality and state/province must be specified.",
       });
-      expect(error.requestId).to.be.undefined;
+      expect(error.requestId).to.equal(undefined);
     }
   });
 
@@ -477,7 +477,7 @@ describe("normalizeAddress()", () => {
         message:
           "Invalid address. Either the postal code or the city/locality and state/province must be specified.",
       });
-      expect(error.requestId).to.be.undefined;
+      expect(error.requestId).to.equal(undefined);
     }
   });
 
@@ -502,7 +502,7 @@ describe("normalizeAddress()", () => {
         message:
           "Invalid address. Either the postal code or the city/locality and state/province must be specified.",
       });
-      expect(error.requestId).to.be.undefined;
+      expect(error.requestId).to.equal(undefined);
     }
   });
 
@@ -590,7 +590,7 @@ describe("normalizeAddress()", () => {
         code: "field_value_required",
         message: "Invalid address. The country must be specified.",
       });
-      expect(error.requestId).to.be.undefined;
+      expect(error.requestId).to.equal(undefined);
     }
   });
 
@@ -616,7 +616,7 @@ describe("normalizeAddress()", () => {
         code: "invalid_field_value",
         message: "Invalid address. USA is not a valid country code.",
       });
-      expect(error.requestId).to.be.undefined;
+      expect(error.requestId).to.equal(undefined);
     }
   });
 
