@@ -12,6 +12,9 @@ module.exports = {
     expect(actual.stateProvince).to.equal(expected.stateProvince);
     expect(actual.postalCode).to.equal(expected.postalCode);
     expect(actual.country).to.equal(expected.country);
+    if ("isResidential" in expected) {
+      expect(actual.isResidential).to.equal(expected.isResidential);
+    }
   },
 
   assertNormalizedAddressFormat(normalizedAddress) {
