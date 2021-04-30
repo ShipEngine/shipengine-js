@@ -384,7 +384,7 @@ describe("normalizeAddress()", () => {
 
     const addressToValidate = {
       country: "US",
-      street: [],
+      street: ["4 Jersey St", "Ste 200", "Building 2", "Platform 9 3/4"],
       cityLocality: "Boston",
       stateProvince: "MA",
       postalCode: "02215",
@@ -398,8 +398,8 @@ describe("normalizeAddress()", () => {
         name: "ShipEngineError",
         source: "shipengine",
         type: "validation",
-        code: "field_value_required",
-        message: "Invalid address. At least one address line is required.",
+        code: "invalid_field_value",
+        message: "Invalid address. No more than 3 street lines are allowed.",
       });
       expect(error.requestId).to.equal(undefined);
     }
