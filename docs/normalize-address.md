@@ -71,11 +71,6 @@ Output
 ---------------------------
 If the address can be normalized, the `normalizeAddress` method returns a normalized version of the address. If you are using TypeScript, you can import the [NormalizedAddress]("./../src/address/public-types.ts") type into your project to take advantage of your IDE's code completion functionality.
 
-A normalized address contains the original address
-normalized using the standards of the country in which the address resides. You may see changes to capitalization or abbreviations.
-These changes are suggested
-to ensure your address is best understood by the carrier systems that will read it.
-
 * `street` <br>
   An *array* containing the street address. Each string in the array is a separate line, up to 3.<br>
 
