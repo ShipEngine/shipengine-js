@@ -7,7 +7,7 @@ import {
   JsonRpcErrorResponse,
   JsonRpcResponse,
   JsonRpcSuccessResponse,
-  RateLimitExceededErrorData,
+  RateLimitExceededErrorDataDTO,
 } from "./types";
 
 /**
@@ -122,11 +122,11 @@ function createError(response: JsonRpcErrorResponse): ShipEngineError {
 
   switch (response.error.data.code) {
     case ErrorCode.RateLimitExceeded:
-      errorData = response.error.data as RateLimitExceededErrorData;
+      errorData = response.error.data as RateLimitExceededErrorDataDTO;
       return new RateLimitExceededError(
         response.id,
         ErrorSource.ShipEngine,
-        errorData.retry_after * 1000 // convert seconds to milliseconds
+        errorData.retryAfter * 1000 // convert seconds to milliseconds
       );
 
     default:

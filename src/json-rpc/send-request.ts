@@ -69,16 +69,27 @@ export async function sendRequest<TParams, TResult>(
     });
 
     return processResponse(method, request, response, config, events);
-  } catch (error: unknown) {
-    // Something unexpected happened, like a network error.
-    // No response was received from the server
-    throw new ShipEngineError(
-      requestID,
-      ErrorSource.ShipEngine,
-      ErrorType.System,
-      ErrorCode.Unspecified,
-      `An unknown error occurred while calling the ShipEngine ${method} API:\n` +
-        (error as Error).message
-    );
+  } catch (error) {
+    if (error.type === "aborted") {
+      // The request timed out
+      throw new ShipEngineError(
+        requestID,
+        ErrorSource.ShipEngine,
+        ErrorType.System,
+        ErrorCode.Timeout,
+        `The ShipEngine ${method} API timed out.`
+      );
+    } else {
+      // Something unexpected happened, like a network error.
+      // No response was received from the server
+      throw new ShipEngineError(
+        requestID,
+        ErrorSource.ShipEngine,
+        ErrorType.System,
+        ErrorCode.Unspecified,
+        `An unknown error occurred while calling the ShipEngine ${method} API:\n` +
+          (error as Error).message
+      );
+    }
   }
 }
