@@ -29,10 +29,10 @@ export async function normalizeAddress(
     throw new ShipEngineError(
       ErrorType.BusinessRules,
       ErrorCode.InvalidAddress,
-      "Invalid address." +
+      "Invalid address. " +
         (result.errors.length === 1
-          ? result.errors[0]
-          : "\n" + result.errors.join(`\n`))
+          ? result.errors[0].message
+          : "\n" + result.errors.map((msg) => msg.message).join(`\n`))
     );
   }
 

@@ -32,6 +32,7 @@ export async function sendRequest<TParams, TResult>(
   setTimeout(() => controller.abort(), config.timeout);
 
   const headers = {
+    Accept: "application/json",
     "Content-Type": "application/json",
     "API-Key": config.apiKey,
     "User-Agent": userAgent,
