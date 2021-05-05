@@ -9,7 +9,7 @@ describe("validateAddress()", () => {
 
     const addressToValidate = {
       country: "US",
-      street: ["4 Jersey St", "validate-residential-address"],
+      street: ["4 Jersey St", "Apt. 2b"],
       cityLocality: "Boston",
       stateProvince: "MA",
       postalCode: "02215",
@@ -17,7 +17,7 @@ describe("validateAddress()", () => {
 
     const expectedNormalizedAddress = {
       country: "US",
-      street: ["4 JERSEY ST"],
+      street: ["4 JERSEY ST APT 2B"],
       cityLocality: "BOSTON",
       stateProvince: "MA",
       postalCode: "02215",
@@ -52,7 +52,7 @@ describe("validateAddress()", () => {
 
     const addressToValidate = {
       country: "US",
-      street: ["4 Jersey St", "validate-commercial-address"],
+      street: ["400 Jersey St"],
       cityLocality: "Boston",
       stateProvince: "MA",
       postalCode: "02215",
@@ -60,7 +60,7 @@ describe("validateAddress()", () => {
 
     const expectedNormalizedAddress = {
       country: "US",
-      street: ["4 JERSEY ST"],
+      street: ["400 JERSEY ST"],
       cityLocality: "BOSTON",
       stateProvince: "MA",
       postalCode: "02215",
@@ -95,7 +95,7 @@ describe("validateAddress()", () => {
 
     const addressToValidate = {
       country: "US",
-      street: ["4 Jersey St", "validate-unknown-address"],
+      street: ["4 Jersey St"],
       cityLocality: "Boston",
       stateProvince: "MA",
       postalCode: "02215",
@@ -136,11 +136,7 @@ describe("validateAddress()", () => {
 
     const addressToValidate = {
       country: "US",
-      street: [
-        "4 JERSEY ST STE 200",
-        "2nd Floor",
-        "validate-multiline-address",
-      ],
+      street: ["4 Jersey St.", "Suite 200", "2nd Floor"],
       cityLocality: "Boston",
       stateProvince: "MA",
       postalCode: "02215",
@@ -189,7 +185,7 @@ describe("validateAddress()", () => {
 
     const addressToValidate = {
       country: "US",
-      street: ["4 Jersey St", "validate-residential-address"],
+      street: ["4 Jersey St"],
       cityLocality: "Boston",
       stateProvince: "MA",
       postalCode: "02215",
@@ -230,7 +226,7 @@ describe("validateAddress()", () => {
 
     const addressToValidate = {
       country: "CA",
-      street: ["170 Princes' Blvd", "validate-canadian-address"],
+      street: ["170 Princes' Blvd"],
       cityLocality: "Toronto",
       stateProvince: "On",
       postalCode: "M6K 3C3",
@@ -238,10 +234,10 @@ describe("validateAddress()", () => {
 
     const expectedNormalizedAddress = {
       country: "CA",
-      street: ["170 Princes' Blvd"],
+      street: ["170 Princes Blvd"],
       cityLocality: "Toronto",
       stateProvince: "On",
-      postalCode: "M6K 3C3",
+      postalCode: "M6 K 3 C3",
       name: "",
       company: "",
     };
@@ -258,7 +254,7 @@ describe("validateAddress()", () => {
     assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
 
     // The correct postalCode is returned
-    expect(normalizedAddress.postalCode).to.equal("M6K 3C3");
+    expect(normalizedAddress.postalCode).to.equal("M6 K 3 C3");
 
     // There are no warning or error messages
     assertNoWarningsOrErrorMessages(response);
@@ -310,21 +306,28 @@ describe("validateAddress()", () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
-      country: "CA",
-      street: ["170 Princes' Blvd", "validate-with-warning"],
+      street: ["170 Warning Blvd", "Apartment 32-B"],
       cityLocality: "Toronto",
       stateProvince: "On",
       postalCode: "M6K 3C3",
+      country: "CA",
     };
 
     const expectedNormalizedAddress = {
-      country: "CA",
-      street: ["170 Princes' Blvd"],
+      name: "",
+      company: "",
+      street: ["170 Warning Blvd Apt 32-B"],
       cityLocality: "Toronto",
       stateProvince: "On",
       postalCode: "M6K 3C3",
-      name: "",
-      company: "",
+      country: "CA",
+    };
+
+    const expectedWarningMessage = {
+      type: "warning",
+      code: "partially_verified_to_premise_level",
+      message:
+        "This address has been verified down to the house/building level (highest possible accuracy with the provided data)",
     };
 
     const response = await shipengine.validateAddress(addressToValidate);
@@ -337,15 +340,15 @@ describe("validateAddress()", () => {
     // The normalized address is populated with the correct values
     assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
 
-    // Warning messages are returned correctly
-    expect(response.warnings).to.be.an("array").and.to.have.length(1);
-    expect(response.warnings).to.deep.equals([
-      "This address has been verified down to the house/building level (highest possible accuracy with the provided data)",
-    ]);
+    // Messages are returned correctly
+    expect(response.messages).to.deep.equal([expectedWarningMessage]);
 
-    // There are no error messages
-    expect(response.info).to.be.an("array").and.to.have.length(0);
-    expect(response.errors).to.be.an("array").and.to.have.length(0);
+    // Warning messages are returned correctly
+    expect(response.warnings).to.deep.equals([expectedWarningMessage]);
+
+    // There are no info or error messages
+    expect(response.info).to.deep.equal([]);
+    expect(response.errors).to.deep.equal([]);
 
     // It should have a normalized address with the correct shape
     assertNormalizedAddressFormat(normalizedAddress);
@@ -355,11 +358,29 @@ describe("validateAddress()", () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
-      country: "CA",
-      street: ["170 Princes' Blvd", "validate-with-error"],
+      street: ["170 Invalid Blvd"],
       cityLocality: "Toronto",
       stateProvince: "On",
       postalCode: "M6K 3C3",
+      country: "CA",
+    };
+
+    const expectedWarningMessage = {
+      code: "addres_not_found",
+      message: "Address not found",
+      type: "warning",
+    };
+
+    const expectedErrorMessage1 = {
+      code: "addres_not_found",
+      message: "Invalid City, State, or Zip",
+      type: "error",
+    };
+
+    const expectedErrorMessage2 = {
+      code: "addres_not_found",
+      message: "Insufficient or Incorrect Address Data",
+      type: "error",
     };
 
     const response = await shipengine.validateAddress(addressToValidate);
@@ -372,11 +393,20 @@ describe("validateAddress()", () => {
     // The normalized address is null
     expect(normalizedAddress).to.equal(undefined);
 
-    // Warning and error messages are returned correctly
-    expect(response.info).to.be.an("array").and.to.have.length(0);
-    expect(response.warnings).to.be.an("array").and.to.have.length(0);
-    expect(response.errors).to.be.an("array").and.to.have.length(1);
-    expect(response.errors).to.deep.equal(["Invalid City, State, or Zip"]);
+    // Messages are returned correctly
+    expect(response.messages).to.deep.equal([
+      expectedWarningMessage,
+      expectedErrorMessage1,
+      expectedErrorMessage2,
+    ]);
+
+    expect(response.info).to.deep.equal([]);
+    expect(response.warnings).to.deep.equal([expectedWarningMessage]);
+
+    expect(response.errors).to.deep.equal([
+      expectedErrorMessage1,
+      expectedErrorMessage2,
+    ]);
   });
 
   it("Throws an error if no address lines are provided", async function () {
@@ -537,15 +567,15 @@ describe("validateAddress()", () => {
 
     const addressToValidate = {
       country: "US",
-      street: ["4 Jersey St", "validate-residential-address"],
+      street: ["4 Jersey St"],
       postalCode: "02215",
     };
 
     const expectedNormalizedAddress = {
       country: "US",
       street: ["4 JERSEY ST"],
-      cityLocality: "BOSTON",
-      stateProvince: "MA",
+      cityLocality: "METROPOLIS",
+      stateProvince: "XX",
       postalCode: "02215",
       name: "",
       company: "",
@@ -556,7 +586,6 @@ describe("validateAddress()", () => {
     const { normalizedAddress, isValid } = response;
 
     expect(isValid).to.be.a("boolean").and.to.be.true;
-    expect(normalizedAddress.isResidential).to.be.a("boolean").and.to.be.true;
 
     // The city and state should be populated even though it was not provided
     expect(normalizedAddress.cityLocality).to.equal(
@@ -581,7 +610,7 @@ describe("validateAddress()", () => {
 
     const addressToValidate = {
       country: "US",
-      street: ["4 Jersey St", "validate-residential-address"],
+      street: ["4 Jersey St"],
       cityLocality: "Boston",
       stateProvince: "MA",
     };
@@ -591,7 +620,7 @@ describe("validateAddress()", () => {
       street: ["4 JERSEY ST"],
       cityLocality: "BOSTON",
       stateProvince: "MA",
-      postalCode: "02215",
+      postalCode: "12345",
       name: "",
       company: "",
     };
@@ -601,7 +630,6 @@ describe("validateAddress()", () => {
     const { normalizedAddress, isValid } = response;
 
     expect(isValid).to.be.a("boolean").and.to.be.true;
-    expect(normalizedAddress.isResidential).to.be.a("boolean").and.to.be.true;
 
     // The postalCode should to popoulated even though it was not provided
     expect(normalizedAddress.postalCode).to.equal(
@@ -672,11 +700,11 @@ describe("validateAddress()", () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
-      country: "US",
-      street: ["4 Jersey St", "rpc-server-error"],
+      street: ["500 Server Side Error"],
       cityLocality: "Boston",
       stateProvince: "MA",
       postalCode: "01152",
+      country: "US",
     };
 
     try {

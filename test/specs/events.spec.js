@@ -98,7 +98,7 @@ function assertRequestEvent(event, retry = 0, timeout = 5000) {
     .lessThan(new Date());
   expect(event.type).to.equal("requestSent");
   expect(event.message).to.equal(
-    `Calling the ShipEngine address/validate API at ${baseURL}`
+    `Calling the ShipEngine address.validate.v1 API at ${baseURL}`
   );
   expect(event.requestID).to.match(/^req_\w+$/);
   expect(event.url).to.be.an.instanceOf(URL).with.property("href", baseURL);
@@ -113,7 +113,7 @@ function assertRequestEvent(event, retry = 0, timeout = 5000) {
     .with.keys("jsonrpc", "id", "method", "params");
   expect(event.body.jsonrpc).to.equal("2.0");
   expect(event.body.id).to.equal(event.requestID);
-  expect(event.body.method).to.equal("address/validate");
+  expect(event.body.method).to.equal("address.validate.v1");
   expect(event.body.params).to.be.an("object").with.keys("address");
   expect(event.retry).to.be.a("number").and.equal(retry);
   expect(event.timeout).to.be.a("number").and.equal(timeout);
@@ -148,7 +148,7 @@ function assertResponseEvent(
     .lessThan(new Date());
   expect(event.type).to.equal("responseReceived");
   expect(event.message).to.equal(
-    `Received an HTTP ${statusCode} response from the ShipEngine address/validate API.`
+    `Received an HTTP ${statusCode} response from the ShipEngine address.validate.v1 API.`
   );
   expect(event.requestID).to.match(/^req_\w+$/);
   expect(event.url).to.be.an.instanceOf(URL).with.property("href", baseURL);
@@ -170,6 +170,6 @@ function assertResponseEvent(
   } else {
     expect(event.body.result)
       .to.be.an("object")
-      .with.keys("valid", "address", "messages");
+      .with.keys("isValid", "normalizedAddress", "messages");
   }
 }
