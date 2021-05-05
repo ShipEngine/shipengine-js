@@ -1,3 +1,11 @@
+import {
+  Country,
+  ErrorCode,
+  ErrorSource,
+  ErrorType,
+  ValidationMessageCode,
+  ValidationMessageType,
+} from "../enums";
 import { Url } from "url";
 
 import {
@@ -31,22 +39,22 @@ export interface JsonRpcSuccessResponse<TResult> {
 export interface JsonRpcErrorResponse {
   jsonrpc: "2.0";
   id: string;
-  error: ShipEngineError;
+  error: JsonRpcError;
 }
 
 /**
  * A JSON RPC 2.0 error from ShipEngine API
  */
-export interface ShipEngineError {
+export interface JsonRpcError {
   code: number;
   message: string;
-  data: ShipEngineErrorData;
+  data: ErrorDataDTO;
 }
 
 /**
  * ShipEngine-specific error data
  */
-export interface ShipEngineErrorData {
+export interface ErrorDataDTO {
   source: ErrorSource;
   type: ErrorType;
   code: ErrorCode;
@@ -56,49 +64,51 @@ export interface ShipEngineErrorData {
 /**
  * Error data for a rate_limit_exceeded error
  */
-export interface RateLimitExceededErrorData extends ShipEngineErrorData {
+export interface RateLimitExceededErrorDataDTO extends ErrorDataDTO {
   code: ErrorCode.RateLimitExceeded;
-  retry_after: number;
+  retryAfter: number;
 }
 
 /**
  * The params that are passed to the ShipEngine address validation API.
  */
-export interface AddressValidateParams {
+export interface AddressValidateParamsDTO {
   address: {
     name?: string;
-    company_name?: string;
+    company?: string;
     phone?: string;
     street: string[];
-    city_locality?: string;
-    state_province?: string;
-    postal_code?: string;
-    country_code: Country;
-    residential?: boolean | null;
+    cityLocality?: string;
+    stateProvince?: string;
+    postalCode?: string;
+    countryCode: Country;
+    isResidential?: boolean | null;
   };
 }
 
 /**
  * The result that comes back from the ShipEngine address validation API.
  */
-export interface AddressValidateResult {
-  valid: boolean;
-  address?: {
+export interface AddressValidateResultDTO {
+  isValid: boolean;
+  normalizedAddress?: {
     name?: string;
-    company_name?: string;
+    company?: string;
     phone?: string;
     street: string[];
-    city_locality: string;
-    state_province: string;
-    postal_code: string;
-    country_code: Country;
-    residential: boolean | null;
+    cityLocality: string;
+    stateProvince: string;
+    postalCode: string;
+    countryCode: Country;
+    isResidential: boolean | null;
   };
-  messages: {
-    info: string[];
-    warnings: string[];
-    errors: string[];
-  };
+  messages: AddressValidationMessageDTO[];
+}
+
+export interface AddressValidationMessageDTO {
+  type: ValidationMessageType;
+  code: ValidationMessageCode;
+  message: string;
 }
 
 export interface TrackPackageByTrackingNumberRPCParams {
