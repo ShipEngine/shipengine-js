@@ -1,4 +1,8 @@
-import { Country } from "../enums";
+import {
+  Country,
+  ValidationMessageCode,
+  ValidationMessageType,
+} from "../enums";
 
 /**
  * An input address to be validated.
@@ -136,19 +140,44 @@ export interface AddressValidationResult {
   normalizedAddress?: NormalizedAddress;
 
   /**
+   * Messages about the address validation, such as corrections or invalid fields.
+   */
+  messages: AddressValidationMessage[];
+
+  /**
    * Informational messages about the address validation, such as minor corrections.
    */
-  info: string[];
+  readonly info: AddressValidationMessage[];
 
   /**
    * Warning messages about the address validation, such as major changes that
    * were made to the normalized address.
    */
-  warnings: string[];
+  readonly warnings: AddressValidationMessage[];
 
   /**
    * Error messages about the address validation, such as invalid fields that
    * prevent the address from being fully validated.
    */
-  errors: string[];
+  readonly errors: AddressValidationMessage[];
+}
+
+/**
+ * A message about the address validation, such as a correction or an invalid field.
+ */
+export interface AddressValidationMessage {
+  /**
+   * Indicates whether this message is just informational, or a warning/error.
+   */
+  type: ValidationMessageType;
+
+  /**
+   * Indicates the specific validation message that was returned.
+   */
+  code: ValidationMessageCode;
+
+  /**
+   * The human-readable message.
+   */
+  message: string;
 }

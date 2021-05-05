@@ -1,13 +1,14 @@
 import { EventEmitter } from "../isomorphic.node";
 import { NormalizedConfig } from "../config";
 import {
-  AddressValidateParams,
-  AddressValidateResult,
+  AddressValidateParamsDTO,
+  AddressValidateResultDTO,
   callJsonRpcMethod,
 } from "../json-rpc";
 import { formatAddress } from "./format-address";
 import { Address, AddressValidationResult } from "./public-types";
 import { validateInputAddress } from "./validate-input-address";
+import { ValidationMessageType } from "../enums";
 
 /**
  * Validates an address and returns the full validation results.
@@ -24,22 +25,22 @@ export async function validateAddress(
     ? address.street
     : [address.street];
 
-  const params: AddressValidateParams = {
+  const params: AddressValidateParamsDTO = {
     address: {
       name: address.name,
-      company_name: address.company,
+      company: address.company,
       phone: address.phone,
       street,
-      city_locality: address.cityLocality,
-      state_province: address.stateProvince,
-      postal_code: address.postalCode,
-      country_code: address.country,
-      residential: address.isResidential,
+      cityLocality: address.cityLocality,
+      stateProvince: address.stateProvince,
+      postalCode: address.postalCode,
+      countryCode: address.country,
+      isResidential: address.isResidential,
     },
   };
 
-  const result: AddressValidateResult = await callJsonRpcMethod(
-    "address/validate",
+  const result: AddressValidateResultDTO = await callJsonRpcMethod(
+    "address.validate.v1",
     params,
     config,
     events
@@ -52,31 +53,46 @@ export async function validateAddress(
  * Converts the JSON RPC 2.0 result to an AddressValidationResult object
  */
 function createAddressValidationResult(
-  result: AddressValidateResult
+  result: AddressValidateResultDTO
 ): AddressValidationResult {
+  const { isValid, normalizedAddress, messages } = result;
+
   return {
-    isValid: result.valid,
-    normalizedAddress: result.address && {
-      street: result.address.street,
-      name: result.address.name || "",
-      company: result.address.company_name || "",
-      phone: result.address.phone || "",
-      cityLocality: result.address.city_locality,
-      stateProvince: result.address.state_province,
-      postalCode: result.address.postal_code,
-      country: result.address.country_code,
+    isValid,
+    normalizedAddress: normalizedAddress && {
+      street: normalizedAddress.street,
+      name: normalizedAddress.name || "",
+      company: normalizedAddress.company || "",
+      phone: normalizedAddress.phone || "",
+      cityLocality: normalizedAddress.cityLocality,
+      stateProvince: normalizedAddress.stateProvince,
+      postalCode: normalizedAddress.postalCode,
+      country: normalizedAddress.countryCode,
 
       // TODO: Replace this with a nullish coalescing operator
       // once Node 12 is no longer supported
       isResidential:
-        result.address.residential === false
+        normalizedAddress.isResidential === false
           ? false
-          : result.address.residential || undefined,
+          : normalizedAddress.isResidential || undefined,
 
       toString: formatAddress,
     },
-    info: result.messages.info,
-    warnings: result.messages.warnings,
-    errors: result.messages.errors,
+
+    messages,
+
+    get info() {
+      return messages.filter((msg) => msg.type === ValidationMessageType.Info);
+    },
+
+    get warnings() {
+      return messages.filter(
+        (msg) => msg.type === ValidationMessageType.Warning
+      );
+    },
+
+    get errors() {
+      return messages.filter((msg) => msg.type === ValidationMessageType.Error);
+    },
   };
 }
