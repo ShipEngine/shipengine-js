@@ -1,4 +1,12 @@
-import { Country, ErrorCode, ErrorSource, ErrorType } from "../enums";
+import { Url } from "url";
+
+import {
+  Country,
+  ErrorCode,
+  ErrorSource,
+  ErrorType,
+  CarrierCode,
+} from "../enums";
 
 /**
  * A JSON RPC 2.0 response from ShipEngine API, which may be a successful or
@@ -91,4 +99,57 @@ export interface AddressValidateResult {
     warnings: string[];
     errors: string[];
   };
+}
+
+export interface TrackPackageByTrackingNumberRPCParams {
+  carrierCode: CarrierCode;
+  trackingNumber: string;
+}
+
+/**
+ * The result that comes back from the ShipEngine track package API.
+ */
+export interface TrackPackageByTrackingNumberRpcResult {
+  shipment: {
+    carrier_code: string;
+    estimated_delivery_date: string;
+    carrier_id?: string;
+    shipment_id?: string;
+  };
+  package: {
+    package_id?: string;
+    tracking_number: string;
+    tracking_url?: Url;
+    weight?: {
+      value: number;
+      unit: string;
+    };
+    dimensions?: {
+      length: number;
+      width: number;
+      height: number;
+      unit: string;
+    };
+  };
+  events: [
+    {
+      date_time: string;
+      carrier_date_time: string;
+      status: string;
+      description: string;
+      carrier_status_code: string;
+      signer?: string;
+      carrier_detail_code?: string;
+      location?: {
+        state_province?: string;
+        coordinates?: {
+          latitude?: number;
+          longitude?: number;
+        };
+        postal_code?: string;
+        city_locality?: string;
+        country_code?: string;
+      };
+    }
+  ];
 }
