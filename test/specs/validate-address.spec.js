@@ -700,7 +700,7 @@ describe("validateAddress()", () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
-      street: ["500 Server Side Error"],
+      street: ["500 Server Error"],
       cityLocality: "Boston",
       stateProvince: "MA",
       postalCode: "01152",

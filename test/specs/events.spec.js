@@ -104,7 +104,7 @@ function assertRequestEvent(event, retry = 0, timeout = 5000) {
   expect(event.url).to.be.an.instanceOf(URL).with.property("href", baseURL);
   expect(event.headers)
     .to.be.an("object")
-    .with.keys("API-Key", "User-Agent", "Content-Type");
+    .with.keys("Accept", "API-Key", "User-Agent", "Content-Type");
   expect(event.headers["API-Key"]).to.be.a("string").and.not.empty;
   expect(event.headers["User-Agent"]).to.be.a("string").and.not.empty;
   expect(event.headers["Content-Type"]).to.equal("application/json");

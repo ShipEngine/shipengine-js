@@ -13,7 +13,7 @@ describe("normalizeAddress()", () => {
 
     const addressToValidate = {
       country: "US",
-      street: ["4 Jersey St", "validate-residential-address"],
+      street: ["4 Jersey St", "Apartment 7b"],
       cityLocality: "Boston",
       stateProvince: "MA",
       postalCode: "02215",
@@ -21,7 +21,7 @@ describe("normalizeAddress()", () => {
 
     const expectedNormalizedAddress = {
       country: "US",
-      street: ["4 JERSEY ST"],
+      street: ["4 JERSEY ST APT 7B"],
       cityLocality: "BOSTON",
       stateProvince: "MA",
       postalCode: "02215",
@@ -51,7 +51,7 @@ describe("normalizeAddress()", () => {
 
     const addressToValidate = {
       country: "US",
-      street: ["4 Jersey St", "validate-commercial-address"],
+      street: ["4 Jersey St", "Suite 200"],
       cityLocality: "Boston",
       stateProvince: "MA",
       postalCode: "02215",
@@ -59,7 +59,7 @@ describe("normalizeAddress()", () => {
 
     const expectedNormalizedAddress = {
       country: "US",
-      street: ["4 JERSEY ST"],
+      street: ["4 JERSEY ST STE 200"],
       cityLocality: "BOSTON",
       stateProvince: "MA",
       postalCode: "02215",
@@ -89,7 +89,7 @@ describe("normalizeAddress()", () => {
 
     const addressToValidate = {
       country: "US",
-      street: ["4 Jersey St", "validate-unknown-address"],
+      street: ["4 Jersey St"],
       cityLocality: "Boston",
       stateProvince: "MA",
       postalCode: "02215",
@@ -125,11 +125,7 @@ describe("normalizeAddress()", () => {
 
     const addressToValidate = {
       country: "US",
-      street: [
-        "4 JERSEY ST STE 200",
-        "2nd Floor",
-        "validate-multiline-address",
-      ],
+      street: ["4 Jersey St", "Suite 200", "2nd Floor"],
       cityLocality: "Boston",
       stateProvince: "MA",
       postalCode: "02215",
@@ -164,7 +160,7 @@ describe("normalizeAddress()", () => {
 
     const addressToValidate = {
       country: "US",
-      street: ["4 Jersey St", "validate-residential-address"],
+      street: ["4 Jersey St"],
       cityLocality: "Boston",
       stateProvince: "MA",
       postalCode: "02215",
@@ -200,7 +196,7 @@ describe("normalizeAddress()", () => {
 
     const addressToValidate = {
       country: "CA",
-      street: ["170 Princes' Blvd", "validate-canadian-address"],
+      street: ["170 Princes Blvd"],
       cityLocality: "Toronto",
       stateProvince: "On",
       postalCode: "M6K 3C3",
@@ -208,10 +204,10 @@ describe("normalizeAddress()", () => {
 
     const expectedNormalizedAddress = {
       country: "CA",
-      street: ["170 Princes' Blvd"],
+      street: ["170 Princes Blvd"],
       cityLocality: "Toronto",
       stateProvince: "On",
-      postalCode: "M6K 3C3",
+      postalCode: "M6 K 3 C3",
       name: "",
       company: "",
       phone: "",
@@ -225,7 +221,7 @@ describe("normalizeAddress()", () => {
     assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
 
     // The correct postalCode is returned
-    expect(normalizedAddress.postalCode).to.equal("M6K 3C3");
+    expect(normalizedAddress.postalCode).to.equal("M6 K 3 C3");
 
     // It should have a normalized address with the correct shape
     assertNormalizedAddressFormat(normalizedAddress);
@@ -268,7 +264,7 @@ describe("normalizeAddress()", () => {
 
     const addressToValidate = {
       country: "CA",
-      street: ["170 Princes' Blvd", "validate-with-warning"],
+      street: ["170 Warning Blvd", "Apartment 32-B"],
       cityLocality: "Toronto",
       stateProvince: "On",
       postalCode: "M6K 3C3",
@@ -276,7 +272,7 @@ describe("normalizeAddress()", () => {
 
     const expectedNormalizedAddress = {
       country: "CA",
-      street: ["170 Princes' Blvd"],
+      street: ["170 Warning Blvd Apt 32-B"],
       cityLocality: "Toronto",
       stateProvince: "On",
       postalCode: "M6K 3C3",
@@ -301,7 +297,7 @@ describe("normalizeAddress()", () => {
 
     const addressToValidate = {
       country: "CA",
-      street: ["170 Princes' Blvd", "invalid-address-error"],
+      street: ["170 Error Blvd"],
       cityLocality: "Toronto",
       stateProvince: "On",
       postalCode: "M6K 3C3",
@@ -316,7 +312,7 @@ describe("normalizeAddress()", () => {
         source: "shipengine",
         type: "business_rules",
         code: "invalid_address",
-        message: "Could not validate the address provided.",
+        message: "Invalid address. Insufficient or innacurate postal code",
       });
       expect(error.requestId).to.equal(undefined);
     }
@@ -327,7 +323,7 @@ describe("normalizeAddress()", () => {
 
     const addressToValidate = {
       country: "CA",
-      street: ["170 Princes' Blvd", "multiple-error-messages.json"],
+      street: ["170 Invalid Blvd"],
       cityLocality: "Toronto",
       stateProvince: "On",
       postalCode: "M6K 3C3",
@@ -343,11 +339,9 @@ describe("normalizeAddress()", () => {
         type: "business_rules",
         code: "invalid_address",
         message:
-          "Invalid address." +
-          "\n" +
-          "Invalid City, State, or Zip" +
-          "\n" +
-          "Invalid postal code",
+          "Invalid address. \n" +
+          "Invalid City, State, or Zip\n" +
+          "Insufficient or Incorrect Address Data",
       });
       expect(error.requestId).to.equal(undefined);
     }
@@ -511,15 +505,15 @@ describe("normalizeAddress()", () => {
 
     const addressToValidate = {
       country: "US",
-      street: ["4 Jersey St", "validate-residential-address"],
+      street: ["4 Jersey St"],
       postalCode: "02215",
     };
 
     const expectedNormalizedAddress = {
       country: "US",
       street: ["4 JERSEY ST"],
-      cityLocality: "BOSTON",
-      stateProvince: "MA",
+      cityLocality: "METROPOLIS",
+      stateProvince: "XX",
       postalCode: "02215",
       name: "",
       company: "",
@@ -542,7 +536,7 @@ describe("normalizeAddress()", () => {
 
     const addressToValidate = {
       country: "US",
-      street: ["4 Jersey St", "validate-residential-address"],
+      street: ["4 Jersey St"],
       cityLocality: "Boston",
       stateProvince: "MA",
     };
@@ -552,7 +546,7 @@ describe("normalizeAddress()", () => {
       street: ["4 JERSEY ST"],
       cityLocality: "BOSTON",
       stateProvince: "MA",
-      postalCode: "02215",
+      postalCode: "12345",
       name: "",
       company: "",
       phone: "",
@@ -625,7 +619,7 @@ describe("normalizeAddress()", () => {
 
     const addressToValidate = {
       country: "US",
-      street: ["4 Jersey St", "rpc-server-error"],
+      street: ["500 Server Error"],
       cityLocality: "Boston",
       stateProvince: "MA",
       postalCode: "01152",
