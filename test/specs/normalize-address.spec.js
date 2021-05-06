@@ -513,7 +513,7 @@ describe("normalizeAddress()", () => {
       country: "US",
       street: ["4 JERSEY ST"],
       cityLocality: "METROPOLIS",
-      stateProvince: "XX",
+      stateProvince: "ME",
       postalCode: "02215",
       name: "",
       company: "",
