@@ -26,31 +26,21 @@ export function validateInputAddress(address: Address): void {
  * Validates the `street` field of an input address
  */
 function validateAddressStreet(street: string | string[]): void {
-  if (typeof street === "string") {
-    assert.isNonWhitespaceString("Street address", street);
-  } else if (Array.isArray(street)) {
-    assert.isArrayOfStrings("Street address", street);
+  assert.isArrayOfStrings("Street address", street);
 
-    if (street.length === 0) {
-      throw new ShipEngineError(
-        ErrorType.Validation,
-        ErrorCode.FieldValueRequired,
-        "Invalid address. At least one address line is required."
-      );
-    }
+  if (street.length === 0) {
+    throw new ShipEngineError(
+      ErrorType.Validation,
+      ErrorCode.FieldValueRequired,
+      "Invalid address. At least one address line is required."
+    );
+  }
 
-    if (street.length > 3) {
-      throw new ShipEngineError(
-        ErrorType.Validation,
-        ErrorCode.InvalidFieldValue,
-        "Invalid address. No more than 3 street lines are allowed."
-      );
-    }
-  } else {
-    throw new InvalidFieldValueError(
-      "Street address",
-      "must be a string or array of strings.",
-      street
+  if (street.length > 3) {
+    throw new ShipEngineError(
+      ErrorType.Validation,
+      ErrorCode.InvalidFieldValue,
+      "Invalid address. No more than 3 street lines are allowed."
     );
   }
 }

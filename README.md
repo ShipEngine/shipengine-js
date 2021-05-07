@@ -38,7 +38,9 @@ Methods
 -------------------------------
 * [`validateAddress`](./docs/validate-address.md) - Indicates whether the provided address is valid. If the address is valid, 
   the method returns a normalized version of the address
-based on the standards of the country in which the address resides. 
+based on the standards of the country in which the address resides.
+* [`normalizeAddress`](./docs/normalize-address.md) - Returns a normalized, or standardized, version of the address. If the 
+address cannot be normalized, an error is returned.
 
 Contributing
 --------------------------
