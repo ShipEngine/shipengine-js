@@ -3,17 +3,9 @@ import {
   ErrorCode,
   ErrorSource,
   ErrorType,
+  CarrierCode,
   ValidationMessageCode,
   ValidationMessageType,
-} from "../enums";
-import { Url } from "url";
-
-import {
-  Country,
-  ErrorCode,
-  ErrorSource,
-  ErrorType,
-  CarrierCode,
 } from "../enums";
 
 /**
@@ -119,17 +111,17 @@ export interface TrackPackageByTrackingNumberRPCParams {
 /**
  * The result that comes back from the ShipEngine track package API.
  */
-export interface TrackPackageByTrackingNumberRpcResult {
+export interface TrackPackageByTrackingNumberDTO {
   shipment: {
-    carrier_code: string;
-    estimated_delivery_date: string;
-    carrier_id?: string;
-    shipment_id?: string;
+    carrierCode: string;
+    carrierAccountID: string;
+    shipmentID?: string;
+    estimatedDelivery: string;
   };
   package: {
-    package_id?: string;
-    tracking_number: string;
-    tracking_url?: Url;
+    packageID?: string;
+    trackingNumber: string;
+    trackingURL?: string;
     weight?: {
       value: number;
       unit: string;
@@ -141,25 +133,25 @@ export interface TrackPackageByTrackingNumberRpcResult {
       unit: string;
     };
   };
-  events: [
-    {
-      date_time: string;
-      carrier_date_time: string;
-      status: string;
-      description: string;
-      carrier_status_code: string;
-      signer?: string;
-      carrier_detail_code?: string;
-      location?: {
-        state_province?: string;
-        coordinates?: {
-          latitude?: number;
-          longitude?: number;
-        };
-        postal_code?: string;
-        city_locality?: string;
-        country_code?: string;
-      };
-    }
-  ];
+  events: EventDTO[];
+}
+
+export interface EventDTO {
+  timestamp: string;
+  carrierTimeStamp: string;
+  status: string;
+  description: string;
+  carrierStatusCode: string;
+  carrierDetailCode?: string;
+  signer?: string;
+  location?: {
+    stateProvince?: string;
+    postalCode?: string;
+    cityLocality?: string;
+    countryCode?: string;
+    coordinates?: {
+      latitude?: number;
+      longitude?: number;
+    };
+  };
 }

@@ -1,19 +1,30 @@
-import { CarrierCode, ErrorCode, ErrorType } from "../enums";
-import { InvalidFieldValueError, ShipEngineError } from "../errors";
+import {
+  CarrierCode,
+  CarrierName,
+  DimensionUnit,
+  ErrorCode,
+  ErrorType,
+  WeightUnit,
+  TrackingStatus,
+} from "../enums";
+import { ShipEngineError } from "../errors";
 import { EventEmitter } from "../isomorphic.node";
 import { NormalizedConfig } from "../config";
 import * as assert from "../utils/assert";
 import { isCarrierCode } from "../utils/type-guards";
+
 import {
   TrackingInfoParams,
   TrackPackageByTrackingNumberResult,
 } from "./public-types";
+
 import {
-  TrackPackageByTrackingNumberRPCParams,
-  TrackPackageByTrackingNumberRpcResult,
   callJsonRpcMethod,
+  TrackPackageByTrackingNumberDTO,
+  TrackPackageByTrackingNumberRPCParams,
 } from "../json-rpc";
 
+import { EventDTO } from "./../json-rpc/types";
 /**
  * Retrieves tracking info using the carrier code and the carrier's tracking number.
  */
@@ -22,21 +33,22 @@ export async function trackPackageByTrackingNumber(
   config: NormalizedConfig,
   events: EventEmitter
 ): Promise<TrackPackageByTrackingNumberResult> {
-  // validateTrackingParams(trackingInfo);
+  validateTrackingParams(trackingInfo);
 
+  const { trackingNumber, carrierCode } = trackingInfo;
   const params = {
-    tracking_number: trackingInfo.trackingNumber,
-    carrier_code: trackingInfo.carrierCode,
+    trackingNumber,
+    carrierCode,
   };
-  const result: TrackPackageByTrackingNumberRpcResult = await callJsonRpcMethod(
-    "package/track",
+  const result: TrackPackageByTrackingNumberDTO = await callJsonRpcMethod(
+    "package.track.v1",
     params,
     config,
     events
   );
 
-  console.log(result);
-  return result;
+  // console.log(result);
+  return createTrackPackageByTrackingNumberResult(result);
 }
 
 function validateTrackingParams(
@@ -85,21 +97,51 @@ function validateStringLength(
   }
 }
 
-// function convertCountryCode(code: CarrierCode): string {
-//
-//   return CarrierCode[code];
-//   }
-// }
-
 function createTrackPackageByTrackingNumberResult(
-  result: TrackPackageByTrackingNumberRpcResult
-): TrackPackageByTrackingNumberResult {
-  shipment:
+  result: TrackPackageByTrackingNumberDTO
+) {
+  const { shipment, events } = result;
 
-
-
-
-
-
-
+  const returnValue = {
+    shipment: {
+      shipmentID: shipment.shipmentID || "",
+      carrierID: shipment.carrierAccountID || "",
+      carrier: {
+        name:
+          CarrierName[
+            shipment.carrierCode.toUpperCase() as keyof typeof CarrierName
+          ],
+        code: shipment.carrierCode,
+      },
+      carrierAccount: undefined,
+      estimatedDeliveryDateTime: shipment.estimatedDelivery,
+      // Create function to calculated this from the events
+      actualDeliveryDateTime: undefined,
+    },
+    package: {
+      packageID: result.package.packageID,
+      trackingNumber: result.package.trackingNumber,
+      // Where to get this?
+      trackingURL: new URL("https://www.fedex.com"),
+      weight: result.package.weight,
+      dimensions: result.package.dimensions,
+    },
+    events: events.map((e: EventDTO) => {
+      return {
+        dateTime: e.timestamp,
+        carrierDateTime: e.carrierTimeStamp,
+        status: e.status,
+        description: e.description,
+        carrierStatusCode: e.carrierStatusCode,
+        carrierDetailCode: e.carrierDetailCode,
+        signer: e.signer,
+        location: e.location,
+      };
+    }),
+    // Add function to check for latest timestamp and/or status
+    // latestEvent: events.slice(-1),
+    hasErrors: false,
+    // errors: events[0],
+  };
+  return returnValue;
 }

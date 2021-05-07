@@ -7,7 +7,7 @@ describe("trackPackageByTrackingNumber", () => {
   it("Tracks a package using a tracking number and carrier code", async function () {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
-      trackingNumber: "AAAA",
+      trackingNumber: "aaaaa_delivered",
       carrierCode: "fedex",
     };
     const response = await shipengine.trackPackage(params);

@@ -1,5 +1,3 @@
-import { Url } from "url";
-
 import {
   WeightUnit,
   DimensionUnit,
@@ -10,17 +8,18 @@ import {
 
 export interface Package {
   trackingNumber: string;
-  trackingUrl: Url;
-  packageId?: string;
+  trackingURL: URL;
+  packageID?: string;
   weight?: Weight;
   dimensions?: Dimensions;
 }
 
 export interface Shipment {
-  shipmentId?: string;
-  carrierId?: string;
-  carrierCode: string;
-  carrier: Carrier;
+  shipmentID?: string;
+  carrierID?: string;
+  // results of getCarrier
+  // carrierAccount: CarrierAccount
+  carrier?: Carrier;
   estimatedDeliveryDateTime: string;
   // Filled in from last event (assuming status is delivered)
   actualDeliveryDateTime: string;
@@ -46,7 +45,7 @@ export interface Dimensions {
 export interface Event {
   dateTime: string;
   carrierDateTime: string;
-  status: TrackingStatus;
+  status: string;
   description?: string;
   carrierStatusCode?: string;
   carrierDetailCode?: string;
@@ -58,13 +57,13 @@ export interface Location {
   cityLocality?: string;
   stateProvince?: string;
   postalCode?: string;
-  countryCode?: Country;
+  countryCode?: string;
   coordinates?: Coordinates;
 }
 
 export interface Coordinates {
-  latitude: number;
-  longitude: number;
+  latitude?: number;
+  longitude?: number;
 }
 
 export interface TrackingInfoParams {
@@ -76,7 +75,13 @@ export interface TrackPackageByTrackingNumberResult {
   shipment: Shipment;
   package: Package;
   events: Event[];
-  latestEvent: Event;
+
+  // latestEvent: Event;
   hasErrors: boolean;
-  errors: Event[];
+  // errors: Event[];
+}
+
+export interface CarrierAccount {
+  carrierName: string;
+  carrierAccountID: string;
 }
