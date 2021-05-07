@@ -8,6 +8,7 @@ import { validateAddress } from "./address/validate-address";
 import { normalizeAddress } from "./address/normalize-address";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
 import { ShipEngineError } from "./errors";
+import { ListCarriersResult } from "./carriers/public-types";
 
 /**
  * Exposes the functionality of the ShipEngine API.
@@ -65,4 +66,9 @@ export class ShipEngine extends EventEmitter {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return normalizeAddress(address, mergedConfig, this);
   }
+
+  public async listCarrierAccunts(
+    address: Address,
+    config?: ShipEngineConfig
+  ): Promise<ListCarriersResult>;
 }
