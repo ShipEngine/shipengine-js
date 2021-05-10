@@ -366,19 +366,19 @@ describe("validateAddress()", () => {
     };
 
     const expectedWarningMessage = {
-      code: "addres_not_found",
+      code: "address_not_found",
       message: "Address not found",
       type: "warning",
     };
 
     const expectedErrorMessage1 = {
-      code: "addres_not_found",
+      code: "address_not_found",
       message: "Invalid City, State, or Zip",
       type: "error",
     };
 
     const expectedErrorMessage2 = {
-      code: "addres_not_found",
+      code: "address_not_found",
       message: "Insufficient or Incorrect Address Data",
       type: "error",
     };
