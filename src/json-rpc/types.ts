@@ -112,7 +112,6 @@ export interface CarriersDTO {
 /**
  * The result that comes back from the ShipEngine list carriers API.
  */
-
-export interface ListCarriersDTO {
+export interface CarriersDTOResult {
   carrierAccounts: CarriersDTO[];
 }
