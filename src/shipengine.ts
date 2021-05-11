@@ -6,9 +6,9 @@ import {
 } from "./address/public-types";
 import { validateAddress } from "./address/validate-address";
 import { normalizeAddress } from "./address/normalize-address";
+import { getCarrierAccounts } from "./carrier/get-carrier-accounts";
+import { CarrierAccount } from "./carrier/public-types";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
-import { ShipEngineError } from "./errors";
-import { ListCarriersResult } from "./carriers/public-types";
 
 /**
  * Exposes the functionality of the ShipEngine API.
@@ -62,13 +62,16 @@ export class ShipEngine extends EventEmitter {
   public async normalizeAddress(
     address: Address,
     config?: ShipEngineConfig
-  ): Promise<NormalizedAddress | ShipEngineError> {
+  ): Promise<NormalizedAddress> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return normalizeAddress(address, mergedConfig, this);
   }
 
-  public async listCarrierAccunts(
-    address: Address,
+  public async getCarrierAccounts(
+    carrierCode?: string,
     config?: ShipEngineConfig
-  ): Promise<ListCarriersResult>;
+  ): Promise<CarrierAccount[]> {
+    const mergedConfig = NormalizedConfig.merge(this.config, config);
+    return getCarrierAccounts(mergedConfig, this, carrierCode);
+  }
 }
