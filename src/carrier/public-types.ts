@@ -2,11 +2,7 @@ export interface CarrierAccount {
   id: string;
   carrier: Carrier;
   accountNumber: string;
-  accountName: string;
-}
-
-export interface ListCarriersResult {
-  accounts: CarrierAccount[];
+  name: string;
 }
 
 export interface Carrier {
