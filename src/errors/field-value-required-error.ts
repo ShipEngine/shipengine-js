@@ -3,7 +3,7 @@ import { ShipEngineError } from "./shipengine-error";
 
 /**
  * This error occurs when a rquired field has not been set.
- * This icnludes fields that are conditionally required.
+ * This includes fields that are conditionally required.
  */
 export class FieldValueRequiredError extends ShipEngineError {
   /**
