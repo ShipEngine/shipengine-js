@@ -312,7 +312,7 @@ describe("normalizeAddress()", () => {
         source: "shipengine",
         type: "business_rules",
         code: "invalid_address",
-        message: "Invalid address. Insufficient or innacurate postal code",
+        message: "Invalid address. Insufficient or inaccurate postal code",
       });
       expect(error.requestId).to.equal(undefined);
     }
