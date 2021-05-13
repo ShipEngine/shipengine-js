@@ -60,7 +60,7 @@ describe("getCarrierAccounts()", async function () {
     }
 
     // The list contains the expected number of carrier accounts
-    expect(accounts).to.be.an("array").and.lengthOf(2);
+    expect(accounts).to.be.an("array").and.lengthOf(5);
 
     // The list contains the expected carrier accounts (IDs, names, account numbers, etc.)
     // All accounts have an account name
@@ -226,10 +226,11 @@ function assertUniqueIds(accounts) {
   // because those values already existed, hence we have an error
 
   let accountIds = [];
-  for (a of accounts) {
+  for (const a of accounts) {
     accountIds.push(a.id);
   }
 
+  // eslint-disable-next-line no-undef
   let accountSet = new Set(accountIds);
 
   if (accountSet.size !== accounts.length) {
