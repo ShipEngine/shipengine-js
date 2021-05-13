@@ -41,6 +41,8 @@ Methods
 based on the standards of the country in which the address resides.
 * [`normalizeAddress`](./docs/normalize-address.md) - Returns a normalized, or standardized, version of the address. If the 
 address cannot be normalized, an error is returned.
+* [`getCarrierAccounts`](./docs/get-carrier-accounts.md) - Returns a list of carrier accounts that have been connected through
+the [ShipEngine dashboard](https://www.shipengine.com/docs/carriers/setup/).
 
 Contributing
 --------------------------

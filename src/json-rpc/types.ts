@@ -155,3 +155,17 @@ export interface EventDTO {
     };
   };
 }
+
+export interface CarriersDTO {
+  accountID: string;
+  carrierCode: string;
+  accountNumber: string;
+  name: string;
+}
+
+/**
+ * The result that comes back from the ShipEngine list carriers API.
+ */
+export interface CarriersDTOResult {
+  carrierAccounts: CarriersDTO[];
+}

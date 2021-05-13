@@ -1,3 +1,4 @@
+export * from "./carrier-code";
 export * from "./country";
 export * from "./error-code";
 export * from "./error-source";

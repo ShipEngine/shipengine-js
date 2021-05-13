@@ -7,6 +7,8 @@ import {
 import { validateAddress } from "./address/validate-address";
 import { trackPackageByTrackingNumber } from "./tracking/track-by-tracking-number";
 import { normalizeAddress } from "./address/normalize-address";
+import { getCarrierAccounts } from "./carrier/get-carrier-accounts";
+import { CarrierAccount } from "./carrier/public-types";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
 import { TrackPackageByTrackingNumberResult } from "./tracking/public-types";
 import { TrackPackageByTrackingNumberRPCParams } from "./json-rpc";
@@ -64,9 +66,17 @@ export class ShipEngine extends EventEmitter {
   public async normalizeAddress(
     address: Address,
     config?: ShipEngineConfig
-  ): Promise<NormalizedAddress | ShipEngineError> {
+  ): Promise<NormalizedAddress> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return normalizeAddress(address, mergedConfig, this);
+  }
+
+  public async getCarrierAccounts(
+    carrierCode?: string,
+    config?: ShipEngineConfig
+  ): Promise<CarrierAccount[]> {
+    const mergedConfig = NormalizedConfig.merge(this.config, config);
+    return getCarrierAccounts(mergedConfig, this, carrierCode);
   }
 
   /**

@@ -9,6 +9,7 @@ import { formatAddress } from "./format-address";
 import { Address, AddressValidationResult } from "./public-types";
 import { validateInputAddress } from "./validate-input-address";
 import { ValidationMessageType } from "../enums";
+import { normalizeInputAddress } from "./normalize-input-address";
 
 /**
  * Validates an address and returns the full validation results.
@@ -18,19 +19,15 @@ export async function validateAddress(
   config: NormalizedConfig,
   events: EventEmitter
 ): Promise<AddressValidationResult> {
+  normalizeInputAddress(address);
   validateInputAddress(address);
-
-  // Normalizing street to an array
-  const street = Array.isArray(address.street)
-    ? address.street
-    : [address.street];
 
   const params: AddressValidateParamsDTO = {
     address: {
       name: address.name,
       company: address.company,
       phone: address.phone,
-      street,
+      street: address.street as string[],
       cityLocality: address.cityLocality,
       stateProvince: address.stateProvince,
       postalCode: address.postalCode,

@@ -366,19 +366,19 @@ describe("validateAddress()", () => {
     };
 
     const expectedWarningMessage = {
-      code: "addres_not_found",
+      code: "address_not_found",
       message: "Address not found",
       type: "warning",
     };
 
     const expectedErrorMessage1 = {
-      code: "addres_not_found",
+      code: "address_not_found",
       message: "Invalid City, State, or Zip",
       type: "error",
     };
 
     const expectedErrorMessage2 = {
-      code: "addres_not_found",
+      code: "address_not_found",
       message: "Insufficient or Incorrect Address Data",
       type: "error",
     };
@@ -575,7 +575,7 @@ describe("validateAddress()", () => {
       country: "US",
       street: ["4 JERSEY ST"],
       cityLocality: "METROPOLIS",
-      stateProvince: "XX",
+      stateProvince: "ME",
       postalCode: "02215",
       name: "",
       company: "",
@@ -630,6 +630,94 @@ describe("validateAddress()", () => {
     const { normalizedAddress, isValid } = response;
 
     expect(isValid).to.be.a("boolean").and.to.be.true;
+
+    // The postalCode should to popoulated even though it was not provided
+    expect(normalizedAddress.postalCode).to.equal(
+      expectedNormalizedAddress.postalCode
+    );
+
+    // The normalized address is populated and matches the expected normalized address
+    assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
+
+    // It should have a normalized address with the correct shape
+    assertNormalizedAddressFormat(normalizedAddress);
+
+    // It should not throw errors
+    assertNoWarningsOrErrorMessages(response);
+  });
+
+  it("Normalizes a lowercase country to uppercase", async function () {
+    const shipengine = new ShipEngine({ apiKey, baseURL });
+
+    const addressToValidate = {
+      country: "us",
+      street: ["4 Jersey St"],
+      cityLocality: "Boston",
+      stateProvince: "MA",
+    };
+
+    const expectedNormalizedAddress = {
+      country: "US",
+      street: ["4 JERSEY ST"],
+      cityLocality: "BOSTON",
+      stateProvince: "MA",
+      postalCode: "12345",
+      name: "",
+      company: "",
+    };
+
+    const response = await shipengine.validateAddress(addressToValidate);
+
+    const { normalizedAddress, isValid } = response;
+
+    expect(isValid).to.be.a("boolean").and.to.be.true;
+
+    // The lowercase "us" should have been normalized to uppercase
+    expect(normalizedAddress.country).to.equal("US");
+
+    // The postalCode should to popoulated even though it was not provided
+    expect(normalizedAddress.postalCode).to.equal(
+      expectedNormalizedAddress.postalCode
+    );
+
+    // The normalized address is populated and matches the expected normalized address
+    assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
+
+    // It should have a normalized address with the correct shape
+    assertNormalizedAddressFormat(normalizedAddress);
+
+    // It should not throw errors
+    assertNoWarningsOrErrorMessages(response);
+  });
+
+  it("Removes whitespace from the country", async function () {
+    const shipengine = new ShipEngine({ apiKey, baseURL });
+
+    const addressToValidate = {
+      country: " \t  us  \n  ",
+      street: ["4 Jersey St"],
+      cityLocality: "Boston",
+      stateProvince: "MA",
+    };
+
+    const expectedNormalizedAddress = {
+      country: "US",
+      street: ["4 JERSEY ST"],
+      cityLocality: "BOSTON",
+      stateProvince: "MA",
+      postalCode: "12345",
+      name: "",
+      company: "",
+    };
+
+    const response = await shipengine.validateAddress(addressToValidate);
+
+    const { normalizedAddress, isValid } = response;
+
+    expect(isValid).to.be.a("boolean").and.to.be.true;
+
+    // The whitespace in the country should have been removed
+    expect(normalizedAddress.country).to.equal("US");
 
     // The postalCode should to popoulated even though it was not provided
     expect(normalizedAddress.postalCode).to.equal(
