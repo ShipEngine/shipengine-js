@@ -1,5 +1,5 @@
 import { Country, ErrorCode, ErrorType } from "../enums";
-import { InvalidFieldValueError, ShipEngineError } from "../errors";
+import { ShipEngineError } from "../errors";
 import * as assert from "../utils/assert";
 import { isCountry } from "../utils/type-guards";
 import { Address } from "./public-types";
