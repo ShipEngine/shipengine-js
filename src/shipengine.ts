@@ -5,14 +5,12 @@ import {
   NormalizedAddress,
 } from "./address/public-types";
 import { validateAddress } from "./address/validate-address";
-import { trackPackageByTrackingNumber } from "./tracking/track-by-tracking-number";
 import { normalizeAddress } from "./address/normalize-address";
 import { getCarrierAccounts } from "./carrier/get-carrier-accounts";
 import { CarrierAccount } from "./carrier/public-types";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
-import { TrackPackageByTrackingNumberResult } from "./tracking/public-types";
-import { TrackPackageByTrackingNumberRPCParams } from "./json-rpc";
-import { ShipEngineError } from "./errors";
+import { TrackingParams, TrackPackageResult } from "./track/public-types";
+import { trackPackage } from "./track/track-package";
 
 /**
  * Exposes the functionality of the ShipEngine API.
@@ -89,10 +87,10 @@ export class ShipEngine extends EventEmitter {
    * @param [config] - Optional configuration overrides for this method call.
    */
   public async trackPackage(
-    params: TrackPackageByTrackingNumberRPCParams,
+    params: TrackingParams,
     config?: ShipEngineConfig
-  ): Promise<TrackPackageByTrackingNumberResult> {
+  ): Promise<TrackPackageResult> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
-    return trackPackageByTrackingNumber(params, mergedConfig, this);
+    return trackPackage(params, "packageId", mergedConfig, this);
   }
 }

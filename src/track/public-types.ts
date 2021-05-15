@@ -1,14 +1,20 @@
-import {
-  WeightUnit,
-  DimensionUnit,
-  Country,
-  TrackingStatus,
-  CarrierCode,
-} from "../enums";
+import { WeightUnit, DimensionUnit } from "../enums";
+
+export type TrackingParams = TrackByPackageParams | TrackByNumberParams;
+
+export interface TrackByPackageParams {
+  packageId: string;
+}
+
+export interface TrackByNumberParams {
+  trackingNumber: string;
+  carrierCode: string;
+}
 
 export interface Package {
   trackingNumber: string;
-  trackingURL: URL;
+  // Make URL object
+  trackingURL: string;
   packageID?: string;
   weight?: Weight;
   dimensions?: Dimensions;
@@ -31,15 +37,15 @@ export interface Carrier {
 }
 
 export interface Weight {
-  value: number;
-  unit: WeightUnit;
+  value?: number;
+  unit?: WeightUnit | string;
 }
 
 export interface Dimensions {
-  length: number;
-  width: number;
-  height: number;
-  unit: DimensionUnit;
+  length?: number;
+  width?: number;
+  height?: number;
+  unit?: DimensionUnit | string;
 }
 
 export interface Event {
@@ -66,12 +72,7 @@ export interface Coordinates {
   longitude?: number;
 }
 
-export interface TrackingInfoParams {
-  carrierCode: CarrierCode;
-  trackingNumber: string;
-}
-
-export interface TrackPackageByTrackingNumberResult {
+export interface TrackPackageResult {
   shipment: Shipment;
   package: Package;
   events: Event[];

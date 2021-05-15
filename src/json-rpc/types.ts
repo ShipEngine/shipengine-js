@@ -103,15 +103,16 @@ export interface AddressValidationMessageDTO {
   message: string;
 }
 
-export interface TrackPackageByTrackingNumberRPCParams {
-  carrierCode: CarrierCode;
-  trackingNumber: string;
+export interface TrackPackageRPCParams {
+  carrierCode?: CarrierCode;
+  trackingNumber?: string;
+  packageId?: string;
 }
 
 /**
  * The result that comes back from the ShipEngine track package API.
  */
-export interface TrackPackageByTrackingNumberDTO {
+export interface TrackPackageDTO {
   shipment: {
     carrierCode: string;
     carrierAccountID: string;

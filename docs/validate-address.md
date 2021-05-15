@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 Address Validation
 ================================
 [ShipEngine](www.shipengine.com) allows you to validate an address before using it to create a shipment to ensure 
@@ -127,6 +128,84 @@ were made to the normalized address.
 * `error` <br>
 An *array* of Error messages about the address validation, such as invalid fields that
 prevent the address from being fully validated.
+=======
+Introduction
+================================
+[ShipEngine](www.shipengine.com) allows you to validate an address before using it to create a shipment to ensure accurate delivery of your packages.
+
+Address validation can lead to reduced shipping costs by preventing address correction 
+surcharges. ShipEngine cross-references multiple databases to validate addresses and identify potential delivery issues.
+
+Validate an Address
+============================================
+```
+try {
+  response = await shipengine.validateAddress({
+    country: "US",
+      street: ["4 Jersey St", "validate-residential-address"],
+      cityLocality: "Boston",
+      stateProvince: "MA",
+    }
+    
+    const { isValid, normalizedAddress } = rewsponse;
+    
+    console.assert(isValid, "Expected address to be valid.");
+    console.assert(normalizedAddress.isResidential, "Expected address to be a residential address");
+    console.log( `The normalizedAddress is ${normalizedAddress` );
+  
+  } catch (e) {
+    
+  
+  }
+}
+
+```
+
+Parameters
+=================================================
+
+The `validateAddress` method accepts an object containing the following properties:
+
+`countryCode` *required* <br>
+A *string* containing a valid [two digit country code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes).
+
+`street` *required* <br>
+Is either a *string* containing `0` to `1000` characters  or an *array* containing `1` to `3` elements. Each element should contain a *string* value containing `0` to `1000` characters.
+
+`postalCode` **required* <br>
+A *string* containing `0` to `1000` characters.
+
+`city` **required* <br>
+A *string* containing `0` to `1000` characters.
+
+`state` **required* <br>
+A *string* containing`0` to `1000` characters.
+
+`isResidential`  
+A *boolean*  null
+
+`name`
+*string* between `0` and `1000` characters
+
+`phone`
+*string* between `0` and `1000` characters
+
+`companyName`
+*string* between `0` and `1000` characters
+
+
+Examples:
+=========
+
+**Successful Address Validation:**
+
+```php
+<?php declare(strict_types=1);
+
+require __DIR__ . '/vendor/autoload.php';
+
+use ShipEngine\ShipEngine;
+>>>>>>> Stashed changes
 
 
 Errors
@@ -199,7 +278,59 @@ Example Output
 }
 ```
 
+<<<<<<< Updated upstream
 ### Successful Address Validation with Warnings
+=======
+`validateAddresses()` - Validate multiple addresses.
+====================================================
+- This method takes an `array` of php objects that contain the appropriate method arguments used in the
+  `validateAddress()` method. This allows you to validate multiple addresses by passing in an array of addresses.
+- **Behavior:** The `validateAddresses()` method will always return an array of addresses, and will return an error
+  if something goes wrong with the request itself.
+
+Method Arguments: Multi-Address
+--------------------------------
+- An `array` of objects, each containing the same arguments that the `validateAddress()`
+  method uses. Each address object should at minimum, provide a `street` and `country_code`.
+  The complete arguments of the listed below:
+  - **street** *array* `required`
+  - **city** *string*
+  - **state** *string*
+  - **postal_code** *string*
+  - **country_code** *string* `required`
+  - **residential** *boolean*
+  - **name** *string*
+  - **phone** *string*
+  - **company_name** *string*
+
+```php
+<?php declare(strict_types=1);
+
+require __DIR__ . '/vendor/autoload.php';
+
+use ShipEngine\ShipEngine;
+
+$api_key = 'SHIPENGINE_API_KEY';
+
+$shipengine = new ShipEngine($api_key);
+
+$validation = $shipengine->addresses->validateAddresses(
+    array(
+        ['4 Jersey St', 'ste 200'],
+        'Boston',
+        'TX',
+        '02215',
+        'US',
+        ['4 Jersey St', 'ste 200'],
+        'Boston',
+        'MA',
+        '02215',
+        'US'
+    )
+);
+
+print_r($validation);
+>>>>>>> Stashed changes
 ```
 {
   "isValid": true,

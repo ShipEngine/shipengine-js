@@ -6,7 +6,6 @@ export * from "./error-type";
 export * from "./weight-unit";
 export * from "./dimension-unit";
 export * from "./tracking-status";
-export * from "./carrier-codes";
 export * from "./validation-message-type";
 export * from "./validation-message-code";
 export * from "./carrier-name";

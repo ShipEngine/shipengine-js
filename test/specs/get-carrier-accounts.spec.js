@@ -207,8 +207,8 @@ function assertAccountsMatch(accounts) {
 function assertAccountFormat(accounts) {
   for (let a of accounts) {
     expect(a)
-      .to.be.an("object")
-      .with.keys("id", "carrier", "accountNumber", "name");
+        .to.be.an("object")
+        .with.keys("id", "carrier", "accountNumber", "name");
     expect(a.id).to.be.a("string");
     expect(a.carrier).to.be.an("object").and.with.keys("name", "code");
     // Optional
