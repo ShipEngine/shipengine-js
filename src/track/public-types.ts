@@ -1,4 +1,5 @@
 import { WeightUnit, DimensionUnit } from "../enums";
+import { CarrierAccount } from "../carrier/public-types";
 
 export type TrackingParams = TrackByPackageParams | TrackByNumberParams;
 
@@ -13,7 +14,7 @@ export interface TrackByNumberParams {
 
 export interface Package {
   trackingNumber: string;
-  // Make URL object
+  // TODO Make URL object
   trackingURL: string;
   packageID?: string;
   weight?: Weight;
@@ -23,11 +24,10 @@ export interface Package {
 export interface Shipment {
   shipmentID?: string;
   carrierID?: string;
-  // results of getCarrier
-  // carrierAccount: CarrierAccount
+  carrierAccount: CarrierAccount;
   carrier?: Carrier;
+  // TODO Make proper data objects
   estimatedDeliveryDateTime: string;
-  // Filled in from last event (assuming status is delivered)
   actualDeliveryDateTime: string;
 }
 
@@ -49,6 +49,7 @@ export interface Dimensions {
 }
 
 export interface Event {
+  // TODO Make proper data objects
   dateTime: string;
   carrierDateTime: string;
   status: string;
@@ -76,13 +77,7 @@ export interface TrackPackageResult {
   shipment: Shipment;
   package: Package;
   events: Event[];
-
-  // latestEvent: Event;
+  latestEvent: Event;
   hasErrors: boolean;
-  // errors: Event[];
-}
-
-export interface CarrierAccount {
-  carrierName: string;
-  carrierAccountID: string;
+  errors: Event[];
 }

@@ -6,14 +6,28 @@ import {
   getActualDeliveryDateTime,
 } from "./util";
 import { TrackPackageResult } from "./public-types";
+import { getCarrierAccounts } from "./../carrier/get-carrier-accounts";
+import { NormalizedConfig } from "../config";
+import { EventEmitter } from "../isomorphic.node";
+import { CarrierAccount } from "../carrier/public-types";
 
 export async function createTrackPackageResult(
   result: TrackPackageDTO,
-  trackingMethod: string
+  config: NormalizedConfig,
+  eventEmitter: EventEmitter
 ): Promise<TrackPackageResult> {
   const { shipment, events } = result;
   const formattedEvents = formatEvents(events);
   const exceptionEvents = getExceptions(formattedEvents);
+  let account: CarrierAccount | undefined;
+
+  if (shipment.carrierAccountID) {
+    account = await getCarrier(
+      result.shipment.carrierAccountID,
+      config,
+      eventEmitter
+    );
+  }
 
   const returnValue = {
     shipment: {
@@ -24,20 +38,22 @@ export async function createTrackPackageResult(
         name: getCarrierName(shipment.carrierCode),
       },
       carrierAccount: {
-        id: "",
+        id: account?.id || "",
         carrier: {
-          name: "",
-          code: "",
+          name: account?.carrier.name || "",
+          code: account?.carrier.code || "",
         },
-        accountNumber: "",
-        name: "",
+        accountNumber: account?.accountNumber || "",
+        name: account?.name || "",
       },
+      // TODO Format dates properly
       estimatedDeliveryDateTime: shipment.estimatedDelivery,
       actualDeliveryDateTime: getActualDeliveryDateTime(formattedEvents),
     },
     package: {
       packageId: result.package.packageID || "",
       trackingNumber: result.package.trackingNumber,
+      // TODO Make URL object
       trackingURL: result.package.trackingURL || "",
       weight: {
         unit: result.package.weight?.unit || "",
@@ -51,10 +67,24 @@ export async function createTrackPackageResult(
       },
     },
     events: formattedEvents,
-    // Add function to check for latest timestamp and/or status
-    latestEvent: formattedEvents.slice(-1),
+    latestEvent: formattedEvents.slice(-1)[0],
     hasErrors: !!exceptionEvents,
     errors: exceptionEvents,
   };
   return returnValue;
+}
+
+async function getCarrier(
+  id: string,
+  config: NormalizedConfig,
+  eventEmitter: EventEmitter
+): Promise<CarrierAccount | undefined> {
+  const carrierAccounts = await getCarrierAccounts(config, eventEmitter);
+
+  for (const account of carrierAccounts) {
+    if (account.id === id) {
+      return account;
+    }
+  }
+  return undefined;
 }

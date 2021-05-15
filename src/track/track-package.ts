@@ -6,16 +6,16 @@ import { callJsonRpcMethod, TrackPackageDTO } from "../json-rpc";
 
 export async function trackPackage(
   trackingInfo: TrackingParams,
-  trackingMethod: string,
   config: NormalizedConfig,
   events: EventEmitter
 ): Promise<TrackPackageResult> {
-  // Validate input
+  // TODO: Parameter validation
+
   const result: TrackPackageDTO = await callJsonRpcMethod(
     "package.track.v1",
     trackingInfo,
     config,
     events
   );
-  return await createTrackPackageResult(result, trackingMethod);
+  return await createTrackPackageResult(result, config, events);
 }
