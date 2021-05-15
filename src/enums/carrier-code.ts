@@ -1,5 +1,4 @@
 export enum CarrierCode {
-<<<<<<< Updated upstream
   AccessWorldwide = "access_worldwide",
   AmazonBuyShipping = "amazon_buy_shipping",
   AmazonShippingUK = "amazon_shipping_uk",
@@ -29,31 +28,4 @@ export enum CarrierCode {
   StampsCom = "stamps_com",
   UPS = "ups",
   USPS = "usps",
-=======
-  /**
-   * FedEx - Federal Express
-   *
-   * @link https://www.fedex.com/en-us/home.html
-   */
-  FEDEX = "fedex",
-
-  /**
-   * UPS - United Parcel Service
-   *
-   * @link https://www.ups.com/us/en/about/sites.page
-   */
-  UPS = "ups",
-
-  /**
-   * USPS - United State Postal Service
-   *
-   * @link https://www.stamps.com/
-   */
-  USPS = "stamps_com",
-}
-
-interface Carrier {
-  name: string;
-  code: string;
->>>>>>> Stashed changes
 }
