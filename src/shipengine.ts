@@ -61,6 +61,15 @@ export class ShipEngine extends EventEmitter {
     return validateAddress(address, mergedConfig, this);
   }
 
+  /**
+   * Normalizes an address in nearly any country in the world.
+   *
+   * @param address
+   * The address to normalize. This can even be an incomplete or improperly
+   * formatted address.
+   *
+   * @param [config] - Optional configuration overrides for this method call.
+   */
   public async normalizeAddress(
     address: Address,
     config?: ShipEngineConfig
@@ -69,6 +78,16 @@ export class ShipEngine extends EventEmitter {
     return normalizeAddress(address, mergedConfig, this);
   }
 
+  /**
+   * Retrieves the carrier accounts that have been connect to your ShipEngine account
+   * using the ShipEngine dashboard.
+   *
+   * @param [carrierCode]
+   * An optional parameter used to return only the account(s) for the specified carrierCode.
+   * Otherwise, all carrier accounts will be returned.
+   *
+   * @param [config] - Optional configuration overrides for this method call.
+   */
   public async getCarrierAccounts(
     carrierCode?: string,
     config?: ShipEngineConfig
@@ -79,10 +98,18 @@ export class ShipEngine extends EventEmitter {
 
   /**
    * Tracks a package.
-   * TODO
-   * @param address
-   * The address to validate. This can even be an incomplete or improperly
-   * formatted address
+   *
+   * @param [packageId]
+   * The packageId of the package you wish to track. You must not provide the carrierCode or the packageId
+   * when using the parameter.
+   *
+   * @param [trackingNumber]
+   * The trackingNumber of the package you wish to track. You must also provide the carrierCode and no packageId.
+   * OR trackingNumber and carrierCode
+   *
+   * @param [carrierCode]
+   * The carrierCode for the trackingNumber you are using to track the package. You must also provide the trackingNumber
+   * and no packageId.
    *
    * @param [config] - Optional configuration overrides for this method call.
    */
@@ -91,6 +118,6 @@ export class ShipEngine extends EventEmitter {
     config?: ShipEngineConfig
   ): Promise<TrackPackageResult> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
-    return trackPackage(params, "packageId", mergedConfig, this);
+    return trackPackage(params, mergedConfig, this);
   }
 }
