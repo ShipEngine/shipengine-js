@@ -1,5 +1,6 @@
 import { WeightUnit, DimensionUnit } from "../enums";
 import { CarrierAccount } from "../carrier/public-types";
+import { URL } from "url";
 
 export type TrackingParams = TrackByPackageParams | TrackByNumberParams;
 
@@ -14,9 +15,8 @@ export interface TrackByNumberParams {
 
 export interface Package {
   trackingNumber: string;
-  // TODO Make URL object
-  trackingURL: string;
-  packageID?: string;
+  trackingURL?: URL | string;
+  packageId?: string;
   weight?: Weight;
   dimensions?: Dimensions;
 }

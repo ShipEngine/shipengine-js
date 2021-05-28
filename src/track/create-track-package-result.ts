@@ -1,3 +1,4 @@
+import { URL } from "url";
 import { TrackPackageDTO } from "../json-rpc";
 import {
   formatEvents,
@@ -53,8 +54,9 @@ export async function createTrackPackageResult(
     package: {
       packageId: result.package.packageID || "",
       trackingNumber: result.package.trackingNumber || "",
-      // TODO Make URL object
-      trackingURL: result.package.trackingURL || "",
+      trackingURL: result.package.trackingURL
+        ? new URL(result.package.trackingURL)
+        : "",
       weight: result.package.weight
         ? {
             unit: result.package.weight?.unit || "",
