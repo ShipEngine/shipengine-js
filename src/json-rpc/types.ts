@@ -104,9 +104,9 @@ export interface AddressValidationMessageDTO {
 }
 
 export interface TrackPackageRPCParams {
-  carrierCode?: CarrierCode;
+  carrierCode?: string;
   trackingNumber?: string;
-  packageId?: string;
+  packageID?: string;
 }
 
 /**
