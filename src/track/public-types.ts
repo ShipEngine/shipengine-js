@@ -77,7 +77,7 @@ export interface TrackPackageResult {
   shipment: Shipment;
   package: Package;
   events: Event[];
-  latestEvent: Event;
+  latestEvent?: Event;
   hasErrors: boolean;
   errors: Event[];
 }

@@ -52,22 +52,26 @@ export async function createTrackPackageResult(
     },
     package: {
       packageId: result.package.packageID || "",
-      trackingNumber: result.package.trackingNumber,
+      trackingNumber: result.package.trackingNumber || "",
       // TODO Make URL object
       trackingURL: result.package.trackingURL || "",
-      weight: {
-        unit: result.package.weight?.unit || "",
-        value: result.package.weight?.value || 0,
-      },
-      dimensions: {
-        unit: result.package.dimensions?.unit || "",
-        height: result.package.dimensions?.height || 0,
-        length: result.package.dimensions?.length || 0,
-        width: result.package.dimensions?.width || 0,
-      },
+      weight: result.package.weight
+        ? {
+            unit: result.package.weight?.unit || "",
+            value: result.package.weight?.value || 0,
+          }
+        : undefined,
+      dimensions: result.package.dimensions
+        ? {
+            unit: result.package.dimensions?.unit || "",
+            height: result.package.dimensions?.height || 0,
+            length: result.package.dimensions?.length || 0,
+            width: result.package.dimensions?.width || 0,
+          }
+        : undefined,
     },
-    events: formattedEvents,
-    latestEvent: formattedEvents.slice(-1)[0],
+    events: formattedEvents || [],
+    latestEvent: formattedEvents ? formattedEvents.slice(-1)[0] : undefined,
     hasErrors: !!exceptionEvents,
     errors: exceptionEvents,
   };

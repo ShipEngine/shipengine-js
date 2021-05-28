@@ -1,5 +1,9 @@
-import { Event } from "./public-types";
-import { EventDTO } from "../json-rpc";
+import {
+  Event,
+  TrackByNumberParams,
+  TrackByPackageParams,
+} from "./public-types";
+import { EventDTO, TrackPackageRPCParams } from "../json-rpc";
 import { ShipEngineError } from "../errors";
 import { CarrierCode, ErrorCode, ErrorType } from "../enums";
 import { isCarrierCode } from "../utils/type-guards";
@@ -58,7 +62,7 @@ export function validateStringLength(
   }
 }
 
-export function validateCarrierCode(code: CarrierCode): void {
+export function validateCarrierCode(code: string): void {
   if (!code) {
     throw new ShipEngineError(
       ErrorType.Validation,
@@ -114,4 +118,45 @@ export function getActualDeliveryDateTime(events: Event[]): string {
 
   // TODO Update when dateTime handling is implemented
   return "";
+}
+
+export function validateTrackingParams(
+  params: TrackByPackageParams | TrackByNumberParams
+): TrackPackageRPCParams {
+  if ("packageId" in params) {
+    if ("trackingNumber" in params || "carrierCode" in params) {
+      throw new ShipEngineError(
+        ErrorType.Validation,
+        ErrorCode.InvalidFieldValue,
+        `Invalid input. You must provide either a packageId OR a trackingNumber and carrierCode.`
+      );
+    }
+    validatePackageId(params.packageId);
+    return {
+      packageID: params.packageId,
+    };
+  } else {
+    // We know we do not have packageId at this point
+    if ("trackingNumber" in params) {
+      if (!("carrierCode" in params)) {
+        throw new ShipEngineError(
+          ErrorType.Validation,
+          ErrorCode.InvalidFieldValue,
+          `Invalid input. You must provide either a packageId OR a trackingNumber and carrierCode.`
+        );
+      }
+      validateTrackingNumber(params.trackingNumber);
+      validateCarrierCode(params.carrierCode);
+      return {
+        trackingNumber: params.trackingNumber,
+        carrierCode: params.carrierCode,
+      };
+    } else {
+      throw new ShipEngineError(
+        ErrorType.Validation,
+        ErrorCode.InvalidFieldValue,
+        `Invalid input. You must provide either a packageId OR a trackingNumber and carrierCode.`
+      );
+    }
+  }
 }
