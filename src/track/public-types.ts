@@ -26,9 +26,8 @@ export interface Shipment {
   carrierID?: string;
   carrierAccount: CarrierAccount;
   carrier?: Carrier;
-  // TODO Make proper data objects
-  estimatedDeliveryDateTime: string;
-  actualDeliveryDateTime: string;
+  estimatedDeliveryDateTime: Date;
+  actualDeliveryDateTime: Date | undefined;
 }
 
 export interface Carrier {
@@ -49,9 +48,8 @@ export interface Dimensions {
 }
 
 export interface Event {
-  // TODO Make proper data objects
-  dateTime: string;
-  carrierDateTime: string;
+  dateTime: Date;
+  carrierDateTime: Date;
   status: string;
   description?: string;
   carrierStatusCode?: string;

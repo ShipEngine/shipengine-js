@@ -48,7 +48,7 @@ export async function createTrackPackageResult(
         name: account?.name || "",
       },
       // TODO Format dates properly
-      estimatedDeliveryDateTime: shipment.estimatedDelivery,
+      estimatedDeliveryDateTime: new Date(shipment.estimatedDelivery),
       actualDeliveryDateTime: getActualDeliveryDateTime(formattedEvents),
     },
     package: {

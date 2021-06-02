@@ -50,11 +50,9 @@ describe("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    // TODO: Update test to meet this requirement once it is implemented
-    // The estimated delivery date is populated and is a full date/time in the UTC time zone
-    expect(response.shipment.estimatedDeliveryDateTime)
-      .to.be.a("string")
-      .and.not.to.equal("");
+    expect(
+      response.shipment.estimatedDeliveryDateTime.getFullYear()
+    ).to.not.equal(undefined);
 
     expect(response.events).to.have.length(1);
 

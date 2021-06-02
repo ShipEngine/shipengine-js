@@ -23,8 +23,8 @@ export function getExceptions(events: Event[]): Event[] {
 export function formatEvents(events: EventDTO[]): Event[] {
   return events.map((e: EventDTO) => {
     return {
-      dateTime: e.timestamp,
-      carrierDateTime: e.carrierTimeStamp,
+      dateTime: new Date(e.timestamp),
+      carrierDateTime: new Date(e.carrierTimeStamp),
       status: e.status || "",
       description: e.description || "",
       carrierStatusCode: e.carrierStatusCode || "",
@@ -103,7 +103,7 @@ export function validatePackageId(value: string): void {
   }
 }
 
-export function getActualDeliveryDateTime(events: Event[]): string {
+export function getActualDeliveryDateTime(events: Event[]): Date | undefined {
   const deliveredEvents = events.filter(
     (event) => event.status === "delivered"
   );
@@ -112,12 +112,9 @@ export function getActualDeliveryDateTime(events: Event[]): string {
   if (deliveredEvents.length > 0) {
     const e = deliveredEvents.pop();
 
-    // Couldn't not suppress undefined warnings even with if statement above
-    return e!.dateTime;
+    // Could not suppress undefined warnings even with if statement above
+    return new Date(e!.dateTime);
   }
-
-  // TODO Update when dateTime handling is implemented
-  return "";
 }
 
 export function validateTrackingParams(
