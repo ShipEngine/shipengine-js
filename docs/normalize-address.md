@@ -105,7 +105,7 @@ If the address can be normalized, the `normalizeAddress` method returns a normal
 
 Errors
 -----------------------
-If the address is not valid or cannot be normalized properly, or if a network or server error is encounted, the `normalizeAddress` method will throw a [`ShipEngineError`](https://github.com/ShipEngine/shipengine-js/blob/dc2a6cd5dba7f3e62f35b9d2224270bb94700897/src/errors/shipengine-error.ts#L7-L44).
+If the address is not valid or cannot be normalized properly, or if a network or server error is encountered, the `normalizeAddress` method will throw a [`ShipEngineError`](https://github.com/ShipEngine/shipengine-js/blob/dc2a6cd5dba7f3e62f35b9d2224270bb94700897/src/errors/shipengine-error.ts#L7-L44).
 
 
 Example
@@ -131,22 +131,18 @@ async function normalizeAddress() {
     
     console.log("Successfully normalized the address!")
     console.log(result.normalizedAddress.toString());
-    }
-    else {
-      // Bad address. Print the warning & error messages
-      console.log("The address is not valid");
-      console.log(result.warnings[0]);
-      console.log(result.errors[0]);
-   } 
+     
   } catch (e) {
     console.log("Error validating address: ", e.message);
   }
 }
 
+normalizeAddress();
+
 ```                               
 
 Example Output
-===========================
+-------------------------------------
 
 ### Successful Address Normalization
 ```

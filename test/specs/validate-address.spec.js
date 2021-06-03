@@ -646,7 +646,7 @@ describe("validateAddress()", () => {
     assertNoWarningsOrErrorMessages(response);
   });
 
-  it("normalizes a lowercase country to uppercase", async function () {
+  it("Normalizes a lowercase country to uppercase", async function () {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
@@ -690,7 +690,7 @@ describe("validateAddress()", () => {
     assertNoWarningsOrErrorMessages(response);
   });
 
-  it("removes whitespace from the country", async function () {
+  it("Removes whitespace from the country", async function () {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {

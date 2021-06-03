@@ -3,6 +3,7 @@ import {
   ErrorCode,
   ErrorSource,
   ErrorType,
+  CarrierCode,
   ValidationMessageCode,
   ValidationMessageType,
 } from "../enums";
@@ -100,4 +101,72 @@ export interface AddressValidationMessageDTO {
   type: ValidationMessageType;
   code: ValidationMessageCode;
   message: string;
+}
+
+export interface TrackPackageRPCParams {
+  carrierCode?: string;
+  trackingNumber?: string;
+  packageID?: string;
+}
+
+/**
+ * The result that comes back from the ShipEngine track package API.
+ */
+export interface TrackPackageDTO {
+  shipment: {
+    carrierCode: string;
+    carrierAccountID: string;
+    shipmentID?: string;
+    estimatedDelivery: string;
+  };
+  package: {
+    packageID?: string;
+    trackingNumber: string;
+    trackingURL?: string;
+    weight?: {
+      value: number;
+      unit: string;
+    };
+    dimensions?: {
+      length: number;
+      width: number;
+      height: number;
+      unit: string;
+    };
+  };
+  events: EventDTO[];
+}
+
+export interface EventDTO {
+  timestamp: string;
+  carrierTimeStamp: string;
+  status: string;
+  description: string;
+  carrierStatusCode: string;
+  carrierDetailCode?: string;
+  signer?: string;
+  location?: {
+    stateProvince?: string;
+    postalCode?: string;
+    cityLocality?: string;
+    countryCode?: string;
+    coordinates?: {
+      latitude?: number;
+      longitude?: number;
+    };
+  };
+}
+
+export interface CarriersDTO {
+  accountID: string;
+  carrierCode: string;
+  accountNumber: string;
+  name: string;
+}
+
+/**
+ * The result that comes back from the ShipEngine list carriers API.
+ */
+export interface CarriersDTOResult {
+  carrierAccounts: CarriersDTO[];
 }

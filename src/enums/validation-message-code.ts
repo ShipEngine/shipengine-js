@@ -68,7 +68,7 @@ export enum ValidationMessageCode {
    * The address could not be found due to insufficient or incorrect data, or the
    * address is non-deliverable
    */
-  AddresNotFound = "addres_not_found",
+  AddressNotFound = "address_not_found",
 
   /**
    * There was a change or addition to the postal code.

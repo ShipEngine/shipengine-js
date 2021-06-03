@@ -1,0 +1,35 @@
+export type CarrierNames = {
+  [key: string]: string | undefined;
+};
+
+export const carrierNames: CarrierNames = {
+  access_worldwide: "Access Worldwide",
+  amazon_buy_shipping: "Amazon Buy Shipping",
+  amazon_shipping_uk: "Amazon Shipping UK",
+  apc: "APC",
+  asendia: "asendia",
+  australia_post: "Australia Post",
+  canada_post: "Canada Post",
+  dhl_ecommerce: "DHL E-Commerce",
+  dhl_express: "DHL Express",
+  dhl_express_australia: "DHL Express Australia",
+  dhl_express_canada: "DHL Express Canada",
+  dhl_express_uk: "DHL Express UK",
+  dpd: "DPD",
+  endicia: "Endicia",
+  fedex: "Federal Express",
+  fedex_uk: "Federal Express UK",
+  first_mail: "First Mile",
+  globegistics: "Globegistics",
+  imex: "Imex",
+  newgistics: "Newgistics",
+  on_trac: "OnTrac",
+  purolator_canada: "Purolator Canada",
+  royal_mail: "Royal Mail",
+  rr_donnelley: "RR Donnelley",
+  seko: "Seko",
+  sendle: "Sendle",
+  stamps_com: "United States Postal Service",
+  ups: "United Parcel Service",
+  usps: "United States Postal Service",
+};
