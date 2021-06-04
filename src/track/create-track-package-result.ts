@@ -11,6 +11,7 @@ import { getCarrierAccounts } from "./../carrier/get-carrier-accounts";
 import { NormalizedConfig } from "../config";
 import { EventEmitter } from "../isomorphic.node";
 import { CarrierAccount } from "../carrier/public-types";
+import { ISOString } from "../utils/date-time";
 
 export async function createTrackPackageResult(
   result: TrackPackageDTO,
@@ -47,8 +48,7 @@ export async function createTrackPackageResult(
         accountNumber: account?.accountNumber || "",
         name: account?.name || "",
       },
-      // TODO Format dates properly
-      estimatedDeliveryDateTime: new Date(shipment.estimatedDelivery),
+      estimatedDeliveryDateTime: new ISOString(shipment.estimatedDelivery),
       actualDeliveryDateTime: getActualDeliveryDateTime(formattedEvents),
     },
     package: {

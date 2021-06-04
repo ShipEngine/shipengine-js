@@ -50,9 +50,7 @@ describe("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    expect(
-      response.shipment.estimatedDeliveryDateTime.getFullYear()
-    ).to.not.equal(undefined);
+    expect(response.shipment.estimatedDeliveryDateTime).to.not.equal(undefined);
 
     expect(response.events).to.have.length(1);
 
@@ -65,10 +63,9 @@ describe("trackPackage", () => {
       packageId: "pkg_1FedAttempted",
     };
     const response = await shipengine.trackPackage(params);
+    const { shipment } = response;
 
-    expect(response.shipment.carrier.code)
-      .to.be.a("string")
-      .and.not.to.equal("");
+    expect(shipment.carrier.code).to.be.a("string").and.not.to.equal("");
 
     expect(response.package.trackingNumber)
       .to.be.a("string")
@@ -76,9 +73,7 @@ describe("trackPackage", () => {
 
     // TODO: Update test to meet this requirement once it is implemented
     // The estimated delivery date is populated and is a full date/time in the UTC time zone
-    expect(response.shipment.estimatedDeliveryDateTime)
-      .to.be.a("string")
-      .and.not.to.equal("");
+    validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
     expect(response.events).to.have.length(5);
 
@@ -93,20 +88,15 @@ describe("trackPackage", () => {
       packageId: "pkg_1FedexDeLiveredAttempted",
     };
     const response = await shipengine.trackPackage(params);
+    const { shipment } = response;
 
-    expect(response.shipment.carrier.code)
-      .to.be.a("string")
-      .and.not.to.equal("");
+    expect(shipment.carrier.code).to.be.a("string").and.not.to.equal("");
 
     expect(response.package.trackingNumber)
       .to.be.a("string")
       .and.not.to.equal("");
 
-    // TODO: Update test to meet these requirements once it is implemented
-    // The estimated delivery date is populated and is a full date/time in the UTC time zone
-    expect(response.shipment.estimatedDeliveryDateTime)
-      .to.be.a("string")
-      .and.not.to.equal("");
+    validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
     expect(response.events[0].status).to.equal("accepted");
 
@@ -130,22 +120,17 @@ describe("trackPackage", () => {
       packageId: "pkg_1FedExDeLivered",
     };
     const response = await shipengine.trackPackage(params);
+    const { shipment } = response;
 
-    expect(response.shipment.carrier.code)
-      .to.be.a("string")
-      .and.not.to.equal("");
+    expect(shipment.carrier.code).to.be.a("string").and.not.to.equal("");
 
     expect(response.package.trackingNumber)
       .to.be.a("string")
       .and.not.to.equal("");
 
-    // TODO: Update test to meet these requirements once it is implemented
-    // The estimated delivery date is populated and is a full date/time in the UTC time zone
-    expect(response.shipment.estimatedDeliveryDateTime)
-      .to.be.a("string")
-      .and.not.to.equal("");
+    validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
-    expect(response.shipment.actualDeliveryDateTime).to.equal(
+    expect(shipment.actualDeliveryDateTime).to.equal(
       response.events.pop().dateTime
     );
 
@@ -175,11 +160,7 @@ describe("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    // TODO: Update test to meet these requirements once it is implemented
-    // The estimated delivery date is populated and is a full date/time in the UTC time zone
-    expect(shipment.estimatedDeliveryDateTime)
-      .to.be.a("string")
-      .and.not.to.equal("");
+    validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
     expect(shipment.actualDeliveryDateTime).to.equal(events[4].dateTime);
 
@@ -210,11 +191,7 @@ describe("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    // TODO: Update test to meet these requirements once it is implemented
-    // The estimated delivery date is populated and is a full date/time in the UTC time zone
-    expect(shipment.estimatedDeliveryDateTime)
-      .to.be.a("string")
-      .and.not.to.equal("");
+    validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
     expect(shipment.actualDeliveryDateTime).to.equal(events.pop().dateTime);
 
@@ -248,11 +225,7 @@ describe("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    // TODO: Update test to meet these requirements once it is implemented
-    // The estimated delivery date is populated and is a full date/time in the UTC time zone
-    expect(shipment.estimatedDeliveryDateTime)
-      .to.be.a("string")
-      .and.not.to.equal("");
+    validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
     expect(shipment.actualDeliveryDateTime).to.equal(events.pop().dateTime);
 
@@ -286,13 +259,9 @@ describe("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    // TODO: Update test to meet these requirements once it is implemented
-    // The estimated delivery date is populated and is a full date/time in the UTC time zone
-    expect(shipment.estimatedDeliveryDateTime)
-      .to.be.a("string")
-      .and.not.to.equal("");
+    validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
-    expect(shipment.actualDeliveryDateTime).to.equal("");
+    expect(shipment.actualDeliveryDateTime).to.equal(undefined);
 
     expect(events).to.have.length(3);
 
@@ -322,11 +291,8 @@ describe("trackPackage", () => {
       .and.not.to.equal("");
 
     expect(events).to.have.length(8);
-    // TODO: Update test to meet these requirements once it is implemented
-    // The estimated delivery date is populated and is a full date/time in the UTC time zone
-    expect(shipment.estimatedDeliveryDateTime)
-      .to.be.a("string")
-      .and.not.to.equal("");
+
+    validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
     expect(events).to.have.length(8);
 
@@ -351,11 +317,7 @@ describe("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    // TODO: Update test to meet these requirements once it is implemented
-    // The estimated delivery date is populated and is a full date/time in the UTC time zone
-    expect(shipment.estimatedDeliveryDateTime)
-      .to.be.a("string")
-      .and.not.to.equal("");
+    validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
     // At least one event has no location information (city, state, postal code, or geocoordinates)
     expect(
@@ -501,3 +463,9 @@ function hasNoCoordinates(e) {
     e.location.coordinates.longitude === 0
   );
 }
+
+const validateDateTimeFormat = (dateValue) => {
+  expect(dateValue)
+    .to.be.an("object")
+    .with.keys("value", "hasTime", "hasTimeZone");
+};
