@@ -2,6 +2,7 @@ const { expect } = require("chai");
 const { ShipEngine } = require("../../");
 const { apiKey, baseURL } = require("../utils/constants");
 const errors = require("../utils/errors");
+const { getExceptions } = require("../../cjs/track/util");
 
 describe("trackPackage", () => {
   it("DX-1266: Tracks a package using a tracking number and carrier code", async function () {
@@ -446,6 +447,32 @@ describe("trackPackage", () => {
       expect(error.requestID).to.match(/^req_\w+$/);
     }
   });
+  it("finds an exception event when it is present", function () {
+    const dataCopy = data.events.map((x) => {
+      return x;
+    });
+
+    expect(getExceptions(dataCopy)).to.be.an("array").and.to.have.lengthOf(1);
+  });
+  it("finds multiple exception events when they are present", function () {
+    const dataCopy = data.events.map((x) => {
+      return x;
+    });
+
+    dataCopy[0].status = "exception";
+
+    expect(getExceptions(dataCopy)).to.be.an("array").and.to.have.lengthOf(2);
+  });
+
+  it("returns an empty array when no exception events are present", function () {
+    const dataCopy = data.events.map((x) => {
+      return x;
+    });
+
+    dataCopy[2].status = "delivered";
+
+    expect(getExceptions(dataCopy)).to.be.an("array").and.to.have.lengthOf(0);
+  });
 });
 
 function hasNoLocationData(e) {
@@ -468,4 +495,87 @@ const validateDateTimeFormat = (dateValue) => {
   expect(dateValue)
     .to.be.an("object")
     .with.keys("value", "hasTime", "hasTimeZone");
+};
+
+const data = {
+  events: [
+    {
+      dateTime: {
+        value: "2021-06-02T11:00:00.000Z",
+        hasTime: true,
+        hasTimeZone: true,
+      },
+      carrierDateTime: {
+        hasTime: false,
+        hasTimeZone: false,
+      },
+      status: "accepted",
+      description: "Picked up from shipper's warehouse",
+      carrierStatusCode: "PU7W",
+      carrierDetailCode: "DRR-913c-0001",
+      signer: "",
+      location: {
+        cityLocality: "",
+        stateProvince: "",
+        postalCode: "",
+        countryCode: "",
+        coordinates: {
+          latitude: 0,
+          longitude: 0,
+        },
+      },
+    },
+    {
+      dateTime: {
+        value: "2021-06-03T14:00:00.000Z",
+        hasTime: true,
+        hasTimeZone: true,
+      },
+      carrierDateTime: {
+        hasTime: false,
+        hasTimeZone: false,
+      },
+      status: "in_transit",
+      description: "En-route to distribution center hub",
+      carrierStatusCode: "ER00P",
+      carrierDetailCode: "",
+      signer: "",
+      location: {
+        cityLocality: "",
+        stateProvince: "",
+        postalCode: "",
+        countryCode: "",
+        coordinates: {
+          latitude: 0,
+          longitude: 0,
+        },
+      },
+    },
+    {
+      dateTime: {
+        value: "2021-06-08T11:00:00.000Z",
+        hasTime: true,
+        hasTimeZone: true,
+      },
+      carrierDateTime: {
+        hasTime: false,
+        hasTimeZone: false,
+      },
+      status: "exception",
+      description: "Package lost",
+      carrierStatusCode: "LL",
+      carrierDetailCode: "",
+      signer: "",
+      location: {
+        cityLocality: "",
+        stateProvince: "",
+        postalCode: "",
+        countryCode: "",
+        coordinates: {
+          latitude: 0,
+          longitude: 0,
+        },
+      },
+    },
+  ],
 };
