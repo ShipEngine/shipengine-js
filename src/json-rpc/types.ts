@@ -139,7 +139,7 @@ export interface TrackPackageDTO {
 
 export interface EventDTO {
   timestamp: string;
-  carrierTimeStamp: string;
+  carrierTimestamp: string;
   status: string;
   description: string;
   carrierStatusCode: string;

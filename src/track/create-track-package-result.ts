@@ -50,7 +50,7 @@ export async function createTrackPackageResult(
         name: account?.name || "",
       },
       estimatedDeliveryDateTime: new ISOString(shipment.estimatedDelivery),
-      actualDeliveryDateTime: actualDeliveryDateTime.value
+      actualDeliveryDateTime: actualDeliveryDateTime?.value
         ? actualDeliveryDateTime
         : undefined,
     },
