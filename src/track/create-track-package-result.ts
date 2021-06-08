@@ -21,6 +21,7 @@ export async function createTrackPackageResult(
   const { shipment, events } = result;
   const formattedEvents = formatEvents(events);
   const exceptionEvents = getExceptions(formattedEvents);
+  const actualDeliveryDateTime = getActualDeliveryDateTime(formattedEvents);
   let account: CarrierAccount | undefined;
 
   if (shipment.carrierAccountID) {
@@ -49,7 +50,9 @@ export async function createTrackPackageResult(
         name: account?.name || "",
       },
       estimatedDeliveryDateTime: new ISOString(shipment.estimatedDelivery),
-      actualDeliveryDateTime: getActualDeliveryDateTime(formattedEvents),
+      actualDeliveryDateTime: actualDeliveryDateTime.value
+        ? actualDeliveryDateTime
+        : undefined,
     },
     package: {
       packageId: result.package.packageID || "",
@@ -74,7 +77,7 @@ export async function createTrackPackageResult(
     },
     events: formattedEvents || [],
     latestEvent: formattedEvents ? formattedEvents.slice(-1)[0] : undefined,
-    hasErrors: !!exceptionEvents,
+    hasErrors: exceptionEvents.length > 0,
     errors: exceptionEvents,
   };
   return returnValue;
