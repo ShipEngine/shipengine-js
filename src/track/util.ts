@@ -14,7 +14,7 @@ import { ISOString } from "../utils/date-time";
 export function getExceptions(events: Event[]): Event[] {
   const exceptionEvents: Event[] = [];
   for (const e of events) {
-    if (e.status === "Exception") {
+    if (e.status.toUpperCase() === "EXCEPTION") {
       exceptionEvents.push(e);
     }
   }
@@ -25,7 +25,7 @@ export function formatEvents(events: EventDTO[]): Event[] {
   return events.map((e: EventDTO) => {
     return {
       dateTime: new ISOString(e.timestamp),
-      carrierDateTime: new ISOString(e.carrierTimeStamp),
+      carrierDateTime: new ISOString(e.carrierTimestamp),
       status: e.status || "",
       description: e.description || "",
       carrierStatusCode: e.carrierStatusCode || "",
@@ -108,7 +108,7 @@ export function getActualDeliveryDateTime(
   events: Event[]
 ): ISOString | undefined {
   const deliveredEvents = events.filter(
-    (event) => event.status === "delivered"
+    (event) => event.status.toUpperCase() === "DELIVERED"
   );
 
   // Relying on RPC API to handle sorting events by dateTime
@@ -117,6 +117,8 @@ export function getActualDeliveryDateTime(
 
     // Could not suppress undefined warnings even with if statement above
     return e?.dateTime;
+  } else {
+    return undefined;
   }
 }
 
