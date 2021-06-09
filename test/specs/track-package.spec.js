@@ -72,7 +72,6 @@ describe("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    // TODO: Update test to meet this requirement once it is implemented
     // The estimated delivery date is populated and is a full date/time in the UTC time zone
     validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
@@ -135,7 +134,7 @@ describe("trackPackage", () => {
       response.events.pop().dateTime
     );
 
-    // TODO Are the events sorted by the server
+    // Not validating this since it is sorted by the RPC server
     // The events array is sorted in ascending order by the UTC date/time (NOT by the carrier date/time field)
 
     expect(response.events[0].status).to.equal("accepted");
@@ -166,7 +165,8 @@ describe("trackPackage", () => {
     expect(shipment.actualDeliveryDateTime).to.equal(events[4].dateTime);
 
     expect(events).to.have.length(5);
-    // TODO Are the events sorted by the server
+
+    // Not validating this since it is sorted by the RPC server
     // The events array is sorted in ascending order by the UTC date/time (NOT by the carrier date/time field)
 
     expect(events[0].status).to.equal("accepted");
@@ -196,7 +196,7 @@ describe("trackPackage", () => {
 
     expect(shipment.actualDeliveryDateTime).to.equal(events.pop().dateTime);
 
-    // TODO Are the events sorted by the server
+    // Not validating this since it is sorted by the RPC server
     // The events array is sorted in ascending order by the UTC date/time (NOT by the carrier date/time field)
 
     expect(events[0].status).to.equal("accepted");
@@ -230,7 +230,7 @@ describe("trackPackage", () => {
 
     expect(shipment.actualDeliveryDateTime).to.equal(events.pop().dateTime);
 
-    // TODO Are the events sorted by the server
+    // Not validating this since it is sorted by the RPC server
     // The events array is sorted in ascending order by the UTC date/time (NOT by the carrier date/time field)
 
     expect(events[0].status).to.equal("accepted");
@@ -336,8 +336,42 @@ describe("trackPackage", () => {
     ).to.have.length.greaterThanOrEqual(1);
   });
 
-  // TODO DX-1280 Tracks a package with event date/time values with no timestamp
-  // This has not yet been implemented
+  it("DX-1280: Tracks a package with an event date/time values with no timestamp", async function () {
+    const shipengine = new ShipEngine({ apiKey, baseURL });
+    const params = {
+      packageId: "pkg_Attempted",
+    };
+    const response = await shipengine.trackPackage(params);
+    const { shipment, events } = response;
+
+    expect(shipment.carrier.code).to.be.a("string").and.not.to.equal("");
+
+    expect(response.package.trackingNumber)
+      .to.be.a("string")
+      .and.not.to.equal("");
+
+    validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
+
+    // The events array contains at least 3 events
+    expect(events).to.have.length.greaterThanOrEqual(3);
+
+    // Each of the events has both the date/time and the carrier date/time populated
+    expect(
+      events.filter((e) => e.dateTime && e.carrierDateTime).length
+    ).to.equal(events.length);
+
+    // The date/time field of each event is a full date/time in the UTC time zone
+    //
+    // The carrier date/time field of each event does not include time zone information
+    expect(
+      events.filter(
+        (e) => e.dateTime.hasTimeZone && !e.carrierDateTime.hasTimeZone
+      ).length
+    ).to.equal(events.length);
+
+    /// Not validating this since it is sorted by the RPC server
+    // The events array is sorted in ascending order by the UTC date/time (NOT by the carrier date/time field)
+  });
 
   it("DX-1281: Tracks a package with an invalid tracking number", async function () {
     const shipengine = new ShipEngine({ apiKey, baseURL });
