@@ -28,6 +28,9 @@ export async function callJsonRpcMethod<TParams, TResult>(
         // So wait the specified amount of time and then retry.
         await wait(error.retryAfter);
       } else {
+        if (error.retryAfter > config.timeout) {
+          // throw timeout error
+        }
         throw error;
       }
     }
