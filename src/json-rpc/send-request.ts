@@ -9,6 +9,7 @@ import {
   getUserAgentString,
 } from "../isomorphic.node";
 import { processResponse } from "./process-response";
+import bs58 from "bs58";
 
 const userAgent = getUserAgentString();
 
@@ -25,7 +26,7 @@ export async function sendRequest<TParams, TResult>(
 ): Promise<TResult> {
   // Generate a unique request ID using the timestamp and a random number
   const randomNumber = Math.floor(Math.random() * 1000);
-  const requestID = `req_${Date.now()}${randomNumber}`;
+  const requestID = `req_` + bs58.encode(new Buffer(`${Date.now()}${randomNumber}`));
 
   // Create an AbortController so we can cancel the request if it times out
   const controller = new AbortController();
