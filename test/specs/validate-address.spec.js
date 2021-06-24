@@ -391,7 +391,7 @@ describe("validateAddress()", () => {
     expect(isValid).to.be.a("boolean").and.to.equal(false);
 
     // The normalized address is null
-    expect(normalizedAddress).to.equal(null);
+    expect(normalizedAddress).to.equal(undefined);
 
     // Messages are returned correctly
     expect(response.messages).to.deep.equal([

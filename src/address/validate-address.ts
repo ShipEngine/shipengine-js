@@ -56,7 +56,7 @@ function createAddressValidationResult(
 
   return {
     isValid,
-    normalizedAddress: normalizedAddress && {
+    normalizedAddress: (normalizedAddress || undefined) && {
       street: normalizedAddress.street,
       name: normalizedAddress.name || "",
       company: normalizedAddress.company || "",
