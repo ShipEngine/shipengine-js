@@ -799,7 +799,6 @@ describe("validateAddress()", () => {
       await shipengine.validateAddress(addressToValidate);
       errors.shouldHaveThrown();
     } catch (error) {
-        console.log(error)
       errors.assertShipEngineError(error, {
         name: "ShipEngineError",
         source: "shipengine",
