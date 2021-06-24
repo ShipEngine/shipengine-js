@@ -237,7 +237,7 @@ describe("validateAddress()", () => {
       street: ["170 Princes Blvd"],
       cityLocality: "Toronto",
       stateProvince: "On",
-      postalCode: "M6 K 3 C3",
+      postalCode: "M6K 3C3",
       name: "",
       company: "",
     };
@@ -254,7 +254,7 @@ describe("validateAddress()", () => {
     assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
 
     // The correct postalCode is returned
-    expect(normalizedAddress.postalCode).to.equal("M6 K 3 C3");
+    expect(normalizedAddress.postalCode).to.equal("M6K 3C3");
 
     // There are no warning or error messages
     assertNoWarningsOrErrorMessages(response);
@@ -267,7 +267,7 @@ describe("validateAddress()", () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
-      street: ["上鳥羽角田町６８", "validate-with-non-latin-chars"],
+      street: ["上鳥羽角田町６８"],
       cityLocality: "南区",
       stateProvince: "京都",
       postalCode: "601-8104",
@@ -391,7 +391,7 @@ describe("validateAddress()", () => {
     expect(isValid).to.be.a("boolean").and.to.equal(false);
 
     // The normalized address is null
-    expect(normalizedAddress).to.equal(undefined);
+    expect(normalizedAddress).to.equal(null);
 
     // Messages are returned correctly
     expect(response.messages).to.deep.equal([
@@ -575,7 +575,7 @@ describe("validateAddress()", () => {
       country: "US",
       street: ["4 JERSEY ST"],
       cityLocality: "METROPOLIS",
-      stateProvince: "ME",
+      stateProvince: "TX",
       postalCode: "02215",
       name: "",
       company: "",
@@ -799,12 +799,13 @@ describe("validateAddress()", () => {
       await shipengine.validateAddress(addressToValidate);
       errors.shouldHaveThrown();
     } catch (error) {
+        console.log(error)
       errors.assertShipEngineError(error, {
         name: "ShipEngineError",
         source: "shipengine",
         type: "system",
         code: "unspecified",
-        message: "Unable to connect to the database",
+        message: "Unable to process this request. A downstream API error occurred.",
       });
       expect(error.requestID).to.match(/^req_\w+$/);
     }
