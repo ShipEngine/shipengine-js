@@ -1,26 +1,25 @@
 // Karma config
-// https://karma-runner.github.io/0.12/config/configuration-file.html
+// https://karma-runner.github.io/0.12/config/configuratio
 // https://jstools.dev/karma-config/
 
 'use strict';
+
 const { karmaConfig } = require('@jsdevtools/karma-config');
 // const { host } = require('@jsdevtools/host-environment');
-const { karmaProxyBaseUri, apiBaseUri } = require('./test/utils/constants');
+const { karmaProxyBaseUri, baseURL } = require('./test/utils/constants');
 
 module.exports = (cfg) => {
   const getConfig = karmaConfig({
-    sourceDir: './esm.test',
-    tests: ['./esm.test/**/*.spec.js'],
+    sourceDir: './esm',
+    testDir: 'test',
+    tests: ['test/specs/!(exports.spec).js'],
 
-    config: {
-      frameworks: ['mocha', 'host-environment'],
-      proxies: {
-        [karmaProxyBaseUri]: {
-          target: apiBaseUri,
-          changeOrigin: true,
-        },
-      },
-    },
+    // config: {
+    //   files: [
+    //     { pattern: 'test/specs/!(exports.spec).js', type: 'module' }
+    //   ]
+    // },
+
     browsers: {
       chrome: true,
       firefox: false,
@@ -28,7 +27,7 @@ module.exports = (cfg) => {
       edge: false,
       ie: false,
     },
-    CI: true, // headless
+    CI: false, // headless
   });
   getConfig(cfg);
 };
