@@ -19,7 +19,6 @@
     "strictBindCallApply": true,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
-    "esModuleInterop": true,
     "stripInternal": true,
 
     "typeRoots": [
