@@ -25,9 +25,8 @@ module.exports = (cfg) => {
       firefox: false,
       safari: false,
       edge: false,
-      ie: false,
     },
-    CI: false, // headless
+    CI: true, // headless
   });
   getConfig(cfg);
 };
