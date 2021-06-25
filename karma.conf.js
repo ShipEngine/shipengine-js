@@ -12,7 +12,7 @@ module.exports = (cfg) => {
   cfg.set({
     // Defaults to the Karma-Verbose-Reporter
     // See https://www.npmjs.com/package/karma-verbose-reporter
-    reporters: ["verbose"],
+    reporters: ["verbose", 'coverage-istanbul'],
   
     // The browsers will vary depending on the OS.
     // In CI/CD environments, FirefoxHeadless and ChromeHeadless are used instead.
@@ -45,6 +45,25 @@ module.exports = (cfg) => {
       // Inlne source maps ensure proper stack traces in errors,
       // and allow you to debug your original source code rather than bundled code.
       devtool: "inline-source-map",
+      module: {
+        rules: [
+          {
+            test: /\.(js|jsx|mjs)$/,
+            include: /.\/esm/,
+            exclude: /node_modules|\.spec\.|\.test\./,
+            enforce: 'post',
+            use: '@jsdevtools/coverage-istanbul-loader'
+          }
+        ]
+      }
+    },
+    coverageIstanbulReporter: {
+      dir: 'coverage/%browser%',
+      reports: [
+        'text-summary',
+        'lcov'
+      ],
+      skipFilesWithNoCoverage: true
     }
   });
 };
