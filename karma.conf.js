@@ -24,7 +24,7 @@ module.exports = (cfg) => {
     // The browsers will vary depending on the OS.
     // In CI/CD environments, FirefoxHeadless and ChromeHeadless are used instead.
     // browsers: ["Firefox", "Chrome"],
-    browsers: ["ChromeHeadless"],
+    browsers,
 
     frameworks: [
       // Defaults to the Mocha test framework.
