@@ -37,7 +37,9 @@ module.exports = (cfg) => {
       // Uses Webpack to bundle your tests and their dependencies
       "test/**/*.+(spec|test).+(js|jsx|mjs)": ["webpack"]
     },
-  
+    
+    processKillTimeout: 5000,
+
     webpack: {
       // Webpack development mode it easier to debug failing tests
       mode: "development",
