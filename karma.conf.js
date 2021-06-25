@@ -3,10 +3,17 @@
 // https://jstools.dev/karma-config/
 
 'use strict';
+const { host } = require('@jsdevtools/host-environment');
 
-const { karmaConfig } = require('@jsdevtools/karma-config');
-// const { host } = require('@jsdevtools/host-environment');
-const { karmaProxyBaseUri, baseURL } = require('./test/utils/constants');
+const browsers = ["ChromeHeadless", "FirefoxHeadless"];
+
+if (host.os.mac) {
+  browsers.push("Safari")
+}
+
+if (host.os.windows) {
+  browsers.push("Edge");
+}
 
 module.exports = (cfg) => {
   cfg.set({
