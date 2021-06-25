@@ -92,7 +92,7 @@ jobs:
 
       # On windows the lcov.info file currently returns empty, so skip for now
       - name: Combine code coverage data into a single file
-        if: matrix.os != "windows-latest"
+        # if: matrix.os != "windows-latest"
         shell: bash
         run: |
           ls -Rlh coverage/*/lcov.info
@@ -100,7 +100,7 @@ jobs:
 
       # On windows the lcov.info file currently returns empty, so skip for now
       - name: Send code coverage results to Coveralls
-        if: matrix.os != "windows-latest"
+        # if: matrix.os != "windows-latest"
         uses: coverallsapp/github-action@v1.1.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
