@@ -207,7 +207,7 @@ describe("normalizeAddress()", () => {
       street: ["170 Princes Blvd"],
       cityLocality: "Toronto",
       stateProvince: "On",
-      postalCode: "M6 K 3 C3",
+      postalCode: "M6K 3C3",
       name: "",
       company: "",
       phone: "",
@@ -221,7 +221,7 @@ describe("normalizeAddress()", () => {
     assertAddressEquals(normalizedAddress, expectedNormalizedAddress);
 
     // The correct postalCode is returned
-    expect(normalizedAddress.postalCode).to.equal("M6 K 3 C3");
+    expect(normalizedAddress.postalCode).to.equal("M6K 3C3");
 
     // It should have a normalized address with the correct shape
     assertNormalizedAddressFormat(normalizedAddress);
@@ -231,7 +231,7 @@ describe("normalizeAddress()", () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
-      street: ["上鳥羽角田町６８", "address-with-non-latin-chars"],
+      street: ["上鳥羽角田町６８"],
       cityLocality: "南区",
       stateProvince: "京都",
       postalCode: "601-8104",
@@ -513,7 +513,7 @@ describe("normalizeAddress()", () => {
       country: "US",
       street: ["4 JERSEY ST"],
       cityLocality: "METROPOLIS",
-      stateProvince: "ME",
+      stateProvince: "TX",
       postalCode: "02215",
       name: "",
       company: "",
@@ -634,7 +634,7 @@ describe("normalizeAddress()", () => {
         source: "shipengine",
         type: "system",
         code: "unspecified",
-        message: "Unable to connect to the database",
+        message: "Unable to process this request. A downstream API error occurred.",
       });
       expect(error.requestID).to.match(/^req_\w+$/);
     }
