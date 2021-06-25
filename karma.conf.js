@@ -28,6 +28,12 @@ module.exports = (cfg) => {
       // See https://jstools.dev/karma-host-environment
       // "host-environment"
     ],
+
+    client: {
+      mocha: {
+        timeout : 6000 // 6 seconds - upped from 2 seconds
+      }
+    },
   
     files: [
       'test/specs/!(file-system.spec).js',  
@@ -37,8 +43,6 @@ module.exports = (cfg) => {
       // Uses Webpack to bundle your tests and their dependencies
       "test/**/*.+(spec|test).+(js|jsx|mjs)": ["webpack"]
     },
-    
-    processKillTimeout: 5000,
 
     webpack: {
       // Webpack development mode it easier to debug failing tests
