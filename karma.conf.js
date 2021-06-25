@@ -9,24 +9,42 @@ const { karmaConfig } = require('@jsdevtools/karma-config');
 const { karmaProxyBaseUri, baseURL } = require('./test/utils/constants');
 
 module.exports = (cfg) => {
-  const getConfig = karmaConfig({
-    sourceDir: './esm',
-    testDir: 'test',
-    tests: ['test/specs/!(exports.spec).js'],
+  cfg.set({
+    // Defaults to the Karma-Verbose-Reporter
+    // See https://www.npmjs.com/package/karma-verbose-reporter
+    reporters: ["verbose"],
+  
+    // The browsers will vary depending on the OS.
+    // In CI/CD environments, FirefoxHeadless and ChromeHeadless are used instead.
+    // browsers: ["Firefox", "Chrome"],
+    browsers: ["ChromeHeadless"],
 
-    // config: {
-    //   files: [
-    //     { pattern: 'test/specs/!(exports.spec).js', type: 'module' }
-    //   ]
-    // },
-
-    browsers: {
-      chrome: true,
-      firefox: false,
-      safari: false,
-      edge: false,
+    frameworks: [
+      // Defaults to the Mocha test framework.
+      "mocha",
+  
+      // This makes it easy to detect which browser your tests are running in.
+      // Also provides access to environment variables.
+      // See https://jstools.dev/karma-host-environment
+      // "host-environment"
+    ],
+  
+    files: [
+      'test/specs/!(file-system.spec).js',  
+    ],
+  
+    preprocessors: {
+      // Uses Webpack to bundle your tests and their dependencies
+      "test/**/*.+(spec|test).+(js|jsx|mjs)": ["webpack"]
     },
-    CI: true, // headless
+  
+    webpack: {
+      // Webpack development mode it easier to debug failing tests
+      mode: "development",
+  
+      // Inlne source maps ensure proper stack traces in errors,
+      // and allow you to debug your original source code rather than bundled code.
+      devtool: "inline-source-map",
+    }
   });
-  getConfig(cfg);
 };
