@@ -67,6 +67,7 @@ jobs:
         os:
           - ubuntu-latest     # Chrome, Firefox, Safari (via SauceLabs), Edge (via SauceLabs)
           - windows-latest    # Internet Explorer
+          - macos-latest
 
     steps:
       - name: Checkout source
