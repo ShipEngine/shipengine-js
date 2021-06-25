@@ -74,11 +74,7 @@ describe("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    // TODO: Update test to meet this requirement once it is implemented
-    // The estimated delivery date is populated and is a full date/time in the UTC time zone
-    expect(response.shipment.estimatedDeliveryDateTime)
-      .to.be.a("string")
-      .and.not.to.equal("");
+    expect(response.shipment.estimatedDeliveryDateTime).to.be.a('date')
 
     expect(response.events).to.have.length(5);
 
@@ -102,12 +98,7 @@ describe("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    // TODO: Update test to meet these requirements once it is implemented
-    // The estimated delivery date is populated and is a full date/time in the UTC time zone
-    expect(response.shipment.estimatedDeliveryDateTime)
-      .to.be.a("string")
-      .and.not.to.equal("");
-
+    expect(response.shipment.estimatedDeliveryDateTime).to.be.a('date')
     expect(response.events[0].status).to.equal("accepted");
 
     expect(response.events[1].status).to.equal("in_transit");
@@ -139,14 +130,11 @@ describe("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    // TODO: Update test to meet these requirements once it is implemented
-    // The estimated delivery date is populated and is a full date/time in the UTC time zone
-    expect(response.shipment.estimatedDeliveryDateTime)
-      .to.be.a("string")
-      .and.not.to.equal("");
+    expect(response.shipment.estimatedDeliveryDateTime).to.be.a('date')
 
-    expect(response.shipment.actualDeliveryDateTime).to.equal(
-      response.events.pop().dateTime
+    lastEvent = response.events.pop()
+    expect(response.shipment.actualDeliveryDateTime).to.deep.equal(
+      lastEvent.dateTime
     );
 
     // TODO Are the events sorted by the server
@@ -158,7 +146,7 @@ describe("trackPackage", () => {
       response.events.filter((e) => e.status === "in_transit")
     ).to.have.length.greaterThan(0);
 
-    expect(response.events.pop().status === "delivered");
+    expect(lastEvent.status === "delivered");
   });
 
   it("DX-1274: Tracks a package delivered with signature", async function () {
@@ -175,13 +163,9 @@ describe("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    // TODO: Update test to meet these requirements once it is implemented
-    // The estimated delivery date is populated and is a full date/time in the UTC time zone
-    expect(shipment.estimatedDeliveryDateTime)
-      .to.be.a("string")
-      .and.not.to.equal("");
+    expect(response.shipment.estimatedDeliveryDateTime).to.be.a('date')
 
-    expect(shipment.actualDeliveryDateTime).to.equal(events[4].dateTime);
+    expect(shipment.actualDeliveryDateTime).to.deep.equal(events[4].dateTime);
 
     expect(events).to.have.length(5);
     // TODO Are the events sorted by the server
@@ -210,13 +194,9 @@ describe("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    // TODO: Update test to meet these requirements once it is implemented
-    // The estimated delivery date is populated and is a full date/time in the UTC time zone
-    expect(shipment.estimatedDeliveryDateTime)
-      .to.be.a("string")
-      .and.not.to.equal("");
+    expect(response.shipment.estimatedDeliveryDateTime).to.be.a('date')
 
-    expect(shipment.actualDeliveryDateTime).to.equal(events.pop().dateTime);
+    expect(shipment.actualDeliveryDateTime).to.deep.equal(events.pop().dateTime);
 
     // TODO Are the events sorted by the server
     // The events array is sorted in ascending order by the UTC date/time (NOT by the carrier date/time field)
@@ -248,13 +228,9 @@ describe("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    // TODO: Update test to meet these requirements once it is implemented
-    // The estimated delivery date is populated and is a full date/time in the UTC time zone
-    expect(shipment.estimatedDeliveryDateTime)
-      .to.be.a("string")
-      .and.not.to.equal("");
+    expect(response.shipment.estimatedDeliveryDateTime).to.be.a('date')
 
-    expect(shipment.actualDeliveryDateTime).to.equal(events.pop().dateTime);
+    expect(shipment.actualDeliveryDateTime).to.deep.equal(events.pop().dateTime);
 
     // TODO Are the events sorted by the server
     // The events array is sorted in ascending order by the UTC date/time (NOT by the carrier date/time field)
@@ -286,13 +262,9 @@ describe("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    // TODO: Update test to meet these requirements once it is implemented
-    // The estimated delivery date is populated and is a full date/time in the UTC time zone
-    expect(shipment.estimatedDeliveryDateTime)
-      .to.be.a("string")
-      .and.not.to.equal("");
+    expect(response.shipment.estimatedDeliveryDateTime).to.be.a('date')
 
-    expect(shipment.actualDeliveryDateTime).to.equal("");
+    expect(shipment.actualDeliveryDateTime).to.equal(undefined);
 
     expect(events).to.have.length(3);
 
@@ -322,11 +294,7 @@ describe("trackPackage", () => {
       .and.not.to.equal("");
 
     expect(events).to.have.length(8);
-    // TODO: Update test to meet these requirements once it is implemented
-    // The estimated delivery date is populated and is a full date/time in the UTC time zone
-    expect(shipment.estimatedDeliveryDateTime)
-      .to.be.a("string")
-      .and.not.to.equal("");
+    expect(response.shipment.estimatedDeliveryDateTime).to.be.a('date')
 
     expect(events).to.have.length(8);
 
@@ -351,11 +319,7 @@ describe("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    // TODO: Update test to meet these requirements once it is implemented
-    // The estimated delivery date is populated and is a full date/time in the UTC time zone
-    expect(shipment.estimatedDeliveryDateTime)
-      .to.be.a("string")
-      .and.not.to.equal("");
+    expect(response.shipment.estimatedDeliveryDateTime).to.be.a('date')
 
     // At least one event has no location information (city, state, postal code, or geocoordinates)
     expect(
@@ -479,7 +443,7 @@ describe("trackPackage", () => {
         source: "shipengine",
         type: "system",
         code: "unspecified",
-        message: "Unable to connect to the database",
+        message: "Unable to process this request. A downstream API error occurred.",
       });
       expect(error.requestID).to.match(/^req_\w+$/);
     }
