@@ -130,7 +130,7 @@ export function validateTrackingParams(
     }
     validatePackageId(params.packageId);
     return {
-      packageID: params.packageId,
+      packageId: params.packageId,
     };
   } else {
     // We know we do not have packageId at this point
