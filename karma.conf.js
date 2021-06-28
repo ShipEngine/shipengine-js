@@ -7,11 +7,6 @@ const { host } = require('@jsdevtools/host-environment');
 
 const browsers = ["ChromeWithoutSecurity"];
 
-// Firefox Headless currently has issues running on the windows-latest image
-if(!host.os.windows) {
-  browsers.push("FirefoxHeadless");
-}
-
 module.exports = (cfg) => {
   cfg.set({
     reporters: ["verbose", 'coverage-istanbul'],
