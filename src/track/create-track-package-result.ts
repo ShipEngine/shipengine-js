@@ -39,13 +39,13 @@ export async function createTrackPackageResult(
         name: getCarrierName(shipment.carrierCode),
       },
       carrierAccount: {
-        id: account?.id || "",
+        id: (account && account.id) || "",
         carrier: {
-          name: account?.carrier.name || "",
-          code: account?.carrier.code || "",
+          name: (account && account.carrier.name) || "",
+          code: (account && account.carrier.code) || "",
         },
-        accountNumber: account?.accountNumber || "",
-        name: account?.name || "",
+        accountNumber: (account && account.accountNumber) || "",
+        name: (account && account.name) || "",
       },
       // TODO Format dates properly
       estimatedDeliveryDateTime: new Date(shipment.estimatedDelivery),
@@ -59,16 +59,24 @@ export async function createTrackPackageResult(
         : "",
       weight: result.package.weight
         ? {
-            unit: result.package.weight?.unit || "",
-            value: result.package.weight?.value || 0,
+            unit: (result.package.weight && result.package.weight.unit) || "",
+            value: (result.package.weight && result.package.weight.value) || 0,
           }
         : undefined,
       dimensions: result.package.dimensions
         ? {
-            unit: result.package.dimensions?.unit || "",
-            height: result.package.dimensions?.height || 0,
-            length: result.package.dimensions?.length || 0,
-            width: result.package.dimensions?.width || 0,
+            unit:
+              (result.package.dimensions && result.package.dimensions.unit) ||
+              "",
+            height:
+              (result.package.dimensions && result.package.dimensions.height) ||
+              0,
+            length:
+              (result.package.dimensions && result.package.dimensions.length) ||
+              0,
+            width:
+              (result.package.dimensions && result.package.dimensions.width) ||
+              0,
           }
         : undefined,
     },

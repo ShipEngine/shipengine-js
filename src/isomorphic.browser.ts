@@ -12,7 +12,7 @@ export const fetch = window.fetch;
 export const AbortController = window.AbortController;
 
 // Web browsers don't support the EventEmitter API, so use tiny-eventemitter instead
-import * as EventEmitter from "tp-events";
+import EventEmitter from "tp-events";
 export { EventEmitter };
 
 /**
