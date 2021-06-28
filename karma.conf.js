@@ -3,37 +3,16 @@
 // https://jstools.dev/karma-config/
 
 'use strict';
-const { host } = require('@jsdevtools/host-environment');
-
-const browsers = ["ChromeHeadless", "FirefoxHeadless"];
-
-if (host.os.mac) {
-  browsers.push("Safari")
-}
-
-if (host.os.windows) {
-  browsers.push("Edge");
-}
+// const { host } = require('@jsdevtools/host-environment');
 
 module.exports = (cfg) => {
   cfg.set({
-    // Defaults to the Karma-Verbose-Reporter
-    // See https://www.npmjs.com/package/karma-verbose-reporter
     reporters: ["verbose", 'coverage-istanbul'],
   
-    // The browsers will vary depending on the OS.
-    // In CI/CD environments, FirefoxHeadless and ChromeHeadless are used instead.
-    // browsers: ["Firefox", "Chrome"],
-    browsers,
+    browsers: ["ChromeHeadless", "FirefoxHeadless"],
 
     frameworks: [
-      // Defaults to the Mocha test framework.
       "mocha",
-  
-      // This makes it easy to detect which browser your tests are running in.
-      // Also provides access to environment variables.
-      // See https://jstools.dev/karma-host-environment
-      // "host-environment"
     ],
 
     client: {
@@ -62,7 +41,7 @@ module.exports = (cfg) => {
         rules: [
           {
             test: /\.(js|jsx|mjs)$/,
-            include: /.\/esm/,
+            include: /esm/,
             exclude: /node_modules|\.spec\.|\.test\./,
             enforce: 'post',
             use: '@jsdevtools/coverage-istanbul-loader'
@@ -76,7 +55,7 @@ module.exports = (cfg) => {
         'text-summary',
         'lcov'
       ],
-      skipFilesWithNoCoverage: true
+      skipFilesWithNoCoverage: true,
     }
   });
 };
