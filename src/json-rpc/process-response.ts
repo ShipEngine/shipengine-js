@@ -109,7 +109,8 @@ function isJsonRpcErrorResponse(
       typeof error.data.type === "string" &&
       error.data.code &&
       typeof error.data.code === "string" &&
-      (error.data.url === null || (error.data.url && typeof error.data.url === "string"))
+      (error.data.url === null ||
+        (error.data.url && typeof error.data.url === "string"))
   );
 }
 

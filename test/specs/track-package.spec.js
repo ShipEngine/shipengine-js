@@ -74,7 +74,7 @@ describe.skip("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    expect(response.shipment.estimatedDeliveryDateTime).to.be.a('date')
+    expect(response.shipment.estimatedDeliveryDateTime).to.be.a("date");
 
     expect(response.events).to.have.length(5);
 
@@ -98,7 +98,7 @@ describe.skip("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    expect(response.shipment.estimatedDeliveryDateTime).to.be.a('date')
+    expect(response.shipment.estimatedDeliveryDateTime).to.be.a("date");
     expect(response.events[0].status).to.equal("accepted");
 
     expect(response.events[1].status).to.equal("in_transit");
@@ -130,9 +130,9 @@ describe.skip("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    expect(response.shipment.estimatedDeliveryDateTime).to.be.a('date')
+    expect(response.shipment.estimatedDeliveryDateTime).to.be.a("date");
 
-    lastEvent = response.events.pop()
+    const lastEvent = response.events.pop();
     expect(response.shipment.actualDeliveryDateTime).to.deep.equal(
       lastEvent.dateTime
     );
@@ -163,7 +163,7 @@ describe.skip("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    expect(response.shipment.estimatedDeliveryDateTime).to.be.a('date')
+    expect(response.shipment.estimatedDeliveryDateTime).to.be.a("date");
 
     expect(shipment.actualDeliveryDateTime).to.deep.equal(events[4].dateTime);
 
@@ -194,9 +194,11 @@ describe.skip("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    expect(response.shipment.estimatedDeliveryDateTime).to.be.a('date')
+    expect(response.shipment.estimatedDeliveryDateTime).to.be.a("date");
 
-    expect(shipment.actualDeliveryDateTime).to.deep.equal(events.pop().dateTime);
+    expect(shipment.actualDeliveryDateTime).to.deep.equal(
+      events.pop().dateTime
+    );
 
     // TODO Are the events sorted by the server
     // The events array is sorted in ascending order by the UTC date/time (NOT by the carrier date/time field)
@@ -228,9 +230,11 @@ describe.skip("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    expect(response.shipment.estimatedDeliveryDateTime).to.be.a('date')
+    expect(response.shipment.estimatedDeliveryDateTime).to.be.a("date");
 
-    expect(shipment.actualDeliveryDateTime).to.deep.equal(events.pop().dateTime);
+    expect(shipment.actualDeliveryDateTime).to.deep.equal(
+      events.pop().dateTime
+    );
 
     // TODO Are the events sorted by the server
     // The events array is sorted in ascending order by the UTC date/time (NOT by the carrier date/time field)
@@ -262,7 +266,7 @@ describe.skip("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    expect(response.shipment.estimatedDeliveryDateTime).to.be.a('date')
+    expect(response.shipment.estimatedDeliveryDateTime).to.be.a("date");
 
     expect(shipment.actualDeliveryDateTime).to.equal(undefined);
 
@@ -294,7 +298,7 @@ describe.skip("trackPackage", () => {
       .and.not.to.equal("");
 
     expect(events).to.have.length(8);
-    expect(response.shipment.estimatedDeliveryDateTime).to.be.a('date')
+    expect(response.shipment.estimatedDeliveryDateTime).to.be.a("date");
 
     expect(events).to.have.length(8);
 
@@ -319,7 +323,7 @@ describe.skip("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    expect(response.shipment.estimatedDeliveryDateTime).to.be.a('date')
+    expect(response.shipment.estimatedDeliveryDateTime).to.be.a("date");
 
     // At least one event has no location information (city, state, postal code, or geocoordinates)
     expect(
@@ -443,7 +447,8 @@ describe.skip("trackPackage", () => {
         source: "shipengine",
         type: "system",
         code: "unspecified",
-        message: "Unable to process this request. A downstream API error occurred.",
+        message:
+          "Unable to process this request. A downstream API error occurred.",
       });
       expect(error.requestID).to.match(/^req_\w+$/);
     }

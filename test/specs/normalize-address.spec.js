@@ -634,7 +634,8 @@ describe("normalizeAddress()", () => {
         source: "shipengine",
         type: "system",
         code: "unspecified",
-        message: "Unable to process this request. A downstream API error occurred.",
+        message:
+          "Unable to process this request. A downstream API error occurred.",
       });
       expect(error.requestID).to.match(/^req_\w+$/);
     }
