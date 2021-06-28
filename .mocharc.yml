@@ -12,4 +12,3 @@ spec:
 bail: true
 recursive: true
 require: source-map-support/register
-timeout: 5000
