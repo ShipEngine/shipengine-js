@@ -3,7 +3,7 @@ const { ShipEngine } = require("../../");
 const { apiKey, baseURL } = require("../utils/constants");
 const errors = require("../utils/errors");
 
-describe.skip("trackPackage", () => {
+describe("trackPackage", () => {
   it("DX-1266: Tracks a package using a tracking number and carrier code", async function () {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
