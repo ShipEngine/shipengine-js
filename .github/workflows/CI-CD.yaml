@@ -47,8 +47,6 @@ jobs:
         run: npm run build
 
       - name: Run tests
-        env:
-          BASE_URL: https://simengine.herokuapp.com/jsonrpc/
         run: npm run coverage:node
 
       - name: Send code coverage results to Coveralls
@@ -80,6 +78,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: clean
+        run: npm run clean
 
       - name: Build the code
         run: npm run build
