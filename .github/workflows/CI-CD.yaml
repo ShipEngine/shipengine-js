@@ -43,9 +43,6 @@ jobs:
       - name: Run linter
         run: npm run lint
 
-      - name: Debug
-        run: ls -al; ls -al cjs;
-
       - name: Build the code
         run: npm run build
 
