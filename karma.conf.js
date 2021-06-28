@@ -3,13 +3,20 @@
 // https://jstools.dev/karma-config/
 
 'use strict';
-// const { host } = require('@jsdevtools/host-environment');
+const { host } = require('@jsdevtools/host-environment');
+
+const browsers = ["ChromeHeadless"];
+
+// Firefox Headless currently has issues running on the windows-latest image
+if(!host.os.windows) {
+  browsers.push("FirefoxHeadless");
+}
 
 module.exports = (cfg) => {
   cfg.set({
     reporters: ["verbose", 'coverage-istanbul'],
   
-    browsers: ["ChromeHeadless", "FirefoxHeadless"],
+    browsers,
 
     frameworks: [
       "mocha",
