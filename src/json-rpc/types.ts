@@ -158,7 +158,7 @@ export interface EventDTO {
 }
 
 export interface CarriersDTO {
-  accountID: string;
+  accountId: string;
   carrierCode: string;
   accountNumber: string;
   name: string;

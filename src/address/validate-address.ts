@@ -56,25 +56,27 @@ function createAddressValidationResult(
 
   return {
     isValid,
-    normalizedAddress: (normalizedAddress || undefined) && {
-      street: normalizedAddress.street,
-      name: normalizedAddress.name || "",
-      company: normalizedAddress.company || "",
-      phone: normalizedAddress.phone || "",
-      cityLocality: normalizedAddress.cityLocality,
-      stateProvince: normalizedAddress.stateProvince,
-      postalCode: normalizedAddress.postalCode,
-      country: normalizedAddress.countryCode,
+    normalizedAddress: normalizedAddress
+      ? {
+          street: normalizedAddress.street,
+          name: normalizedAddress.name || "",
+          company: normalizedAddress.company || "",
+          phone: normalizedAddress.phone || "",
+          cityLocality: normalizedAddress.cityLocality,
+          stateProvince: normalizedAddress.stateProvince,
+          postalCode: normalizedAddress.postalCode,
+          country: normalizedAddress.countryCode,
 
-      // TODO: Replace this with a nullish coalescing operator
-      // once Node 12 is no longer supported
-      isResidential:
-        normalizedAddress.isResidential === false
-          ? false
-          : normalizedAddress.isResidential || undefined,
+          // TODO: Replace this with a nullish coalescing operator
+          // once Node 12 is no longer supported
+          isResidential:
+            normalizedAddress.isResidential === false
+              ? false
+              : normalizedAddress.isResidential || undefined,
 
-      toString: formatAddress,
-    },
+          toString: formatAddress,
+        }
+      : undefined,
 
     messages,
 
