@@ -124,7 +124,7 @@ export function getActualDeliveryDateTime(
     const e = deliveredEvents.pop();
 
     // Could not suppress undefined warnings even with if statement above
-    return e?.dateTime;
+    return e ? e.dateTime : undefined;
   }
 }
 
