@@ -431,7 +431,7 @@ describe("validateAddress()", () => {
         code: "field_value_required",
         message: "Invalid address. At least one address line is required.",
       });
-      expect(error.requestId).not.to.be.undefined;
+      expect(error.requestId).to.be.undefined;
     }
   });
 
