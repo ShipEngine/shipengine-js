@@ -4,7 +4,6 @@ const { apiKey, baseURL } = require("../utils/constants");
 const errors = require("../utils/errors");
 
 describe("getCarrierAccounts()", async () => {
-
   it("Returns an empty array if no accounts are setup yet", async () => {
     let response;
     const carrierName = "royal_mail";
