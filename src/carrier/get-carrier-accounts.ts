@@ -52,7 +52,7 @@ function formatGetCarriersResult(result: CarriersDTOResult): CarrierAccount[] {
 
   for (const c of carrierAccounts) {
     const item = {
-      id: c.accountID,
+      id: c.accountId,
       carrier: {
         name: carrierNames[c.carrierCode] || "",
         code: c.carrierCode,

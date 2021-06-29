@@ -32,13 +32,21 @@ export function formatEvents(events: EventDTO[]): Event[] {
       carrierDetailCode: e.carrierDetailCode || "",
       signer: e.signer || "",
       location: {
-        cityLocality: e.location?.cityLocality || "",
-        stateProvince: e.location?.stateProvince || "",
-        postalCode: e.location?.postalCode || "",
-        countryCode: e.location?.countryCode || "",
+        cityLocality: (e.location && e.location.cityLocality) || "",
+        stateProvince: (e.location && e.location.stateProvince) || "",
+        postalCode: (e.location && e.location.postalCode) || "",
+        countryCode: (e.location && e.location.countryCode) || "",
         coordinates: {
-          latitude: e.location?.coordinates?.latitude || 0,
-          longitude: e.location?.coordinates?.latitude || 0,
+          latitude:
+            (e.location &&
+              e.location.coordinates &&
+              e.location.coordinates.latitude) ||
+            0,
+          longitude:
+            (e.location &&
+              e.location.coordinates &&
+              e.location.coordinates.latitude) ||
+            0,
         },
       },
     };
@@ -116,9 +124,7 @@ export function getActualDeliveryDateTime(
     const e = deliveredEvents.pop();
 
     // Could not suppress undefined warnings even with if statement above
-    return e?.dateTime;
-  } else {
-    return undefined;
+    return e ? e.dateTime : undefined;
   }
 }
 
@@ -135,7 +141,7 @@ export function validateTrackingParams(
     }
     validatePackageId(params.packageId);
     return {
-      packageID: params.packageId,
+      packageId: params.packageId,
     };
   } else {
     // We know we do not have packageId at this point

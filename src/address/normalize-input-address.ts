@@ -11,8 +11,8 @@ export function normalizeInputAddress(arg: unknown): void {
       .toUpperCase();
 
     // Normalize the street to an array
-    address.street = Array.isArray(address?.street)
+    address.street = Array.isArray(address.street)
       ? address.street
-      : [address?.street];
+      : [address.street];
   }
 }
