@@ -74,7 +74,7 @@ describe("Events", function () {
     assertResponseEvent(responseReceived.firstCall.firstArg, 200);
   });
 
-  it.only("DX-1544 - retry > timeout - If the 429 retry value is greater than the configured timeout, we timeout rather than wait", async () => {
+  it.skip("DX-1544 - retry > timeout - If the 429 retry value is greater than the configured timeout, we timeout rather than wait", async () => {
     // 429 retry is 5000
     const config = {
       timeout: 4000,
