@@ -3,8 +3,15 @@ const { ShipEngine } = require("../../");
 const { apiKey, baseURL } = require("../utils/constants");
 const errors = require("../utils/errors");
 
-describe("getCarrierAccounts()", async function () {
-  it("Returns an empty array if no accounts are setup yet", async function () {
+const { setAccountCache } = require("../../cjs/carrier/account-cache");
+
+describe("getCarrierAccounts()", async () => {
+  // Clear the carrier cache before each unit test to ensure no side effects get stored.
+  beforeEach(() => {
+    setAccountCache([]);
+  });
+
+  it("Returns an empty array if no accounts are setup yet", async () => {
     let response;
     const carrierName = "royal_mail";
 
@@ -18,7 +25,7 @@ describe("getCarrierAccounts()", async function () {
     expect(response).to.eql([]);
   });
 
-  it("Returns multiple accounts for different carriers", async function () {
+  it("Returns multiple accounts for different carriers", async () => {
     let accounts;
 
     const shipengine = new ShipEngine({ apiKey, baseURL });
@@ -47,7 +54,7 @@ describe("getCarrierAccounts()", async function () {
     assertAccountFormat(accounts);
   });
 
-  it("Returns multiple accounts for the same carrier", async function () {
+  it("Returns multiple accounts for the same carrier", async () => {
     let accounts;
     let carrierCode = "fedex";
 
@@ -60,7 +67,7 @@ describe("getCarrierAccounts()", async function () {
     }
 
     // The list contains the expected number of carrier accounts
-    expect(accounts).to.be.an("array").and.lengthOf(5);
+    expect(accounts).to.be.an("array").and.lengthOf(2);
 
     // The list contains the expected carrier accounts (IDs, names, account numbers, etc.)
     // All accounts have an account name
@@ -78,7 +85,7 @@ describe("getCarrierAccounts()", async function () {
   });
 
   // TODO This test fails when the suite is run but passes when run on its own
-  it.skip("Throws a server-side error", async function () {
+  it("Throws a server-side error", async () => {
     let carrierName = "access_worldwide";
 
     const shipengine = new ShipEngine({ apiKey, baseURL });
@@ -92,13 +99,14 @@ describe("getCarrierAccounts()", async function () {
         source: "shipengine",
         type: "system",
         code: "unspecified",
-        message: "Unable to connect to the database",
+        message:
+          "Unable to process this request. A downstream API error occurred.",
       });
       expect(error.requestID).to.match(/^req_\w+$/);
     }
   });
 
-  it("Throws an client-side error if an invalid carrierCode is passed", async function () {
+  it("Throws an client-side error if an invalid carrierCode is passed", async () => {
     let carrierName = "my_carrier";
 
     const shipengine = new ShipEngine({ apiKey, baseURL });
@@ -119,7 +127,7 @@ describe("getCarrierAccounts()", async function () {
   });
 
   // TODO This test fails when the suite is run but passes when run on its own
-  it.skip("Throws a server-side 429 error if the rate limit is exceeded", async function () {
+  it.skip("Throws a server-side 429 error if the rate limit is exceeded", async () => {
     // This case runs a little long for some reason
     this.timeout(15000);
 
