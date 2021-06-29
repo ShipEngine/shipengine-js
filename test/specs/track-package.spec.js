@@ -5,7 +5,7 @@ const errors = require("../utils/errors");
 const { getExceptions } = require("../../cjs/track/util");
 
 describe("trackPackage", () => {
-  it("DX-1266: Tracks a package using a tracking number and carrier code", async function () {
+  it("DX-1266: Tracks a package using a tracking number and carrier code", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       trackingNumber: "aaaaa_delivered",
@@ -18,7 +18,7 @@ describe("trackPackage", () => {
     expect(response.package.trackingNumber).to.equal(params.trackingNumber);
   });
 
-  it("DX-1268: Tracks a package using a packageId", async function () {
+  it("DX-1268: Tracks a package using a packageId", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pkg_1FedExAttempted",
@@ -36,7 +36,7 @@ describe("trackPackage", () => {
       .and.not.to.equal("");
   });
 
-  it("DX-1270: Tracks a package with an Initial Scan event", async function () {
+  it("DX-1270: Tracks a package with an Initial Scan event", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pkg_1FedAccepted",
@@ -58,7 +58,7 @@ describe("trackPackage", () => {
     expect(response.events[0].status).to.equal("accepted");
   });
 
-  it("DX-1271: Tracks a package Out for Delivery", async function () {
+  it("DX-1271: Tracks a package Out for Delivery", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pkg_1FedAttempted",
@@ -82,7 +82,7 @@ describe("trackPackage", () => {
     expect(response.events[1].status).to.equal("in_transit");
   });
 
-  it("DX-1272: Tracks a package with multiple delivery attempts", async function () {
+  it("DX-1272: Tracks a package with multiple delivery attempts", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pkg_1FedexDeLiveredAttempted",
@@ -114,7 +114,7 @@ describe("trackPackage", () => {
     expect(response.events.slice(-1)[0].status).to.equal("delivered");
   });
 
-  it("DX-1273: Tracks a package delivered on the first try", async function () {
+  it("DX-1273: Tracks a package delivered on the first try", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pkg_1FedExDeLivered",
@@ -130,8 +130,9 @@ describe("trackPackage", () => {
 
     validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
-    expect(shipment.actualDeliveryDateTime).to.equal(
-      response.events.pop().dateTime
+    const lastEvent = response.events.pop();
+    expect(response.shipment.actualDeliveryDateTime).to.deep.equal(
+      lastEvent.dateTime
     );
 
     // Not validating this since it is sorted by the RPC server
@@ -143,10 +144,10 @@ describe("trackPackage", () => {
       response.events.filter((e) => e.status === "in_transit")
     ).to.have.length.greaterThan(0);
 
-    expect(response.events.pop().status === "delivered");
+    expect(lastEvent.status === "delivered");
   });
 
-  it("DX-1274: Tracks a package delivered with signature", async function () {
+  it("DX-1274: Tracks a package delivered with signature", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pkg_1FedexDeLivered",
@@ -162,7 +163,7 @@ describe("trackPackage", () => {
 
     validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
-    expect(shipment.actualDeliveryDateTime).to.equal(events[4].dateTime);
+    expect(shipment.actualDeliveryDateTime).to.deep.equal(events[4].dateTime);
 
     expect(events).to.have.length(5);
 
@@ -178,7 +179,7 @@ describe("trackPackage", () => {
     expect(events[4].signer).to.be.a("string").and.not.to.equal("");
   });
 
-  it("DX-1275: Tracks a package delivered after multiple attempts", async function () {
+  it("DX-1275: Tracks a package delivered after multiple attempts", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pkg_1FedexDeLiveredAttempted",
@@ -194,7 +195,9 @@ describe("trackPackage", () => {
 
     validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
-    expect(shipment.actualDeliveryDateTime).to.equal(events.pop().dateTime);
+    expect(shipment.actualDeliveryDateTime).to.deep.equal(
+      events.pop().dateTime
+    );
 
     // Not validating this since it is sorted by the RPC server
     // The events array is sorted in ascending order by the UTC date/time (NOT by the carrier date/time field)
@@ -212,7 +215,7 @@ describe("trackPackage", () => {
     expect(events.pop().status === "delivered");
   });
 
-  it("DX-1276: Tracks a package delivered after exception", async function () {
+  it("DX-1276: Tracks a package delivered after exception", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pkg_1FedexDeLiveredException",
@@ -228,7 +231,9 @@ describe("trackPackage", () => {
 
     validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
-    expect(shipment.actualDeliveryDateTime).to.equal(events.pop().dateTime);
+    expect(shipment.actualDeliveryDateTime).to.deep.equal(
+      events.pop().dateTime
+    );
 
     // Not validating this since it is sorted by the RPC server
     // The events array is sorted in ascending order by the UTC date/time (NOT by the carrier date/time field)
@@ -246,7 +251,7 @@ describe("trackPackage", () => {
     expect(events.pop().status === "delivered");
   });
 
-  it("DX-1277: Tracks a package with a single exception", async function () {
+  it("DX-1277: Tracks a package with a single exception", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pkg_1FedexException",
@@ -277,7 +282,7 @@ describe("trackPackage", () => {
     ).length.greaterThanOrEqual(1);
   });
 
-  it("DX-1278: Tracks a package with multiple exceptions", async function () {
+  it("DX-1278: Tracks a package with multiple exceptions", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pkg_DeLiveredException",
@@ -304,7 +309,7 @@ describe("trackPackage", () => {
     ).length.greaterThanOrEqual(2);
   });
 
-  it("DX-1279: Tracks a package with multiple events with location info", async function () {
+  it("DX-1279: Tracks a package with multiple events with location info", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pkg_Attempted",
@@ -373,7 +378,7 @@ describe("trackPackage", () => {
     // The events array is sorted in ascending order by the UTC date/time (NOT by the carrier date/time field)
   });
 
-  it("DX-1281: Tracks a package with an invalid tracking number", async function () {
+  it("DX-1281: Tracks a package with an invalid tracking number", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       trackingNumber: "abc",
@@ -395,7 +400,7 @@ describe("trackPackage", () => {
     }
   });
 
-  it("DX-1282: Throws a client-side error for a packageId with an invalid prefix", async function () {
+  it("DX-1282: Throws a client-side error for a packageId with an invalid prefix", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "xxx_1FedExAttempted",
@@ -417,7 +422,7 @@ describe("trackPackage", () => {
     }
   });
 
-  it("DX-1283: Throws a client-side error for a packageId with an invalid base58-encoded portion of the id", async function () {
+  it("DX-1283: Throws a client-side error for a packageId with an invalid base58-encoded portion of the id", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pgk_mandy",
@@ -439,7 +444,7 @@ describe("trackPackage", () => {
     }
   });
 
-  it("DX-1284 Tracks a package with a packageId that cannot be found", async function () {
+  it("DX-1284 Tracks a package with a packageId that cannot be found", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pkg_123",
@@ -460,7 +465,7 @@ describe("trackPackage", () => {
     }
   });
 
-  it("DX-1285 Tracks a package with server-side error", async function () {
+  it("DX-1285 Tracks a package with server-side error", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       trackingNumber: "500 Server Error",
@@ -476,32 +481,27 @@ describe("trackPackage", () => {
         source: "shipengine",
         type: "system",
         code: "unspecified",
-        message: "Unable to connect to the database",
+        message:
+          "Unable to process this request. A downstream API error occurred.",
       });
       expect(error.requestID).to.match(/^req_\w+$/);
     }
   });
-  it("finds an exception event when it is present", function () {
-    const dataCopy = data.events.map((x) => {
-      return x;
-    });
+  it("finds an exception event when it is present", () => {
+    const dataCopy = JSON.parse(JSON.stringify(data.events));
 
     expect(getExceptions(dataCopy)).to.be.an("array").and.to.have.lengthOf(1);
   });
-  it("finds multiple exception events when they are present", function () {
-    const dataCopy = data.events.map((x) => {
-      return x;
-    });
+  it("finds multiple exception events when they are present", () => {
+    const dataCopy = JSON.parse(JSON.stringify(data.events));
 
     dataCopy[0].status = "exception";
 
     expect(getExceptions(dataCopy)).to.be.an("array").and.to.have.lengthOf(2);
   });
 
-  it("returns an empty array when no exception events are present", function () {
-    const dataCopy = data.events.map((x) => {
-      return x;
-    });
+  it("returns an empty array when no exception events are present", () => {
+    const dataCopy = JSON.parse(JSON.stringify(data.events));
 
     dataCopy[2].status = "delivered";
 
