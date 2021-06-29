@@ -130,8 +130,9 @@ describe("trackPackage", () => {
 
     validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
-    expect(shipment.actualDeliveryDateTime).to.equal(
-      response.events.pop().dateTime
+    const lastEvent = response.events.pop();
+    expect(response.shipment.actualDeliveryDateTime).to.deep.equal(
+      lastEvent.dateTime
     );
 
     // TODO Are the events sorted by the server
@@ -143,7 +144,7 @@ describe("trackPackage", () => {
       response.events.filter((e) => e.status === "in_transit")
     ).to.have.length.greaterThan(0);
 
-    expect(response.events.pop().status === "delivered");
+    expect(lastEvent.status === "delivered");
   });
 
   it("DX-1274: Tracks a package delivered with signature", async function () {
@@ -162,7 +163,7 @@ describe("trackPackage", () => {
 
     validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
-    expect(shipment.actualDeliveryDateTime).to.equal(events[4].dateTime);
+    expect(shipment.actualDeliveryDateTime).to.deep.equal(events[4].dateTime);
 
     expect(events).to.have.length(5);
     // TODO Are the events sorted by the server
@@ -193,7 +194,9 @@ describe("trackPackage", () => {
 
     validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
-    expect(shipment.actualDeliveryDateTime).to.equal(events.pop().dateTime);
+    expect(shipment.actualDeliveryDateTime).to.deep.equal(
+      events.pop().dateTime
+    );
 
     // TODO Are the events sorted by the server
     // The events array is sorted in ascending order by the UTC date/time (NOT by the carrier date/time field)
@@ -227,7 +230,9 @@ describe("trackPackage", () => {
 
     validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
-    expect(shipment.actualDeliveryDateTime).to.equal(events.pop().dateTime);
+    expect(shipment.actualDeliveryDateTime).to.deep.equal(
+      events.pop().dateTime
+    );
 
     // TODO Are the events sorted by the server
     // The events array is sorted in ascending order by the UTC date/time (NOT by the carrier date/time field)
@@ -441,7 +446,8 @@ describe("trackPackage", () => {
         source: "shipengine",
         type: "system",
         code: "unspecified",
-        message: "Unable to connect to the database",
+        message:
+          "Unable to process this request. A downstream API error occurred.",
       });
       expect(error.requestID).to.match(/^req_\w+$/);
     }

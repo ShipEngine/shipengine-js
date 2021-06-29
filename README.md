@@ -8,7 +8,7 @@ ShipEngine JavaScript SDK
 [![License](https://img.shields.io/npm/l/shipengine.svg)](LICENSE)
 
 [![Build Status](https://github.com/ShipEngine/shipengine-js/workflows/CI-CD/badge.svg)](https://github.com/ShipEngine/shipengine-js/actions)
-[![Coverage Status](https://coveralls.io/repos/github/ShipEngine/shipengine-js/badge.svg?branch=master)](https://coveralls.io/github/ShipEngine/shipengine-js)
+[![Coverage Status](https://coveralls.io/repos/github/ShipEngine/shipengine-js/badge.svg?branch=main)](https://coveralls.io/github/ShipEngine/shipengine-js?branch=main)
 [![Dependencies](https://david-dm.org/ShipEngine/shipengine-js.svg)](https://david-dm.org/ShipEngine/shipengine-js)
 
 [![OS and Browser Compatibility](https://shipengine.github.io/img/badges/ci-badges.svg)](https://github.com/ShipEngine/shipengine-js/actions)

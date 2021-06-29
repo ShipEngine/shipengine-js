@@ -23,9 +23,9 @@ export async function createTrackPackageResult(
   const exceptionEvents = getExceptions(formattedEvents);
   let account: CarrierAccount | undefined;
 
-  if (shipment.carrierAccountID) {
+  if (shipment.carrierAccountId) {
     account = await getCarrier(
-      result.shipment.carrierAccountID,
+      result.shipment.carrierAccountId,
       config,
       eventEmitter
     );
@@ -33,42 +33,50 @@ export async function createTrackPackageResult(
 
   const returnValue = {
     shipment: {
-      shipmentId: shipment.shipmentID || "",
-      carrierId: shipment.carrierAccountID || "",
+      shipmentId: shipment.shipmentId || "",
+      carrierId: shipment.carrierAccountId || "",
       carrier: {
         code: shipment.carrierCode,
         name: getCarrierName(shipment.carrierCode),
       },
       carrierAccount: {
-        id: account?.id || "",
+        id: (account && account.id) || "",
         carrier: {
-          name: account?.carrier.name || "",
-          code: account?.carrier.code || "",
+          name: (account && account.carrier.name) || "",
+          code: (account && account.carrier.code) || "",
         },
-        accountNumber: account?.accountNumber || "",
-        name: account?.name || "",
+        accountNumber: (account && account.accountNumber) || "",
+        name: (account && account.name) || "",
       },
       estimatedDeliveryDateTime: new ISOString(shipment.estimatedDelivery),
       actualDeliveryDateTime: getActualDeliveryDateTime(formattedEvents),
     },
     package: {
-      packageId: result.package.packageID || "",
+      packageId: result.package.packageId || "",
       trackingNumber: result.package.trackingNumber || "",
       trackingURL: result.package.trackingURL
         ? new URL(result.package.trackingURL)
         : "",
       weight: result.package.weight
         ? {
-            unit: result.package.weight?.unit || "",
-            value: result.package.weight?.value || 0,
+            unit: (result.package.weight && result.package.weight.unit) || "",
+            value: (result.package.weight && result.package.weight.value) || 0,
           }
         : undefined,
       dimensions: result.package.dimensions
         ? {
-            unit: result.package.dimensions?.unit || "",
-            height: result.package.dimensions?.height || 0,
-            length: result.package.dimensions?.length || 0,
-            width: result.package.dimensions?.width || 0,
+            unit:
+              (result.package.dimensions && result.package.dimensions.unit) ||
+              "",
+            height:
+              (result.package.dimensions && result.package.dimensions.height) ||
+              0,
+            length:
+              (result.package.dimensions && result.package.dimensions.length) ||
+              0,
+            width:
+              (result.package.dimensions && result.package.dimensions.width) ||
+              0,
           }
         : undefined,
     },

@@ -106,7 +106,7 @@ export interface AddressValidationMessageDTO {
 export interface TrackPackageRPCParams {
   carrierCode?: string;
   trackingNumber?: string;
-  packageID?: string;
+  packageId?: string;
 }
 
 /**
@@ -115,12 +115,12 @@ export interface TrackPackageRPCParams {
 export interface TrackPackageDTO {
   shipment: {
     carrierCode: string;
-    carrierAccountID: string;
-    shipmentID?: string;
+    carrierAccountId: string;
+    shipmentId?: string;
     estimatedDelivery: string;
   };
   package: {
-    packageID?: string;
+    packageId?: string;
     trackingNumber: string;
     trackingURL?: string;
     weight?: {
@@ -158,7 +158,7 @@ export interface EventDTO {
 }
 
 export interface CarriersDTO {
-  accountID: string;
+  accountId: string;
   carrierCode: string;
   accountNumber: string;
   name: string;

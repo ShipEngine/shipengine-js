@@ -8,7 +8,7 @@ name: CI-CD
 on:
   push:
     branches:
-      - "*"
+      - "**"
     tags-ignore:
       - "*"
 
@@ -47,8 +47,6 @@ jobs:
         run: npm run build
 
       - name: Run tests
-        env:
-          BASE_URL: https://simengine.herokuapp.com/jsonrpc/
         run: npm run coverage:node
 
       - name: Send code coverage results to Coveralls
@@ -67,6 +65,7 @@ jobs:
         os:
           - ubuntu-latest     # Chrome, Firefox, Safari (via SauceLabs), Edge (via SauceLabs)
           - windows-latest    # Internet Explorer
+          - macos-latest
 
     steps:
       - name: Checkout source
@@ -80,14 +79,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: clean
+        run: npm run clean
+
       - name: Build the code
         run: npm run build
 
       - name: Run tests
         run: npm run coverage:browser
-        env:
-          SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
-          SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+        # env:
+        #   SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+        #   SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
 
       - name: Combine code coverage data into a single file
         shell: bash
