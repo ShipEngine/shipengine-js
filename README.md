@@ -11,7 +11,7 @@ ShipEngine JavaScript SDK
 [![Coverage Status](https://coveralls.io/repos/github/ShipEngine/shipengine-js/badge.svg?branch=main)](https://coveralls.io/github/ShipEngine/shipengine-js?branch=main)
 [![Dependencies](https://david-dm.org/ShipEngine/shipengine-js.svg)](https://david-dm.org/ShipEngine/shipengine-js)
 
-[![OS and Browser Compatibility](https://shipengine.github.io/img/badges/ci-badges.svg)](https://github.com/ShipEngine/shipengine-js/actions)
+<!-- [![OS and Browser Compatibility](https://shipengine.github.io/img/badges/ci-badges.svg)](https://github.com/ShipEngine/shipengine-js/actions) -->
 
 
 > ⚠ **WARNING**: This is alpha software under active development. This repo is a successor to https://www.npmjs.com/package/shipengine. Until this has a stable release, we recommend you either stick to the current releases, or use the [ShipEngine API](https://www.shipengine.com/docs/) directly.
