@@ -3,19 +3,15 @@ const { ShipEngine } = require("../../");
 const { apiKey, baseURL } = require("../utils/constants");
 const errors = require("../utils/errors");
 
-const { setAccountCache } = require("../../cjs/carrier/account-cache");
-
 describe("getCarrierAccounts()", async () => {
   // Clear the carrier cache before each unit test to ensure no side effects get stored.
-  beforeEach(() => {
-    setAccountCache([]);
-  });
 
   it("Returns an empty array if no accounts are setup yet", async () => {
     let response;
     const carrierName = "royal_mail";
 
     const shipengine = new ShipEngine({ apiKey, baseURL });
+    shipengine.clearCache();
 
     try {
       response = await shipengine.getCarrierAccounts(carrierName);
@@ -29,6 +25,7 @@ describe("getCarrierAccounts()", async () => {
     let accounts;
 
     const shipengine = new ShipEngine({ apiKey, baseURL });
+    shipengine.clearCache();
 
     try {
       accounts = await shipengine.getCarrierAccounts();
@@ -59,6 +56,7 @@ describe("getCarrierAccounts()", async () => {
     let carrierCode = "fedex";
 
     const shipengine = new ShipEngine({ apiKey, baseURL });
+    shipengine.clearCache();
 
     try {
       accounts = await shipengine.getCarrierAccounts(carrierCode);
@@ -89,6 +87,7 @@ describe("getCarrierAccounts()", async () => {
     let carrierName = "access_worldwide";
 
     const shipengine = new ShipEngine({ apiKey, baseURL });
+    shipengine.clearCache();
 
     try {
       await shipengine.getCarrierAccounts(carrierName);

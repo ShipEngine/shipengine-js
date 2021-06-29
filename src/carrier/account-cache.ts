@@ -31,8 +31,15 @@ export function getAccountCache(carrierCode?: string): CarrierAccount[] {
  */
 export function setAccountCache(accounts: CarrierAccount[]): void {
   // Set the length to 0 to clear the cache
-  accountCache.length = 0;
+  clearAccountCache();
   for (const account of accounts) {
     accountCache.push(account);
   }
+}
+
+/**
+ * Clear Carrier account cache
+ */
+export function clearAccountCache(): void {
+  accountCache.length = 0;
 }

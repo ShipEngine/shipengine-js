@@ -43,6 +43,7 @@ based on the standards of the country in which the address resides.
 address cannot be normalized, an error is returned.
 * [`getCarrierAccounts`](./docs/get-carrier-accounts.md) - Returns a list of carrier accounts that have been connected through
 the [ShipEngine dashboard](https://www.shipengine.com/docs/carriers/setup/).
+* `clearCache` - Clear the SDK cache. Currently only stores carrier account data.
 
 Contributing
 --------------------------
