@@ -2,14 +2,40 @@
 
 const fs = require("fs");
 const path = require("path");
+const { ShipEngine } = require("../../");
+const { apiKey, baseURL } = require("../utils/constants");
+const { expect } = require("chai");
+const sinon = require("sinon");
+const pjson = require("../../package.json");
 
-describe("file specific exports", () => {
+describe("exports and versions", () => {
   it("should export all of the enumerations", () => {
     assertFileExports("src/enums");
   });
 
   it("should export all of the error classes", () => {
     assertFileExports("src/errors");
+  });
+
+  it("should send the current SDK version in the user agent", async () => {
+    const shipengine = new ShipEngine({ apiKey, baseURL });
+
+    // Subscribe to the request/response events
+    const requestSent = sinon.spy();
+    shipengine.on("requestSent", requestSent);
+
+    // Call a method that should trigger a single request & response
+    await shipengine.validateAddress({
+      street: "4 Jersey St.",
+      cityLocality: "Boston",
+      stateProvince: "MA",
+      country: "US",
+    });
+    const requestEvent = requestSent.firstCall.firstArg;
+
+    const userAgentString = requestEvent.headers["User-Agent"];
+
+    expect(userAgentString).to.be.a("string").and.contains(pjson.version);
   });
 });
 
