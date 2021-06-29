@@ -4,7 +4,6 @@ const { apiKey, baseURL } = require("../utils/constants");
 const errors = require("../utils/errors");
 
 describe("getCarrierAccounts()", async () => {
-  // Clear the carrier cache before each unit test to ensure no side effects get stored.
 
   it("Returns an empty array if no accounts are setup yet", async () => {
     let response;
@@ -82,7 +81,6 @@ describe("getCarrierAccounts()", async () => {
     assertAccountFormat(accounts);
   });
 
-  // TODO This test fails when the suite is run but passes when run on its own
   it("Throws a server-side error", async () => {
     let carrierName = "access_worldwide";
 
