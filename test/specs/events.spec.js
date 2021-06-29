@@ -74,7 +74,7 @@ describe("Events", function () {
     assertResponseEvent(responseReceived.firstCall.firstArg, 200);
   });
 
-  it("DX-1544 - retry > timeout - If the 429 retry value is greater than the configured timeout, we timeout rather than wait", async () => {
+  it.only("DX-1544 - retry > timeout - If the 429 retry value is greater than the configured timeout, we timeout rather than wait", async () => {
     // 429 retry is 5000
     const config = {
       timeout: 4000,
@@ -91,13 +91,14 @@ describe("Events", function () {
 
     try {
       // Call a method that should trigger a single request & an error response
-      const response = await shipengine.validateAddress({
+      const result = await shipengine.validateAddress({
         street: "429 Rate Limit Error",
         cityLocality: "Boston",
         stateProvince: "MA",
+        postalCode: "01152",
         country: "US",
       });
-      console.log(response);
+      console.log(result);
     } catch (error) {
       errors.assertShipEngineError(error, {
         name: "RateLimitExceededError",
