@@ -22,8 +22,8 @@ export interface Package {
 }
 
 export interface Shipment {
-  shipmentID?: string;
-  carrierID?: string;
+  shipmentId?: string;
+  carrierId?: string;
   carrierAccount: CarrierAccount;
   carrier?: Carrier;
   estimatedDeliveryDateTime: Date;

@@ -5,12 +5,7 @@
 'use strict';
 const { host } = require('@jsdevtools/host-environment');
 
-const browsers = ["ChromeHeadless"];
-
-// Firefox Headless currently has issues running on the windows-latest image
-if(!host.os.windows) {
-  browsers.push("FirefoxHeadless");
-}
+const browsers = ["ChromeWithoutSecurity"];
 
 module.exports = (cfg) => {
   cfg.set({
@@ -63,6 +58,12 @@ module.exports = (cfg) => {
         'lcov'
       ],
       skipFilesWithNoCoverage: true,
-    }
+    },
+    customLaunchers: {
+      ChromeWithoutSecurity: {
+        base: 'ChromeHeadless',
+        flags: ['--disable-web-security']
+      },
+    },
   });
 };
