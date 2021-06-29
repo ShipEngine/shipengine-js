@@ -31,9 +31,9 @@ describe("exports and versions", () => {
       stateProvince: "MA",
       country: "US",
     });
-    const requestEvent = requestSent.firstCall.firstArg;
 
-    const userAgentString = requestEvent.headers["User-Agent"];
+    const userAgentString =
+      requestSent.firstCall.firstArg.headers["User-Agent"];
 
     expect(userAgentString).to.be.a("string").and.contains(pjson.version);
   });
