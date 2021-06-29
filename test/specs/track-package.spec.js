@@ -454,16 +454,12 @@ describe("trackPackage", () => {
     }
   });
   it("finds an exception event when it is present", function () {
-    const dataCopy = data.events.map((x) => {
-      return x;
-    });
+    const dataCopy = JSON.parse(JSON.stringify(data.events));
 
     expect(getExceptions(dataCopy)).to.be.an("array").and.to.have.lengthOf(1);
   });
   it("finds multiple exception events when they are present", function () {
-    const dataCopy = data.events.map((x) => {
-      return x;
-    });
+    const dataCopy = JSON.parse(JSON.stringify(data.events));
 
     dataCopy[0].status = "exception";
 
@@ -471,9 +467,7 @@ describe("trackPackage", () => {
   });
 
   it("returns an empty array when no exception events are present", function () {
-    const dataCopy = data.events.map((x) => {
-      return x;
-    });
+    const dataCopy = JSON.parse(JSON.stringify(data.events));
 
     dataCopy[2].status = "delivered";
 
