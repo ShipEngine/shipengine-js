@@ -1,6 +1,7 @@
 import { WeightUnit, DimensionUnit } from "../enums";
 import { CarrierAccount } from "../carrier/public-types";
 import { URL } from "url";
+import { ISOString } from "../utils/date-time";
 
 export type TrackingParams = TrackByPackageParams | TrackByNumberParams;
 
@@ -26,8 +27,8 @@ export interface Shipment {
   carrierId?: string;
   carrierAccount: CarrierAccount;
   carrier?: Carrier;
-  estimatedDeliveryDateTime: Date;
-  actualDeliveryDateTime: Date | undefined;
+  estimatedDeliveryDateTime: ISOString;
+  actualDeliveryDateTime: ISOString | undefined;
 }
 
 export interface Carrier {
@@ -48,8 +49,8 @@ export interface Dimensions {
 }
 
 export interface Event {
-  dateTime: Date;
-  carrierDateTime: Date;
+  dateTime: ISOString;
+  carrierDateTime: ISOString;
   status: string;
   description?: string;
   carrierStatusCode?: string;

@@ -2,9 +2,10 @@ const { expect } = require("chai");
 const { ShipEngine } = require("../../");
 const { apiKey, baseURL } = require("../utils/constants");
 const errors = require("../utils/errors");
+const { getExceptions } = require("../../cjs/track/util");
 
 describe("trackPackage", () => {
-  it("DX-1266: Tracks a package using a tracking number and carrier code", async function () {
+  it("DX-1266: Tracks a package using a tracking number and carrier code", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       trackingNumber: "aaaaa_delivered",
@@ -17,7 +18,7 @@ describe("trackPackage", () => {
     expect(response.package.trackingNumber).to.equal(params.trackingNumber);
   });
 
-  it("DX-1268: Tracks a package using a packageId", async function () {
+  it("DX-1268: Tracks a package using a packageId", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pkg_1FedExAttempted",
@@ -35,7 +36,7 @@ describe("trackPackage", () => {
       .and.not.to.equal("");
   });
 
-  it("DX-1270: Tracks a package with an Initial Scan event", async function () {
+  it("DX-1270: Tracks a package with an Initial Scan event", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pkg_1FedAccepted",
@@ -50,31 +51,30 @@ describe("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    expect(
-      response.shipment.estimatedDeliveryDateTime.getFullYear()
-    ).to.not.equal(undefined);
+    expect(response.shipment.estimatedDeliveryDateTime).to.not.equal(undefined);
 
     expect(response.events).to.have.length(1);
 
     expect(response.events[0].status).to.equal("accepted");
   });
 
-  it("DX-1271: Tracks a package Out for Delivery", async function () {
+  it("DX-1271: Tracks a package Out for Delivery", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pkg_1FedAttempted",
     };
     const response = await shipengine.trackPackage(params);
+    const { shipment } = response;
 
-    expect(response.shipment.carrier.code)
-      .to.be.a("string")
-      .and.not.to.equal("");
+    expect(shipment.carrier.code).to.be.a("string").and.not.to.equal("");
 
     expect(response.package.trackingNumber)
       .to.be.a("string")
       .and.not.to.equal("");
 
-    expect(response.shipment.estimatedDeliveryDateTime).to.be.a("date");
+    // TODO: Update test to meet this requirement once it is implemented
+    // The estimated delivery date is populated and is a full date/time in the UTC time zone
+    validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
     expect(response.events).to.have.length(5);
 
@@ -83,22 +83,22 @@ describe("trackPackage", () => {
     expect(response.events[1].status).to.equal("in_transit");
   });
 
-  it("DX-1272: Tracks a package with multiple delivery attempts", async function () {
+  it("DX-1272: Tracks a package with multiple delivery attempts", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pkg_1FedexDeLiveredAttempted",
     };
     const response = await shipengine.trackPackage(params);
+    const { shipment } = response;
 
-    expect(response.shipment.carrier.code)
-      .to.be.a("string")
-      .and.not.to.equal("");
+    expect(shipment.carrier.code).to.be.a("string").and.not.to.equal("");
 
     expect(response.package.trackingNumber)
       .to.be.a("string")
       .and.not.to.equal("");
 
-    expect(response.shipment.estimatedDeliveryDateTime).to.be.a("date");
+    validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
+
     expect(response.events[0].status).to.equal("accepted");
 
     expect(response.events[1].status).to.equal("in_transit");
@@ -115,22 +115,21 @@ describe("trackPackage", () => {
     expect(response.events.slice(-1)[0].status).to.equal("delivered");
   });
 
-  it("DX-1273: Tracks a package delivered on the first try", async function () {
+  it("DX-1273: Tracks a package delivered on the first try", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pkg_1FedExDeLivered",
     };
     const response = await shipengine.trackPackage(params);
+    const { shipment } = response;
 
-    expect(response.shipment.carrier.code)
-      .to.be.a("string")
-      .and.not.to.equal("");
+    expect(shipment.carrier.code).to.be.a("string").and.not.to.equal("");
 
     expect(response.package.trackingNumber)
       .to.be.a("string")
       .and.not.to.equal("");
 
-    expect(response.shipment.estimatedDeliveryDateTime).to.be.a("date");
+    validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
     const lastEvent = response.events.pop();
     expect(response.shipment.actualDeliveryDateTime).to.deep.equal(
@@ -149,7 +148,7 @@ describe("trackPackage", () => {
     expect(lastEvent.status === "delivered");
   });
 
-  it("DX-1274: Tracks a package delivered with signature", async function () {
+  it("DX-1274: Tracks a package delivered with signature", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pkg_1FedexDeLivered",
@@ -163,7 +162,7 @@ describe("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    expect(response.shipment.estimatedDeliveryDateTime).to.be.a("date");
+    validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
     expect(shipment.actualDeliveryDateTime).to.deep.equal(events[4].dateTime);
 
@@ -180,7 +179,7 @@ describe("trackPackage", () => {
     expect(events[4].signer).to.be.a("string").and.not.to.equal("");
   });
 
-  it("DX-1275: Tracks a package delivered after multiple attempts", async function () {
+  it("DX-1275: Tracks a package delivered after multiple attempts", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pkg_1FedexDeLiveredAttempted",
@@ -194,7 +193,7 @@ describe("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    expect(response.shipment.estimatedDeliveryDateTime).to.be.a("date");
+    validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
     expect(shipment.actualDeliveryDateTime).to.deep.equal(
       events.pop().dateTime
@@ -216,7 +215,7 @@ describe("trackPackage", () => {
     expect(events.pop().status === "delivered");
   });
 
-  it("DX-1276: Tracks a package delivered after exception", async function () {
+  it("DX-1276: Tracks a package delivered after exception", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pkg_1FedexDeLiveredException",
@@ -230,7 +229,7 @@ describe("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    expect(response.shipment.estimatedDeliveryDateTime).to.be.a("date");
+    validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
     expect(shipment.actualDeliveryDateTime).to.deep.equal(
       events.pop().dateTime
@@ -252,7 +251,7 @@ describe("trackPackage", () => {
     expect(events.pop().status === "delivered");
   });
 
-  it("DX-1277: Tracks a package with a single exception", async function () {
+  it("DX-1277: Tracks a package with a single exception", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pkg_1FedexException",
@@ -266,7 +265,7 @@ describe("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    expect(response.shipment.estimatedDeliveryDateTime).to.be.a("date");
+    validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
     expect(shipment.actualDeliveryDateTime).to.equal(undefined);
 
@@ -283,7 +282,7 @@ describe("trackPackage", () => {
     ).length.greaterThanOrEqual(1);
   });
 
-  it("DX-1278: Tracks a package with multiple exceptions", async function () {
+  it("DX-1278: Tracks a package with multiple exceptions", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pkg_DeLiveredException",
@@ -298,7 +297,8 @@ describe("trackPackage", () => {
       .and.not.to.equal("");
 
     expect(events).to.have.length(8);
-    expect(response.shipment.estimatedDeliveryDateTime).to.be.a("date");
+
+    validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
     expect(events).to.have.length(8);
 
@@ -309,7 +309,7 @@ describe("trackPackage", () => {
     ).length.greaterThanOrEqual(2);
   });
 
-  it("DX-1279: Tracks a package with multiple events with location info", async function () {
+  it("DX-1279: Tracks a package with multiple events with location info", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pkg_Attempted",
@@ -323,7 +323,7 @@ describe("trackPackage", () => {
       .to.be.a("string")
       .and.not.to.equal("");
 
-    expect(response.shipment.estimatedDeliveryDateTime).to.be.a("date");
+    validateDateTimeFormat(shipment.estimatedDeliveryDateTime);
 
     // At least one event has no location information (city, state, postal code, or geocoordinates)
     expect(
@@ -344,7 +344,7 @@ describe("trackPackage", () => {
   // TODO DX-1280 Tracks a package with event date/time values with no timestamp
   // This has not yet been implemented
 
-  it("DX-1281: Tracks a package with an invalid tracking number", async function () {
+  it("DX-1281: Tracks a package with an invalid tracking number", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       trackingNumber: "abc",
@@ -366,7 +366,7 @@ describe("trackPackage", () => {
     }
   });
 
-  it("DX-1282: Throws a client-side error for a packageId with an invalid prefix", async function () {
+  it("DX-1282: Throws a client-side error for a packageId with an invalid prefix", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "xxx_1FedExAttempted",
@@ -388,7 +388,7 @@ describe("trackPackage", () => {
     }
   });
 
-  it("DX-1283: Throws a client-side error for a packageId with an invalid base58-encoded portion of the id", async function () {
+  it("DX-1283: Throws a client-side error for a packageId with an invalid base58-encoded portion of the id", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pgk_mandy",
@@ -410,7 +410,7 @@ describe("trackPackage", () => {
     }
   });
 
-  it("DX-1284 Tracks a package with a packageId that cannot be found", async function () {
+  it("DX-1284 Tracks a package with a packageId that cannot be found", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       packageId: "pkg_123",
@@ -431,7 +431,7 @@ describe("trackPackage", () => {
     }
   });
 
-  it("DX-1285 Tracks a package with server-side error", async function () {
+  it("DX-1285 Tracks a package with server-side error", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const params = {
       trackingNumber: "500 Server Error",
@@ -453,6 +453,26 @@ describe("trackPackage", () => {
       expect(error.requestID).to.match(/^req_\w+$/);
     }
   });
+  it("finds an exception event when it is present", () => {
+    const dataCopy = JSON.parse(JSON.stringify(data.events));
+
+    expect(getExceptions(dataCopy)).to.be.an("array").and.to.have.lengthOf(1);
+  });
+  it("finds multiple exception events when they are present", () => {
+    const dataCopy = JSON.parse(JSON.stringify(data.events));
+
+    dataCopy[0].status = "exception";
+
+    expect(getExceptions(dataCopy)).to.be.an("array").and.to.have.lengthOf(2);
+  });
+
+  it("returns an empty array when no exception events are present", () => {
+    const dataCopy = JSON.parse(JSON.stringify(data.events));
+
+    dataCopy[2].status = "delivered";
+
+    expect(getExceptions(dataCopy)).to.be.an("array").and.to.have.lengthOf(0);
+  });
 });
 
 function hasNoLocationData(e) {
@@ -470,3 +490,92 @@ function hasNoCoordinates(e) {
     e.location.coordinates.longitude === 0
   );
 }
+
+const validateDateTimeFormat = (dateValue) => {
+  expect(dateValue)
+    .to.be.an("object")
+    .with.keys("value", "hasTime", "hasTimeZone");
+};
+
+const data = {
+  events: [
+    {
+      dateTime: {
+        value: "2021-06-02T11:00:00.000Z",
+        hasTime: true,
+        hasTimeZone: true,
+      },
+      carrierDateTime: {
+        hasTime: false,
+        hasTimeZone: false,
+      },
+      status: "accepted",
+      description: "Picked up from shipper's warehouse",
+      carrierStatusCode: "PU7W",
+      carrierDetailCode: "DRR-913c-0001",
+      signer: "",
+      location: {
+        cityLocality: "",
+        stateProvince: "",
+        postalCode: "",
+        countryCode: "",
+        coordinates: {
+          latitude: 0,
+          longitude: 0,
+        },
+      },
+    },
+    {
+      dateTime: {
+        value: "2021-06-03T14:00:00.000Z",
+        hasTime: true,
+        hasTimeZone: true,
+      },
+      carrierDateTime: {
+        hasTime: false,
+        hasTimeZone: false,
+      },
+      status: "in_transit",
+      description: "En-route to distribution center hub",
+      carrierStatusCode: "ER00P",
+      carrierDetailCode: "",
+      signer: "",
+      location: {
+        cityLocality: "",
+        stateProvince: "",
+        postalCode: "",
+        countryCode: "",
+        coordinates: {
+          latitude: 0,
+          longitude: 0,
+        },
+      },
+    },
+    {
+      dateTime: {
+        value: "2021-06-08T11:00:00.000Z",
+        hasTime: true,
+        hasTimeZone: true,
+      },
+      carrierDateTime: {
+        hasTime: false,
+        hasTimeZone: false,
+      },
+      status: "exception",
+      description: "Package lost",
+      carrierStatusCode: "LL",
+      carrierDetailCode: "",
+      signer: "",
+      location: {
+        cityLocality: "",
+        stateProvince: "",
+        postalCode: "",
+        countryCode: "",
+        coordinates: {
+          latitude: 0,
+          longitude: 0,
+        },
+      },
+    },
+  ],
+};

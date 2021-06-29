@@ -69,7 +69,9 @@ IDE's code completion functionality.
 
 Output
 ---------------------------
-If the address can be normalized, the `normalizeAddress` method returns a normalized version of the address. If you are using TypeScript, you can import the [NormalizedAddress]("./../src/address/public-types.ts") type into your project to take advantage of your IDE's code completion functionality.
+If the address can be normalized, the `normalizeAddress` method returns a normalized version of the address. 
+If you are using TypeScript, you can import the 
+[NormalizedAddress]("https://github.com/ShipEngine/shipengine-js/blob/main/src/address/public-types.ts#L63") type into your project to take advantage of your IDE's code completion functionality.
 
 * `street` <br>
   An *array* containing the street address. Each string in the array is a separate line, up to 3.<br>

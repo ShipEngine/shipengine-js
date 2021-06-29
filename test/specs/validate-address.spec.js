@@ -4,7 +4,7 @@ const { apiKey, baseURL } = require("../utils/constants");
 const errors = require("../utils/errors");
 
 describe("validateAddress()", () => {
-  it("Validates a residential address", async function () {
+  it("Validates a residential address", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
@@ -47,7 +47,7 @@ describe("validateAddress()", () => {
     assertNormalizedAddressFormat(normalizedAddress);
   });
 
-  it("Validates a commercial address", async function () {
+  it("Validates a commercial address", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
@@ -90,7 +90,7 @@ describe("validateAddress()", () => {
     assertNormalizedAddressFormat(normalizedAddress);
   });
 
-  it("Validates an address of unknown type", async function () {
+  it("Validates an address of unknown type", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
@@ -131,7 +131,7 @@ describe("validateAddress()", () => {
     assertNormalizedAddressFormat(normalizedAddress);
   });
 
-  it("Validates a multiline address", async function () {
+  it("Validates a multiline address", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
@@ -180,7 +180,7 @@ describe("validateAddress()", () => {
     assertNormalizedAddressFormat(normalizedAddress);
   });
 
-  it("Validates an address with a numeric zip code", async function () {
+  it("Validates an address with a numeric zip code", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
@@ -221,7 +221,7 @@ describe("validateAddress()", () => {
     assertNormalizedAddressFormat(normalizedAddress);
   });
 
-  it("Validates an address with an alpha zip code", async function () {
+  it("Validates an address with an alpha zip code", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
@@ -263,7 +263,7 @@ describe("validateAddress()", () => {
     assertNormalizedAddressFormat(normalizedAddress);
   });
 
-  it("Validates an address with non-Latin characters", async function () {
+  it("Validates an address with non-Latin characters", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
@@ -302,7 +302,7 @@ describe("validateAddress()", () => {
     assertNormalizedAddressFormat(normalizedAddress);
   });
 
-  it("Validates an address with warning messages", async function () {
+  it("Validates an address with warning messages", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
@@ -354,7 +354,7 @@ describe("validateAddress()", () => {
     assertNormalizedAddressFormat(normalizedAddress);
   });
 
-  it("Validates an address with error messages", async function () {
+  it("Validates an address with error messages", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
@@ -409,7 +409,7 @@ describe("validateAddress()", () => {
     ]);
   });
 
-  it("Throws an error if no address lines are provided", async function () {
+  it("Throws an error if no address lines are provided", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
@@ -435,7 +435,7 @@ describe("validateAddress()", () => {
     }
   });
 
-  it("Throws an error if too many address lines are provided", async function () {
+  it("Throws an error if too many address lines are provided", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
@@ -461,7 +461,7 @@ describe("validateAddress()", () => {
     }
   });
 
-  it("Throws an error if the postalCode, cityLocality, and stateProvince properties are not *provided*", async function () {
+  it("Throws an error if the postalCode, cityLocality, and stateProvince properties are not *provided*", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
@@ -485,7 +485,7 @@ describe("validateAddress()", () => {
     }
   });
 
-  it("Throws an error if the postalCode, cityLocality, and stateProvince properties are not *populated*", async function () {
+  it("Throws an error if the postalCode, cityLocality, and stateProvince properties are not *populated*", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
@@ -512,7 +512,7 @@ describe("validateAddress()", () => {
     }
   });
 
-  it("Throws an error if neither the postalCode nor the cityLocality is provided, (state only provided)", async function () {
+  it("Throws an error if neither the postalCode nor the cityLocality is provided, (state only provided)", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
@@ -537,7 +537,7 @@ describe("validateAddress()", () => {
     }
   });
 
-  it("Throws an error if neither the postalCode nor the stateProvince is provided (citLocality only provided)", async function () {
+  it("Throws an error if neither the postalCode nor the stateProvince is provided (citLocality only provided)", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
@@ -562,7 +562,7 @@ describe("validateAddress()", () => {
     }
   });
 
-  it("Validates an address when a postalCode is provided but neither cityLocality nor stateProvince is provided", async function () {
+  it("Validates an address when a postalCode is provided but neither cityLocality nor stateProvince is provided", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
@@ -605,7 +605,7 @@ describe("validateAddress()", () => {
     assertNoWarningsOrErrorMessages(response);
   });
 
-  it("Validates an address when cityLocality and stateProvince are provided but no postalCode is provided", async function () {
+  it("Validates an address when cityLocality and stateProvince are provided but no postalCode is provided", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
@@ -646,7 +646,7 @@ describe("validateAddress()", () => {
     assertNoWarningsOrErrorMessages(response);
   });
 
-  it("Normalizes a lowercase country to uppercase", async function () {
+  it("Normalizes a lowercase country to uppercase", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
@@ -690,7 +690,7 @@ describe("validateAddress()", () => {
     assertNoWarningsOrErrorMessages(response);
   });
 
-  it("Removes whitespace from the country", async function () {
+  it("Removes whitespace from the country", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
@@ -734,7 +734,7 @@ describe("validateAddress()", () => {
     assertNoWarningsOrErrorMessages(response);
   });
 
-  it("Throws an error if the country is not provided", async function () {
+  it("Throws an error if the country is not provided", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
     const addressToValidate = {
       street: ["4 Jersey St"],
@@ -758,7 +758,7 @@ describe("validateAddress()", () => {
     }
   });
 
-  it("Throws an error if the country is invalid", async function () {
+  it("Throws an error if the country is invalid", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {
@@ -784,7 +784,7 @@ describe("validateAddress()", () => {
     }
   });
 
-  it("Throws an error if there is a server-side error", async function () {
+  it("Throws an error if there is a server-side error", async () => {
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
     const addressToValidate = {

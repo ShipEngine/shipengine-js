@@ -11,6 +11,7 @@ import { getCarrierAccounts } from "./../carrier/get-carrier-accounts";
 import { NormalizedConfig } from "../config";
 import { EventEmitter } from "../isomorphic.node";
 import { CarrierAccount } from "../carrier/public-types";
+import { ISOString } from "../utils/date-time";
 
 export async function createTrackPackageResult(
   result: TrackPackageDTO,
@@ -20,6 +21,7 @@ export async function createTrackPackageResult(
   const { shipment, events } = result;
   const formattedEvents = formatEvents(events);
   const exceptionEvents = getExceptions(formattedEvents);
+  const actualDeliveryDateTime = getActualDeliveryDateTime(formattedEvents);
   let account: CarrierAccount | undefined;
 
   if (shipment.carrierAccountId) {
@@ -47,9 +49,11 @@ export async function createTrackPackageResult(
         accountNumber: (account && account.accountNumber) || "",
         name: (account && account.name) || "",
       },
-      // TODO Format dates properly
-      estimatedDeliveryDateTime: new Date(shipment.estimatedDelivery),
-      actualDeliveryDateTime: getActualDeliveryDateTime(formattedEvents),
+      estimatedDeliveryDateTime: new ISOString(shipment.estimatedDelivery),
+      actualDeliveryDateTime:
+        actualDeliveryDateTime && actualDeliveryDateTime.value
+          ? actualDeliveryDateTime
+          : undefined,
     },
     package: {
       packageId: result.package.packageId || "",
@@ -82,7 +86,7 @@ export async function createTrackPackageResult(
     },
     events: formattedEvents || [],
     latestEvent: formattedEvents ? formattedEvents.slice(-1)[0] : undefined,
-    hasErrors: !!exceptionEvents,
+    hasErrors: exceptionEvents.length > 0,
     errors: exceptionEvents,
   };
   return returnValue;

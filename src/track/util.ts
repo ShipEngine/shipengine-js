@@ -9,11 +9,12 @@ import { CarrierCode, ErrorCode, ErrorType } from "../enums";
 import { isCarrierCode } from "../utils/type-guards";
 import * as assert from "../utils/assert";
 import { carrierNames } from "../carrier/carrier-names";
+import { ISOString } from "../utils/date-time";
 
 export function getExceptions(events: Event[]): Event[] {
   const exceptionEvents: Event[] = [];
   for (const e of events) {
-    if (e.status === "Exception") {
+    if (e.status.toUpperCase() === "EXCEPTION") {
       exceptionEvents.push(e);
     }
   }
@@ -23,8 +24,8 @@ export function getExceptions(events: Event[]): Event[] {
 export function formatEvents(events: EventDTO[]): Event[] {
   return events.map((e: EventDTO) => {
     return {
-      dateTime: new Date(e.timestamp),
-      carrierDateTime: new Date(e.carrierTimeStamp),
+      dateTime: new ISOString(e.timestamp),
+      carrierDateTime: new ISOString(e.carrierTimestamp),
       status: e.status || "",
       description: e.description || "",
       carrierStatusCode: e.carrierStatusCode || "",
@@ -111,9 +112,11 @@ export function validatePackageId(value: string): void {
   }
 }
 
-export function getActualDeliveryDateTime(events: Event[]): Date | undefined {
+export function getActualDeliveryDateTime(
+  events: Event[]
+): ISOString | undefined {
   const deliveredEvents = events.filter(
-    (event) => event.status === "delivered"
+    (event) => event.status.toUpperCase() === "DELIVERED"
   );
 
   // Relying on RPC API to handle sorting events by dateTime
@@ -121,7 +124,7 @@ export function getActualDeliveryDateTime(events: Event[]): Date | undefined {
     const e = deliveredEvents.pop();
 
     // Could not suppress undefined warnings even with if statement above
-    return new Date(e!.dateTime);
+    return e ? e.dateTime : undefined;
   }
 }
 
