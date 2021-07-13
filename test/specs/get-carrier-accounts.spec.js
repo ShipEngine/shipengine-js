@@ -123,10 +123,11 @@ describe("getCarrierAccounts()", async () => {
     }
   });
 
-  it.only("Throws a server-side 429 error if the rate limit is exceeded", async function () {
+  it("Throws a server-side 429 error if the rate limit is exceeded", async function () {
     let carrierName = "amazon_buy_shipping";
 
     const shipengine = new ShipEngine({ apiKey, baseURL });
+    shipengine.clearCache();
 
     const requestSent = sinon.spy();
     const responseReceived = sinon.spy();
