@@ -191,7 +191,7 @@ describe("getCarrierAccounts()", async () => {
         "https://www.shipengine.com/docs/rate-limits"
       );
 
-      // Each event should have triggered twice
+      // Each event should have triggered only once
       sinon.assert.calledOnce(requestSent);
       sinon.assert.calledOnce(responseReceived);
 
