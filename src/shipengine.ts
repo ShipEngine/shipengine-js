@@ -11,6 +11,7 @@ import { CarrierAccount } from "./carrier/public-types";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
 import { TrackingParams, TrackPackageResult } from "./track/public-types";
 import { trackPackage } from "./track/track-package";
+import { clearAccountCache } from "./carrier/account-cache";
 
 /**
  * Exposes the functionality of the ShipEngine API.
@@ -119,5 +120,12 @@ export class ShipEngine extends EventEmitter {
   ): Promise<TrackPackageResult> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return trackPackage(params, mergedConfig, this);
+  }
+
+  /**
+   * Clear the SDK Cache
+   */
+  public clearCache(): void {
+    clearAccountCache();
   }
 }
