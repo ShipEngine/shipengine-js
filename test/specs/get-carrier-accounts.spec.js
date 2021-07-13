@@ -2,6 +2,7 @@ const { expect, assert } = require("chai");
 const { ShipEngine } = require("../../");
 const { apiKey, baseURL } = require("../utils/constants");
 const errors = require("../utils/errors");
+const sinon = require("sinon");
 
 describe("getCarrierAccounts()", async function () {
   it("Returns an empty array if no accounts are setup yet", async function () {
@@ -118,14 +119,15 @@ describe("getCarrierAccounts()", async function () {
     }
   });
 
-  // TODO This test fails when the suite is run but passes when run on its own
-  it.skip("Throws a server-side 429 error if the rate limit is exceeded", async function () {
-    // This case runs a little long for some reason
-    this.timeout(15000);
-
+  it.only("Throws a server-side 429 error if the rate limit is exceeded", async function () {
     let carrierName = "amazon_buy_shipping";
 
     const shipengine = new ShipEngine({ apiKey, baseURL });
+
+    const requestSent = sinon.spy();
+    const responseReceived = sinon.spy();
+    shipengine.on("requestSent", requestSent);
+    shipengine.on("responseReceived", responseReceived);
 
     try {
       await shipengine.getCarrierAccounts(carrierName);
@@ -139,6 +141,21 @@ describe("getCarrierAccounts()", async function () {
         message: "You have exceeded the rate limit.",
       });
       expect(error.requestID).to.match(/^req_\w+$/);
+      expect(error.url.href).to.equal(
+        "https://www.shipengine.com/docs/rate-limits"
+      );
+
+      // Each event should have triggered twice
+      sinon.assert.calledTwice(requestSent);
+      sinon.assert.calledTwice(responseReceived);
+
+      // The first request and response events both have retry 0
+      expect(requestSent.getCall(0).firstArg.retry).to.equal(0);
+      expect(responseReceived.getCall(0).firstArg.retry).to.equal(0);
+
+      // The second request and response events both have retry 1
+      expect(requestSent.getCall(1).firstArg.retry).to.equal(1);
+      expect(responseReceived.getCall(1).firstArg.retry).to.equal(1);
     }
   });
 });

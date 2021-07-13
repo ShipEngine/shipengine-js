@@ -3,7 +3,6 @@ import {
   ErrorCode,
   ErrorSource,
   ErrorType,
-  CarrierCode,
   ValidationMessageCode,
   ValidationMessageType,
 } from "../enums";
@@ -58,7 +57,10 @@ export interface ErrorDataDTO {
  */
 export interface RateLimitExceededErrorDataDTO extends ErrorDataDTO {
   code: ErrorCode.RateLimitExceeded;
-  retryAfter: number;
+  details: {
+    retryAfter: number;
+    url: URL;
+  };
 }
 
 /**

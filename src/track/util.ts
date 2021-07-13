@@ -5,7 +5,7 @@ import {
 } from "./public-types";
 import { EventDTO, TrackPackageRPCParams } from "../json-rpc";
 import { ShipEngineError } from "../errors";
-import { CarrierCode, ErrorCode, ErrorType } from "../enums";
+import { ErrorCode, ErrorType } from "../enums";
 import { isCarrierCode } from "../utils/type-guards";
 import * as assert from "../utils/assert";
 import { carrierNames } from "../carrier/carrier-names";
