@@ -200,6 +200,55 @@ describe("getCarrierAccounts()", async () => {
       expect(responseReceived.getCall(0).firstArg.retry).to.equal(0);
     }
   });
+
+  it("Attempts the custom number of retries on a server side error", async () => {
+    let carrierName = "amazon_buy_shipping";
+
+    const shipengine = new ShipEngine({ apiKey, baseURL, retries: 3 });
+    shipengine.clearCache();
+
+    const requestSent = sinon.spy();
+    const responseReceived = sinon.spy();
+    shipengine.on("requestSent", requestSent);
+    shipengine.on("responseReceived", responseReceived);
+
+    try {
+      await shipengine.getCarrierAccounts(carrierName);
+      errors.shouldHaveThrown();
+    } catch (error) {
+      errors.assertShipEngineError(error, {
+        name: "RateLimitExceededError",
+        source: "shipengine",
+        type: "system",
+        code: "rate_limit_exceeded",
+        message: "You have exceeded the rate limit.",
+      });
+      expect(error.requestID).to.match(/^req_\w+$/);
+      expect(error.url.href).to.equal(
+        "https://www.shipengine.com/docs/rate-limits"
+      );
+
+      // Each event should have triggered only once
+      sinon.assert.callCount(requestSent, 4);
+      sinon.assert.callCount(responseReceived, 4);
+
+      // The first request and response events both have retry 0
+      expect(requestSent.getCall(0).firstArg.retry).to.equal(0);
+      expect(responseReceived.getCall(0).firstArg.retry).to.equal(0);
+
+      // The second request and response events both have retry 1
+      expect(requestSent.getCall(1).firstArg.retry).to.equal(1);
+      expect(responseReceived.getCall(1).firstArg.retry).to.equal(1);
+
+      // The third request and response events both have retry 2
+      expect(requestSent.getCall(2).firstArg.retry).to.equal(2);
+      expect(responseReceived.getCall(2).firstArg.retry).to.equal(2);
+
+      // The fourth request and response events both have retry 3
+      expect(requestSent.getCall(3).firstArg.retry).to.equal(3);
+      expect(responseReceived.getCall(3).firstArg.retry).to.equal(3);
+    }
+  }).timeout(10000);
 });
 
 const accountData = [
