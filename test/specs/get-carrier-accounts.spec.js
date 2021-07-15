@@ -228,25 +228,15 @@ describe("getCarrierAccounts()", async () => {
         "https://www.shipengine.com/docs/rate-limits"
       );
 
-      // Each event should have triggered only once
+      // Each event should have triggered 4 times
       sinon.assert.callCount(requestSent, 4);
       sinon.assert.callCount(responseReceived, 4);
 
-      // The first request and response events both have retry 0
-      expect(requestSent.getCall(0).firstArg.retry).to.equal(0);
-      expect(responseReceived.getCall(0).firstArg.retry).to.equal(0);
-
-      // The second request and response events both have retry 1
-      expect(requestSent.getCall(1).firstArg.retry).to.equal(1);
-      expect(responseReceived.getCall(1).firstArg.retry).to.equal(1);
-
-      // The third request and response events both have retry 2
-      expect(requestSent.getCall(2).firstArg.retry).to.equal(2);
-      expect(responseReceived.getCall(2).firstArg.retry).to.equal(2);
-
-      // The fourth request and response events both have retry 3
-      expect(requestSent.getCall(3).firstArg.retry).to.equal(3);
-      expect(responseReceived.getCall(3).firstArg.retry).to.equal(3);
+      // Check that the retry is increasing by 1 for each request
+      for (let i = 0; i < 3; i++) {
+        expect(requestSent.getCall(i).firstArg.retry).to.equal(i);
+        expect(responseReceived.getCall(i).firstArg.retry).to.equal(i);
+      }
     }
   }).timeout(10000);
 });
