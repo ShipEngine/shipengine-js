@@ -126,7 +126,7 @@ function createError(response: JsonRpcErrorResponse): ShipEngineError {
       return new RateLimitExceededError(
         response.id,
         ErrorSource.ShipEngine,
-        errorData.retryAfter * 1000 // convert seconds to milliseconds
+        errorData.details.retryAfter * 1000 // convert seconds to milliseconds
       );
 
     default:
