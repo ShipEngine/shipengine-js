@@ -82,7 +82,7 @@ describe("getCarrierAccounts()", async () => {
   });
 
   it("Throws a server-side error", async () => {
-    let carrierName = "access_worldwide";
+    const carrierName = "access_worldwide";
 
     const shipengine = new ShipEngine({ apiKey, baseURL });
     shipengine.clearCache();
@@ -104,7 +104,7 @@ describe("getCarrierAccounts()", async () => {
   });
 
   it("Throws an client-side error if an invalid carrierCode is passed", async () => {
-    let carrierName = "my_carrier";
+    const carrierName = "my_carrier";
 
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
@@ -123,8 +123,8 @@ describe("getCarrierAccounts()", async () => {
     }
   });
 
-  it("Throws a server-side 429 error if the rate limit is exceeded", async function () {
-    let carrierName = "amazon_buy_shipping";
+  it("Throws a server-side 429 error if the rate limit is exceeded", async () => {
+    const carrierName = "amazon_buy_shipping";
 
     const shipengine = new ShipEngine({ apiKey, baseURL });
     shipengine.clearCache();
@@ -161,6 +161,43 @@ describe("getCarrierAccounts()", async () => {
       // The second request and response events both have retry 1
       expect(requestSent.getCall(1).firstArg.retry).to.equal(1);
       expect(responseReceived.getCall(1).firstArg.retry).to.equal(1);
+    }
+  });
+
+  it("Does not attempt a retry on a server side error when retries is set to 0 in the config", async () => {
+    const carrierName = "amazon_buy_shipping";
+
+    const shipengine = new ShipEngine({ apiKey, baseURL, retries: 0 });
+    shipengine.clearCache();
+
+    const requestSent = sinon.spy();
+    const responseReceived = sinon.spy();
+    shipengine.on("requestSent", requestSent);
+    shipengine.on("responseReceived", responseReceived);
+
+    try {
+      await shipengine.getCarrierAccounts(carrierName);
+      errors.shouldHaveThrown();
+    } catch (error) {
+      errors.assertShipEngineError(error, {
+        name: "RateLimitExceededError",
+        source: "shipengine",
+        type: "system",
+        code: "rate_limit_exceeded",
+        message: "You have exceeded the rate limit.",
+      });
+      expect(error.requestID).to.match(/^req_\w+$/);
+      expect(error.url.href).to.equal(
+        "https://www.shipengine.com/docs/rate-limits"
+      );
+
+      // Each event should have triggered only once
+      sinon.assert.calledOnce(requestSent);
+      sinon.assert.calledOnce(responseReceived);
+
+      // The first request and response events both have retry 0
+      expect(requestSent.getCall(0).firstArg.retry).to.equal(0);
+      expect(responseReceived.getCall(0).firstArg.retry).to.equal(0);
     }
   });
 });
