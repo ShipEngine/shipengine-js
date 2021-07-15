@@ -82,7 +82,7 @@ describe("getCarrierAccounts()", async () => {
   });
 
   it("Throws a server-side error", async () => {
-    let carrierName = "access_worldwide";
+    const carrierName = "access_worldwide";
 
     const shipengine = new ShipEngine({ apiKey, baseURL });
     shipengine.clearCache();
@@ -104,7 +104,7 @@ describe("getCarrierAccounts()", async () => {
   });
 
   it("Throws an client-side error if an invalid carrierCode is passed", async () => {
-    let carrierName = "my_carrier";
+    const carrierName = "my_carrier";
 
     const shipengine = new ShipEngine({ apiKey, baseURL });
 
@@ -124,7 +124,7 @@ describe("getCarrierAccounts()", async () => {
   });
 
   it("Throws a server-side 429 error if the rate limit is exceeded", async () => {
-    let carrierName = "amazon_buy_shipping";
+    const carrierName = "amazon_buy_shipping";
 
     const shipengine = new ShipEngine({ apiKey, baseURL });
     shipengine.clearCache();
@@ -165,7 +165,7 @@ describe("getCarrierAccounts()", async () => {
   });
 
   it("Does not attempt a retry on a server side error when retries is set to 0 in the config", async () => {
-    let carrierName = "amazon_buy_shipping";
+    const carrierName = "amazon_buy_shipping";
 
     const shipengine = new ShipEngine({ apiKey, baseURL, retries: 0 });
     shipengine.clearCache();
