@@ -200,6 +200,45 @@ describe("getCarrierAccounts()", async () => {
       expect(responseReceived.getCall(0).firstArg.retry).to.equal(0);
     }
   });
+
+  it("Attempts the custom number of retries on a server side error", async () => {
+    let carrierName = "amazon_buy_shipping";
+
+    const shipengine = new ShipEngine({ apiKey, baseURL, retries: 3 });
+    shipengine.clearCache();
+
+    const requestSent = sinon.spy();
+    const responseReceived = sinon.spy();
+    shipengine.on("requestSent", requestSent);
+    shipengine.on("responseReceived", responseReceived);
+
+    try {
+      await shipengine.getCarrierAccounts(carrierName);
+      errors.shouldHaveThrown();
+    } catch (error) {
+      errors.assertShipEngineError(error, {
+        name: "RateLimitExceededError",
+        source: "shipengine",
+        type: "system",
+        code: "rate_limit_exceeded",
+        message: "You have exceeded the rate limit.",
+      });
+      expect(error.requestID).to.match(/^req_\w+$/);
+      expect(error.url.href).to.equal(
+        "https://www.shipengine.com/docs/rate-limits"
+      );
+
+      // Each event should have triggered 4 times
+      sinon.assert.callCount(requestSent, 4);
+      sinon.assert.callCount(responseReceived, 4);
+
+      // Check that the retry is increasing by 1 for each request
+      for (let i = 0; i < 3; i++) {
+        expect(requestSent.getCall(i).firstArg.retry).to.equal(i);
+        expect(responseReceived.getCall(i).firstArg.retry).to.equal(i);
+      }
+    }
+  }).timeout(10000);
 });
 
 const accountData = [
