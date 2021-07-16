@@ -18,7 +18,7 @@ describe("getCarrierAccounts()", async () => {
       assert.fail(`Did not expect an error to be thrown: ${e.message}`);
     }
     expect(response).to.eql([]);
-  });
+  }).timeout(5000);
 
   it("Returns multiple accounts for different carriers", async () => {
     let accounts;
@@ -48,7 +48,7 @@ describe("getCarrierAccounts()", async () => {
     // Function asserts that the shape of the accounts is correct, including
     // All accounts have an account name
     assertAccountFormat(accounts);
-  });
+  }).timeout(5000);
 
   it("Returns multiple accounts for the same carrier", async () => {
     let accounts;
@@ -79,7 +79,7 @@ describe("getCarrierAccounts()", async () => {
     // Function asserts that the shape of the accounts is correct, including
     // All accounts have an account name
     assertAccountFormat(accounts);
-  });
+  }).timeout(5000);
 
   it("Throws a server-side error", async () => {
     const carrierName = "access_worldwide";
@@ -101,7 +101,7 @@ describe("getCarrierAccounts()", async () => {
       });
       expect(error.requestID).to.match(/^req_\w+$/);
     }
-  });
+  }).timeout(5000);
 
   it("Throws an client-side error if an invalid carrierCode is passed", async () => {
     const carrierName = "my_carrier";
@@ -121,7 +121,7 @@ describe("getCarrierAccounts()", async () => {
       });
       expect(error.requestID).to.equal(undefined);
     }
-  });
+  }).timeout(5000);
 
   it("Throws a server-side 429 error if the rate limit is exceeded", async () => {
     const carrierName = "amazon_buy_shipping";
@@ -162,7 +162,7 @@ describe("getCarrierAccounts()", async () => {
       expect(requestSent.getCall(1).firstArg.retry).to.equal(1);
       expect(responseReceived.getCall(1).firstArg.retry).to.equal(1);
     }
-  });
+  }).timeout(5000);
 
   it("Does not attempt a retry on a server side error when retries is set to 0 in the config", async () => {
     const carrierName = "amazon_buy_shipping";
@@ -199,7 +199,7 @@ describe("getCarrierAccounts()", async () => {
       expect(requestSent.getCall(0).firstArg.retry).to.equal(0);
       expect(responseReceived.getCall(0).firstArg.retry).to.equal(0);
     }
-  });
+  }).timeout(5000);
 
   it("Attempts the custom number of retries on a server side error", async () => {
     let carrierName = "amazon_buy_shipping";
@@ -239,11 +239,50 @@ describe("getCarrierAccounts()", async () => {
       }
     }
   }).timeout(10000);
+
+  it("It waits the correct amount of time to retry a failed network call", async () => {
+    let carrierName = "amazon_buy_shipping";
+
+    const shipengine = new ShipEngine({ apiKey, baseURL });
+    shipengine.clearCache();
+
+    const requestSent = sinon.spy();
+    const responseReceived = sinon.spy();
+    shipengine.on("requestSent", requestSent);
+    shipengine.on("responseReceived", responseReceived);
+
+    try {
+      await shipengine.getCarrierAccounts(carrierName);
+      errors.shouldHaveThrown();
+    } catch (error) {
+      errors.assertShipEngineError(error, {
+        name: "RateLimitExceededError",
+        source: "shipengine",
+        type: "system",
+        code: "rate_limit_exceeded",
+        message: "You have exceeded the rate limit.",
+      });
+      expect(error.requestID).to.match(/^req_\w+$/);
+      expect(error.url.href).to.equal(
+        "https://www.shipengine.com/docs/rate-limits"
+      );
+
+      // Each event should have triggered 2 time
+      sinon.assert.callCount(requestSent, 2);
+      sinon.assert.callCount(responseReceived, 2);
+
+      const firstRequestTime = requestSent.getCall(0).firstArg.timestamp;
+      const secondRequestTime = requestSent.getCall(1).firstArg.timestamp;
+
+      // Wait at least two seconds in between calls
+      expect(secondRequestTime - firstRequestTime).to.be.at.least(2000);
+    }
+  }).timeout(20000);
 });
 
 const accountData = [
   {
-    id: "car_1knseddGBrseWTiw",
+    id: "car_76wyerZpiMKUHAdiDiBS5kU29tZU9u",
     carrier: {
       name: "United Parcel Service",
       code: "ups",
@@ -252,7 +291,7 @@ const accountData = [
     name: "My UPS Account",
   },
   {
-    id: "car_kfUjTZSEAQ8gHeT",
+    id: "car_41GrQHn5uouiPZc2TNE6PU29tZU9ud",
     carrier: {
       name: "Federal Express",
       code: "fedex",
@@ -261,7 +300,7 @@ const accountData = [
     name: "FedEx Account #1",
   },
   {
-    id: "car_3a76b06902f812d14b33d6847",
+    id: "car_Mg6nuNd6M8nuHKcKHD6UDGURvw9xh3",
     carrier: {
       name: "Federal Express",
       code: "fedex",
@@ -270,7 +309,7 @@ const accountData = [
     name: "FedEx Account #2",
   },
   {
-    id: "car_4b8hb06902f812d14b88d682n",
+    id: "car_N5Xhzj3r8TkmRkS1NAGYFbX5AbrQq4",
     carrier: {
       name: "United States Postal Service",
       code: "usps",
@@ -279,7 +318,7 @@ const accountData = [
     name: "My USPS Account",
   },
   {
-    id: "car_d1dcrTN3c86Wpcfd82d161",
+    id: "car_UCDpbvfiQnJxEt5KryX75i3qFeCPi8",
     carrier: {
       name: "United States Postal Service",
       code: "stamps_com",

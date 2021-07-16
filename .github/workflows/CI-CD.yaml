@@ -87,7 +87,8 @@ jobs:
 
       - name: Run tests
         run: npm run coverage:browser
-        # env:
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
         #   SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
         #   SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
 

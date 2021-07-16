@@ -5,10 +5,10 @@
  * If not set, it will default to the public ShipEngine API.
  */
 exports.baseURL =
-  process.env["BASE_URL"] ||
-  "https://shipengine-web-api.herokuapp.com/jsonrpc/";
+  process.env["BASE_URL"] || "https://api.shipengine.com/jsonrpc/";
 
 /**
  * The API key to use for testing. If not set, it defaults to a dummy key.
  */
-exports.apiKey = process.env["API_KEY"] || "req1_foobar_sim";
+exports.apiKey =
+  process.env["API_KEY"] || "TEST_bTYAskEX6tD7vv6u/cZ/M4LaUSWBJ219+8S1jgFcnkk";
