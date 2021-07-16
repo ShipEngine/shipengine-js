@@ -234,8 +234,8 @@ describe("getCarrierAccounts()", async () => {
 
       // Check that the retry is increasing by 1 for each request
       for (let i = 0; i < 3; i++) {
-        expect(requestSent.getCall(0).firstArg.retry).to.equal(0);
-        expect(responseReceived.getCall(0).firstArg.retry).to.equal(0);
+        expect(requestSent.getCall(i).firstArg.retry).to.equal(i);
+        expect(responseReceived.getCall(i).firstArg.retry).to.equal(i);
       }
     }
   }).timeout(10000);
