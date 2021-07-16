@@ -274,15 +274,8 @@ describe("getCarrierAccounts()", async () => {
       const firstRequestTime = requestSent.getCall(0).firstArg.timestamp;
       const secondRequestTime = requestSent.getCall(1).firstArg.timestamp;
 
+      // Wait at least two seconds in between calls
       expect(secondRequestTime - firstRequestTime).to.be.at.least(2000);
-
-      // Check that the retry is increasing by 1 for each request
-      expect(requestSent.getCall(0).firstArg.retry).to.equal(0);
-      expect(responseReceived.getCall(0).firstArg.retry).to.equal(0);
-
-      // Check that the retry is increasing by 1 for each request
-      expect(requestSent.getCall(1).firstArg.retry).to.equal(1);
-      expect(responseReceived.getCall(1).firstArg.retry).to.equal(1);
     }
   }).timeout(20000);
 });
