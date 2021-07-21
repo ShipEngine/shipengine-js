@@ -7,7 +7,7 @@ export async function get<TResult>(
   endpoint: string,
   config: NormalizedConfig
 ): Promise<TResult> {
-  return await sendRequest(endpoint, "GET", undefined, config);
+  return await sendRequestWithRetry(endpoint, "GET", undefined, config);
 }
 
 export async function post<TParams, TResult>(
@@ -15,7 +15,7 @@ export async function post<TParams, TResult>(
   body: TParams,
   config: NormalizedConfig
 ): Promise<TResult> {
-  return await sendRequest(endpoint, "POST", body, config);
+  return await sendRequestWithRetry(endpoint, "POST", body, config);
 }
 
 export async function put<TParams, TResult>(
@@ -23,63 +23,29 @@ export async function put<TParams, TResult>(
   body: TParams,
   config: NormalizedConfig
 ): Promise<TResult> {
-  return await sendRequest(endpoint, "PUT", body, config);
+  return await sendRequestWithRetry(endpoint, "PUT", body, config);
 }
 
 export async function destroy<TResult>(
   endpoint: string,
   config: NormalizedConfig
 ): Promise<TResult> {
-  return await sendRequest(endpoint, "DELETE", undefined, config);
+  return await sendRequestWithRetry(endpoint, "DELETE", undefined, config);
 }
 
-async function sendRequest<TParams, TResult>(
+async function sendRequestWithRetry<TParams, TResult>(
   endpoint: string,
   method: "GET" | "POST" | "PUT" | "DELETE",
   body: TParams | undefined,
   config: NormalizedConfig
   // @ts-expect-error TypeScript is confused by the return in the for loop
 ): Promise<TResult> {
-  // Create an AbortController so we can cancel the request if it times out
-  const controller = new AbortController();
-
-  setTimeout(() => controller.abort(), config.timeout);
-
   const urlWithPath = new URL(endpoint, config.baseURL.toString());
 
   // Retry up to N times
   for (let retry = 0; retry <= config.retries; retry++) {
     try {
-      const response = await fetch(urlWithPath.toString(), {
-        body: body ? JSON.stringify(body) : undefined,
-        method: method,
-        mode: "cors" as const,
-        signal: controller.signal,
-        headers: buildHeaders(config),
-      });
-
-      const responseBody = await response.json();
-
-      if (response.status === 429) {
-        throw new RateLimitExceededError(
-          responseBody.request_id,
-          ErrorSource.ShipEngine,
-          Number(response.headers.get("Retry-After")) || 0
-        );
-      }
-
-      // TODO
-      // if (response.status === 400) {
-      //   throw new ShipEngineError(
-      //     responseBody.request_id,,
-      //     response.error.data.source,
-      //     response.error.data.type,
-      //     response.error.data.code,
-      //     response.error.message
-      //   );
-      // }
-
-      return responseBody;
+      return await sendRequest(urlWithPath, method, body, config);
     } catch (error) {
       if (
         retry < config.retries &&
@@ -108,6 +74,48 @@ async function sendRequest<TParams, TResult>(
       }
     }
   }
+}
+
+async function sendRequest<TParams, TResult>(
+  url: URL,
+  method: "GET" | "POST" | "PUT" | "DELETE",
+  body: TParams | undefined,
+  config: NormalizedConfig
+): Promise<TResult> {
+  // Create an AbortController so we can cancel the request if it times out
+  const controller = new AbortController();
+  setTimeout(() => controller.abort(), config.timeout);
+
+  const response = await fetch(url.toString(), {
+    body: body ? JSON.stringify(body) : undefined,
+    method: method,
+    mode: "cors" as const,
+    signal: controller.signal,
+    headers: buildHeaders(config),
+  });
+
+  const responseBody = await response.json();
+
+  if (response.status === 429) {
+    throw new RateLimitExceededError(
+      responseBody.request_id,
+      ErrorSource.ShipEngine,
+      Number(response.headers.get("Retry-After")) || 0
+    );
+  }
+
+  // TODO
+  // if (response.status === 400) {
+  //   throw new ShipEngineError(
+  //     responseBody.request_id,,
+  //     response.error.data.source,
+  //     response.error.data.type,
+  //     response.error.data.code,
+  //     response.error.message
+  //   );
+  // }
+
+  return responseBody;
 }
 
 /**
