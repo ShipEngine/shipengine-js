@@ -55,12 +55,61 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           parallel: true
 
+  browser_tests:
+    name: Browser Tests
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      fail-fast: true
+      matrix:
+        os:
+          - ubuntu-latest # Chrome, Firefox, Safari (via SauceLabs), Edge (via SauceLabs)
+          - windows-latest # Internet Explorer
+          - macos-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+
+      - name: Install Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: clean
+        run: npm run clean
+
+      - name: Build the code
+        run: npm run build
+
+      - name: Run tests
+        run: npm run coverage:browser
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+
+        #   SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+        #   SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+      - name: Combine code coverage data into a single file
+        shell: bash
+        run: |
+          ls -Rlh coverage/*/lcov.info
+          cat coverage/*/lcov.info > ./coverage/lcov.info
+      - name: Send code coverage results to Coveralls
+        uses: coverallsapp/github-action@v1.1.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          parallel: true
+
   coverage:
     name: Code Coverage
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs:
       - node_tests
+      - browser_tests
     steps:
       - name: Let Coveralls know that all tests have finished
         uses: coverallsapp/github-action@v1.1.0
@@ -75,6 +124,7 @@ jobs:
     timeout-minutes: 10
     needs:
       - node_tests
+      - browser_tests
 
     steps:
       - name: Checkout source

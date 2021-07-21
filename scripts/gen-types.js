@@ -29,6 +29,6 @@ compileFromFile('node_modules/shipengine-json-schema/requests/calculate_rates_re
 compileFromFile('node_modules/shipengine-json-schema/responses/calculate_rates_response_body.json')
   .then(ts => fs.writeFileSync('src/list-rates/types/private-response.ts', ts))
 
-// List Carriers
+// List Carrier Accounts
 compileFromFile('node_modules/shipengine-json-schema/responses/list_carriers_response_body.json')
-  .then(ts => fs.writeFileSync('src/list-carriers/types/private-response.ts', ts))
+  .then(ts => fs.writeFileSync('src/list-carrier-accounts/types/private-response.ts', ts))
