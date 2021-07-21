@@ -3,6 +3,7 @@ import {
   ValidateAddressParams,
   ValidateAddressResult,
 } from "./validate-address";
+import { listCarrierAccounts } from "./list-carrier-accounts";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
 
 /**
@@ -53,40 +54,18 @@ export class ShipEngine {
     return validateAddress(address, mergedConfig);
   }
 
-  // /**
-  //  * Normalizes an address in nearly any country in the world.
-  //  *
-  //  * @param address
-  //  * The address to normalize. This can even be an incomplete or improperly
-  //  * formatted address.
-  //  *
-  //  * @param [config] - Optional configuration overrides for this method call.
-  //  */
-  // public async normalizeAddress(
-  //   address: Address,
-  //   config?: ShipEngineConfig
-  // ): Promise<NormalizedAddress> {
-  //   const mergedConfig = NormalizedConfig.merge(this.config, config);
-  //   return normalizeAddress(address, mergedConfig, this);
-  // }
-
-  // /**
-  //  * Retrieves the carrier accounts that have been connect to your ShipEngine account
-  //  * using the ShipEngine dashboard.
-  //  *
-  //  * @param [carrierCode]
-  //  * An optional parameter used to return only the account(s) for the specified carrierCode.
-  //  * Otherwise, all carrier accounts will be returned.
-  //  *
-  //  * @param [config] - Optional configuration overrides for this method call.
-  //  */
-  // public async getCarrierAccounts(
-  //   carrierCode?: string,
-  //   config?: ShipEngineConfig
-  // ): Promise<CarrierAccount[]> {
-  //   const mergedConfig = NormalizedConfig.merge(this.config, config);
-  //   return getCarrierAccounts(mergedConfig, this, carrierCode);
-  // }
+  /**
+   * Retrieves the carrier accounts that have been connect to your ShipEngine account
+   * using the ShipEngine dashboard.
+   *
+   * @param [config] - Optional configuration overrides for this method call.
+   */
+  public async listCarrierAccounts(
+    config?: ShipEngineConfig
+  ): Promise<unknown> {
+    const mergedConfig = NormalizedConfig.merge(this.config, config);
+    return listCarrierAccounts(mergedConfig);
+  }
 
   // /**
   //  * Tracks a package.
