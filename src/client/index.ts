@@ -7,7 +7,7 @@ export async function get<TResult>(
   endpoint: string,
   config: NormalizedConfig
 ): Promise<TResult> {
-  return await sendRequest(endpoint, "GET", {}, config);
+  return await sendRequest(endpoint, "GET", undefined, config);
 }
 
 export async function post<TParams, TResult>(
@@ -30,13 +30,13 @@ export async function destroy<TResult>(
   endpoint: string,
   config: NormalizedConfig
 ): Promise<TResult> {
-  return await sendRequest(endpoint, "DELETE", {}, config);
+  return await sendRequest(endpoint, "DELETE", undefined, config);
 }
 
 async function sendRequest<TParams, TResult>(
   endpoint: string,
   method: "GET" | "POST" | "PUT" | "DELETE",
-  body: TParams,
+  body: TParams | undefined,
   config: NormalizedConfig
   // @ts-expect-error TypeScript is confused by the return in the for loop
 ): Promise<TResult> {
@@ -51,7 +51,7 @@ async function sendRequest<TParams, TResult>(
   for (let retry = 0; retry <= config.retries; retry++) {
     try {
       const response = await fetch(urlWithPath.toString(), {
-        body: JSON.stringify(body),
+        body: body ? JSON.stringify(body) : undefined,
         method: method,
         mode: "cors" as const,
         signal: controller.signal,

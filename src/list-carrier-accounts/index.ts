@@ -27,5 +27,6 @@ export async function listCarrierAccounts(
     config
   );
 
+  console.log(JSON.stringify(response));
   return response;
 }

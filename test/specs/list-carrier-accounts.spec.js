@@ -1,16 +1,16 @@
 const { expect } = require("chai");
-const { ShipEngine } = require("../../esm");
+const { ShipEngine } = require("../..");
 const { apiKey } = require("../utils/constants");
 // const errors = require("../utils/errors");
-// const nock = require("nock");
+const { mockListCarries200 } = require("../utils/mocks/mock-list-carriers-200");
 
 describe("listCarrierAccounts()", () => {
-  it("Returns a list of connected carrier accounts", async () => {
+  it.skip("Returns a list of connected carrier accounts", async () => {
+    mockListCarries200();
+
     const shipengine = new ShipEngine({ apiKey });
 
     const result = await shipengine.listCarrierAccounts();
-
-    console.log(result);
 
     expect(result).to.deep.equal({
       status: "verified",
