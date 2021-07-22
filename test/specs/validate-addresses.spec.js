@@ -583,98 +583,107 @@ describe("validateAddresses()", () => {
   //   }
   // });
 
-  // it("Retries when it encounters a 429 error", async () => {
-  //   fetchMock.("https://api.shipengine.com")
-  //     .post("/v1/addresses/validate")
-  //     .reply(429, {
-  //       request_id: "7b80b28f-80d2-4175-ad99-7c459980539f",
-  //       errors: [
-  //         {
-  //           error_source: "shipengine",
-  //           error_type: "system",
-  //           error_code: "rate_limit_exceeded",
-  //           message:
-  //             "You have exceeded the rate limit. Please see https://www.shipengine.com/docs/rate-limits",
-  //         },
-  //       ],
-  //     })
-  //     .post("/v1/addresses/validate")
-  //     .reply(200, [
-  //       {
-  //         status: "verified",
-  //         original_address: {
-  //           name: "John Smith",
-  //           phone: null,
-  //           company_name: "ShipStation",
-  //           address_line1: "3800 N Lamar Blvd",
-  //           address_line2: "#220",
-  //           address_line3: null,
-  //           city_locality: "Austin",
-  //           state_province: "TX",
-  //           postal_code: "78756",
-  //           country_code: "US",
-  //           address_residential_indicator: "no",
-  //         },
-  //         matched_address: {
-  //           name: "JOHN SMITH",
-  //           phone: null,
-  //           company_name: "SHIPSTATION",
-  //           address_line1: "3800 N LAMAR BLVD STE 220",
-  //           address_line2: "",
-  //           address_line3: null,
-  //           city_locality: "AUSTIN",
-  //           state_province: "TX",
-  //           postal_code: "78756-0003",
-  //           country_code: "US",
-  //           address_residential_indicator: "no",
-  //         },
-  //         messages: [],
-  //       },
-  //     ]);
+  it("Retries when it encounters a 429 error", async () => {
+    fetchMock.postOnce("https://api.shipengine.com/v1/addresses/validate", {
+      status: 429,
+      body: {
+        request_id: "7b80b28f-80d2-4175-ad99-7c459980539f",
+        errors: [
+          {
+            error_source: "shipengine",
+            error_type: "system",
+            error_code: "rate_limit_exceeded",
+            message:
+              "You have exceeded the rate limit. Please see https://www.shipengine.com/docs/rate-limits",
+          },
+        ],
+      },
+    });
 
-  //   const shipengine = new ShipEngine({ apiKey, retries: 1 });
+    fetchMock.postOnce(
+      "https://api.shipengine.com/v1/addresses/validate",
+      [
+        {
+          status: "verified",
+          original_address: {
+            name: "John Smith",
+            phone: null,
+            company_name: "ShipStation",
+            address_line1: "3800 N Lamar Blvd",
+            address_line2: "#220",
+            address_line3: null,
+            city_locality: "Austin",
+            state_province: "TX",
+            postal_code: "78756",
+            country_code: "US",
+            address_residential_indicator: "no",
+          },
+          matched_address: {
+            name: "JOHN SMITH",
+            phone: null,
+            company_name: "SHIPSTATION",
+            address_line1: "3800 N LAMAR BLVD STE 220",
+            address_line2: "",
+            address_line3: null,
+            city_locality: "AUSTIN",
+            state_province: "TX",
+            postal_code: "78756-0003",
+            country_code: "US",
+            address_residential_indicator: "no",
+          },
+          messages: [],
+        },
+      ],
+      { overwriteRoutes: false }
+    );
 
-  //   const addressToValidate = {
-  //     name: "John Smith",
-  //     companyName: "ShipStation",
-  //     addressLine1: "3800 N Lamar Blvd",
-  //     addressLine2: "#220",
-  //     cityLocality: "Austin",
-  //     stateProvince: "TX",
-  //     postalCode: "78756",
-  //     countryCode: "US",
-  //     addressResidentialIndicator: "no",
-  //   };
+    const shipengine = new ShipEngine({ apiKey, retries: 1 });
 
-  //   const result = await shipengine.validateAddresses(addressToValidate);
+    const addressToValidate = [
+      {
+        name: "John Smith",
+        companyName: "ShipStation",
+        addressLine1: "3800 N Lamar Blvd",
+        addressLine2: "#220",
+        cityLocality: "Austin",
+        stateProvince: "TX",
+        postalCode: "78756",
+        countryCode: "US",
+        addressResidentialIndicator: "no",
+      },
+    ];
 
-  //   expect(result).to.deep.equal({
-  //     status: "verified",
-  //     originalAddress: {
-  //       name: "John Smith",
-  //       companyName: "ShipStation",
-  //       addressLine1: "3800 N Lamar Blvd",
-  //       addressLine2: "#220",
-  //       addressLine3: "",
-  //       cityLocality: "Austin",
-  //       stateProvince: "TX",
-  //       postalCode: "78756",
-  //       countryCode: "US",
-  //       addressResidentialIndicator: "no",
-  //     },
-  //     normalizedAddress: {
-  //       name: "JOHN SMITH",
-  //       companyName: "SHIPSTATION",
-  //       addressLine1: "3800 N LAMAR BLVD STE 220",
-  //       addressLine2: "",
-  //       addressLine3: "",
-  //       cityLocality: "AUSTIN",
-  //       stateProvince: "TX",
-  //       postalCode: "78756-0003",
-  //       countryCode: "US",
-  //       addressResidentialIndicator: "no",
-  //     },
-  //     messages: [],
-  //   });
-  // });
+    const result = await shipengine.validateAddresses(addressToValidate);
+
+    expect(result).to.deep.equal([
+      {
+        status: "verified",
+        originalAddress: {
+          name: "John Smith",
+          companyName: "ShipStation",
+          addressLine1: "3800 N Lamar Blvd",
+          addressLine2: "#220",
+          addressLine3: "",
+          cityLocality: "Austin",
+          stateProvince: "TX",
+          postalCode: "78756",
+          countryCode: "US",
+          addressResidentialIndicator: "no",
+        },
+        normalizedAddress: {
+          name: "JOHN SMITH",
+          companyName: "SHIPSTATION",
+          addressLine1: "3800 N LAMAR BLVD STE 220",
+          addressLine2: "",
+          addressLine3: "",
+          cityLocality: "AUSTIN",
+          stateProvince: "TX",
+          postalCode: "78756-0003",
+          countryCode: "US",
+          addressResidentialIndicator: "no",
+        },
+        messages: [],
+      },
+    ]);
+  });
 });
