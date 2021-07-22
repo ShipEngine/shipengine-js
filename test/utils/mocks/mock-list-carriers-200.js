@@ -1,4 +1,4 @@
-const fetchMock = require("fetch-mock");
+const fetchMock = require("../fetch-mock");
 
 function mockListCarries200() {
   fetchMock.get("https://api.shipengine.com/v1/carriers", {

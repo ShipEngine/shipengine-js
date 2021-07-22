@@ -2,7 +2,7 @@ const { expect } = require("chai");
 const { ShipEngine } = require("../../");
 const { apiKey } = require("../utils/constants");
 const errors = require("../utils/errors");
-const fetchMock = require("fetch-mock");
+const fetchMock = require("../utils/fetch-mock");
 
 describe("validateAddress()", () => {
   afterEach(() => {
