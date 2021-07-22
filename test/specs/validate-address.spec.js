@@ -2,44 +2,46 @@ const { expect } = require("chai");
 const { ShipEngine } = require("../../");
 const { apiKey } = require("../utils/constants");
 const errors = require("../utils/errors");
-const nock = require("nock");
+const fetchMock = require("fetch-mock");
 
 describe("validateAddress()", () => {
+  afterEach(() => {
+    fetchMock.reset();
+  });
+
   it("Validates a residential address", async () => {
-    nock("https://api.shipengine.com")
-      .post("/v1/addresses/validate")
-      .reply(200, [
-        {
-          status: "verified",
-          original_address: {
-            name: "John Smith",
-            phone: null,
-            company_name: null,
-            address_line1: "3910 Bailey Lane",
-            address_line2: null,
-            address_line3: null,
-            city_locality: "Austin",
-            state_province: "TX",
-            postal_code: "78756",
-            country_code: "US",
-            address_residential_indicator: "yes",
-          },
-          matched_address: {
-            name: "JOHN SMITH",
-            phone: null,
-            company_name: null,
-            address_line1: "3910 BAILEY LN",
-            address_line2: "",
-            address_line3: null,
-            city_locality: "AUSTIN",
-            state_province: "TX",
-            postal_code: "78756-3924",
-            country_code: "US",
-            address_residential_indicator: "yes",
-          },
-          messages: [],
+    fetchMock.post("https://api.shipengine.com/v1/addresses/validate", [
+      {
+        status: "verified",
+        original_address: {
+          name: "John Smith",
+          phone: null,
+          company_name: null,
+          address_line1: "3910 Bailey Lane",
+          address_line2: null,
+          address_line3: null,
+          city_locality: "Austin",
+          state_province: "TX",
+          postal_code: "78756",
+          country_code: "US",
+          address_residential_indicator: "yes",
         },
-      ]);
+        matched_address: {
+          name: "JOHN SMITH",
+          phone: null,
+          company_name: null,
+          address_line1: "3910 BAILEY LN",
+          address_line2: "",
+          address_line3: null,
+          city_locality: "AUSTIN",
+          state_province: "TX",
+          postal_code: "78756-3924",
+          country_code: "US",
+          address_residential_indicator: "yes",
+        },
+        messages: [],
+      },
+    ]);
 
     const shipengine = new ShipEngine({ apiKey });
 
@@ -96,40 +98,38 @@ describe("validateAddress()", () => {
   });
 
   it("Validates a commercial address", async () => {
-    nock("https://api.shipengine.com")
-      .post("/v1/addresses/validate")
-      .reply(200, [
-        {
-          status: "verified",
-          original_address: {
-            name: "John Smith",
-            phone: null,
-            company_name: "ShipStation",
-            address_line1: "3800 N Lamar Blvd",
-            address_line2: "#220",
-            address_line3: null,
-            city_locality: "Austin",
-            state_province: "TX",
-            postal_code: "78756",
-            country_code: "US",
-            address_residential_indicator: "no",
-          },
-          matched_address: {
-            name: "JOHN SMITH",
-            phone: null,
-            company_name: "SHIPSTATION",
-            address_line1: "3800 N LAMAR BLVD STE 220",
-            address_line2: "",
-            address_line3: null,
-            city_locality: "AUSTIN",
-            state_province: "TX",
-            postal_code: "78756-0003",
-            country_code: "US",
-            address_residential_indicator: "no",
-          },
-          messages: [],
+    fetchMock.post("https://api.shipengine.com/v1/addresses/validate", [
+      {
+        status: "verified",
+        original_address: {
+          name: "John Smith",
+          phone: null,
+          company_name: "ShipStation",
+          address_line1: "3800 N Lamar Blvd",
+          address_line2: "#220",
+          address_line3: null,
+          city_locality: "Austin",
+          state_province: "TX",
+          postal_code: "78756",
+          country_code: "US",
+          address_residential_indicator: "no",
         },
-      ]);
+        matched_address: {
+          name: "JOHN SMITH",
+          phone: null,
+          company_name: "SHIPSTATION",
+          address_line1: "3800 N LAMAR BLVD STE 220",
+          address_line2: "",
+          address_line3: null,
+          city_locality: "AUSTIN",
+          state_province: "TX",
+          postal_code: "78756-0003",
+          country_code: "US",
+          address_residential_indicator: "no",
+        },
+        messages: [],
+      },
+    ]);
 
     const shipengine = new ShipEngine({ apiKey });
 
@@ -188,53 +188,51 @@ describe("validateAddress()", () => {
   });
 
   it("Validates an address with messages", async () => {
-    nock("https://api.shipengine.com")
-      .post("/v1/addresses/validate")
-      .reply(200, [
-        {
-          status: "error",
-          original_address: {
-            name: "John Smith",
-            phone: null,
-            company_name: null,
-            address_line1: "Winchester Blvd",
-            address_line2: null,
-            address_line3: null,
-            city_locality: "San Jose",
-            state_province: "CA",
-            postal_code: "78756",
-            country_code: "US",
-            address_residential_indicator: "unknown",
-          },
-          matched_address: {
-            name: "JOHN SMITH",
-            phone: null,
-            company_name: null,
-            address_line1: "WINCHESTER BLVD",
-            address_line2: "",
-            address_line3: null,
-            city_locality: "SAN JOSE",
-            state_province: "CA",
-            postal_code: "95128-2092",
-            country_code: "US",
-            address_residential_indicator: "unknown",
-          },
-          messages: [
-            {
-              code: "a1004",
-              message: "Address not found",
-              type: "warning",
-              detail_code: null,
-            },
-            {
-              code: "a1004",
-              message: "Insufficient or Incorrect Address Data",
-              type: "warning",
-              detail_code: null,
-            },
-          ],
+    fetchMock.post("https://api.shipengine.com/v1/addresses/validate", [
+      {
+        status: "error",
+        original_address: {
+          name: "John Smith",
+          phone: null,
+          company_name: null,
+          address_line1: "Winchester Blvd",
+          address_line2: null,
+          address_line3: null,
+          city_locality: "San Jose",
+          state_province: "CA",
+          postal_code: "78756",
+          country_code: "US",
+          address_residential_indicator: "unknown",
         },
-      ]);
+        matched_address: {
+          name: "JOHN SMITH",
+          phone: null,
+          company_name: null,
+          address_line1: "WINCHESTER BLVD",
+          address_line2: "",
+          address_line3: null,
+          city_locality: "SAN JOSE",
+          state_province: "CA",
+          postal_code: "95128-2092",
+          country_code: "US",
+          address_residential_indicator: "unknown",
+        },
+        messages: [
+          {
+            code: "a1004",
+            message: "Address not found",
+            type: "warning",
+            detail_code: null,
+          },
+          {
+            code: "a1004",
+            message: "Insufficient or Incorrect Address Data",
+            type: "warning",
+            detail_code: null,
+          },
+        ],
+      },
+    ]);
 
     const shipengine = new ShipEngine({ apiKey });
 
@@ -492,10 +490,9 @@ describe("validateAddress()", () => {
   });
 
   it("Throws an error when the request times out", async () => {
-    nock("https://api.shipengine.com")
-      .post("/v1/addresses/validate")
-      .delayConnection(600)
-      .reply(200, [
+    fetchMock.post(
+      "https://api.shipengine.com/v1/addresses/validate",
+      [
         {
           status: "verified",
           original_address: {
@@ -526,7 +523,11 @@ describe("validateAddress()", () => {
           },
           messages: [],
         },
-      ]);
+      ],
+      {
+        delay: 1000,
+      }
+    );
 
     const shipengine = new ShipEngine({ apiKey, timeout: 500, retries: 0 });
 
@@ -556,9 +557,9 @@ describe("validateAddress()", () => {
   });
 
   it("Retries when it encounters a 429 error", async () => {
-    nock("https://api.shipengine.com")
-      .post("/v1/addresses/validate")
-      .reply(429, {
+    fetchMock.postOnce("https://api.shipengine.com/v1/addresses/validate", {
+      status: 429,
+      body: {
         request_id: "7b80b28f-80d2-4175-ad99-7c459980539f",
         errors: [
           {
@@ -569,9 +570,12 @@ describe("validateAddress()", () => {
               "You have exceeded the rate limit. Please see https://www.shipengine.com/docs/rate-limits",
           },
         ],
-      })
-      .post("/v1/addresses/validate")
-      .reply(200, [
+      },
+    });
+
+    fetchMock.postOnce(
+      "https://api.shipengine.com/v1/addresses/validate",
+      [
         {
           status: "verified",
           original_address: {
@@ -602,7 +606,9 @@ describe("validateAddress()", () => {
           },
           messages: [],
         },
-      ]);
+      ],
+      { overwriteRoutes: false }
+    );
 
     const shipengine = new ShipEngine({ apiKey, retries: 1 });
 

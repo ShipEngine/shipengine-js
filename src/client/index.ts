@@ -1,4 +1,4 @@
-import { AbortController, fetch, getUserAgentString } from "../isomorphic.node";
+import { AbortController, getUserAgentString } from "../isomorphic.node";
 import { ErrorCode, ErrorSource, ErrorType } from "../enums";
 import { NormalizedConfig } from "../config";
 import { ShipEngineError, RateLimitExceededError } from "../errors";
