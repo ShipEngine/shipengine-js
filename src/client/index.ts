@@ -104,16 +104,14 @@ async function sendRequest<TParams, TResult>(
     );
   }
 
-  // TODO
-  // if (response.status === 400) {
-  //   throw new ShipEngineError(
-  //     responseBody.request_id,,
-  //     response.error.data.source,
-  //     response.error.data.type,
-  //     response.error.data.code,
-  //     response.error.message
-  //   );
-  // }
+  if (response.status === 400) {
+    throw new ShipEngineError(
+      ErrorType.Validation,
+      ErrorCode.InvalidAddress,
+      ErrorSource.ShipEngine,
+      "TODO"
+    );
+  }
 
   return responseBody;
 }

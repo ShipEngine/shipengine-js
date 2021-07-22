@@ -5,7 +5,7 @@ import * as ValidateAddressesTypes from "./types/public";
 import { Request, Response } from "./types/private";
 import { formatParams } from "./format-params";
 import { formatResponse } from "./format-response";
-// import { validateParams } from "./validate-params";
+import { validateParams } from "./validate-params";
 
 export * as ValidateAddressesTypes from "./types/public";
 
@@ -18,6 +18,8 @@ export async function validateAddresses(
   params: ValidateAddressesTypes.Params,
   config: NormalizedConfig
 ): Promise<ValidateAddressesTypes.Response> {
+  validateParams(params);
+
   const formattedParams = formatParams(params);
 
   const response = await post<
