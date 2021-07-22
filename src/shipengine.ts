@@ -1,9 +1,8 @@
 import {
-  validateAddress,
-  ValidateAddressParams,
-  ValidateAddressResult,
-} from "./validate-address";
-import { listCarrierAccounts } from "./list-carrier-accounts";
+  validateAddresses,
+  ValidateAddressesTypes,
+} from "./validate-addresses";
+// import { listCarrierAccounts } from "./list-carrier-accounts";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
 
 /**
@@ -46,26 +45,26 @@ export class ShipEngine {
    *
    * @param [config] - Optional configuration overrides for this method call.
    */
-  public async validateAddress(
-    address: ValidateAddressParams,
+  public async validateAddresses(
+    params: ValidateAddressesTypes.Params,
     config?: ShipEngineConfig
-  ): Promise<ValidateAddressResult> {
+  ): Promise<ValidateAddressesTypes.Response> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
-    return validateAddress(address, mergedConfig);
+    return validateAddresses(params, mergedConfig);
   }
 
-  /**
-   * Retrieves the carrier accounts that have been connect to your ShipEngine account
-   * using the ShipEngine dashboard.
-   *
-   * @param [config] - Optional configuration overrides for this method call.
-   */
-  public async listCarrierAccounts(
-    config?: ShipEngineConfig
-  ): Promise<unknown> {
-    const mergedConfig = NormalizedConfig.merge(this.config, config);
-    return listCarrierAccounts(mergedConfig);
-  }
+  // /**
+  //  * Retrieves the carrier accounts that have been connect to your ShipEngine account
+  //  * using the ShipEngine dashboard.
+  //  *
+  //  * @param [config] - Optional configuration overrides for this method call.
+  //  */
+  // public async listCarrierAccounts(
+  //   config?: ShipEngineConfig
+  // ): Promise<unknown> {
+  //   const mergedConfig = NormalizedConfig.merge(this.config, config);
+  //   return listCarrierAccounts(mergedConfig);
+  // }
 
   // /**
   //  * Tracks a package.
