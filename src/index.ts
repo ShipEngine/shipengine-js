@@ -1,6 +1,6 @@
 import { ShipEngine } from "./shipengine";
 
-export * from "./validate-address/types/public";
+export { ValidateAddressesTypes } from "./validate-addresses";
 export { ShipEngineConfig } from "./config";
 export * from "./enums";
 export * from "./errors";
