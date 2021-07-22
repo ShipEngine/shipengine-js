@@ -1,8 +1,8 @@
 import {
-  validateAddress,
+  validateAddresses,
   ValidateAddressParams,
   ValidateAddressResult,
-} from "./validate-address";
+} from "./validate-addresses";
 import { listCarrierAccounts } from "./list-carrier-accounts";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
 
@@ -46,12 +46,12 @@ export class ShipEngine {
    *
    * @param [config] - Optional configuration overrides for this method call.
    */
-  public async validateAddress(
+  public async validateAddresses(
     address: ValidateAddressParams,
     config?: ShipEngineConfig
   ): Promise<ValidateAddressResult> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
-    return validateAddress(address, mergedConfig);
+    return validateAddresses(address, mergedConfig);
   }
 
   /**

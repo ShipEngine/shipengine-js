@@ -14,7 +14,7 @@ export * from "./types/public";
  *
  * https://www.shipengine.com/docs/addresses/validation/
  */
-export async function validateAddress(
+export async function validateAddresses(
   params: ValidateAddressParams,
   config: NormalizedConfig
 ): Promise<ValidateAddressResult> {
