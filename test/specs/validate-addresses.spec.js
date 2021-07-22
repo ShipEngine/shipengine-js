@@ -86,6 +86,8 @@ describe("validateAddresses()", () => {
 
     // There are no warning or error messages
     expect(result[0].messages).to.be.an("array").and.be.empty;
+
+    fetchMock.restore();
   });
 
   it("Validates a commercial address", async () => {
@@ -173,6 +175,8 @@ describe("validateAddresses()", () => {
 
     // There are no warning or error messages
     expect(result[0].messages).to.be.an("array").and.be.empty;
+
+    fetchMock.restore();
   });
 
   it("Validates an address with messages", async () => {
@@ -277,6 +281,8 @@ describe("validateAddresses()", () => {
 
     // There are no warning or error messages
     expect(result[0].messages).to.be.an("array").and.not.be.empty;
+
+    fetchMock.restore();
   });
 
   it("Throws an error if the params provided are not an array", async () => {
