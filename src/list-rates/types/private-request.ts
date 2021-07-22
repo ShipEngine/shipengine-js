@@ -5,8 +5,15 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type CreateLabelRequestBody = Label;
-export type Shipment = PartialShipment;
+export type CalculateRatesRequestBody = CalculateRatesRequestBody1 & CalculateRatesRequestBody2;
+export type CalculateRatesRequestBody1 = RateRequestOptions;
+export type SeId = string;
+export type Currency = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
+export type CalculateRatesRequestBody2 = ShipmentIdRequest | ShipmentRequest;
+export type AddressValidatingShipment = ValidateShipmentFields & PartialShipment;
+export type ValidateAddress = "no_validation" | "validate_only" | "validate_and_clean";
+export type SeId1 = string;
+export type ServiceCode = string;
 export type OrderSourceName =
   | "amazon_ca"
   | "amazon_us"
@@ -30,6 +37,7 @@ export type OrderSourceName =
   | "volusion";
 export type TaxableEntityType = "shipper" | "recipient";
 export type IdentifierType = "vat" | "eori" | "ssn" | "ein" | "tin" | "ioss" | "pan" | "voec";
+export type Date = string;
 export type Address = PartialAddress;
 export type PostalCode = string;
 export type CountryCode = string;
@@ -38,7 +46,7 @@ export type Address1 = PartialAddress1;
 export type PostalCode1 = string;
 export type CountryCode1 = string;
 export type AddressResidentialIndicator1 = "unknown" | "yes" | "no";
-export type SeId = string;
+export type SeId2 = string;
 export type Address2 = PartialAddress2;
 export type PostalCode2 = string;
 export type CountryCode2 = string;
@@ -52,14 +60,14 @@ export type DeliveryConfirmation =
   | "delivery_mailed";
 export type PackageContents = "merchandise" | "documents" | "gift" | "returned_goods" | "sample";
 export type NonDelivery = "return_to_sender" | "treat_as_abandoned";
-export type Currency = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
+export type Currency1 = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
 export type CountryCode3 = string;
 export type CountryCode4 = string;
 export type BillToParty = "recipient" | "third_party";
 export type WeightUnit = "pound" | "ounce" | "gram" | "kilogram";
 export type OriginType = "pickup" | "drop_off";
 export type CollectOnDeliveryPaymentType = "any" | "cash" | "cash_equivalent" | "none";
-export type Currency1 = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
+export type Currency2 = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
 export type OriginType1 = "pickup" | "drop_off";
 export type InsuranceProvider = "none" | "shipsurance" | "carrier" | "third_party";
 export type OrderSourceName1 =
@@ -83,37 +91,44 @@ export type OrderSourceName1 =
   | "walmart"
   | "woo_commerce"
   | "volusion";
-export type LabelChargeEvent = "carrier_default" | "on_creation" | "on_carrier_acceptance";
-export type SeId1 = string;
-export type ValidateAddress = "no_validation" | "validate_only" | "validate_and_clean";
-export type LabelDownloadType = "url" | "inline";
-export type LabelFormat = "pdf" | "png" | "zpl";
-export type DisplayScheme = "label" | "qr_code";
-export type LabelLayout = "4x6" | "letter";
-export type ImageId = string;
+export type PackageCode = string;
+export type WeightUnit1 = "pound" | "ounce" | "gram" | "kilogram";
+export type DimensionUnit = "inch" | "centimeter";
+export type Currency3 = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
 
-export interface Label {
-  shipment?: Shipment;
-  is_return_label?: boolean;
-  rma_number?: string;
-  charge_event?: LabelChargeEvent;
-  outbound_label_id?: SeId1;
-  test_label?: boolean;
+export interface RateRequestOptions {
+  rate_options?: RateRequestBody;
+  [k: string]: unknown;
+}
+export interface RateRequestBody {
+  carrier_ids: [SeId, ...SeId[]];
+  package_types?: string[];
+  service_codes?: string[];
+  calculate_tax_amount?: boolean;
+  preferred_currency?: Currency;
+}
+export interface ShipmentIdRequest {
+  [k: string]: unknown;
+}
+export interface ShipmentRequest {
+  shipment?: AddressValidatingShipment;
+  [k: string]: unknown;
+}
+export interface ValidateShipmentFields {
   validate_address?: ValidateAddress & string;
-  label_download_type?: LabelDownloadType & string;
-  label_format?: LabelFormat & string;
-  display_scheme?: DisplayScheme & string;
-  label_layout?: LabelLayout & string;
-  label_image_id?: ImageId;
+  [k: string]: unknown;
 }
 export interface PartialShipment {
+  carrier_id?: SeId1;
+  service_code?: ServiceCode;
   external_order_id?: string;
   items?: ShipmentItem[];
   tax_identifiers?: TaxIdentifier[];
   external_shipment_id?: string;
+  ship_date?: Date;
   ship_to?: Address;
   ship_from?: Address1;
-  warehouse_id?: SeId;
+  warehouse_id?: SeId2;
   return_to?: Address2;
   confirmation?: DeliveryConfirmation & string;
   customs?: InternationalShipmentOptions;
@@ -121,6 +136,7 @@ export interface PartialShipment {
   origin_type?: OriginType1;
   insurance_provider?: InsuranceProvider & string;
   order_source_code?: OrderSourceName1;
+  packages?: [Package, ...Package[]];
 }
 export interface ShipmentItem {
   name?: string;
@@ -193,7 +209,7 @@ export interface CustomsItem {
   sku_description?: string;
 }
 export interface MonetaryValue {
-  currency: Currency;
+  currency: Currency1;
   amount: number;
 }
 export interface AdvancedShipmentOptions {
@@ -226,7 +242,34 @@ export interface CollectOnDelivery {
   [k: string]: unknown;
 }
 export interface PaymentAmount {
-  currency?: Currency1;
+  currency?: Currency2;
   amount?: number;
   [k: string]: unknown;
+}
+export interface Package {
+  package_code?: PackageCode;
+  weight: Weight1;
+  dimensions?: Dimensions;
+  insured_value?: MonetaryValue1;
+  label_messages?: LabelMessages;
+  external_package_id?: string;
+}
+export interface Weight1 {
+  value: number;
+  unit: WeightUnit1;
+}
+export interface Dimensions {
+  unit: DimensionUnit & string;
+  length: number;
+  width: number;
+  height: number;
+}
+export interface MonetaryValue1 {
+  currency: Currency3;
+  amount: number;
+}
+export interface LabelMessages {
+  reference1: string;
+  reference2: string;
+  reference3: string;
 }

@@ -1,4 +1,4 @@
-import { AbortController, fetch, getUserAgentString } from "../isomorphic.node";
+import { AbortController, getUserAgentString } from "../isomorphic.node";
 import { ErrorCode, ErrorSource, ErrorType } from "../enums";
 import { NormalizedConfig } from "../config";
 import { ShipEngineError, RateLimitExceededError } from "../errors";
@@ -55,7 +55,7 @@ async function sendRequestWithRetry<TParams, TResult>(
         // The request was blocked due to exceeding the rate limit.
         // So wait the specified amount of time and then retry.
         await wait(error.retryAfter);
-      } else if (error.type === "aborted") {
+      } else if (error.name === "AbortError") {
         // The request timed out
         throw new ShipEngineError(
           ErrorType.System,
@@ -104,14 +104,16 @@ async function sendRequest<TParams, TResult>(
     );
   }
 
-  if (response.status === 400) {
-    throw new ShipEngineError(
-      ErrorType.Validation,
-      ErrorCode.InvalidAddress,
-      ErrorSource.ShipEngine,
-      "TODO"
-    );
-  }
+  // TODO
+  // if (response.status === 400) {
+  //   throw new ShipEngineError(
+  //     responseBody.request_id,,
+  //     response.error.data.source,
+  //     response.error.data.type,
+  //     response.error.data.code,
+  //     response.error.message
+  //   );
+  // }
 
   return responseBody;
 }

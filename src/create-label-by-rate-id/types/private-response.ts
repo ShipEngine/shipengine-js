@@ -5,7 +5,7 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type CreateLabelResponseBody = Label;
+export type CreateLabelFromRateResponseBody = Label;
 export type SeId = string;
 export type LabelStatus = "processing" | "completed" | "error" | "voided";
 export type SeId1 = string;

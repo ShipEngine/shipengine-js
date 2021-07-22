@@ -5,9 +5,6 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { version: sdkVersion } = require("../package.json");
 
-// In web browsers we use the native Fetch API
-export const fetch = window.fetch;
-
 // In web browsers we use the native AbortController API
 export const AbortController = window.AbortController;
 
