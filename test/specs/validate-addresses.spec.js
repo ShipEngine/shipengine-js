@@ -1,10 +1,10 @@
 const { expect } = require("chai");
-const { ShipEngine } = require("../../");
+const { ShipEngine } = require("../..");
 const { apiKey } = require("../utils/constants");
 const errors = require("../utils/errors");
 const nock = require("nock");
 
-describe("validateAddress()", () => {
+describe("validateAddresses()", () => {
   it("Validates a residential address", async () => {
     nock("https://api.shipengine.com")
       .post("/v1/addresses/validate")
@@ -53,7 +53,7 @@ describe("validateAddress()", () => {
       isResidential: true,
     };
 
-    const result = await shipengine.validateAddress(addressToValidate);
+    const result = await shipengine.validateAddresses(addressToValidate);
 
     expect(result).to.deep.equal({
       status: "verified",
@@ -145,7 +145,7 @@ describe("validateAddress()", () => {
       isResidential: false,
     };
 
-    const result = await shipengine.validateAddress(addressToValidate);
+    const result = await shipengine.validateAddresses(addressToValidate);
 
     expect(result).to.deep.equal({
       status: "verified",
@@ -247,7 +247,7 @@ describe("validateAddress()", () => {
       country: "US",
     };
 
-    const result = await shipengine.validateAddress(addressToValidate);
+    const result = await shipengine.validateAddresses(addressToValidate);
 
     expect(result).to.deep.equal({
       status: "error",
@@ -303,7 +303,7 @@ describe("validateAddress()", () => {
     };
 
     try {
-      await shipengine.validateAddress(addressToValidate);
+      await shipengine.validateAddresses(addressToValidate);
       errors.shouldHaveThrown();
     } catch (error) {
       errors.assertShipEngineError(error, {
@@ -330,7 +330,7 @@ describe("validateAddress()", () => {
     };
 
     try {
-      await shipengine.validateAddress(addressToValidate);
+      await shipengine.validateAddresses(addressToValidate);
       errors.shouldHaveThrown();
     } catch (error) {
       errors.assertShipEngineError(error, {
@@ -361,7 +361,7 @@ describe("validateAddress()", () => {
     };
 
     try {
-      await shipengine.validateAddress(addressToValidate);
+      await shipengine.validateAddresses(addressToValidate);
       errors.shouldHaveThrown();
     } catch (error) {
       errors.assertShipEngineError(error, {
@@ -390,7 +390,7 @@ describe("validateAddress()", () => {
     };
 
     try {
-      await shipengine.validateAddress(addressToValidate);
+      await shipengine.validateAddresses(addressToValidate);
       errors.shouldHaveThrown();
     } catch (error) {
       errors.assertShipEngineError(error, {
@@ -419,7 +419,7 @@ describe("validateAddress()", () => {
     };
 
     try {
-      await shipengine.validateAddress(addressToValidate);
+      await shipengine.validateAddresses(addressToValidate);
       errors.shouldHaveThrown();
     } catch (error) {
       errors.assertShipEngineError(error, {
@@ -447,7 +447,7 @@ describe("validateAddress()", () => {
       isResidential: false,
     };
     try {
-      await shipengine.validateAddress(addressToValidate);
+      await shipengine.validateAddresses(addressToValidate);
       errors.shouldHaveThrown();
     } catch (error) {
       errors.assertShipEngineError(error, {
@@ -477,7 +477,7 @@ describe("validateAddress()", () => {
     };
 
     try {
-      await shipengine.validateAddress(addressToValidate);
+      await shipengine.validateAddresses(addressToValidate);
       errors.shouldHaveThrown();
     } catch (error) {
       errors.assertShipEngineError(error, {
@@ -541,7 +541,7 @@ describe("validateAddress()", () => {
     };
 
     try {
-      await shipengine.validateAddress(addressToValidate);
+      await shipengine.validateAddresses(addressToValidate);
       errors.shouldHaveThrown();
     } catch (error) {
       errors.assertShipEngineError(error, {
@@ -618,7 +618,7 @@ describe("validateAddress()", () => {
       isResidential: false,
     };
 
-    const result = await shipengine.validateAddress(addressToValidate);
+    const result = await shipengine.validateAddresses(addressToValidate);
 
     expect(result).to.deep.equal({
       status: "verified",

@@ -1,13 +1,13 @@
 // import { EventEmitter } from "../isomorphic.node";
 import { NormalizedConfig } from "../config";
 import { post } from "../client";
-import { ValidateAddressParams, ValidateAddressResult } from "./types/public";
+import * as ValidateAddressesTypes from "./types/public";
 import { Request, Response } from "./types/private";
 import { formatParams } from "./format-params";
-import { formatResult } from "./format-result";
-import { validateParams } from "./validate-params";
+import { formatResponse } from "./format-response";
+// import { validateParams } from "./validate-params";
 
-export * from "./types/public";
+export * as ValidateAddressesTypes from "./types/public";
 
 /**
  * Validates an address and returns the full validation results.
@@ -15,11 +15,9 @@ export * from "./types/public";
  * https://www.shipengine.com/docs/addresses/validation/
  */
 export async function validateAddresses(
-  params: ValidateAddressParams,
+  params: ValidateAddressesTypes.Params,
   config: NormalizedConfig
-): Promise<ValidateAddressResult> {
-  validateParams(params);
-
+): Promise<ValidateAddressesTypes.Response> {
   const formattedParams = formatParams(params);
 
   const response = await post<
@@ -27,5 +25,5 @@ export async function validateAddresses(
     Response.ValidateAddressResponseBody
   >("/v1/addresses/validate", formattedParams, config);
 
-  return formatResult(response);
+  return formatResponse(response);
 }

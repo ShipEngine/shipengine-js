@@ -1,7 +1,6 @@
 import {
   validateAddresses,
-  ValidateAddressParams,
-  ValidateAddressResult,
+  ValidateAddressesTypes,
 } from "./validate-addresses";
 // import { listCarrierAccounts } from "./list-carrier-accounts";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
@@ -9,6 +8,8 @@ import { NormalizedConfig, ShipEngineConfig } from "./config";
 /**
  * Exposes the functionality of the ShipEngine API.
  */
+export default ShipEngine;
+
 export class ShipEngine {
   /**
    * Global configuration for the ShipEngine API client, such as timeouts,
@@ -47,9 +48,9 @@ export class ShipEngine {
    * @param [config] - Optional configuration overrides for this method call.
    */
   public async validateAddresses(
-    address: ValidateAddressParams,
+    address: ValidateAddressesTypes.Params,
     config?: ShipEngineConfig
-  ): Promise<ValidateAddressResult> {
+  ): Promise<ValidateAddressesTypes.Response> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return validateAddresses(address, mergedConfig);
   }

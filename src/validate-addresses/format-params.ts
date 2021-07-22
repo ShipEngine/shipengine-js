@@ -1,39 +1,19 @@
 import { Request } from "./types/private";
-import { ValidateAddressParams } from "./types/public";
+import { ValidateAddressesTypes } from ".";
 
 export function formatParams(
-  params: ValidateAddressParams
+  params: ValidateAddressesTypes.Params
 ): Request.ValidateAddressRequestBody {
-  return [
-    {
-      name: params.name,
-      company_name: params.company,
-      address_line1: params.addressLineOne,
-      address_line2: params.addressLineTwo,
-      address_line3: params.addressLineThree,
-      city_locality: params.cityLocality,
-      state_province: params.stateProvince,
-      postal_code: params.postalCode,
-      country_code: params.country,
-      address_residential_indicator: mapResidentialIndicator(
-        params.isResidential
-      ),
-    },
-  ];
-}
-
-function mapResidentialIndicator(
-  indicator: boolean | undefined | null
-): "unknown" | "yes" | "no" {
-  switch (indicator) {
-    case true:
-      return "yes";
-    case false:
-      return "no";
-    case undefined:
-    case null:
-      return "unknown";
-    default:
-      return "unknown";
-  }
+  return params.map((addressInput) => ({
+    name: addressInput.name,
+    company_name: addressInput.companyName,
+    address_line1: addressInput.addressLine1,
+    address_line2: addressInput.addressLine2,
+    address_line3: addressInput.addressLine3,
+    city_locality: addressInput.cityLocality,
+    state_province: addressInput.stateProvince,
+    postal_code: addressInput.postalCode,
+    country_code: addressInput.countryCode,
+    address_residential_indicator: addressInput.addressResidentialIndicator,
+  }));
 }
