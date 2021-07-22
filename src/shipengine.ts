@@ -8,8 +8,6 @@ import { NormalizedConfig, ShipEngineConfig } from "./config";
 /**
  * Exposes the functionality of the ShipEngine API.
  */
-export default ShipEngine;
-
 export class ShipEngine {
   /**
    * Global configuration for the ShipEngine API client, such as timeouts,

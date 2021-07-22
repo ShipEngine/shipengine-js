@@ -1,6 +1,6 @@
 "use strict";
 
-const { ShipEngine } = require("../../");
+const { ShipEngine } = require("../..");
 const { expect } = require("chai");
 const errors = require("../utils/errors");
 const { apiKey } = require("../utils/constants");
