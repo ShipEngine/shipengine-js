@@ -15,7 +15,10 @@ export type Currency = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
 export type Currency1 = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
 export type SeId2 = string;
 export type SeId3 = string;
-export type LabelChargeEvent = "carrier_default" | "on_creation" | "on_carrier_acceptance";
+export type LabelChargeEvent =
+  | "carrier_default"
+  | "on_creation"
+  | "on_carrier_acceptance";
 export type ServiceCode = string;
 export type PackageCode = string;
 export type DateTime1 = string;
