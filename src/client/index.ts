@@ -55,7 +55,7 @@ async function sendRequestWithRetry<TParams, TResult>(
         // The request was blocked due to exceeding the rate limit.
         // So wait the specified amount of time and then retry.
         await wait(error.retryAfter);
-      } else if (error.type === "aborted") {
+      } else if (error.name === "AbortError") {
         // The request timed out
         throw new ShipEngineError(
           ErrorType.System,
