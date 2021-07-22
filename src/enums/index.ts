@@ -7,4 +7,3 @@ export * from "./weight-unit";
 export * from "./dimension-unit";
 export * from "./tracking-status";
 export * from "./validation-message-type";
-export * from "./validation-message-code";

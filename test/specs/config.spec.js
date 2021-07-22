@@ -1,6 +1,6 @@
 "use strict";
 
-const { ShipEngine } = require("../../");
+const { ShipEngine } = require("../..");
 const { expect } = require("chai");
 const errors = require("../utils/errors");
 const { apiKey } = require("../utils/constants");
@@ -160,7 +160,7 @@ describe("Configuration", () => {
       const shipengine = new ShipEngine({ apiKey: "original API key" });
 
       try {
-        await shipengine.validateAddress(dummyAddress, "new API key");
+        await shipengine.validateAddresses(dummyAddress, "new API key");
         errors.shouldHaveThrown();
       } catch (error) {
         errors.assertInvalidFieldValueError(error, {
@@ -178,7 +178,7 @@ describe("Configuration", () => {
       const shipengine = new ShipEngine({ apiKey: "original API key" });
 
       try {
-        await shipengine.validateAddress(dummyAddress, { apiKey: "" });
+        await shipengine.validateAddresses(dummyAddress, { apiKey: "" });
         errors.shouldHaveThrown();
       } catch (error) {
         errors.assertShipEngineError(error, {
@@ -195,7 +195,9 @@ describe("Configuration", () => {
       const shipengine = new ShipEngine({ apiKey: "original API key" });
 
       try {
-        await shipengine.validateAddress(dummyAddress, { apiKey: "  \n\t  " });
+        await shipengine.validateAddresses(dummyAddress, {
+          apiKey: "  \n\t  ",
+        });
         errors.shouldHaveThrown();
       } catch (error) {
         errors.assertShipEngineError(error, {
@@ -212,7 +214,7 @@ describe("Configuration", () => {
       const shipengine = new ShipEngine({ apiKey: "original API key" });
 
       try {
-        await shipengine.validateAddress(dummyAddress, { apiKey: 42 });
+        await shipengine.validateAddresses(dummyAddress, { apiKey: 42 });
         errors.shouldHaveThrown();
       } catch (error) {
         errors.assertInvalidFieldValueError(error, {
@@ -230,7 +232,7 @@ describe("Configuration", () => {
       const shipengine = new ShipEngine({ apiKey: "original API key" });
 
       try {
-        await shipengine.validateAddress(dummyAddress, { timeout: 0 });
+        await shipengine.validateAddresses(dummyAddress, { timeout: 0 });
         errors.shouldHaveThrown();
       } catch (error) {
         errors.assertInvalidFieldValueError(error, {
@@ -248,7 +250,7 @@ describe("Configuration", () => {
       const shipengine = new ShipEngine({ apiKey: "original API key" });
 
       try {
-        await shipengine.validateAddress(dummyAddress, { timeout: -42 });
+        await shipengine.validateAddresses(dummyAddress, { timeout: -42 });
         errors.shouldHaveThrown();
       } catch (error) {
         errors.assertInvalidFieldValueError(error, {

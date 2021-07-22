@@ -15,7 +15,6 @@
     "shipping-rates",
     "shipping-labels",
     "address-validation",
-    "isomorphic",
     "browser"
   ],
   "author": {
@@ -43,23 +42,24 @@
     "node": ">=12"
   },
   "scripts": {
-    "prepare": "husky install",
+    "build": "npm run gen:types && npm run build:cjs && npm run build:esm",
+    "build:cjs": "tsc",
+    "build:esm": "tsc --module esnext --outDir esm",
+    "bump": "bump --tag --push --all",
     "clean": "shx rm -rf .nyc_output coverage cjs esm",
+    "coverage": "npm run coverage:node && npm run coverage:browser",
+    "coverage:browser": "npm run test:browser -- --coverage",
+    "coverage:node": "nyc node_modules/mocha/bin/mocha",
+    "gen:types": "node scripts/gen-types.js && npm run lint:fix",
     "lint": "eslint src test",
     "lint:fix": "prettier --write src test && eslint --fix src test",
-    "build": "npm run build:cjs && npm run build:esm",
-    "build:esm": "tsc --module esnext --outDir esm",
-    "build:cjs": "tsc",
-    "watch": "tsc --watch",
+    "prepare": "husky install",
+    "release": "npm run upgrade && npm run clean && npm run build && npm test && npm run bump",
     "test": "npm run test:node && npm run test:browser && npm run lint",
-    "test:node": "mocha",
     "test:browser": "karma start --single-run",
-    "coverage": "npm run coverage:node && npm run coverage:browser",
-    "coverage:node": "nyc node_modules/mocha/bin/mocha",
-    "coverage:browser": "npm run test:browser -- --coverage",
+    "test:node": "mocha",
     "upgrade": "npm-check -u && npm audit fix",
-    "bump": "bump --tag --push --all",
-    "release": "npm run upgrade && npm run clean && npm run build && npm test && npm run bump"
+    "watch": "tsc --watch"
   },
   "husky": {
     "hooks": {
@@ -84,6 +84,7 @@
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
     "husky": "^6.0.0",
+    "json-schema-to-typescript": "^10.1.4",
     "karma": "^6.3.2",
     "karma-chrome-launcher": "^3.1.0",
     "karma-cli": "^2.0.0",
@@ -95,9 +96,11 @@
     "karma-verbose-reporter": "^0.0.6",
     "karma-webpack": "^4.0.2",
     "mocha": "^8.3.2",
+    "nock": "^13.1.1",
     "npm-check": "^5.9.2",
     "nyc": "^15.1.0",
     "prettier": "^2.2.1",
+    "shipengine-json-schema": "^1.4.5",
     "shx": "^0.3.3",
     "sinon": "^10.0.0",
     "source-map-support": "^0.5.19",

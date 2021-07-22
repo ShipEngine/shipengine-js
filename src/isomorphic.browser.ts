@@ -11,10 +11,6 @@ export const fetch = window.fetch;
 // In web browsers we use the native AbortController API
 export const AbortController = window.AbortController;
 
-// Web browsers don't support the EventEmitter API, so use tiny-eventemitter instead
-import EventEmitter from "tp-events";
-export { EventEmitter };
-
 /**
  * Returns the User-Agent string for the browser SDK
  */
