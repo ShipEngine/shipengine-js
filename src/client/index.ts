@@ -105,7 +105,7 @@ async function sendRequest<TParams, TResult>(
     );
   }
 
-  if (response.status === 400) handle400Errors(responseBody);
+  // if (response.status === 400) handle400Errors(responseBody);
 
   return responseBody;
 }

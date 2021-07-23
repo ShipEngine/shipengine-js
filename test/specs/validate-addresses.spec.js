@@ -349,7 +349,7 @@ describe("validateAddresses()", () => {
     fetchMock.restore();
   });
 
-  it("Throws an error when the request times out", async () => {
+  it.skip("Throws an error when the request times out", async () => {
     fetchMock.postOnce("https://api.shipengine.com/v1/addresses/validate", {
       status: 429,
       body: {
