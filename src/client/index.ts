@@ -64,14 +64,8 @@ async function sendRequestWithRetry<TParams, TResult>(
           `The ShipEngine ${endpoint} API timed out.`
         );
       } else {
-        // Something unexpected happened, like a network error.
-        // No response was received from the server
-        throw new ShipEngineError(
-          ErrorType.System,
-          ErrorCode.Unspecified,
-          `An unknown error occurred while calling the ShipEngine ${endpoint} API:\n` +
-            (error as Error).message
-        );
+        // Re-throw errors that were thrown from within sendRequest
+        throw error;
       }
     }
   }
@@ -105,7 +99,7 @@ async function sendRequest<TParams, TResult>(
     );
   }
 
-  // if (response.status === 400) handle400Errors(responseBody);
+  if (response.status === 400) handle400Errors(responseBody);
 
   return responseBody;
 }

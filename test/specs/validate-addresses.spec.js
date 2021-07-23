@@ -314,7 +314,7 @@ describe("validateAddresses()", () => {
     }
   });
 
-  it.skip("Throws an error when given an empty array", async () => {
+  it("Throws an error when given an empty array", async () => {
     fetchMock.postOnce("https://api.shipengine.com/v1/addresses/validate", {
       status: 400,
       body: {
@@ -336,20 +336,19 @@ describe("validateAddresses()", () => {
       await shipengine.validateAddresses([]);
       errors.shouldHaveThrown();
     } catch (error) {
-      console.log(error);
       errors.assertShipEngineError(error, {
         name: "ShipEngineError",
         source: "shipengine",
         type: "validation",
         code: "request_body_required",
-        message: "The ShipEngine /v1/addresses/validate API timed out.",
+        message: "Request body cannot be empty.",
       });
     }
 
     fetchMock.restore();
   });
 
-  it.skip("Throws an error when the request times out", async () => {
+  it("Throws an error when the rate limit is exceeded", async () => {
     fetchMock.postOnce("https://api.shipengine.com/v1/addresses/validate", {
       status: 429,
       body: {
@@ -365,31 +364,36 @@ describe("validateAddresses()", () => {
         ],
       },
     });
+
     const shipengine = new ShipEngine({ apiKey, timeout: 500, retries: 0 });
 
-    const addressToValidate = {
-      name: "John Smith",
-      addressLine1: "3910 Bailey Lane",
-      cityLocality: "Austin",
-      stateProvince: "TX",
-      postalCode: "78756",
-      countryCode: "US",
-      isResidential: true,
-    };
+    const addressToValidate = [
+      {
+        name: "John Smith",
+        addressLine1: "3910 Bailey Lane",
+        cityLocality: "Austin",
+        stateProvince: "TX",
+        postalCode: "78756",
+        countryCode: "US",
+        isResidential: true,
+      },
+    ];
 
     try {
       await shipengine.validateAddresses(addressToValidate);
       errors.shouldHaveThrown();
     } catch (error) {
       errors.assertShipEngineError(error, {
-        name: "ShipEngineError",
+        name: "RateLimitExceededError",
         source: "shipengine",
         type: "system",
-        code: "timeout",
-        message: "The ShipEngine /v1/addresses/validate API timed out.",
+        code: "rate_limit_exceeded",
+        message: "You have exceeded the rate limit.",
       });
       expect(error.requestId).to.be.undefined;
     }
+
+    fetchMock.restore();
   });
 
   it("Retries when it encounters a 429 error", async () => {
@@ -495,4 +499,7 @@ describe("validateAddresses()", () => {
       },
     ]);
   });
+
+  // TODO - not sure how to test this w/ fetchMock
+  // it("Throws an error when the request timesout", async () => {});
 });
