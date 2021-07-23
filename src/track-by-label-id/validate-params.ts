@@ -2,7 +2,7 @@ import { InvalidFieldValueError } from "../errors";
 import { TrackPackageByLabelIdTypes } from ".";
 
 /**
- * Performs client-side validation of the address params that's passed-in by the user.
+ * Performs client-side validation of the params passed in by the user.
  */
 export function validateParams(
   params: TrackPackageByLabelIdTypes.Params

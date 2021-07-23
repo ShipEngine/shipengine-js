@@ -1,4 +1,3 @@
-// import { EventEmitter } from "../isomorphic.node";
 import { NormalizedConfig } from "../config";
 import { get } from "../client";
 import * as TrackPackageByLabelIdTypes from "./types/public";
