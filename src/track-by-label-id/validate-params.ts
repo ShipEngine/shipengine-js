@@ -7,11 +7,11 @@ import { TrackPackageByLabelIDTypes } from ".";
 export function validateParams(
   params: TrackPackageByLabelIDTypes.Params
 ): void {
-  if (typeof params.labelID !== "string") {
+  if (typeof params.labelId !== "string") {
     throw new InvalidFieldValueError("Params", "must be a string.");
   }
 
-  if (!params.labelID.startsWith("se-")) {
+  if (!params.labelId.startsWith("se-")) {
     throw new InvalidFieldValueError("Params", "must be a valid label id.");
   }
 }

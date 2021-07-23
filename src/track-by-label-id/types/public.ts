@@ -3,15 +3,15 @@ import {
   TrackingStatusDescription,
 } from "../../enums/tracking-status";
 
-export type Params = { labelID: string };
+export type Params = { labelId: string };
 
-export type Response = TrackPackageByLabelIDResult;
+export type Response = TrackPackageByLabelIdResult;
 
 /**
  * The Tracking events associated with this label
  * @see https://www.shipengine.com/docs/tracking/track-by-label-id/
  */
-export interface TrackPackageByLabelIDResult {
+export interface TrackPackageByLabelIdResult {
   /**
    * A tracking number for a package. The format depends on the carrier.
    */

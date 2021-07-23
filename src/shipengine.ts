@@ -119,11 +119,4 @@ export class ShipEngine {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return trackPackageByLabelID(params, mergedConfig);
   }
-
-  // /**
-  //  * Clear the SDK Cache
-  //  */
-  // public clearCache(): void {
-  //   clearAccountCache();
-  // }
 }

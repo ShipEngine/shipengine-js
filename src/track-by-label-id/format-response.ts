@@ -9,12 +9,12 @@ import {
 export function formatResponse(
   response: Response.GetTrackingLogFromLabelResponseBody
 ): TrackPackageByLabelIDTypes.Response {
-  return formatTrackPackageByLabelIDResult(response);
+  return formatTrackPackageByLabelIdResult(response);
 }
 
-function formatTrackPackageByLabelIDResult(
+function formatTrackPackageByLabelIdResult(
   result: Response.GetTrackingLogFromLabelResponseBody
-): TrackPackageByLabelIDTypes.TrackPackageByLabelIDResult {
+): TrackPackageByLabelIDTypes.TrackPackageByLabelIdResult {
   return {
     trackingNumber: result.tracking_number || "",
     statusCode: mapStatusCode(result.status_code),

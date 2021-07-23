@@ -5,15 +5,15 @@ const errors = require("../utils/errors");
 const fetchMock = require("../utils/fetch-mock");
 
 const {
-  mocktrackPackageByLabelID200,
+  mockTrackPackageByLabelId200,
 } = require("../utils/mocks/mock-track-by-label-id-200");
 
-describe("trackPackageByLabelID()", () => {
+describe("trackPackageByLabelId()", () => {
   it("should throw an error if the label ID is not a string", async () => {
     const shipengine = new ShipEngine({ apiKey });
 
     try {
-      await shipengine.trackPackageByLabelID({ labelID: 1234 });
+      await shipengine.trackPackageByLabelId({ labelId: 1234 });
       errors.shouldHaveThrown();
     } catch (error) {
       errors.assertInvalidFieldValueError(error, {
@@ -32,7 +32,7 @@ describe("trackPackageByLabelID()", () => {
     const shipengine = new ShipEngine({ apiKey });
 
     try {
-      await shipengine.trackPackageByLabelID({ labelID: "1234" });
+      await shipengine.trackPackageByLabelId({ labelId: "1234" });
       errors.shouldHaveThrown();
     } catch (error) {
       errors.assertInvalidFieldValueError(error, {
@@ -68,8 +68,8 @@ describe("trackPackageByLabelID()", () => {
   //   const shipengine = new ShipEngine({ apiKey });
 
   //   try {
-  //     const result = await shipengine.trackPackageByLabelID({
-  //       labelID: "se-1234",
+  //     const result = await shipengine.trackPackageByLabelId({
+  //       LabelId: "se-1234",
   //     });
   //     errors.shouldHaveThrown();
   //   } catch (error) {
@@ -86,12 +86,12 @@ describe("trackPackageByLabelID()", () => {
   // });
 
   it("should return tracking information for a valid Label ID", async () => {
-    mocktrackPackageByLabelID200();
+    mockTrackPackageByLabelId200();
 
     const shipengine = new ShipEngine({ apiKey });
 
-    const result = await shipengine.trackPackageByLabelID({
-      labelID: "se-1234",
+    const result = await shipengine.trackPackageByLabelId({
+      labelId: "se-1234",
     });
 
     expect(result.trackingNumber).to.equal("332980205337");

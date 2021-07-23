@@ -20,7 +20,7 @@ export async function trackPackageByLabelID(
   validateParams(params);
 
   const response = await get<Response.GetTrackingLogFromLabelResponseBody>(
-    `/v1/labels/${params.labelID}/track`,
+    `/v1/labels/${params.labelId}/track`,
     config
   );
 
