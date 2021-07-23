@@ -32,3 +32,8 @@ compileFromFile('node_modules/shipengine-json-schema/responses/calculate_rates_r
 // List Carrier Accounts
 compileFromFile('node_modules/shipengine-json-schema/responses/list_carriers_response_body.json')
   .then(ts => fs.writeFileSync('src/list-carrier-accounts/types/private-response.ts', ts))
+
+// Comment out for now, json schema is missing properties
+// Track By Label ID
+// compileFromFile('node_modules/shipengine-json-schema/responses/get_tracking_log_from_label_response_body.json')
+// .then(ts => fs.writeFileSync('src/track-by-label-id/types/private-response.ts', ts))

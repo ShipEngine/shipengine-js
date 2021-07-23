@@ -1,8 +1,17 @@
-export enum TrackingStatus {
-  Accepted = "accepted",
-  AttemptedDelivery = "attempted_delivery",
-  Delivered = "delivered",
-  Exception = "exception",
-  InTransit = "in_transit",
-  Unknown = "unknown",
+export enum TrackingStatusDescription {
+  Accepted = "Accepted",
+  AttemptedDelivery = "Attempted Delivery",
+  Delivered = "Delivered",
+  Exception = "Exception",
+  InTransit = "In Transit",
+  Unknown = "Unknown",
+}
+
+export enum TrackingStatusCodes {
+  Accepted = "AC",
+  InTransit = "IT",
+  Delivered = "DE",
+  Exception = "EX",
+  AttemptedDelivery = "AT",
+  Unknown = "UN",
 }
