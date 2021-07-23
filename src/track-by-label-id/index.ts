@@ -1,21 +1,21 @@
 import { NormalizedConfig } from "../config";
 import { get } from "../client";
-import * as TrackPackageByLabelIdTypes from "./types/public";
+import * as TrackByLabelIdTypes from "./types/public";
 import { Response } from "./types/private";
 import { formatResponse } from "./format-response";
 import { validateParams } from "./validate-params";
 
-export * as TrackPackageByLabelIdTypes from "./types/public";
+export * as TrackByLabelIdTypes from "./types/public";
 
 /**
  * Returns the tracking information of a package identified by its label id.
  *
  * @see https://www.shipengine.com/docs/tracking/track-by-label-id
  */
-export async function trackPackageByLabelId(
-  params: TrackPackageByLabelIdTypes.Params,
+export async function trackByLabelId(
+  params: TrackByLabelIdTypes.Params,
   config: NormalizedConfig
-): Promise<TrackPackageByLabelIdTypes.Response> {
+): Promise<TrackByLabelIdTypes.Response> {
   validateParams(params);
 
   const response = await get<Response.GetTrackingLogFromLabelResponseBody>(

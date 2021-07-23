@@ -4,10 +4,7 @@ import {
 } from "./validate-addresses";
 // import { listCarrierAccounts } from "./list-carrier-accounts";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
-import {
-  TrackPackageByLabelIdTypes,
-  trackPackageByLabelId,
-} from "./track-by-label-id";
+import { TrackByLabelIdTypes, trackByLabelId } from "./track-by-label-id";
 
 /**
  * Exposes the functionality of the ShipEngine API.
@@ -71,11 +68,7 @@ export class ShipEngine {
   // }
 
   // /**
-  //  * Tracks a package.
-  //  *
-  //  * @param [packageId]
-  //  * The packageId of the package you wish to track. You must not provide the carrierCode or the packageId
-  //  * when using the parameter.
+  //  * Tracks a package based on the trackingNumber and carrierCode.
   //  *
   //  * @param [trackingNumber]
   //  * The trackingNumber of the package you wish to track. You must also provide the carrierCode and no packageId.
@@ -87,7 +80,7 @@ export class ShipEngine {
   //  *
   //  * @param [config] - Optional configuration overrides for this method call.
   //  */
-  // public async trackPackage(
+  // public async trackPackageByTrackingNumber(
   //   params: TrackingParams,
   //   config?: ShipEngineConfig
   // ): Promise<TrackPackageResult> {
@@ -96,18 +89,18 @@ export class ShipEngine {
   // }
 
   /**
-   * Tracks a package by Label ID.
+   * Tracks a shipment by Label ID.
    *
    * @param [labelId]
    * The labelId that contains the package you wish to track.
 
   * @param [config] - Optional configuration overrides for this method call.
    */
-  public async trackPackageByLabelId(
-    params: TrackPackageByLabelIdTypes.Params,
+  public async trackByLabelId(
+    params: TrackByLabelIdTypes.Params,
     config?: ShipEngineConfig
-  ): Promise<TrackPackageByLabelIdTypes.Response> {
+  ): Promise<TrackByLabelIdTypes.Response> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
-    return trackPackageByLabelId(params, mergedConfig);
+    return trackByLabelId(params, mergedConfig);
   }
 }

@@ -5,13 +5,13 @@ import {
 
 export type Params = { labelId: string };
 
-export type Response = TrackPackageByLabelIdResult;
+export type Response = TrackByLabelIdResult;
 
 /**
  * The Tracking information and events associated with a label
  * @see https://www.shipengine.com/docs/tracking/track-by-label-id/
  */
-export interface TrackPackageByLabelIdResult {
+export interface TrackByLabelIdResult {
   /**
    * A tracking number for a package. The format depends on the carrier.
    */
