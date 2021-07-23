@@ -8,7 +8,7 @@ import { validateParams } from "./validate-params";
 export * as TrackPackageByLabelIdTypes from "./types/public";
 
 /**
- * Validates an address and returns the full validation results.
+ * Returns the tracking information of a package identified by its label id.
  *
  * @see https://www.shipengine.com/docs/tracking/track-by-label-id
  */
