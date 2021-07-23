@@ -1,1 +1,3 @@
-export * from "./public-result";
+export interface Response {
+  foo: "string";
+}
