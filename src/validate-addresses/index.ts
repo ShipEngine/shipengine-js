@@ -7,7 +7,7 @@ import { formatParams } from "./format-params";
 import { formatResponse } from "./format-response";
 import { validateParams } from "./validate-params";
 
-export * as ValidateAddressesTypes from "./types/public";
+export { ValidateAddressesTypes };
 
 /**
  * Validates an address and returns the full validation results.
