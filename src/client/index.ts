@@ -2,6 +2,7 @@ import { AbortController, getUserAgentString } from "../isomorphic.node";
 import { ErrorCode, ErrorSource, ErrorType } from "../enums";
 import { NormalizedConfig } from "../config";
 import { ShipEngineError, RateLimitExceededError } from "../errors";
+import { handle400Errors } from "./handle-400-errors";
 
 export async function get<TResult>(
   endpoint: string,
@@ -104,15 +105,7 @@ async function sendRequest<TParams, TResult>(
     );
   }
 
-  if (response.status === 400) {
-    throw new ShipEngineError(
-      responseBody.request_id,
-      ErrorSource.ShipEngine,
-      responseBody.errors[0].error_type,
-      responseBody.errors[0].error_code,
-      responseBody.errors[0].message
-    );
-  }
+  if (response.status === 400) handle400Errors(responseBody);
 
   return responseBody;
 }
