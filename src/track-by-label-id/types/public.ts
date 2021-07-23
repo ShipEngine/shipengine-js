@@ -8,7 +8,7 @@ export type Params = { labelId: string };
 export type Response = TrackPackageByLabelIdResult;
 
 /**
- * The Tracking events associated with this label
+ * The Tracking information and events associated with a label
  * @see https://www.shipengine.com/docs/tracking/track-by-label-id/
  */
 export interface TrackPackageByLabelIdResult {
