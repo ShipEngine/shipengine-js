@@ -29,15 +29,7 @@ export type OrderSourceName =
   | "woo_commerce"
   | "volusion";
 export type TaxableEntityType = "shipper" | "recipient";
-export type IdentifierType =
-  | "vat"
-  | "eori"
-  | "ssn"
-  | "ein"
-  | "tin"
-  | "ioss"
-  | "pan"
-  | "voec";
+export type IdentifierType = "vat" | "eori" | "ssn" | "ein" | "tin" | "ioss" | "pan" | "voec";
 export type Address = PartialAddress;
 export type PostalCode = string;
 export type CountryCode = string;
@@ -58,12 +50,7 @@ export type DeliveryConfirmation =
   | "adult_signature"
   | "direct_signature"
   | "delivery_mailed";
-export type PackageContents =
-  | "merchandise"
-  | "documents"
-  | "gift"
-  | "returned_goods"
-  | "sample";
+export type PackageContents = "merchandise" | "documents" | "gift" | "returned_goods" | "sample";
 export type NonDelivery = "return_to_sender" | "treat_as_abandoned";
 export type Currency = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
 export type CountryCode3 = string;
@@ -71,18 +58,10 @@ export type CountryCode4 = string;
 export type BillToParty = "recipient" | "third_party";
 export type WeightUnit = "pound" | "ounce" | "gram" | "kilogram";
 export type OriginType = "pickup" | "drop_off";
-export type CollectOnDeliveryPaymentType =
-  | "any"
-  | "cash"
-  | "cash_equivalent"
-  | "none";
+export type CollectOnDeliveryPaymentType = "any" | "cash" | "cash_equivalent" | "none";
 export type Currency1 = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
 export type OriginType1 = "pickup" | "drop_off";
-export type InsuranceProvider =
-  | "none"
-  | "shipsurance"
-  | "carrier"
-  | "third_party";
+export type InsuranceProvider = "none" | "shipsurance" | "carrier" | "third_party";
 export type OrderSourceName1 =
   | "amazon_ca"
   | "amazon_us"
@@ -104,15 +83,9 @@ export type OrderSourceName1 =
   | "walmart"
   | "woo_commerce"
   | "volusion";
-export type LabelChargeEvent =
-  | "carrier_default"
-  | "on_creation"
-  | "on_carrier_acceptance";
+export type LabelChargeEvent = "carrier_default" | "on_creation" | "on_carrier_acceptance";
 export type SeId1 = string;
-export type ValidateAddress =
-  | "no_validation"
-  | "validate_only"
-  | "validate_and_clean";
+export type ValidateAddress = "no_validation" | "validate_only" | "validate_and_clean";
 export type LabelDownloadType = "url" | "inline";
 export type LabelFormat = "pdf" | "png" | "zpl";
 export type DisplayScheme = "label" | "qr_code";

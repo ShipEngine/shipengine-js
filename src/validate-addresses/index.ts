@@ -27,5 +27,7 @@ export async function validateAddresses(
     Response.ValidateAddressResponseBody
   >("/v1/addresses/validate", formattedParams, config);
 
+  console.log(response);
+
   return formatResponse(response);
 }

@@ -314,274 +314,82 @@ describe("validateAddresses()", () => {
     }
   });
 
-  // it("Throws an error if no address lines are provided", async () => {
-  //   const shipengine = new ShipEngine({ apiKey });
+  it("Throws an error when given an empty array", async () => {
+    fetchMock.postOnce("https://api.shipengine.com/v1/addresses/validate", {
+      status: 400,
+      body: {
+        request_id: "5d6eb8ef-e354-4279-a9b8-f3e33ab89e0b",
+        errors: [
+          {
+            error_source: "shipengine",
+            error_type: "validation",
+            error_code: "request_body_required",
+            message: "Request body cannot be empty.",
+          },
+        ],
+      },
+    });
 
-  //   const addressToValidate = [
-  //     {
-  //       name: "John Smith",
-  //       companyName: "ShipStation",
-  //       addressLine2: "#220",
-  //       cityLocality: "AUSTIN",
-  //       stateProvince: "TX",
-  //       postalCode: "78756-0003",
-  //       countryCode: "US",
-  //     },
-  //   ];
+    const shipengine = new ShipEngine({ apiKey });
 
-  //   try {
-  //     await shipengine.validateAddresses(addressToValidate);
-  //     errors.shouldHaveThrown();
-  //   } catch (error) {
-  //     console.log(error)
-  //     errors.assertShipEngineError(error, {
-  //       name: "ShipEngineError",
-  //       source: "shipengine",
-  //       type: "validation",
-  //       code: "field_value_required",
-  //       message: "Invalid address. The addressLine1 must be specified.",
-  //     });
-  //     expect(error.requestId).to.be.undefined;
-  //   }
-  // });
+    try {
+      await shipengine.validateAddresses([]);
+      errors.shouldHaveThrown();
+    } catch (error) {
+      errors.assertShipEngineError(error, {
+        name: "ShipEngineError",
+        source: "shipengine",
+        type: "system",
+        code: "timeout",
+        message: "The ShipEngine /v1/addresses/validate API timed out.",
+      });
+    }
 
-  // it("Throws an error if the postalCode, cityLocality, and stateProvince properties are not *provided*", async () => {
-  //   const shipengine = new ShipEngine({ apiKey });
+    fetchMock.restore();
+  });
 
-  //   const addressToValidate = {
-  //     name: "John Smith",
-  //     companyName: "ShipStation",
-  //     addressLine1: "3800 N Lamar Blvd",
-  //     addressLine2: "#220",
-  //     countryCode: "US",
-  //     addressResidentialIndicator: "no",
-  //   };
+  it("Throws an error when the request times out", async () => {
+    fetchMock.postOnce("https://api.shipengine.com/v1/addresses/validate", {
+      status: 429,
+      body: {
+        request_id: "7b80b28f-80d2-4175-ad99-7c459980539f",
+        errors: [
+          {
+            error_source: "shipengine",
+            error_type: "system",
+            error_code: "rate_limit_exceeded",
+            message:
+              "You have exceeded the rate limit. Please see https://www.shipengine.com/docs/rate-limits",
+          },
+        ],
+      },
+    });
+    const shipengine = new ShipEngine({ apiKey, timeout: 500, retries: 0 });
 
-  //   try {
-  //     await shipengine.validateAddresses(addressToValidate);
-  //     errors.shouldHaveThrown();
-  //   } catch (error) {
-  //     errors.assertShipEngineError(error, {
-  //       name: "ShipEngineError",
-  //       source: "shipengine",
-  //       type: "validation",
-  //       code: "field_value_required",
-  //       message:
-  //         "Invalid address. Either the postal code or the city/locality and state/province must be specified.",
-  //     });
-  //     expect(error.requestId).to.be.undefined;
-  //   }
-  // });
+    const addressToValidate = {
+      name: "John Smith",
+      addressLine1: "3910 Bailey Lane",
+      cityLocality: "Austin",
+      stateProvince: "TX",
+      postalCode: "78756",
+      countryCode: "US",
+      isResidential: true,
+    };
 
-  // it("Throws an error if the postalCode, cityLocality, and stateProvince properties are not *populated*", async () => {
-  //   const shipengine = new ShipEngine({ apiKey });
-
-  //   const addressToValidate = {
-  //     name: "John Smith",
-  //     companyName: "ShipStation",
-  //     addressLine1: "3800 N Lamar Blvd",
-  //     addressLine2: "#220",
-  //     postalCode: "",
-  //     cityLocality: "",
-  //     stateProvince: "",
-  //     countryCode: "US",
-  //     addressResidentialIndicator: "no",
-  //   };
-
-  //   try {
-  //     await shipengine.validateAddresses(addressToValidate);
-  //     errors.shouldHaveThrown();
-  //   } catch (error) {
-  //     errors.assertShipEngineError(error, {
-  //       name: "ShipEngineError",
-  //       source: "shipengine",
-  //       type: "validation",
-  //       code: "field_value_required",
-  //       message:
-  //         "Invalid address. Either the postal code or the city/locality and state/province must be specified.",
-  //     });
-  //     expect(error.requestId).to.be.undefined;
-  //   }
-  // });
-
-  // it("Throws an error if neither the postalCode nor the cityLocality is provided, (state only provided)", async () => {
-  //   const shipengine = new ShipEngine({ apiKey });
-
-  //   const addressToValidate = {
-  //     name: "John Smith",
-  //     companyName: "ShipStation",
-  //     addressLine1: "3800 N Lamar Blvd",
-  //     addressLine2: "#220",
-  //     stateProvince: "TX",
-  //     countryCode: "US",
-  //     addressResidentialIndicator: "no",
-  //   };
-
-  //   try {
-  //     await shipengine.validateAddresses(addressToValidate);
-  //     errors.shouldHaveThrown();
-  //   } catch (error) {
-  //     errors.assertShipEngineError(error, {
-  //       name: "ShipEngineError",
-  //       source: "shipengine",
-  //       type: "validation",
-  //       code: "field_value_required",
-  //       message:
-  //         "Invalid address. Either the postal code or the city/locality and state/province must be specified.",
-  //     });
-  //     expect(error.requestId).to.be.undefined;
-  //   }
-  // });
-
-  // it("Throws an error if neither the postalCode nor the stateProvince is provided (citLocality only provided)", async () => {
-  //   const shipengine = new ShipEngine({ apiKey });
-
-  //   const addressToValidate = {
-  //     name: "John Smith",
-  //     companyName: "ShipStation",
-  //     addressLine1: "3800 N Lamar Blvd",
-  //     addressLine2: "#220",
-  //     cityLocality: "Austin",
-  //     countryCode: "US",
-  //     addressResidentialIndicator: "no",
-  //   };
-
-  //   try {
-  //     await shipengine.validateAddresses(addressToValidate);
-  //     errors.shouldHaveThrown();
-  //   } catch (error) {
-  //     errors.assertShipEngineError(error, {
-  //       name: "ShipEngineError",
-  //       source: "shipengine",
-  //       type: "validation",
-  //       code: "field_value_required",
-  //       message:
-  //         "Invalid address. Either the postal code or the city/locality and state/province must be specified.",
-  //     });
-  //     expect(error.requestId).to.be.undefined;
-  //   }
-  // });
-
-  // it("Throws an error if the country is not provided", async () => {
-  //   const shipengine = new ShipEngine({ apiKey });
-  //   const addressToValidate = {
-  //     name: "John Smith",
-  //     companyName: "ShipStation",
-  //     addressLine1: "3800 N Lamar Blvd",
-  //     addressLine2: "#220",
-  //     cityLocality: "Austin",
-  //     stateProvince: "TX",
-  //     postalCode: "78756",
-  //     addressResidentialIndicator: "no",
-  //   };
-  //   try {
-  //     await shipengine.validateAddresses(addressToValidate);
-  //     errors.shouldHaveThrown();
-  //   } catch (error) {
-  //     errors.assertShipEngineError(error, {
-  //       name: "ShipEngineError",
-  //       source: "shipengine",
-  //       type: "validation",
-  //       code: "field_value_required",
-  //       message: "Invalid address. The country must be specified.",
-  //     });
-  //     expect(error.requestId).to.be.undefined;
-  //   }
-  // });
-
-  // it("Throws an error if the country is invalid", async () => {
-  //   const shipengine = new ShipEngine({ apiKey });
-
-  //   const addressToValidate = {
-  //     name: "John Smith",
-  //     companyName: "ShipStation",
-  //     addressLine1: "3800 N Lamar Blvd",
-  //     addressLine2: "#220",
-  //     cityLocality: "Austin",
-  //     stateProvince: "TX",
-  //     postalCode: "78756",
-  //     countryCode: "USA",
-  //     addressResidentialIndicator: "no",
-  //   };
-
-  //   try {
-  //     await shipengine.validateAddresses(addressToValidate);
-  //     errors.shouldHaveThrown();
-  //   } catch (error) {
-  //     errors.assertShipEngineError(error, {
-  //       name: "ShipEngineError",
-  //       source: "shipengine",
-  //       type: "validation",
-  //       code: "invalid_field_value",
-  //       message: "Invalid address. USA is not a valid country code.",
-  //     });
-  //     expect(error.requestId).to.be.undefined;
-  //   }
-  // });
-
-  // it("Throws an error when the request times out", async () => {
-  //   fetchMock.("https://api.shipengine.com")
-  //     .post("/v1/addresses/validate")
-  //     .delayConnection(600)
-  //     .reply(200, [
-  //       {
-  //         status: "verified",
-  //         original_address: {
-  //           name: "John Smith",
-  //           phone: null,
-  //           company_name: null,
-  //           address_line1: "3910 Bailey Lane",
-  //           address_line2: null,
-  //           address_line3: null,
-  //           city_locality: "Austin",
-  //           state_province: "TX",
-  //           postal_code: "78756",
-  //           country_code: "US",
-  //           address_residential_indicator: "yes",
-  //         },
-  //         matched_address: {
-  //           name: "JOHN SMITH",
-  //           phone: null,
-  //           company_name: null,
-  //           address_line1: "3910 BAILEY LN",
-  //           address_line2: "",
-  //           address_line3: null,
-  //           city_locality: "AUSTIN",
-  //           state_province: "TX",
-  //           postal_code: "78756-3924",
-  //           country_code: "US",
-  //           address_residential_indicator: "yes",
-  //         },
-  //         messages: [],
-  //       },
-  //     ]);
-
-  //   const shipengine = new ShipEngine({ apiKey, timeout: 500, retries: 0 });
-
-  //   const addressToValidate = {
-  //     name: "John Smith",
-  //     addressLine1: "3910 Bailey Lane",
-  //     cityLocality: "Austin",
-  //     stateProvince: "TX",
-  //     postalCode: "78756",
-  //     countryCode: "US",
-  //     isResidential: true,
-  //   };
-
-  //   try {
-  //     await shipengine.validateAddresses(addressToValidate);
-  //     errors.shouldHaveThrown();
-  //   } catch (error) {
-  //     errors.assertShipEngineError(error, {
-  //       name: "ShipEngineError",
-  //       source: "shipengine",
-  //       type: "system",
-  //       code: "timeout",
-  //       message: "The ShipEngine /v1/addresses/validate API timed out.",
-  //     });
-  //     expect(error.requestId).to.be.undefined;
-  //   }
-  // });
+    try {
+      await shipengine.validateAddresses(addressToValidate);
+      errors.shouldHaveThrown();
+    } catch (error) {
+      errors.assertShipEngineError(error, {
+        name: "ShipEngineError",
+        source: "shipengine",
+        type: "system",
+        code: "timeout",
+        message: "The ShipEngine /v1/addresses/validate API timed out.",
+      });
+      expect(error.requestId).to.be.undefined;
+    }
+  });
 
   it("Retries when it encounters a 429 error", async () => {
     fetchMock.postOnce("https://api.shipengine.com/v1/addresses/validate", {

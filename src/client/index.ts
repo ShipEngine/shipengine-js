@@ -104,16 +104,15 @@ async function sendRequest<TParams, TResult>(
     );
   }
 
-  // TODO
-  // if (response.status === 400) {
-  //   throw new ShipEngineError(
-  //     responseBody.request_id,,
-  //     response.error.data.source,
-  //     response.error.data.type,
-  //     response.error.data.code,
-  //     response.error.message
-  //   );
-  // }
+  if (response.status === 400) {
+    throw new ShipEngineError(
+      responseBody.request_id,
+      ErrorSource.ShipEngine,
+      responseBody.errors[0].error_type,
+      responseBody.errors[0].error_code,
+      responseBody.errors[0].message
+    );
+  }
 
   return responseBody;
 }
