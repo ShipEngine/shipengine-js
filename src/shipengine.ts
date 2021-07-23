@@ -98,19 +98,10 @@ export class ShipEngine {
   /**
    * Tracks a package by Label ID.
    *
-   * @param [packageId]
-   * The packageId of the package you wish to track. You must not provide the carrierCode or the packageId
-   * when using the parameter.
-   *
-   * @param [trackingNumber]
-   * The trackingNumber of the package you wish to track. You must also provide the carrierCode and no packageId.
-   * OR trackingNumber and carrierCode
-   *
-   * @param [carrierCode]
-   * The carrierCode for the trackingNumber you are using to track the package. You must also provide the trackingNumber
-   * and no packageId.
-   *
-   * @param [config] - Optional configuration overrides for this method call.
+   * @param [labelId]
+   * The labelId that contains the package you wish to track.
+
+  * @param [config] - Optional configuration overrides for this method call.
    */
   public async trackPackageByLabelId(
     params: TrackPackageByLabelIdTypes.Params,
