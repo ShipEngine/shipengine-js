@@ -5,8 +5,8 @@ import {
 // import { listCarrierAccounts } from "./list-carrier-accounts";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
 import {
-  TrackPackageByLabelIDTypes,
-  trackPackageByLabelID,
+  TrackPackageByLabelIdTypes,
+  trackPackageByLabelId,
 } from "./track-by-label-id";
 
 /**
@@ -112,11 +112,11 @@ export class ShipEngine {
    *
    * @param [config] - Optional configuration overrides for this method call.
    */
-  public async trackPackageByLabelID(
-    params: TrackPackageByLabelIDTypes.Params,
+  public async trackPackageByLabelId(
+    params: TrackPackageByLabelIdTypes.Params,
     config?: ShipEngineConfig
-  ): Promise<TrackPackageByLabelIDTypes.Response> {
+  ): Promise<TrackPackageByLabelIdTypes.Response> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
-    return trackPackageByLabelID(params, mergedConfig);
+    return trackPackageByLabelId(params, mergedConfig);
   }
 }

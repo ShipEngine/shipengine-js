@@ -1,11 +1,11 @@
 import { InvalidFieldValueError } from "../errors";
-import { TrackPackageByLabelIDTypes } from ".";
+import { TrackPackageByLabelIdTypes } from ".";
 
 /**
  * Performs client-side validation of the address params that's passed-in by the user.
  */
 export function validateParams(
-  params: TrackPackageByLabelIDTypes.Params
+  params: TrackPackageByLabelIdTypes.Params
 ): void {
   if (typeof params.labelId !== "string") {
     throw new InvalidFieldValueError("Params", "must be a string.");
