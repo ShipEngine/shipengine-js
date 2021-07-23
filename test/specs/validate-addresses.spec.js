@@ -339,8 +339,8 @@ describe("validateAddresses()", () => {
       errors.assertShipEngineError(error, {
         name: "ShipEngineError",
         source: "shipengine",
-        type: "system",
-        code: "timeout",
+        type: "validation",
+        code: "request_body_required",
         message: "The ShipEngine /v1/addresses/validate API timed out.",
       });
     }
