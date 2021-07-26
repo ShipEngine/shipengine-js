@@ -148,54 +148,54 @@ describe("createLabel()", () => {
     });
 
     expect(result).to.deep.equal({
-      label_id: "se-28529731",
+      labelId: "se-28529731",
       status: "processing",
-      shipment_id: "se-28529731",
-      ship_date: "2018-09-23T00:00:00.000Z",
-      created_at: "2018-09-23T15:00:00.000Z",
-      shipment_cost: {
+      shipmentId: "se-28529731",
+      shipDate: "2018-09-23T00:00:00.000Z",
+      createdAt: "2018-09-23T15:00:00.000Z",
+      shipmentCost: {
         currency: "usd",
         amount: 0,
       },
-      insurance_cost: {
+      insuranceCost: {
         currency: "usd",
         amount: 0,
       },
-      tracking_number: "782758401696",
-      is_return_label: true,
-      rma_number: "string",
-      is_international: true,
-      batch_id: "se-28529731",
-      carrier_id: "se-28529731",
-      charge_event: "carrier_default",
-      service_code: "usps_first_class_mail",
-      package_code: "small_flat_rate_box",
+      trackingNumber: "782758401696",
+      isReturnLabel: true,
+      rmaNumber: "string",
+      isInternational: true,
+      batchId: "se-28529731",
+      carrierId: "se-28529731",
+      chargeEvent: "carrier_default",
+      serviceCode: "usps_first_class_mail",
+      packageCode: "small_flat_rate_box",
       voided: true,
-      voided_at: "2018-09-23T15:00:00.000Z",
-      label_format: "pdf",
-      display_scheme: "label",
-      label_layout: "4x6",
+      voidedAt: "2018-09-23T15:00:00.000Z",
+      labelFormat: "pdf",
+      displayScheme: "label",
+      labelLayout: "4x6",
       trackable: true,
-      label_image_id: "img_DtBXupDBxREpHnwEXhTfgK",
-      carrier_code: "dhl_express",
-      tracking_status: "unknown",
-      label_download: {
+      labelImageId: "img_DtBXupDBxREpHnwEXhTfgK",
+      carrierCode: "dhl_express",
+      trackingStatus: "unknown",
+      labelDownload: {
         href: "http://api.shipengine.com/v1/labels/se-28529731",
         pdf: "http://api.shipengine.com/v1/labels/se-28529731",
         png: "http://api.shipengine.com/v1/labels/se-28529731",
         zpl: "http://api.shipengine.com/v1/labels/se-28529731",
       },
-      form_download: {
+      formDownload: {
         href: "http://api.shipengine.com/v1/labels/se-28529731",
         type: "string",
       },
-      insurance_claim: {
+      insuranceClaim: {
         href: "http://api.shipengine.com/v1/labels/se-28529731",
         type: "string",
       },
       packages: [
         {
-          package_code: "small_flat_rate_box",
+          packageCode: "small_flat_rate_box",
           weight: {
             value: 0,
             unit: "pound",
@@ -206,21 +206,17 @@ describe("createLabel()", () => {
             width: 0,
             height: 0,
           },
-          insured_value: {
-            0: {
-              currency: "usd",
-              amount: 0,
-            },
+          insuredValue: {
             currency: "usd",
             amount: 0,
           },
-          tracking_number: "1Z932R800392060079",
-          label_messages: {
+          trackingNumber: "1Z932R800392060079",
+          labelMessages: {
             reference1: null,
             reference2: null,
             reference3: null,
           },
-          external_package_id: "string",
+          externalPackageId: "string",
         },
       ],
     });

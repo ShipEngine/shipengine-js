@@ -1,2 +1,2 @@
-export * from "./public-request";
-export * from "./public-response";
+export * as PublicRequest from "./public-request";
+export * as PublicResponse from "./public-response";

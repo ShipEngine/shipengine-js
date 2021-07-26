@@ -14,9 +14,9 @@ export { CreateLabelTypes };
  * https://shipengine.github.io/shipengine-openapi/#operation/create_label
  */
 export async function createLabel(
-  params: CreateLabelTypes.Params,
+  params: CreateLabelTypes.PublicRequest.Params,
   config: NormalizedConfig
-): Promise<CreateLabelTypes.Response> {
+): Promise<CreateLabelTypes.PublicResponse.Response> {
   const formattedParams = formatParams(params);
 
   const response = await post<

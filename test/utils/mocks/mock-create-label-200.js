@@ -61,10 +61,6 @@ function mockCreateLabel200() {
           height: 0,
         },
         insured_value: {
-          0: {
-            currency: "usd",
-            amount: 0,
-          },
           currency: "usd",
           amount: 0,
         },

@@ -4,36 +4,51 @@ import { CreateLabelTypes } from ".";
 
 export function formatResponse(
   params: Response.CreateLabelResponseBody
-): CreateLabelTypes.Response {
+): CreateLabelTypes.PublicResponse.Response {
   return {
-    label_id: params.label_id,
+    labelId: params.label_id,
     status: params.status,
-    shipment_id: params.shipment_id,
-    ship_date: params.ship_date,
-    created_at: params.created_at,
-    shipment_cost: params.shipment_cost,
-    insurance_cost: params.insurance_cost,
-    tracking_number: params.tracking_number,
-    is_return_label: params.is_return_label,
-    rma_number: params.rma_number,
-    is_international: params.is_international,
-    batch_id: params.batch_id,
-    carrier_id: params.carrier_id,
-    charge_event: params.charge_event,
-    service_code: params.service_code,
-    package_code: params.package_code,
+    shipmentId: params.shipment_id,
+    shipDate: params.ship_date,
+    createdAt: params.created_at,
+    shipmentCost: params.shipment_cost,
+    insuranceCost: params.insurance_cost,
+    trackingNumber: params.tracking_number,
+    isReturnLabel: params.is_return_label,
+    rmaNumber: params.rma_number,
+    isInternational: params.is_international,
+    batchId: params.batch_id,
+    carrierId: params.carrier_id,
+    chargeEvent: params.charge_event,
+    serviceCode: params.service_code,
+    packageCode: params.package_code,
     voided: params.voided,
-    voided_at: params.voided_at,
-    label_format: params.label_format,
-    display_scheme: params.display_scheme,
-    label_layout: params.label_layout,
+    voidedAt: params.voided_at,
+    labelFormat: params.label_format,
+    displayScheme: params.display_scheme,
+    labelLayout: params.label_layout,
     trackable: params.trackable,
-    label_image_id: params.label_image_id,
-    carrier_code: params.carrier_code,
-    tracking_status: params.tracking_status,
-    label_download: params.label_download,
-    form_download: params.form_download,
-    insurance_claim: params.insurance_claim,
-    packages: params.packages,
+    labelImageId: params.label_image_id,
+    carrierCode: params.carrier_code,
+    trackingStatus: params.tracking_status,
+    labelDownload: params.label_download,
+    formDownload: params.form_download,
+    insuranceClaim: params.insurance_claim,
+    packages: mapPackages(params.packages),
   };
+}
+
+function mapPackages(
+  params: Response.Package[] | undefined
+): CreateLabelTypes.PublicResponse.Package[] | undefined {
+  if (!params) return undefined;
+  return params.map((pkg) => ({
+    packageCode: pkg.package_code,
+    trackingNumber: pkg.tracking_number,
+    weight: pkg.weight,
+    dimensions: pkg.dimensions,
+    insuredValue: pkg.insured_value,
+    labelMessages: pkg.label_messages,
+    externalPackageId: pkg.external_package_id,
+  }));
 }

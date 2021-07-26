@@ -101,9 +101,9 @@ export class ShipEngine {
    * @param [config] - Optional configuration overrides for this method call.
    */
   public async createLabel(
-    params: CreateLabelTypes.Params,
+    params: CreateLabelTypes.PublicRequest.Params,
     config?: ShipEngineConfig
-  ): Promise<CreateLabelTypes.Response> {
+  ): Promise<CreateLabelTypes.PublicResponse.Response> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return createLabel(params, mergedConfig);
   }
