@@ -1,10 +1,10 @@
 import { Response } from "./types/private";
 import { TrackByLabelIdTypes } from ".";
-import { TrackingEvent } from "./types/public";
 import {
+  TrackingEvent,
   TrackingStatusCodes,
   TrackingStatusDescription,
-} from "../enums/tracking-status";
+} from "./types/public";
 
 export function formatResponse(
   response: Response.GetTrackingLogFromLabelResponseBody
@@ -17,9 +17,12 @@ function formatTrackByLabelIdResult(
 ): TrackByLabelIdTypes.TrackByLabelIdResult {
   return {
     trackingNumber: result.tracking_number || "",
-    statusCode: mapStatusCode(result.status_code),
-    statusDescription: mapStatusDescription(result.status_description),
+    statusCode: (result.status_code as TrackingStatusCodes) || "UN",
+    statusDescription:
+      (result.status_description as TrackingStatusDescription) || "Unknown",
     carrierStatusCode: result.carrier_status_code || "",
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     carrierDetailCode: result.carrier_detail_code || "",
     carrierStatusDescription: result.carrier_status_description || "",
     shipDate: result.ship_date || "",
@@ -34,7 +37,9 @@ function formatTrackingEvent(event: Response.TrackEvent): TrackingEvent {
   return {
     occurredAt: event.occurred_at,
     carrierOccurredAt: event.carrier_occurred_at || "",
-    description: event.description,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    description: event.description!,
     cityLocality: event.city_locality,
     stateProvince: event.state_province,
     postalCode: event.postal_code,
@@ -42,46 +47,16 @@ function formatTrackingEvent(event: Response.TrackEvent): TrackingEvent {
     companyName: event.company_name || "",
     signer: event.signer || "",
     eventCode: event.event_code || "",
-    statusCode: event.status_code || "",
-    carrierStatusCode: event.carrier_status_code || "",
-    carrierDetailCode: event.carrier_detail_code || "",
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    statusCode: event.status_code! || "",
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    carrierStatusCode: event.carrier_status_code! || "",
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    carrierDetailCode: event.carrier_detail_code! || "",
     latitude: event.latitude,
     longitude: event.longitude,
   };
-}
-
-function mapStatusCode(type: string | undefined): TrackingStatusCodes {
-  switch (type) {
-    case "AC":
-      return TrackingStatusCodes.Accepted;
-    case "IT":
-      return TrackingStatusCodes.InTransit;
-    case "DE":
-      return TrackingStatusCodes.Delivered;
-    case "EX":
-      return TrackingStatusCodes.Exception;
-    case "AT":
-      return TrackingStatusCodes.AttemptedDelivery;
-    default:
-      return TrackingStatusCodes.Unknown;
-  }
-}
-
-function mapStatusDescription(
-  type: string | undefined
-): TrackingStatusDescription {
-  switch (type) {
-    case "Accepted":
-      return TrackingStatusDescription.Accepted;
-    case "Attempted Delivery":
-      return TrackingStatusDescription.InTransit;
-    case "Delivered":
-      return TrackingStatusDescription.Delivered;
-    case "Exception":
-      return TrackingStatusDescription.Exception;
-    case "In Transit":
-      return TrackingStatusDescription.AttemptedDelivery;
-    default:
-      return TrackingStatusDescription.Unknown;
-  }
 }

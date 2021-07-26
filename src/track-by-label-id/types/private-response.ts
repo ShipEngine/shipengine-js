@@ -17,7 +17,6 @@ export type CountryCode = string;
 export interface TrackingInformation {
   tracking_number?: TrackingNumber;
   status_code?: string;
-  carrier_detail_code: string;
   status_description?: string;
   carrier_status_code?: string;
   carrier_status_description?: string;
@@ -30,13 +29,9 @@ export interface TrackingInformation {
 export interface TrackEvent {
   occurred_at: DateTime3;
   carrier_occurred_at?: DateTime4;
-  carrier_detail_code?: string;
-  carrier_status_code?: string;
   city_locality: string;
-  description: string;
   state_province: string;
   postal_code: string;
-  status_code: string;
   country_code?: CountryCode;
   company_name?: string;
   signer?: string;
