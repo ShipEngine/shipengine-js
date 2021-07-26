@@ -5,7 +5,8 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type ListCarriersResponseBody = ListCarriersResponseBody1 & ErrorResponseBody;
+export type ListCarriersResponseBody = ListCarriersResponseBody1 &
+  ErrorResponseBody;
 export type SeId = string;
 export type SeId1 = string;
 export type SeId2 = string;
@@ -15,7 +16,13 @@ export type PackageCode = string;
 export type DimensionUnit = "inch" | "centimeter";
 export type Uuid = string;
 export type ErrorSource = "carrier" | "order_source" | "shipengine";
-export type ErrorType = "account_status" | "business_rules" | "validation" | "security" | "system" | "integrations";
+export type ErrorType =
+  | "account_status"
+  | "business_rules"
+  | "validation"
+  | "security"
+  | "system"
+  | "integrations";
 export type ErrorCode =
   | "auto_fund_not_supported"
   | "batch_cannot_be_modified"
