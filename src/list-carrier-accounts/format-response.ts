@@ -16,13 +16,13 @@ function formatCarrier(
   carrier: Response.Carrier
 ): ListCarrierAccountsTypes.Carrier {
   return {
-    carrierId: carrier.carrier_id || "",
-    carrierCode: carrier.carrier_code || "",
-    accountNumber: carrier.account_number || "",
+    carrierId: carrier.carrier_id!,
+    carrierCode: carrier.carrier_code!,
+    accountNumber: carrier.account_number!,
     requiresFundedAmount: carrier.requires_funded_amount,
     balance: carrier.balance,
-    nickname: carrier.nickname || "",
-    friendlyName: carrier.friendly_name || "",
+    nickname: carrier.nickname,
+    friendlyName: carrier.friendly_name,
     primary: carrier.primary,
     hasMultiPackageSupportingServices:
       carrier.has_multi_package_supporting_services,
@@ -43,10 +43,10 @@ function formatService(
   service: Response.Service
 ): ListCarrierAccountsTypes.Service {
   return {
-    carrierId: service.carrier_id || "",
-    carrierCode: service.carrier_code || "",
-    serviceCode: service.service_code || "",
-    name: service.name || "",
+    carrierId: service.carrier_id!,
+    carrierCode: service.carrier_code!,
+    serviceCode: service.service_code!,
+    name: service.name,
     domestic: service.domestic,
     international: service.international,
     isMultiPackageSupported: service.is_multi_package_supported,
@@ -57,9 +57,12 @@ function formatPackageType(
   p: Response.PackageType
 ): ListCarrierAccountsTypes.PackageType {
   return {
-    packageId: p.package_id || "",
-    packageCode: p.package_code || "",
-    name: p.name || "",
+    packageId: p.package_id,
+    packageCode: p.package_code,
+    name: p.name,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    description: p.description!,
     dimensions:
       p.dimensions && p.dimensions.unit
         ? {
@@ -76,7 +79,10 @@ function formatOption(
   option: Response.CarrierAdvancedOption
 ): ListCarrierAccountsTypes.AdvancedOption {
   return {
-    name: option.name || "",
-    defaultValue: option.default_value || "",
+    name: option.name,
+    defaultValue: option.default_value,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    description: option.description!,
   };
 }

@@ -58,7 +58,7 @@ describe("listCarrierAccounts()", () => {
             {
               name: "non_machinable",
               default_value: "false",
-              description: "",
+              description: null,
             },
             {
               name: "bill_to_account",
@@ -127,22 +127,27 @@ describe("listCarrierAccounts()", () => {
           {
             defaultValue: "false",
             name: "non_machinable",
+            description: null,
           },
           {
-            defaultValue: "",
+            defaultValue: null,
             name: "bill_to_account",
+            description: "Bill To Account",
           },
           {
-            defaultValue: "",
+            defaultValue: null,
             name: "bill_to_party",
+            description: "Bill To Party",
           },
           {
-            defaultValue: "",
+            defaultValue: null,
             name: "bill_to_postal_code",
+            description: "Bill To Postal Code",
           },
           {
-            defaultValue: "",
+            defaultValue: null,
             name: "bill_to_country_code",
+            description: "Bill To Country Code",
           },
         ],
         packages: [
@@ -150,13 +155,16 @@ describe("listCarrierAccounts()", () => {
             dimensions: undefined,
             name: "Cubic",
             packageCode: "cubic",
-            packageId: "",
+            description: "Cubic",
+            packageId: null,
           },
           {
             dimensions: undefined,
             name: "Flat Rate Envelope",
             packageCode: "flat_rate_envelope",
-            packageId: "",
+            description:
+              'USPS flat rate envelope. A special cardboard envelope provided by the USPS that clearly indicates "Flat Rate".',
+            packageId: null,
           },
         ],
       },

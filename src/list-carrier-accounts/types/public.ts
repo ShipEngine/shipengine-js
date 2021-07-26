@@ -70,15 +70,15 @@ export interface Service {
   /**
    * The carrier ID
    */
-  carrierId?: string;
+  carrierId: string;
   /**
    * The code associated with the carrier for this service
    */
-  carrierCode?: string;
+  carrierCode: string;
   /**
    * The code associated with the service
    */
-  serviceCode?: string;
+  serviceCode: string;
   /**
    * The name of the service
    */
@@ -117,6 +117,7 @@ export interface PackageType {
    * The package type dimensions
    */
   dimensions?: Dimensions;
+  description?: string;
 }
 
 /**
@@ -135,4 +136,5 @@ export interface Dimensions {
 export interface AdvancedOption {
   name?: string;
   defaultValue?: string;
+  description?: string;
 }
