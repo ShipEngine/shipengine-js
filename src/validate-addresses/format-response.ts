@@ -1,6 +1,6 @@
 import { ValidateAddressesTypes } from ".";
 import { Response } from "./types/private";
-import { ValidationMessageType, Country } from "../enums";
+import { ValidationMessageType } from "../enums";
 
 export function formatResponse(
   response: Response.ValidateAddressResponseBody
