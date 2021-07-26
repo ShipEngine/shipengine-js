@@ -10,7 +10,7 @@ export interface Address {
   /**
    * The first line of the address.
    */
-  addressLine1: string;
+  addressLine1?: string;
 
   /**
    * The second line of the address.
