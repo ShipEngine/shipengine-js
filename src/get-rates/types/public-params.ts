@@ -1,20 +1,4 @@
-import {
-  Contents,
-  Country,
-  Currency,
-  DeliveryConfirmation,
-  InsuranceProvider,
-  NonDelivery,
-  OrderSourceCode,
-  OriginType,
-  TaxableEntityType,
-  IdentifierType,
-  PackageCode,
-  PaymentType,
-  BillToAccount,
-  BillToParty,
-} from "../../enums";
-import { ValidateAddress } from "../../enums/validate-address";
+import { Country } from "../../enums";
 
 export interface ShipmentId {
   shipmentId: string;
@@ -25,7 +9,7 @@ export interface Shipment {
   carrierId: string;
   serviceCode: string;
   externalOrderId: string;
-  items: ShipmentItems[];
+  items: ShipmentItem[];
   taxIdentifiers: TaxIdentifier[];
   externalShipmentId: string;
 
@@ -44,22 +28,22 @@ export interface Shipment {
   packages: Package[];
 }
 
-export interface ShipmentItems {
+export interface ShipmentItem {
   name: string;
   salesOrderId: string;
   salesOrderItemId: string;
-  quantity: number;
+  quantity?: number;
   sku: string;
   externalOrderId: string;
   externalOrderItemId: string;
   asin: string;
-  TaxableE: OrderSourceCode;
+  orderSourceCode: OrderSourceCode;
 }
 
 export interface TaxIdentifier {
   taxableEntityType: TaxableEntityType;
   identifierType: IdentifierType;
-  issuingAuthority: Country;
+  issuingAuthority: Country | string;
   value: string;
 }
 
@@ -163,3 +147,91 @@ export interface RateOptions {
   calculateTaAmount: boolean;
   preferredCurrency: Currency | string;
 }
+
+export type BillToAccount =
+  | "bill_to_country_code"
+  | "bill_to_party"
+  | "bill_to_postal_code";
+
+export type BillToParty = "recipient" | "third_party";
+
+export type Currency = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
+
+export type Contents =
+  | "merchandise"
+  | "documents"
+  | "gift"
+  | "returned_goods"
+  | "sample";
+
+export type NonDelivery = "return_to_sender" | "treat_as_abandoned";
+
+export type DeliveryConfirmation =
+  | "none"
+  | "delivery"
+  | "signature"
+  | "adult_signature"
+  | "direct_signature"
+  | "delivery_mailed";
+
+export type InsuranceProvider =
+  | "none"
+  | "shipsurance"
+  | "carrier"
+  | "third_party";
+
+export type OrderSourceCode =
+  | "amazon_ca"
+  | "amazon_us"
+  | "brightpearl"
+  | "channel_advisor"
+  | "cratejoy"
+  | "ebay"
+  | "etsy"
+  | "jane"
+  | "groupon_goods"
+  | "magento"
+  | "paypal"
+  | "seller_active"
+  | "shopify"
+  | "stitch_labs"
+  | "squarespace"
+  | "three_dcart"
+  | "tophatter"
+  | "walmart"
+  | "woo_commerce"
+  | "volusion";
+
+export type OriginType = "pickup" | "drop_off";
+
+export type PackageCode =
+  | "thick_envelope"
+  | "small_flat_rate_box"
+  | "large_package";
+
+export type PaymentType = "any" | "cash" | "cash_equivalent" | "none";
+
+export type ShipmentStatus =
+  | "pending"
+  | "processing"
+  | "label_purchased"
+  | "cancelled";
+
+export type TaxableEntityType = "shipper" | "recipient";
+
+export type IdentifierType =
+  | "vat"
+  | "eori"
+  | "ssn"
+  | "ein"
+  | "tin"
+  | "ioss"
+  | "pan"
+  | "voec";
+
+export type ValidateAddress =
+  | "no_validation"
+  | "validate_only"
+  | "validate_and_clean";
+
+export type ValidationStatus = "valid" | "invalid" | "has_warnings" | "unknown";

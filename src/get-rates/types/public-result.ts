@@ -1,25 +1,21 @@
 import { InsuranceProvider } from "../../create-label/types/private-request";
-import {
-  Contents,
-  Currency,
-  DeliveryConfirmation,
-  ErrorCode,
-  ErrorSource,
-  ErrorType,
-  NonDelivery,
-  OrderSourceCode,
-  OriginType,
-  ShipmentStatus,
-  ValidationStatus,
-} from "../../enums";
+import { ErrorCode, ErrorSource, ErrorType } from "../../enums";
 
 import {
   AdvancedOptions,
+  Contents,
+  Currency,
   CustomItem,
+  DeliveryConfirmation,
+  NonDelivery,
+  OrderSourceCode,
+  OriginType,
   Package,
-  ShipmentItems,
+  ShipmentItem,
+  ShipmentStatus,
   ShippingAddress,
   TaxIdentifier,
+  ValidationStatus,
 } from "./public";
 
 export interface GetRatesResult {
@@ -27,7 +23,7 @@ export interface GetRatesResult {
   carrierId: string;
   serviceCode: string;
   externalOrderId: string;
-  items: ShipmentItems[];
+  items: ShipmentItem[];
   taxIdentifiers: TaxIdentifier[];
   externalShipmentId: string;
   shipDate: string;
@@ -48,7 +44,7 @@ export interface GetRatesResult {
   originType: OriginType;
   insuranceProvider: InsuranceProvider;
   tags: string[];
-  orderSourceCode: OrderSourceCode | string;
+  orderSourceCode?: OrderSourceCode | string;
   packages: Package[];
   totalWeight: {
     value: number;
