@@ -7,7 +7,7 @@ const {
   mockTrackByTrackingNumber200,
 } = require("../utils/mocks/mock-track-by-tracking-number-200");
 
-describe("trackByTrackingNumber()", () => { 
+describe("trackByTrackingNumber()", () => {
   it("should throw an error if the carrier code is not a string", async () => {
     const shipengine = new ShipEngine({ apiKey });
 
