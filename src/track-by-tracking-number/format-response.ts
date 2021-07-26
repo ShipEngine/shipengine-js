@@ -1,5 +1,5 @@
 import { Response } from "./types/private";
-import { TrackPackageByLabelIdTypes } from ".";
+import { TrackByTrackingNumberTypes } from ".";
 import { TrackingEvent } from "./types/public";
 import {
   TrackingStatusCodes,
@@ -8,13 +8,13 @@ import {
 
 export function formatResponse(
   response: Response.GetTrackingLogResponseBody
-): TrackPackageByLabelIdTypes.Response {
+): TrackByTrackingNumberTypes.Response {
   return formatTrackPackageByLabelIdResult(response);
 }
 
 function formatTrackPackageByLabelIdResult(
   result: Response.GetTrackingLogResponseBody
-): TrackPackageByLabelIdTypes.TrackPackageByLabelIdResult {
+): TrackByTrackingNumberTypes.TrackPackageByTrackingNumberResult {
   return {
     trackingNumber: result.tracking_number || "",
     statusCode: mapStatusCode(result.status_code),

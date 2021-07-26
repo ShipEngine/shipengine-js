@@ -40,5 +40,5 @@ compileFromFile('node_modules/shipengine-json-schema/responses/list_carriers_res
 
 
 // Track By Carrier Code and Tracking Number
-compileFromFile('node_modules/shipengine-json-schema/responses/get_tracking_log_response_body.json')
-.then(ts => fs.writeFileSync('src/track-by-tracking-number/types/private-response.ts', ts))
+// compileFromFile('node_modules/shipengine-json-schema/responses/get_tracking_log_response_body.json')
+// .then(ts => fs.writeFileSync('src/track-by-tracking-number/types/private-response.ts', ts))

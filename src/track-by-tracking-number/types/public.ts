@@ -3,7 +3,7 @@ import {
   TrackingStatusDescription,
 } from "../../enums/tracking-status";
 
-export type Params = { labelId: string };
+export type Params = { trackingNumber: string; carrierCode: string };
 
 export type Response = TrackPackageByTrackingNumberResult;
 
