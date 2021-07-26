@@ -2,6 +2,7 @@ import { AbortController, getUserAgentString } from "../isomorphic.node";
 import { ErrorCode, ErrorSource, ErrorType } from "../enums";
 import { NormalizedConfig } from "../config";
 import { ShipEngineError, RateLimitExceededError } from "../errors";
+import { handle400Errors } from "./handle-400-errors";
 
 export async function get<TResult>(
   endpoint: string,
@@ -63,14 +64,8 @@ async function sendRequestWithRetry<TParams, TResult>(
           `The ShipEngine ${endpoint} API timed out.`
         );
       } else {
-        // Something unexpected happened, like a network error.
-        // No response was received from the server
-        throw new ShipEngineError(
-          ErrorType.System,
-          ErrorCode.Unspecified,
-          `An unknown error occurred while calling the ShipEngine ${endpoint} API:\n` +
-            (error as Error).message
-        );
+        // Re-throw errors that were thrown from within sendRequest
+        throw error;
       }
     }
   }
@@ -104,16 +99,7 @@ async function sendRequest<TParams, TResult>(
     );
   }
 
-  // TODO
-  // if (response.status === 400) {
-  //   throw new ShipEngineError(
-  //     responseBody.request_id,,
-  //     response.error.data.source,
-  //     response.error.data.type,
-  //     response.error.data.code,
-  //     response.error.message
-  //   );
-  // }
+  if (response.status === 400) handle400Errors(responseBody);
 
   return responseBody;
 }
