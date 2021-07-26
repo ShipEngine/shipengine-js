@@ -80,7 +80,7 @@ export class ShipEngine {
   //  *
   //  * @param [config] - Optional configuration overrides for this method call.
   //  */
-  // public async trackPackageByTrackingNumber(
+  // public async trackByTrackingNumber(
   //   params: TrackingParams,
   //   config?: ShipEngineConfig
   // ): Promise<TrackPackageResult> {
