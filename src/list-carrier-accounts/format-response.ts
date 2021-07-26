@@ -1,6 +1,5 @@
 import { ListCarrierAccountsTypes } from ".";
 import { Response } from "./types/private";
-import { DimensionUnit } from "../enums";
 
 export function formatResponse(
   response: Response.ListCarriersResponseBody
@@ -66,7 +65,7 @@ function formatPackageType(
     dimensions:
       p.dimensions && p.dimensions.unit
         ? {
-            unit: p.dimensions.unit as DimensionUnit,
+            unit: p.dimensions.unit as ListCarrierAccountsTypes.DimensionUnit,
             length: p.dimensions.length,
             width: p.dimensions.width,
             height: p.dimensions.height,
