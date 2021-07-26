@@ -8,7 +8,7 @@ const {
   mockTrackByLabelId200,
 } = require("../utils/mocks/mock-track-by-label-id-200");
 
-describe.only("trackByTrackingNumber()", () => { 
+describe("trackByTrackingNumber()", () => { 
   it("should throw an error if the carrier code is not a string", async () => {
     const shipengine = new ShipEngine({ apiKey });
 
@@ -44,7 +44,7 @@ describe.only("trackByTrackingNumber()", () => {
       errors.assertInvalidFieldValueError(error, {
         code: "invalid_field_value",
         fieldName: "Params",
-        message: "Params must be a valid label id.",
+        message: "Params must be a string.",
         name: "InvalidFieldValueError",
         source: "shipengine",
         type: "validation",
@@ -91,13 +91,14 @@ describe.only("trackByTrackingNumber()", () => {
   //   }
   // });
 
-  it("should return tracking information for a valid Label ID", async () => {
+  it.only("should return tracking information for a valid Label ID", async () => {
     mockTrackByLabelId200();
 
     const shipengine = new ShipEngine({ apiKey });
 
     const result = await shipengine.trackByTrackingNumber({
-      carrierCode: "se-1234",
+      carrierCode: "stamps_com",
+      trackingNumber: "1234",
     });
 
     expect(result.trackingNumber).to.equal("332980205337");

@@ -14,7 +14,7 @@ export function formatResponse(
 
 function formatTrackPackageByLabelIdResult(
   result: Response.GetTrackingLogResponseBody
-): TrackByTrackingNumberTypes.TrackPackageByTrackingNumberResult {
+): TrackByTrackingNumberTypes.TrackByTrackingNumberResult {
   return {
     trackingNumber: result.tracking_number || "",
     statusCode: mapStatusCode(result.status_code),
