@@ -5,7 +5,7 @@ import { Response } from "./types/private";
 import { formatResponse } from "./format-response";
 import { validateParams } from "./validate-params";
 
-export * as TrackByLabelIdTypes from "./types/public";
+export { TrackByLabelIdTypes };
 
 /**
  * Returns the tracking information of a package identified by its label id.

@@ -5,7 +5,7 @@ import { Response } from "./types/private";
 import { formatResponse } from "./format-response";
 import { validateParams } from "./validate-params";
 
-export * as TrackByTrackingNumberTypes from "./types/public";
+export { TrackByTrackingNumberTypes };
 
 /**
  * Returns the tracking information of a package identified by its tracking number and carrier code.
