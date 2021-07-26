@@ -1,6 +1,6 @@
 const fetchMock = require("../fetch-mock");
 
-function mockTrackByLabelId200() {
+function mockTrackByTrackingNumber200() {
   fetchMock.get(
     "https://api.shipengine.com/v1/tracking?carrier_code=stamps_com&tracking_number=1234",
     {
@@ -54,4 +54,4 @@ function mockTrackByLabelId200() {
   );
 }
 
-module.exports = { mockTrackByLabelId200 };
+module.exports = { mockTrackByTrackingNumber200 };

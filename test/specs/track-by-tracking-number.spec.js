@@ -2,13 +2,12 @@ const { expect } = require("chai");
 const { ShipEngine } = require("../..");
 const { apiKey } = require("../utils/constants");
 const errors = require("../utils/errors");
-const fetchMock = require("../utils/fetch-mock");
 
 const {
-  mockTrackByLabelId200,
-} = require("../utils/mocks/mock-track-by-label-id-200");
+  mockTrackByTrackingNumber200,
+} = require("../utils/mocks/mock-track-by-tracking-number-200");
 
-describe("trackByTrackingNumber()", () => { 
+describe.only("trackByTrackingNumber()", () => { 
   it("should throw an error if the carrier code is not a string", async () => {
     const shipengine = new ShipEngine({ apiKey });
 
@@ -91,8 +90,8 @@ describe("trackByTrackingNumber()", () => {
   //   }
   // });
 
-  it.only("should return tracking information for a valid Label ID", async () => {
-    mockTrackByLabelId200();
+  it("should return tracking information for a valid Label ID", async () => {
+    mockTrackByTrackingNumber200();
 
     const shipengine = new ShipEngine({ apiKey });
 
