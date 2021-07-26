@@ -1,4 +1,4 @@
-import { ErrorCode, ErrorSource, ErrorType } from "../enums";
+import { ErrorSource } from "../constants";
 import { ShipEngineError } from "./shipengine-error";
 
 /**
@@ -22,8 +22,8 @@ export class RateLimitExceededError extends ShipEngineError {
     super(
       requestID,
       source,
-      ErrorType.System,
-      ErrorCode.RateLimitExceeded,
+      "system",
+      "rate_limit_exceeded",
       `You have exceeded the rate limit.`,
       "https://www.shipengine.com/docs/rate-limits"
     );

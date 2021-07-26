@@ -1,8 +1,3 @@
-import {
-  TrackingStatusCodes,
-  TrackingStatusDescription,
-} from "../../enums/tracking-status";
-
 export type Params = { labelId: string };
 
 export type Response = TrackByLabelIdResult;
@@ -155,3 +150,13 @@ export interface TrackingEvent {
    */
   longitude?: number;
 }
+
+export type TrackingStatusDescription =
+  | "Accepted"
+  | "Attempted Delivery"
+  | "Delivered"
+  | "Exception"
+  | "In Transit"
+  | "Unknown";
+
+export type TrackingStatusCodes = "AC" | "IT" | "DE" | "EX" | "AT" | "UN";
