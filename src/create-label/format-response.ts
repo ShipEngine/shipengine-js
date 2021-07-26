@@ -1,10 +1,10 @@
 import { Response } from "./types/private";
 
-import { CreateLabelTypes } from ".";
+import { CreateLabelResponseTypes } from ".";
 
 export function formatResponse(
   params: Response.CreateLabelResponseBody
-): CreateLabelTypes.PublicResponse.Response {
+): CreateLabelResponseTypes.Response {
   return {
     labelId: params.label_id,
     status: params.status,
@@ -40,7 +40,7 @@ export function formatResponse(
 
 function mapPackages(
   params: Response.Package[] | undefined
-): CreateLabelTypes.PublicResponse.Package[] | undefined {
+): CreateLabelResponseTypes.Package[] | undefined {
   if (!params) return undefined;
   return params.map((pkg) => ({
     packageCode: pkg.package_code,

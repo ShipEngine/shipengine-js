@@ -1,9 +1,9 @@
 import { Request } from "./types/private";
 
-import { CreateLabelTypes } from ".";
+import { CreateLabelRequestTypes } from ".";
 
 export function formatParams(
-  params: CreateLabelTypes.PublicRequest.Params
+  params: CreateLabelRequestTypes.Params
 ): Request.CreateLabelRequestBody {
   return {
     shipment: mapShipment(params.shipment),
@@ -22,7 +22,7 @@ export function formatParams(
 }
 
 function mapShipment(
-  params?: CreateLabelTypes.PublicRequest.Shipment
+  params?: CreateLabelRequestTypes.Shipment
 ): Request.Shipment | undefined {
   if (!params) return undefined;
   return {
@@ -46,7 +46,7 @@ function mapShipment(
   };
 }
 
-function mapPackages(params: CreateLabelTypes.PublicRequest.Package[]): any[] {
+function mapPackages(params: CreateLabelRequestTypes.Package[]): any[] {
   return params.map((pkg) => ({
     package_code: pkg.packageCode,
     weight: pkg.weight,
@@ -58,7 +58,7 @@ function mapPackages(params: CreateLabelTypes.PublicRequest.Package[]): any[] {
 }
 
 function mapTaxIdentifiers(
-  params?: CreateLabelTypes.PublicRequest.TaxIdentifier[]
+  params?: CreateLabelRequestTypes.TaxIdentifier[]
 ): Request.TaxIdentifier[] | undefined {
   if (!params) return undefined;
   return params.map((taxId) => ({
@@ -70,7 +70,7 @@ function mapTaxIdentifiers(
 }
 
 function mapCustoms(
-  params?: CreateLabelTypes.PublicRequest.InternationalShipmentOptions
+  params?: CreateLabelRequestTypes.InternationalShipmentOptions
 ): Request.InternationalShipmentOptions | undefined {
   if (!params) return undefined;
   let custom_items: Request.CustomsItem[] = [];
@@ -93,7 +93,7 @@ function mapCustoms(
 }
 
 function mapAdvancedOptions(
-  params?: CreateLabelTypes.PublicRequest.AdvancedShipmentOptions
+  params?: CreateLabelRequestTypes.AdvancedShipmentOptions
 ): Request.AdvancedShipmentOptions | undefined {
   if (!params) return undefined;
   return {
