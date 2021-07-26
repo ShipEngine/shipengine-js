@@ -1,4 +1,4 @@
-import { ErrorCode, ErrorSource, ErrorType } from "../enums";
+import { ErrorSource } from "../constants";
 import { ShipEngineError } from "./shipengine-error";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -45,7 +45,7 @@ export class InvalidFieldValueError extends ShipEngineError {
       | [string, ErrorSource, string, string]
       | [string, ErrorSource, string, string, FieldValue]
   ) {
-    let requestID, source, fieldName, reason, fieldValue;
+    let requestID, source: ErrorSource, fieldName, reason, fieldValue;
 
     // Determine which overload was called
     if (args.length >= 4) {
@@ -55,7 +55,7 @@ export class InvalidFieldValueError extends ShipEngineError {
       reason = args[3] as string;
       fieldValue = args[4] as FieldValue;
     } else {
-      source = ErrorSource.ShipEngine;
+      source = "shipengine";
       fieldName = args[0] as string;
       reason = args[1] as string;
       fieldValue = args[2] as FieldValue;
@@ -64,8 +64,8 @@ export class InvalidFieldValueError extends ShipEngineError {
     super(
       requestID,
       source,
-      ErrorType.Validation,
-      ErrorCode.InvalidFieldValue,
+      "validation",
+      "invalid_field_value",
       `${fieldName || "Field"} ${reason}`
     );
 

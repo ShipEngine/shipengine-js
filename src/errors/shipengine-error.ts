@@ -1,4 +1,4 @@
-import { ErrorCode, ErrorSource, ErrorType } from "../enums";
+import { ErrorCode, ErrorSource, ErrorType } from "../constants";
 
 /**
  * An error thrown by the ShipEngine SDK.
@@ -77,7 +77,12 @@ export class ShipEngineError extends Error {
       | [string | undefined, ErrorSource, ErrorType, ErrorCode, string]
       | [string | undefined, ErrorSource, ErrorType, ErrorCode, string, string]
   ) {
-    let requestID, source, type, code, message, url;
+    let requestID,
+      source: ErrorSource,
+      type: ErrorType,
+      code: ErrorCode,
+      message,
+      url;
 
     // Determine which overload was called
     if (args.length >= 5) {
@@ -88,7 +93,7 @@ export class ShipEngineError extends Error {
       message = args[4] as string;
       url = args[5] as string;
     } else {
-      source = ErrorSource.ShipEngine;
+      source = "shipengine";
       type = args[0] as ErrorType;
       code = args[1] as ErrorCode;
       message = args[2] as string;

@@ -1,5 +1,3 @@
-import { DimensionUnit } from "../../enums";
-
 /**
  * The listCarrierAccounts response
  */
@@ -122,6 +120,8 @@ export interface PackageType {
 
 /**
  * The package dimensions object
+ *
+ * @see https://www.shipengine.com/docs/shipping/size-and-weight/
  */
 export interface Dimensions {
   unit: DimensionUnit;
@@ -129,6 +129,8 @@ export interface Dimensions {
   width?: number;
   height?: number;
 }
+
+export type DimensionUnit = "in" | "cm";
 
 /**
  * The carrier advanced option object

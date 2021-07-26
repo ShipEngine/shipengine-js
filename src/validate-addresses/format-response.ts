@@ -1,6 +1,5 @@
 import { ValidateAddressesTypes } from ".";
 import { Response } from "./types/private";
-import { ValidationMessageType, Country } from "../enums";
 
 export function formatResponse(
   response: Response.ValidateAddressResponseBody
@@ -25,7 +24,8 @@ function formatAddressValidationResult(
       cityLocality: originalAddressResponse.city_locality,
       stateProvince: originalAddressResponse.state_province,
       postalCode: originalAddressResponse.postal_code,
-      countryCode: originalAddressResponse.country_code as Country,
+      countryCode:
+        originalAddressResponse.country_code as ValidateAddressesTypes.Country,
       addressResidentialIndicator:
         originalAddressResponse.address_residential_indicator,
     },
@@ -33,24 +33,11 @@ function formatAddressValidationResult(
       normalizedAddressResponse &&
       mapNormalizedAddress(normalizedAddressResponse),
     messages: result.messages.map((m) => ({
-      detailCode: m.detail_code!,
+      detailCode: m.detail_code,
       message: m.message,
-      type: mapMessageType(m.type!),
+      type: m.type,
     })),
   };
-}
-
-function mapMessageType(
-  type: Response.AddressValidationMessageType
-): ValidationMessageType {
-  switch (type) {
-    case "error":
-      return ValidationMessageType.Error;
-    case "info":
-      return ValidationMessageType.Info;
-    case "warning":
-      return ValidationMessageType.Warning;
-  }
 }
 
 function mapNormalizedAddress(
@@ -65,7 +52,8 @@ function mapNormalizedAddress(
     cityLocality: normalizedAddressResponse.city_locality,
     stateProvince: normalizedAddressResponse.state_province,
     postalCode: normalizedAddressResponse.postal_code,
-    countryCode: normalizedAddressResponse.country_code as Country,
+    countryCode:
+      normalizedAddressResponse.country_code as ValidateAddressesTypes.Country,
     addressResidentialIndicator:
       normalizedAddressResponse.address_residential_indicator,
   };
