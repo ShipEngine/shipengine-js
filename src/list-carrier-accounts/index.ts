@@ -3,7 +3,7 @@ import { NormalizedConfig } from "../config";
 import { get } from "../client";
 import * as ListCarrierAccountsTypes from "./types/public";
 import { Response } from "./types/private";
-// import { formatResult } from "./format-result";
+import { formatResponse } from "./format-response";
 
 export { ListCarrierAccountsTypes };
 
@@ -15,11 +15,11 @@ export { ListCarrierAccountsTypes };
  */
 export async function listCarrierAccounts(
   config: NormalizedConfig
-): Promise<any> {
+): Promise<ListCarrierAccountsTypes.Response> {
   const response = await get<Response.ListCarriersResponseBody>(
     "/v1/carriers",
     config
   );
 
-  return response;
+  return formatResponse(response);
 }
