@@ -26,12 +26,12 @@ function formatCarrier(
     primary: carrier.primary,
     hasMultiPackageSupportingServices:
       carrier.has_multi_package_supporting_services,
-    supports_label_messages: carrier.supports_label_messages,
+    supportsLabelMessages: carrier.supports_label_messages,
     services: carrier.services
       ? carrier.services.map((service) => formatService(service))
       : [],
     packages: carrier.packages
-      ? carrier.packages.map((p) => formatPackage(p))
+      ? carrier.packages.map((p) => formatPackageType(p))
       : [],
     options: carrier.options
       ? carrier.options.map((option) => formatOption(option))
@@ -53,9 +53,9 @@ function formatService(
   };
 }
 
-function formatPackage(
+function formatPackageType(
   p: Response.PackageType
-): ListCarrierAccountsTypes.Package {
+): ListCarrierAccountsTypes.PackageType {
   return {
     packageId: p.package_id || "",
     packageCode: p.package_code || "",
@@ -74,7 +74,7 @@ function formatPackage(
 
 function formatOption(
   option: Response.CarrierAdvancedOption
-): ListCarrierAccountsTypes.Options {
+): ListCarrierAccountsTypes.AdvancedOption {
   return {
     name: option.name || "",
     defaultValue: option.default_value || "",

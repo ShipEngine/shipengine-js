@@ -102,7 +102,7 @@ describe("listCarrierAccounts()", () => {
         friendlyName: "Stamps.com",
         primary: false,
         hasMultiPackageSupportingServices: false,
-        supports_label_messages: true,
+        supportsLabelMessages: true,
         services: [
           {
             carrierCode: "stamps_com",
