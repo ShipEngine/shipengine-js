@@ -1,0 +1,1 @@
+// Either Ship From or Warehouse ID must be set.
