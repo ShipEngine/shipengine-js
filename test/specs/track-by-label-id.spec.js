@@ -2,7 +2,6 @@ const { expect } = require("chai");
 const { ShipEngine } = require("../..");
 const { apiKey } = require("../utils/constants");
 const errors = require("../utils/errors");
-const fetchMock = require("../utils/fetch-mock");
 
 const {
   mockTrackByLabelId200,
