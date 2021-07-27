@@ -1,18 +1,6 @@
 import { ErrorType, ErrorCode } from "../constants";
 import { ShipEngineError } from "../errors";
 
-// export interface ShipEngineErrorOne {
-//   request_id: string;
-//   error: {
-//     message: string;
-//   };
-// }
-
-// export interface ShipEngineErrorTwo {
-//   request_id: string;
-//   error: string;
-// }
-
 type StructuredError = {
   request_id: string;
   errors: [
