@@ -1,10 +1,6 @@
 import { Response } from "./types/private";
 import { TrackByLabelIdTypes } from ".";
-import {
-  TrackingEvent,
-  TrackingStatusCodes,
-  TrackingStatusDescription,
-} from "./types/public";
+import { TrackingEvent } from "./types/public";
 
 export function formatResponse(
   response: Response.GetTrackingLogFromLabelResponseBody
@@ -17,9 +13,12 @@ function formatTrackByLabelIdResult(
 ): TrackByLabelIdTypes.TrackByLabelIdResult {
   return {
     trackingNumber: result.tracking_number || "",
-    statusCode: (result.status_code as TrackingStatusCodes) || "UN",
+    statusCode:
+      (result.status_code as TrackByLabelIdTypes.Response["statusCode"]) ||
+      "UN",
     statusDescription:
-      (result.status_description as TrackingStatusDescription) || "Unknown",
+      (result.status_description as TrackByLabelIdTypes.Response["statusDescription"]) ||
+      "Unknown",
     carrierStatusCode: result.carrier_status_code || "",
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore

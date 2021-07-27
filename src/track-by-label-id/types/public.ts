@@ -15,12 +15,18 @@ export interface TrackByLabelIdResult {
   /**
    * Status Code
    */
-  statusCode: TrackingStatusCodes;
+  statusCode: "AC" | "IT" | "DE" | "EX" | "AT" | "UN";
 
   /**
    * Status Description
    */
-  statusDescription: TrackingStatusDescription;
+  statusDescription:
+    | "Accepted"
+    | "Attempted Delivery"
+    | "Delivered"
+    | "Exception"
+    | "In Transit"
+    | "Unknown";
 
   /**
    * Carrier Detail Code
@@ -150,13 +156,3 @@ export interface TrackingEvent {
    */
   longitude?: number;
 }
-
-export type TrackingStatusDescription =
-  | "Accepted"
-  | "Attempted Delivery"
-  | "Delivered"
-  | "Exception"
-  | "In Transit"
-  | "Unknown";
-
-export type TrackingStatusCodes = "AC" | "IT" | "DE" | "EX" | "AT" | "UN";
