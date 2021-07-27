@@ -8,6 +8,7 @@ import {
 } from "./list-carrier-accounts";
 import { voidLabelById, VoidLabelByIdTypes } from "./void-label-by-id";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
+import { TrackByLabelIdTypes, trackByLabelId } from "./track-by-label-id";
 import { createLabel, CreateLabelTypes } from "./create-label";
 
 /**
@@ -72,11 +73,7 @@ export class ShipEngine {
   }
 
   // /**
-  //  * Tracks a package.
-  //  *
-  //  * @param [packageId]
-  //  * The packageId of the package you wish to track. You must not provide the carrierCode or the packageId
-  //  * when using the parameter.
+  //  * Tracks a package based on the trackingNumber and carrierCode.
   //  *
   //  * @param [trackingNumber]
   //  * The trackingNumber of the package you wish to track. You must also provide the carrierCode and no packageId.
@@ -88,7 +85,7 @@ export class ShipEngine {
   //  *
   //  * @param [config] - Optional configuration overrides for this method call.
   //  */
-  // public async trackPackage(
+  // public async trackByTrackingNumber(
   //   params: TrackingParams,
   //   config?: ShipEngineConfig
   // ): Promise<TrackPackageResult> {
@@ -96,6 +93,21 @@ export class ShipEngine {
   //   return trackPackage(params, mergedConfig, this);
   // }
 
+  /**
+   * Tracks a shipment by Label ID.
+   *
+   * @param [labelId]
+   * The labelId that contains the package you wish to track.
+
+  * @param [config] - Optional configuration overrides for this method call.
+   */
+  public async trackByLabelId(
+    params: TrackByLabelIdTypes.Params,
+    config?: ShipEngineConfig
+  ): Promise<TrackByLabelIdTypes.Response> {
+    const mergedConfig = NormalizedConfig.merge(this.config, config);
+    return trackByLabelId(params, mergedConfig);
+  }
   /**
    * Create a label for shipment
    *
@@ -127,11 +139,4 @@ export class ShipEngine {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return voidLabelById(id, mergedConfig);
   }
-
-  // /**
-  //  * Clear the SDK Cache
-  //  */
-  // public clearCache(): void {
-  //   clearAccountCache();
-  // }
 }
