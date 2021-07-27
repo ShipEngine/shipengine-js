@@ -152,14 +152,14 @@ describe("listCarrierAccounts()", () => {
         ],
         packages: [
           {
-            dimensions: undefined,
+            dimensions: null,
             name: "Cubic",
             packageCode: "cubic",
             description: "Cubic",
             packageId: null,
           },
           {
-            dimensions: undefined,
+            dimensions: null,
             name: "Flat Rate Envelope",
             packageCode: "flat_rate_envelope",
             description:

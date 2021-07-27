@@ -18,14 +18,14 @@ function formatCarrier(
     carrierId: carrier.carrier_id!, // Error in generated types
     carrierCode: carrier.carrier_code!, // Error in generated types
     accountNumber: carrier.account_number!, // Error in generated types
-    requiresFundedAmount: carrier.requires_funded_amount || null,
+    requiresFundedAmount: carrier.requires_funded_amount!, // Error in generated types
     balance: carrier.balance || null,
     nickname: carrier.nickname || null,
     friendlyName: carrier.friendly_name || null,
-    primary: carrier.primary || null,
+    primary: carrier.primary!, // Error in generated types
     hasMultiPackageSupportingServices:
-      carrier.has_multi_package_supporting_services || null,
-    supportsLabelMessages: carrier.supports_label_messages || null,
+      carrier.has_multi_package_supporting_services!, // Error in generated types
+    supportsLabelMessages: carrier.supports_label_messages!, // Error in generated types
     services: carrier.services
       ? carrier.services.map((service) => formatService(service))
       : [],
@@ -46,9 +46,9 @@ function formatService(
     carrierCode: service.carrier_code!, // Error in generated types
     serviceCode: service.service_code!, // Error in generated types
     name: service.name || null,
-    domestic: service.domestic || null,
-    international: service.international || null,
-    isMultiPackageSupported: service.is_multi_package_supported || null,
+    domestic: service.domestic!,
+    international: service.international!,
+    isMultiPackageSupported: service.is_multi_package_supported!,
   };
 }
 
@@ -64,11 +64,11 @@ function formatPackageType(
     description: p.description!, // Error in generated types
     dimensions: p.dimensions
       ? {
-          unit: p.dimensions.unit as unknown as NonNullable<
+          unit: p.dimensions.unit as NonNullable<
             NonNullable<
               ListCarrierAccountsTypes.Result[0]["packages"]
             >[0]["dimensions"]
-          >,
+          >["unit"],
           length: p.dimensions.length,
           width: p.dimensions.width,
           height: p.dimensions.height,
