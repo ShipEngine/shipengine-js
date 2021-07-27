@@ -1,2 +1,2 @@
-export * from "./public-params";
-export * from "./public-result";
+export * from "./public-request";
+export * from "./public-response";
