@@ -9,6 +9,10 @@ import {
 import { voidLabelById, VoidLabelByIdTypes } from "./void-label-by-id";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
 import { createLabel, CreateLabelTypes } from "./create-label";
+import {
+  createLabelFromRate,
+  CreateLabelFromRateTypes,
+} from "./create-label-from-rate";
 
 /**
  * Exposes the functionality of the ShipEngine API.
@@ -110,6 +114,22 @@ export class ShipEngine {
   ): Promise<CreateLabelTypes.Response> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return createLabel(params, mergedConfig);
+  }
+
+  /**
+   * Create a label with a rateId
+   *
+   * @param rate
+   * The rate and additional params for creating a label.
+   *
+   * @param [config] - Optional configuration overrides for this method call.
+   */
+  public async createLabelFromRate(
+    params: CreateLabelFromRateTypes.Params,
+    config?: ShipEngineConfig
+  ): Promise<CreateLabelFromRateTypes.Response> {
+    const mergedConfig = NormalizedConfig.merge(this.config, config);
+    return createLabelFromRate(params, mergedConfig);
   }
 
   /**
