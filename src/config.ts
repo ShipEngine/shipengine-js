@@ -1,4 +1,3 @@
-import { ErrorCode, ErrorType } from "./enums";
 import { ShipEngineError } from "./errors";
 import * as assert from "./utils/assert";
 
@@ -68,8 +67,8 @@ export class NormalizedConfig {
       (typeof config.apiKey === "string" && config.apiKey.trim().length === 0)
     ) {
       throw new ShipEngineError(
-        ErrorType.Validation,
-        ErrorCode.FieldValueRequired,
+        "validation",
+        "field_value_required",
         "A ShipEngine API key must be specified."
       );
     }

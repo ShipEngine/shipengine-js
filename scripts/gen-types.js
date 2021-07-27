@@ -39,3 +39,11 @@ compileFromFile('node_modules/shipengine-json-schema/requests/calculate_rates_re
 
 compileFromFile('node_modules/shipengine-json-schema/responses/calculate_rates_response_body.json')
 .then(ts => fs.writeFileSync('src/get-rates/types/private-response.ts', ts))
+
+// Track By Label ID
+compileFromFile('node_modules/shipengine-json-schema/responses/get_tracking_log_from_label_response_body.json')
+.then(ts => fs.writeFileSync('src/track-by-label-id/types/private-response.ts', ts))
+
+// Void Label
+compileFromFile('node_modules/shipengine-json-schema/responses/void_label_response_body.json')
+  .then(ts => fs.writeFileSync('src/void-label-by-id/types/private-response.ts', ts))

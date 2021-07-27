@@ -1,10 +1,9 @@
 import { ListCarrierAccountsTypes } from ".";
 import { Response } from "./types/private";
-import { DimensionUnit } from "../enums";
 
 export function formatResponse(
   response: Response.ListCarriersResponseBody
-): ListCarrierAccountsTypes.Response {
+): ListCarrierAccountsTypes.Result {
   if (response.carriers && Array.isArray(response.carriers)) {
     return response.carriers.map((carrier) => formatCarrier(carrier));
   } else {
@@ -14,19 +13,19 @@ export function formatResponse(
 
 function formatCarrier(
   carrier: Response.Carrier
-): ListCarrierAccountsTypes.Carrier {
+): ListCarrierAccountsTypes.Result[0] {
   return {
-    carrierId: carrier.carrier_id!,
-    carrierCode: carrier.carrier_code!,
-    accountNumber: carrier.account_number!,
-    requiresFundedAmount: carrier.requires_funded_amount,
-    balance: carrier.balance,
-    nickname: carrier.nickname,
-    friendlyName: carrier.friendly_name,
-    primary: carrier.primary,
+    carrierId: carrier.carrier_id!, // Error in generated types
+    carrierCode: carrier.carrier_code!, // Error in generated types
+    accountNumber: carrier.account_number!, // Error in generated types
+    requiresFundedAmount: carrier.requires_funded_amount!, // Error in generated types
+    balance: carrier.balance!, // Error in generated types
+    nickname: carrier.nickname!, // Error in generated types
+    friendlyName: carrier.friendly_name!, // Error in generated types
+    primary: carrier.primary!, // Error in generated types
     hasMultiPackageSupportingServices:
-      carrier.has_multi_package_supporting_services,
-    supportsLabelMessages: carrier.supports_label_messages,
+      carrier.has_multi_package_supporting_services!, // Error in generated types
+    supportsLabelMessages: carrier.supports_label_messages!, // Error in generated types
     services: carrier.services
       ? carrier.services.map((service) => formatService(service))
       : [],
@@ -41,48 +40,51 @@ function formatCarrier(
 
 function formatService(
   service: Response.Service
-): ListCarrierAccountsTypes.Service {
+): NonNullable<ListCarrierAccountsTypes.Result[0]["services"]>[0] {
   return {
-    carrierId: service.carrier_id!,
-    carrierCode: service.carrier_code!,
-    serviceCode: service.service_code!,
-    name: service.name,
-    domestic: service.domestic,
-    international: service.international,
-    isMultiPackageSupported: service.is_multi_package_supported,
+    carrierId: service.carrier_id!, // Error in generated types
+    carrierCode: service.carrier_code!, // Error in generated types
+    serviceCode: service.service_code!, // Error in generated types
+    name: service.name || null,
+    domestic: service.domestic!,
+    international: service.international!,
+    isMultiPackageSupported: service.is_multi_package_supported!,
   };
 }
 
 function formatPackageType(
   p: Response.PackageType
-): ListCarrierAccountsTypes.PackageType {
+): NonNullable<ListCarrierAccountsTypes.Result[0]["packages"]>[0] {
   return {
-    packageId: p.package_id,
+    packageId: p.package_id || null, // Error in generated types
     packageCode: p.package_code,
     name: p.name,
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    description: p.description!,
-    dimensions:
-      p.dimensions && p.dimensions.unit
-        ? {
-            unit: p.dimensions.unit as DimensionUnit,
-            length: p.dimensions.length,
-            width: p.dimensions.width,
-            height: p.dimensions.height,
-          }
-        : undefined,
+    description: p.description!, // Error in generated types
+    dimensions: p.dimensions
+      ? {
+          unit: p.dimensions.unit as NonNullable<
+            NonNullable<
+              ListCarrierAccountsTypes.Result[0]["packages"]
+            >[0]["dimensions"]
+          >["unit"],
+          length: p.dimensions.length,
+          width: p.dimensions.width,
+          height: p.dimensions.height,
+        }
+      : null,
   };
 }
 
 function formatOption(
   option: Response.CarrierAdvancedOption
-): ListCarrierAccountsTypes.AdvancedOption {
+): NonNullable<ListCarrierAccountsTypes.Result[0]["options"]>[0] {
   return {
-    name: option.name,
-    defaultValue: option.default_value,
+    name: option.name || null, // Error in generated types
+    defaultValue: option.default_value || null, // Error in generated types
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    description: option.description!,
+    description: option.description || null, // Error in generated types
   };
 }

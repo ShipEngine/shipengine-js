@@ -1,8 +1,9 @@
 import { AbortController, getUserAgentString } from "../isomorphic.node";
-import { ErrorCode, ErrorSource, ErrorType } from "../enums";
 import { NormalizedConfig } from "../config";
 import { ShipEngineError, RateLimitExceededError } from "../errors";
 import { handle400Errors } from "./handle-400-errors";
+import { handle404Errors } from "./handle-404-errors";
+import { handle500Errors } from "./handle-500-errors";
 
 export async function get<TResult>(
   endpoint: string,
@@ -59,8 +60,8 @@ async function sendRequestWithRetry<TParams, TResult>(
       } else if (error.name === "AbortError") {
         // The request timed out
         throw new ShipEngineError(
-          ErrorType.System,
-          ErrorCode.Timeout,
+          "system",
+          "timeout",
           `The ShipEngine ${endpoint} API timed out.`
         );
       } else {
@@ -94,12 +95,14 @@ async function sendRequest<TParams, TResult>(
   if (response.status === 429) {
     throw new RateLimitExceededError(
       responseBody.request_id,
-      ErrorSource.ShipEngine,
+      "shipengine",
       Number(response.headers.get("Retry-After")) || 0
     );
   }
 
   if (response.status === 400) handle400Errors(responseBody);
+  if (response.status === 404) handle404Errors(responseBody);
+  if (response.status === 500) handle500Errors();
 
   return responseBody;
 }

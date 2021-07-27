@@ -9,10 +9,6 @@ const path = require("path");
 // const pjson = require("../../package.json");
 
 describe("exports and versions", () => {
-  it("should export all of the enumerations", () => {
-    assertFileExports("src/enums");
-  });
-
   it("should export all of the error classes", () => {
     assertFileExports("src/errors");
   });

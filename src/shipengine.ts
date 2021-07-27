@@ -6,7 +6,10 @@ import {
   listCarrierAccounts,
   ListCarrierAccountsTypes,
 } from "./list-carrier-accounts";
+import { voidLabelById, VoidLabelByIdTypes } from "./void-label-by-id";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
+import { TrackByLabelIdTypes, trackByLabelId } from "./track-by-label-id";
+import { createLabel, CreateLabelTypes } from "./create-label";
 
 /**
  * Exposes the functionality of the ShipEngine API.
@@ -51,7 +54,7 @@ export class ShipEngine {
   public async validateAddresses(
     params: ValidateAddressesTypes.Params,
     config?: ShipEngineConfig
-  ): Promise<ValidateAddressesTypes.Response> {
+  ): Promise<ValidateAddressesTypes.Result> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return validateAddresses(params, mergedConfig);
   }
@@ -64,17 +67,13 @@ export class ShipEngine {
    */
   public async listCarrierAccounts(
     config?: ShipEngineConfig
-  ): Promise<ListCarrierAccountsTypes.Response> {
+  ): Promise<ListCarrierAccountsTypes.Result> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return listCarrierAccounts(mergedConfig);
   }
 
   // /**
-  //  * Tracks a package.
-  //  *
-  //  * @param [packageId]
-  //  * The packageId of the package you wish to track. You must not provide the carrierCode or the packageId
-  //  * when using the parameter.
+  //  * Tracks a package based on the trackingNumber and carrierCode.
   //  *
   //  * @param [trackingNumber]
   //  * The trackingNumber of the package you wish to track. You must also provide the carrierCode and no packageId.
@@ -86,7 +85,7 @@ export class ShipEngine {
   //  *
   //  * @param [config] - Optional configuration overrides for this method call.
   //  */
-  // public async trackPackage(
+  // public async trackByTrackingNumber(
   //   params: TrackingParams,
   //   config?: ShipEngineConfig
   // ): Promise<TrackPackageResult> {
@@ -94,10 +93,50 @@ export class ShipEngine {
   //   return trackPackage(params, mergedConfig, this);
   // }
 
-  // /**
-  //  * Clear the SDK Cache
-  //  */
-  // public clearCache(): void {
-  //   clearAccountCache();
-  // }
+  /**
+   * Tracks a shipment by Label ID.
+   *
+   * @param [labelId]
+   * The labelId that contains the package you wish to track.
+
+  * @param [config] - Optional configuration overrides for this method call.
+   */
+  public async trackByLabelId(
+    params: TrackByLabelIdTypes.Params,
+    config?: ShipEngineConfig
+  ): Promise<TrackByLabelIdTypes.Response> {
+    const mergedConfig = NormalizedConfig.merge(this.config, config);
+    return trackByLabelId(params, mergedConfig);
+  }
+  /**
+   * Create a label for shipment
+   *
+   * @param label
+   * The label that you want to create.
+   *
+   * @param [config] - Optional configuration overrides for this method call.
+   */
+  public async createLabel(
+    params: CreateLabelTypes.Params,
+    config?: ShipEngineConfig
+  ): Promise<CreateLabelTypes.Response> {
+    const mergedConfig = NormalizedConfig.merge(this.config, config);
+    return createLabel(params, mergedConfig);
+  }
+
+  /**
+   * Void a label by its ID
+   *
+   * @param label ID
+   * The ID for the label being voided.
+   *
+   * @param [config] - Optional configuration overrides for this method call.
+   */
+  public async voidLabelById(
+    id: string,
+    config?: ShipEngineConfig
+  ): Promise<VoidLabelByIdTypes.Result> {
+    const mergedConfig = NormalizedConfig.merge(this.config, config);
+    return voidLabelById(id, mergedConfig);
+  }
 }

@@ -1,4 +1,4 @@
-import { ErrorCode, ErrorSource, ErrorType } from "../enums";
+import { ErrorSource } from "../constants";
 import { ShipEngineError } from "./shipengine-error";
 
 /**
@@ -22,7 +22,7 @@ export class FieldValueRequiredError extends ShipEngineError {
   public constructor(requestID: string, source: ErrorSource, fieldName: string);
 
   public constructor(...args: [string] | [string, ErrorSource, string]) {
-    let requestID, source, fieldName;
+    let requestID, source: ErrorSource, fieldName;
 
     // Determine which overload was called
     if (args.length >= 3) {
@@ -30,15 +30,15 @@ export class FieldValueRequiredError extends ShipEngineError {
       source = args[1] as ErrorSource;
       fieldName = args[2] as string;
     } else {
-      source = ErrorSource.ShipEngine;
+      source = "shipengine";
       fieldName = args[0] as string;
     }
 
     super(
       requestID,
       source,
-      ErrorType.Validation,
-      ErrorCode.FieldValueRequired,
+      "validation",
+      "field_value_required",
       `${fieldName || "Field"} is required.`
     );
 

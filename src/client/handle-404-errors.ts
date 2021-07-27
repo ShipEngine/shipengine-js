@@ -17,7 +17,7 @@ export function isNetworkStructuredError(error: any): error is StructuredError {
   return typeof error.request_id === "string" && Array.isArray(error.errors);
 }
 
-export function handle400Errors(body: StructuredError): unknown {
+export function handle404Errors(body: StructuredError): unknown {
   if (isNetworkStructuredError(body)) {
     throw new ShipEngineError(
       body.request_id,

@@ -59,6 +59,7 @@ describe("validateAddresses()", () => {
         originalAddress: {
           name: "John Smith",
           companyName: null,
+          phone: null,
           addressLine1: "3910 Bailey Lane",
           addressLine2: null,
           addressLine3: null,
@@ -71,6 +72,7 @@ describe("validateAddresses()", () => {
         normalizedAddress: {
           name: "JOHN SMITH",
           companyName: null,
+          phone: null,
           addressLine1: "3910 BAILEY LN",
           addressLine2: null,
           addressLine3: null,
@@ -147,6 +149,7 @@ describe("validateAddresses()", () => {
         status: "verified",
         originalAddress: {
           name: "John Smith",
+          phone: null,
           companyName: "ShipStation",
           addressLine1: "3800 N Lamar Blvd",
           addressLine2: "#220",
@@ -159,6 +162,7 @@ describe("validateAddresses()", () => {
         },
         normalizedAddress: {
           name: "JOHN SMITH",
+          phone: null,
           companyName: "SHIPSTATION",
           addressLine1: "3800 N LAMAR BLVD STE 220",
           addressLine2: null,
@@ -246,6 +250,7 @@ describe("validateAddresses()", () => {
         status: "error",
         originalAddress: {
           name: "John Smith",
+          phone: null,
           companyName: null,
           addressLine1: "Winchester Blvd",
           addressLine2: null,
@@ -259,6 +264,7 @@ describe("validateAddresses()", () => {
         normalizedAddress: {
           name: "JOHN SMITH",
           companyName: null,
+          phone: null,
           addressLine1: "WINCHESTER BLVD",
           addressLine2: null,
           addressLine3: null,
@@ -474,6 +480,7 @@ describe("validateAddresses()", () => {
         originalAddress: {
           name: "John Smith",
           companyName: "ShipStation",
+          phone: null,
           addressLine1: "3800 N Lamar Blvd",
           addressLine2: "#220",
           addressLine3: null,
@@ -486,6 +493,7 @@ describe("validateAddresses()", () => {
         normalizedAddress: {
           name: "JOHN SMITH",
           companyName: "SHIPSTATION",
+          phone: null,
           addressLine1: "3800 N LAMAR BLVD STE 220",
           addressLine2: null,
           addressLine3: null,
@@ -502,4 +510,53 @@ describe("validateAddresses()", () => {
 
   // TODO - not sure how to test this w/ fetchMock
   // it("Throws an error when the request timesout", async () => {});
+
+  it("Throws an error if the request returns a 500", async () => {
+    fetchMock.postOnce(
+      "https://api.shipengine.com/v1/addresses/validate",
+      {
+        status: 500,
+        body: {
+          request_id: "123456789132456789123465789",
+          error: {
+            message: "Something bad happened",
+          },
+        },
+      },
+      { overwriteRoutes: false }
+    );
+
+    const shipengine = new ShipEngine({ apiKey });
+
+    const addressToValidate = [
+      {
+        name: "John Smith",
+        companyName: "ShipStation",
+        addressLine1: "3800 N Lamar Blvd",
+        addressLine2: "#220",
+        cityLocality: "Austin",
+        stateProvince: "TX",
+        postalCode: "78756",
+        countryCode: "US",
+        addressResidentialIndicator: "no",
+      },
+    ];
+
+    try {
+      await shipengine.validateAddresses(addressToValidate);
+      errors.shouldHaveThrown();
+    } catch (error) {
+      errors.assertShipEngineError(error, {
+        name: "ShipEngineError",
+        source: "shipengine",
+        type: "system",
+        code: "unspecified",
+        message: "An unknown error occurred while calling the ShipEngine API.",
+      });
+
+      expect(error.requestId).to.be.undefined;
+    }
+
+    fetchMock.restore();
+  });
 });

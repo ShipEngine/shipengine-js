@@ -17,7 +17,7 @@ export { ValidateAddressesTypes };
 export async function validateAddresses(
   params: ValidateAddressesTypes.Params,
   config: NormalizedConfig
-): Promise<ValidateAddressesTypes.Response> {
+): Promise<ValidateAddressesTypes.Result> {
   validateParams(params);
 
   const formattedParams = formatParams(params);
