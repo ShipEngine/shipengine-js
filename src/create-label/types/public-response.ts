@@ -23,7 +23,7 @@ interface Label {
   insuranceCost: MonetaryValue;
   trackingNumber: string;
   isReturnLabel: boolean;
-  rmaNumber: string;
+  rmaNumber: string | null;
   isInternational: boolean;
   batchId: string;
   carrierId: string;
@@ -36,12 +36,12 @@ interface Label {
   displayScheme: DisplayScheme;
   labelLayout: LabelLayout;
   trackable: boolean;
-  labelImageId: string;
+  labelImageId: string | null;
   carrierCode: string;
   trackingStatus: TrackingStatus;
   labelDownload: LabelDownload;
-  formDownload: Link;
-  insuranceClaim: Link;
+  formDownload: Link | null;
+  insuranceClaim: Link | null;
   packages: Package[];
 }
 
@@ -51,25 +51,25 @@ interface MonetaryValue {
 }
 
 interface LabelDownload {
-  href?: string;
-  pdf?: string;
-  png?: string;
-  zpl?: string;
+  href: string;
+  pdf: string;
+  png: string;
+  zpl: string;
 }
 
 interface Link {
-  href?: string;
-  type?: string;
+  href: string;
+  type: string;
 }
 
 interface Package {
-  packageCode?: string;
+  packageCode: string;
   weight: Weight;
-  dimensions?: Dimensions;
-  insuredValue?: MonetaryValue;
-  trackingNumber?: string;
-  labelMessages?: LabelMessages;
-  externalPackageId?: string;
+  dimensions: Dimensions;
+  insuredValue: MonetaryValue;
+  trackingNumber: string;
+  labelMessages: LabelMessages;
+  externalPackageId: string;
 }
 
 interface Weight {
@@ -85,7 +85,7 @@ interface Dimensions {
 }
 
 interface LabelMessages {
-  reference1?: string;
-  reference2?: string;
-  reference3?: string;
+  reference1: string | null;
+  reference2: string | null;
+  reference3: string | null;
 }

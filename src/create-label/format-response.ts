@@ -31,10 +31,41 @@ export function formatResponse(
     labelImageId: params.label_image_id!,
     carrierCode: params.carrier_code!,
     trackingStatus: params.tracking_status!,
-    labelDownload: params.label_download!,
-    formDownload: params.form_download!,
-    insuranceClaim: params.insurance_claim!,
+    labelDownload: mapLabelDownload(params.label_download!),
+    formDownload: mapFormDownload(params.form_download),
+    insuranceClaim: mapInsuranceClaim(params.insurance_claim),
     packages: mapPackages(params.packages!)!,
+  };
+}
+
+function mapLabelDownload(
+  params: Response.LabelDownload
+): CreateLabelTypes.Response["labelDownload"] {
+  return {
+    href: params.href!,
+    pdf: params.pdf!,
+    png: params.png!,
+    zpl: params.zpl!,
+  };
+}
+
+function mapFormDownload(
+  params: Response.Link | undefined
+): CreateLabelTypes.Response["formDownload"] | null {
+  if (!params) return null;
+  return {
+    href: params.href!,
+    type: params.type!,
+  };
+}
+
+function mapInsuranceClaim(
+  params: Response.Link | undefined
+): CreateLabelTypes.Response["insuranceClaim"] | null {
+  if (!params) return null;
+  return {
+    href: params.href!,
+    type: params.type!,
   };
 }
 
@@ -42,12 +73,12 @@ function mapPackages(
   params: Response.Package[]
 ): CreateLabelTypes.Response["packages"][0][] {
   return params.map((pkg) => ({
-    packageCode: pkg.package_code,
-    trackingNumber: pkg.tracking_number,
-    weight: pkg.weight,
-    dimensions: pkg.dimensions,
-    insuredValue: pkg.insured_value,
-    labelMessages: pkg.label_messages,
-    externalPackageId: pkg.external_package_id,
+    packageCode: pkg.package_code!,
+    trackingNumber: pkg.tracking_number!,
+    weight: pkg.weight!,
+    dimensions: pkg.dimensions!,
+    insuredValue: pkg.insured_value!,
+    labelMessages: pkg.label_messages!,
+    externalPackageId: pkg.external_package_id!,
   }));
 }
