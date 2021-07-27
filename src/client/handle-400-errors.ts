@@ -1,4 +1,4 @@
-import { ErrorSource, ErrorType, ErrorCode } from "../enums";
+import { ErrorType, ErrorCode } from "../constants";
 import { ShipEngineError } from "../errors";
 
 // export interface ShipEngineErrorOne {
@@ -33,15 +33,15 @@ export function handle400Errors(body: NetworkError): unknown {
   if (isNetworkError(body)) {
     throw new ShipEngineError(
       body.request_id,
-      ErrorSource.ShipEngine,
+      "shipengine",
       body.errors[0].error_type as ErrorType,
       body.errors[0].error_code as ErrorCode,
       body.errors[0].message
     );
   } else {
     throw new ShipEngineError(
-      ErrorType.System,
-      ErrorCode.Unspecified,
+      "system",
+      "unspecified",
       "An unknown error occurred while calling the ShipEngine API"
     );
   }
