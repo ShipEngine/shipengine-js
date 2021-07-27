@@ -1,9 +1,9 @@
 import { Request } from "./types/private";
 
-import { CreateLabelRequestTypes } from ".";
+import { CreateLabelTypes } from ".";
 
 export function formatParams(
-  params: CreateLabelRequestTypes.Params
+  params: CreateLabelTypes.Params
 ): Request.CreateLabelRequestBody {
   return {
     shipment: mapShipment(params.shipment),
@@ -22,7 +22,7 @@ export function formatParams(
 }
 
 function mapShipment(
-  params?: CreateLabelRequestTypes.Shipment
+  params?: CreateLabelTypes.Params["shipment"]
 ): Request.Shipment | undefined {
   if (!params) return undefined;
   return {
@@ -46,7 +46,9 @@ function mapShipment(
   };
 }
 
-function mapPackages(params: CreateLabelRequestTypes.Package[]): any[] {
+function mapPackages(
+  params: CreateLabelTypes.Params["shipment"]["packages"][0][]
+): any[] {
   return params.map((pkg) => ({
     package_code: pkg.packageCode,
     weight: pkg.weight,
@@ -58,7 +60,7 @@ function mapPackages(params: CreateLabelRequestTypes.Package[]): any[] {
 }
 
 function mapTaxIdentifiers(
-  params?: CreateLabelRequestTypes.TaxIdentifier[]
+  params?: CreateLabelTypes.Params["shipment"]["taxIdentifiers"][0]
 ): Request.TaxIdentifier[] | undefined {
   if (!params) return undefined;
   return params.map((taxId) => ({
@@ -70,7 +72,7 @@ function mapTaxIdentifiers(
 }
 
 function mapCustoms(
-  params?: CreateLabelRequestTypes.InternationalShipmentOptions
+  params?: CreateLabelTypes.Params["shipment"]["customs"]
 ): Request.InternationalShipmentOptions | undefined {
   if (!params) return undefined;
   let custom_items: Request.CustomsItem[] = [];
@@ -93,7 +95,7 @@ function mapCustoms(
 }
 
 function mapAdvancedOptions(
-  params?: CreateLabelRequestTypes.AdvancedShipmentOptions
+  params?: CreateLabelTypes.Params["shipment"]["advancedOptions"]
 ): Request.AdvancedShipmentOptions | undefined {
   if (!params) return undefined;
   return {
@@ -114,6 +116,26 @@ function mapAdvancedOptions(
     custom_field3: params.customField3,
     origin_type: params.originType,
     shipper_release: params.shipperRelease,
-    collect_on_delivery: params.collectOnDelivery,
+    collect_on_delivery: mapCollectOnDelivery(params),
+  };
+}
+
+function mapCollectOnDelivery(
+  params?: CreateLabelTypes.Params["shipment"]["advancedOptions"]["collectOnDelivery"]
+): Request.CollectOnDelivery | undefined {
+  if (!params) return undefined;
+  return {
+    payment_type: params.paymentType,
+    payment_amount: mapPaymentAmount(params.paymentAmount),
+  };
+}
+
+function mapPaymentAmount(
+  params?: CreateLabelTypes.Params["shipment"]["advancedOptions"]["collectOnDelivery"]["paymentAmount"]
+): Request.PaymentAmount | undefined {
+  if (!params) return undefined;
+  return {
+    currency: params.currency,
+    amount: params.amount,
   };
 }

@@ -1,47 +1,46 @@
 import { Response } from "./types/private";
 
-import { CreateLabelResponseTypes } from ".";
+import { CreateLabelTypes } from ".";
 
 export function formatResponse(
   params: Response.CreateLabelResponseBody
-): CreateLabelResponseTypes.Response {
+): CreateLabelTypes.Response {
   return {
-    labelId: params.label_id,
-    status: params.status,
-    shipmentId: params.shipment_id,
-    shipDate: params.ship_date,
-    createdAt: params.created_at,
-    shipmentCost: params.shipment_cost,
+    labelId: params.label_id!,
+    status: params.status!,
+    shipmentId: params.shipment_id!,
+    shipDate: params.ship_date!,
+    createdAt: params.created_at!,
+    shipmentCost: params.shipment_cost!,
     insuranceCost: params.insurance_cost,
-    trackingNumber: params.tracking_number,
-    isReturnLabel: params.is_return_label,
-    rmaNumber: params.rma_number,
-    isInternational: params.is_international,
-    batchId: params.batch_id,
-    carrierId: params.carrier_id,
-    chargeEvent: params.charge_event,
-    serviceCode: params.service_code,
-    packageCode: params.package_code,
-    voided: params.voided,
-    voidedAt: params.voided_at,
-    labelFormat: params.label_format,
-    displayScheme: params.display_scheme,
-    labelLayout: params.label_layout,
-    trackable: params.trackable,
-    labelImageId: params.label_image_id,
-    carrierCode: params.carrier_code,
-    trackingStatus: params.tracking_status,
-    labelDownload: params.label_download,
-    formDownload: params.form_download,
-    insuranceClaim: params.insurance_claim,
-    packages: mapPackages(params.packages),
+    trackingNumber: params.tracking_number!,
+    isReturnLabel: params.is_return_label!,
+    rmaNumber: params.rma_number!,
+    isInternational: params.is_international!,
+    batchId: params.batch_id!,
+    carrierId: params.carrier_id!,
+    chargeEvent: params.charge_event!,
+    serviceCode: params.service_code!,
+    packageCode: params.package_code!,
+    voided: params.voided!,
+    voidedAt: params.voided_at!,
+    labelFormat: params.label_format!,
+    displayScheme: params.display_scheme!,
+    labelLayout: params.label_layout!,
+    trackable: params.trackable!,
+    labelImageId: params.label_image_id!,
+    carrierCode: params.carrier_code!,
+    trackingStatus: params.tracking_status!,
+    labelDownload: params.label_download!,
+    formDownload: params.form_download!,
+    insuranceClaim: params.insurance_claim!,
+    packages: mapPackages(params.packages)!,
   };
 }
 
 function mapPackages(
-  params: Response.Package[] | undefined
-): CreateLabelResponseTypes.Package[] | undefined {
-  if (!params) return undefined;
+  params: Response.Package[]
+): CreateLabelTypes.Response["packages"][0][] {
   return params.map((pkg) => ({
     packageCode: pkg.package_code,
     trackingNumber: pkg.tracking_number,

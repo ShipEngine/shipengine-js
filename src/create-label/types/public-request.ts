@@ -1,6 +1,251 @@
 export type Params = Label;
 
-export type OrderSourceName =
+type Country =
+  | "AF"
+  | "AX"
+  | "AL"
+  | "DZ"
+  | "AS"
+  | "AD"
+  | "AO"
+  | "AI"
+  | "AQ"
+  | "AG"
+  | "AR"
+  | "AM"
+  | "AW"
+  | "AU"
+  | "AT"
+  | "AZ"
+  | "BS"
+  | "BH"
+  | "BD"
+  | "BB"
+  | "BY"
+  | "BE"
+  | "BZ"
+  | "BJ"
+  | "BM"
+  | "BT"
+  | "BO"
+  | "BA"
+  | "BW"
+  | "BV"
+  | "BR"
+  | "IO"
+  | "BN"
+  | "BG"
+  | "BF"
+  | "BI"
+  | "KH"
+  | "CM"
+  | "CA"
+  | "CV"
+  | "KY"
+  | "CF"
+  | "TD"
+  | "CL"
+  | "CN"
+  | "CX"
+  | "CC"
+  | "CO"
+  | "KM"
+  | "CG"
+  | "CD"
+  | "CK"
+  | "CR"
+  | "CI"
+  | "HR"
+  | "CU"
+  | "CY"
+  | "CZ"
+  | "DK"
+  | "DJ"
+  | "DM"
+  | "DO"
+  | "EC"
+  | "EG"
+  | "SV"
+  | "GQ"
+  | "ER"
+  | "EE"
+  | "ET"
+  | "FK"
+  | "FO"
+  | "FJ"
+  | "FI"
+  | "FR"
+  | "GF"
+  | "PF"
+  | "TF"
+  | "GA"
+  | "GM"
+  | "GE"
+  | "DE"
+  | "GH"
+  | "GI"
+  | "GR"
+  | "GL"
+  | "GD"
+  | "GP"
+  | "GU"
+  | "GT"
+  | "GG"
+  | "GN"
+  | "GW"
+  | "GY"
+  | "HT"
+  | "HM"
+  | "VA"
+  | "HN"
+  | "HK"
+  | "HU"
+  | "IS"
+  | "IN"
+  | "ID"
+  | "IR"
+  | "IQ"
+  | "IE"
+  | "IM"
+  | "IL"
+  | "IT"
+  | "JM"
+  | "JP"
+  | "JE"
+  | "JO"
+  | "KZ"
+  | "KE"
+  | "KI"
+  | "KR"
+  | "KW"
+  | "KG"
+  | "LA"
+  | "LV"
+  | "LB"
+  | "LS"
+  | "LR"
+  | "LY"
+  | "LI"
+  | "LT"
+  | "LU"
+  | "MO"
+  | "MK"
+  | "MG"
+  | "MW"
+  | "MY"
+  | "MV"
+  | "ML"
+  | "MT"
+  | "MH"
+  | "MQ"
+  | "MR"
+  | "MU"
+  | "YT"
+  | "MX"
+  | "FM"
+  | "MD"
+  | "MC"
+  | "MN"
+  | "ME"
+  | "MS"
+  | "MA"
+  | "MZ"
+  | "MM"
+  | "NA"
+  | "NR"
+  | "NP"
+  | "NL"
+  | "NC"
+  | "NZ"
+  | "NI"
+  | "NE"
+  | "NG"
+  | "NU"
+  | "NF"
+  | "MP"
+  | "NO"
+  | "OM"
+  | "PK"
+  | "PW"
+  | "PS"
+  | "PA"
+  | "PG"
+  | "PY"
+  | "PE"
+  | "PH"
+  | "PN"
+  | "PL"
+  | "PT"
+  | "PR"
+  | "QA"
+  | "RE"
+  | "RO"
+  | "RU"
+  | "RW"
+  | "BL"
+  | "SH"
+  | "KN"
+  | "LC"
+  | "MF"
+  | "PM"
+  | "VC"
+  | "WS"
+  | "SM"
+  | "ST"
+  | "SA"
+  | "SN"
+  | "RS"
+  | "SC"
+  | "SL"
+  | "SG"
+  | "SK"
+  | "SI"
+  | "SB"
+  | "SO"
+  | "ZA"
+  | "GS"
+  | "ES"
+  | "LK"
+  | "SD"
+  | "SR"
+  | "SJ"
+  | "SZ"
+  | "SE"
+  | "CH"
+  | "SY"
+  | "TW"
+  | "TJ"
+  | "TZ"
+  | "TH"
+  | "TL"
+  | "TG"
+  | "TK"
+  | "TO"
+  | "TT"
+  | "TN"
+  | "TR"
+  | "TM"
+  | "TC"
+  | "TV"
+  | "UG"
+  | "UA"
+  | "AE"
+  | "GB"
+  | "US"
+  | "UM"
+  | "UY"
+  | "UZ"
+  | "VU"
+  | "VE"
+  | "VN"
+  | "VG"
+  | "VI"
+  | "WF"
+  | "EH"
+  | "YE"
+  | "ZM"
+  | "ZW";
+type OrderSourceName =
   | "amazon_ca"
   | "amazon_us"
   | "brightpearl"
@@ -21,8 +266,8 @@ export type OrderSourceName =
   | "walmart"
   | "woo_commerce"
   | "volusion";
-export type TaxableEntityType = "shipper" | "recipient";
-export type IdentifierType =
+type TaxableEntityType = "shipper" | "recipient";
+type IdentifierType =
   | "vat"
   | "eori"
   | "ssn"
@@ -31,57 +276,46 @@ export type IdentifierType =
   | "ioss"
   | "pan"
   | "voec";
-export type AddressResidentialIndicator = "unknown" | "yes" | "no";
-export type DeliveryConfirmation =
+type AddressResidentialIndicator = "unknown" | "yes" | "no";
+type DeliveryConfirmation =
   | "none"
   | "delivery"
   | "signature"
   | "adult_signature"
   | "direct_signature"
   | "delivery_mailed";
-export type PackageContents =
+type PackageContents =
   | "merchandise"
   | "documents"
   | "gift"
   | "returned_goods"
   | "sample";
-export type Currency = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
-export type NonDelivery = "return_to_sender" | "treat_as_abandoned";
-export type BillToParty = "recipient" | "third_party";
-export type OriginType = "pickup" | "drop_off";
-export type CollectOnDeliveryPaymentType =
-  | "any"
-  | "cash"
-  | "cash_equivalent"
-  | "none";
-export type InsuranceProvider =
-  | "none"
-  | "shipsurance"
-  | "carrier"
-  | "third_party";
-export type LabelChargeEvent =
+type Currency = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
+type NonDelivery = "return_to_sender" | "treat_as_abandoned";
+type BillToParty = "recipient" | "third_party";
+type OriginType = "pickup" | "drop_off";
+type CollectOnDeliveryPaymentType = "any" | "cash" | "cash_equivalent" | "none";
+type InsuranceProvider = "none" | "shipsurance" | "carrier" | "third_party";
+type LabelChargeEvent =
   | "carrier_default"
   | "on_creation"
   | "on_carrier_acceptance";
-export type ValidateAddress =
-  | "no_validation"
-  | "validate_only"
-  | "validate_and_clean";
-export type LabelDownloadType = "url" | "inline";
-export type LabelFormat = "pdf" | "png" | "zpl";
-export type DisplayScheme = "label" | "qr_code";
-export type LabelLayout = "4x6" | "letter";
-export type DimensionUnit = "inch" | "centimeter";
-export type WeightUnit = "pound" | "ounce" | "gram" | "kilogram";
+type ValidateAddress = "no_validation" | "validate_only" | "validate_and_clean";
+type LabelDownloadType = "url" | "inline";
+type LabelFormat = "pdf" | "png" | "zpl";
+type DisplayScheme = "label" | "qr_code";
+type LabelLayout = "4x6" | "letter";
+type DimensionUnit = "inch" | "centimeter";
+type WeightUnit = "pound" | "ounce" | "gram" | "kilogram";
 
 /**
  * An input label to be purchased.
  */
-export interface Label {
+interface Label {
   /**
    * The shipment information used to generate the label
    */
-  shipment?: Shipment;
+  shipment: Shipment;
 
   /**
    * Indicates whether this is a return label. You may also want to set the rmaNumber so you know what is being returned.
@@ -104,38 +338,33 @@ export interface Label {
   outboundLabelId?: string;
 
   /**
-   * Indicate if this label is being used only for testing purposes. If true, then no charge will be added to your account.
-   */
-  testLabel?: boolean;
-
-  /**
    * Default: "validateAndClean"
    * Enum: "noValidation" "validateOnly" "validateAndClean"
    * The possible validate address values
    */
-  validateAddress?: ValidateAddress & string;
+  validateAddress?: ValidateAddress;
 
   /**
    * Default: "url"
    * Enum: "url" "inline"
    * There are two different ways to download a label:
    */
-  labelDownloadType?: LabelDownloadType & string;
+  labelDownloadType?: LabelDownloadType;
 
   /**
    * The file format that you want the label to be in. We recommend pdf format because it is supported by all carriers, whereas some carriers do not support the png or zpl formats.
    */
-  labelFormat?: LabelFormat & string;
+  labelFormat?: LabelFormat;
 
   /**
    * The display format that the label should be shown in.
    */
-  displayScheme?: DisplayScheme & string;
+  displayScheme?: DisplayScheme;
 
   /**
    * The layout (size) that you want the label to be in. The labelFormat determines which sizes are allowed. 4x6 is supported for all label formats, whereas letter (8.5" x 11") is only supported for pdf format.
    */
-  labelLayout?: LabelLayout & string;
+  labelLayout?: LabelLayout;
 
   /**
    * The label image resource that was used to create a custom label image.
@@ -143,7 +372,7 @@ export interface Label {
   labelImageId?: string;
 }
 
-export interface Shipment {
+interface Shipment {
   /**
    * The carrier account that is billed for the shipping charges
    */
@@ -202,7 +431,7 @@ export interface Shipment {
   /**
    * The type of delivery confirmation that is required for this shipment.
    */
-  confirmation?: DeliveryConfirmation & string;
+  confirmation?: DeliveryConfirmation;
 
   /**
    * Customs information. This is usually only needed for international shipments.
@@ -222,7 +451,7 @@ export interface Shipment {
   /**
    * The insurance provider to use for any insured packages in the shipment
    */
-  insuranceProvider?: InsuranceProvider & string;
+  insuranceProvider?: InsuranceProvider;
 
   /**
    * The order sources that are supported by ShipEngine
@@ -235,7 +464,7 @@ export interface Shipment {
   packages: Package[];
 }
 
-export interface Package {
+interface Package {
   packageCode?: string;
   weight: Weight;
   dimensions?: Dimensions;
@@ -244,20 +473,20 @@ export interface Package {
   externalPackageId?: string;
 }
 
-export interface LabelMessages {
+interface LabelMessages {
   reference1?: string;
   reference2?: string;
   reference3?: string;
 }
 
-export interface Dimensions {
+interface Dimensions {
   unit: DimensionUnit;
   length: number;
   width: number;
   height: number;
 }
 
-export interface ShipmentItem {
+interface ShipmentItem {
   name?: string;
   salesOrderId?: string;
   salesOrderItemId?: string;
@@ -268,13 +497,13 @@ export interface ShipmentItem {
   asin?: string;
   orderSourceCode?: OrderSourceName;
 }
-export interface TaxIdentifier {
+interface TaxIdentifier {
   taxableEntityType: TaxableEntityType;
   identifierType: IdentifierType;
   issuingAuthority: string;
   value: string;
 }
-export interface Address {
+interface Address {
   name?: string;
   phone?: string;
   companyName?: string;
@@ -284,29 +513,29 @@ export interface Address {
   cityLocality?: string;
   stateProvince?: string;
   postalCode?: string;
-  countryCode?: string;
-  addressResidentialIndicator?: AddressResidentialIndicator & string;
+  countryCode?: Country;
+  addressResidentialIndicator?: AddressResidentialIndicator;
 }
 
-export interface InternationalShipmentOptions {
-  contents: PackageContents & string;
-  nonDelivery: NonDelivery & string;
+interface InternationalShipmentOptions {
+  contents: PackageContents;
+  nonDelivery: NonDelivery;
   customsItems?: CustomsItem[];
 }
-export interface CustomsItem {
+interface CustomsItem {
   quantity?: number;
   value?: MonetaryValue;
   harmonizedTariffCode?: string;
-  countryOfOrigin?: string;
+  countryOfOrigin?: Country;
   unitOfMeasure?: string;
   sku?: string;
   skuDescription?: string;
 }
-export interface MonetaryValue {
+interface MonetaryValue {
   currency: Currency;
   amount: number;
 }
-export interface AdvancedShipmentOptions {
+interface AdvancedShipmentOptions {
   billToAccount?: string;
   billToCountryCode?: string;
   billToParty?: BillToParty;
@@ -326,18 +555,16 @@ export interface AdvancedShipmentOptions {
   shipperRelease?: boolean;
   collectOnDelivery?: CollectOnDelivery;
 }
-export interface Weight {
+interface Weight {
   value: number;
   unit: WeightUnit;
 }
-export interface CollectOnDelivery {
+interface CollectOnDelivery {
   paymentType?: CollectOnDeliveryPaymentType;
   paymentAmount?: PaymentAmount;
-  [k: string]: unknown;
 }
 
-export interface PaymentAmount {
+interface PaymentAmount {
   currency?: Currency;
   amount?: number;
-  [k: string]: unknown;
 }
