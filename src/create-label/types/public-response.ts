@@ -20,7 +20,7 @@ interface Label {
   shipDate: string;
   createdAt: string;
   shipmentCost: MonetaryValue;
-  insuranceCost?: MonetaryValue;
+  insuranceCost: MonetaryValue;
   trackingNumber: string;
   isReturnLabel: boolean;
   rmaNumber: string;

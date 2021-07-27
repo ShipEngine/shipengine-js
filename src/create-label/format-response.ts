@@ -12,7 +12,7 @@ export function formatResponse(
     shipDate: params.ship_date!,
     createdAt: params.created_at!,
     shipmentCost: params.shipment_cost!,
-    insuranceCost: params.insurance_cost,
+    insuranceCost: params.insurance_cost!,
     trackingNumber: params.tracking_number!,
     isReturnLabel: params.is_return_label!,
     rmaNumber: params.rma_number!,
