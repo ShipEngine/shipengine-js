@@ -1,18 +1,6 @@
 import { ErrorType, ErrorCode } from "../constants";
 import { ShipEngineError } from "../errors";
 
-// export interface ShipEngineErrorOne {
-//   request_id: string;
-//   error: {
-//     message: string;
-//   };
-// }
-
-// export interface ShipEngineErrorTwo {
-//   request_id: string;
-//   error: string;
-// }
-
 type StructuredError = {
   request_id: string;
   errors: [
@@ -29,7 +17,7 @@ export function isNetworkStructuredError(error: any): error is StructuredError {
   return typeof error.request_id === "string" && Array.isArray(error.errors);
 }
 
-export function handle400Errors(body: StructuredError): unknown {
+export function handle404Errors(body: StructuredError): unknown {
   if (isNetworkStructuredError(body)) {
     throw new ShipEngineError(
       body.request_id,
