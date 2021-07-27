@@ -27,25 +27,6 @@ describe("trackByLabelId()", () => {
     }
   });
 
-  it("should throw an error for an improperly formatted label ID", async () => {
-    const shipengine = new ShipEngine({ apiKey });
-
-    try {
-      await shipengine.trackByLabelId({ labelId: "1234" });
-      errors.shouldHaveThrown();
-    } catch (error) {
-      errors.assertInvalidFieldValueError(error, {
-        code: "invalid_field_value",
-        fieldName: "Params",
-        message: "Params must be a valid label id.",
-        name: "InvalidFieldValueError",
-        source: "shipengine",
-        type: "validation",
-      });
-      expect(error.requestId).to.be.undefined;
-    }
-  });
-
   // it("should throw an error when the label ID does not exist", async () => {
   //   fetchMock.get("https://api.shipengine.com/v1/labels/se-1234/track", {
   //     status: 404,

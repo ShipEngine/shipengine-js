@@ -8,8 +8,4 @@ export function validateParams(params: TrackByLabelIdTypes.Params): void {
   if (typeof params.labelId !== "string") {
     throw new InvalidFieldValueError("Params", "must be a string.");
   }
-
-  if (!params.labelId.startsWith("se-")) {
-    throw new InvalidFieldValueError("Params", "must be a valid label id.");
-  }
 }
