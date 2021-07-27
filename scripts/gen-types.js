@@ -36,7 +36,7 @@ compileFromFile('node_modules/shipengine-json-schema/responses/list_carriers_res
 // Track By Label ID
 compileFromFile('node_modules/shipengine-json-schema/responses/get_tracking_log_from_label_response_body.json')
 .then(ts => fs.writeFileSync('src/track-by-label-id/types/private-response.ts', ts))
-/
-/ Void Label
+
+// Void Label
 compileFromFile('node_modules/shipengine-json-schema/responses/void_label_response_body.json')
   .then(ts => fs.writeFileSync('src/void-label-by-id/types/private-response.ts', ts))
