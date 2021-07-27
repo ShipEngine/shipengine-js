@@ -93,51 +93,53 @@ describe("trackByLabelId()", () => {
       labelId: "se-1234",
     });
 
-    expect(result.trackingNumber).to.equal("332980205337");
-    expect(result.statusCode).to.equal("DE");
-    expect(result.statusDescription).to.equal("Delivered");
-    expect(result.carrierStatusCode).to.equal("Delivery");
-    expect(result.carrierDetailCode).to.equal("");
-    expect(result.carrierStatusDescription).to.equal("Shipment delivered");
-    expect(result.shipDate).to.equal("");
-    expect(result.estimatedDeliveryDate).to.equal("");
-    expect(result.actualDeliveryDate).to.equal("2021-06-17T05:04:39Z");
-    expect(result.exceptionDescription).to.equal("");
-
-    expect(result.events).to.have.lengthOf(2);
-
-    expect(result.events[0].occurredAt).to.equal("2021-07-23T12:42:00Z");
-    expect(result.events[0].carrierOccurredAt).to.equal("2021-07-23T07:42:00");
-    expect(result.events[0].description).to.equal(
-      "Out for Delivery, Expected Delivery by 9:00pm"
-    );
-    expect(result.events[0].cityLocality).to.equal("MCKINNEY");
-    expect(result.events[0].stateProvince).to.equal("TX");
-    expect(result.events[0].postalCode).to.equal("75071");
-    expect(result.events[0].countryCode).to.equal("");
-    expect(result.events[0].companyName).to.equal("");
-    expect(result.events[0].signer).to.equal("");
-    expect(result.events[0].eventCode).to.equal("OF");
-    expect(result.events[0].carrierDetailCode).to.equal("");
-    expect(result.events[0].statusCode).to.equal("");
-    expect(result.events[0].carrierStatusCode).to.equal("OF");
-    expect(result.events[0].latitude).to.equal(33.175);
-    expect(result.events[0].longitude).to.equal(-96.6986);
-
-    expect(result.events[1].occurredAt).to.equal("2021-07-23T12:31:00Z");
-    expect(result.events[1].carrierOccurredAt).to.equal("2021-07-23T07:31:00");
-    expect(result.events[1].description).to.equal("Arrived at Post Office");
-    expect(result.events[1].cityLocality).to.equal("MCKINNEY");
-    expect(result.events[1].stateProvince).to.equal("TX");
-    expect(result.events[1].postalCode).to.equal("75070");
-    expect(result.events[1].countryCode).to.equal("");
-    expect(result.events[1].companyName).to.equal("");
-    expect(result.events[1].signer).to.equal("");
-    expect(result.events[1].eventCode).to.equal("07");
-    expect(result.events[1].carrierDetailCode).to.equal("");
-    expect(result.events[1].statusCode).to.equal("");
-    expect(result.events[1].carrierStatusCode).to.equal("07");
-    expect(result.events[1].latitude).to.equal(33.175);
-    expect(result.events[1].longitude).to.equal(-96.6986);
+    expect(result).to.deep.equal({
+      trackingNumber: "332980205337",
+      statusCode: "DE",
+      statusDescription: "Delivered",
+      carrierStatusCode: "Delivery",
+      carrierDetailCode: null,
+      carrierStatusDescription: "Shipment delivered",
+      shipDate: null,
+      estimatedDeliveryDate: null,
+      actualDeliveryDate: "2021-06-17T05:04:39Z",
+      exceptionDescription: null,
+      events: [
+        {
+          occurredAt: "2021-07-23T12:42:00Z",
+          carrierOccurredAt: "2021-07-23T07:42:00",
+          description: "Out for Delivery, Expected Delivery by 9:00pm",
+          cityLocality: "MCKINNEY",
+          stateProvince: "TX",
+          postalCode: "75071",
+          countryCode: null,
+          companyName: null,
+          signer: null,
+          eventCode: "OF",
+          statusCode: null,
+          carrierStatusCode: "OF",
+          carrierDetailCode: null,
+          latitude: 33.175,
+          longitude: -96.6986,
+        },
+        {
+          occurredAt: "2021-07-23T12:31:00Z",
+          carrierOccurredAt: "2021-07-23T07:31:00",
+          description: "Arrived at Post Office",
+          cityLocality: "MCKINNEY",
+          stateProvince: "TX",
+          postalCode: "75070",
+          countryCode: null,
+          companyName: null,
+          signer: null,
+          eventCode: "07",
+          statusCode: null,
+          carrierStatusCode: "07",
+          carrierDetailCode: null,
+          latitude: 33.175,
+          longitude: -96.6986,
+        },
+      ],
+    });
   });
 });

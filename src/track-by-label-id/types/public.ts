@@ -31,7 +31,7 @@ export interface TrackByLabelIdResult {
   /**
    * Carrier Detail Code
    */
-  carrierDetailCode: string;
+  carrierDetailCode: string | null;
 
   /**
    * Carrier Status Code
@@ -41,14 +41,14 @@ export interface TrackByLabelIdResult {
   /**
    * Carrier Status Description
    */
-  carrierStatusDescription: string;
+  carrierStatusDescription: string | null;
 
   /**
    * An ISO 8601 string that represents a date and time.
    * @see https://en.wikipedia.org/wiki/ISO_8601
    */
 
-  shipDate: string;
+  shipDate: string | null;
 
   /**
    * An ISO 8601 string that represents a date and time.
@@ -60,12 +60,12 @@ export interface TrackByLabelIdResult {
    * An ISO 8601 string that represents a date and time.
    * @see https://en.wikipedia.org/wiki/ISO_8601
    */
-  actualDeliveryDate: string;
+  actualDeliveryDate: string | null;
 
   /**
    * Exception description
    */
-  exceptionDescription: string;
+  exceptionDescription: string | null;
 
   /**
    * The events that have occured during the lifetime of this tracking number.
@@ -87,12 +87,12 @@ export interface TrackingEvent {
   /**
    * Carrier timestamp for the event, it is assumed to be the local time of where the event occurred.
    */
-  carrierOccurredAt: string;
+  carrierOccurredAt: string | null;
 
   /**
    * Event description
    */
-  description: string;
+  description: string | null;
 
   /**
    * City Locality
@@ -114,45 +114,45 @@ export interface TrackingEvent {
    *
    * @see https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
    */
-  countryCode: string;
+  countryCode: string | null;
 
   /**
    * Company Name
    */
-  companyName: string;
+  companyName: string | null;
 
   /**
    * Signer information
    */
-  signer: string;
+  signer: string | null;
 
   /**
    * Event Code
    */
-  eventCode: string;
+  eventCode: string | null;
 
   /**
    * Event status code
    */
-  statusCode: string;
+  statusCode: string | null;
 
   /**
    * Carrier Status Code
    */
-  carrierStatusCode: string;
+  carrierStatusCode: string | null;
 
   /**
    * Carrier Detail Code
    */
-  carrierDetailCode: string;
+  carrierDetailCode: string | null;
 
   /**
    * Latitude coordinate of tracking event
    */
-  latitude?: number;
+  latitude: number | null;
 
   /**
    * Longitude coordinate of tracking event
    */
-  longitude?: number;
+  longitude: number | null;
 }
