@@ -11,7 +11,6 @@ export function formatParams(
     rma_number: params.rmaNumber,
     charge_event: params.chargeEvent,
     outbound_label_id: params.outboundLabelId,
-    test_label: params.testLabel,
     validate_address: params.validateAddress,
     label_download_type: params.labelDownloadType,
     label_format: params.labelFormat,
@@ -60,7 +59,9 @@ function mapPackages(
 }
 
 function mapTaxIdentifiers(
-  params?: CreateLabelTypes.Params["shipment"]["taxIdentifiers"][0]
+  params?: NonNullable<
+    CreateLabelTypes.Params["shipment"]["taxIdentifiers"]
+  >[0][]
 ): Request.TaxIdentifier[] | undefined {
   if (!params) return undefined;
   return params.map((taxId) => ({
@@ -116,12 +117,14 @@ function mapAdvancedOptions(
     custom_field3: params.customField3,
     origin_type: params.originType,
     shipper_release: params.shipperRelease,
-    collect_on_delivery: mapCollectOnDelivery(params),
+    collect_on_delivery: mapCollectOnDelivery(params.collectOnDelivery),
   };
 }
 
 function mapCollectOnDelivery(
-  params?: CreateLabelTypes.Params["shipment"]["advancedOptions"]["collectOnDelivery"]
+  params?: NonNullable<
+    CreateLabelTypes.Params["shipment"]["advancedOptions"]
+  >["collectOnDelivery"]
 ): Request.CollectOnDelivery | undefined {
   if (!params) return undefined;
   return {
@@ -131,7 +134,11 @@ function mapCollectOnDelivery(
 }
 
 function mapPaymentAmount(
-  params?: CreateLabelTypes.Params["shipment"]["advancedOptions"]["collectOnDelivery"]["paymentAmount"]
+  params?: NonNullable<
+    NonNullable<
+      CreateLabelTypes.Params["shipment"]["advancedOptions"]
+    >["collectOnDelivery"]
+  >["paymentAmount"]
 ): Request.PaymentAmount | undefined {
   if (!params) return undefined;
   return {

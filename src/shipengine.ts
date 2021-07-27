@@ -4,11 +4,7 @@ import {
 } from "./validate-addresses";
 // import { listCarrierAccounts } from "./list-carrier-accounts";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
-import {
-  createLabel,
-  CreateLabelRequestTypes,
-  CreateLabelResponseTypes,
-} from "./create-label";
+import { createLabel, CreateLabelTypes } from "./create-label";
 
 /**
  * Exposes the functionality of the ShipEngine API.
@@ -105,9 +101,9 @@ export class ShipEngine {
    * @param [config] - Optional configuration overrides for this method call.
    */
   public async createLabel(
-    params: CreateLabelRequestTypes.Params,
+    params: CreateLabelTypes.Params,
     config?: ShipEngineConfig
-  ): Promise<CreateLabelResponseTypes.Response> {
+  ): Promise<CreateLabelTypes.Response> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return createLabel(params, mergedConfig);
   }

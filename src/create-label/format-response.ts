@@ -34,7 +34,7 @@ export function formatResponse(
     labelDownload: params.label_download!,
     formDownload: params.form_download!,
     insuranceClaim: params.insurance_claim!,
-    packages: mapPackages(params.packages)!,
+    packages: mapPackages(params.packages!)!,
   };
 }
 
