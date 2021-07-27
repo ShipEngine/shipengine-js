@@ -6,6 +6,7 @@ import {
   listCarrierAccounts,
   ListCarrierAccountsTypes,
 } from "./list-carrier-accounts";
+import { voidLabelById, VoidLabelByIdTypes } from "./void-label-by-id";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
 import { TrackByLabelIdTypes, trackByLabelId } from "./track-by-label-id";
 import { createLabel, CreateLabelTypes } from "./create-label";
@@ -53,7 +54,7 @@ export class ShipEngine {
   public async validateAddresses(
     params: ValidateAddressesTypes.Params,
     config?: ShipEngineConfig
-  ): Promise<ValidateAddressesTypes.Response> {
+  ): Promise<ValidateAddressesTypes.Result> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return validateAddresses(params, mergedConfig);
   }
@@ -66,7 +67,7 @@ export class ShipEngine {
    */
   public async listCarrierAccounts(
     config?: ShipEngineConfig
-  ): Promise<ListCarrierAccountsTypes.Response> {
+  ): Promise<ListCarrierAccountsTypes.Result> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return listCarrierAccounts(mergedConfig);
   }
@@ -121,5 +122,21 @@ export class ShipEngine {
   ): Promise<CreateLabelTypes.Response> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return createLabel(params, mergedConfig);
+  }
+
+  /**
+   * Void a label by its ID
+   *
+   * @param label ID
+   * The ID for the label being voided.
+   *
+   * @param [config] - Optional configuration overrides for this method call.
+   */
+  public async voidLabelById(
+    id: string,
+    config?: ShipEngineConfig
+  ): Promise<VoidLabelByIdTypes.Result> {
+    const mergedConfig = NormalizedConfig.merge(this.config, config);
+    return voidLabelById(id, mergedConfig);
   }
 }
