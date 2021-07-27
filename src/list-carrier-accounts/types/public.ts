@@ -24,31 +24,31 @@ interface Carrier {
   /**
    * Flag indicating if carrier requires funding
    */
-  requiresFundedAmount: boolean | null;
+  requiresFundedAmount: boolean;
   /**
    * The carrier account balance
    */
-  balance: number | null;
+  balance: number;
   /**
    * The carrier account nickname
    */
-  nickname: string | null;
+  nickname: string;
   /**
    * The carrier account friendly name
    */
-  friendlyName: string | null;
+  friendlyName: string;
   /**
    * Flag indicating if this is the primary account
    */
-  primary: boolean | null;
+  primary: boolean;
   /**
    * Flag indicating if the carrier supports multi package shipments
    */
-  hasMultiPackageSupportingServices: boolean | null;
+  hasMultiPackageSupportingServices: boolean;
   /**
    * Flag indicating if the carrier supports label messages
    */
-  supportsLabelMessages: boolean | null;
+  supportsLabelMessages: boolean;
   /**
    * Array of supported carrier services
    */

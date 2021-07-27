@@ -19,9 +19,9 @@ function formatCarrier(
     carrierCode: carrier.carrier_code!, // Error in generated types
     accountNumber: carrier.account_number!, // Error in generated types
     requiresFundedAmount: carrier.requires_funded_amount!, // Error in generated types
-    balance: carrier.balance || null,
-    nickname: carrier.nickname || null,
-    friendlyName: carrier.friendly_name || null,
+    balance: carrier.balance!, // Error in generated types
+    nickname: carrier.nickname!, // Error in generated types
+    friendlyName: carrier.friendly_name!, // Error in generated types
     primary: carrier.primary!, // Error in generated types
     hasMultiPackageSupportingServices:
       carrier.has_multi_package_supporting_services!, // Error in generated types
