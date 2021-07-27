@@ -107,6 +107,7 @@ export class ShipEngine {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return trackByLabelId(params, mergedConfig);
   }
+  /**
    * Create a label for shipment
    *
    * @param label
