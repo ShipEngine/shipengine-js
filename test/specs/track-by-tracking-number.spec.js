@@ -2,10 +2,12 @@ const { expect } = require("chai");
 const { ShipEngine } = require("../..");
 const { apiKey } = require("../utils/constants");
 const errors = require("../utils/errors");
+const fetchMock = require("../utils/fetch-mock");
 
 const {
   mockTrackByTrackingNumber200,
-} = require("../utils/mocks/mock-track-by-tracking-number-200");
+  mockTrackByTrackingNumber400,
+} = require("../utils/mocks/mock-track-by-tracking-number");
 
 describe("trackByTrackingNumber()", () => {
   it("should throw an error if the carrier code is not a string", async () => {
@@ -52,43 +54,33 @@ describe("trackByTrackingNumber()", () => {
     }
   });
 
-  // it("should throw an error when the label ID does not exist", async () => {
-  //   fetchMock.get("https://api.shipengine.com/v1/labels/se-1234/track", {
-  //     status: 404,
-  //     body: {
-  //       request_id: "c2a2d543-0c1b-4876-9171-af56b623f848",
-  //       errors: [
-  //         {
-  //           error_source: "shipengine",
-  //           error_type: "security",
-  //           error_code: "not_found",
-  //           message: "GET",
-  //           method: "/v1/labels/se-1234/track",
-  //           path: "GET /v1/labels/se-1234/track is not a valid API endpoint.",
-  //         },
-  //       ],
-  //     },
-  //   });
+  it("Throws an error if the request returns a 500", async () => {
+    mockTrackByTrackingNumber400();
 
-  //   const shipengine = new ShipEngine({ apiKey });
+    const shipengine = new ShipEngine({ apiKey });
 
-  //   try {
-  //     const result = await shipengine.trackByTrackingNumber({
-  //       carrierCode: "se-1234",
-  //     });
-  //     errors.shouldHaveThrown();
-  //   } catch (error) {
-  //     errors.assertInvalidFieldValueError(error, {
-  //       code: "invalid_field_value",
-  //       fieldName: "Params",
-  //       message: "Params must be a valid label id.",
-  //       name: "InvalidFieldValueError",
-  //       source: "shipengine",
-  //       type: "validation",
-  //     });
-  //     expect(error.requestId).to.be.undefined;
-  //   }
-  // });
+    try {
+      await shipengine.trackByTrackingNumber({
+        carrierCode: "stamps_com",
+        trackingNumber: "1234",
+      });
+      errors.shouldHaveThrown();
+    } catch (error) {
+      errors.assertShipEngineError(error, {
+        name: "ShipEngineError",
+        source: "shipengine",
+        type: "system",
+        code: "unspecified",
+        message: "An unknown error occurred while calling the ShipEngine API.",
+      });
+
+      // TODO: surface the request ID in the error??
+      expect(error.requestId).to.be.undefined;
+      // expect(error.requestID).to.equal("123456789132456789123465789");
+    }
+
+    fetchMock.restore();
+  });
 
   it("should return tracking information for a valid Label ID", async () => {
     mockTrackByTrackingNumber200();

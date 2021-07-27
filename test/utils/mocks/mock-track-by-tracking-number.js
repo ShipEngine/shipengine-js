@@ -54,4 +54,20 @@ function mockTrackByTrackingNumber200() {
   );
 }
 
-module.exports = { mockTrackByTrackingNumber200 };
+function mockTrackByTrackingNumber400() {
+  fetchMock.getOnce(
+    "https://api.shipengine.com/v1/tracking?carrier_code=stamps_com&tracking_number=1234",
+    {
+      status: 500,
+      body: {
+        request_id: "123456789132456789123465789",
+        error: {
+          message: "Something bad happened",
+        },
+      },
+    },
+    { overwriteRoutes: false }
+  );
+}
+
+module.exports = { mockTrackByTrackingNumber200, mockTrackByTrackingNumber400 };
