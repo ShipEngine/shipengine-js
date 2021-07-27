@@ -3,13 +3,13 @@ import { Response } from "./types/private";
 
 export function formatResponse(
   response: Response.ValidateAddressResponseBody
-): ValidateAddressesTypes.Response {
+): ValidateAddressesTypes.Result {
   return response.map((result) => formatAddressValidationResult(result));
 }
 
 function formatAddressValidationResult(
   result: Response.AddressValidationResult
-): ValidateAddressesTypes.AddressValidationResult {
+): ValidateAddressesTypes.Result[0] {
   const normalizedAddressResponse = result.matched_address;
   const originalAddressResponse = result.original_address;
 
@@ -25,7 +25,7 @@ function formatAddressValidationResult(
       stateProvince: originalAddressResponse.state_province,
       postalCode: originalAddressResponse.postal_code,
       countryCode:
-        originalAddressResponse.country_code as ValidateAddressesTypes.Country,
+        originalAddressResponse.country_code as ValidateAddressesTypes.Result[0]["originalAddress"]["countryCode"],
       addressResidentialIndicator:
         originalAddressResponse.address_residential_indicator,
     },
@@ -42,7 +42,7 @@ function formatAddressValidationResult(
 
 function mapNormalizedAddress(
   normalizedAddressResponse: Response.PartialAddress
-): ValidateAddressesTypes.Address {
+): ValidateAddressesTypes.Result[0]["normalizedAddress"] {
   return {
     name: normalizedAddressResponse.name,
     companyName: normalizedAddressResponse.company_name,
@@ -53,7 +53,7 @@ function mapNormalizedAddress(
     stateProvince: normalizedAddressResponse.state_province,
     postalCode: normalizedAddressResponse.postal_code,
     countryCode:
-      normalizedAddressResponse.country_code as ValidateAddressesTypes.Country,
+      normalizedAddressResponse.country_code as ValidateAddressesTypes.Result[0]["normalizedAddress"]["countryCode"],
     addressResidentialIndicator:
       normalizedAddressResponse.address_residential_indicator,
   };
