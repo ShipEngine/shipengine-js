@@ -9,17 +9,17 @@ interface Address {
   /**
    * The first line of the address.
    */
-  addressLine1?: string;
+  addressLine1: string;
 
   /**
    * The second line of the address.
    */
-  addressLine2?: string;
+  addressLine2: string | null;
 
   /**
    * The third line of the address.
    */
-  addressLine3?: string;
+  addressLine3: string | null;
 
   /**
    * The ISO 3166 country code
@@ -31,37 +31,37 @@ interface Address {
   /**
    * The name of the sender or recipient at the address, if applicable.
    */
-  name?: string;
+  name: string;
 
   /**
    * The company name, if this is a business address.
    */
-  companyName?: string;
+  companyName: string | null;
 
   /**
    * The phone number associated with this address, if any.
    */
-  phone?: string;
+  phone: string;
 
   /**
    * The city or locality
    */
-  cityLocality?: string;
+  cityLocality: string;
 
   /**
    * The state or province
    */
-  stateProvince?: string;
+  stateProvince: string;
 
   /**
    * The postal code
    */
-  postalCode?: string;
+  postalCode: string;
 
   /**
    * Indicates whether the address is residential or commercial, if known.
    */
-  addressResidentialIndicator?: "unknown" | "yes" | "no";
+  addressResidentialIndicator: "unknown" | "yes" | "no";
 }
 
 /**
@@ -85,7 +85,7 @@ interface AddressValidationResult {
    * Addresses are normalized according to the normalization rules of the
    * country they're in.
    */
-  normalizedAddress?: Address;
+  normalizedAddress: Address | null;
 
   /**
    * Messages about the address validation, such as corrections or invalid fields.

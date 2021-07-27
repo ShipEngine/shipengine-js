@@ -1,14 +1,14 @@
 // import { ValidateAddressesTypes } from "../../validate-addresses";
 
 /**
- * The listCarrierAccounts response
+ * The listCarrierAccounts result
  */
-export type Response = Carrier[];
+export type Result = Carrier[];
 
 /**
  * The carrier object
  */
-export interface Carrier {
+interface Carrier {
   /**
    * The carrier ID
    */
@@ -24,87 +24,87 @@ export interface Carrier {
   /**
    * Flag indicating if carrier requires funding
    */
-  requiresFundedAmount?: boolean;
+  requiresFundedAmount: boolean | null;
   /**
    * The carrier account balance
    */
-  balance?: number;
+  balance: number | null;
   /**
    * The carrier account nickname
    */
-  nickname?: string;
+  nickname: string | null;
   /**
    * The carrier account friendly name
    */
-  friendlyName?: string;
+  friendlyName: string | null;
   /**
    * Flag indicating if this is the primary account
    */
-  primary?: boolean;
+  primary: boolean | null;
   /**
    * Flag indicating if the carrier supports multi package shipments
    */
-  hasMultiPackageSupportingServices?: boolean;
+  hasMultiPackageSupportingServices: boolean | null;
   /**
    * Flag indicating if the carrier supports label messages
    */
-  supportsLabelMessages?: boolean;
+  supportsLabelMessages: boolean | null;
   /**
    * Array of supported carrier services
    */
-  services?: Service[];
+  services: Service[];
   /**
    * Array of supported package types
    */
-  packages?: PackageType[];
+  packages: PackageType[];
   /**
    * Array of supported advanced options
    */
-  options?: AdvancedOption[];
+  options: AdvancedOption[];
 }
 
 /**
  * The carrier service object
  */
-export interface Service {
+interface Service {
   /**
    * The carrier ID
    */
-  carrierId: string;
+  carrierId: string | null;
   /**
    * The code associated with the carrier for this service
    */
-  carrierCode: string;
+  carrierCode: string | null;
   /**
    * The code associated with the service
    */
-  serviceCode: string;
+  serviceCode: string | null;
   /**
    * The name of the service
    */
-  name?: string;
+  name: string | null;
   /**
    * Flag indicating if the service is domestic
    */
-  domestic?: boolean;
+  domestic: boolean | null;
   /**
    * Flag indicating if the service is international
    */
-  international?: boolean;
+  international: boolean | null;
   /**
    * Flag indicating if the service supports multi package shipments
    */
-  isMultiPackageSupported?: boolean;
+  isMultiPackageSupported: boolean | null;
 }
 
 /**
  * The package type object
  */
-export interface PackageType {
+interface PackageType {
   /**
    * The package type ID
    */
-  packageId?: string;
+  packageId: string | null;
   /**
    * The package type code
    */
@@ -116,8 +116,8 @@ export interface PackageType {
   /**
    * The package type dimensions
    */
-  dimensions?: Dimensions;
-  description?: string;
+  dimensions: Dimensions | null;
+  description: string | null;
 }
 
 /**
@@ -125,20 +125,20 @@ export interface PackageType {
  *
  * @see https://www.shipengine.com/docs/shipping/size-and-weight/
  */
-export interface Dimensions {
+interface Dimensions {
   unit: DimensionUnit;
-  length?: number;
-  width?: number;
-  height?: number;
+  length: number;
+  width: number;
+  height: number;
 }
 
-export type DimensionUnit = "in" | "cm";
+type DimensionUnit = "in" | "cm";
 
 /**
  * The carrier advanced option object
  */
-export interface AdvancedOption {
-  name?: string;
-  defaultValue?: string;
-  description?: string;
+interface AdvancedOption {
+  name: string | null;
+  defaultValue: string | null;
+  description: string | null;
 }

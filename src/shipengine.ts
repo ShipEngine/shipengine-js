@@ -64,7 +64,7 @@ export class ShipEngine {
    */
   public async listCarrierAccounts(
     config?: ShipEngineConfig
-  ): Promise<ListCarrierAccountsTypes.Response> {
+  ): Promise<ListCarrierAccountsTypes.Result> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return listCarrierAccounts(mergedConfig);
   }

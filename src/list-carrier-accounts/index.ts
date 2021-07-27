@@ -15,7 +15,7 @@ export { ListCarrierAccountsTypes };
  */
 export async function listCarrierAccounts(
   config: NormalizedConfig
-): Promise<ListCarrierAccountsTypes.Response> {
+): Promise<ListCarrierAccountsTypes.Result> {
   const response = await get<Response.ListCarriersResponseBody>(
     "/v1/carriers",
     config

@@ -7,7 +7,7 @@ interface Address {
   /**
    * The first line of the address.
    */
-  addressLine1?: string;
+  addressLine1: string;
 
   /**
    * The second line of the address.
@@ -44,7 +44,7 @@ interface Address {
   /**
    * The city or locality
    */
-  cityLocality?: string;
+  cityLocality: string;
 
   /**
    * The state or province
