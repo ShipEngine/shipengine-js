@@ -32,3 +32,7 @@ compileFromFile('node_modules/shipengine-json-schema/responses/calculate_rates_r
 // List Carrier Accounts
 compileFromFile('node_modules/shipengine-json-schema/responses/list_carriers_response_body.json')
   .then(ts => fs.writeFileSync('src/list-carrier-accounts/types/private-response.ts', ts))
+
+// Void Label
+compileFromFile('node_modules/shipengine-json-schema/responses/void_label_response_body.json')
+  .then(ts => fs.writeFileSync('src/void-label-by-id/types/private-response.ts', ts))
