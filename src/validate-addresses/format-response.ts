@@ -52,8 +52,9 @@ function mapNormalizedAddress(
     cityLocality: normalizedAddressResponse.city_locality,
     stateProvince: normalizedAddressResponse.state_province,
     postalCode: normalizedAddressResponse.postal_code,
-    countryCode:
-      normalizedAddressResponse.country_code as ValidateAddressesTypes.Result[0]["normalizedAddress"]["countryCode"],
+    countryCode: normalizedAddressResponse.country_code as NonNullable<
+      ValidateAddressesTypes.Result[0]["normalizedAddress"]
+    >["countryCode"],
     addressResidentialIndicator:
       normalizedAddressResponse.address_residential_indicator,
   };
