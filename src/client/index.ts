@@ -2,6 +2,8 @@ import { AbortController, getUserAgentString } from "../isomorphic.node";
 import { NormalizedConfig } from "../config";
 import { ShipEngineError, RateLimitExceededError } from "../errors";
 import { handle400Errors } from "./handle-400-errors";
+import { handle404Errors } from "./handle-404-errors";
+import { handle500Errors } from "./handle-500-errors";
 
 export async function get<TResult>(
   endpoint: string,
@@ -99,6 +101,8 @@ async function sendRequest<TParams, TResult>(
   }
 
   if (response.status === 400) handle400Errors(responseBody);
+  if (response.status === 404) handle404Errors(responseBody);
+  if (response.status === 500) handle500Errors();
 
   return responseBody;
 }
