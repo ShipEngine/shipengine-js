@@ -1,7 +1,6 @@
 const { expect } = require("chai");
 const { ShipEngine } = require("../..");
 const { apiKey } = require("../utils/constants");
-// const errors = require("../utils/errors");
 const { mockCreateLabel200 } = require("../utils/mocks/mock-create-label-200");
 
 describe("createLabel()", () => {

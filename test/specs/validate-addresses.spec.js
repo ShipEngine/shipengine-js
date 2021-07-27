@@ -510,4 +510,53 @@ describe("validateAddresses()", () => {
 
   // TODO - not sure how to test this w/ fetchMock
   // it("Throws an error when the request timesout", async () => {});
+
+  it("Throws an error if the request returns a 500", async () => {
+    fetchMock.postOnce(
+      "https://api.shipengine.com/v1/addresses/validate",
+      {
+        status: 500,
+        body: {
+          request_id: "123456789132456789123465789",
+          error: {
+            message: "Something bad happened",
+          },
+        },
+      },
+      { overwriteRoutes: false }
+    );
+
+    const shipengine = new ShipEngine({ apiKey });
+
+    const addressToValidate = [
+      {
+        name: "John Smith",
+        companyName: "ShipStation",
+        addressLine1: "3800 N Lamar Blvd",
+        addressLine2: "#220",
+        cityLocality: "Austin",
+        stateProvince: "TX",
+        postalCode: "78756",
+        countryCode: "US",
+        addressResidentialIndicator: "no",
+      },
+    ];
+
+    try {
+      await shipengine.validateAddresses(addressToValidate);
+      errors.shouldHaveThrown();
+    } catch (error) {
+      errors.assertShipEngineError(error, {
+        name: "ShipEngineError",
+        source: "shipengine",
+        type: "system",
+        code: "unspecified",
+        message: "An unknown error occurred while calling the ShipEngine API.",
+      });
+
+      expect(error.requestId).to.be.undefined;
+    }
+
+    fetchMock.restore();
+  });
 });

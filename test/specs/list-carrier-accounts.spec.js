@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const { ShipEngine } = require("../..");
 const { apiKey } = require("../utils/constants");
-// const errors = require("../utils/errors");
+const errors = require("../utils/errors");
 const fetchMock = require("../utils/fetch-mock");
 
 describe("listCarrierAccounts()", () => {
@@ -169,6 +169,41 @@ describe("listCarrierAccounts()", () => {
         ],
       },
     ]);
+
+    fetchMock.restore();
+  });
+
+  it("Throws an error if the request returns a 500", async () => {
+    fetchMock.getOnce(
+      "https://api.shipengine.com/v1/carriers",
+      {
+        status: 500,
+        body: {
+          request_id: "123456789132456789123465789",
+          error: {
+            message: "Something bad happened",
+          },
+        },
+      },
+      { overwriteRoutes: false }
+    );
+
+    const shipengine = new ShipEngine({ apiKey });
+
+    try {
+      await shipengine.listCarrierAccounts();
+      errors.shouldHaveThrown();
+    } catch (error) {
+      errors.assertShipEngineError(error, {
+        name: "ShipEngineError",
+        source: "shipengine",
+        type: "system",
+        code: "unspecified",
+        message: "An unknown error occurred while calling the ShipEngine API.",
+      });
+
+      expect(error.requestId).to.be.undefined;
+    }
 
     fetchMock.restore();
   });
