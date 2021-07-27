@@ -7,6 +7,8 @@ ignorePatterns:
   - esm
   - cjs
   - node_modules
+  - "**/types/private-request.ts"
+  - "**/types/private-response.ts"
 
 overrides:
   # TypeScript source files
