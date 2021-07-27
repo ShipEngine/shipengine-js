@@ -9,6 +9,10 @@ import {
 import { voidLabelById, VoidLabelByIdTypes } from "./void-label-by-id";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
 import { TrackByLabelIdTypes, trackByLabelId } from "./track-by-label-id";
+import {
+  TrackByTrackingNumberTypes,
+  trackByTrackingNumber,
+} from "./track-by-tracking-number";
 import { createLabel, CreateLabelTypes } from "./create-label";
 
 /**
@@ -72,26 +76,26 @@ export class ShipEngine {
     return listCarrierAccounts(mergedConfig);
   }
 
-  // /**
-  //  * Tracks a package based on the trackingNumber and carrierCode.
-  //  *
-  //  * @param [trackingNumber]
-  //  * The trackingNumber of the package you wish to track. You must also provide the carrierCode and no packageId.
-  //  * OR trackingNumber and carrierCode
-  //  *
-  //  * @param [carrierCode]
-  //  * The carrierCode for the trackingNumber you are using to track the package. You must also provide the trackingNumber
-  //  * and no packageId.
-  //  *
-  //  * @param [config] - Optional configuration overrides for this method call.
-  //  */
-  // public async trackByTrackingNumber(
-  //   params: TrackingParams,
-  //   config?: ShipEngineConfig
-  // ): Promise<TrackPackageResult> {
-  //   const mergedConfig = NormalizedConfig.merge(this.config, config);
-  //   return trackPackage(params, mergedConfig, this);
-  // }
+  /**
+   * Tracks a package based on the trackingNumber and carrierCode.
+   *
+   * @param [trackingNumber]
+   * The trackingNumber of the package you wish to track. You must also provide the carrierCode and no packageId.
+   * OR trackingNumber and carrierCode
+   *
+   * @param [carrierCode]
+   * The carrierCode for the trackingNumber you are using to track the package. You must also provide the trackingNumber
+   * and no packageId.
+   *
+   * @param [config] - Optional configuration overrides for this method call.
+   */
+  public async trackByTrackingNumber(
+    params: TrackByTrackingNumberTypes.Params,
+    config?: ShipEngineConfig
+  ): Promise<TrackByTrackingNumberTypes.Response> {
+    const mergedConfig = NormalizedConfig.merge(this.config, config);
+    return trackByTrackingNumber(params, mergedConfig);
+  }
 
   /**
    * Tracks a shipment by Label ID.
