@@ -52,7 +52,7 @@ export class ShipEngine {
   public async validateAddresses(
     params: ValidateAddressesTypes.Params,
     config?: ShipEngineConfig
-  ): Promise<ValidateAddressesTypes.Response> {
+  ): Promise<ValidateAddressesTypes.Result> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return validateAddresses(params, mergedConfig);
   }
@@ -65,7 +65,7 @@ export class ShipEngine {
    */
   public async listCarrierAccounts(
     config?: ShipEngineConfig
-  ): Promise<ListCarrierAccountsTypes.Response> {
+  ): Promise<ListCarrierAccountsTypes.Result> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return listCarrierAccounts(mergedConfig);
   }
