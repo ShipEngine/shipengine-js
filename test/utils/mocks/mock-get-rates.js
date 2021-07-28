@@ -1,7 +1,7 @@
 const fetchMock = require("../fetch-mock");
 
 function mockGetRates200() {
-  fetchMock.get("https://api.shipengine.com/v1/labels/se-1234/track", {
+  fetchMock.post("https://api.shipengine.com/v1/rates", {
     rate_response: {
       rates: [
         {
