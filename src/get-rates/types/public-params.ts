@@ -34,7 +34,7 @@ interface Shipment {
   externalShipmentId?: string;
 
   /**
-   * The date that the shipment was (or will be) shippped. ShipEngine will take the day of week into consideration. 
+   * The date that the shipment was (or will be) shippped. ShipEngine will take the day of week into consideration.
    * For example, if the carrier does not operate on Sundays, then a package that would have shipped on Sunday will ship on Monday instead.
    */
   shipDate?: Date;
@@ -43,7 +43,7 @@ interface Shipment {
    */
   shipTo: ShippingAddress;
   /**
-   * The shipment's origin address. If you frequently ship from the same location, consider creating a warehouse. 
+   * The shipment's origin address. If you frequently ship from the same location, consider creating a warehouse.
    * Then you can simply specify the warehouse_id rather than the complete address each time.
    */
   shipFrom?: ShippingAddress;
@@ -200,7 +200,7 @@ interface AdvancedOptions {
    */
   billToCountryCode?: Country;
   /**
-   * Indicates whether to bill shipping costs to the recipient or to a third-party. 
+   * Indicates whether to bill shipping costs to the recipient or to a third-party.
    * When billing to a third-party, the bill_to_account, bill_to_country_code, and bill_to_postal_code fields must also be set.
    */
   billToParty?: BillToParty;
@@ -228,7 +228,7 @@ interface AdvancedOptions {
     unit: "pound" | "ounce" | "gram" | "kilogram";
   };
   /**
-   * Indicates that the package cannot be processed automatically because it is too large or irregularly shaped. 
+   * Indicates that the package cannot be processed automatically because it is too large or irregularly shaped.
    * This is primarily for USPS shipments. See Section 1.2 of the USPS parcel standards for details.
    */
   nonMachinable?: boolean;
@@ -291,7 +291,7 @@ interface Package {
    */
   insuredValue?: MonetaryValue;
   /**
-   * Custom messages to print on the shipping label for the package. These are typically used to print invoice numbers, product numbers, or other internal reference numbers. 
+   * Custom messages to print on the shipping label for the package. These are typically used to print invoice numbers, product numbers, or other internal reference numbers.
    * Not all carriers support label messages. The number of lines and the maximum length of each line also varies by carrier.
    */
   labelMessages?: LabelMessages;
@@ -342,7 +342,7 @@ interface Weight {
 
 interface ShippingAddress {
   /**
-   * The name of a contact person at this address. 
+   * The name of a contact person at this address.
    * This field may be set instead of - or in addition to - the company_name field.
    */
   name: string;
@@ -355,7 +355,7 @@ interface ShippingAddress {
    */
   companyName?: string;
   /**
-   * The first line of the street address. For some addresses, this may be the only line. 
+   * The first line of the street address. For some addresses, this may be the only line.
    * Other addresses may require 2 or 3 lines.
    */
   addressLine1: string;
@@ -372,7 +372,7 @@ interface ShippingAddress {
    */
   cityLocality: string;
   /**
-   * The state or province. For some countries (including the U.S.) only abbreviations are allowed. 
+   * The state or province. For some countries (including the U.S.) only abbreviations are allowed.
    * Other countries allow the full name or abbreviation.
    */
   stateProvince: string;

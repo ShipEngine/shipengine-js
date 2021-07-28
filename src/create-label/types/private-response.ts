@@ -40,7 +40,7 @@ export type Currency2 = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
 export type TrackingNumber = string;
 
 export interface Label {
-  label_id?: SeId;
+  label_id: SeId;
   status?: LabelStatus;
   shipment_id?: SeId1;
   ship_date?: Date;
