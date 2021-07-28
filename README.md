@@ -42,7 +42,7 @@ Methods
 * [`listCarrierAccounts`](./docs/list-carrier-accounts.md) - Returns a list of carrier accounts that have been connected through
 the [ShipEngine dashboard](https://www.shipengine.com/docs/carriers/setup/).
 * [`trackByLabelId`](./docs/track-by-label-id.md) - Track a package by its associated label ID.
-* [`trackByTrackingNumber`](./docs/track-by-tracking-number.md) - Track a package by its associated trackng number.
+* [`trackByCarrierCodeAndTrackingNumber`](./docs/track-by-tracking-number.md) - Track a package by its associated trackng number.
 * [`validateAddresses`](./docs/validate-addresses.md) - Indicates whether the provided addresses are valid. If the addresses are valid, the method returns a normalized version based on the standards of the country in which the address resides. If an address cannot be normalized, an error is returned.
 * [`voidLabelById`](./docs/void-label-by-id.md) - Void a label by its ID.
 
