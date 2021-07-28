@@ -11,10 +11,8 @@ export function formatResponse(
     carrierId: response.carrier_id || null,
     serviceCode: response.service_code || null,
     externalOrderId: response.external_order_id || null,
-    items: response.items ? formatShipmentItems(response.items) : null,
-    taxIdentifiers: response.tax_identifiers
-      ? formatTaxIdentifiers(response.tax_identifiers)
-      : null,
+    items: formatShipmentItems(response.items),
+    taxIdentifiers: formatTaxIdentifiers(response.tax_identifiers),
     externalShipmentId: response.external_shipment_id || null,
     shipDate: response.ship_date!, // Error in generated types
     createdAt: response.created_at!, // Error in generated types
@@ -25,7 +23,7 @@ export function formatResponse(
     warehouseId: response.warehouse_id || null,
     returnTo: formatShippingAddress(response.return_to!), // Error in generated types
     confirmation: response.confirmation!, // Error in generated types
-    customs: response.customs ? formatCustoms(response.customs) : null,
+    customs: formatCustoms(response.customs!), // Error in generated types
     advancedOptions: formatAdvancedOptions(response.advanced_options!), // Error in generated types
     originType: response.origin_type || null,
     insuranceProvider: response.insurance_provider || "none",
@@ -234,7 +232,7 @@ function formatShippingAddress(
 
 function formatCustoms(
   customs: Response.InternationalShipmentOptions
-): GetRatesTypes.Result["customs"] {
+): GetRatesTypes.Result["customs"] | null {
   return {
     contents: customs.contents,
     nonDelivery: customs.non_delivery,
@@ -269,11 +267,12 @@ function formatCustomsItems(items: Response.CustomsItem[]): CustomsItemResult {
   });
 }
 
-type ShipmentItemArrayResult = NonNullable<GetRatesTypes.Result["items"]>;
-
 function formatShipmentItems(
-  items: Response.ShipmentItem[]
-): ShipmentItemArrayResult {
+  items: Response.ShipmentItem[] | undefined
+): GetRatesTypes.Result["items"] {
+  if (!items) {
+    return null;
+  }
   return items.map((item) => {
     return {
       name: item.name || null,
@@ -289,11 +288,12 @@ function formatShipmentItems(
   });
 }
 
-type TaxIdentifierResult = NonNullable<GetRatesTypes.Result["taxIdentifiers"]>;
-
 function formatTaxIdentifiers(
-  identifiers: Response.TaxIdentifier[]
-): TaxIdentifierResult {
+  identifiers: Response.TaxIdentifier[] | undefined
+): GetRatesTypes.Result["taxIdentifiers"] {
+  if (!identifiers) {
+    return null;
+  }
   return identifiers.map((identifier) => {
     return {
       taxableEntityType: identifier.taxable_entity_type,

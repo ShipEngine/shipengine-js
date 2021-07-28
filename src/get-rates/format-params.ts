@@ -14,21 +14,7 @@ export function formatParams(
         carrier_id: params.shipment.carrierId,
         service_code: params.shipment.serviceCode,
         external_order_id: params.shipment.externalOrderId,
-        items: params.shipment.items
-          ? params.shipment.items.map((item) => {
-              return {
-                name: item.name,
-                sales_order_id: item.salesOrderId,
-                sales_order_item_id: item.salesOrderItemId,
-                quantity: item.quantity,
-                sku: item.sku,
-                external_order_id: item.externalOrderId,
-                external_order_item_id: item.externalOrderItemId,
-                asin: item.asin,
-                order_source_code: item.orderSourceCode,
-              };
-            })
-          : undefined,
+        items: formatShipmentItems(params.shipment.items),
         tax_identifiers: mapTaxIdentifiers(params.shipment.taxIdentifiers),
         external_shipment_id: params.shipment.externalShipmentId,
         ship_date: params.shipment.shipDate as unknown as Request.Date,
@@ -38,9 +24,7 @@ export function formatParams(
         return_to: params.shipment.returnTo,
         confirmation: params.shipment.confirmation,
         customs: mapCustoms(params.shipment.customs),
-        advanced_options: params.shipment.advancedOptions
-          ? mapAdvancedOptions(params.shipment.advancedOptions)
-          : undefined,
+        advanced_options: mapAdvancedOptions(params.shipment.advancedOptions),
         origin_type: params.shipment.originType,
         insurance_provider: params.shipment.insuranceProvider,
         order_source_code: params.shipment.orderSourceCode,
@@ -69,13 +53,39 @@ export function formatParams(
   return request;
 }
 
+type ShipmentItem = NonNullable<GetRatesTypes.Params["shipment"]>["items"];
+
+function formatShipmentItems(
+  shipmentItems: ShipmentItem
+): Request.ShipmentItem[] | undefined {
+  if (!shipmentItems) {
+    return undefined;
+  }
+  return shipmentItems.map((item) => {
+    return {
+      name: item.name,
+      sales_order_id: item.salesOrderId,
+      sales_order_item_id: item.salesOrderItemId,
+      quantity: item.quantity,
+      sku: item.sku,
+      external_order_id: item.externalOrderId,
+      external_order_item_id: item.externalOrderItemId,
+      asin: item.asin,
+      order_source_code: item.orderSourceCode,
+    };
+  });
+}
+
 type AdvancedOptions = NonNullable<
-  NonNullable<GetRatesTypes.Params["shipment"]>["advancedOptions"]
->;
+  GetRatesTypes.Params["shipment"]
+>["advancedOptions"];
 
 function mapAdvancedOptions(
   advancedOptions: AdvancedOptions
-): Request.AdvancedShipmentOptions {
+): Request.AdvancedShipmentOptions | undefined {
+  if (!advancedOptions) {
+    return undefined;
+  }
   return {
     bill_to_account: advancedOptions.billToAccount,
     bill_to_country_code: advancedOptions.billToCountryCode,
@@ -104,8 +114,8 @@ function mapAdvancedOptions(
 }
 
 type TaxIdentifiers = NonNullable<
-  NonNullable<GetRatesTypes.Params["shipment"]>["taxIdentifiers"]
->;
+  GetRatesTypes.Params["shipment"]
+>["taxIdentifiers"];
 
 function mapTaxIdentifiers(
   params?: TaxIdentifiers
@@ -119,11 +129,12 @@ function mapTaxIdentifiers(
   }));
 }
 
-type Packages = NonNullable<
-  NonNullable<GetRatesTypes.Params["shipment"]>["packages"]
->;
+type Packages = NonNullable<GetRatesTypes.Params["shipment"]>["packages"];
 
-function mapPackages(params: Packages): any[] {
+function mapPackages(params: Packages): any[] | undefined {
+  if (!params) {
+    return undefined;
+  }
   return params.map((pkg) => ({
     package_code: pkg.packageCode,
     weight: pkg.weight,
@@ -134,9 +145,7 @@ function mapPackages(params: Packages): any[] {
   }));
 }
 
-type Customs = NonNullable<
-  NonNullable<GetRatesTypes.Params["shipment"]>["customs"]
->;
+type Customs = NonNullable<GetRatesTypes.Params["shipment"]>["customs"];
 
 function mapCustoms(
   params?: Customs

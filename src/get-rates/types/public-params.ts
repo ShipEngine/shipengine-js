@@ -5,6 +5,9 @@ interface ShipmentParam {
   shipment?: Shipment;
 }
 
+/**
+ * The shipment object
+ */
 interface Shipment {
   /**
    * The possible validate address values
@@ -27,6 +30,7 @@ interface Shipment {
    * Describe the packages included in this shipment as related to potential metadata that was imported from external order sources
    */
   items?: ShipmentItem[];
+
   taxIdentifiers?: TaxIdentifier[];
   /**
    * You can optionally use this field to store your own identifier for this shipment.
