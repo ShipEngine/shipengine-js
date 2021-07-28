@@ -1,32 +1,32 @@
-Package Tracking
+Track By Tracking Number
 ================================
-[ShipEngine](www.shipengine.com) allows you to get real-time tracking and delivery information for *any* package, regardless of 
+[ShipEngine](www.shipengine.com) allows you to get real-time tracking and delivery information for *any* package, regardless of
 whether you created the package label through ShipEngine, so you know exactly where your package is and when it will arrive.
 
 The `trackPackage` Method
 --------------------------------------
 The `trackPackage` method gives you information about a package and details about each of the tracking events that
-have occurred, such as when the package is scanned by the carrier and when it is delivered. 
+have occurred, such as when the package is scanned by the carrier and when it is delivered.
 
-If you created the package label through ShipEngine, we recommend that you use the package's `packageId` to track the 
-package so that we can provide as many details as possible about the package and its status. 
+If you created the package label through ShipEngine, we recommend that you use the package's `packageId` to track the
+package so that we can provide as many details as possible about the package and its status.
 
 If you only have the tracking number and shipping carrier, ShipEngine can still retrieve the information you need
-to ensure your package's whereabouts. 
+to ensure your package's whereabouts.
 
 Input Parameters
 -------------------------------------
 The `trackPackage` method can accept either the `packageId` that was generated when you created the package label using
-ShipEngine *OR* it can accept a `trackingNumber` and `carrierCode`. 
+ShipEngine *OR* it can accept a `trackingNumber` and `carrierCode`.
 
 ### Track by `packageId`
 * `packageId` *required* <br>
 A *string* containing a valid ShipEngine package ID.
-  
+
 ### Track by `trackingNumber` and `carrierCode`
 * `trackingNumber` *required* <br>
 A *string* containing the tracking number provided by the carrier.
-  
+
 * `carrierCode` *required* <br>
 A string containing the ShipEngine carrier code for the carrier that provided the tracking number.
 
@@ -76,28 +76,28 @@ type into your project to take advantage of your IDE's code completion functiona
   An *object* representing the shipment details associated with this package.
     <br> <br>
     *  `shipmentId` <br>
-    A *string* containing the ShipEngine ID for the shipment associated with this package. 
+    A *string* containing the ShipEngine ID for the shipment associated with this package.
        <br> <br>
        This property
-       will be *undefined* if you are tracking by `trackingNumber` and `carrierCode`.  
+       will be *undefined* if you are tracking by `trackingNumber` and `carrierCode`.
        <br>
     *  `carrierId` <br>
     A *string* containing the ShipEngine ID for the shipping carrier who is delivering this package.
-    <br>  
+    <br>
     This property
        will be *undefined* if you are tracking by `trackingNumber` and `carrierCode`.
        <br>
        <br>
     *  `carrierAccount`
     An *object* containing information about the carrier who is delivering this package.
-   <br>  
-   This property will be *undefined* if you are tracking by `trackingNumber` and `carrierCode`.  
+   <br>
+   This property will be *undefined* if you are tracking by `trackingNumber` and `carrierCode`.
        <br>
        * `id`  <br>
-       A *string* containing the ShipEngine ID for this carrier. 
+       A *string* containing the ShipEngine ID for this carrier.
        <br> <br>
        *  `carrier`
-       An *object* identifying the carrier. 
+       An *object* identifying the carrier.
        <br> <br>
           * `name`
            A *string* containing the name of the carrier (i.e. FedEx).<br> <br>
@@ -114,9 +114,9 @@ type into your project to take advantage of your IDE's code completion functiona
     An *object* representing the estimated delivery date and time.
       <br> <br>
       * `value` <br>
-      The [ISOString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString) value of this date.  
+      The [ISOString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString) value of this date.
       * `hasTime` <br>
-        <br> 
+        <br>
       A *boolean* value indicated whether the value includes a timestamp. <br>
         <br>
       * `hasTimeZone` <br>
@@ -126,15 +126,15 @@ type into your project to take advantage of your IDE's code completion functiona
       A *function* used to get the string representation of this value. <br>
         <br>
   * `actualDeliveryDateTime` <br>
-    An *object* representing the actual delivery date and time. 
+    An *object* representing the actual delivery date and time.
     <br>
     <br>
     This property will be *undefined* if the package is still
     in transit.
     <br> <br>
     * `value` <br>
-      The [ISOString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString) value of this date.  
-      <br> 
+      The [ISOString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString) value of this date.
+      <br>
     * `hasTime` <br>
       A *boolean* value indicated whether the value includes a timestamp.
       <br> <br>
@@ -148,9 +148,9 @@ type into your project to take advantage of your IDE's code completion functiona
 An *object* containing information about the physical package.
   <br> <br>
   * `packageId` <br>
-  A *string* containing the ShipEngine ID for this package. 
+  A *string* containing the ShipEngine ID for this package.
     <br><br>
-    This property will be *undefined* if you 
+    This property will be *undefined* if you
     are tracking by `trackingNumber` and `carrierCode`.
     <br> <br>
   * `trackingNumber` <br>
@@ -158,10 +158,10 @@ An *object* containing information about the physical package.
     <br> <br>
   `trackingURl` <br>
   A *string* containing a URL you can use to get the latest tracking information directly from the carrier.
-    <br> <br> 
+    <br> <br>
  * `weight` <br>
-  An *object* representing the weight of the package.   
-  <br> 
+  An *object* representing the weight of the package.
+  <br>
   This property will be *undefined* if you
   are tracking by `trackingNumber` and `carrierCode`.
    <br><br>
@@ -169,14 +169,14 @@ An *object* containing information about the physical package.
     A *number* containing the value of the weight in the specified `unit`.
     <br><br>
     * `unit`
-    A *string* containing the unit of measure for the specified `value`. 
+    A *string* containing the unit of measure for the specified `value`.
       Possible values include the following:
       * `lb` - pound
       * `oz` - ounce
       * `gram`- gram
       * `kg` - kilogram
-  <br><br> 
-  * `dimensions` 
+  <br><br>
+  * `dimensions`
   An *object* representing the dimensions of this package.
   <br><br>
   This property will be *undefined* if you
@@ -189,7 +189,7 @@ An *object* containing information about the physical package.
     A *number* containing the width of this package.
     <br><br>
     * `height`
-    A *number* containing the height of this package.  
+    A *number* containing the height of this package.
     <br>
     * `unit`
     A *string* containing the unit of measure for the dimensions .
@@ -204,7 +204,7 @@ An *array of objects* representing the individual tracking events that have occu
   An *object* representing the date and time that this event occurred.
     <br><br>
     * `value` <br>
-    The [ISOString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString) value of this date.  
+    The [ISOString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString) value of this date.
     <br>
     * `hasTime` <br>
       A *boolean* value indicated whether the value includes a timestamp.
@@ -219,7 +219,7 @@ An *array of objects* representing the individual tracking events that have occu
   An *object* representing the date and time the carrier recorded this event.
     <br><br>
     * `value` <br>
-      The [ISOString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString) value of this date.  
+      The [ISOString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString) value of this date.
       <br>
     * `hasTime` <br>
       A *boolean* value indicated whether the value includes a timestamp.
@@ -235,13 +235,13 @@ An *array of objects* representing the individual tracking events that have occu
   <br><br>
   * `description`
   A *string* containing ShipEngine's description of this event. May be `undefined`.
-  <br><br> 
+  <br><br>
   * `carrierStatusCode`
   A *string* containing the carrier's status for this event. (i.e. IN TRANSIT). May be `undefined`.
   <br><br>
   * `carrierDetailCode`
   A *string* containing the carrier's detail code for this event.
-  <br><br>  
+  <br><br>
   * `signer`
   A *string* containing the name of the person who signed for this package, if any. May be `undefined`.
   <br><br>
@@ -251,17 +251,17 @@ An *array of objects* representing the individual tracking events that have occu
     * `cityLocality`
     A *string* containing the city or locality where this event occurred. May be `undefined`.
     <br><br>
-    * `stateProvince` 
+    * `stateProvince`
     A *string* containing the state or province where this event occurred. May be `undefined`.
-    <br><br>    
+    <br><br>
     * `postalCode`
     A *string* containing the postal code where this event occurred. May be `undefined`.
-    <br><br>  
+    <br><br>
    * `countryCode`
    A *string* containing the [ISO 3166](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) country code
      where this event occurred. May be `undefined`.
    <br><br>
-   * `coordinates`  
+   * `coordinates`
    An *object* containing the geo-coordinates for this location. May be `undefined`.
    <br><br>
      * `latitude`
@@ -274,7 +274,7 @@ An *array of objects* representing the individual tracking events that have occu
  An `Event` object representing the most recent tracking event for this package. May be `undefined`.
  <br><br>
  * `hasErrors`
- A *boolean* indicating whether or not any tracking error events have occurred. 
+ A *boolean* indicating whether or not any tracking error events have occurred.
  <br><br>
  * `errors[]`
  An *array* containing tracking error events. May be empty.
@@ -295,7 +295,7 @@ async function trackPackage() {
 
   try {
     const result = await shipengine.trackPackage('pkg_kfUjTZSEAQ8gHeT');
-    
+
     if (!result.hasErrors) {
       // Success! No tracking errors encountered
       console.log('No tracking error events occurred.');

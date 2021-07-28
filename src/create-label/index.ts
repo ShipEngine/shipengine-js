@@ -16,7 +16,7 @@ export { CreateLabelTypes };
 export async function createLabel(
   params: CreateLabelTypes.Params,
   config: NormalizedConfig
-): Promise<CreateLabelTypes.Response> {
+): Promise<CreateLabelTypes.Result> {
   const formattedParams = formatParams(params);
 
   const response = await post<
