@@ -123,7 +123,7 @@ export class ShipEngine {
   public async createLabel(
     params: CreateLabelTypes.Params,
     config?: ShipEngineConfig
-  ): Promise<CreateLabelTypes.Response> {
+  ): Promise<CreateLabelTypes.Result> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return createLabel(params, mergedConfig);
   }
@@ -139,7 +139,7 @@ export class ShipEngine {
   public async createLabelFromRate(
     params: CreateLabelFromRateTypes.Params,
     config?: ShipEngineConfig
-  ): Promise<CreateLabelFromRateTypes.Response> {
+  ): Promise<CreateLabelFromRateTypes.Result> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return createLabelFromRate(params, mergedConfig);
   }

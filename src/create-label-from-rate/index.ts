@@ -16,7 +16,7 @@ export { CreateLabelFromRateTypes };
 export async function createLabelFromRate(
   params: CreateLabelFromRateTypes.Params,
   config: NormalizedConfig
-): Promise<CreateLabelFromRateTypes.Response> {
+): Promise<CreateLabelFromRateTypes.Result> {
   validateParams(params);
 
   const formattedParams = formatParams(params);
