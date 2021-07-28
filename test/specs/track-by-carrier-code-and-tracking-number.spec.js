@@ -1,21 +1,23 @@
 const { expect } = require("chai");
-const { ShipEngine } = require("../..");
+const { ShipEngine } = require("../../");
 const { apiKey } = require("../utils/constants");
 const errors = require("../utils/errors");
 const fetchMock = require("../utils/fetch-mock");
 
 const {
-  mockTrackByLabelId200,
-  mockTrackByLabelId404,
-  mockTrackByLabelId500,
-} = require("../utils/mocks/mock-track-by-label-id-200");
+  mockTrackByCarrierCodeAndTrackingNumber200,
+  mockTrackByCarrierCodeAndTrackingNumber400,
+} = require("../utils/mocks/mock-track-by-carrier-code-and-tracking-number");
 
-describe("trackByLabelId()", () => {
-  it("should throw an error if the label ID is not a string", async () => {
+describe("trackByTrackingNumber()", () => {
+  it("should throw an error if the carrier code is not a string", async () => {
     const shipengine = new ShipEngine({ apiKey });
 
     try {
-      await shipengine.trackByLabelId({ labelId: 1234 });
+      await shipengine.trackByCarrierCodeAndTrackingNumber({
+        carrierCode: 1234,
+        trackingNumber: "1234",
+      });
       errors.shouldHaveThrown();
     } catch (error) {
       errors.assertInvalidFieldValueError(error, {
@@ -30,37 +32,38 @@ describe("trackByLabelId()", () => {
     }
   });
 
-  it("Throws an error if the request returns a 404", async () => {
-    mockTrackByLabelId404();
-
+  it("should throw an error if the tracking number is not a string", async () => {
     const shipengine = new ShipEngine({ apiKey });
 
     try {
-      await shipengine.trackByLabelId({ labelId: "se-1234" });
+      await shipengine.trackByCarrierCodeAndTrackingNumber({
+        carrierCode: "1234",
+        trackingNumber: 1234,
+      });
       errors.shouldHaveThrown();
     } catch (error) {
-      errors.assertShipEngineError(error, {
-        name: "ShipEngineError",
+      errors.assertInvalidFieldValueError(error, {
+        code: "invalid_field_value",
+        fieldName: "Params",
+        message: "Params must be a string.",
+        name: "InvalidFieldValueError",
         source: "shipengine",
-        type: "security",
-        code: "not_found",
-        message: "GET",
+        type: "validation",
       });
-
-      // TODO: surface the request ID in the error??
-      expect(error.requestID).to.equal("594a0d7d-5905-48ef-bb89-93acea737b3a");
+      expect(error.requestId).to.be.undefined;
     }
-
-    fetchMock.restore();
   });
 
   it("Throws an error if the request returns a 500", async () => {
-    mockTrackByLabelId500();
+    mockTrackByCarrierCodeAndTrackingNumber400();
 
     const shipengine = new ShipEngine({ apiKey });
 
     try {
-      await shipengine.trackByLabelId({ labelId: "se-1234" });
+      await shipengine.trackByCarrierCodeAndTrackingNumber({
+        carrierCode: "stamps_com",
+        trackingNumber: "1234",
+      });
       errors.shouldHaveThrown();
     } catch (error) {
       errors.assertShipEngineError(error, {
@@ -73,19 +76,20 @@ describe("trackByLabelId()", () => {
 
       // TODO: surface the request ID in the error??
       expect(error.requestId).to.be.undefined;
-      // expect(error.requestId).to.equal("123456789132456789123465789");
+      // expect(error.requestID).to.equal("123456789132456789123465789");
     }
 
     fetchMock.restore();
   });
 
   it("should return tracking information for a valid Label ID", async () => {
-    mockTrackByLabelId200();
+    mockTrackByCarrierCodeAndTrackingNumber200();
 
     const shipengine = new ShipEngine({ apiKey });
 
-    const result = await shipengine.trackByLabelId({
-      labelId: "se-1234",
+    const result = await shipengine.trackByCarrierCodeAndTrackingNumber({
+      carrierCode: "stamps_com",
+      trackingNumber: "1234",
     });
 
     expect(result).to.deep.equal({
@@ -136,7 +140,5 @@ describe("trackByLabelId()", () => {
         },
       ],
     });
-
-    fetchMock.restore();
   });
 });

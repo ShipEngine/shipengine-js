@@ -51,4 +51,47 @@ function mockTrackByLabelId200() {
   });
 }
 
-module.exports = { mockTrackByLabelId200 };
+function mockTrackByLabelId404() {
+  fetchMock.getOnce(
+    "https://api.shipengine.com/v1/labels/se-1234/track",
+    {
+      status: 404,
+      body: {
+        request_id: "594a0d7d-5905-48ef-bb89-93acea737b3a",
+        errors: [
+          {
+            error_source: "shipengine",
+            error_type: "security",
+            error_code: "not_found",
+            message: "GET",
+            method: "/v1/labels/se-1234/track",
+            path: "GET /v1/labels/se-1234/track is not a valid API endpoint.",
+          },
+        ],
+      },
+    },
+    { overwriteRoutes: false }
+  );
+}
+
+function mockTrackByLabelId500() {
+  fetchMock.getOnce(
+    "https://api.shipengine.com/v1/labels/se-1234/track",
+    {
+      status: 500,
+      body: {
+        request_id: "123456789132456789123465789",
+        error: {
+          message: "Something bad happened",
+        },
+      },
+    },
+    { overwriteRoutes: false }
+  );
+}
+
+module.exports = {
+  mockTrackByLabelId200,
+  mockTrackByLabelId404,
+  mockTrackByLabelId500,
+};
