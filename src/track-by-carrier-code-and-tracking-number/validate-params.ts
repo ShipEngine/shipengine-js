@@ -1,11 +1,11 @@
 import { InvalidFieldValueError } from "../errors";
-import { TrackByTrackingNumberTypes } from ".";
+import { TrackByCarrierCodeAndTrackingNumberTypes } from ".";
 
 /**
  * Performs client-side validation of the params passed in by the user.
  */
 export function validateParams(
-  params: TrackByTrackingNumberTypes.Params
+  params: TrackByCarrierCodeAndTrackingNumberTypes.Params
 ): void {
   if (typeof params.trackingNumber !== "string") {
     throw new InvalidFieldValueError("Params", "must be a string.");

@@ -10,9 +10,9 @@ import { voidLabelById, VoidLabelByIdTypes } from "./void-label-by-id";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
 import { TrackByLabelIdTypes, trackByLabelId } from "./track-by-label-id";
 import {
-  TrackByTrackingNumberTypes,
-  trackByTrackingNumber,
-} from "./track-by-tracking-number";
+  TrackByCarrierCodeAndTrackingNumberTypes,
+  trackByCarrierCodeAndTrackingNumber,
+} from "./track-by-carrier-code-and-tracking-number";
 import { createLabel, CreateLabelTypes } from "./create-label";
 
 /**
@@ -89,12 +89,12 @@ export class ShipEngine {
    *
    * @param [config] - Optional configuration overrides for this method call.
    */
-  public async trackByTrackingNumber(
-    params: TrackByTrackingNumberTypes.Params,
+  public async trackByCarrierCodeAndTrackingNumber(
+    params: TrackByCarrierCodeAndTrackingNumberTypes.Params,
     config?: ShipEngineConfig
-  ): Promise<TrackByTrackingNumberTypes.Response> {
+  ): Promise<TrackByCarrierCodeAndTrackingNumberTypes.Result> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
-    return trackByTrackingNumber(params, mergedConfig);
+    return trackByCarrierCodeAndTrackingNumber(params, mergedConfig);
   }
 
   /**

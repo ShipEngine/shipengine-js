@@ -1,12 +1,12 @@
 export type Params = { trackingNumber: string; carrierCode: string };
 
-export type Response = TrackByTrackingNumberResult;
+export type Result = TrackByCarrierCodeAndTrackingNumberResult;
 
 /**
  * The Tracking information and events associated with a label
  * @see https://www.shipengine.com/docs/tracking/track-by-label-id/
  */
-export interface TrackByTrackingNumberResult {
+interface TrackByCarrierCodeAndTrackingNumberResult {
   /**
    * A tracking number for a package. The format depends on the carrier.
    */
@@ -78,7 +78,7 @@ export interface TrackByTrackingNumberResult {
  *
  * @see https://www.shipengine.com/docs/tracking/track-by-label-id/
  */
-export interface TrackingEvent {
+interface TrackingEvent {
   /**
    * Timestamp for carrier event
    */

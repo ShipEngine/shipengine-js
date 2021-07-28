@@ -1,20 +1,20 @@
 const { expect } = require("chai");
-const { ShipEngine } = require("../..");
+const { ShipEngine } = require("../../");
 const { apiKey } = require("../utils/constants");
 const errors = require("../utils/errors");
 const fetchMock = require("../utils/fetch-mock");
 
 const {
-  mockTrackByTrackingNumber200,
-  mockTrackByTrackingNumber400,
-} = require("../utils/mocks/mock-track-by-tracking-number");
+  mockTrackByCarrierCodeAndTrackingNumber200,
+  mockTrackByCarrierCodeAndTrackingNumber400,
+} = require("../utils/mocks/mock-track-by-carrier-code-and-tracking-number");
 
 describe("trackByTrackingNumber()", () => {
   it("should throw an error if the carrier code is not a string", async () => {
     const shipengine = new ShipEngine({ apiKey });
 
     try {
-      await shipengine.trackByTrackingNumber({
+      await shipengine.trackByCarrierCodeAndTrackingNumber({
         carrierCode: 1234,
         trackingNumber: "1234",
       });
@@ -36,7 +36,7 @@ describe("trackByTrackingNumber()", () => {
     const shipengine = new ShipEngine({ apiKey });
 
     try {
-      await shipengine.trackByTrackingNumber({
+      await shipengine.trackByCarrierCodeAndTrackingNumber({
         carrierCode: "1234",
         trackingNumber: 1234,
       });
@@ -55,12 +55,12 @@ describe("trackByTrackingNumber()", () => {
   });
 
   it("Throws an error if the request returns a 500", async () => {
-    mockTrackByTrackingNumber400();
+    mockTrackByCarrierCodeAndTrackingNumber400();
 
     const shipengine = new ShipEngine({ apiKey });
 
     try {
-      await shipengine.trackByTrackingNumber({
+      await shipengine.trackByCarrierCodeAndTrackingNumber({
         carrierCode: "stamps_com",
         trackingNumber: "1234",
       });
@@ -83,11 +83,11 @@ describe("trackByTrackingNumber()", () => {
   });
 
   it("should return tracking information for a valid Label ID", async () => {
-    mockTrackByTrackingNumber200();
+    mockTrackByCarrierCodeAndTrackingNumber200();
 
     const shipengine = new ShipEngine({ apiKey });
 
-    const result = await shipengine.trackByTrackingNumber({
+    const result = await shipengine.trackByCarrierCodeAndTrackingNumber({
       carrierCode: "stamps_com",
       trackingNumber: "1234",
     });
