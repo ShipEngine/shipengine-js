@@ -14,6 +14,7 @@ import {
   trackByCarrierCodeAndTrackingNumber,
 } from "./track-by-carrier-code-and-tracking-number";
 import { createLabel, CreateLabelTypes } from "./create-label";
+import { getRates, GetRatesTypes } from "./get-rates";
 import {
   createLabelFromRate,
   CreateLabelFromRateTypes,
@@ -162,5 +163,18 @@ export class ShipEngine {
   ): Promise<VoidLabelByIdTypes.Result> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return voidLabelById(id, mergedConfig);
+  }
+
+  /**
+   * Retrieve rates for a package.
+   *
+   * @param [config] - Optional configuration overrides for this method call.
+   */
+  public async getRates(
+    params: GetRatesTypes.Params,
+    config?: ShipEngineConfig
+  ): Promise<GetRatesTypes.Result> {
+    const mergedConfig = NormalizedConfig.merge(this.config, config);
+    return getRates(params, mergedConfig);
   }
 }
