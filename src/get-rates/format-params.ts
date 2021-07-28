@@ -14,19 +14,21 @@ export function formatParams(
         carrier_id: params.shipment.carrierId,
         service_code: params.shipment.serviceCode,
         external_order_id: params.shipment.externalOrderId,
-        items: params.shipment.items?.map((item) => {
-          return {
-            name: item.name,
-            sales_order_id: item.salesOrderId,
-            sales_order_item_id: item.salesOrderItemId,
-            quantity: item.quantity,
-            sku: item.sku,
-            external_order_id: item.externalOrderId,
-            external_order_item_id: item.externalOrderItemId,
-            asin: item.asin,
-            order_source_code: item.orderSourceCode,
-          };
-        }),
+        items: params.shipment.items
+          ? params.shipment.items.map((item) => {
+              return {
+                name: item.name,
+                sales_order_id: item.salesOrderId,
+                sales_order_item_id: item.salesOrderItemId,
+                quantity: item.quantity,
+                sku: item.sku,
+                external_order_id: item.externalOrderId,
+                external_order_item_id: item.externalOrderItemId,
+                asin: item.asin,
+                order_source_code: item.orderSourceCode,
+              };
+            })
+          : undefined,
         tax_identifiers: mapTaxIdentifiers(params.shipment.taxIdentifiers),
         external_shipment_id: params.shipment.externalShipmentId,
         ship_date: params.shipment.shipDate as unknown as Request.Date,
@@ -36,35 +38,9 @@ export function formatParams(
         return_to: params.shipment.returnTo,
         confirmation: params.shipment.confirmation,
         customs: mapCustoms(params.shipment.customs),
-        advanced_options: {
-          bill_to_account: params.shipment.advancedOptions?.billToAccount,
-          bill_to_country_code:
-            params.shipment.advancedOptions?.billToCountryCode,
-          bill_to_party: params.shipment.advancedOptions?.billToParty,
-          bill_to_postal_code:
-            params.shipment.advancedOptions?.billToPostalCode,
-          contains_alcohol: params.shipment.advancedOptions?.containsAlcohol,
-          delivered_duty_paid:
-            params.shipment.advancedOptions?.deliveryDutyPaid,
-          dry_ice: params.shipment.advancedOptions?.dryIce,
-          dry_ice_weight: params.shipment.advancedOptions?.dryIceWeight,
-          non_machinable: params.shipment.advancedOptions?.nonMachinable,
-          saturday_delivery: params.shipment.advancedOptions?.saturdayDelivery,
-          use_ups_ground_freight_pricing:
-            params.shipment.advancedOptions?.useUPSGroundFreightPricing,
-          freight_class: params.shipment.advancedOptions?.freightClass,
-          custom_field1: params.shipment.advancedOptions?.customField1,
-          custom_field2: params.shipment.advancedOptions?.customField2,
-          custom_field3: params.shipment.advancedOptions?.customField3,
-          origin_type: params.shipment.advancedOptions?.originType,
-          shipper_release: params.shipment.advancedOptions?.shipperRelease,
-          collect_on_delivery: {
-            payment_type:
-              params.shipment.advancedOptions?.collectOnDelivery?.paymentType,
-            payment_amount:
-              params.shipment.advancedOptions?.collectOnDelivery?.paymentAmount,
-          },
-        },
+        advanced_options: params.shipment.advancedOptions
+          ? mapAdvancedOptions(params.shipment.advancedOptions)
+          : undefined,
         origin_type: params.shipment.originType,
         insurance_provider: params.shipment.insuranceProvider,
         order_source_code: params.shipment.orderSourceCode,
@@ -91,7 +67,40 @@ export function formatParams(
   }
 
   return request;
+}
 
+type AdvancedOptions = NonNullable<
+  NonNullable<GetRatesTypes.Params["shipment"]>["advancedOptions"]
+>;
+
+function mapAdvancedOptions(
+  advancedOptions: AdvancedOptions
+): Request.AdvancedShipmentOptions {
+  return {
+    bill_to_account: advancedOptions.billToAccount,
+    bill_to_country_code: advancedOptions.billToCountryCode,
+    bill_to_party: advancedOptions.billToParty,
+    bill_to_postal_code: advancedOptions.billToPostalCode,
+    contains_alcohol: advancedOptions.containsAlcohol,
+    delivered_duty_paid: advancedOptions.deliveryDutyPaid,
+    dry_ice: advancedOptions.dryIce,
+    dry_ice_weight: advancedOptions.dryIceWeight,
+    non_machinable: advancedOptions.nonMachinable,
+    saturday_delivery: advancedOptions.saturdayDelivery,
+    use_ups_ground_freight_pricing: advancedOptions.useUPSGroundFreightPricing,
+    freight_class: advancedOptions.freightClass,
+    custom_field1: advancedOptions.customField1,
+    custom_field2: advancedOptions.customField2,
+    custom_field3: advancedOptions.customField3,
+    origin_type: advancedOptions.originType,
+    shipper_release: advancedOptions.shipperRelease,
+    collect_on_delivery: advancedOptions.collectOnDelivery
+      ? {
+          payment_type: advancedOptions.collectOnDelivery.paymentType,
+          payment_amount: advancedOptions.collectOnDelivery.paymentAmount,
+        }
+      : undefined,
+  };
 }
 
 type TaxIdentifiers = NonNullable<
