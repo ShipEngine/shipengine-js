@@ -36,14 +36,15 @@ const shipengine = new ShipEngine("___YOUR_API_KEY_HERE__");
 ```
 Methods
 -------------------------------
-* [`validateAddress`](./docs/validate-address.md) - Indicates whether the provided address is valid. If the address is valid, 
-  the method returns a normalized version of the address
-based on the standards of the country in which the address resides.
-* [`normalizeAddress`](./docs/normalize-address.md) - Returns a normalized, or standardized, version of the address. If the 
-address cannot be normalized, an error is returned.
-* [`getCarrierAccounts`](./docs/get-carrier-accounts.md) - Returns a list of carrier accounts that have been connected through
+* [`createLabelFromRate`](./docs/create-label-from-rate.md) - When retrieving rates for shipments using the `getRates` method, the returned information contains a `rate_id` property that can be used to purchase a label without having to refill in the shipment information repeatedly.
+* [`createLabel`](./docs/create-label.md) - Purchase and print a label for shipment.
+* [`getRates`](./docs/get-rates.md) - Given some shipment details and rate options, this method returns a list of rate quotes.
+* [`listCarrierAccounts`](./docs/list-carrier-accounts.md) - Returns a list of carrier accounts that have been connected through
 the [ShipEngine dashboard](https://www.shipengine.com/docs/carriers/setup/).
-* `clearCache` - Clear the SDK cache. Currently only stores carrier account data.
+* [`trackByLabelId`](./docs/track-by-label-id.md) - Track a package by its associated label ID.
+* [`trackByTrackingNumber`](./docs/track-by-label-id.md) - Track a package by its associated trackng number.
+* [`validateAddresses`](./docs/validate-addresses.md) - Indicates whether the provided addresses are valid. If the addresses are valid, the method returns a normalized version based on the standards of the country in which the address resides. If an address cannot be normalized, an error is returned.
+* [`voidLabelById`](./docs/track-by-label-id.md) - Void a label by its ID.
 
 Contributing
 --------------------------
