@@ -4,7 +4,7 @@ import { CreateLabelFromRateTypes } from ".";
 
 export function formatResponse(
   params: Response.CreateLabelFromRateResponseBody
-): CreateLabelFromRateTypes.Response {
+): CreateLabelFromRateTypes.Result {
   return {
     labelId: params.label_id!, // Error in generated types
     status: params.status!, // Error in generated types
@@ -40,7 +40,7 @@ export function formatResponse(
 
 function mapLabelDownload(
   params: Response.LabelDownload
-): CreateLabelFromRateTypes.Response["labelDownload"] {
+): CreateLabelFromRateTypes.Result["labelDownload"] {
   return {
     href: params.href!, // Error in generated types
     pdf: params.pdf!, // Error in generated types
@@ -51,7 +51,7 @@ function mapLabelDownload(
 
 function mapFormDownload(
   params: Response.Link | undefined
-): CreateLabelFromRateTypes.Response["formDownload"] | null {
+): CreateLabelFromRateTypes.Result["formDownload"] | null {
   if (!params) return null;
   return {
     href: params.href!, // Error in generated types
@@ -61,7 +61,7 @@ function mapFormDownload(
 
 function mapInsuranceClaim(
   params: Response.Link | undefined
-): CreateLabelFromRateTypes.Response["insuranceClaim"] | null {
+): CreateLabelFromRateTypes.Result["insuranceClaim"] | null {
   if (!params) return null;
   return {
     href: params.href!, // Error in generated types
@@ -71,7 +71,7 @@ function mapInsuranceClaim(
 
 function mapPackages(
   params: Response.Package[]
-): CreateLabelFromRateTypes.Response["packages"][0][] {
+): CreateLabelFromRateTypes.Result["packages"][0][] {
   return params.map((pkg) => ({
     packageCode: pkg.package_code!, // Error in generated types
     trackingNumber: pkg.tracking_number!, // Error in generated types
