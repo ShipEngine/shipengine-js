@@ -1,4 +1,4 @@
-export type Response = Label;
+export type Result = Label;
 
 type LabelStatus = "processing" | "completed" | "error" | "voided";
 type Currency = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
