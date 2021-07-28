@@ -1,72 +1,73 @@
-import { Country } from "../../enums";
+export type Params = ShipmentParam & RateOptions;
 
-export interface ShipmentId {
-  shipmentId: string;
+interface ShipmentParam {
+  shipmentId?: string;
+  shipment?: Shipment;
 }
 
-export interface Shipment {
-  validateAddress: ValidateAddress;
+interface Shipment {
+  validateAddress?: ValidateAddress;
   carrierId: string;
   serviceCode: string;
-  externalOrderId: string;
-  items: ShipmentItem[];
-  taxIdentifiers: TaxIdentifier[];
-  externalShipmentId: string;
+  externalOrderId?: string;
+  items?: ShipmentItem[];
+  taxIdentifiers?: TaxIdentifier[];
+  externalShipmentId?: string;
 
-  shipDate: Date;
+  shipDate?: Date;
   shipTo: ShippingAddress;
-  shipFrom: ShippingAddress;
-  wareHouseId: string;
-  returnTo: ShippingAddress;
-  confirmation: DeliveryConfirmation;
+  shipFrom?: ShippingAddress;
+  wareHouseId?: string;
+  returnTo?: ShippingAddress;
+  confirmation?: DeliveryConfirmation;
 
-  customs: CustomInfo[];
-  advancedOptions: AdvancedOptions;
-  originType: OriginType;
-  insuranceProvider: InsuranceProvider;
-  orderSourceCode: OrderSourceCode | string;
-  packages: Package[];
+  customs?: CustomInfo;
+  advancedOptions?: AdvancedOptions;
+  originType?: OriginType;
+  insuranceProvider?: InsuranceProvider;
+  orderSourceCode?: OrderSourceCode;
+  packages?: Package[];
 }
 
-export interface ShipmentItem {
-  name: string;
-  salesOrderId: string;
-  salesOrderItemId: string;
+interface ShipmentItem {
+  name?: string;
+  salesOrderId?: string;
+  salesOrderItemId?: string;
   quantity?: number;
-  sku: string;
-  externalOrderId: string;
-  externalOrderItemId: string;
-  asin: string;
-  orderSourceCode: OrderSourceCode;
+  sku?: string;
+  externalOrderId?: string;
+  externalOrderItemId?: string;
+  asin?: string;
+  orderSourceCode?: OrderSourceCode;
 }
 
-export interface TaxIdentifier {
+interface TaxIdentifier {
   taxableEntityType: TaxableEntityType;
   identifierType: IdentifierType;
   issuingAuthority: Country | string;
   value: string;
 }
 
-export interface CustomInfo {
+interface CustomInfo {
   contents: Contents;
   nonDelivery: NonDelivery;
-  customItems: CustomItem[];
+  customsItems?: CustomItem[];
 }
 
-export interface CustomItem {
-  description: string;
-  quantity: number;
-  value: {
+interface CustomItem {
+  description?: string;
+  quantity?: number;
+  value?: {
     currency: Currency;
     amount: number;
   };
-  harmonizedTariffCode: string;
-  countryOfOrigin: Country;
-  unitOfMeasure: string;
-  sku: string;
-  skuDescription: string;
+  harmonizedTariffCode?: string;
+  countryOfOrigin?: Country;
+  unitOfMeasure?: string;
+  sku?: string;
+  skuDescription?: string;
 }
-export interface AdvancedOptions {
+interface AdvancedOptions {
   billToAccount?: BillToAccount;
   billToCountryCode?: Country;
   billToParty?: BillToParty;
@@ -96,77 +97,79 @@ export interface AdvancedOptions {
   };
 }
 
-export interface Package {
-  packageCode: PackageCode;
+interface Package {
+  packageCode?: PackageCode;
   weight: Weight;
-  dimensions: Dimensions;
-  insuredValue: {
+  dimensions?: Dimensions;
+  insuredValue?: {
     currency: Currency;
     amount: number;
   };
-  labelMessages: LabelMessages;
+  labelMessages?: LabelMessages;
   externalPackageId?: string;
 }
 
-export interface Dimensions {
+interface Dimensions {
   unit: string;
   length: number;
   width: number;
   height: number;
 }
 
-export interface LabelMessages {
+interface LabelMessages {
   reference1: string;
   reference2: string;
   reference3: string;
 }
 
-export interface Weight {
+interface Weight {
   unit: string;
   value: number;
 }
 
-export interface ShippingAddress {
-  addressResidentialIndicator: string;
+interface ShippingAddress {
   name: string;
   phone: string;
-  companyName: string;
+  companyName?: string;
   addressLine1: string;
-  addressLine2: string;
-  addressLine3: string;
+  addressLine2?: string;
+  addressLine3?: string;
   cityLocality: string;
   stateProvince: string;
   postalCode: string;
   countryCode: string;
+  addressResidentialIndicator: string;
 }
 
-export interface RateOptions {
-  carrierIds: string[];
-  packageTypes: string[];
-  serviceCodes: string[];
-  calculateTaAmount: boolean;
-  preferredCurrency: Currency | string;
+interface RateOptions {
+  rateOptions: {
+    carrierIds: [string, ...string[]];
+    packageTypes: string[];
+    serviceCodes: string[];
+    calculateTaxAmount: boolean;
+    preferredCurrency: Currency | string;
+  };
 }
 
-export type BillToAccount =
+type BillToAccount =
   | "bill_to_country_code"
   | "bill_to_party"
   | "bill_to_postal_code";
 
-export type BillToParty = "recipient" | "third_party";
+type BillToParty = "recipient" | "third_party";
 
-export type Currency = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
+type Currency = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
 
-export type Contents =
+type Contents =
   | "merchandise"
   | "documents"
   | "gift"
   | "returned_goods"
   | "sample";
 
-export type NonDelivery = "return_to_sender" | "treat_as_abandoned";
+type NonDelivery = "return_to_sender" | "treat_as_abandoned";
 
-export type DeliveryConfirmation =
+type DeliveryConfirmation =
   | "none"
   | "delivery"
   | "signature"
@@ -174,13 +177,9 @@ export type DeliveryConfirmation =
   | "direct_signature"
   | "delivery_mailed";
 
-export type InsuranceProvider =
-  | "none"
-  | "shipsurance"
-  | "carrier"
-  | "third_party";
+type InsuranceProvider = "none" | "shipsurance" | "carrier" | "third_party";
 
-export type OrderSourceCode =
+type OrderSourceCode =
   | "amazon_ca"
   | "amazon_us"
   | "brightpearl"
@@ -202,24 +201,15 @@ export type OrderSourceCode =
   | "woo_commerce"
   | "volusion";
 
-export type OriginType = "pickup" | "drop_off";
+type OriginType = "pickup" | "drop_off";
 
-export type PackageCode =
-  | "thick_envelope"
-  | "small_flat_rate_box"
-  | "large_package";
+type PackageCode = "thick_envelope" | "small_flat_rate_box" | "large_package";
 
-export type PaymentType = "any" | "cash" | "cash_equivalent" | "none";
+type PaymentType = "any" | "cash" | "cash_equivalent" | "none";
 
-export type ShipmentStatus =
-  | "pending"
-  | "processing"
-  | "label_purchased"
-  | "cancelled";
+type TaxableEntityType = "shipper" | "recipient";
 
-export type TaxableEntityType = "shipper" | "recipient";
-
-export type IdentifierType =
+type IdentifierType =
   | "vat"
   | "eori"
   | "ssn"
@@ -229,9 +219,250 @@ export type IdentifierType =
   | "pan"
   | "voec";
 
-export type ValidateAddress =
-  | "no_validation"
-  | "validate_only"
-  | "validate_and_clean";
+type ValidateAddress = "no_validation" | "validate_only" | "validate_and_clean";
 
-export type ValidationStatus = "valid" | "invalid" | "has_warnings" | "unknown";
+type Country =
+  | "AF"
+  | "AX"
+  | "AL"
+  | "DZ"
+  | "AS"
+  | "AD"
+  | "AO"
+  | "AI"
+  | "AQ"
+  | "AG"
+  | "AR"
+  | "AM"
+  | "AW"
+  | "AU"
+  | "AT"
+  | "AZ"
+  | "BS"
+  | "BH"
+  | "BD"
+  | "BB"
+  | "BY"
+  | "BE"
+  | "BZ"
+  | "BJ"
+  | "BM"
+  | "BT"
+  | "BO"
+  | "BA"
+  | "BW"
+  | "BV"
+  | "BR"
+  | "IO"
+  | "BN"
+  | "BG"
+  | "BF"
+  | "BI"
+  | "KH"
+  | "CM"
+  | "CA"
+  | "CV"
+  | "KY"
+  | "CF"
+  | "TD"
+  | "CL"
+  | "CN"
+  | "CX"
+  | "CC"
+  | "CO"
+  | "KM"
+  | "CG"
+  | "CD"
+  | "CK"
+  | "CR"
+  | "CI"
+  | "HR"
+  | "CU"
+  | "CY"
+  | "CZ"
+  | "DK"
+  | "DJ"
+  | "DM"
+  | "DO"
+  | "EC"
+  | "EG"
+  | "SV"
+  | "GQ"
+  | "ER"
+  | "EE"
+  | "ET"
+  | "FK"
+  | "FO"
+  | "FJ"
+  | "FI"
+  | "FR"
+  | "GF"
+  | "PF"
+  | "TF"
+  | "GA"
+  | "GM"
+  | "GE"
+  | "DE"
+  | "GH"
+  | "GI"
+  | "GR"
+  | "GL"
+  | "GD"
+  | "GP"
+  | "GU"
+  | "GT"
+  | "GG"
+  | "GN"
+  | "GW"
+  | "GY"
+  | "HT"
+  | "HM"
+  | "VA"
+  | "HN"
+  | "HK"
+  | "HU"
+  | "IS"
+  | "IN"
+  | "ID"
+  | "IR"
+  | "IQ"
+  | "IE"
+  | "IM"
+  | "IL"
+  | "IT"
+  | "JM"
+  | "JP"
+  | "JE"
+  | "JO"
+  | "KZ"
+  | "KE"
+  | "KI"
+  | "KR"
+  | "KW"
+  | "KG"
+  | "LA"
+  | "LV"
+  | "LB"
+  | "LS"
+  | "LR"
+  | "LY"
+  | "LI"
+  | "LT"
+  | "LU"
+  | "MO"
+  | "MK"
+  | "MG"
+  | "MW"
+  | "MY"
+  | "MV"
+  | "ML"
+  | "MT"
+  | "MH"
+  | "MQ"
+  | "MR"
+  | "MU"
+  | "YT"
+  | "MX"
+  | "FM"
+  | "MD"
+  | "MC"
+  | "MN"
+  | "ME"
+  | "MS"
+  | "MA"
+  | "MZ"
+  | "MM"
+  | "NA"
+  | "NR"
+  | "NP"
+  | "NL"
+  | "NC"
+  | "NZ"
+  | "NI"
+  | "NE"
+  | "NG"
+  | "NU"
+  | "NF"
+  | "MP"
+  | "NO"
+  | "OM"
+  | "PK"
+  | "PW"
+  | "PS"
+  | "PA"
+  | "PG"
+  | "PY"
+  | "PE"
+  | "PH"
+  | "PN"
+  | "PL"
+  | "PT"
+  | "PR"
+  | "QA"
+  | "RE"
+  | "RO"
+  | "RU"
+  | "RW"
+  | "BL"
+  | "SH"
+  | "KN"
+  | "LC"
+  | "MF"
+  | "PM"
+  | "VC"
+  | "WS"
+  | "SM"
+  | "ST"
+  | "SA"
+  | "SN"
+  | "RS"
+  | "SC"
+  | "SL"
+  | "SG"
+  | "SK"
+  | "SI"
+  | "SB"
+  | "SO"
+  | "ZA"
+  | "GS"
+  | "ES"
+  | "LK"
+  | "SD"
+  | "SR"
+  | "SJ"
+  | "SZ"
+  | "SE"
+  | "CH"
+  | "SY"
+  | "TW"
+  | "TJ"
+  | "TZ"
+  | "TH"
+  | "TL"
+  | "TG"
+  | "TK"
+  | "TO"
+  | "TT"
+  | "TN"
+  | "TR"
+  | "TM"
+  | "TC"
+  | "TV"
+  | "UG"
+  | "UA"
+  | "AE"
+  | "GB"
+  | "US"
+  | "UM"
+  | "UY"
+  | "UZ"
+  | "VU"
+  | "VE"
+  | "VN"
+  | "VG"
+  | "VI"
+  | "WF"
+  | "EH"
+  | "YE"
+  | "ZM"
+  | "ZW";
