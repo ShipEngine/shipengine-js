@@ -10,6 +10,7 @@ import { voidLabelById, VoidLabelByIdTypes } from "./void-label-by-id";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
 import { TrackByLabelIdTypes, trackByLabelId } from "./track-by-label-id";
 import { createLabel, CreateLabelTypes } from "./create-label";
+import { getRates, GetRatesTypes } from "./get-rates";
 
 /**
  * Exposes the functionality of the ShipEngine API.
@@ -138,5 +139,18 @@ export class ShipEngine {
   ): Promise<VoidLabelByIdTypes.Result> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return voidLabelById(id, mergedConfig);
+  }
+
+  /**
+   * Retrieve rates for a package.
+   *
+   * @param [config] - Optional configuration overrides for this method call.
+   */
+  public async getRates(
+    params: GetRatesTypes.Params,
+    config?: ShipEngineConfig
+  ): Promise<GetRatesTypes.Result> {
+    const mergedConfig = NormalizedConfig.merge(this.config, config);
+    return getRates(params, mergedConfig);
   }
 }

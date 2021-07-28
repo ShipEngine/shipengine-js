@@ -1,4 +1,3 @@
-// import { EventEmitter } from "../isomorphic.node";
 import { NormalizedConfig } from "../config";
 import { post } from "../client";
 import * as GetRatesTypes from "./types/public";
@@ -10,22 +9,22 @@ import { formatResponse } from "./format-response";
 export { GetRatesTypes };
 
 /**
- * Validates an address and returns the full validation results.
+ * Retrieve various rates for a shipmnent.
  *
- * https://www.shipengine.com/docs/addresses/validation/
+ * https://www.shipengine.com/docs/rates/
  */
-export async function validateAddresses(
+export async function getRates(
   params: GetRatesTypes.Params,
   config: NormalizedConfig
-): Promise<GetRatesTypes.Response> {
+): Promise<GetRatesTypes.Result> {
   // validateParams(params);
 
   const formattedParams = formatParams(params);
 
   const response = await post<
-    Request.ValidateAddressRequestBody,
-    Response.ValidateAddressResponseBody
-  >("/v1/addresses/validate", formattedParams, config);
+    Request.CalculateRatesRequestBody,
+    Response.CalculateRatesResponseBody
+  >("/v1/rates", formattedParams, config);
 
   return formatResponse(response);
 }
