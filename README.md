@@ -13,11 +13,6 @@ ShipEngine JavaScript SDK
 
 [![OS Compatibility](https://shipengine.github.io/img/badges/os-badges.svg)](https://github.com/ShipEngine/shipengine-js/actions)
 
-
-> ⚠ **WARNING**: This is alpha software under active development. This repo is a successor to https://www.npmjs.com/package/shipengine. Until this has a stable release, we recommend you either stick to the current releases, or use the [ShipEngine API](https://www.shipengine.com/docs/) directly.
-
-
-
 Quick Start
 --------------------------
 Install ShipEngine JavaScript SDK via [npm](https://docs.npmjs.com/about-npm/).
@@ -70,3 +65,11 @@ Or you can use `npm run lint:fix` to automatically fix most linting errors.
 5. __Run the tests__<br>
 `npm test`<br><br>
 This runs tests in both Node.js and web browsers. Use `npm run test:node` to only run Node.js tests, or `npm run test:browser` to only run browser tests.
+
+Committing
+-------------------------
+This project adheres to the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
+
+Publishing
+-------------------------
+Publishing new versions of the SDK to [NPM](https://www.npmjs.com/package/shipengine) is handled on GitHub via the [Release Please](https://github.com/googleapis/release-please) GitHub Actions workflow. Learn more about about Release PRs, updating the changelog, and commit messages [here](https://github.com/googleapis/release-please#how-should-i-write-my-commits).
