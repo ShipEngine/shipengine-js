@@ -48,8 +48,6 @@ export function formatParams(
     };
   }
 
-  console.log(request);
-
   return request;
 }
 
