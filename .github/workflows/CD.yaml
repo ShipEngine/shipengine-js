@@ -13,7 +13,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           release-type: node
-          package-name: test-release-please
+          package-name: shipengine
 
       # Checkout code if release was created
       - uses: actions/checkout@v2
