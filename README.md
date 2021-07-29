@@ -18,13 +18,13 @@ Quick Start
 Install ShipEngine JavaScript SDK via [npm](https://docs.npmjs.com/about-npm/).
 
 ```bash
-npm install shipengine-js
+npm install shipengine
 ```
 
 The only configuration requirement is an [API key](https://www.shipengine.com/docs/auth/#api-keys).
 
 ```javascript
-const ShipEngine = require("shipengine-js");
+const ShipEngine = require("shipengine");
 
 const shipengine = new ShipEngine("___YOUR_API_KEY_HERE__");
 
