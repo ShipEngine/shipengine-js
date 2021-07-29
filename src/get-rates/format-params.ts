@@ -9,29 +9,27 @@ export function formatParams(
 
   if (params.shipment) {
     request.shipment = {
-      shipment: {
-        validate_address: params.shipment.validateAddress,
-        carrier_id: params.shipment.carrierId,
-        service_code: params.shipment.serviceCode,
-        external_order_id: params.shipment.externalOrderId,
-        items: formatShipmentItems(params.shipment.items),
-        tax_identifiers: mapTaxIdentifiers(params.shipment.taxIdentifiers),
-        external_shipment_id: params.shipment.externalShipmentId,
-        ship_date: params.shipment.shipDate as unknown as Request.Date,
-        ship_to: mapShipTo(params.shipment.shipTo),
-        ship_from: mapShipFrom(params.shipment.shipFrom),
-        warehouse_id: params.shipment.wareHouseId,
-        return_to: mapReturnTo(params.shipment.returnTo),
-        confirmation: params.shipment.confirmation,
-        customs: mapCustoms(params.shipment.customs),
-        advanced_options: mapAdvancedOptions(params.shipment.advancedOptions),
-        origin_type: params.shipment.originType,
-        insurance_provider: params.shipment.insuranceProvider,
-        order_source_code: params.shipment.orderSourceCode,
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        packages: mapPackages(params.shipment.packages!), // Error in generated types
-      },
+      validate_address: params.shipment.validateAddress,
+      carrier_id: params.shipment.carrierId,
+      service_code: params.shipment.serviceCode,
+      external_order_id: params.shipment.externalOrderId,
+      items: formatShipmentItems(params.shipment.items),
+      tax_identifiers: mapTaxIdentifiers(params.shipment.taxIdentifiers),
+      external_shipment_id: params.shipment.externalShipmentId,
+      ship_date: params.shipment.shipDate as unknown as Request.Date,
+      ship_to: mapShipTo(params.shipment.shipTo),
+      ship_from: mapShipFrom(params.shipment.shipFrom),
+      warehouse_id: params.shipment.wareHouseId,
+      return_to: mapReturnTo(params.shipment.returnTo),
+      confirmation: params.shipment.confirmation,
+      customs: mapCustoms(params.shipment.customs),
+      advanced_options: mapAdvancedOptions(params.shipment.advancedOptions),
+      origin_type: params.shipment.originType,
+      insurance_provider: params.shipment.insuranceProvider,
+      order_source_code: params.shipment.orderSourceCode,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      packages: mapPackages(params.shipment.packages), // Error in generated types
     };
   }
 
@@ -49,6 +47,8 @@ export function formatParams(
         .preferredCurrency as Request.Currency,
     };
   }
+
+  console.log(request);
 
   return request;
 }

@@ -17,11 +17,11 @@ interface Shipment {
   /**
    * The carrier account that is billed for the shipping charges
    */
-  carrierId: string;
+  carrierId?: string;
   /**
    * The carrier service used to ship the package, such as fedex_ground, usps_first_class_mail, flat_rate_envelope, etc.
    */
-  serviceCode: string;
+  serviceCode?: string;
   /**
    * ID that the Order Source assigned
    */
@@ -87,7 +87,7 @@ interface Shipment {
   /**
    * The packages in the shipment.
    */
-  packages?: Package[];
+  packages: Package[];
 }
 
 interface ShipmentItem {
