@@ -116,30 +116,3 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           parallel-finished: true
-
-  deploy:
-    name: Publish to NPM
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    needs:
-      - node_tests
-      - browser_tests
-
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v2
-
-      - name: Install Node
-        uses: actions/setup-node@v1
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build the code
-        run: npm run build
-
-      - name: Publish to NPM
-        uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
