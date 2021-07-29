@@ -391,7 +391,7 @@ interface ShippingAddress {
   /**
    * Indicates whether this is a residential address.
    */
-  addressResidentialIndicator: string;
+  addressResidentialIndicator: "unknown" | "yes" | "no";
 }
 
 interface RateOptions {

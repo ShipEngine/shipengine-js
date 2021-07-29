@@ -29,10 +29,10 @@ function mapShipment(
     items: params.items,
     tax_identifiers: mapTaxIdentifiers(params.taxIdentifiers),
     external_shipment_id: params.externalShipmentId,
-    ship_to: params.shipTo,
-    ship_from: params.shipFrom,
+    ship_to: mapShipTo(params.shipTo),
+    ship_from: mapShipFrom(params.shipFrom),
     warehouse_id: params.warehouseId,
-    return_to: params.returnTo,
+    return_to: mapReturnTo(params.returnTo),
     confirmation: params.confirmation,
     customs: mapCustoms(params.customs),
     advanced_options: mapAdvancedOptions(params.advancedOptions),
@@ -41,7 +41,65 @@ function mapShipment(
     order_source_code: params.orderSourceCode,
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
+    service_code: params.serviceCode,
     packages: mapPackages(params.packages),
+  };
+}
+
+function mapShipTo(
+  params: CreateLabelTypes.Params["shipment"]["shipTo"]
+): Request.Address | undefined {
+  if (!params) return undefined;
+  return {
+    name: params.name,
+    phone: params.phone,
+    company_name: params.companyName,
+    address_line1: params.addressLine1,
+    address_line2: params.addressLine2,
+    address_line3: params.addressLine3,
+    city_locality: params.cityLocality,
+    state_province: params.stateProvince,
+    postal_code: params.postalCode,
+    country_code: params.countryCode,
+    address_residential_indicator: params.addressResidentialIndicator,
+  };
+}
+
+function mapShipFrom(
+  params: CreateLabelTypes.Params["shipment"]["shipFrom"]
+): Request.Address | undefined {
+  if (!params) return undefined;
+  return {
+    name: params.name,
+    phone: params.phone,
+    company_name: params.companyName,
+    address_line1: params.addressLine1,
+    address_line2: params.addressLine2,
+    address_line3: params.addressLine3,
+    city_locality: params.cityLocality,
+    state_province: params.stateProvince,
+    postal_code: params.postalCode,
+    country_code: params.countryCode,
+    address_residential_indicator: params.addressResidentialIndicator,
+  };
+}
+
+function mapReturnTo(
+  params: CreateLabelTypes.Params["shipment"]["returnTo"]
+): Request.Address | undefined {
+  if (!params) return undefined;
+  return {
+    name: params.name,
+    phone: params.phone,
+    company_name: params.companyName,
+    address_line1: params.addressLine1,
+    address_line2: params.addressLine2,
+    address_line3: params.addressLine3,
+    city_locality: params.cityLocality,
+    state_province: params.stateProvince,
+    postal_code: params.postalCode,
+    country_code: params.countryCode,
+    address_residential_indicator: params.addressResidentialIndicator,
   };
 }
 
