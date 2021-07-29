@@ -5,7 +5,11 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type AddressValidationStatus = "unverified" | "verified" | "warning" | "error";
+export type AddressValidationStatus =
+  | "unverified"
+  | "verified"
+  | "warning"
+  | "error";
 export type Address = PartialAddress;
 export type PostalCode = string;
 export type CountryCode = string;

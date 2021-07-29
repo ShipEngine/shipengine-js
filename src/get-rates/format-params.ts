@@ -69,7 +69,7 @@ function mapShipTo(
     postal_code: params.postalCode,
     country_code: params.countryCode,
     address_residential_indicator: params.addressResidentialIndicator,
-  } 
+  };
 }
 
 function mapShipFrom(
@@ -88,7 +88,7 @@ function mapShipFrom(
     postal_code: params.postalCode,
     country_code: params.countryCode,
     address_residential_indicator: params.addressResidentialIndicator,
-  } 
+  };
 }
 
 function mapReturnTo(
@@ -107,7 +107,7 @@ function mapReturnTo(
     postal_code: params.postalCode,
     country_code: params.countryCode,
     address_residential_indicator: params.addressResidentialIndicator,
-  } 
+  };
 }
 
 type ShipmentItem = NonNullable<GetRatesTypes.Params["shipment"]>["items"];

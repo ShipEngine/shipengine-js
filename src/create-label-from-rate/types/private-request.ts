@@ -6,7 +6,10 @@
  */
 
 export type CreateLabelFromRateRequestBody = PurchaseLabelWithoutShipment;
-export type ValidateAddress = "no_validation" | "validate_only" | "validate_and_clean";
+export type ValidateAddress =
+  | "no_validation"
+  | "validate_only"
+  | "validate_and_clean";
 export type LabelLayout = "4x6" | "letter";
 export type LabelFormat = "pdf" | "png" | "zpl";
 export type LabelDownloadType = "url" | "inline";
