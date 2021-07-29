@@ -18,10 +18,10 @@ export function formatParams(
         tax_identifiers: mapTaxIdentifiers(params.shipment.taxIdentifiers),
         external_shipment_id: params.shipment.externalShipmentId,
         ship_date: params.shipment.shipDate as unknown as Request.Date,
-        ship_to: params.shipment.shipTo,
-        ship_from: params.shipment.shipFrom,
+        ship_to: mapShipTo(params.shipment.shipTo),
+        ship_from: mapShipFrom(params.shipment.shipFrom),
         warehouse_id: params.shipment.wareHouseId,
-        return_to: params.shipment.returnTo,
+        return_to: mapReturnTo(params.shipment.returnTo),
         confirmation: params.shipment.confirmation,
         customs: mapCustoms(params.shipment.customs),
         advanced_options: mapAdvancedOptions(params.shipment.advancedOptions),
@@ -51,6 +51,63 @@ export function formatParams(
   }
 
   return request;
+}
+
+function mapShipTo(
+  params: NonNullable<GetRatesTypes.Params["shipment"]>["shipTo"]
+): Request.Address | undefined {
+  if (!params) return undefined;
+  return {
+    name: params.name,
+    phone: params.phone,
+    company_name: params.companyName,
+    address_line1: params.addressLine1,
+    address_line2: params.addressLine2,
+    address_line3: params.addressLine3,
+    city_locality: params.cityLocality,
+    state_province: params.stateProvince,
+    postal_code: params.postalCode,
+    country_code: params.countryCode,
+    address_residential_indicator: params.addressResidentialIndicator,
+  } 
+}
+
+function mapShipFrom(
+  params: NonNullable<GetRatesTypes.Params["shipment"]>["shipFrom"]
+): Request.Address | undefined {
+  if (!params) return undefined;
+  return {
+    name: params.name,
+    phone: params.phone,
+    company_name: params.companyName,
+    address_line1: params.addressLine1,
+    address_line2: params.addressLine2,
+    address_line3: params.addressLine3,
+    city_locality: params.cityLocality,
+    state_province: params.stateProvince,
+    postal_code: params.postalCode,
+    country_code: params.countryCode,
+    address_residential_indicator: params.addressResidentialIndicator,
+  } 
+}
+
+function mapReturnTo(
+  params: NonNullable<GetRatesTypes.Params["shipment"]>["returnTo"]
+): Request.Address | undefined {
+  if (!params) return undefined;
+  return {
+    name: params.name,
+    phone: params.phone,
+    company_name: params.companyName,
+    address_line1: params.addressLine1,
+    address_line2: params.addressLine2,
+    address_line3: params.addressLine3,
+    city_locality: params.cityLocality,
+    state_province: params.stateProvince,
+    postal_code: params.postalCode,
+    country_code: params.countryCode,
+    address_residential_indicator: params.addressResidentialIndicator,
+  } 
 }
 
 type ShipmentItem = NonNullable<GetRatesTypes.Params["shipment"]>["items"];
