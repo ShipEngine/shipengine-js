@@ -15,13 +15,13 @@ describe("trackByLabelId()", () => {
     const shipengine = new ShipEngine({ apiKey });
 
     try {
-      await shipengine.trackByLabelId({ labelId: 1234 });
+      await shipengine.trackByLabelId(1234);
       errors.shouldHaveThrown();
     } catch (error) {
       errors.assertInvalidFieldValueError(error, {
         code: "invalid_field_value",
-        fieldName: "Params",
-        message: "Params must be a string.",
+        fieldName: "labelId",
+        message: "labelId must be a string.",
         name: "InvalidFieldValueError",
         source: "shipengine",
         type: "validation",
@@ -36,7 +36,7 @@ describe("trackByLabelId()", () => {
     const shipengine = new ShipEngine({ apiKey });
 
     try {
-      await shipengine.trackByLabelId({ labelId: "se-1234" });
+      await shipengine.trackByLabelId("se-1234");
       errors.shouldHaveThrown();
     } catch (error) {
       errors.assertShipEngineError(error, {
@@ -60,7 +60,7 @@ describe("trackByLabelId()", () => {
     const shipengine = new ShipEngine({ apiKey });
 
     try {
-      await shipengine.trackByLabelId({ labelId: "se-1234" });
+      await shipengine.trackByLabelId("se-1234");
       errors.shouldHaveThrown();
     } catch (error) {
       errors.assertShipEngineError(error, {
@@ -84,9 +84,7 @@ describe("trackByLabelId()", () => {
 
     const shipengine = new ShipEngine({ apiKey });
 
-    const result = await shipengine.trackByLabelId({
-      labelId: "se-1234",
-    });
+    const result = await shipengine.trackByLabelId("se-1234");
 
     expect(result).to.deep.equal({
       trackingNumber: "332980205337",

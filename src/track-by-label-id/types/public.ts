@@ -1,5 +1,3 @@
-export type Params = { labelId: string };
-
 export type Response = TrackByLabelIdResult;
 
 /**

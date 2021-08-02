@@ -111,11 +111,11 @@ export class ShipEngine {
   * @param [config] - Optional configuration overrides for this method call.
    */
   public async trackByLabelId(
-    params: TrackByLabelIdTypes.Params,
+    labelId: string,
     config?: ShipEngineConfig
   ): Promise<TrackByLabelIdTypes.Response> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
-    return trackByLabelId(params, mergedConfig);
+    return trackByLabelId(labelId, mergedConfig);
   }
   /**
    * Create a label for shipment
