@@ -13,13 +13,13 @@ export { TrackByLabelIdTypes };
  * @see https://www.shipengine.com/docs/tracking/track-by-label-id
  */
 export async function trackByLabelId(
-  params: TrackByLabelIdTypes.Params,
+  labelId: string,
   config: NormalizedConfig
 ): Promise<TrackByLabelIdTypes.Response> {
-  validateParams(params);
+  validateParams(labelId);
 
   const response = await get<Response.GetTrackingLogFromLabelResponseBody>(
-    `/v1/labels/${params.labelId}/track`,
+    `/v1/labels/${labelId}/track`,
     config
   );
 
