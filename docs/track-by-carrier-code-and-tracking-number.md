@@ -1,6 +1,6 @@
 Track By Carrier Code and Tracking Number
 ======================================
-[ShipEngine](www.shipengine.com) allows you to track a package by for a given carrier and tracking number. Please see [our docs](https://www.shipengine.com/docs/tracking/) to learn more about tracking shipments.
+[ShipEngine](www.shipengine.com) allows you to track a package for a given carrier and tracking number. Please see [our docs](https://www.shipengine.com/docs/tracking/) to learn more about tracking shipments.
 
 Input Parameters
 -------------------------------------
