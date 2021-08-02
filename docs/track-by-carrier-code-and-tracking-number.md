@@ -5,7 +5,7 @@ Track By Carrier Code and Tracking Number
 Input Parameters
 -------------------------------------
 
-The `trackByCarrierCodeAndTrackingNumber` requires the carrier code and tracking number of the shipment being tracked. If you are using TypeScript, you can import the [`TrackByCarrierCodeAndTrackingNumberTypes.Param`](https://github.com/ShipEngine/shipengine-js/blob/main/src/track-by-carrier-code-and-tracking-number/types/public.ts)
+The `trackByCarrierCodeAndTrackingNumber` method requires the carrier code and tracking number of the shipment being tracked. If you are using TypeScript, you can import the [`TrackByCarrierCodeAndTrackingNumberTypes.Param`](https://github.com/ShipEngine/shipengine-js/blob/main/src/track-by-carrier-code-and-tracking-number/types/public.ts)
 type into your project to take advantage of your
 IDE's code completion functionality.
 
