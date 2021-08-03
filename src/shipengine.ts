@@ -175,7 +175,7 @@ export class ShipEngine {
   }
 
   /**
-   * Retrieve rates for a package.
+   * Retrieve rates for a package with the provided shipment details.
    *
    * @param [config] - Optional configuration overrides for this method call.
    */
