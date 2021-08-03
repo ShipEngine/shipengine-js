@@ -1,6 +1,6 @@
 Create Label From Rate
 ======================================
-When retrieving rates for shipments using the `getRates` method, the returned information contains a `rateId` property that can be used to purchase a label without having to refill in the shipment information repeatedly. Please see [our docs](https://www.shipengine.com/docs/labels/create-from-rate/) to learn more about creating shipping labels from rates.
+When retrieving rates for shipments using the `getRatesWithShipmentDetails` method, the returned information contains a `rateId` property that can be used to purchase a label without having to refill in the shipment information repeatedly. Please see [our docs](https://www.shipengine.com/docs/labels/create-from-rate/) to learn more about creating shipping labels from rates.
 
 Input Parameters
 -------------------------------------
