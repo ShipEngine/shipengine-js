@@ -1,22 +1,22 @@
 import { Response } from "./types/private";
-import { TrackByCarrierCodeAndTrackingNumberTypes } from ".";
+import { TrackUsingCarrierCodeAndTrackingNumberTypes } from ".";
 
 export function formatResponse(
   response: Response.GetTrackingLogResponseBody
-): TrackByCarrierCodeAndTrackingNumberTypes.Result {
+): TrackUsingCarrierCodeAndTrackingNumberTypes.Result {
   return formatTrackPackageByLabelIdResult(response);
 }
 
 function formatTrackPackageByLabelIdResult(
   result: Response.GetTrackingLogResponseBody
-): TrackByCarrierCodeAndTrackingNumberTypes.Result {
+): TrackUsingCarrierCodeAndTrackingNumberTypes.Result {
   return {
     trackingNumber: result.tracking_number!,
     statusCode:
-      (result.status_code as TrackByCarrierCodeAndTrackingNumberTypes.Result["statusCode"]) ||
+      (result.status_code as TrackUsingCarrierCodeAndTrackingNumberTypes.Result["statusCode"]) ||
       "UN",
     statusDescription:
-      (result.status_description as TrackByCarrierCodeAndTrackingNumberTypes.Result["statusDescription"]) ||
+      (result.status_description as TrackUsingCarrierCodeAndTrackingNumberTypes.Result["statusDescription"]) ||
       "Unknown",
     carrierStatusCode: result.carrier_status_code!,
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -33,7 +33,7 @@ function formatTrackPackageByLabelIdResult(
 
 function formatTrackingEvent(
   event: Response.TrackEvent
-): TrackByCarrierCodeAndTrackingNumberTypes.Result["events"][0] {
+): TrackUsingCarrierCodeAndTrackingNumberTypes.Result["events"][0] {
   return {
     occurredAt: event.occurred_at,
     carrierOccurredAt: event.carrier_occurred_at || "",

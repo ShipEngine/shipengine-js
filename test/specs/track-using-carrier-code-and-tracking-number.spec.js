@@ -9,12 +9,12 @@ const {
   mockTrackByCarrierCodeAndTrackingNumber400,
 } = require("../utils/mocks/mock-track-by-carrier-code-and-tracking-number");
 
-describe("trackByTrackingNumber()", () => {
+describe("trackUsingCarrierCodeAndTrackingNumber()", () => {
   it("should throw an error if the carrier code is not a string", async () => {
     const shipengine = new ShipEngine({ apiKey });
 
     try {
-      await shipengine.trackByCarrierCodeAndTrackingNumber({
+      await shipengine.trackUsingCarrierCodeAndTrackingNumber({
         carrierCode: 1234,
         trackingNumber: "1234",
       });
@@ -36,7 +36,7 @@ describe("trackByTrackingNumber()", () => {
     const shipengine = new ShipEngine({ apiKey });
 
     try {
-      await shipengine.trackByCarrierCodeAndTrackingNumber({
+      await shipengine.trackUsingCarrierCodeAndTrackingNumber({
         carrierCode: "1234",
         trackingNumber: 1234,
       });
@@ -60,7 +60,7 @@ describe("trackByTrackingNumber()", () => {
     const shipengine = new ShipEngine({ apiKey });
 
     try {
-      await shipengine.trackByCarrierCodeAndTrackingNumber({
+      await shipengine.trackUsingCarrierCodeAndTrackingNumber({
         carrierCode: "stamps_com",
         trackingNumber: "1234",
       });
@@ -87,7 +87,7 @@ describe("trackByTrackingNumber()", () => {
 
     const shipengine = new ShipEngine({ apiKey });
 
-    const result = await shipengine.trackByCarrierCodeAndTrackingNumber({
+    const result = await shipengine.trackUsingCarrierCodeAndTrackingNumber({
       carrierCode: "stamps_com",
       trackingNumber: "1234",
     });

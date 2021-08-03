@@ -35,7 +35,7 @@ compileFromFile('node_modules/shipengine-json-schema/responses/calculate_rates_r
 
 // Track By Carrier Code and Tracking Number
 compileFromFile('node_modules/shipengine-json-schema/responses/get_tracking_log_response_body.json')
-  .then(ts => fs.writeFileSync('src/track-by-carrier-code-and-tracking-number/types/private-response.ts', ts))
+  .then(ts => fs.writeFileSync('src/track-using-carrier-code-and-tracking-number/types/private-response.ts', ts))
 
 // Track Using Label ID
 compileFromFile('node_modules/shipengine-json-schema/responses/get_tracking_log_from_label_response_body.json')

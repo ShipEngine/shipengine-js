@@ -13,9 +13,9 @@ import {
   trackUsingLabelId,
 } from "./track-using-label-id";
 import {
-  TrackByCarrierCodeAndTrackingNumberTypes,
-  trackByCarrierCodeAndTrackingNumber,
-} from "./track-by-carrier-code-and-tracking-number";
+  TrackUsingCarrierCodeAndTrackingNumberTypes,
+  trackUsingCarrierCodeAndTrackingNumber,
+} from "./track-using-carrier-code-and-tracking-number";
 import {
   createLabelFromShipmentDetails,
   CreateLabelFromShipmentDetailsTypes,
@@ -103,12 +103,12 @@ export class ShipEngine {
    *
    * @param [config] - Optional configuration overrides for this method call.
    */
-  public async trackByCarrierCodeAndTrackingNumber(
-    params: TrackByCarrierCodeAndTrackingNumberTypes.Params,
+  public async trackUsingCarrierCodeAndTrackingNumber(
+    params: TrackUsingCarrierCodeAndTrackingNumberTypes.Params,
     config?: ShipEngineConfig
-  ): Promise<TrackByCarrierCodeAndTrackingNumberTypes.Result> {
+  ): Promise<TrackUsingCarrierCodeAndTrackingNumberTypes.Result> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
-    return trackByCarrierCodeAndTrackingNumber(params, mergedConfig);
+    return trackUsingCarrierCodeAndTrackingNumber(params, mergedConfig);
   }
 
   /**

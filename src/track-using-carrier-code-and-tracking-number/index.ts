@@ -1,21 +1,21 @@
 import { NormalizedConfig } from "../config";
 import { get } from "../client";
-import * as TrackByCarrierCodeAndTrackingNumberTypes from "./types/public";
+import * as TrackUsingCarrierCodeAndTrackingNumberTypes from "./types/public";
 import { Response } from "./types/private";
 import { formatResponse } from "./format-response";
 import { validateParams } from "./validate-params";
 
-export { TrackByCarrierCodeAndTrackingNumberTypes };
+export { TrackUsingCarrierCodeAndTrackingNumberTypes };
 
 /**
  * Returns the tracking information of a package identified by its tracking number and carrier code.
  *
  * @see https://www.shipengine.com/docs/tracking
  */
-export async function trackByCarrierCodeAndTrackingNumber(
-  params: TrackByCarrierCodeAndTrackingNumberTypes.Params,
+export async function trackUsingCarrierCodeAndTrackingNumber(
+  params: TrackUsingCarrierCodeAndTrackingNumberTypes.Params,
   config: NormalizedConfig
-): Promise<TrackByCarrierCodeAndTrackingNumberTypes.Result> {
+): Promise<TrackUsingCarrierCodeAndTrackingNumberTypes.Result> {
   validateParams(params);
 
   const response = await get<Response.GetTrackingLogResponseBody>(
