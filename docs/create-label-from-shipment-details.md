@@ -5,14 +5,14 @@ Create Label From Shipment Details
 Input Parameters
 -------------------------------------
 
-The `createLabel` method accepts shipment related params. If you are using TypeScript, you can import the [`CreateLabelTypes.Param`](https://github.com/ShipEngine/shipengine-js/blob/main/src/create-label/types/public-params.ts)
+The `createLabelFromShipmentDetails` method accepts shipment related params. If you are using TypeScript, you can import the [`CreateLabelFromShipmentDetailsTypes.Param`](https://github.com/ShipEngine/shipengine-js/blob/main/src/create-label/types/public-params.ts)
 type into your project to take advantage of your
 IDE's code completion functionality.
 
 Output
 --------------------------------
-The `createLabel` method returns the label that was created.
-If you are using TypeScript, you can import the [`CreateLabelTypes.Result`](https://github.com/ShipEngine/shipengine-js/blob/main/src/create-label/types/public-result.ts)
+The `createLabelFromShipmentDetails` method returns the label that was created.
+If you are using TypeScript, you can import the [`CreateLabelFromShipmentDetailsTypes.Result`](https://github.com/ShipEngine/shipengine-js/blob/main/src/create-label/types/public-result.ts)
 type into your project to take advantage of your IDE's code completion functionality.
 
 Example
@@ -21,7 +21,7 @@ Example
 const ShipEngine = require("shipengine");
 const shipengine = new ShipEngine("api_key");
 
-async function createLabel() {
+async function createLabelFromShipmentDetails() {
   const params = {
     shipment: {
       serviceCode: "ups_ground",
@@ -64,7 +64,7 @@ async function createLabel() {
 
 
   try {
-    const result = await shipengine.createLabel(params);
+    const result = await shipengine.createLabelFromShipmentDetails(params);
 
     console.log("The label that was created:");
     console.log(result);
@@ -73,7 +73,7 @@ async function createLabel() {
   }
 }
 
-createLabel();
+createLabelFromShipmentDetails();
 ```
 
 Example Output
