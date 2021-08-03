@@ -39,7 +39,7 @@ the [ShipEngine dashboard](https://www.shipengine.com/docs/carriers/setup/).
 * [`trackByLabelId`](./docs/track-by-label-id.md) - Track a package by its associated label ID.
 * [`trackByCarrierCodeAndTrackingNumber`](./docs/track-by-carrier-code-and-tracking-number.md) - Track a package for a given carrier and tracking number.
 * [`validateAddresses`](./docs/validate-addresses.md) - Indicates whether the provided addresses are valid. If the addresses are valid, the method returns a normalized version based on the standards of the country in which the address resides. If an address cannot be normalized, an error is returned.
-* [`voidLabelById`](./docs/void-label-by-id.md) - Void a label by its ID.
+* [`voidLabelWithLabelId`](./docs/void-label-with-label-id.md) - Void a label with its Label ID.
 
 Contributing
 --------------------------

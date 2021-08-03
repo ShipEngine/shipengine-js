@@ -4,7 +4,7 @@ const { apiKey } = require("../utils/constants");
 const errors = require("../utils/errors");
 const fetchMock = require("../utils/fetch-mock");
 
-describe("voidLabelById()", () => {
+describe("voidLabelWithLabelId()", () => {
   it("Returns a success message", async () => {
     fetchMock.put("https://api.shipengine.com/v1/labels/se-451990109/void", {
       approved: true,
@@ -13,7 +13,7 @@ describe("voidLabelById()", () => {
 
     const shipengine = new ShipEngine({ apiKey });
 
-    const result = await shipengine.voidLabelById("se-451990109");
+    const result = await shipengine.voidLabelWithLabelId("se-451990109");
 
     expect(result).to.deep.equal({
       approved: true,
@@ -42,7 +42,7 @@ describe("voidLabelById()", () => {
     const shipengine = new ShipEngine({ apiKey });
 
     try {
-      await shipengine.voidLabelById("invalid");
+      await shipengine.voidLabelWithLabelId("invalid");
       errors.shouldHaveThrown();
     } catch (error) {
       errors.assertShipEngineError(error, {
@@ -63,7 +63,7 @@ describe("voidLabelById()", () => {
     const shipengine = new ShipEngine({ apiKey });
 
     try {
-      await shipengine.voidLabelById();
+      await shipengine.voidLabelWithLabelId();
       errors.shouldHaveThrown();
     } catch (error) {
       errors.assertInvalidFieldValueError(error, {
@@ -92,7 +92,7 @@ describe("voidLabelById()", () => {
     const shipengine = new ShipEngine({ apiKey });
 
     try {
-      await shipengine.voidLabelById("se-451990109");
+      await shipengine.voidLabelWithLabelId("se-451990109");
       errors.shouldHaveThrown();
     } catch (error) {
       errors.assertShipEngineError(error, {

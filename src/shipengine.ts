@@ -3,7 +3,10 @@ import {
   ValidateAddressesTypes,
 } from "./validate-addresses";
 import { listCarriers, ListCarriersTypes } from "./list-carriers";
-import { voidLabelById, VoidLabelByIdTypes } from "./void-label-by-id";
+import {
+  voidLabelWithLabelId,
+  VoidLabelWithLabelId,
+} from "./void-label-with-label-id";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
 import { TrackByLabelIdTypes, trackByLabelId } from "./track-by-label-id";
 import {
@@ -150,19 +153,19 @@ export class ShipEngine {
   }
 
   /**
-   * Void a label by its ID
+   * Void a label with its Label ID
    *
    * @param label ID
    * The ID for the label being voided.
    *
    * @param [config] - Optional configuration overrides for this method call.
    */
-  public async voidLabelById(
+  public async voidLabelWithLabelId(
     id: string,
     config?: ShipEngineConfig
-  ): Promise<VoidLabelByIdTypes.Result> {
+  ): Promise<VoidLabelWithLabelId.Result> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
-    return voidLabelById(id, mergedConfig);
+    return voidLabelWithLabelId(id, mergedConfig);
   }
 
   /**

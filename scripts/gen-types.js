@@ -49,4 +49,4 @@ compileFromFile('node_modules/shipengine-json-schema/responses/get_tracking_log_
 
 // Void Label
 compileFromFile('node_modules/shipengine-json-schema/responses/void_label_response_body.json')
-  .then(ts => fs.writeFileSync('src/void-label-by-id/types/private-response.ts', ts))
+  .then(ts => fs.writeFileSync('src/void-label-with-label-id/types/private-response.ts', ts))
