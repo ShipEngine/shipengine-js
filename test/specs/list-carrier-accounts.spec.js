@@ -4,7 +4,7 @@ const { apiKey } = require("../utils/constants");
 const errors = require("../utils/errors");
 const fetchMock = require("../utils/fetch-mock");
 
-describe("listCarrierAccounts()", () => {
+describe("listCarriers()", () => {
   it("Returns a list of connected carrier accounts", async () => {
     fetchMock.get("https://api.shipengine.com/v1/carriers", {
       carriers: [
@@ -89,7 +89,7 @@ describe("listCarrierAccounts()", () => {
 
     const shipengine = new ShipEngine({ apiKey });
 
-    const result = await shipengine.listCarrierAccounts();
+    const result = await shipengine.listCarriers();
 
     expect(result).to.deep.equal([
       {
@@ -191,7 +191,7 @@ describe("listCarrierAccounts()", () => {
     const shipengine = new ShipEngine({ apiKey });
 
     try {
-      await shipengine.listCarrierAccounts();
+      await shipengine.listCarriers();
       errors.shouldHaveThrown();
     } catch (error) {
       errors.assertShipEngineError(error, {

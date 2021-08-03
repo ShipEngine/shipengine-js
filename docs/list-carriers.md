@@ -1,12 +1,12 @@
 List Carrier Accounts
 ======================================
 [ShipEngine](www.shipengine.com) allows you to connect
-your own carrier accounts through the ShipEngine [dashboard](https://www.shipengine.com/docs/carriers/setup/). You can list all the carrier accounts you have connected with the `listCarrierAccounts` method. To learn more about carrier accounts please see [our docs](https://www.shipengine.com/docs/reference/list-carriers/).
+your own carrier accounts through the ShipEngine [dashboard](https://www.shipengine.com/docs/carriers/setup/). You can list all the carrier accounts you have connected with the `listCarriers` method. To learn more about carrier accounts please see [our docs](https://www.shipengine.com/docs/reference/list-carriers/).
 
 Output
 --------------------------------
-The `listCarrierAccounts` method returns an array of connected carrier accounts.
-If you are using TypeScript, you can import the [`listCarrierAccountsTypes.Result`](https://github.com/ShipEngine/shipengine-js/blob/main/src/list-carrier-accounts/types/public.ts)
+The `listCarriers` method returns an array of connected carriers.
+If you are using TypeScript, you can import the [`listCarriersTypes.Result`](https://github.com/ShipEngine/shipengine-js/blob/main/src/list-carrier-accounts/types/public.ts)
 type into your project to take advantage of your IDE's code completion functionality.
 
 Example
@@ -15,24 +15,24 @@ Example
 const ShipEngine = require("shipengine");
 const shipengine = new ShipEngine("api_key");
 
-async function listCarrierAccounts() {
+async function listCarriers() {
   try {
-    const result = await shipengine.listCarrierAccounts();
+    const result = await shipengine.listCarriers();
 
-    console.log("The connected carrier accounts:");
+    console.log("The list of carriers:");
     console.log(result);
   } catch (e) {
-    console.log("Error listing carrier accounts: ", e.message);
+    console.log("Error listing carriers: ", e.message);
   }
 }
 
-listCarrierAccounts();
+listCarriers();
 ```
 
 Example Output
 -----------------------------------------------------
 
-### Array of connected carrier accounts
+### Array of carrier accounts
 ```javascript
 [
   {

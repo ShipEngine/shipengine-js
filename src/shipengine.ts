@@ -2,10 +2,7 @@ import {
   validateAddresses,
   ValidateAddressesTypes,
 } from "./validate-addresses";
-import {
-  listCarrierAccounts,
-  ListCarrierAccountsTypes,
-} from "./list-carrier-accounts";
+import { listCarriers, ListCarriersTypes } from "./list-carrier-accounts";
 import { voidLabelById, VoidLabelByIdTypes } from "./void-label-by-id";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
 import { TrackByLabelIdTypes, trackByLabelId } from "./track-by-label-id";
@@ -74,11 +71,11 @@ export class ShipEngine {
    *
    * @param [config] - Optional configuration overrides for this method call.
    */
-  public async listCarrierAccounts(
+  public async listCarriers(
     config?: ShipEngineConfig
-  ): Promise<ListCarrierAccountsTypes.Result> {
+  ): Promise<ListCarriersTypes.Result> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
-    return listCarrierAccounts(mergedConfig);
+    return listCarriers(mergedConfig);
   }
 
   /**

@@ -34,7 +34,7 @@ Methods
 * [`createLabelFromRate`](./docs/create-label-from-rate.md) - When retrieving rates for shipments using the `getRates` method, the returned information contains a `rate_id` property that can be used to purchase a label without having to refill in the shipment information repeatedly.
 * [`createLabel`](./docs/create-label.md) - Purchase and print a label for shipment.
 * [`getRates`](./docs/get-rates.md) - Given some shipment details and rate options, this method returns a list of rate quotes.
-* [`listCarrierAccounts`](./docs/list-carrier-accounts.md) - Returns a list of carrier accounts that have been connected through
+* [`listCarriers`](./docs/list-carrier-accounts.md) - Returns a list of carrier accounts that have been connected through
 the [ShipEngine dashboard](https://www.shipengine.com/docs/carriers/setup/).
 * [`trackByLabelId`](./docs/track-by-label-id.md) - Track a package by its associated label ID.
 * [`trackByCarrierCodeAndTrackingNumber`](./docs/track-by-carrier-code-and-tracking-number.md) - Track a package for a given carrier and tracking number.

@@ -1,11 +1,11 @@
 // import { EventEmitter } from "../isomorphic.node";
 import { NormalizedConfig } from "../config";
 import { get } from "../client";
-import * as ListCarrierAccountsTypes from "./types/public";
+import * as ListCarriersTypes from "./types/public";
 import { Response } from "./types/private";
 import { formatResponse } from "./format-response";
 
-export { ListCarrierAccountsTypes };
+export { ListCarriersTypes };
 
 /**
  * This function returns a list of all your connected carrier accounts,
@@ -13,9 +13,9 @@ export { ListCarrierAccountsTypes };
  *
  * https://www.shipengine.com/docs/reference/list-carriers/
  */
-export async function listCarrierAccounts(
+export async function listCarriers(
   config: NormalizedConfig
-): Promise<ListCarrierAccountsTypes.Result> {
+): Promise<ListCarriersTypes.Result> {
   const response = await get<Response.ListCarriersResponseBody>(
     "/v1/carriers",
     config

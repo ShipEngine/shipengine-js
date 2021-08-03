@@ -1,7 +1,7 @@
 // import { ValidateAddressesTypes } from "../../validate-addresses";
 
 /**
- * The listCarrierAccounts result
+ * The listCarriers result
  */
 export type Result = Carrier[];
 

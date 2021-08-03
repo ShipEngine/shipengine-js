@@ -1,9 +1,9 @@
-import { ListCarrierAccountsTypes } from ".";
+import { ListCarriersTypes } from ".";
 import { Response } from "./types/private";
 
 export function formatResponse(
   response: Response.ListCarriersResponseBody
-): ListCarrierAccountsTypes.Result {
+): ListCarriersTypes.Result {
   if (response.carriers && Array.isArray(response.carriers)) {
     return response.carriers.map((carrier) => formatCarrier(carrier));
   } else {
@@ -11,9 +11,7 @@ export function formatResponse(
   }
 }
 
-function formatCarrier(
-  carrier: Response.Carrier
-): ListCarrierAccountsTypes.Result[0] {
+function formatCarrier(carrier: Response.Carrier): ListCarriersTypes.Result[0] {
   return {
     carrierId: carrier.carrier_id!, // Error in generated types
     carrierCode: carrier.carrier_code!, // Error in generated types
@@ -40,7 +38,7 @@ function formatCarrier(
 
 function formatService(
   service: Response.Service
-): NonNullable<ListCarrierAccountsTypes.Result[0]["services"]>[0] {
+): NonNullable<ListCarriersTypes.Result[0]["services"]>[0] {
   return {
     carrierId: service.carrier_id!, // Error in generated types
     carrierCode: service.carrier_code!, // Error in generated types
@@ -54,7 +52,7 @@ function formatService(
 
 function formatPackageType(
   p: Response.PackageType
-): NonNullable<ListCarrierAccountsTypes.Result[0]["packages"]>[0] {
+): NonNullable<ListCarriersTypes.Result[0]["packages"]>[0] {
   return {
     packageId: p.package_id || null, // Error in generated types
     packageCode: p.package_code,
@@ -66,7 +64,7 @@ function formatPackageType(
       ? {
           unit: p.dimensions.unit as NonNullable<
             NonNullable<
-              ListCarrierAccountsTypes.Result[0]["packages"]
+              ListCarriersTypes.Result[0]["packages"]
             >[0]["dimensions"]
           >["unit"],
           length: p.dimensions.length,
@@ -79,7 +77,7 @@ function formatPackageType(
 
 function formatOption(
   option: Response.CarrierAdvancedOption
-): NonNullable<ListCarrierAccountsTypes.Result[0]["options"]>[0] {
+): NonNullable<ListCarriersTypes.Result[0]["options"]>[0] {
   return {
     name: option.name || null, // Error in generated types
     defaultValue: option.default_value || null, // Error in generated types
