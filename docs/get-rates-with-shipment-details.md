@@ -5,14 +5,14 @@ Given some shipment details and rate options, this method returns a list of rate
 Input Parameters
 -------------------------------------
 
-The `getRatesWithShipmentDetails` method accepts shipment related params. If you are using TypeScript, you can import the [`GetRatesWithShipmentDetailsTypes.Param`](https://github.com/ShipEngine/shipengine-js/blob/main/src/create-label/types/public-params.ts)
+The `getRatesWithShipmentDetails` method accepts shipment related params. If you are using TypeScript, you can import the [`GetRatesWithShipmentDetailsTypes.Param`](https://github.com/ShipEngine/shipengine-js/blob/main/src/get-rates-with-shipment-details/types/public-params.ts)
 type into your project to take advantage of your
 IDE's code completion functionality.
 
 Output
 --------------------------------
 The `getRatesWithShipmentDetails` method returns the rates that were calculated for the given shipment params.
-If you are using TypeScript, you can import the [`GetRatesWithShipmentDetailsTypes.Result`](https://github.com/ShipEngine/shipengine-js/blob/main/src/create-label-from-rate/types/public-result.ts)
+If you are using TypeScript, you can import the [`GetRatesWithShipmentDetailsTypes.Result`](https://github.com/ShipEngine/shipengine-js/blob/main/src/get-rates-with-shipment-details/types/public-result.ts)
 type into your project to take advantage of your IDE's code completion functionality.
 
 Example
