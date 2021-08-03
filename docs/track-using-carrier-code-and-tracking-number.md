@@ -5,14 +5,14 @@ Track Using Carrier Code and Tracking Number
 Input Parameters
 -------------------------------------
 
-The `trackUsingCarrierCodeAndTrackingNumber` method requires the carrier code and tracking number of the shipment being tracked. If you are using TypeScript, you can import the [`TrackUsingCarrierCodeAndTrackingNumberTypes.Param`](https://github.com/ShipEngine/shipengine-js/blob/main/src/track-by-carrier-code-and-tracking-number/types/public.ts)
+The `trackUsingCarrierCodeAndTrackingNumber` method requires the carrier code and tracking number of the shipment being tracked. If you are using TypeScript, you can import the [`TrackUsingCarrierCodeAndTrackingNumberTypes.Param`](https://github.com/ShipEngine/shipengine-js/blob/main/src/track-using-carrier-code-and-tracking-number/types/public.ts)
 type into your project to take advantage of your
 IDE's code completion functionality.
 
 Output
 --------------------------------
 The `trackUsingCarrierCodeAndTrackingNumber` method returns tracking information associated with the shipment for the carrier code and tracking number.
-If you are using TypeScript, you can import the [`TrackUsingCarrierCodeAndTrackingNumberTypes.Result`](https://github.com/ShipEngine/shipengine-js/blob/main/src/validate-addresses/types/public-result.ts)
+If you are using TypeScript, you can import the [`TrackUsingCarrierCodeAndTrackingNumberTypes.Result`](https://github.com/ShipEngine/shipengine-js/blob/main/src/track-using-carrier-code-and-tracking-number/types/public.ts)
 type into your project to take advantage of your IDE's code completion functionality.
 
 Example
