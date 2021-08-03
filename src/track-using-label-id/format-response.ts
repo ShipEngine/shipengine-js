@@ -1,23 +1,23 @@
 import { Response } from "./types/private";
-import { TrackByLabelIdTypes } from ".";
+import { TrackUsingLabelIdTypes } from ".";
 import { TrackingEvent } from "./types/public";
 
 export function formatResponse(
   response: Response.GetTrackingLogFromLabelResponseBody
-): TrackByLabelIdTypes.Response {
-  return formatTrackByLabelIdResult(response);
+): TrackUsingLabelIdTypes.Response {
+  return formatTrackUsingLabelIdResult(response);
 }
 
-function formatTrackByLabelIdResult(
+function formatTrackUsingLabelIdResult(
   result: Response.GetTrackingLogFromLabelResponseBody
-): TrackByLabelIdTypes.TrackByLabelIdResult {
+): TrackUsingLabelIdTypes.TrackUsingLabelIdResult {
   return {
     trackingNumber: result.tracking_number!,
     statusCode:
-      (result.status_code as TrackByLabelIdTypes.Response["statusCode"]) ||
+      (result.status_code as TrackUsingLabelIdTypes.Response["statusCode"]) ||
       "UN",
     statusDescription:
-      (result.status_description as TrackByLabelIdTypes.Response["statusDescription"]) ||
+      (result.status_description as TrackUsingLabelIdTypes.Response["statusDescription"]) ||
       "Unknown",
     carrierStatusCode: result.carrier_status_code!,
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

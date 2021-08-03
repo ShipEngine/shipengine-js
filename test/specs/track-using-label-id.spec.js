@@ -10,12 +10,12 @@ const {
   mockTrackByLabelId500,
 } = require("../utils/mocks/mock-track-by-label-id-200");
 
-describe("trackByLabelId()", () => {
+describe("trackUsingLabelId()", () => {
   it("should throw an error if the label ID is not a string", async () => {
     const shipengine = new ShipEngine({ apiKey });
 
     try {
-      await shipengine.trackByLabelId(1234);
+      await shipengine.trackUsingLabelId(1234);
       errors.shouldHaveThrown();
     } catch (error) {
       errors.assertInvalidFieldValueError(error, {
@@ -36,7 +36,7 @@ describe("trackByLabelId()", () => {
     const shipengine = new ShipEngine({ apiKey });
 
     try {
-      await shipengine.trackByLabelId("se-1234");
+      await shipengine.trackUsingLabelId("se-1234");
       errors.shouldHaveThrown();
     } catch (error) {
       errors.assertShipEngineError(error, {
@@ -60,7 +60,7 @@ describe("trackByLabelId()", () => {
     const shipengine = new ShipEngine({ apiKey });
 
     try {
-      await shipengine.trackByLabelId("se-1234");
+      await shipengine.trackUsingLabelId("se-1234");
       errors.shouldHaveThrown();
     } catch (error) {
       errors.assertShipEngineError(error, {
@@ -84,7 +84,7 @@ describe("trackByLabelId()", () => {
 
     const shipengine = new ShipEngine({ apiKey });
 
-    const result = await shipengine.trackByLabelId("se-1234");
+    const result = await shipengine.trackUsingLabelId("se-1234");
 
     expect(result).to.deep.equal({
       trackingNumber: "332980205337",

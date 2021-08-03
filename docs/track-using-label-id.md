@@ -5,12 +5,12 @@ Track By Label ID
 Input Parameters
 -------------------------------------
 
-The `trackByLabelId` method requires the ID of the label associated with the shipment you are trying to track.
+The `trackUsingLabelId` method requires the ID of the label associated with the shipment you are trying to track.
 
 Output
 --------------------------------
-The `trackByLabelId` method returns tracking information associated with the shipment for the given label ID.
-If you are using TypeScript, you can import the [`TrackByLabelIdTypes.Result`](https://github.com/ShipEngine/shipengine-js/blob/main/src/validate-addresses/types/public-result.ts)
+The `trackUsingLabelId` method returns tracking information associated with the shipment for the given label ID.
+If you are using TypeScript, you can import the [`TrackUsingLabelIdTypes.Result`](https://github.com/ShipEngine/shipengine-js/blob/main/src/validate-addresses/types/public-result.ts)
 type into your project to take advantage of your IDE's code completion functionality.
 
 Example
@@ -19,9 +19,9 @@ Example
 const ShipEngine = require("shipengine");
 const shipengine = new ShipEngine("api_key");
 
-async function trackByLabelId() {
+async function trackUsingLabelId() {
   try {
-    const result = await shipengine.trackByLabelId('se-324658');
+    const result = await shipengine.trackUsingLabelId('se-324658');
 
     console.log("Tracking info:");
     console.log(result);
@@ -30,7 +30,7 @@ async function trackByLabelId() {
   }
 }
 
-trackByLabelId();
+trackUsingLabelId();
 ```
 
 Example Output

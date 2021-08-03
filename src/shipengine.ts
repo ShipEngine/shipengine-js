@@ -8,7 +8,10 @@ import {
   VoidLabelWithLabelIdTypes,
 } from "./void-label-with-label-id";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
-import { TrackByLabelIdTypes, trackByLabelId } from "./track-by-label-id";
+import {
+  TrackUsingLabelIdTypes,
+  trackUsingLabelId,
+} from "./track-using-label-id";
 import {
   TrackByCarrierCodeAndTrackingNumberTypes,
   trackByCarrierCodeAndTrackingNumber,
@@ -109,19 +112,19 @@ export class ShipEngine {
   }
 
   /**
-   * Tracks a shipment by Label ID.
+   * Tracks a shipment using the Label ID.
    *
    * @param [labelId]
    * The labelId that contains the package you wish to track.
 
   * @param [config] - Optional configuration overrides for this method call.
    */
-  public async trackByLabelId(
+  public async trackUsingLabelId(
     labelId: string,
     config?: ShipEngineConfig
-  ): Promise<TrackByLabelIdTypes.Response> {
+  ): Promise<TrackUsingLabelIdTypes.Response> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
-    return trackByLabelId(labelId, mergedConfig);
+    return trackUsingLabelId(labelId, mergedConfig);
   }
   /**
    * Create a label from shipment details

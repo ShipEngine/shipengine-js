@@ -1,10 +1,10 @@
-export type Response = TrackByLabelIdResult;
+export type Response = TrackUsingLabelIdResult;
 
 /**
  * The Tracking information and events associated with a label
  * @see https://www.shipengine.com/docs/tracking/track-by-label-id/
  */
-export interface TrackByLabelIdResult {
+export interface TrackUsingLabelIdResult {
   /**
    * A tracking number for a package. The format depends on the carrier.
    */
