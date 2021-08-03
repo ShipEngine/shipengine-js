@@ -67,7 +67,7 @@ async function createLabel() {
     const result = await shipengine.createLabel(params);
 
     console.log("The label that was created:");
-    console.log(JSON.stringify(result));
+    console.log(result);
   } catch (e) {
     console.log("Error creating label: ", e.message);
   }
