@@ -1,10 +1,10 @@
 import { Response } from "./types/private";
 
-import { CreateLabelTypes } from ".";
+import { CreateLabelFromShipmentDetailsTypes } from ".";
 
 export function formatResponse(
   params: Response.CreateLabelResponseBody
-): CreateLabelTypes.Result {
+): CreateLabelFromShipmentDetailsTypes.Result {
   return {
     labelId: params.label_id!, // Error in generated types
     status: params.status!, // Error in generated types
@@ -40,7 +40,7 @@ export function formatResponse(
 
 function mapLabelDownload(
   params: Response.LabelDownload
-): CreateLabelTypes.Result["labelDownload"] {
+): CreateLabelFromShipmentDetailsTypes.Result["labelDownload"] {
   return {
     href: params.href!, // Error in generated types
     pdf: params.pdf!, // Error in generated types
@@ -51,7 +51,7 @@ function mapLabelDownload(
 
 function mapFormDownload(
   params: Response.Link | undefined
-): CreateLabelTypes.Result["formDownload"] | null {
+): CreateLabelFromShipmentDetailsTypes.Result["formDownload"] | null {
   if (!params) return null;
   return {
     href: params.href!, // Error in generated types
@@ -61,7 +61,7 @@ function mapFormDownload(
 
 function mapInsuranceClaim(
   params: Response.Link | undefined
-): CreateLabelTypes.Result["insuranceClaim"] | null {
+): CreateLabelFromShipmentDetailsTypes.Result["insuranceClaim"] | null {
   if (!params) return null;
   return {
     href: params.href!, // Error in generated types
@@ -71,7 +71,7 @@ function mapInsuranceClaim(
 
 function mapPackages(
   params: Response.Package[]
-): CreateLabelTypes.Result["packages"][0][] {
+): CreateLabelFromShipmentDetailsTypes.Result["packages"][0][] {
   return params.map((pkg) => ({
     packageCode: pkg.package_code!, // Error in generated types
     trackingNumber: pkg.tracking_number!, // Error in generated types

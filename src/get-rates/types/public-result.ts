@@ -1,5 +1,5 @@
 import { ErrorCode, ErrorSource, ErrorType } from "../..";
-import { InsuranceProvider } from "../../create-label/types/private-request";
+import { InsuranceProvider } from "../../create-label-from-shipment-details/types/private-request";
 
 export type Result = RatesResults;
 

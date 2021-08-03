@@ -1,9 +1,9 @@
 import { Request } from "./types/private";
 
-import { CreateLabelTypes } from ".";
+import { CreateLabelFromShipmentDetailsTypes } from ".";
 
 export function formatParams(
-  params: CreateLabelTypes.Params
+  params: CreateLabelFromShipmentDetailsTypes.Params
 ): Request.CreateLabelRequestBody {
   return {
     shipment: mapShipment(params.shipment),
@@ -21,7 +21,7 @@ export function formatParams(
 }
 
 function mapShipment(
-  params?: CreateLabelTypes.Params["shipment"]
+  params?: CreateLabelFromShipmentDetailsTypes.Params["shipment"]
 ): Request.Shipment | undefined {
   if (!params) return undefined;
   return {
@@ -47,7 +47,7 @@ function mapShipment(
 }
 
 function mapShipTo(
-  params: CreateLabelTypes.Params["shipment"]["shipTo"]
+  params: CreateLabelFromShipmentDetailsTypes.Params["shipment"]["shipTo"]
 ): Request.Address | undefined {
   if (!params) return undefined;
   return {
@@ -66,7 +66,7 @@ function mapShipTo(
 }
 
 function mapShipFrom(
-  params: CreateLabelTypes.Params["shipment"]["shipFrom"]
+  params: CreateLabelFromShipmentDetailsTypes.Params["shipment"]["shipFrom"]
 ): Request.Address | undefined {
   if (!params) return undefined;
   return {
@@ -85,7 +85,7 @@ function mapShipFrom(
 }
 
 function mapReturnTo(
-  params: CreateLabelTypes.Params["shipment"]["returnTo"]
+  params: CreateLabelFromShipmentDetailsTypes.Params["shipment"]["returnTo"]
 ): Request.Address | undefined {
   if (!params) return undefined;
   return {
@@ -104,7 +104,7 @@ function mapReturnTo(
 }
 
 function mapPackages(
-  params: CreateLabelTypes.Params["shipment"]["packages"][0][]
+  params: CreateLabelFromShipmentDetailsTypes.Params["shipment"]["packages"][0][]
 ): any[] {
   return params.map((pkg) => ({
     package_code: pkg.packageCode,
@@ -118,7 +118,7 @@ function mapPackages(
 
 function mapTaxIdentifiers(
   params?: NonNullable<
-    CreateLabelTypes.Params["shipment"]["taxIdentifiers"]
+    CreateLabelFromShipmentDetailsTypes.Params["shipment"]["taxIdentifiers"]
   >[0][]
 ): Request.TaxIdentifier[] | undefined {
   if (!params) return undefined;
@@ -131,7 +131,7 @@ function mapTaxIdentifiers(
 }
 
 function mapCustoms(
-  params?: CreateLabelTypes.Params["shipment"]["customs"]
+  params?: CreateLabelFromShipmentDetailsTypes.Params["shipment"]["customs"]
 ): Request.InternationalShipmentOptions | undefined {
   if (!params) return undefined;
   let custom_items: Request.CustomsItem[] = [];
@@ -154,7 +154,7 @@ function mapCustoms(
 }
 
 function mapAdvancedOptions(
-  params?: CreateLabelTypes.Params["shipment"]["advancedOptions"]
+  params?: CreateLabelFromShipmentDetailsTypes.Params["shipment"]["advancedOptions"]
 ): Request.AdvancedShipmentOptions | undefined {
   if (!params) return undefined;
   return {
@@ -181,7 +181,7 @@ function mapAdvancedOptions(
 
 function mapCollectOnDelivery(
   params?: NonNullable<
-    CreateLabelTypes.Params["shipment"]["advancedOptions"]
+    CreateLabelFromShipmentDetailsTypes.Params["shipment"]["advancedOptions"]
   >["collectOnDelivery"]
 ): Request.CollectOnDelivery | undefined {
   if (!params) return undefined;
@@ -194,7 +194,7 @@ function mapCollectOnDelivery(
 function mapPaymentAmount(
   params?: NonNullable<
     NonNullable<
-      CreateLabelTypes.Params["shipment"]["advancedOptions"]
+      CreateLabelFromShipmentDetailsTypes.Params["shipment"]["advancedOptions"]
     >["collectOnDelivery"]
   >["paymentAmount"]
 ): Request.PaymentAmount | undefined {

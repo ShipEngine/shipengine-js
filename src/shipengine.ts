@@ -2,7 +2,7 @@ import {
   validateAddresses,
   ValidateAddressesTypes,
 } from "./validate-addresses";
-import { listCarriers, ListCarriersTypes } from "./list-carrier-accounts";
+import { listCarriers, ListCarriersTypes } from "./list-carriers";
 import { voidLabelById, VoidLabelByIdTypes } from "./void-label-by-id";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
 import { TrackByLabelIdTypes, trackByLabelId } from "./track-by-label-id";
@@ -10,7 +10,10 @@ import {
   TrackByCarrierCodeAndTrackingNumberTypes,
   trackByCarrierCodeAndTrackingNumber,
 } from "./track-by-carrier-code-and-tracking-number";
-import { createLabel, CreateLabelTypes } from "./create-label";
+import {
+  createLabelFromShipmentDetails,
+  CreateLabelFromShipmentDetailsTypes,
+} from "./create-label-from-shipment-details";
 import { getRates, GetRatesTypes } from "./get-rates";
 import {
   createLabelFromRate,
@@ -115,19 +118,19 @@ export class ShipEngine {
     return trackByLabelId(labelId, mergedConfig);
   }
   /**
-   * Create a label for shipment
+   * Create a label from shipment details
    *
    * @param label
    * The label that you want to create.
    *
    * @param [config] - Optional configuration overrides for this method call.
    */
-  public async createLabel(
-    params: CreateLabelTypes.Params,
+  public async createLabelFromShipmentDetails(
+    params: CreateLabelFromShipmentDetailsTypes.Params,
     config?: ShipEngineConfig
-  ): Promise<CreateLabelTypes.Result> {
+  ): Promise<CreateLabelFromShipmentDetailsTypes.Result> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
-    return createLabel(params, mergedConfig);
+    return createLabelFromShipmentDetails(params, mergedConfig);
   }
 
   /**
