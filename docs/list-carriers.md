@@ -6,7 +6,7 @@ your own carrier accounts through the ShipEngine [dashboard](https://www.shipeng
 Output
 --------------------------------
 The `listCarriers` method returns an array of connected carriers.
-If you are using TypeScript, you can import the [`listCarriersTypes.Result`](https://github.com/ShipEngine/shipengine-js/blob/main/src/list-carrier-accounts/types/public.ts)
+If you are using TypeScript, you can import the [`listCarriersTypes.Result`](https://github.com/ShipEngine/shipengine-js/blob/main/src/list-carriers/types/public.ts)
 type into your project to take advantage of your IDE's code completion functionality.
 
 Example

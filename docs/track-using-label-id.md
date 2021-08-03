@@ -10,7 +10,7 @@ The `trackUsingLabelId` method requires the ID of the label associated with the 
 Output
 --------------------------------
 The `trackUsingLabelId` method returns tracking information associated with the shipment for the given label ID.
-If you are using TypeScript, you can import the [`TrackUsingLabelIdTypes.Result`](https://github.com/ShipEngine/shipengine-js/blob/main/src/validate-addresses/types/public-result.ts)
+If you are using TypeScript, you can import the [`TrackUsingLabelIdTypes.Result`](https://github.com/ShipEngine/shipengine-js/blob/main/src/track-using-label-id/types/public.ts)
 type into your project to take advantage of your IDE's code completion functionality.
 
 Example
