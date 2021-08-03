@@ -1,11 +1,11 @@
-import { GetRatesTypes } from ".";
+import { GetRatesWithShipmentDetailsTypes } from ".";
 import { Response } from "./types/private";
 
 // TODO: update types to allow null/undefined
 
 export function formatResponse(
   response: Response.CalculateRatesResponseBody
-): GetRatesTypes.Result {
+): GetRatesWithShipmentDetailsTypes.Result {
   return {
     shipmentId: response.shipment_id!, // Error in generated types
     carrierId: response.carrier_id || null,
@@ -48,15 +48,17 @@ export function formatResponse(
   };
 }
 type ErrorType = NonNullable<
-  GetRatesTypes.Result["rateResponse"]["errors"]
+  GetRatesWithShipmentDetailsTypes.Result["rateResponse"]["errors"]
 >[0]["errorType"];
 type ErrorCode = NonNullable<
-  GetRatesTypes.Result["rateResponse"]["errors"]
+  GetRatesWithShipmentDetailsTypes.Result["rateResponse"]["errors"]
 >[0]["errorCode"];
 
 function formatErrors(
   errors: Response.Error[]
-): NonNullable<GetRatesTypes.Result["rateResponse"]["errors"]> {
+): NonNullable<
+  GetRatesWithShipmentDetailsTypes.Result["rateResponse"]["errors"]
+> {
   return errors.map((error) => {
     return {
       errorSource: error.error_source,
@@ -69,7 +71,7 @@ function formatErrors(
 
 function formatRates(
   rates: Response.Rate[]
-): GetRatesTypes.Result["rateResponse"]["rates"] {
+): GetRatesWithShipmentDetailsTypes.Result["rateResponse"]["rates"] {
   return rates.map((rate) => {
     return {
       rateId: rate.rate_id,
@@ -115,11 +117,12 @@ function formatRates(
   });
 }
 
-type PackageCode = GetRatesTypes.Result["packages"][0]["packageCode"];
+type PackageCode =
+  GetRatesWithShipmentDetailsTypes.Result["packages"][0]["packageCode"];
 
 function formatPackages(
   packages: Response.Package[]
-): GetRatesTypes.Result["packages"] {
+): GetRatesWithShipmentDetailsTypes.Result["packages"] {
   return packages.map((pkg) => {
     return {
       packageCode: (pkg.package_code as PackageCode) || null,
@@ -154,46 +157,49 @@ function formatPackages(
   });
 }
 
-type BillToAccount = GetRatesTypes.Result["advancedOptions"]["billToAccount"];
+type BillToAccount =
+  GetRatesWithShipmentDetailsTypes.Result["advancedOptions"]["billToAccount"];
 
 type BillToCountryCode =
-  GetRatesTypes.Result["advancedOptions"]["billToCountryCode"];
+  GetRatesWithShipmentDetailsTypes.Result["advancedOptions"]["billToCountryCode"];
 
 type Currency = NonNullable<
   NonNullable<
-    GetRatesTypes.Result["advancedOptions"]["collectOnDelivery"]
+    GetRatesWithShipmentDetailsTypes.Result["advancedOptions"]["collectOnDelivery"]
   >["paymentAmount"]
 >["currency"];
 
 function formatAdvancedOptions(
   options: Response.AdvancedShipmentOptions
-): GetRatesTypes.Result["advancedOptions"] {
-  const advancedOptions: GetRatesTypes.Result["advancedOptions"] = {
-    billToAccount: (options.bill_to_account as BillToAccount) || null,
-    billToCountryCode:
-      (options.bill_to_country_code as BillToCountryCode) || null,
-    billToParty: options.bill_to_party || null,
-    billToPostalCode: options.bill_to_postal_code || null,
-    containsAlcohol: options.contains_alcohol || null,
-    deliveryDutyPaid: options.delivered_duty_paid || null,
-    dryIce: options.dry_ice || null,
-    dryIceWeight: options.dry_ice_weight
-      ? {
-          value: options.dry_ice_weight.value,
-          unit: options.dry_ice_weight.unit,
-        }
-      : null,
-    nonMachinable: options.non_machinable || null,
-    saturdayDelivery: options.saturday_delivery || null,
-    useUPSGroundFreightPricing: options.use_ups_ground_freight_pricing || null,
-    freightClass: options.freight_class || null,
-    customField1: options.custom_field1 || null,
-    customField2: options.custom_field2 || null,
-    customField3: options.custom_field3 || null,
-    originType: options.origin_type || null,
-    shipperRelease: options.shipper_release || null,
-    collectOnDelivery: null,
-  };
+): GetRatesWithShipmentDetailsTypes.Result["advancedOptions"] {
+  const advancedOptions: GetRatesWithShipmentDetailsTypes.Result["advancedOptions"] =
+    {
+      billToAccount: (options.bill_to_account as BillToAccount) || null,
+      billToCountryCode:
+        (options.bill_to_country_code as BillToCountryCode) || null,
+      billToParty: options.bill_to_party || null,
+      billToPostalCode: options.bill_to_postal_code || null,
+      containsAlcohol: options.contains_alcohol || null,
+      deliveryDutyPaid: options.delivered_duty_paid || null,
+      dryIce: options.dry_ice || null,
+      dryIceWeight: options.dry_ice_weight
+        ? {
+            value: options.dry_ice_weight.value,
+            unit: options.dry_ice_weight.unit,
+          }
+        : null,
+      nonMachinable: options.non_machinable || null,
+      saturdayDelivery: options.saturday_delivery || null,
+      useUPSGroundFreightPricing:
+        options.use_ups_ground_freight_pricing || null,
+      freightClass: options.freight_class || null,
+      customField1: options.custom_field1 || null,
+      customField2: options.custom_field2 || null,
+      customField3: options.custom_field3 || null,
+      originType: options.origin_type || null,
+      shipperRelease: options.shipper_release || null,
+      collectOnDelivery: null,
+    };
 
   if (options.collect_on_delivery) {
     advancedOptions.collectOnDelivery = {
@@ -214,7 +220,7 @@ function formatAdvancedOptions(
 
 function formatShippingAddress(
   address: Response.Address
-): GetRatesTypes.Result["returnTo"] {
+): GetRatesWithShipmentDetailsTypes.Result["returnTo"] {
   return {
     name: address.name!, // Error in generated types
     phone: address.phone!, // Error in generated types
@@ -232,7 +238,7 @@ function formatShippingAddress(
 
 function formatCustoms(
   customs: Response.InternationalShipmentOptions
-): GetRatesTypes.Result["customs"] | null {
+): GetRatesWithShipmentDetailsTypes.Result["customs"] | null {
   return {
     contents: customs.contents,
     nonDelivery: customs.non_delivery,
@@ -243,7 +249,9 @@ function formatCustoms(
 }
 
 type CustomsItemResult = NonNullable<
-  NonNullable<GetRatesTypes.Result["customs"]>["customsItems"]
+  NonNullable<
+    GetRatesWithShipmentDetailsTypes.Result["customs"]
+  >["customsItems"]
 >;
 type CustomsItemCountry = NonNullable<CustomsItemResult[0]["countryOfOrigin"]>;
 
@@ -269,7 +277,7 @@ function formatCustomsItems(items: Response.CustomsItem[]): CustomsItemResult {
 
 function formatShipmentItems(
   items: Response.ShipmentItem[] | undefined
-): GetRatesTypes.Result["items"] {
+): GetRatesWithShipmentDetailsTypes.Result["items"] {
   if (!items) {
     return null;
   }
@@ -290,7 +298,7 @@ function formatShipmentItems(
 
 function formatTaxIdentifiers(
   identifiers: Response.TaxIdentifier[] | undefined
-): GetRatesTypes.Result["taxIdentifiers"] {
+): GetRatesWithShipmentDetailsTypes.Result["taxIdentifiers"] {
   if (!identifiers) {
     return null;
   }

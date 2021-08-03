@@ -5,7 +5,7 @@ import {
 import { listCarriers, ListCarriersTypes } from "./list-carriers";
 import {
   voidLabelWithLabelId,
-  VoidLabelWithLabelId,
+  VoidLabelWithLabelIdTypes,
 } from "./void-label-with-label-id";
 import { NormalizedConfig, ShipEngineConfig } from "./config";
 import { TrackByLabelIdTypes, trackByLabelId } from "./track-by-label-id";
@@ -17,7 +17,10 @@ import {
   createLabelFromShipmentDetails,
   CreateLabelFromShipmentDetailsTypes,
 } from "./create-label-from-shipment-details";
-import { getRates, GetRatesTypes } from "./get-rates";
+import {
+  getRatesWithShipmentDetails,
+  GetRatesWithShipmentDetailsTypes,
+} from "./get-rates-with-shipment-details";
 import {
   createLabelFromRate,
   CreateLabelFromRateTypes,
@@ -163,7 +166,7 @@ export class ShipEngine {
   public async voidLabelWithLabelId(
     id: string,
     config?: ShipEngineConfig
-  ): Promise<VoidLabelWithLabelId.Result> {
+  ): Promise<VoidLabelWithLabelIdTypes.Result> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
     return voidLabelWithLabelId(id, mergedConfig);
   }
@@ -173,11 +176,11 @@ export class ShipEngine {
    *
    * @param [config] - Optional configuration overrides for this method call.
    */
-  public async getRates(
-    params: GetRatesTypes.Params,
+  public async getRatesWithShipmentDetails(
+    params: GetRatesWithShipmentDetailsTypes.Params,
     config?: ShipEngineConfig
-  ): Promise<GetRatesTypes.Result> {
+  ): Promise<GetRatesWithShipmentDetailsTypes.Result> {
     const mergedConfig = NormalizedConfig.merge(this.config, config);
-    return getRates(params, mergedConfig);
+    return getRatesWithShipmentDetails(params, mergedConfig);
   }
 }

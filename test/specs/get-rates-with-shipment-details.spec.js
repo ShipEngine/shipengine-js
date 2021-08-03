@@ -1,17 +1,17 @@
 const { expect } = require("chai");
-const { ShipEngine } = require("../..");
+const { ShipEngine } = require("../../");
 const { apiKey } = require("../utils/constants");
 const errors = require("../utils/errors");
 const fetchMock = require("../utils/fetch-mock");
 const { mockGetRates200 } = require("../utils/mocks/mock-get-rates");
 
-describe("getRates()", () => {
+describe("getRatesWithShipmentDetails()", () => {
   it("Returns rates on a successful request", async () => {
     mockGetRates200();
 
     const shipengine = new ShipEngine({ apiKey });
 
-    const result = await shipengine.getRates({
+    const result = await shipengine.getRatesWithShipmentDetails({
       rate_options: {
         carrier_ids: ["se-161650"],
         service_codes: ["usps_first_class_mail"],
@@ -209,7 +209,7 @@ describe("getRates()", () => {
     const shipengine = new ShipEngine({ apiKey });
 
     try {
-      await shipengine.getRates({
+      await shipengine.getRatesWithShipmentDetails({
         rate_options: {
           carrier_ids: ["se-161650"],
           service_codes: ["usps_first_class_mail"],

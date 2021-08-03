@@ -1,9 +1,9 @@
-import { GetRatesTypes } from ".";
+import { GetRatesWithShipmentDetailsTypes } from ".";
 
 import { Request } from "./types/private";
 
 export function formatParams(
-  params: GetRatesTypes.Params
+  params: GetRatesWithShipmentDetailsTypes.Params
 ): Request.CalculateRatesRequestBody {
   const request: Request.CalculateRatesRequestBody = {};
 
@@ -52,7 +52,9 @@ export function formatParams(
 }
 
 function mapShipTo(
-  params: NonNullable<GetRatesTypes.Params["shipment"]>["shipTo"]
+  params: NonNullable<
+    GetRatesWithShipmentDetailsTypes.Params["shipment"]
+  >["shipTo"]
 ): Request.Address | undefined {
   if (!params) return undefined;
   return {
@@ -71,7 +73,9 @@ function mapShipTo(
 }
 
 function mapShipFrom(
-  params: NonNullable<GetRatesTypes.Params["shipment"]>["shipFrom"]
+  params: NonNullable<
+    GetRatesWithShipmentDetailsTypes.Params["shipment"]
+  >["shipFrom"]
 ): Request.Address | undefined {
   if (!params) return undefined;
   return {
@@ -90,7 +94,9 @@ function mapShipFrom(
 }
 
 function mapReturnTo(
-  params: NonNullable<GetRatesTypes.Params["shipment"]>["returnTo"]
+  params: NonNullable<
+    GetRatesWithShipmentDetailsTypes.Params["shipment"]
+  >["returnTo"]
 ): Request.Address | undefined {
   if (!params) return undefined;
   return {
@@ -108,7 +114,9 @@ function mapReturnTo(
   };
 }
 
-type ShipmentItem = NonNullable<GetRatesTypes.Params["shipment"]>["items"];
+type ShipmentItem = NonNullable<
+  GetRatesWithShipmentDetailsTypes.Params["shipment"]
+>["items"];
 
 function formatShipmentItems(
   shipmentItems: ShipmentItem
@@ -132,7 +140,7 @@ function formatShipmentItems(
 }
 
 type AdvancedOptions = NonNullable<
-  GetRatesTypes.Params["shipment"]
+  GetRatesWithShipmentDetailsTypes.Params["shipment"]
 >["advancedOptions"];
 
 function mapAdvancedOptions(
@@ -169,7 +177,7 @@ function mapAdvancedOptions(
 }
 
 type TaxIdentifiers = NonNullable<
-  GetRatesTypes.Params["shipment"]
+  GetRatesWithShipmentDetailsTypes.Params["shipment"]
 >["taxIdentifiers"];
 
 function mapTaxIdentifiers(
@@ -184,7 +192,9 @@ function mapTaxIdentifiers(
   }));
 }
 
-type Packages = NonNullable<GetRatesTypes.Params["shipment"]>["packages"];
+type Packages = NonNullable<
+  GetRatesWithShipmentDetailsTypes.Params["shipment"]
+>["packages"];
 
 function mapPackages(params: Packages): any[] | undefined {
   if (!params) {
@@ -200,7 +210,9 @@ function mapPackages(params: Packages): any[] | undefined {
   }));
 }
 
-type Customs = NonNullable<GetRatesTypes.Params["shipment"]>["customs"];
+type Customs = NonNullable<
+  GetRatesWithShipmentDetailsTypes.Params["shipment"]
+>["customs"];
 
 function mapCustoms(
   params?: Customs

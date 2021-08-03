@@ -22,23 +22,17 @@ compileFromFile('node_modules/shipengine-json-schema/requests/create_label_from_
 compileFromFile('node_modules/shipengine-json-schema/responses/create_label_from_rate_response_body.json')
   .then(ts => fs.writeFileSync('src/create-label-from-rate/types/private-response.ts', ts))
 
-// List Rates
-compileFromFile('node_modules/shipengine-json-schema/requests/calculate_rates_request_body.json')
-  .then(ts => fs.writeFileSync('src/get-rates/types/private-request.ts', ts))
-
-compileFromFile('node_modules/shipengine-json-schema/responses/calculate_rates_response_body.json')
-  .then(ts => fs.writeFileSync('src/get-rates/types/private-response.ts', ts))
-
 // List Carrier Accounts
 compileFromFile('node_modules/shipengine-json-schema/responses/list_carriers_response_body.json')
   .then(ts => fs.writeFileSync('src/list-carriers/types/private-response.ts', ts))
 
 // Get Rates
 compileFromFile('node_modules/shipengine-json-schema/requests/calculate_rates_request_body.json')
-.then(ts => fs.writeFileSync('src/get-rates/types/private-request.ts', ts))
+.then(ts => fs.writeFileSync('src/get-rates-with-shipment-details/types/private-request.ts', ts))
 
 compileFromFile('node_modules/shipengine-json-schema/responses/calculate_rates_response_body.json')
-.then(ts => fs.writeFileSync('src/get-rates/types/private-response.ts', ts))
+.then(ts => fs.writeFileSync('src/get-rates-with-shipment-details/types/private-response.ts', ts))
+
 // Track By Carrier Code and Tracking Number
 compileFromFile('node_modules/shipengine-json-schema/responses/get_tracking_log_response_body.json')
   .then(ts => fs.writeFileSync('src/track-by-carrier-code-and-tracking-number/types/private-response.ts', ts))

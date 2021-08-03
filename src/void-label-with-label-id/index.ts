@@ -1,11 +1,11 @@
 // import { EventEmitter } from "../isomorphic.node";
 import { NormalizedConfig } from "../config";
 import { put } from "../client";
-import * as VoidLabelWithLabelId from "./types/public";
+import * as VoidLabelWithLabelIdTypes from "./types/public";
 import { Response } from "./types/private";
 import { InvalidFieldValueError } from "../errors";
 
-export { VoidLabelWithLabelId };
+export { VoidLabelWithLabelIdTypes };
 
 /**
  * Void a label with its ID
@@ -15,7 +15,7 @@ export { VoidLabelWithLabelId };
 export async function voidLabelWithLabelId(
   id: string,
   config: NormalizedConfig
-): Promise<VoidLabelWithLabelId.Result> {
+): Promise<VoidLabelWithLabelIdTypes.Result> {
   if (typeof id !== "string") {
     throw new InvalidFieldValueError("ID", "must be a string.", id);
   }

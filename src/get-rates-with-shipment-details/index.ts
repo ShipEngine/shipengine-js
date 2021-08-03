@@ -1,22 +1,22 @@
 import { NormalizedConfig } from "../config";
 import { post } from "../client";
-import * as GetRatesTypes from "./types/public";
+import * as GetRatesWithShipmentDetailsTypes from "./types/public";
 import { Request, Response } from "./types/private";
 import { formatParams } from "./format-params";
 import { formatResponse } from "./format-response";
 // import { validateParams } from "./validate-params";
 
-export { GetRatesTypes };
+export { GetRatesWithShipmentDetailsTypes };
 
 /**
  * Retrieve various rates for a shipmnent.
  *
  * https://www.shipengine.com/docs/rates/
  */
-export async function getRates(
-  params: GetRatesTypes.Params,
+export async function getRatesWithShipmentDetails(
+  params: GetRatesWithShipmentDetailsTypes.Params,
   config: NormalizedConfig
-): Promise<GetRatesTypes.Result> {
+): Promise<GetRatesWithShipmentDetailsTypes.Result> {
   // validateParams(params);
 
   const formattedParams = formatParams(params);
