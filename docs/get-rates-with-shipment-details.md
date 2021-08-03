@@ -64,10 +64,10 @@ async function getRatesWithShipmentDetails() {
   try {
     const result = await shipengine.getRatesWithShipmentDetails(params);
 
-    console.log("The label that was created:");
+    console.log("The rates that were created:");
     console.log(result);
   } catch (e) {
-    console.log("Error creating label: ", e.message);
+    console.log("Error creating rates: ", e.message);
   }
 }
 
