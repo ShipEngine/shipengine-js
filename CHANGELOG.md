@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.0.0](https://www.github.com/ShipEngine/shipengine-js/compare/v1.0.0-rc.3...v1.0.0) (2021-08-11)
+
+
+### Features
+
+* add validate addresses doc ([#151](https://www.github.com/ShipEngine/shipengine-js/issues/151)) ([be6cc0a](https://www.github.com/ShipEngine/shipengine-js/commit/be6cc0a452a7d14b0ae3cdf087c621b651616261))
+* create label from rate doc ([#158](https://www.github.com/ShipEngine/shipengine-js/issues/158)) ([042dfda](https://www.github.com/ShipEngine/shipengine-js/commit/042dfdaec6fc79f16e36f71ef914f3104e950393))
+* track by label ID doc ([#154](https://www.github.com/ShipEngine/shipengine-js/issues/154)) ([8335037](https://www.github.com/ShipEngine/shipengine-js/commit/8335037fe904d1c94fc20f9920e5f9602a8fcb9f))
+
+
+### Bug Fixes
+
+* fixup readme ([d02c130](https://www.github.com/ShipEngine/shipengine-js/commit/d02c130b31c20604fc528cf0e87055e65c72dffa))
+
+
+### Miscellaneous Chores
+
+* release 1.0.0 ([da02cbd](https://www.github.com/ShipEngine/shipengine-js/commit/da02cbda8ac66c0778f77d6370f6aaac240241d4))
+
 ## 1.0.0-rc.3 (2021-07-29)
 
 
