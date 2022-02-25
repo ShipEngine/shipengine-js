@@ -55,6 +55,7 @@ export class NormalizedConfig {
   public pageSize: number;
   public retries: number;
   public timeout: number;
+  public onBehalfOf?: string;
 
   public constructor(config: string | ShipEngineConfig) {
     if (typeof config === "string") {
@@ -78,6 +79,13 @@ export class NormalizedConfig {
     // API Key
     assert.isNonWhitespaceString("API Key", config.apiKey);
     this.apiKey = config.apiKey;
+
+
+    // Make request on behalf of child account (partner API)
+    if (config.onBehalfOf) {
+      assert.isNonWhitespaceString("On Behalf of API Key", config.onBehalfOf);
+      this.onBehalfOf = config.onBehalfOf;
+    }
 
     // Base URL
     if (config.baseURL instanceof URL) {
