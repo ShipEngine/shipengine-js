@@ -13,6 +13,13 @@ export interface ShipEngineConfig {
   apiKey: string;
 
   /**
+   * ShipEngine child account API key (partner API)
+   *
+   * This can be a production or sandbox key. Sandbox keys start with "TEST_".
+   */
+  onBehalfOf?: string;
+
+  /**
    * The URL of the ShipEngine API. You can usually leave this unset and it will
    * default to our public API.
    */
