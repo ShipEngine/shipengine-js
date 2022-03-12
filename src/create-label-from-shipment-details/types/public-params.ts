@@ -530,6 +530,7 @@ interface CustomsItem {
   unitOfMeasure?: string;
   sku?: string;
   skuDescription?: string;
+  description?: string;
 }
 interface MonetaryValue {
   currency: Currency;
