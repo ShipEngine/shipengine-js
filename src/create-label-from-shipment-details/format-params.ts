@@ -145,7 +145,7 @@ function mapCustoms(
       unit_of_measure: customItem.unitOfMeasure,
       sku: customItem.sku,
       sku_description: customItem.skuDescription,
-      description: customItem.description
+      description: customItem.description,
     }));
   }
   return {
