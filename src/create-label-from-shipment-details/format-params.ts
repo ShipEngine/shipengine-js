@@ -42,6 +42,7 @@ function mapShipment(
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     service_code: params.serviceCode,
+    carrier_id: params.carrierId,
     packages: mapPackages(params.packages),
   };
 }
