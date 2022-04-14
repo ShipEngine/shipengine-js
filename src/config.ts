@@ -87,7 +87,6 @@ export class NormalizedConfig {
     assert.isNonWhitespaceString("API Key", config.apiKey);
     this.apiKey = config.apiKey;
 
-
     // Make request on behalf of child account (partner API)
     if (config.onBehalfOf) {
       assert.isNonWhitespaceString("On Behalf of API Key", config.onBehalfOf);
