@@ -119,11 +119,17 @@ const userAgent = getUserAgentString();
 /**
  * Builds request headers
  */
-const buildHeaders = (config: NormalizedConfig) => {
-  return {
+const buildHeaders = ({ apiKey, onBehalfOf }: NormalizedConfig) => {
+  const headers: HeadersInit =  {
     Accept: "application/json",
     "Content-Type": "application/json",
-    "API-Key": config.apiKey,
+    "API-Key": apiKey,
     "User-Agent": userAgent,
   };
+
+  if (onBehalfOf) {
+    headers['On-Behalf-Of'] = onBehalfOf;
+  }
+
+  return headers;
 };
