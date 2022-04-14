@@ -120,7 +120,7 @@ const userAgent = getUserAgentString();
  * Builds request headers
  */
 const buildHeaders = ({ apiKey, onBehalfOf }: NormalizedConfig) => {
-  const headers: HeadersInit =  {
+  const headers: HeadersInit = {
     Accept: "application/json",
     "Content-Type": "application/json",
     "API-Key": apiKey,
