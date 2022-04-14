@@ -128,7 +128,7 @@ const buildHeaders = ({ apiKey, onBehalfOf }: NormalizedConfig) => {
   };
 
   if (onBehalfOf) {
-    headers['On-Behalf-Of'] = onBehalfOf;
+    headers["On-Behalf-Of"] = onBehalfOf;
   }
 
   return headers;
