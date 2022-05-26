@@ -5,14 +5,14 @@ Create Label From Shipment Details
 Input Parameters
 -------------------------------------
 
-The `createLabelFromShipmentDetails` method accepts shipment related params. If you are using TypeScript, you can import the [`CreateLabelFromShipmentDetailsTypes.Param`](https://github.com/ShipEngine/shipengine-js/blob/main/src/create-label/types/public-params.ts)
+The `createLabelFromShipmentDetails` method accepts shipment related params. If you are using TypeScript, you can import the [`CreateLabelFromShipmentDetailsTypes.Param`](https://github.com/ShipEngine/shipengine-js/blob/main/src/create-label-from-shipment-details/types/public-params.ts)
 type into your project to take advantage of your
 IDE's code completion functionality.
 
 Output
 --------------------------------
 The `createLabelFromShipmentDetails` method returns the label that was created.
-If you are using TypeScript, you can import the [`CreateLabelFromShipmentDetailsTypes.Result`](https://github.com/ShipEngine/shipengine-js/blob/main/src/create-label/types/public-result.ts)
+If you are using TypeScript, you can import the [`CreateLabelFromShipmentDetailsTypes.Result`](https://github.com/ShipEngine/shipengine-js/blob/main/src/create-label-from-shipment-details/types/public-result.ts)
 type into your project to take advantage of your IDE's code completion functionality.
 
 Example
