@@ -53,7 +53,7 @@
     "gen:types": "node scripts/gen-types.js",
     "lint": "eslint src test",
     "lint:fix": "prettier --write src test && eslint --fix src test",
-    "prepare": "husky install",
+    "prepare": "husky install && npm run build",
     "release": "npm run upgrade && npm run clean && npm run build && npm test && npm run bump",
     "test": "npm run test:node && npm run test:browser && npm run lint",
     "test:browser": "karma start --single-run",
