@@ -221,6 +221,7 @@ function mapCustoms(
   let custom_items: Request.CustomsItem[] = [];
   if (params.customsItems) {
     custom_items = params.customsItems.map((customItem) => ({
+      description: customItem.description,
       quantity: customItem.quantity,
       value: customItem.value,
       harmonized_tariff_code: customItem.harmonizedTariffCode,
