@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/ShipEngine/shipengine-js/compare/v1.0.1...v1.0.2) (2022-08-24)
+
+
+### Bug Fixes
+
+* document links ([#179](https://www.github.com/ShipEngine/shipengine-js/issues/179)) ([0cb0ed5](https://www.github.com/ShipEngine/shipengine-js/commit/0cb0ed57de033b33da8b2b43f5f3af74eb5df9be))
+
 ### [1.0.1](https://www.github.com/ShipEngine/shipengine-js/compare/v1.0.0...v1.0.1) (2022-04-14)
 
 
