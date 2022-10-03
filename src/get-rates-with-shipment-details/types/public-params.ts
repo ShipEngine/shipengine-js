@@ -1,10 +1,8 @@
-export type Params = ShipmentParam & RateOptions;
-
+export declare type Params = ShipmentParam & RateOptions;
 interface ShipmentParam {
   shipmentId?: string;
   shipment?: Shipment;
 }
-
 /**
  * The shipment object
  */
@@ -12,7 +10,6 @@ interface Shipment {
   /**
    * The possible validate address values
    */
-
   validateAddress?: ValidateAddress;
   /**
    * The carrier account that is billed for the shipping charges
@@ -30,13 +27,11 @@ interface Shipment {
    * Describe the packages included in this shipment as related to potential metadata that was imported from external order sources
    */
   items?: ShipmentItem[];
-
   taxIdentifiers?: TaxIdentifier[];
   /**
    * You can optionally use this field to store your own identifier for this shipment.
    */
   externalShipmentId?: string;
-
   /**
    * The date that the shipment was (or will be) shippped. ShipEngine will take the day of week into consideration.
    * For example, if the carrier does not operate on Sundays, then a package that would have shipped on Sunday will ship on Monday instead.
@@ -63,7 +58,6 @@ interface Shipment {
    * The type of delivery confirmation that is required for this shipment.
    */
   confirmation?: DeliveryConfirmation;
-
   /**
    * Customs information. This is usually only needed for international shipments.
    */
@@ -89,7 +83,6 @@ interface Shipment {
    */
   packages: Package[];
 }
-
 interface ShipmentItem {
   /**
    * item name
@@ -128,7 +121,6 @@ interface ShipmentItem {
    */
   orderSourceCode?: OrderSourceCode;
 }
-
 interface TaxIdentifier {
   /**
    * The taxable entity type for this tax item
@@ -147,7 +139,6 @@ interface TaxIdentifier {
    */
   value: string;
 }
-
 interface CustomInfo {
   /**
    * The type of contents in this shipment. This may impact import duties or customs treatment.
@@ -162,7 +153,6 @@ interface CustomInfo {
    */
   customsItems?: CustomItem[];
 }
-
 interface CustomItem {
   /**
    * A description of the item
@@ -276,7 +266,6 @@ interface AdvancedOptions {
     };
   };
 }
-
 interface Package {
   /**
    * The package type, such as thick_envelope, small_flat_rate_box, large_package, etc. The code package indicates a custom or unknown package type.
@@ -304,7 +293,6 @@ interface Package {
    */
   externalPackageId?: string;
 }
-
 interface Dimensions {
   /**
    * The dimension units that are supported by ShipEngine.
@@ -323,7 +311,6 @@ interface Dimensions {
    */
   height: number;
 }
-
 interface LabelMessages {
   /**
    * The first line of the custom label message. Some carriers may prefix this line with something like "REF", "Reference", "Trx Ref No.", etc.
@@ -338,12 +325,10 @@ interface LabelMessages {
    */
   reference3: string;
 }
-
 interface Weight {
   unit: string;
   value: number;
 }
-
 interface ShippingAddress {
   /**
    * The name of a contact person at this address.
@@ -393,17 +378,15 @@ interface ShippingAddress {
    */
   addressResidentialIndicator: "unknown" | "yes" | "no";
 }
-
 interface RateOptions {
   rateOptions: {
     carrierIds: [string, ...string[]];
-    packageTypes: string[];
-    serviceCodes: string[];
-    calculateTaxAmount: boolean;
-    preferredCurrency: Currency | string;
+    packageTypes?: string[];
+    serviceCodes?: string[];
+    calculateTaxAmount?: boolean;
+    preferredCurrency?: Currency | string;
   };
 }
-
 interface MonetaryValue {
   /**
    * The currencies that are supported by ShipEngine.
@@ -414,36 +397,32 @@ interface MonetaryValue {
    */
   amount: number;
 }
-
-type BillToAccount =
+declare type BillToAccount =
   | "bill_to_country_code"
   | "bill_to_party"
   | "bill_to_postal_code";
-
-type BillToParty = "recipient" | "third_party";
-
-type Currency = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
-
-type Contents =
+declare type BillToParty = "recipient" | "third_party";
+declare type Currency = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
+declare type Contents =
   | "merchandise"
   | "documents"
   | "gift"
   | "returned_goods"
   | "sample";
-
-type NonDelivery = "return_to_sender" | "treat_as_abandoned";
-
-type DeliveryConfirmation =
+declare type NonDelivery = "return_to_sender" | "treat_as_abandoned";
+declare type DeliveryConfirmation =
   | "none"
   | "delivery"
   | "signature"
   | "adult_signature"
   | "direct_signature"
   | "delivery_mailed";
-
-type InsuranceProvider = "none" | "shipsurance" | "carrier" | "third_party";
-
-type OrderSourceCode =
+declare type InsuranceProvider =
+  | "none"
+  | "shipsurance"
+  | "carrier"
+  | "third_party";
+declare type OrderSourceCode =
   | "amazon_ca"
   | "amazon_us"
   | "brightpearl"
@@ -464,16 +443,14 @@ type OrderSourceCode =
   | "walmart"
   | "woo_commerce"
   | "volusion";
-
-type OriginType = "pickup" | "drop_off";
-
-type PackageCode = "thick_envelope" | "small_flat_rate_box" | "large_package";
-
-type PaymentType = "any" | "cash" | "cash_equivalent" | "none";
-
-type TaxableEntityType = "shipper" | "recipient";
-
-type IdentifierType =
+declare type OriginType = "pickup" | "drop_off";
+declare type PackageCode =
+  | "thick_envelope"
+  | "small_flat_rate_box"
+  | "large_package";
+declare type PaymentType = "any" | "cash" | "cash_equivalent" | "none";
+declare type TaxableEntityType = "shipper" | "recipient";
+declare type IdentifierType =
   | "vat"
   | "eori"
   | "ssn"
@@ -482,10 +459,11 @@ type IdentifierType =
   | "ioss"
   | "pan"
   | "voec";
-
-type ValidateAddress = "no_validation" | "validate_only" | "validate_and_clean";
-
-type Country =
+declare type ValidateAddress =
+  | "no_validation"
+  | "validate_only"
+  | "validate_and_clean";
+declare type Country =
   | "AF"
   | "AX"
   | "AL"
@@ -730,3 +708,4 @@ type Country =
   | "YE"
   | "ZM"
   | "ZW";
+export {};
