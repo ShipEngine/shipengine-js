@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.3](https://www.github.com/ShipEngine/shipengine-js/compare/v1.0.2...v1.0.3) (2022-10-03)
+
+
+### Bug Fixes
+
+* allow optional parameters in rateOptions ([#191](https://www.github.com/ShipEngine/shipengine-js/issues/191)) ([bca0bbe](https://www.github.com/ShipEngine/shipengine-js/commit/bca0bbe2ba1c82c2f224a724d4a01d7d2e71b94c))
+
 ### [1.0.2](https://www.github.com/ShipEngine/shipengine-js/compare/v1.0.1...v1.0.2) (2022-08-24)
 
 
