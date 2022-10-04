@@ -27,7 +27,7 @@ compileFromFile('node_modules/shipengine-json-schema/responses/list_carriers_res
   .then(ts => fs.writeFileSync('src/list-carriers/types/private-response.ts', ts))
 
 // Get Rates
-compileFromFile('node_modules/shipengine-json-schema/requests/calculate_rates_request_body.json')
+compileFromFile('node_modules/shipengine-json-schema/requests/calculate_rates_request_body.json', {'ignoreMinAndMaxItems':true})
 .then(ts => fs.writeFileSync('src/get-rates-with-shipment-details/types/private-request.ts', ts))
 
 compileFromFile('node_modules/shipengine-json-schema/responses/calculate_rates_response_body.json')
