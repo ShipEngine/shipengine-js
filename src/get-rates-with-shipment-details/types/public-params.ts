@@ -380,7 +380,7 @@ interface ShippingAddress {
 }
 interface RateOptions {
   rateOptions: {
-    carrierIds: [string, ...string[]];
+    carrierIds: string[];
     packageTypes?: string[];
     serviceCodes?: string[];
     calculateTaxAmount?: boolean;

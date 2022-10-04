@@ -220,7 +220,7 @@ export interface PartialShipment {
   insurance_provider?: InsuranceProvider & string;
   tags?: Tag[];
   order_source_code?: OrderSourceName1;
-  packages?: [Package, ...Package[]];
+  packages?: Package[];
   total_weight?: Weight2;
 }
 export interface ShipmentItem {

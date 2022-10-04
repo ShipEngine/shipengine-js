@@ -127,7 +127,7 @@ export interface RateRequestOptions {
   [k: string]: unknown;
 }
 export interface RateRequestBody {
-  carrier_ids: [SeId, ...SeId[]];
+  carrier_ids: SeId[];
   package_types?: string[];
   service_codes?: string[];
   calculate_tax_amount?: boolean;
@@ -162,7 +162,7 @@ export interface PartialShipment {
   origin_type?: OriginType1;
   insurance_provider?: InsuranceProvider & string;
   order_source_code?: OrderSourceName1;
-  packages?: [Package, ...Package[]];
+  packages?: Package[];
 }
 export interface ShipmentItem {
   name?: string;
