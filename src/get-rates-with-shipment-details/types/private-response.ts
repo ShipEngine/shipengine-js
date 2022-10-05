@@ -218,8 +218,14 @@ export interface PartialShipment {
   advanced_options?: AdvancedShipmentOptions;
   origin_type?: OriginType1;
   insurance_provider?: InsuranceProvider & string;
+  /**
+   * @minItems 0
+   */
   tags?: Tag[];
   order_source_code?: OrderSourceName1;
+  /**
+   * @minItems 1
+   */
   packages?: Package[];
   total_weight?: Weight2;
 }
@@ -282,6 +288,9 @@ export interface PartialAddress2 {
 export interface InternationalShipmentOptions {
   contents: PackageContents & string;
   non_delivery: NonDelivery & string;
+  /**
+   * @minItems 0
+   */
   customs_items?: CustomsItem[];
 }
 export interface CustomsItem {
@@ -403,7 +412,13 @@ export interface Rate {
   carrier_nickname: string;
   carrier_friendly_name: string;
   validation_status: ValidationStatus;
+  /**
+   * @minItems 0
+   */
   warning_messages: string[];
+  /**
+   * @minItems 0
+   */
   error_messages: string[];
 }
 export interface MonetaryValue2 {
@@ -450,7 +465,13 @@ export interface Rate1 {
   carrier_nickname: string;
   carrier_friendly_name: string;
   validation_status: ValidationStatus1;
+  /**
+   * @minItems 0
+   */
   warning_messages: string[];
+  /**
+   * @minItems 0
+   */
   error_messages: string[];
 }
 export interface MonetaryValue7 {
