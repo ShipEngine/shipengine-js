@@ -208,6 +208,9 @@ export interface PartialAddress2 {
 export interface InternationalShipmentOptions {
   contents: PackageContents & string;
   non_delivery: NonDelivery & string;
+  /**
+   * @minItems 0
+   */
   customs_items?: CustomsItem[];
 }
 export interface CustomsItem {

@@ -127,6 +127,9 @@ export interface RateRequestOptions {
   [k: string]: unknown;
 }
 export interface RateRequestBody {
+  /**
+   * @minItems 1
+   */
   carrier_ids: SeId[];
   package_types?: string[];
   service_codes?: string[];
@@ -162,6 +165,9 @@ export interface PartialShipment {
   origin_type?: OriginType1;
   insurance_provider?: InsuranceProvider & string;
   order_source_code?: OrderSourceName1;
+  /**
+   * @minItems 1
+   */
   packages?: Package[];
 }
 export interface ShipmentItem {
@@ -223,6 +229,9 @@ export interface PartialAddress2 {
 export interface InternationalShipmentOptions {
   contents: PackageContents & string;
   non_delivery: NonDelivery & string;
+  /**
+   * @minItems 0
+   */
   customs_items?: CustomsItem[];
 }
 export interface CustomsItem {
