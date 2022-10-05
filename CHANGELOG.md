@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.4](https://www.github.com/ShipEngine/shipengine-js/compare/v1.0.3...v1.0.4) (2022-10-05)
+
+
+### Bug Fixes
+
+* upgrade json-schema-to-typescript dep ([#196](https://www.github.com/ShipEngine/shipengine-js/issues/196)) ([68e585e](https://www.github.com/ShipEngine/shipengine-js/commit/68e585ed7b82c09636f06cbe441ae5d231bde04c))
+
 ### [1.0.3](https://www.github.com/ShipEngine/shipengine-js/compare/v1.0.2...v1.0.3) (2022-10-03)
 
 
