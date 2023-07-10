@@ -48,7 +48,7 @@ export interface ShipEngineConfig {
    * The maximum amount of time (in milliseconds) to wait for a response from
    * the ShipEngine server.
    *
-   * Defaults to 5000 (5 seconds).
+   * Defaults to 65000 (1 minute & 5 seconds).
    */
   timeout?: number;
 }
@@ -113,7 +113,7 @@ export class NormalizedConfig {
 
     // Retries
     if (config.retries === undefined) {
-      this.retries = 1;
+      this.retries = 0;
     } else {
       assert.isNonNegativeInteger("Retries", config.retries);
       this.retries = config.retries;
@@ -121,7 +121,7 @@ export class NormalizedConfig {
 
     // Timeout
     if (config.timeout === undefined) {
-      this.timeout = 5000;
+      this.timeout = 65000;
     } else {
       assert.isPositiveInteger("Timeout", config.timeout);
       this.timeout = config.timeout;

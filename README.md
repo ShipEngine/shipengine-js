@@ -29,6 +29,62 @@ const ShipEngine = require("shipengine");
 const shipengine = new ShipEngine("___YOUR_API_KEY_HERE__");
 
 ```
+
+Configuring the ShipEngine SDK
+-------------------------------
+* Be sure to configure the SDK if you would like to update things like `retries`, `timeouts`, and `page sizes` using the [`ShipEngine Config`](./src/config.ts) interface. Alternatively, you can simply pass in your ShipEngine API Key and use the default configuration.
+
+```TypeScript
+export interface ShipEngineConfig {
+  /**
+   * Your ShipEngine API key.
+   *
+   * This can be a production or sandbox key. Sandbox keys start with "TEST_".
+   */
+  apiKey: string;
+
+  /**
+   * ShipEngine child account API key (partner API)
+   *
+   * This can be a production or sandbox key. Sandbox keys start with "TEST_".
+   */
+  onBehalfOf?: string;
+
+  /**
+   * The URL of the ShipEngine API. You can usually leave this unset and it will
+   * default to our public API.
+   */
+  baseURL?: string | URL;
+
+  /**
+   * Some ShipEngine API endpoints return paged data. This lets you control the
+   * number of items returned per request. Larger numbers will use more memory
+   * but will require fewer HTTP requests.
+   *
+   * Defaults to 50.
+   */
+  pageSize?: number;
+
+  /**
+   * If the ShipEngine client receives a rate limit error it can automatically
+   * retry the request after a few seconds. This setting lets you control how
+   * many times it will retry before giving up.
+   *
+   * Defaults to 1, which means up to 2 attempts will be made (the original
+   * attempt, plus one retry).
+   */
+  retries?: number;
+
+  /**
+   * The maximum amount of time (in milliseconds) to wait for a response from
+   * the ShipEngine server.
+   *
+   * Defaults to 5000 (5 seconds).
+   */
+  timeout?: number;
+}
+```
+
 Methods
 -------------------------------
 * [`createLabelFromRate`](./docs/create-label-from-rate.md) - When retrieving rates for shipments using the `getRatesWithShipmentDetails` method, the returned information contains a `rateId` property that can be used to purchase a label without having to refill in the shipment information repeatedly.
