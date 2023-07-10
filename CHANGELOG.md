@@ -1,5 +1,14 @@
 # Changelog
 
+### [1.0.5](https://www.github.com/ShipEngine/shipengine-js/compare/v1.0.4...v1.0.5) (2023-07-10)
+
+
+### Bug Fixes
+
+* [SE-120] SDK Modifications / Improvements Thirty Madison ([2213fb3](https://www.github.com/ShipEngine/shipengine-js/commit/2213fb3382fe12f0d443e030c1344e370663869c))
+* [SE-120] SDK Modifications / Improvements Thirty Madison ([2213fb3](https://www.github.com/ShipEngine/shipengine-js/commit/2213fb3382fe12f0d443e030c1344e370663869c))
+* [SE-120] SDK Modifications / Improvements Thirty Madison ([810e7ca](https://www.github.com/ShipEngine/shipengine-js/commit/810e7ca1c4e855fb008439664e13507d5ac568e5))
+
 ### [1.0.4](https://www.github.com/ShipEngine/shipengine-js/compare/v1.0.3...v1.0.4) (2022-10-05)
 
 
