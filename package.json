@@ -1,6 +1,6 @@
 {
   "name": "shipengine",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "The official ShipEngine JavaScript SDK for Node.js",
   "keywords": [
     "shipengine",

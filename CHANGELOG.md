@@ -1,5 +1,11 @@
 # Changelog
 
+### [1.0.6]
+
+### Changes
+
+* update default timeout to 60s
+
 ### [1.0.5](https://www.github.com/ShipEngine/shipengine-js/compare/v1.0.4...v1.0.5) (2023-07-10)
 
 
