@@ -79,7 +79,7 @@ export interface ShipEngineConfig {
    * The maximum amount of time (in milliseconds) to wait for a response from
    * the ShipEngine server.
    *
-   * Defaults to 5000 (5 seconds).
+   * Defaults to 60000 (60 seconds).
    */
   timeout?: number;
 }
