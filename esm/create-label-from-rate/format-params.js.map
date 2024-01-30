@@ -1,0 +1,1 @@
+{"version":3,"file":"format-params.js","sourceRoot":"","sources":["../../src/create-label-from-rate/format-params.ts"],"names":[],"mappings":"AAIA,MAAM,UAAU,YAAY,CAC1B,MAAuC;IAEvC,OAAO;QACL,gBAAgB,EAAE,MAAM,CAAC,eAAe;QACxC,YAAY,EAAE,MAAM,CAAC,WAAW;QAChC,YAAY,EAAE,MAAM,CAAC,WAAW;QAChC,mBAAmB,EAAE,MAAM,CAAC,iBAAiB;QAC7C,cAAc,EAAE,MAAM,CAAC,aAAa;KACrC,CAAC;AACJ,CAAC"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"validate-params.js","sourceRoot":"","sources":["../../src/create-label-from-rate/validate-params.ts"],"names":[],"mappings":";;;AAAA,sCAAmD;AAGnD;;GAEG;AACH,SAAgB,cAAc,CAAC,MAAuC;IACpE,IAAI,OAAO,MAAM,CAAC,MAAM,KAAK,QAAQ,EAAE;QACrC,MAAM,IAAI,+BAAsB,CAAC,QAAQ,EAAE,mBAAmB,CAAC,CAAC;KACjE;AACH,CAAC;AAJD,wCAIC"}

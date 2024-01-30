@@ -1,0 +1,1 @@
+{"version":3,"file":"handle-500-errors.js","sourceRoot":"","sources":["../../src/client/handle-500-errors.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,eAAe,EAAE,MAAM,WAAW,CAAC;AAE5C,MAAM,UAAU,eAAe;IAC7B,MAAM,IAAI,eAAe,CACvB,QAAQ,EACR,aAAa,EACb,6DAA6D,CAC9D,CAAC;AACJ,CAAC"}
