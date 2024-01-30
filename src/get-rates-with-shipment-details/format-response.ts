@@ -23,7 +23,7 @@ export function formatResponse(
     warehouseId: response.warehouse_id || null,
     returnTo: formatShippingAddress(response.return_to!), // Error in generated types
     confirmation: response.confirmation!, // Error in generated types
-    customs: formatCustoms(response.customs!), // Error in generated types
+    customs: response.customs ? formatCustoms(response.customs!) : null, // Error in generated types
     advancedOptions: formatAdvancedOptions(response.advanced_options!), // Error in generated types
     originType: response.origin_type || null,
     insuranceProvider: response.insurance_provider || "none",
