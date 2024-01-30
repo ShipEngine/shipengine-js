@@ -242,8 +242,8 @@ function formatCustoms(
   return {
     contents: customs?.contents,
     nonDelivery: customs?.non_delivery,
-    customsItems: customs?.customs_items ?? []
-      ? formatCustomsItems(customs?.customs_items ?? [])
+    customsItems: customs?.customs_items
+      ? formatCustomsItems(customs.customs_items)
       : null,
   };
 }
