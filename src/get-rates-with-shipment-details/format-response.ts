@@ -239,6 +239,9 @@ function formatShippingAddress(
 function formatCustoms(
   customs: Response.InternationalShipmentOptions
 ): GetRatesWithShipmentDetailsTypes.Result["customs"] | null {
+  if (!customs) {
+    return null;
+  }
   return {
     contents: customs.contents,
     nonDelivery: customs.non_delivery,
