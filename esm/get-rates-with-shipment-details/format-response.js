@@ -186,6 +186,9 @@ function formatShippingAddress(address) {
     };
 }
 function formatCustoms(customs) {
+    if (!customs) {
+        return null;
+    }
     return {
         contents: customs.contents,
         nonDelivery: customs.non_delivery,
