@@ -5,18 +5,13 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type CalculateRatesRequestBody = CalculateRatesRequestBody1 &
-  CalculateRatesRequestBody2;
+export type CalculateRatesRequestBody = CalculateRatesRequestBody1 & CalculateRatesRequestBody2;
 export type CalculateRatesRequestBody1 = RateRequestOptions;
 export type SeId = string;
 export type Currency = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
 export type CalculateRatesRequestBody2 = ShipmentIdRequest | ShipmentRequest;
-export type AddressValidatingShipment = ValidateShipmentFields &
-  PartialShipment;
-export type ValidateAddress =
-  | "no_validation"
-  | "validate_only"
-  | "validate_and_clean";
+export type AddressValidatingShipment = ValidateShipmentFields & PartialShipment;
+export type ValidateAddress = "no_validation" | "validate_only" | "validate_and_clean";
 export type SeId1 = string;
 export type ServiceCode = string;
 export type OrderSourceName =
@@ -41,15 +36,7 @@ export type OrderSourceName =
   | "woo_commerce"
   | "volusion";
 export type TaxableEntityType = "shipper" | "recipient";
-export type IdentifierType =
-  | "vat"
-  | "eori"
-  | "ssn"
-  | "ein"
-  | "tin"
-  | "ioss"
-  | "pan"
-  | "voec";
+export type IdentifierType = "vat" | "eori" | "ssn" | "ein" | "tin" | "ioss" | "pan" | "voec";
 export type Date = string;
 export type Address = PartialAddress;
 export type PostalCode = string;
@@ -71,12 +58,7 @@ export type DeliveryConfirmation =
   | "adult_signature"
   | "direct_signature"
   | "delivery_mailed";
-export type PackageContents =
-  | "merchandise"
-  | "documents"
-  | "gift"
-  | "returned_goods"
-  | "sample";
+export type PackageContents = "merchandise" | "documents" | "gift" | "returned_goods" | "sample";
 export type NonDelivery = "return_to_sender" | "treat_as_abandoned";
 export type Currency1 = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
 export type CountryCode3 = string;
@@ -84,18 +66,10 @@ export type CountryCode4 = string;
 export type BillToParty = "recipient" | "third_party";
 export type WeightUnit = "pound" | "ounce" | "gram" | "kilogram";
 export type OriginType = "pickup" | "drop_off";
-export type CollectOnDeliveryPaymentType =
-  | "any"
-  | "cash"
-  | "cash_equivalent"
-  | "none";
+export type CollectOnDeliveryPaymentType = "any" | "cash" | "cash_equivalent" | "none";
 export type Currency2 = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
 export type OriginType1 = "pickup" | "drop_off";
-export type InsuranceProvider =
-  | "none"
-  | "shipsurance"
-  | "carrier"
-  | "third_party";
+export type InsuranceProvider = "none" | "shipsurance" | "carrier" | "third_party";
 export type OrderSourceName1 =
   | "amazon_ca"
   | "amazon_us"

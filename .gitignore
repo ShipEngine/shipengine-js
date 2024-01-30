@@ -40,8 +40,8 @@ pids
 node_modules
 
 # Build output
-/cjs
-/esm
+#/cjs
+#/esm
 
 # Test output
 /.nyc_output
