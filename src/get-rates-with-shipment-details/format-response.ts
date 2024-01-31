@@ -239,10 +239,12 @@ function formatShippingAddress(
 function formatCustoms(
   customs: Response.InternationalShipmentOptions
 ): GetRatesWithShipmentDetailsTypes.Result["customs"] | null {
+  if (!customs) return null;
+
   return {
-    contents: customs?.contents,
-    nonDelivery: customs?.non_delivery,
-    customsItems: customs?.customs_items
+    contents: customs.contents,
+    nonDelivery: customs.non_delivery,
+    customsItems: customs.customs_items
       ? formatCustomsItems(customs.customs_items)
       : null,
   };
