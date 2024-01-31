@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.0.7](https://www.github.com/ShipEngine/shipengine-js/compare/v1.0.6...v1.0.7) (2024-01-31)
+
+
+### Bug Fixes
+
+* Trouble shooting release issues ([ee5744f](https://www.github.com/ShipEngine/shipengine-js/commit/ee5744f9f1535226c27c4f8a3bb015f25bb357ff))
+* Trouble shooting release issues ([ee5744f](https://www.github.com/ShipEngine/shipengine-js/commit/ee5744f9f1535226c27c4f8a3bb015f25bb357ff))
+
 ### [1.0.6](https://www.github.com/ShipEngine/shipengine-js/compare/v1.0.5...v1.0.6) (2024-01-12)
 
 
