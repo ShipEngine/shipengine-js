@@ -9,4 +9,6 @@ export type ErrorType =
   | "security"
   | "validation"
   | "business_rules"
-  | "system";
+  | "system"
+  | "wallet"
+  | "funding_sources";
