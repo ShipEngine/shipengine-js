@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.0.8](https://www.github.com/ShipEngine/shipengine-js/compare/v1.0.7...v1.0.8) (2024-01-31)
+
+
+### Features
+
+* Added error code FundingSourceMissingConfiguration
+* Added error code FundingSourceError
+
 ### [1.0.7](https://www.github.com/ShipEngine/shipengine-js/compare/v1.0.6...v1.0.7) (2024-01-31)
 
 

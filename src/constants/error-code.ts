@@ -38,4 +38,6 @@ export type ErrorCode =
   | "unspecified"
   | "verification_failure"
   | "warehouse_conflict"
-  | "webhook_event_type_conflict";
+  | "webhook_event_type_conflict"
+  | "funding_source_missing_configuration"
+  | "funding_source_error";
