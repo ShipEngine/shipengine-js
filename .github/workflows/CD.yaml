@@ -4,26 +4,30 @@ on:
       - main
 
 name: CD
+
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
-      - uses: GoogleCloudPlatform/release-please-action@v2
+      - uses: googleapis/release-please-action@v5
         id: release
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           release-type: node
-          package-name: shipengine
 
       # Checkout code if release was created
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
         if: ${{ steps.release.outputs.release_created }}
 
       # Setup node if a release was created
       - name: Install Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v7
         with:
-          node-version: 14
+          node-version-file: .nvmrc
           registry-url: "https://registry.npmjs.org"
         if: ${{ steps.release.outputs.release_created }}
 
