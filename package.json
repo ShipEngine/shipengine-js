@@ -42,48 +42,38 @@
     "node": ">=12"
   },
   "scripts": {
-    "build": "npm run gen:types && npm run build:cjs && npm run build:esm",
+    "build": "npm run build:cjs && npm run build:esm",
     "build:cjs": "tsc",
     "build:esm": "tsc --module esnext --outDir esm",
-    "bump": "bump --tag --push --all",
     "clean": "shx rm -rf .nyc_output coverage cjs esm",
     "coverage": "npm run coverage:node && npm run coverage:browser",
     "coverage:browser": "npm run test:browser -- --coverage",
     "coverage:node": "nyc node_modules/mocha/bin/mocha",
-    "gen:types": "node scripts/gen-types.js",
+    "gen:types": "node scripts/gen-types.js && prettier --write \"src/**/types/private-*.ts\"",
     "lint": "eslint src test",
     "lint:fix": "prettier --write src test && eslint --fix src test",
-    "prepare": "husky install && npm run build",
-    "release": "npm run upgrade && npm run clean && npm run build && npm test && npm run bump",
+    "prepublishOnly": "npm run build",
     "test": "npm run test:node && npm run test:browser && npm run lint",
     "test:browser": "karma start --single-run",
     "test:node": "mocha",
-    "upgrade": "npm-check -u && npm audit fix",
+    "typecheck": "tsc --noEmit",
     "watch": "tsc --watch"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint:fix",
-      "pre-push": "npm run lint && npm run test:node"
-    }
-  },
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
     "@jsdevtools/coverage-istanbul-loader": "^3.0.5",
     "@jsdevtools/host-environment": "^2.1.2",
     "@jsdevtools/karma-host-environment": "^3.0.3",
-    "@jsdevtools/version-bump-prompt": "^6.1.0",
     "@types/chai": "^4.2.16",
     "@types/mocha": "^9.0.0",
-    "@types/node": "^16.4.1",
+    "@types/node": "^22.20.5",
     "@types/node-fetch": "^2.5.12",
-    "@typescript-eslint/eslint-plugin": "^4.20.0",
-    "@typescript-eslint/parser": "^4.20.0",
     "chai": "^4.3.4",
-    "eslint": "^7.23.0",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-prettier": "^3.3.1",
+    "eslint": "^9.39.5",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.7",
     "fetch-mock": "^9.11.0",
-    "husky": "^7.0.1",
+    "globals": "^17.13.0",
     "json-schema-to-typescript": "^11.0.2",
     "karma": "^6.3.2",
     "karma-chrome-launcher": "^3.1.0",
@@ -96,19 +86,16 @@
     "karma-verbose-reporter": "^0.0.6",
     "karma-webpack": "^4.0.2",
     "mocha": "^9.0.2",
-    "npm-check": "^6.0.1",
     "nyc": "^15.1.0",
-    "prettier": "^2.2.1",
+    "prettier": "^3.9.10",
     "shipengine-json-schema": "^1.4.5",
     "shx": "^0.3.3",
-    "sinon": "^11.1.1",
-    "source-map-support": "^0.5.19",
-    "typescript": "^4.3.5",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.72.1",
     "webpack": "^4.43.0"
   },
   "dependencies": {
     "abort-controller": "^3.0.0",
-    "node-fetch": "^2.6.1",
-    "tp-events": "^1.0.3"
+    "node-fetch": "^2.6.1"
   }
 }

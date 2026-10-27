@@ -14,9 +14,7 @@ export type CalculateRatesRequestBody2 = ShipmentIdRequest | ShipmentRequest;
 export type AddressValidatingShipment = ValidateShipmentFields &
   PartialShipment;
 export type ValidateAddress =
-  | "no_validation"
-  | "validate_only"
-  | "validate_and_clean";
+  "no_validation" | "validate_only" | "validate_and_clean";
 export type SeId1 = string;
 export type ServiceCode = string;
 export type OrderSourceName =
@@ -42,14 +40,7 @@ export type OrderSourceName =
   | "volusion";
 export type TaxableEntityType = "shipper" | "recipient";
 export type IdentifierType =
-  | "vat"
-  | "eori"
-  | "ssn"
-  | "ein"
-  | "tin"
-  | "ioss"
-  | "pan"
-  | "voec";
+  "vat" | "eori" | "ssn" | "ein" | "tin" | "ioss" | "pan" | "voec";
 export type Date = string;
 export type Address = PartialAddress;
 export type PostalCode = string;
@@ -72,11 +63,7 @@ export type DeliveryConfirmation =
   | "direct_signature"
   | "delivery_mailed";
 export type PackageContents =
-  | "merchandise"
-  | "documents"
-  | "gift"
-  | "returned_goods"
-  | "sample";
+  "merchandise" | "documents" | "gift" | "returned_goods" | "sample";
 export type NonDelivery = "return_to_sender" | "treat_as_abandoned";
 export type Currency1 = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
 export type CountryCode3 = string;
@@ -85,17 +72,11 @@ export type BillToParty = "recipient" | "third_party";
 export type WeightUnit = "pound" | "ounce" | "gram" | "kilogram";
 export type OriginType = "pickup" | "drop_off";
 export type CollectOnDeliveryPaymentType =
-  | "any"
-  | "cash"
-  | "cash_equivalent"
-  | "none";
+  "any" | "cash" | "cash_equivalent" | "none";
 export type Currency2 = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
 export type OriginType1 = "pickup" | "drop_off";
 export type InsuranceProvider =
-  | "none"
-  | "shipsurance"
-  | "carrier"
-  | "third_party";
+  "none" | "shipsurance" | "carrier" | "third_party";
 export type OrderSourceName1 =
   | "amazon_ca"
   | "amazon_us"

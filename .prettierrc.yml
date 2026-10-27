@@ -3,3 +3,5 @@
 # https://prettier.io/docs/en/editors.html
 
 parser: "typescript"
+# Prettier 3 changed the default to "all"; keep the pre-3 formatting.
+trailingComma: es5

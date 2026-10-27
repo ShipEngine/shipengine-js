@@ -545,18 +545,13 @@ type NonDelivery = "return_to_sender" | "treat_as_abandoned";
 type OriginType = "pickup" | "drop_off";
 type PaymentType = "any" | "cash" | "cash_equivalent" | "none";
 type BillToAccount =
-  | "bill_to_country_code"
-  | "bill_to_party"
-  | "bill_to_postal_code";
+  "bill_to_country_code" | "bill_to_party" | "bill_to_postal_code";
 type BillToParty = "recipient" | "third_party";
 
 type ValidationStatus = "valid" | "invalid" | "has_warnings" | "unknown";
 
 type ShipmentStatus =
-  | "pending"
-  | "processing"
-  | "label_purchased"
-  | "cancelled";
+  "pending" | "processing" | "label_purchased" | "cancelled";
 
 type Currency = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
 
@@ -592,14 +587,7 @@ interface TaxIdentifier {
 type TaxableEntityType = "shipper" | "recipient";
 
 type IdentifierType =
-  | "vat"
-  | "eori"
-  | "ssn"
-  | "ein"
-  | "tin"
-  | "ioss"
-  | "pan"
-  | "voec";
+  "vat" | "eori" | "ssn" | "ein" | "tin" | "ioss" | "pan" | "voec";
 
 type DeliveryConfirmation =
   | "none"
@@ -610,11 +598,7 @@ type DeliveryConfirmation =
   | "delivery_mailed";
 
 type Contents =
-  | "merchandise"
-  | "documents"
-  | "gift"
-  | "returned_goods"
-  | "sample";
+  "merchandise" | "documents" | "gift" | "returned_goods" | "sample";
 
 type Country =
   | "AF"

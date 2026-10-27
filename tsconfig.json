@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2021",
+    "target": "es2019",
     "module": "commonjs",
     "moduleResolution": "node",
     "lib": [
@@ -20,6 +20,7 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "stripInternal": true,
+    "skipLibCheck": true,
 
     "typeRoots": [
       "node_modules/@types",

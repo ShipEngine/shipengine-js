@@ -38,13 +38,7 @@ export class InvalidFieldValueError extends ShipEngineError {
     fieldValue?: FieldValue
   );
 
-  public constructor(
-    ...args:
-      | [string, string]
-      | [string, string, FieldValue]
-      | [string, ErrorSource, string, string]
-      | [string, ErrorSource, string, string, FieldValue]
-  ) {
+  public constructor(...args: unknown[]) {
     let requestID, source: ErrorSource, fieldName, reason, fieldValue;
 
     // Determine which overload was called

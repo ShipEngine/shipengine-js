@@ -10,7 +10,6 @@ export { ShipEngine };
 export default ShipEngine;
 
 // CommonJS default export hack
-/* eslint-env commonjs */
 if (typeof module === "object" && typeof module.exports === "object") {
   module.exports = Object.assign(module.exports.default, module.exports);
 }

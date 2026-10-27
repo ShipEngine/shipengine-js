@@ -86,7 +86,8 @@ async function sendRequest<TParams, TResult>(
     body: body ? JSON.stringify(body) : undefined,
     method: method,
     mode: "cors" as const,
-    signal: controller.signal,
+    // abort-controller's AbortSignal type lacks newer DOM members
+    signal: controller.signal as unknown as AbortSignal,
     headers: buildHeaders(config),
   });
 

@@ -398,17 +398,11 @@ interface MonetaryValue {
   amount: number;
 }
 declare type BillToAccount =
-  | "bill_to_country_code"
-  | "bill_to_party"
-  | "bill_to_postal_code";
+  "bill_to_country_code" | "bill_to_party" | "bill_to_postal_code";
 declare type BillToParty = "recipient" | "third_party";
 declare type Currency = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
 declare type Contents =
-  | "merchandise"
-  | "documents"
-  | "gift"
-  | "returned_goods"
-  | "sample";
+  "merchandise" | "documents" | "gift" | "returned_goods" | "sample";
 declare type NonDelivery = "return_to_sender" | "treat_as_abandoned";
 declare type DeliveryConfirmation =
   | "none"
@@ -418,10 +412,7 @@ declare type DeliveryConfirmation =
   | "direct_signature"
   | "delivery_mailed";
 declare type InsuranceProvider =
-  | "none"
-  | "shipsurance"
-  | "carrier"
-  | "third_party";
+  "none" | "shipsurance" | "carrier" | "third_party";
 declare type OrderSourceCode =
   | "amazon_ca"
   | "amazon_us"
@@ -445,24 +436,13 @@ declare type OrderSourceCode =
   | "volusion";
 declare type OriginType = "pickup" | "drop_off";
 declare type PackageCode =
-  | "thick_envelope"
-  | "small_flat_rate_box"
-  | "large_package";
+  "thick_envelope" | "small_flat_rate_box" | "large_package";
 declare type PaymentType = "any" | "cash" | "cash_equivalent" | "none";
 declare type TaxableEntityType = "shipper" | "recipient";
 declare type IdentifierType =
-  | "vat"
-  | "eori"
-  | "ssn"
-  | "ein"
-  | "tin"
-  | "ioss"
-  | "pan"
-  | "voec";
+  "vat" | "eori" | "ssn" | "ein" | "tin" | "ioss" | "pan" | "voec";
 declare type ValidateAddress =
-  | "no_validation"
-  | "validate_only"
-  | "validate_and_clean";
+  "no_validation" | "validate_only" | "validate_and_clean";
 declare type Country =
   | "AF"
   | "AX"

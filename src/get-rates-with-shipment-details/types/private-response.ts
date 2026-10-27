@@ -32,22 +32,12 @@ export type OrderSourceName =
   | "volusion";
 export type TaxableEntityType = "shipper" | "recipient";
 export type IdentifierType =
-  | "vat"
-  | "eori"
-  | "ssn"
-  | "ein"
-  | "tin"
-  | "ioss"
-  | "pan"
-  | "voec";
+  "vat" | "eori" | "ssn" | "ein" | "tin" | "ioss" | "pan" | "voec";
 export type Date = string;
 export type DateTime = string;
 export type DateTime1 = string;
 export type ShipmentStatus =
-  | "pending"
-  | "processing"
-  | "label_purchased"
-  | "cancelled";
+  "pending" | "processing" | "label_purchased" | "cancelled";
 export type Address = PartialAddress;
 export type PostalCode = string;
 export type CountryCode = string;
@@ -69,11 +59,7 @@ export type DeliveryConfirmation =
   | "direct_signature"
   | "delivery_mailed";
 export type PackageContents =
-  | "merchandise"
-  | "documents"
-  | "gift"
-  | "returned_goods"
-  | "sample";
+  "merchandise" | "documents" | "gift" | "returned_goods" | "sample";
 export type NonDelivery = "return_to_sender" | "treat_as_abandoned";
 export type SeId3 = string;
 export type Currency = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
@@ -83,17 +69,11 @@ export type BillToParty = "recipient" | "third_party";
 export type WeightUnit = "pound" | "ounce" | "gram" | "kilogram";
 export type OriginType = "pickup" | "drop_off";
 export type CollectOnDeliveryPaymentType =
-  | "any"
-  | "cash"
-  | "cash_equivalent"
-  | "none";
+  "any" | "cash" | "cash_equivalent" | "none";
 export type Currency1 = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
 export type OriginType1 = "pickup" | "drop_off";
 export type InsuranceProvider =
-  | "none"
-  | "shipsurance"
-  | "carrier"
-  | "third_party";
+  "none" | "shipsurance" | "carrier" | "third_party";
 export type OrderSourceName1 =
   | "amazon_ca"
   | "amazon_us"
@@ -141,10 +121,7 @@ export type Currency11 = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
 export type Currency12 = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
 export type Date2 = string;
 export type ValidationStatus1 =
-  | "valid"
-  | "invalid"
-  | "has_warnings"
-  | "unknown";
+  "valid" | "invalid" | "has_warnings" | "unknown";
 export type SeId8 = string;
 export type SeId9 = string;
 export type SeId10 = string;

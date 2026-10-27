@@ -9,7 +9,7 @@ type StructuredError = {
       error_type: string;
       error_code: string;
       message: string;
-    }
+    },
   ];
 };
 

@@ -70,13 +70,7 @@ export class ShipEngineError extends Error {
     url?: string
   );
 
-  public constructor(
-    ...args:
-      | [ErrorType, ErrorCode, string]
-      | [ErrorType, ErrorCode, string, string]
-      | [string | undefined, ErrorSource, ErrorType, ErrorCode, string]
-      | [string | undefined, ErrorSource, ErrorType, ErrorCode, string, string]
-  ) {
+  public constructor(...args: unknown[]) {
     let requestID,
       source: ErrorSource,
       type: ErrorType,

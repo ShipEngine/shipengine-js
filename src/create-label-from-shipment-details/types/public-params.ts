@@ -268,14 +268,7 @@ type OrderSourceName =
   | "volusion";
 type TaxableEntityType = "shipper" | "recipient";
 type IdentifierType =
-  | "vat"
-  | "eori"
-  | "ssn"
-  | "ein"
-  | "tin"
-  | "ioss"
-  | "pan"
-  | "voec";
+  "vat" | "eori" | "ssn" | "ein" | "tin" | "ioss" | "pan" | "voec";
 type AddressResidentialIndicator = "unknown" | "yes" | "no";
 type DeliveryConfirmation =
   | "none"
@@ -285,11 +278,7 @@ type DeliveryConfirmation =
   | "direct_signature"
   | "delivery_mailed";
 type PackageContents =
-  | "merchandise"
-  | "documents"
-  | "gift"
-  | "returned_goods"
-  | "sample";
+  "merchandise" | "documents" | "gift" | "returned_goods" | "sample";
 type Currency = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
 type NonDelivery = "return_to_sender" | "treat_as_abandoned";
 type BillToParty = "recipient" | "third_party";
@@ -297,9 +286,7 @@ type OriginType = "pickup" | "drop_off";
 type CollectOnDeliveryPaymentType = "any" | "cash" | "cash_equivalent" | "none";
 type InsuranceProvider = "none" | "shipsurance" | "carrier" | "third_party";
 type LabelChargeEvent =
-  | "carrier_default"
-  | "on_creation"
-  | "on_carrier_acceptance";
+  "carrier_default" | "on_creation" | "on_carrier_acceptance";
 type ValidateAddress = "no_validation" | "validate_only" | "validate_and_clean";
 type LabelDownloadType = "url" | "inline";
 type LabelFormat = "pdf" | "png" | "zpl";

@@ -3,9 +3,7 @@ export type Result = Label;
 type LabelStatus = "processing" | "completed" | "error" | "voided";
 type Currency = "usd" | "cad" | "aud" | "gbp" | "eur" | "nzd";
 type LabelChargeEvent =
-  | "carrier_default"
-  | "on_creation"
-  | "on_carrier_acceptance";
+  "carrier_default" | "on_creation" | "on_carrier_acceptance";
 type LabelFormat = "pdf" | "png" | "zpl";
 type DisplayScheme = "label" | "qr_code";
 type LabelLayout = "4x6" | "letter";

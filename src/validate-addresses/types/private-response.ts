@@ -6,10 +6,7 @@
  */
 
 export type AddressValidationStatus =
-  | "unverified"
-  | "verified"
-  | "warning"
-  | "error";
+  "unverified" | "verified" | "warning" | "error";
 export type Address = PartialAddress;
 export type PostalCode = string;
 export type CountryCode = string;
