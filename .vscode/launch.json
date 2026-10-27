@@ -5,31 +5,21 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Run Mocha",
+      "name": "Debug Vitest (Node)",
       "type": "node",
-      "runtimeArgs": [
-        "--nolazy"
-      ],
       "request": "launch",
-      "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
-      "stopOnEntry": false,
-      "args": [
-        "--timeout=600000",
-        "--retries=0",
-      ],
+      "autoAttachChildProcesses": true,
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "test:node", "--", "--no-file-parallelism", "--test-timeout=0"],
       "env": {
-        "NODE_ENV": "test",
+        "NODE_ENV": "test"
       },
       "cwd": "${workspaceRoot}",
-      "console": "internalConsole",
+      "console": "integratedTerminal",
       "sourceMaps": true,
-      "outFiles": [
-        "${workspaceRoot}/cjs/**/*.js",
-      ],
+      "outFiles": ["${workspaceRoot}/cjs/**/*.js"],
       "smartStep": true,
-      "skipFiles": [
-        "<node_internals>/**/*.js"
-      ],
-    },
+      "skipFiles": ["<node_internals>/**"]
+    }
   ]
 }

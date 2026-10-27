@@ -1,4 +1,4 @@
-const fetchMock = require("../fetch-mock");
+import fetchMock from "../fetch-mock.js";
 
 function mockTrackByLabelId200() {
   fetchMock.get("https://api.shipengine.com/v1/labels/se-1234/track", {
@@ -90,8 +90,4 @@ function mockTrackByLabelId500() {
   );
 }
 
-module.exports = {
-  mockTrackByLabelId200,
-  mockTrackByLabelId404,
-  mockTrackByLabelId500,
-};
+export { mockTrackByLabelId200, mockTrackByLabelId404, mockTrackByLabelId500 };

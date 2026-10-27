@@ -1,12 +1,5 @@
-"use strict";
-
-const fs = require("fs");
-const path = require("path");
-// const { ShipEngine } = require("../../");
-// const { apiKey, baseURL } = require("../utils/constants");
-// const { expect } = require("chai");
-// const sinon = require("sinon");
-// const pjson = require("../../package.json");
+import fs from "node:fs";
+import path from "node:path";
 
 describe("exports and versions", () => {
   it("should export all of the error classes", () => {

@@ -6,14 +6,18 @@ import prettierRecommended from "eslint-plugin-prettier/recommended";
 import globals from "globals";
 
 const testGlobals = {
-  ...globals.mocha,
   ...globals.node,
   ...globals.browser,
-  // Vitest (when used without `globals: true`, these are imported; harmless otherwise)
+  // Vitest globals (`test.globals: true` in vitest.config.mjs)
+  describe: "readonly",
+  it: "readonly",
+  test: "readonly",
   expect: "readonly",
   vi: "readonly",
   beforeAll: "readonly",
   afterAll: "readonly",
+  beforeEach: "readonly",
+  afterEach: "readonly",
 };
 
 export default tseslint.config(
@@ -49,25 +53,37 @@ export default tseslint.config(
     },
   },
 
-  // JavaScript test files, CommonJS (Mocha era)
+  // JavaScript test files, ESM (Vitest, with `globals: true`)
   {
-    files: ["test/**/*.js", "test/**/*.cjs"],
-    extends: [js.configs.recommended, prettierRecommended],
-    languageOptions: {
-      ecmaVersion: 2022,
-      sourceType: "commonjs",
-      globals: testGlobals,
-    },
-  },
-
-  // JavaScript test files, ESM (Vitest)
-  {
-    files: ["test/**/*.mjs"],
+    files: ["test/**/*.js", "test/**/*.mjs"],
+    ignores: ["test/compat/**"],
     extends: [js.configs.recommended, prettierRecommended],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "module",
       globals: testGlobals,
+    },
+  },
+
+  // Standalone Node.js 12 smoke script (CommonJS), run by CI outside Vitest
+  {
+    files: ["test/compat/**/*.js", "test/compat/**/*.cjs"],
+    extends: [js.configs.recommended, prettierRecommended],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: "commonjs",
+      globals: globals.node,
+    },
+  },
+
+  // Vitest config
+  {
+    files: ["vitest.config.mjs"],
+    extends: [js.configs.recommended, prettierRecommended],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: "module",
+      globals: globals.node,
     },
   }
 );

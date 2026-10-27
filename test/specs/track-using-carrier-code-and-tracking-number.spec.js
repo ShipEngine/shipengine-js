@@ -1,13 +1,12 @@
-const { expect } = require("chai");
-const { ShipEngine } = require("../../");
-const { apiKey } = require("../utils/constants");
-const errors = require("../utils/errors");
-const fetchMock = require("../utils/fetch-mock");
+import { ShipEngine } from "shipengine-sdk";
+import { apiKey } from "../utils/constants.js";
+import errors from "../utils/errors.js";
+import fetchMock from "../utils/fetch-mock.js";
 
-const {
+import {
   mockTrackByCarrierCodeAndTrackingNumber200,
   mockTrackByCarrierCodeAndTrackingNumber400,
-} = require("../utils/mocks/mock-track-by-carrier-code-and-tracking-number");
+} from "../utils/mocks/mock-track-by-carrier-code-and-tracking-number.js";
 
 describe("trackUsingCarrierCodeAndTrackingNumber()", () => {
   it("should throw an error if the carrier code is not a string", async () => {

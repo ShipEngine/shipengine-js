@@ -1,4 +1,4 @@
-const fetchMock = require("../fetch-mock");
+import fetchMock from "../fetch-mock.js";
 
 function mockCreateLabel200() {
   fetchMock.post("https://api.shipengine.com/v1/labels", {
@@ -76,4 +76,4 @@ function mockCreateLabel200() {
   });
 }
 
-module.exports = { mockCreateLabel200 };
+export { mockCreateLabel200 };

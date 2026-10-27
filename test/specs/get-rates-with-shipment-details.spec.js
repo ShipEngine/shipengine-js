@@ -1,9 +1,8 @@
-const { expect } = require("chai");
-const { ShipEngine } = require("../../");
-const { apiKey } = require("../utils/constants");
-const errors = require("../utils/errors");
-const fetchMock = require("../utils/fetch-mock");
-const { mockGetRates200 } = require("../utils/mocks/mock-get-rates");
+import { ShipEngine } from "shipengine-sdk";
+import { apiKey } from "../utils/constants.js";
+import errors from "../utils/errors.js";
+import fetchMock from "../utils/fetch-mock.js";
+import { mockGetRates200 } from "../utils/mocks/mock-get-rates.js";
 
 describe("getRatesWithShipmentDetails()", () => {
   it("Returns rates on a successful request", async () => {

@@ -1,4 +1,4 @@
-const fetchMock = require("../fetch-mock");
+import fetchMock from "../fetch-mock.js";
 
 function mockTrackByCarrierCodeAndTrackingNumber200() {
   fetchMock.get(
@@ -70,7 +70,7 @@ function mockTrackByCarrierCodeAndTrackingNumber400() {
   );
 }
 
-module.exports = {
+export {
   mockTrackByCarrierCodeAndTrackingNumber200,
   mockTrackByCarrierCodeAndTrackingNumber400,
 };

@@ -44,5 +44,6 @@ node_modules
 /esm
 
 # Test output
-/.nyc_output
 /coverage
+/.vitest-attachments
+__screenshots__

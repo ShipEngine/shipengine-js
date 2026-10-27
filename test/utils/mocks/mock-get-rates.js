@@ -1,4 +1,4 @@
-const fetchMock = require("../fetch-mock");
+import fetchMock from "../fetch-mock.js";
 
 function mockGetRates200() {
   fetchMock.post("https://api.shipengine.com/v1/rates", {
@@ -158,4 +158,4 @@ function mockGetRates200() {
   });
 }
 
-module.exports = { mockGetRates200 };
+export { mockGetRates200 };

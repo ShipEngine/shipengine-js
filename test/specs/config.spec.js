@@ -1,9 +1,6 @@
-"use strict";
-
-const { ShipEngine } = require("../..");
-const { expect } = require("chai");
-const errors = require("../utils/errors");
-const { apiKey } = require("../utils/constants");
+import { ShipEngine } from "shipengine-sdk";
+import errors from "../utils/errors.js";
+import { apiKey } from "../utils/constants.js";
 
 describe("Configuration", () => {
   describe("at instantiation", () => {

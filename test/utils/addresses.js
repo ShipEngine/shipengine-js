@@ -1,8 +1,4 @@
-"use strict";
-
-const { expect } = require("chai");
-
-module.exports = {
+export default {
   assertAddressEquals(actual, expected) {
     expect(actual.name).to.equal(expected.name);
     expect(actual.company).to.equal(expected.company);

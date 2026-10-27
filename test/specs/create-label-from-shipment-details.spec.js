@@ -1,7 +1,6 @@
-const { expect } = require("chai");
-const { ShipEngine } = require("../..");
-const { apiKey } = require("../utils/constants");
-const { mockCreateLabel200 } = require("../utils/mocks/mock-create-label-200");
+import { ShipEngine } from "shipengine-sdk";
+import { apiKey } from "../utils/constants.js";
+import { mockCreateLabel200 } from "../utils/mocks/mock-create-label-200.js";
 
 describe("createLabelFromShipmentDetails)", () => {
   it("Returns a label that was created", async () => {

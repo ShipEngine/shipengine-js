@@ -1,14 +1,13 @@
-const { expect } = require("chai");
-const { ShipEngine } = require("../..");
-const { apiKey } = require("../utils/constants");
-const errors = require("../utils/errors");
-const fetchMock = require("../utils/fetch-mock");
+import { ShipEngine } from "shipengine-sdk";
+import { apiKey } from "../utils/constants.js";
+import errors from "../utils/errors.js";
+import fetchMock from "../utils/fetch-mock.js";
 
-const {
+import {
   mockTrackByLabelId200,
   mockTrackByLabelId404,
   mockTrackByLabelId500,
-} = require("../utils/mocks/mock-track-by-label-id-200");
+} from "../utils/mocks/mock-track-by-label-id-200.js";
 
 describe("trackUsingLabelId()", () => {
   it("should throw an error if the label ID is not a string", async () => {

@@ -1,12 +1,9 @@
-"use strict";
-
-const { expect } = require("chai");
-const { ShipEngineError } = require("../../");
+import { ShipEngineError } from "shipengine-sdk";
 
 /**
  * Helper functions for testing errors
  */
-const errors = (module.exports = {
+const errors = {
   /**
    * A helper function that you can put in your test at a point that should not
    * actually be reached because an error should have been thrown.  This prevents
@@ -99,4 +96,6 @@ const errors = (module.exports = {
       expect(error.message).to.equal(props.message);
     }
   },
-});
+};
+
+export default errors;

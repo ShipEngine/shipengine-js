@@ -1,13 +1,24 @@
-"use strict";
+import defaultExport, { ShipEngine as namedExport } from "shipengine-sdk";
+import * as esmExports from "shipengine-sdk";
 
-const commonJSExport = require("../../");
-const { default: defaultExport, ShipEngine: namedExport } = require("../../");
-const { expect } = require("chai");
-const { host } = require("@jsdevtools/host-environment");
+const isNode = typeof window === "undefined";
+
+// In Node.js the tests run against the built CommonJS output, so
+// `require()` of the package must return the ShipEngine class itself.
+// In browsers the tests run against the ESM output, so the "CommonJS export"
+// is simply the ESM module namespace.
+let commonJSExport = esmExports;
+
+beforeAll(async () => {
+  if (isNode) {
+    const { createRequire } = await import("node:module");
+    commonJSExport = createRequire(import.meta.url)("../../cjs/index.js");
+  }
+});
 
 describe("package exports", () => {
   it("should export the ShipEngine class as the default CommonJS export", () => {
-    if (host.node) {
+    if (isNode) {
       expect(commonJSExport).to.be.a("function");
       expect(commonJSExport.name).to.equal("ShipEngine");
     } else {

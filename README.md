@@ -119,8 +119,14 @@ Or you can use `npm run watch` to automatically re-build whenever source files c
 Or you can use `npm run lint:fix` to automatically fix most linting errors.
 
 5. __Run the tests__<br>
+`npx playwright install chromium` (one time, for the browser tests)<br>
+`npm run build`<br>
 `npm test`<br><br>
-This runs tests in both Node.js and web browsers. Use `npm run test:node` to only run Node.js tests, or `npm run test:browser` to only run browser tests.
+Tests are run with [Vitest](https://vitest.dev/) and require the project to be built first. `npm test` runs the Node.js tests, the browser tests, and the linter. You can also run them individually:
+
+- `npm run test:node` runs the tests in Node.js against the built CommonJS output (`cjs/`).
+- `npm run test:browser` runs the tests in headless Chromium (via [Playwright](https://playwright.dev/)) against the built ES module output (`esm/`), using the `browser` field of `package.json`.
+- `npm run coverage:node` and `npm run coverage:browser` run the same tests with code coverage. Reports are written to `coverage/node` and `coverage/browser` (including `lcov.info`).
 
 Committing
 -------------------------
