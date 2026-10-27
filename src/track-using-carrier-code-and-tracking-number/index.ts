@@ -19,7 +19,9 @@ export async function trackUsingCarrierCodeAndTrackingNumber(
   validateParams(params);
 
   const response = await get<Response.GetTrackingLogResponseBody>(
-    `/v1/tracking?carrier_code=${params.carrierCode}&tracking_number=${params.trackingNumber}`,
+    `/v1/tracking?carrier_code=${encodeURIComponent(
+      params.carrierCode
+    )}&tracking_number=${encodeURIComponent(params.trackingNumber)}`,
     config
   );
 
