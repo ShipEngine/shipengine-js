@@ -29,6 +29,42 @@ describe("trackUsingLabelId()", () => {
     }
   });
 
+  it("should throw an error if the label ID is a dot-segment", async () => {
+    const shipengine = new ShipEngine({ apiKey });
+
+    for (const labelId of [".", ".."]) {
+      try {
+        await shipengine.trackUsingLabelId(labelId);
+        errors.shouldHaveThrown();
+      } catch (error) {
+        errors.assertInvalidFieldValueError(error, {
+          code: "invalid_field_value",
+          fieldName: "labelId",
+          fieldValue: labelId,
+          message: "labelId is not a valid label ID.",
+          name: "InvalidFieldValueError",
+          source: "shipengine",
+          type: "validation",
+        });
+      }
+    }
+  });
+
+  it("should URL-encode the label ID", async () => {
+    fetchMock.getOnce(
+      "https://api.shipengine.com/v1/labels/..%2Ftracking%3Fcarrier_code%3Dx%26tracking_number%3Dy%23/track",
+      { events: [] }
+    );
+
+    const shipengine = new ShipEngine({ apiKey });
+    await shipengine.trackUsingLabelId(
+      "../tracking?carrier_code=x&tracking_number=y#"
+    );
+
+    expect(fetchMock.callHistory.done()).to.be.true;
+    fetchMock.restore();
+  });
+
   it("Throws an error if the request returns a 404", async () => {
     mockTrackByLabelId404();
 

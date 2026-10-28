@@ -19,7 +19,7 @@ export async function trackUsingLabelId(
   validateParams(labelId);
 
   const response = await get<Response.GetTrackingLogFromLabelResponseBody>(
-    `/v1/labels/${labelId}/track`,
+    `/v1/labels/${encodeURIComponent(labelId)}/track`,
     config
   );
 
