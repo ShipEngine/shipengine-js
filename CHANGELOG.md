@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.0.8](https://github.com/ShipEngine/shipengine-js/compare/v1.0.7...v1.0.8) (2026-10-28)
+
+
+### Bug Fixes
+
+* percent-encode carrier code and tracking number in tracking query ([796387c](https://github.com/ShipEngine/shipengine-js/commit/796387c08c7d462f631267dc94976f9b85c2258f))
+* properly encode value in querystring ([db73b87](https://github.com/ShipEngine/shipengine-js/commit/db73b879f221dc78cedb5d9b2406c735f85cd236))
+* validate and encode label ID in trackUsingLabelId ([dfe8a6f](https://github.com/ShipEngine/shipengine-js/commit/dfe8a6f1e3b291fcaac1365658978c0812cc7c13))
+* validate and encode label ID in trackUsingLabelId ([2f2808e](https://github.com/ShipEngine/shipengine-js/commit/2f2808ee3891eedfedbcac7833a0c41214dc1ba4))
+
 ### [1.0.8](https://www.github.com/ShipEngine/shipengine-js/compare/v1.0.7...v1.0.8) (2024-01-31)
 
 
